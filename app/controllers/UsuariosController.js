@@ -1,7 +1,9 @@
 const { request, response } = require("express");
 
 const show = (req = request, res = response) => {
-    res.render('home');
+    res.json({
+        ok: 200
+    })
 }
 
 module.exports = {

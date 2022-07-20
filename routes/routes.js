@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const Usuario = require('../app/controllers/UsuariosController');
+const { AlumnosController } = require('../app/controllers')
 
-router.get('/', Usuario.show)
+// Usuarios
+// router.get('/', UsuariosController.show);
+
+// Alumnos
+router.get('/alumnos', AlumnosController.show);
 
 module.exports = router;
 

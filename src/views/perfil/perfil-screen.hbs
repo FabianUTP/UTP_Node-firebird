@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-title">
+    <h1 class="text-center">{{PATERNO}} {{MATERNO}} {{NOMBRE}}</h1>
+    <div class="container">
+
+      <form action="/perfil" method="POST">
+
+        <div class="container pt-4">
+          <div class="row">
+            <h2 class="text-center">Datos editables</h1>
+
+            <div class="col-md-4">
+              <label for="celular" class="form-label">Celular</label>
+              <input type="number" id="celular" name="celular" class="form-control" value={{ CELULAR }}>
+            </div>
+
+            <div class="col-md-4">
+              <label for="correo" class="form-label">Correo</label>
+              <input type="text" id="correo" name="email" class="form-control" value={{ EMAIL }}>
+            </div>
+  
+          </div>
+        </div>
+
+        <div class="container text-center pt-4">
+          <input type="submit" class="btn btn-outline-primary" value="Guardar">
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

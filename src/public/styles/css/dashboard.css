@@ -1,0 +1,79 @@
+.card-dash {
+    cursor: pointer;
+}
+
+.animate-hover::before {
+    content: "";
+    position: absolute;
+    background: #cbe0fb;
+    right: 0%;
+    left: 0%;
+    bottom: 0%;
+    top: 100%;
+    transition: all .3s;
+    z-index: -1;
+}
+
+.animate-hover:hover::before {
+    top: 0;
+    background: #106eea;
+}
+
+.animate-hover:hover div h4{
+    color: #fff;
+}
+
+.animate-hover:hover a p {
+    color: #fff;
+}
+
+.icon-box {
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 0 29px 0 rgb(68 88 144 / 12%);
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    z-index: 1;
+    height: 100%;
+}
+
+.title{
+    font-weight: 700;
+    font-size: 17px;
+    color: #111;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.sub-title {
+    color: orange;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.information p{
+    padding-top: 1rem;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.image {
+    width: 100px;
+    padding-bottom: 1rem;
+}
+
+.header-dash h2 {
+    font-weight: 700;
+}
+
+.header-dash p {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.name-alumno {
+    color: #106eea;
+}

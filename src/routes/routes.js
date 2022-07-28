@@ -1,18 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const { AlumnosController, HomeController } = require('../app/controllers');
+// Middleewares para las sesiones
+const { verifySesion } = require("../app/controllers/middlewares/session");
 
+// Controladores
+const {
+  AlumnosController,
+  HomeController,
+  AuthController,
+} = require("../app/controllers");
 
 // Autenticaciones
-router.get('/login', (req, res) => res.render('auth/login'));
-router.post('/login', (req, res) => res.json({ body: req.body }));
-router.get('/register', (req, res) => res.render('auth/register'));
+router.get("/login", AuthController.login);
+router.post("/login", AuthController.postLogin);
+router.get("/logout", AuthController.logout);
+router.get("/register", (req, res) => res.render("auth/register"));
 
 // Alumnos
-router.get('/', HomeController.show);
-router.get('/perfil', AlumnosController.show);
-router.post('/perfil', AlumnosController.update);
+router.get("/", verifySesion, HomeController.show);
+router.get("/perfil", verifySesion, AlumnosController.show);
+router.post("/perfil", verifySesion, AlumnosController.update);
 
 module.exports = router;
-

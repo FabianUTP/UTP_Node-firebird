@@ -5,10 +5,8 @@ const HomeController = {};
 
 HomeController.show = (req = request, res = response) => {
 
-    let alumnoName = 'Fabian Caamal';
-
     res.render('dashboard', {
-        alumnoName,
+        alumnoName: req.session.name,
         items: dash_items
     });
 }

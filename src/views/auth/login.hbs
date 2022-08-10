@@ -1,9 +1,11 @@
-<div class="w-100  d-flex justify-content-center align-items-center" style="padding-top: 18%;">
+<div class="w-100  d-flex justify-content-center align-items-center" style="padding-top: 8%; left: 0%; position: absolute;">
     <div class="card w-100" style="max-width: 620px;">
         <div class="card-title text-center">
             <h1>Bienvenido</h1>
         </div>
         <div class="card-body px-5">
+
+            {{>error_msj}}
 
             <form action="login" method="post">
                 <div>
@@ -12,7 +14,7 @@
                 </div>
                 <div>
                     <label for="pass" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="password" id="pass" required>
+                    <input type="password" class="form-control" name="password" id="pass">
                 </div>
 
                 <div class="pt-1">

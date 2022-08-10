@@ -1,9 +1,9 @@
 const credentials = {};
 
-credentials.host = '10.147.120.133';
-credentials.port = '3050';
-credentials.database = 'C:\\GES5\\DATOS.FDB';
-credentials.user = 'SYSDBA';
+credentials.host = process.env.FB_HOST;
+credentials.port = process.env.FB_PORT;
+credentials.database = process.env.FB_USER;
+credentials.user = process.env.FB_PASS;
 credentials.password = 'masterkey';
 credentials.localcase_keys = false;
 credentials.role = null;

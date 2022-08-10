@@ -6,8 +6,7 @@ const HomeController = {};
 HomeController.show = (req = request, res = response) => {
 
     res.render('dashboard', {
-        alumnoName: req.session.name,
-        items: dash_items
+        items: dash_items,
     });
 }
 

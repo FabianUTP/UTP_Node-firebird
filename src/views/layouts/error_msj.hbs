@@ -1,0 +1,18 @@
+{{#if error_msj}}
+
+<style>
+    #close {
+        right: 1%;
+        background-color: transparent;
+        border: none;
+    }
+</style>
+
+<div id="msj" class="alert alert-danger alert-dismissible fade show position-relative" role="alert">
+    {{error_msj}}
+
+    <button id="close" type="button" class="position-absolute" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}

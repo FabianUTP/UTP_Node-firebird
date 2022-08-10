@@ -3,12 +3,20 @@ const { request, response } = require("express");
 const AuthController = {};
 
 AuthController.login = (req, res) => {
-  res.render("auth/login");
+  res.render("auth/login") ;
 };
 
 AuthController.postLogin = (req = request, res = response) => {
 
-  req.session.name = "fabian caamal";
+  if(req.body.matricula !== "5465") {
+    req.flash('error_msj', 'Matricula incorrecta');
+    return res.redirect('/login');
+  }
+
+  req.session.isAuth = true;
+  req.session.userAuth = 'Fabian';
+  req.session.userIdAuth = '5465';
+
   res.redirect('/');
 };
 

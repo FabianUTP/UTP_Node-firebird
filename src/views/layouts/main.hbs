@@ -25,9 +25,11 @@
 
 <body>
 
-  {{>navbar }}
+  {{#if isAuth }}
+    {{>navbar }}
 
-  {{>navegation }}
+    {{>navegation }}
+  {{/if }}
 
   <main id="main" class="main">
     {{{body}}}

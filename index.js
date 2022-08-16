@@ -39,10 +39,11 @@ app.use(flash());
 // Variables Globales
 app.use((req, res, next) => {
     res.locals.error_msj = req.flash('error_msj');
-    res.locals.isAuth = req.session.isAuth;
-    res.locals.userAuth = req.session.userAuth;
-    res.locals.userIdAuth = req.session.userIdAuth;
-    res.locals.role = req.session.roleAuth;
+    res.locals.isAuthenticated = req.session.isAuthenticated;
+    res.locals.IDAuth = req.session.IDAuth;
+    res.locals.nameAuth = req.session.nameAuth;
+    res.locals.lastNameAuth = req.session.lastNameAuth
+    res.locals.isAdmin = req.session.isAdmin;
     next();
 })
 

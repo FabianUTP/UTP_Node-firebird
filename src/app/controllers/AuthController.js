@@ -8,14 +8,18 @@ AuthController.login = (req, res) => {
 
 AuthController.postLogin = (req = request, res = response) => {
 
-  if(req.body.matricula !== "5465") {
+  const credential = req.body.matricula;
+
+  if(!["admin", "alumno"].includes(credential)) {
     req.flash('error_msj', 'Matricula incorrecta');
     return res.redirect('/login');
   }
 
-  req.session.isAuth = true;
-  req.session.userAuth = 'Fabian';
-  req.session.userIdAuth = '5465';
+  req.session.isAuthenticated = true;
+  req.session.nameAuth = 'Fabian';
+  req.session.IDAuth = '5465';
+  req.session.lastNameAuth = 'Caamal';
+  req.session.isAdmin = credential === "admin";
 
   res.redirect('/');
 };

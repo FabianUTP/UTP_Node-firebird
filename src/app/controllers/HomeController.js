@@ -5,7 +5,7 @@ const HomeController = {};
 
 HomeController.show = (req = request, res = response) => {
 
-    res.render('dashboard', {
+    res.render('alumno/dashboard', {
         items: dash_items,
     });
 }

@@ -1,7 +1,3 @@
-.card-dash {
-    cursor: pointer;
-}
-
 .animate-hover::before {
     content: "";
     position: absolute;

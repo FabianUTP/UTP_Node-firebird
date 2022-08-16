@@ -25,10 +25,15 @@
 
 <body>
 
-  {{#if isAuth }}
-    {{>navbar }}
+  {{#if isAuthenticated }}
+    {{>navbar}}
 
-    {{>navegation }}
+    {{#if isAdmin}}
+      {{>navegation-admin}}
+    {{else}}
+      {{>navegation-alumno}}
+    {{/if}}
+    
   {{/if }}
 
   <main id="main" class="main">

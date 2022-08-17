@@ -1,317 +1,184 @@
-<div class="pagetitle">
-      <h1>SII-UTP</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="alumno-index.php">Inicio</a></li>
-          <li class="breadcrumb-item">Alumno</li>
-          <li class="breadcrumb-item">{{ IDAuth }}</li>
-          <li class="breadcrumb-item active">Datos personales</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
 
-    <section class="section profile">
-      <div class="row">
-        <div class="col-xl-3">
+<section class="section profile">
 
-          <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+  <div class="col-xl-9">
 
-              <img src="assets/img/CIAU TAH.png" alt="Profile">
-              <h2>Ciau Tah</h2>
-              <h3>Alan Mauricio</h3>
-              
+    <div class="card">
+      <div class="card-body pt-3">
+        <!-- Bordered Tabs -->
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+          <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#datos">Identidad</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contacto">Contacto</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#autorizada">Persona autorizada</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_beca">Datos beca</button>
+          </li>
+
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_seguro">Datos Seguro</button>
+          </li>
+
+        </ul>
+        <div class="tab-content pt-2">
+
+          <div class="tab-pane fade show active profile-overview" id="datos">
+
+            <h5 class="card-title">Datos de identidad</h5>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">Apellido paterno</div>
+              <div class="col-lg-9 col-md-8">Ciau</div>
             </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">Apellido materno</div>
+              <div class="col-lg-9 col-md-8">Tah</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">Nombres</div>
+              <div class="col-lg-9 col-md-8">Alan Mauricio</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Género</div>
+              <div class="col-lg-9 col-md-8">Masculino</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Estado civil</div>
+              <div class="col-lg-9 col-md-8">Soltero</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Estado de nacimiento</div>
+              <div class="col-lg-9 col-md-8">Yucatán</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Municipio de nacimiento</div>
+              <div class="col-lg-9 col-md-8">Muna</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">CURP</div>
+              <div class="col-lg-9 col-md-8">
+                <h3>CAOG740914HDFSCS02</h3>
+              </div>
+            </div>
+
           </div>
 
-        </div>
-        </div>
+          <div class="tab-pane fade pt-3" id="contacto">
 
-        <div class="col-xl-9">
+            <!-- Settings Form -->
+            <form>
 
-          <div class="card">
-            <div class="card-body pt-3">
-              <!-- Bordered Tabs -->
-              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-
-                <!--li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
-                </li-->
-
-                <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#datos">Identidad</button>
-                </li>
-                
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contacto">Contacto</button>
-                </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#autorizada">Persona autorizada</button>
-                </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_beca">Datos beca</button>
-                </li>
-                
-                
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_seguro">Datos Seguro</button>
-                </li>
-
-              </ul>
-              <div class="tab-content pt-2">
-
-                <div class="tab-pane fade show active profile-overview" id="datos">
-                 
-
-                  <h5 class="card-title">Datos de identidad</h5>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Apellido paterno</div>
-                    <div class="col-lg-9 col-md-8">Ciau</div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Apellido materno</div>
-                    <div class="col-lg-9 col-md-8">Tah</div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Nombres</div>
-                    <div class="col-lg-9 col-md-8">Alan Mauricio</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Género</div>
-                    <div class="col-lg-9 col-md-8">Masculino</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Estado civil</div>
-                    <div class="col-lg-9 col-md-8">Soltero</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Estado de nacimiento</div>
-                    <div class="col-lg-9 col-md-8">Yucatán</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">Municipio de nacimiento</div>
-                    <div class="col-lg-9 col-md-8">Muna</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">CURP</div>
-                    <div class="col-lg-9 col-md-8"><h3>CAOG740914HDFSCS02</h3></div>
-                  </div>
-
-                 
-
+              <h5 class="card-title">Datos de domicilio</h5>
+              <div class="row mb-3">
+                <label for="domicilio" class="col-md-4 col-lg-3 col-form-label">Domicilio</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="domicilio" type="text" class="form-control" id="domicilio"
+                    value="Calle 22 x 39 y 41 No. 274, Col. Pedregales de Tanlum " required>
                 </div>
+              </div>
 
-                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
-                  <!-- Profile Edit Form -->
-                  <form>
-                    <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
-                        <img src="assets/img/profile-img.jpg" alt="Profile">
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                      <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form><!-- End Profile Edit Form -->
-
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="Estado" type="text" class="form-control" id="estado" value="YUCATÁN" required>
                 </div>
+              </div>
 
-                <div class="tab-pane fade pt-3" id="contacto">
-
-                  <!-- Settings Form -->
-                  <form>
-
-                    <h5 class="card-title">Datos de domicilio</h5>
-                    <div class="row mb-3">
-                      <label for="domicilio" class="col-md-4 col-lg-3 col-form-label">Domicilio</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="domicilio" type="text" class="form-control" id="domicilio" value="Calle 22 x 39 y 41 No. 274, Col. Pedregales de Tanlum " required>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="Estado" type="text" class="form-control" id="estado" value="YUCATÁN" required>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="municipio" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="municipio" type="text" class="form-control" id="municipio" value="Mérida" required>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="localidad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="localidad" type="text" class="form-control" id="localidad" value="Mérida" required>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="cp" class="col-md-4 col-lg-3 col-form-label">Código postal</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="cp" type="text" class="form-control" id="cp" value="97210" required>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email personal</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="gaspar.castillo.ocampo@gmail.com">
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="Emailutp" class="col-md-4 col-lg-3 col-form-label">Email institucional</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="emailutp" type="email" class="form-control" id="Emailutp" value="gaspar.castillo@utponiente.edu.mx">
-                      </div>
-                    </div>
-                    
-                 
-                    <div class="row mb-3">
-                      <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono celular</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="phonecel" type="text" class="form-control" id="Phonecel" value="9991627044">
-                      </div>
-                    </div>
-                    
-                    
-                    <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Teléfono domicilio</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="9991119897">
-                      </div>
-                    </div>
-                 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
+              <div class="row mb-3">
+                <label for="municipio" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="municipio" type="text" class="form-control" id="municipio" value="Mérida" required>
                 </div>
+              </div>
 
-                <div class="tab-pane fade pt-3" id="autorizada">
-                  <!-- Change Password Form -->
-                  <form>
+              <div class="row mb-3">
+                <label for="localidad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="localidad" type="text" class="form-control" id="localidad" value="Mérida" required>
+                </div>
+              </div>
 
-                    <h5 class="card-title">Persona autorizada para recibir información personal y/o académica</h5>
-                    
-                    <div class="row mb-3">
-                      <label for="nombre_autirizada" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="domicilio" type="text" class="form-control" id="domicilio" value="Calle 22 x 39 y 41 No. 274, Col. Pedregales de Tanlum " required>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
-                      <div class="col-md-8 col-lg-9">
-                        <select class="form-select" id="parentesco" required>
+              <div class="row mb-3">
+                <label for="cp" class="col-md-4 col-lg-3 col-form-label">Código postal</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="cp" type="text" class="form-control" id="cp" value="97210" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email personal</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="email" type="email" class="form-control" id="Email"
+                    value="gaspar.castillo.ocampo@gmail.com">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Emailutp" class="col-md-4 col-lg-3 col-form-label">Email institucional</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="emailutp" type="email" class="form-control" id="Emailutp"
+                    value="gaspar.castillo@utponiente.edu.mx">
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono celular</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="phonecel" type="text" class="form-control" id="Phonecel" value="9991627044">
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Teléfono domicilio</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="phone" type="text" class="form-control" id="Phone" value="9991119897">
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+
+          <div class="tab-pane fade pt-3" id="autorizada">
+            <!-- Change Password Form -->
+            <form>
+
+              <h5 class="card-title">Persona autorizada para recibir información personal y/o académica</h5>
+
+              <div class="row mb-3">
+                <label for="nombre_autirizada" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="domicilio" type="text" class="form-control" id="domicilio"
+                    value="Calle 22 x 39 y 41 No. 274, Col. Pedregales de Tanlum " required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
+                <div class="col-md-8 col-lg-9">
+                  <select class="form-select" id="parentesco" required>
                     <option selected disabled value="">Choose...</option>
                     <option>Padre</option>
                     <option>Madre</option>
@@ -322,96 +189,99 @@
                     <option>Amigo(a)</option>
                     <option>Otro</option>
                   </select>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="Phoneautorizada" class="col-md-4 col-lg-3 col-form-label">Teléfono persona autorizada</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="phoneautorizada" type="text" class="form-control" id="Phoneautorizada" value="9993483728">
-                      </div>
-                    </div>
-                    
-                    
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
                 </div>
-                
-                <div class="tab-pane fade pt-3" id="datos_beca">
-                  <!-- Change Password Form -->
-                  <form>
+              </div>
 
-                    <h5 class="card-title">Beca bachillerato</h5>
-
-                   
-                   <div class="row mb-3">
-                      <label for="instbecabach" class="col-md-4 col-lg-3 col-form-label">Institución beca bach.</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instbecabach" type="text" class="form-control" id="instbecabach" value="CNBBBJ" required>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="becabach" class="col-md-4 col-lg-3 col-form-label">Nombre beca bach.</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="becabach" type="text" class="form-control" id="becabach" value="Benito Juárez" required>
-                      </div>
-                    </div>
-                    
-                     <h5 class="card-title">Beca UTP</h5>
-
-                    
-                    <div class="row mb-3">
-                      <label for="instbeca" class="col-md-4 col-lg-3 col-form-label">Institución de la beca</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="becainst" type="text" class="form-control" id="becainst" value="CNBBBJ" required>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="becanombre" class="col-md-4 col-lg-3 col-form-label">Nombre de la beca</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="becanombre" type="text" class="form-control" id="becanombre" value="JÓVENES ESCRIBIENDO EL FUTURO" required>
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Estatus de la beca</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="becaestatus" type="text" class="form-control" id="becaestatus" value="No aceptada">
-                      </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                      <label for="becafolio" class="col-md-4 col-lg-3 col-form-label">Folio de la beca</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="becafolio" type="text" class="form-control" id="becafolio" value="8739473">
-                      </div>
-                    </div>
-
-                    
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
+              <div class="row mb-3">
+                <label for="Phoneautorizada" class="col-md-4 col-lg-3 col-form-label">Teléfono persona
+                  autorizada</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="phoneautorizada" type="text" class="form-control" id="Phoneautorizada"
+                    value="9993483728">
                 </div>
-                
-                <div class="tab-pane fade pt-3" id="datos_seguro">
-                  <!-- Change Password Form -->
-                  <form>
+              </div>
 
-                    <h5 class="card-title">Datos seguro médico</h5>
 
-                    <div class="row mb-3">
-                      <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
-                      <div class="col-md-8 col-lg-9">
-                        <select class="form-select" id="tiposeguro" required>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+
+          <div class="tab-pane fade pt-3" id="datos_beca">
+            <!-- Change Password Form -->
+            <form>
+
+              <h5 class="card-title">Beca bachillerato</h5>
+
+
+              <div class="row mb-3">
+                <label for="instbecabach" class="col-md-4 col-lg-3 col-form-label">Institución beca bach.</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="instbecabach" type="text" class="form-control" id="instbecabach" value="CNBBBJ" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becabach" class="col-md-4 col-lg-3 col-form-label">Nombre beca bach.</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becabach" type="text" class="form-control" id="becabach" value="Benito Juárez" required>
+                </div>
+              </div>
+
+              <h5 class="card-title">Beca UTP</h5>
+
+
+              <div class="row mb-3">
+                <label for="instbeca" class="col-md-4 col-lg-3 col-form-label">Institución de la beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becainst" type="text" class="form-control" id="becainst" value="CNBBBJ" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becanombre" class="col-md-4 col-lg-3 col-form-label">Nombre de la beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becanombre" type="text" class="form-control" id="becanombre"
+                    value="JÓVENES ESCRIBIENDO EL FUTURO" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Estatus de la beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becaestatus" type="text" class="form-control" id="becaestatus" value="No aceptada">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becafolio" class="col-md-4 col-lg-3 col-form-label">Folio de la beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becafolio" type="text" class="form-control" id="becafolio" value="8739473">
+                </div>
+              </div>
+
+
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+
+          <div class="tab-pane fade pt-3" id="datos_seguro">
+            <!-- Change Password Form -->
+            <form>
+
+              <h5 class="card-title">Datos seguro médico</h5>
+
+              <div class="row mb-3">
+                <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
+                <div class="col-md-8 col-lg-9">
+                  <select class="form-select" id="tiposeguro" required>
                     <option selected disabled value="">Choose...</option>
                     <option>IMSS-UTP</option>
                     <option>IMSS Familiar</option>
@@ -421,30 +291,30 @@
                     <option>Particular</option>
                     <option>Otro</option>
                   </select>
-                      </div>
-                    </div>
-                   
-                   <div class="row mb-3">
-                      <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="nss" type="text" class="form-control" id="nss" value="68198372635">
-                      </div>
-                    </div>
-                    
-                    
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-
                 </div>
+              </div>
 
-              </div><!-- End Bordered Tabs -->
+              <div class="row mb-3">
+                <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="nss" type="text" class="form-control" id="nss" value="68198372635">
+                </div>
+              </div>
 
-            </div>
+
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
           </div>
 
-        </div>
+        </div><!-- End Bordered Tabs -->
+
       </div>
-    </section>
+    </div>
+
+  </div>
+  </div>
+</section>

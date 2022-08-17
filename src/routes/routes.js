@@ -17,13 +17,17 @@ const {
 router.get("/login", noAuth, AuthController.login);
 router.post("/login", AuthController.postLogin);
 router.get("/logout", AuthController.logout);
-// router.get("/register", (req, res) => res.render("auth/register"));
+router.get("/register", (req, res) => res.render("auth/register"));
 
 // Rutas de los Alumnos
 router.get("/", verifySesion, HomeController.show);
 router.get("/boletas", verifySesion, AlumnosController.getBoletas);
 router.get("/perfil", verifySesion, AlumnosController.show);
 router.post("/perfil", verifySesion, AlumnosController.update);
+
+
+// Rutas para el Administrador
+router.get("/nuevo-alumno", verifySesion, (req, res) => res.render("admin/alumno/crear-screen"));
 
 router.get("*", (req, res) => res.status(404).render("error404"));
 

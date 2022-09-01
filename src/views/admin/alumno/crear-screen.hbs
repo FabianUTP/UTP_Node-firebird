@@ -1,457 +1,492 @@
-   <div class="pagetitle">
-      <h1>Crear nuevo alumno</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Formularios</li>
-          <li class="breadcrumb-item active">Aspirantes</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-    
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-6">
-            
-    <section class="section profile">
-     <div class="row">
-      <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-              <img src="assets/img/CIAU TAH.png" alt="Profile">
-               <div class="col-md-12">
-                    <center><h2>Ciau Tah Alan Mauricio</h2></center>
-                    <p>Subir fotografía</p>
-                    <div class="was-validated">
-                        <div class="form-group">
-                            <input type="file" name="fotografia" class="form-control" accept="assets/img/*" /> <!--LA FOTOGRAFÍA PUEDE SER NO REQUERIDA-->
-                        </div>
+<div class="pagetitle">
+  <h1>Crear nuevo alumno</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+      <li class="breadcrumb-item">Formularios</li>
+      <li class="breadcrumb-item active">Aspirantes</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-6">
+
+      <section class="section profile">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                <img src="assets/img/CIAU TAH.png" alt="Profile">
+                <div class="col-md-12">
+                  <center>
+                    <h2>Ciau Tah Alan Mauricio</h2>
+                  </center>
+                  <p>Subir fotografía</p>
+                  <div class="was-validated">
+                    <div class="form-group">
+                      <input type="file" name="fotografia" class="form-control" accept="assets/img/*" />
+                      <!--LA FOTOGRAFÍA PUEDE SER NO REQUERIDA-->
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-      </div>
-     </div>
-    </section>
-        
-        
-        
-        <br>
+      </section>
 
-          <div class="card">
-            <div class="card-body">
-              <h1 class="card-title">Datos de identidad</h1>
+
+
+      <br>
+
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Datos de identidad</h1>
 
 
 
 
-              <!-- Custom Styled Validation -->
-              <form class="row g-3 needs-validation" novalidate>
-                <div class="col-md-6">
-                  <label for="validationapellido1" class="form-label">Primer apellido</label>
-                  <input type="text" class="form-control" id="validationapellido1" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Primer apellido" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <label for="validationapellido2" class="form-label">Segundo apellido</label>
-                  <input type="text" class="form-control" id="validationapellido2" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Segundo apellido" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <label for="validationnombres" class="form-label">Nombres</label>
-                  <input type="text" class="form-control" id="validationnombres" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Nombres" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputgenero" class="form-label"  >Género</label>
-                  <select id="inputState"  placeholder="Género"  class="form-select" required>
-                    <option selected ></option>
-                    <option>Femenino</option>
-                    <option>Masculino</option>
-                  </select>
-                </div>
-                
-                <div class="col-6">
-                 <label for="inputfechanac" class="form-label">Fecha de nacimiento</label>
-                 <div class="col-md-8" style="padding-right: 0px">
-                    <input class="form-control" id="fecha_nac_" onblur="calcularEdad(this.value)" name="fecha_nac" required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-                </div>
-                
-                 <div class="col-md-6">
-                  <label for="validationestadonac" class="form-label">Estado de nacimiento</label>
-                  <select id="estado" class="form-control" name="estado" required></select>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="validationmunicipionac" class="form-label">Municipio de nacimiento</label>
-                  <select id="municipio" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control" name="municipio" required></select>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-4">
-                  <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad" >Nacionalidad</label>
-                  <select id="inputState" class="form-select" required>
-                    <option selected></option>
-                    <option>Mexicana</option>
-                    <option>Extranjera</option>
-                  </select>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputedocivil" class="form-label" placeholder="EdoCivil" >Estado civil</label>
-                  <select id="inputState" class="form-select" required>
-                    <option selected></option>
-                    <option>Soltero</option>
-                    <option>Casado</option>
-                  </select>
-                </div>
-                
-                
-               <div class="col-md-7">
-                                      <div class="was-validated">
-                                          <div class="form-group">
-                                              <label class="control-label" for="curp_">
-                                                  CURP 
-                                              </label>                                            
-                                              <input class="form-control form-control-lg" id="curp_" name="curp" maxlength="18" onkeyup="javascript:this.value=this.value.toUpperCase();" onkeyup="esValidoCurpOBlockeaBtnSubmit();javascript:this.value=this.value.toUpperCase();" required type="text"><h2></h2>
-                                                <pre id="resultado"></pre>
-                                                <p id="val_res_p_" hidden="hidden"></p>
-                                              </input>  
-                                               <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
-                                                      Validar CURP
-                                                  </a>
-                                          </div>
-                                      </div>
-                                  </div>
-                
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <!--button type="reset" class="btn btn-secondary">Reset</button-->
-                </div>
-              </form><!-- End Multi Columns Form -->
-
+          <!-- Custom Styled Validation -->
+          <form class="row g-3 needs-validation" novalidate>
+            <div class="col-md-6">
+              <label for="validationapellido1" class="form-label">Primer apellido</label>
+              <input type="text" class="form-control" id="validationapellido1"
+                onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Primer apellido"
+                required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
             </div>
-          </div>
-
-          <div class="card">
-            <div class="card-body">
-              <h1 class="card-title">Domicilio</h1>
-
-              <!-- Custom Styled Validation -->
-              <form class="row g-3 needs-validation" novalidate>
-                <div class="col-md-8">
-                  <label for="inputAddress" class="form-label">Domicilio particular</label>
-                  <input type="text" class="form-control" id="inputAddress" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="50" placeholder="Calle, número y colonia" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <label for="inputAddress" class="form-label">Cruzamientos</label>
-                  <input type="text" class="form-control" id="inputAddress" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Cruzamientos" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="validationestado" class="form-label">Estado</label>
-                  <select id="estado" class="form-control" name="estado" required></select>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="validationmunicipio" class="form-label">Municipio</label>
-                  <select id="municipio" class="form-control" name="municipio" required></select>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-8">
-                  <label for="validationCustom01" class="form-label">Localidad</label>
-                  <input type="text" class="form-control" id="validationCustom03" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Ciudad, comisaría, hacienda, etc." required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-4">
-                  <label for="validationCustom01" class="form-label">Código postal</label>
-                  <input type="text" class="form-control" id="validationCustom01" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="5" placeholder="C.P." required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-12">
-                  <label for="inputemail" class="form-label">Email personal</label>
-                  <input type="text" class="form-control" id="inputemail" placeholder="nombre@servidor.com" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                 <div class="col-md-12">
-                  <label for="inputemail" class="form-label">Email institucional</label>
-                  <input type="text" class="form-control" id="inputemail" placeholder="nombre@utponiente.edu.mx" >
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputphone" class="form-label">Teléfono celular</label>
-                  <input type="text" class="form-control" id="inputphone"  maxlength="10" placeholder="Celular" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputphone" class="form-label">Teléfono domicilio</label>
-                  <input type="text" class="form-control" id="inputphone"  maxlength="10" placeholder="Tel. domicilio" >
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-              
-                
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <!--button type="reset" class="btn btn-secondary">Reset</button-->
-                </div>
-              </form><!-- End Multi Columns Form -->
-
+            <div class="col-md-6">
+              <label for="validationapellido2" class="form-label">Segundo apellido</label>
+              <input type="text" class="form-control" id="validationapellido2"
+                onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Segundo apellido"
+                required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
             </div>
-          </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Escolaridad</h5>
-
-              <!-- Vertical Form -->
-             <form class="row g-3 needs-validation" novalidate>
-                <div class="col-md-12">
-                  <label for="inputcarrera" class="form-label" placeholder="EdoCivil" >Carrera</label>
-                  <select id="inputcarrera" class="form-select" required>
-                    <option selected></option>
-                    <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
-                    <option>TSU en Gastronomía</option>
-                    <option>TSU en Procesos Alimentarios</option>
-                    <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
-                    <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
-                    <option>Ingeniería en Procesos Bioalimentarios</option>
-                    <option>Ingeniería en Desarrollo y Gestión de Software</option>
-                    <option>Licenciatura en Gestión de Negocios y Proyectos</option>
-                    <option>Licenciatura en Gestión y Desarrollo Turístico</option>
-                    <option>Curso de Inglés Básico</option>
-                    
-                  </select>
-                </div>
-                
-                <div class="col-md-2">
-                  <label for="inputcuatri" class="form-label" placeholder="EdoCivil" >Cuatrimestre</label>
-                  <select id="inputcuatri" class="form-select" required>
-                    <option selected></option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                  </select>
-                </div>
-                
-                 <div class="col-md-5">
-                  <label for="inputgrupo" class="form-label" placeholder="EdoCivil" >Grupo</label>
-                  <select id="inputgrupo" class="form-select" required>
-                    <option selected></option>
-                    <option></option>
-                  </select>
-                </div>
-                
-                 <div class="col-md-5">
-                  <label for="inputmatricula" class="form-label">MATRÍCULA</label>
-                  <input type="text" class="form-control" id="inputmatricula"  maxlength="8" placeholder="AAMMFFFF" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <!--button type="reset" class="btn btn-secondary">Reset</button-->
-                </div>
-                
-              </form><!-- Vertical Form -->
-
+            <div class="col-md-12">
+              <label for="validationnombres" class="form-label">Nombres</label>
+              <input type="text" class="form-control" id="validationnombres"
+                onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Nombres" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
             </div>
-          </div>
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Estatus</h5>
-
-              <!-- No Labels Form -->
-              <form class="row g-3">
-                 <div class="col-md-6">
-                  <label for="inputcuatri" class="form-label" placeholder="EdoCivil" >Estatus actual</label>
-                  <select id="inputcuatri" class="form-select" required>
-                    <option selected></option>
-                    <option>Aspirante</option>
-                    <option>Activo</option>
-                    <option>Baja temporal</option>
-                    <option>Baja definitiva</option>
-                    <option>No admitido</option>
-                    <option>Deserción</option>
-                    
-                  </select>
-                </div>
-                
-                <div class="col-6">
-                 <label for="inputAddress2" class="form-label">Fecha de registro</label>
-                 <div class="col-md-8" style="padding-right: 0px">
-                    <input class="form-control" id="fecha_reg" onblur="calcularEdad(this.value)" name="fecha_nac" required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-                </div>
-                
-                <div class="col-6">
-                 <label for="inputdate" class="form-label">Fecha de ingreso TSU</label>
-                 <div class="col-md-8" style="padding-right: 0px">
-                    <input class="form-control" id="fecha_itsu" onblur="calcularEdad(this.value)" name="fecha_nac" required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputcicloitsu" class="form-label" placeholder="EdoCivil" >Ciclo de ingreso TSU</label>
-                  <select id="inputcicloitsu" class="form-select" required>
-                    <option selected></option>
-                    <option></option>
-                  </select>
-                </div>
-                
-                <div class="col-6">
-                 <label for="inputdate" class="form-label">Fecha de Egreso TSU</label>
-                 <div class="col-md-8" style="padding-right: 0px">
-                    <input class="form-control" id="fecha_etsu" onblur="calcularEdad(this.value)" name="fecha_nac" required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputcicloetsu" class="form-label" placeholder="EdoCivil" >Ciclo de engreso TSU</label>
-                  <select id="inputcicloetsu" class="form-select" required>
-                    <option selected></option>
-                    <option></option>
-                  </select>
-                </div>
-                
-                <div class="col-6">
-                 <label for="inputdate" class="form-label">Fecha de Ingreso Lic.</label>
-                 <div class="col-md-8" style="padding-right: 0px">
-                    <input class="form-control" id="fecha_ilic" onblur="calcularEdad(this.value)" name="fecha_nac" required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputcuatri" class="form-label" placeholder="EdoCivil" >Estatus actual</label>
-                  <select id="inputcuatri" class="form-select" required>
-                    <option selected></option>
-                    <option></option>
-                  </select>
-                </div>
-                
-                <div class="col-6">
-                 <label for="inputdate" class="form-label">Fecha de Egreso Lic.</label>
-                 <div class="col-md-8" style="padding-right: 0px">
-                    <input class="form-control" id="fecha_elic" onblur="calcularEdad(this.value)" name="fecha_nac" required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputcuatri" class="form-label" placeholder="EdoCivil" >Estatus actual</label>
-                  <select id="inputcuatri" class="form-select" required>
-                    <option selected></option>
-                    <option></option>
-                  </select>
-                </div>
-                
-                <div class="col-6">
-                 <label for="inputdate" class="form-label">Fecha de Baja</label>
-                 <div class="col-md-8" style="padding-right: 0px">
-                    <input class="form-control" id="fecha_baja" onblur="calcularEdad(this.value)" name="fecha_nac" required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-                </div>
-                
-                <div class="col-md-6">
-                  <label for="inputmotivo" class="form-label" placeholder="EdoCivil" >Motivo de la baja</label>
-                  <select id="inputmotivo" class="form-select" required>
-                    <option selected></option>
-                    <option>REPROBACIÓN</option>
-                    <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
-                    <option>MOTIVOS PERSONALES</option>
-                    <option>CAMBIO DE CARRERA</option>
-                    <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
-                    <option>DISTANCIA DE LA UT</option>
-                    <option>PROBLEMAS ECONÓMICOS</option>
-                    <option>PROBLEMAS DE TRABAJO</option>
-                    <option>CAMBIO DE UT</option>
-                    <option>DEFUNCIÓN</option>
-                    <option>OTRAS CAUSAS</option>
-                  </select>
-                </div>
-                
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <!--button type="reset" class="btn btn-secondary">Reset</button-->
-                </div>
-                
-              </form><!-- End No Labels Form -->
-
+            <div class="col-md-6">
+              <label for="inputgenero" class="form-label">Género</label>
+              <select id="inputState" placeholder="Género" class="form-select" required>
+                <option selected></option>
+                <option>Femenino</option>
+                <option>Masculino</option>
+              </select>
             </div>
-          </div>
-            
-          </div>
+
+            <div class="col-6">
+              <label for="inputfechanac" class="form-label">Fecha de nacimiento</label>
+              <div class="col-md-8" style="padding-right: 0px">
+                <input class="form-control" id="fecha_nac_" onblur="calcularEdad(this.value)" name="fecha_nac" required
+                  type="date">
+              </div>
+              <div class="col-md-4" style="padding-left: 0px">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="validationestadonac" class="form-label">Estado de nacimiento</label>
+              <select id="estado" class="form-control" name="estado" required></select>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="validationmunicipionac" class="form-label">Municipio de nacimiento</label>
+              <select id="municipio" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control"
+                name="municipio" required></select>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
+              <select id="inputState" class="form-select" required>
+                <option selected></option>
+                <option>Mexicana</option>
+                <option>Extranjera</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputedocivil" class="form-label" placeholder="EdoCivil">Estado civil</label>
+              <select id="inputState" class="form-select" required>
+                <option selected></option>
+                <option>Soltero</option>
+                <option>Casado</option>
+              </select>
+            </div>
+
+
+            <div class="col-md-7">
+              <div>
+                <div class="form-group">
+                  <label class="control-label" for="curp_">
+                    CURP
+                  </label>
+                  <input 
+                    id="curp_" 
+                    name="curp" 
+                    {{!-- is-valid or is-invalid --}}
+                    class="form-control form-control-lg"
+                    style="text-transform: uppercase;"
+                    maxlength="18"
+                    required
+                    type="text"
+                  >
+                  <h2></h2>
+                  <pre id="resultado"></pre>
+                  <p id="val_res_p_" hidden="hidden"></p>
+                  </input>
+                  <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
+                    Consulta tu CURP
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <!--button type="reset" class="btn btn-secondary">Reset</button-->
+            </div>
+          </form><!-- End Multi Columns Form -->
 
         </div>
       </div>
-     </section>
+
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Domicilio</h1>
+
+          <!-- Custom Styled Validation -->
+          <form class="row g-3 needs-validation" novalidate>
+            <div class="col-md-8">
+              <label for="inputAddress" class="form-label">Domicilio particular</label>
+              <input type="text" class="form-control" id="inputAddress"
+                onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="50"
+                placeholder="Calle, número y colonia" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="inputAddress" class="form-label">Cruzamientos</label>
+              <input type="text" class="form-control" id="inputAddress"
+                onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20" placeholder="Cruzamientos"
+                required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="validationestado" class="form-label">Estado</label>
+              <select id="estado" class="form-control" name="estado" required></select>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="validationmunicipio" class="form-label">Municipio</label>
+              <select id="municipio" class="form-control" name="municipio" required></select>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <label for="validationCustom01" class="form-label">Localidad</label>
+              <input type="text" class="form-control" id="validationCustom03"
+                onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20"
+                placeholder="Ciudad, comisaría, hacienda, etc." required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">Código postal</label>
+              <input type="text" class="form-control" id="validationCustom01"
+                onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="5" placeholder="C.P." required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputemail" class="form-label">Email personal</label>
+              <input type="text" class="form-control" id="inputemail" placeholder="nombre@servidor.com" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <label for="inputemail" class="form-label">Email institucional</label>
+              <input type="text" class="form-control" id="inputemail" placeholder="nombre@utponiente.edu.mx">
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputphone" class="form-label">Teléfono celular</label>
+              <input type="text" class="form-control" id="inputphone" maxlength="10" placeholder="Celular" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputphone" class="form-label">Teléfono domicilio</label>
+              <input type="text" class="form-control" id="inputphone" maxlength="10" placeholder="Tel. domicilio">
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <!--button type="reset" class="btn btn-secondary">Reset</button-->
+            </div>
+          </form><!-- End Multi Columns Form -->
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Escolaridad</h5>
+
+          <!-- Vertical Form -->
+          <form class="row g-3 needs-validation" novalidate>
+            <div class="col-md-12">
+              <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
+              <select id="inputcarrera" class="form-select" required>
+                <option selected></option>
+                <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
+                <option>TSU en Gastronomía</option>
+                <option>TSU en Procesos Alimentarios</option>
+                <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
+                <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
+                <option>Ingeniería en Procesos Bioalimentarios</option>
+                <option>Ingeniería en Desarrollo y Gestión de Software</option>
+                <option>Licenciatura en Gestión de Negocios y Proyectos</option>
+                <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+                <option>Curso de Inglés Básico</option>
+
+              </select>
+            </div>
+
+            <div class="col-md-2">
+              <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
+              <select id="inputcuatri" class="form-select" required>
+                <option selected></option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+              </select>
+            </div>
+
+            <div class="col-md-5">
+              <label for="inputgrupo" class="form-label" placeholder="EdoCivil">Grupo</label>
+              <select id="inputgrupo" class="form-select" required>
+                <option selected></option>
+                <option></option>
+              </select>
+            </div>
+
+            <div class="col-md-5">
+              <label for="inputmatricula" class="form-label">MATRÍCULA</label>
+              <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <!--button type="reset" class="btn btn-secondary">Reset</button-->
+            </div>
+
+          </form><!-- Vertical Form -->
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Estatus</h5>
+
+          <!-- No Labels Form -->
+          <form class="row g-3">
+            <div class="col-md-6">
+              <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
+              <select id="inputcuatri" class="form-select" required>
+                <option selected></option>
+                <option>Aspirante</option>
+                <option>Activo</option>
+                <option>Baja temporal</option>
+                <option>Baja definitiva</option>
+                <option>No admitido</option>
+                <option>Deserción</option>
+
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label for="inputAddress2" class="form-label">Fecha de registro</label>
+              <div class="col-md-8" style="padding-right: 0px">
+                <input class="form-control" id="fecha_reg" onblur="calcularEdad(this.value)" name="fecha_nac" required
+                  type="date">
+              </div>
+              <div class="col-md-4" style="padding-left: 0px">
+              </div>
+            </div>
+
+            <div class="col-6">
+              <label for="inputdate" class="form-label">Fecha de ingreso TSU</label>
+              <div class="col-md-8" style="padding-right: 0px">
+                <input class="form-control" id="fecha_itsu" onblur="calcularEdad(this.value)" name="fecha_nac" required
+                  type="date">
+              </div>
+              <div class="col-md-4" style="padding-left: 0px">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputcicloitsu" class="form-label" placeholder="EdoCivil">Ciclo de ingreso TSU</label>
+              <select id="inputcicloitsu" class="form-select" required>
+                <option selected></option>
+                <option></option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label for="inputdate" class="form-label">Fecha de Egreso TSU</label>
+              <div class="col-md-8" style="padding-right: 0px">
+                <input class="form-control" id="fecha_etsu" onblur="calcularEdad(this.value)" name="fecha_nac" required
+                  type="date">
+              </div>
+              <div class="col-md-4" style="padding-left: 0px">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputcicloetsu" class="form-label" placeholder="EdoCivil">Ciclo de engreso TSU</label>
+              <select id="inputcicloetsu" class="form-select" required>
+                <option selected></option>
+                <option></option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label for="inputdate" class="form-label">Fecha de Ingreso Lic.</label>
+              <div class="col-md-8" style="padding-right: 0px">
+                <input class="form-control" id="fecha_ilic" onblur="calcularEdad(this.value)" name="fecha_nac" required
+                  type="date">
+              </div>
+              <div class="col-md-4" style="padding-left: 0px">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
+              <select id="inputcuatri" class="form-select" required>
+                <option selected></option>
+                <option></option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label for="inputdate" class="form-label">Fecha de Egreso Lic.</label>
+              <div class="col-md-8" style="padding-right: 0px">
+                <input class="form-control" id="fecha_elic" onblur="calcularEdad(this.value)" name="fecha_nac" required
+                  type="date">
+              </div>
+              <div class="col-md-4" style="padding-left: 0px">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
+              <select id="inputcuatri" class="form-select" required>
+                <option selected></option>
+                <option></option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label for="inputdate" class="form-label">Fecha de Baja</label>
+              <div class="col-md-8" style="padding-right: 0px">
+                <input class="form-control" id="fecha_baja" onblur="calcularEdad(this.value)" name="fecha_nac" required
+                  type="date">
+              </div>
+              <div class="col-md-4" style="padding-left: 0px">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
+              <select id="inputmotivo" class="form-select" required>
+                <option selected></option>
+                <option>REPROBACIÓN</option>
+                <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
+                <option>MOTIVOS PERSONALES</option>
+                <option>CAMBIO DE CARRERA</option>
+                <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
+                <option>DISTANCIA DE LA UT</option>
+                <option>PROBLEMAS ECONÓMICOS</option>
+                <option>PROBLEMAS DE TRABAJO</option>
+                <option>CAMBIO DE UT</option>
+                <option>DEFUNCIÓN</option>
+                <option>OTRAS CAUSAS</option>
+              </select>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <!--button type="reset" class="btn btn-secondary">Reset</button-->
+            </div>
+
+          </form><!-- End No Labels Form -->
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<script src="functions/crearAlumno.js" />

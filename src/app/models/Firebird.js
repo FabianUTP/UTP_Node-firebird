@@ -32,7 +32,7 @@ class Firebird {
 
         db.query(`SELECT * FROM ${this.table} WHERE ${this.primaryKey}=?`, [id], (err, result) => {
           if (err) throw err;
-          resolve(result);
+          resolve(result[0]);
           db.detach();
         })
 

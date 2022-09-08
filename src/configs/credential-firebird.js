@@ -2,9 +2,9 @@ const credentials = {};
 
 credentials.host = process.env.FB_HOST;
 credentials.port = process.env.FB_PORT;
-credentials.database = process.env.FB_USER;
-credentials.user = process.env.FB_PASS;
-credentials.password = 'masterkey';
+credentials.database = process.env.FB_DATABASE;
+credentials.user = process.env.FB_USER;
+credentials.password = process.env.FB_PASS;
 credentials.localcase_keys = false;
 credentials.role = null;
 credentials.pageSize = 4096;

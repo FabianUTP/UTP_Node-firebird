@@ -1,0 +1,49 @@
+<section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+
+            <div class="car-title text-center">
+              <h1><i class="bi bi-people"></i><span>Grupos</span></h1>
+            </div>
+
+            <div class="card-body">
+              <div class="container">
+              <!-- Table with stripped rows -->
+              <table class="table datatable" align="center" border="1" style="#" class="table table-condensed table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Carrera</th>
+                    <th scope="col">Cuatri</th>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Inscritos</th>
+                    <th scope="col">Tutor</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {{#each grupos}}
+                    <tr>
+                      <td>{{@index}}</td>
+                      <td>{{CODIGO_GRUPO}}</td>
+                      <td>{{GRADO}}</td>
+                      <td>{{GRUPO}}</td>
+                      <td>{{INSCRITOS}} de {{CUPO_MAXIMO}}</td>
+                      <td>{{CLAVEPROFESOR_TITULAR}}</td>
+                    </tr>
+                  {{/each}}
+
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+              <div class="dataTable-bottom">
+                <div class="dataTable-info">Showing 1 to 2 of 2 entries</div>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </section>

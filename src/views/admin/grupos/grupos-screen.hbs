@@ -1,49 +1,68 @@
 <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+  <div id="container" class="row d-none">
+    <div class="col-lg-12">
 
-          <div class="card">
+      <div class="card">
 
-            <div class="car-title text-center">
-              <h1><i class="bi bi-people"></i><span>Grupos</span></h1>
+        <div class="text-center" style="padding: 13px;">
+          <h1><i class="bi bi-people"></i><span>Grupos</span></h1>
+        </div>
+
+        <div class="card-body">
+          <div class="container">
+
+            <div class="d-flex justify-content-between flex-wrap">
+
+              <div>
+                <label for="" class="form-label">Elegir nivel</label>
+                <select id="" class="form-control" onchange="changeNivel">
+                  <option value="1">Nivel 1</option>
+                  <option value="2">Nivel 2</option>
+                  <option value="3">Nivel 3</option>
+                </select>
+              </div>
+
+            </div>
+            
+            <br>
+            
+            <!-- Table with stripped rows -->
+            <div class="table-responsive">
+            <table align="center" border="1" style="#"
+              class="table table-bordered table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Carrera</th>
+                  <th scope="col">Cuatri</th>
+                  <th scope="col">Grupo</th>
+                  <th scope="col">Inscritos</th>
+                  <th scope="col">Tutor</th>
+                </tr>
+              </thead>
+
+              <tbody id="table-container"></tbody>
+
+            </table>
             </div>
 
-            <div class="card-body">
-              <div class="container">
-              <!-- Table with stripped rows -->
-              <table class="table datatable" align="center" border="1" style="#" class="table table-condensed table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Carrera</th>
-                    <th scope="col">Cuatri</th>
-                    <th scope="col">Grupo</th>
-                    <th scope="col">Inscritos</th>
-                    <th scope="col">Tutor</th>
-                  </tr>
-                </thead>
-                <tbody>
+            <div class="text-center">
+              <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
+              <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
+            </div>
+            <!-- End Table with stripped rows -->
 
-                  {{#each grupos}}
-                    <tr>
-                      <td>{{@index}}</td>
-                      <td>{{CODIGO_GRUPO}}</td>
-                      <td>{{GRADO}}</td>
-                      <td>{{GRUPO}}</td>
-                      <td>{{INSCRITOS}} de {{CUPO_MAXIMO}}</td>
-                      <td>{{CLAVEPROFESOR_TITULAR}}</td>
-                    </tr>
-                  {{/each}}
-
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
-
-              <div class="dataTable-bottom">
-                <div class="dataTable-info">Showing 1 to 2 of 2 entries</div>
-              </div>
+            <div class="dataTable-bottom">
+              <div class="dataTable-info">Showing 1 to 2 of 2 entries</div>
+            </div>
           </div>
 
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <div id="preloader"></div>
+</section>
+
+<script src="js/functions/getGrupos.js"></script>

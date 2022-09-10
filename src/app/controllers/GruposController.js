@@ -3,11 +3,8 @@ const Grupos = require("../models/Grupos");
 
 const GruposCtr = {};
 
-GruposCtr.show = async (req = request, res = response) => {
-  let grupos = await Grupos.all(25);
-  res.render('admin/grupos/grupos-screen', {
-    grupos
-  });
-}
+GruposCtr.show = (req, res) => res.render('admin/grupos/grupos-screen');
+
+GruposCtr.showById = (req, res) => res.render('admin/grupos/grupo-detail-screen');  
 
 module.exports = GruposCtr;

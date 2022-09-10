@@ -1,0 +1,12 @@
+.btn-show {
+    position: absolute;
+    right: 1%;
+    background-color: transparent;
+    border: none;
+    top: .3rem;
+    z-index: 9;
+}
+
+.btn-show:hover {
+    color: blue;
+}

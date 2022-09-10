@@ -6,9 +6,9 @@ const { verifySesion, noAuth } = require("../app/controllers/middlewares/");
 
 // Controladores
 const {
-  HomeController,
   AuthController,
   AlumnosController,
+  HomeController,
   GruposCtr,
 } = require("../app/controllers");
 
@@ -16,7 +16,7 @@ const {
 router.get("/login", noAuth, AuthController.login);
 router.post("/login", AuthController.postLogin);
 router.get("/logout", AuthController.logout);
-router.get("/register", (req, res) => res.render("auth/register"));
+// router.get("/register", (req, res) => res.render("auth/register"));
 
 // Rutas de los Alumnos
 router.get("/", verifySesion, HomeController.show);
@@ -32,13 +32,9 @@ router.post("/perfil/update-per-contac", verifySesion, AlumnosController.updateP
 router.post("/perfil/update-seguro", verifySesion, AlumnosController.updateSeguro);
 
 
-
 // Rutas para el Administrador
+router.get("/grupos", GruposCtr.show);
+router.get("/grupos/:idGrupo", GruposCtr.show);
 router.get("/nuevo-alumno", verifySesion, (req, res) => res.render("admin/alumno/crear-screen"));
-
-router.get("/grupos", verifySesion, GruposCtr.show);
-
-// Para la ruta de 404 - Page not found
-router.get("*", (req, res) => res.status(404).render("error404"));
 
 module.exports = router;

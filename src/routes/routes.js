@@ -2,7 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 // Middleewares para las sesiones
-const { verifySesion, noAuth } = require("../app/controllers/middlewares/");
+const { 
+  verifySesion,
+  isAdmin,
+  noAuth
+} = require("../app/controllers/middlewares/session");
 
 // Controladores
 const {
@@ -33,8 +37,8 @@ router.post("/perfil/update-seguro", verifySesion, AlumnosController.updateSegur
 
 
 // Rutas para el Administrador
-router.get("/grupos", GruposCtr.show);
-router.get("/grupos/:idGrupo", GruposCtr.show);
-router.get("/nuevo-alumno", verifySesion, (req, res) => res.render("admin/alumno/crear-screen"));
+router.get("/grupos", [isAdmin, verifySesion], GruposCtr.show);
+router.get("/grupos/:idGrupo", [isAdmin, verifySesion], GruposCtr.show);
+router.get("/nuevo-alumno", [isAdmin, verifySesion], verifySesion, (req, res) => res.render("admin/alumno/crear-screen"));
 
 module.exports = router;

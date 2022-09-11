@@ -16,7 +16,16 @@ const noAuth = (req = request, res = response, next) => {
     }
 }
 
+const isAdmin = (req = request, res = response, next) => {
+    if(req.session.isAdmin) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 module.exports = {
     verifySesion,
-    noAuth
+    noAuth,
+    isAdmin
 }

@@ -10,12 +10,12 @@ class Firebird {
   }
 
   // Obtiene todos los registros de la tabla y columnas registradas
-  all(first = 20) {
+  all({limit = 10, skip = 0}) {
     return new Promise((resolve) => {
       firebird.attach(credential, (error, db) => {
         if(error) throw error;
 
-        db.query(`SELECT FIRST(${first}) * FROM ${this.table}`, (err, result) => {
+        db.query(`SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table}`, (err, result) => {
           if (err) throw err;
           resolve(result);
           db.detach();
@@ -76,16 +76,24 @@ class Firebird {
   }
 
   // Join a tablas
-  join() {
-    return new Promise(resolve => {
+  join({limit = 10, skip = 0, tableToJoin}) {
+    return new Promise((resolve) => {
       resolve('done');
     });
   }
 
   // Create una secuencia SQL personalizada
-  createQuery(query) {
+  createQuery({ query }) {
     return new Promise((resolve, reject) => {
-      resolve(query);
+      firebird.attach(credential, (error, db) => {
+        if(error) throw error;
+
+        db.query(query, (err, result) => {
+          if (err) throw err;
+          resolve(result);
+          db.detach();
+        })
+      })
     })
   }
 

@@ -18,7 +18,7 @@
  * [Express Session - Para el manejo de las sesiones](https://www.npmjs.com/package/express-session)
  * [Express - Creacion de Middlewares](https://expressjs.com/es/guide/using-middleware.html)
  * [Handlebars - Motor de plantillas para las vitas](https://www.npmjs.com/package/express-handlebars)
- * [Conexion a Firebird](https://www.npmjs.com/package/express-session)
+ * [Conexion a Firebird](https://www.npmjs.com/package/node-firebird)
  * [Bootstrap - Para el diseño y estilos](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
 
 

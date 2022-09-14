@@ -5,27 +5,33 @@ const container = document.getElementById("container");
 const table = document.getElementById('table-container');
 
 
+let limit = 25;
 let skip = 0;
 
 const changeView = () => {
   setTimeout(() => {
     loader.style.display = "none";
     container.classList.remove("d-none");
-  }, 700)
+  }, 700);
 };
 
 const prev = () => {
-  console.log("prev")
-  skip += 2;
+  console.log("prev", limit)
+  if(skip >= limit) {
+    // limit -= 10;
+    skip -= limit;
+  }
   getGrupos();
 }
 
 const next = () => {
-  console.log("next")
+  console.log("next", limit)
+  skip += limit;
+  getGrupos()
 }
 
 const getGrupos = async () => {
-  const res = await fetch(`api/grupos?skip=${skip}`);
+  const res = await fetch(`api/grupos?limit=${limit}&skip=${skip}`);
   const data = await res.json();
   console.log(data)
 
@@ -35,6 +41,7 @@ const getGrupos = async () => {
   data.grupos.map((item, i) => {
     content += `<tr>`;
     content += `<td>${i + 1}</td>`;
+    content += `<td>${item.NIVEL}</td>`;
     content += `<td>${item.CODIGO_GRUPO}</td>`;
     content += `<td>${item.GRADO}</td>`;
     content += `<td>${item.GRUPO}</td>`;

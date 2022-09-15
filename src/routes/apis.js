@@ -1,34 +1,44 @@
-const { request, response, Router, query } = require("express");
-const Grupos = require("../app/models/Grupos");
+const { request, response, Router } = require("express");
+const { Grupos, Ciclos } = require("../app/models");
 
 const router = Router();
 
 router.get("/grupos", async (req = request, res = response) => {
-  const { skip = 0, limit = 10, search = '' } = req.query;
+  const { skip = 0, limit = 10, search = "" } = req.query;
 
   let query = "";
   query += `SELECT FIRST(${limit}) SKIP(${skip}) `;
-  query += "grupos.codigo_grupo, grupos.grado, grupos.grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel "
-  query += "FROM grupos JOIN profesores "
-  query += "ON grupos.claveprofesor_titular = profesores.claveprofesor "
-  query += "JOIN cfgniveles "
-  query += "on grupos.nivel = cfgniveles.nivel "
-  
-  if(search.length > 0) {
-    query += `WHERE grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%'`
+  query +=
+    "grupos.codigo_grupo, grupos.grado, grupos.grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel ";
+  query += "FROM grupos JOIN profesores ";
+  query += "ON grupos.claveprofesor_titular = profesores.claveprofesor ";
+  query += "JOIN cfgniveles ";
+  query += "on grupos.nivel = cfgniveles.nivel ";
+
+  if (search.length > 0) {
+    query += `WHERE grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%'`;
   }
 
-  const grupos = await Grupos.createQuery({ query })
+  const grupos = await Grupos.createQuery({ query });
 
   res.json({
-    query: req.query,
+    query: {
+      skip,
+      limit,
+      search
+    },
     grupos: grupos,
   });
 });
 
-router.get("/cuatrimestre", async (req = request, res = response) => {
+router.get("/cuatrimestres", async (req = request, res = response) => {
+
+  const ciclos = await Ciclos.where({
+    periodo: [1, 2, 3],
+  });
+
   res.json({
-    msj: 'Hello'
+    ciclos,
   });
 });
 

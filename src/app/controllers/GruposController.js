@@ -1,6 +1,3 @@
-const { request, response } = require("express");
-const Grupos = require("../models/Grupos");
-
 const GruposCtr = {};
 
 GruposCtr.show = (req, res) => res.render('admin/grupos/grupos-screen');

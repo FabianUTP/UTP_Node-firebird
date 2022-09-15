@@ -3,14 +3,14 @@ const credential = require('../../configs/credential-firebird');
 
 class Firebird {
 
-  constructor(table = "", primaryKey, columns = []) {
+  constructor(table = "", primaryKey = "", columns = []) {
     this.table      = table;      // Nombre de la tabla a usar
     this.primaryKey = primaryKey; // Llave primaria de la tabla
     this.columns    = columns;    // Columnas para retornar
   }
 
-  // Obtiene todos los registros de la tabla y columnas registradas
-  all({limit = 10, skip = 0}) {
+  // Obtiene todos los registros de la tabla
+  all(limit = 10, skip = 0 ) {
     return new Promise((resolve) => {
       firebird.attach(credential, (error, db) => {
         if(error) throw error;
@@ -32,7 +32,7 @@ class Firebird {
 
         db.query(`SELECT * FROM ${this.table} WHERE ${this.primaryKey}=?`, [id], (err, result = []) => {
           if (err) throw err;
-          resolve( result.length > 0 ? result[0] : null);
+          resolve(result.length > 0 ? result[0] : {});
           db.detach();
         })
 
@@ -75,15 +75,43 @@ class Firebird {
     })
   }
 
-  // Join a tablas
-  join({limit = 10, skip = 0, tableToJoin}) {
-    return new Promise((resolve) => {
-      resolve('done');
-    });
+  // Objeto con las condiciones a mostrar
+  where(conditions = {}) {
+
+    if(conditions.length === 0) return [];
+
+    let sql = `SELECT * FROM ${this.table} WHERE`;
+
+    for(const key in conditions) {
+      conditions[key].map((item, i) => {
+        if(typeof item === "string") { 
+          sql += ` (${key} LIKE '%${item}%') OR`;
+        } else {
+          sql += ` (${key} = ${item}) OR`;
+        }
+      });
+    }
+
+    // Elmina el ultimo OR de la consulta para la query en la DB
+    if(sql.substring(sql.length - 2) === "OR") {
+      sql = sql.slice(0, -3)
+    }
+
+    return new Promise(resolve => {
+      firebird.attach(credential, (error, db) => {
+        if(error) throw error;
+
+        db.query(sql, (err, result) => {
+          if (err) throw err;
+          resolve(result);
+          db.detach();
+        })
+      })
+    })
   }
 
   // Create una secuencia SQL personalizada
-  createQuery({ query }) {
+  createQuery({ query = '' }) {
     return new Promise((resolve, reject) => {
       firebird.attach(credential, (error, db) => {
         if(error) throw error;

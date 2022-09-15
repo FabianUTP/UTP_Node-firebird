@@ -6,7 +6,7 @@ const {
   verifySesion,
   isAdmin,
   noAuth
-} = require("../app/controllers/middlewares/session");
+} = require("../app/middlewares/session");
 
 // Controladores
 const {

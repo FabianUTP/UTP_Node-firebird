@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const Alumno = require("../models/Alumno");
+const { Alumno } = require("../models/");
 
 const AlumnosController = {};
 

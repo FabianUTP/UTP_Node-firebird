@@ -4,13 +4,14 @@ const loader = document.getElementById("preloader");
 const container = document.getElementById("container");
 const table = document.getElementById("table-container");
 const inputSearch = document.getElementById("buscar");
+const formInput = document.getElementById("formInput");
 
 let limit = 20;
 let skip = 0;
 let search = "";
 
 // Hace que no se refresque la pagina en el input de busqueda
-const cancelSubmit = (e) => e.preventDefault();
+formInput.addEventListener("submit", e => e.preventDefault());
 
 // Funcion para la animacion de carga
 const changeView = () => {

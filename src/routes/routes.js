@@ -27,13 +27,13 @@ router.get("/", verifySesion, HomeController.show);
 router.get("/boletas", verifySesion, AlumnosController.getBoletas);
 router.get("/documentos", verifySesion, (req, res) => {
   res.render("alumno/documentos/doctos-screen");
-})
+});
 
 router.get("/perfil", verifySesion, AlumnosController.show);
 router.post("/perfil/update-contacto", verifySesion, AlumnosController.updateContact);
 router.post("/perfil/update-per-contac", verifySesion, AlumnosController.updatePerContact);
-// router.post("/perfil/update-beca", verifySesion, AlumnosController.updateBeca);
 router.post("/perfil/update-seguro", verifySesion, AlumnosController.updateSeguro);
+// router.post("/perfil/update-beca", verifySesion, AlumnosController.updateBeca);
 
 
 // Rutas para el Administrador

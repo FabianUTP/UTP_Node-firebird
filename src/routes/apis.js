@@ -12,17 +12,16 @@ router.get("/grupos", async (req = request, res = response) => {
     "grupos.codigo_grupo, grupos.grado, grupos.grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel ";
   query += "FROM grupos JOIN profesores ";
   query += "ON grupos.claveprofesor_titular = profesores.claveprofesor ";
-  query += "JOIN cfgniveles ";
-  query += "on grupos.nivel = cfgniveles.nivel ";
+  query += "JOIN cfgniveles ON grupos.nivel = cfgniveles.nivel ";
 
   if (search.length > 0) {
-    query += `WHERE grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%'`;
+    query += `WHERE (grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%') `;
   }
 
-  const grupos = await Grupos.createQuery({ query });
+  const grupos = await Grupos.createQuery(query);
 
   res.json({
-    query: {
+    querys: {
       skip,
       limit,
       search

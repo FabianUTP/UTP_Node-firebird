@@ -56,6 +56,7 @@ const getGrupos = async () => {
     content += `<td>${i + 1}</td>`;
     content += `<td>${item.NIVEL}</td>`;
     content += `<td>${item.CODIGO_GRUPO}</td>`;
+    content += `<td>${item.PERIODO}</td>`;
     content += `<td>${item.GRADO}</td>`;
     content += `<td>${item.GRUPO}</td>`;
     content += `<td>${item.INSCRITOS} de ${item.CUPO_MAXIMO}</td>`;

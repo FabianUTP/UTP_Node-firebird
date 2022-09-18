@@ -3,7 +3,9 @@ const credentials = {};
 if(process.env.MODE === "local") {
   credentials.host = process.env.FB_HOST_LOCAL;
   credentials.database = process.env.FB_DATABASE_LOCAL
-} else {
+}
+
+if(process.env.MODE === "server"){
   credentials.host = process.env.FB_HOST_SERVER;
   credentials.database = process.env.FB_DATABASE_SERVER
 }

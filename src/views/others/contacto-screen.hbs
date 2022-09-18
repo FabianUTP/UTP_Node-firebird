@@ -1,25 +1,37 @@
 <div class="container">
-    <div class="card">
+  <div class="card">
 
-        <div class="card-title text-center">
-            <h1>Contactanos</h1>
-            <small>Puedes dejarnos una queja, sugerencia o dudas aquí, nosotros lo leeremos.</small> <br>
-            <span>Solo personal autorizado lo podra leer.</span>
-        </div>
-
-        <div class="card-body">
-           <form class="d-flex flex-column justify-content-center">
-
-                <div>
-                    <textarea type="text" class="form-control" placeholder="Escribir su comentario..."></textarea>
-                </div>
-
-                <div class="pt-3 text-center">
-                    <button type="submit" class="btn btn-outline-primary">Mandar</button>
-                </div>
-
-            </form>  
-        </div>
-
+    <div class="card-title text-center">
+      <h1>Contactanos</h1>
+      <small>Puedes dejarnos una queja, sugerencia o dudas aquí, nosotros lo leeremos.</small> <br>
+      <span>Solo personal autorizado lo podra leer.</span>
     </div>
+
+    <div class="card-body">
+      <form class="d-flex flex-column justify-content-center">
+
+        <div>
+          <textarea type="text" class="form-control" placeholder="Escribir su comentario..."
+            id="inputContact"></textarea>
+        </div>
+
+        <div class="pt-3 text-center">
+          <button type="submit" class="btn btn-outline-primary" id="sendMsj" disabled>Mandar</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
 </div>
+
+<script>
+  const inputContact = document.getElementById('inputContact');
+  const btn = document.getElementById('sendMsj');
+
+  // Funcion para deshabilitar el boton de mandar el mensaje
+  inputContact.addEventListener('input', () => {
+    btn.disabled = inputContact.value == "";
+  });
+
+</script>

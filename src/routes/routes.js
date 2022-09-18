@@ -28,6 +28,7 @@ router.get("/boletas", verifySesion, AlumnosController.getBoletas);
 router.get("/documentos", verifySesion, (req, res) => {
   res.render("alumno/documentos/doctos-screen");
 });
+router.get("/contactar", verifySesion, verifySesion, (req, res) => res.render("others/contacto-screen"));
 
 router.get("/perfil", verifySesion, AlumnosController.show);
 router.post("/perfil/update-contacto", verifySesion, AlumnosController.updateContact);

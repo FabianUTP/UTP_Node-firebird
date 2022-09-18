@@ -1,44 +1,12 @@
-const { request, response, Router } = require("express");
-const { Grupos, Ciclos } = require("../app/models");
+const express = require("express");
 
-const router = Router();
+const router = express.Router();
+const { GruposCtr } = require('../app/controllers')
 
-router.get("/grupos", async (req = request, res = response) => {
-  const { skip = 0, limit = 10, search = "" } = req.query;
+router.get("/grupos", GruposCtr.getAll)
 
-  let query = "";
-  query += `SELECT FIRST(${limit}) SKIP(${skip}) `;
-  query +=
-    "grupos.codigo_grupo, grupos.grado, grupos.grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel ";
-  query += "FROM grupos JOIN profesores ";
-  query += "ON grupos.claveprofesor_titular = profesores.claveprofesor ";
-  query += "JOIN cfgniveles ON grupos.nivel = cfgniveles.nivel ";
+router.get("/cuatrimestres", GruposCtr.getCuatris);
 
-  if (search.length > 0) {
-    query += `WHERE (grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%') `;
-  }
-
-  const grupos = await Grupos.createQuery(query);
-
-  res.json({
-    querys: {
-      skip,
-      limit,
-      search
-    },
-    grupos: grupos,
-  });
-});
-
-router.get("/cuatrimestres", async (req = request, res = response) => {
-
-  const ciclos = await Ciclos.where({
-    periodo: [1, 2, 3],
-  });
-
-  res.json({
-    ciclos,
-  });
-});
+router.put("/update/CuatriXGrupos", GruposCtr.updateCuatriGrupo)
 
 module.exports = router;

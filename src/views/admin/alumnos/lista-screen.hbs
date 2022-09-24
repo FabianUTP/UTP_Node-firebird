@@ -1,0 +1,69 @@
+<style>
+  #table-container tr{
+    cursor: pointer;
+  }
+</style>
+
+<section class="section">
+  <div id="container" class="row d-none">
+    <div class="col-lg-12">
+
+      <div class="card">
+
+        <div class="text-center" style="padding: 13px;">
+          <h1><i class="bi bi-people"></i><span>Alumnos</span></h1>
+        </div>
+
+        <div class="card-body">
+          <div class="container">
+
+            <div class="row">
+              <div class="col-5">
+                <div class="pr-2 pb-3">
+                  <form id="formInput">
+                    <div class="d-flex">
+                      <input id="buscar" type="text" class="form-control" placeholder="Matricula...">
+                      <button class="btn btn-warning" onclick="searchAlumno()" type="submit">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Table with stripped rows -->
+            <div class="table-responsive">
+            <table align="center" border="1" style="#"
+              class="table table-bordered table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Foto</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Matricula</th>
+                </tr>
+              </thead>
+
+              <tbody id="table-container"></tbody>
+
+            </table>
+            </div>
+
+            <div class="text-center">
+              <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
+              <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
+            </div>
+            <!-- End Table with stripped rows -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="preloader"></div>
+</section>
+
+<script src="js/functions/getAlumnos.js"></script>

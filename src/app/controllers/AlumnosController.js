@@ -3,15 +3,28 @@ const { Alumno } = require("../models/");
 
 const AlumnosController = {};
 
-AlumnosController.show = async (req = request, res = response) => {
+AlumnosController.getAll = async (req = request, res = response) => {
+  const { limit = 15, skip = 0, search} = req.query;
+
+  let query = `SELECT FIRST(${limit}) SKIP(${skip}) `;
+  query += "nombre, paterno, materno, matricula, nombre ";
+  query += "FROM alumnos ";
+  // Si hay palabras a bsucar, lo agrega en la consulta
+  if (search) query += `WHERE matricula LIKE '%${search}%' `;
+  query += "ORDER BY paterno "
+
+  const alumnos = await Alumno.createQuery(query);
+
+  res.json({
+    querys: req.query,
+    alumnos,
+  });
+}
+
+AlumnosController.showById = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.session.IDAuth);
   res.render("alumno/perfil/perfil-screen", {alumno});
 };
-
-AlumnosController.data = async (req = request, res = response) => {
-  let data = await Alumno.findById("18090186");
-  res.json(data)
-}
 
 AlumnosController.updateContact = async (req = request, res = response) => {
   const body = {

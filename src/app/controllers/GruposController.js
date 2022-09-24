@@ -7,12 +7,11 @@ GruposCtr.show = (req, res) => res.render('admin/grupos/grupos-screen');
 
 GruposCtr.showById = (req, res) => res.render('admin/grupos/grupo-detail-screen');  
 
-GruposCtr.getAll = async (req = request, res = response) => {
+GruposCtr.getGrupos = async (req = request, res = response) => {
     const { skip = 0, limit = 10, search = "" } = req.query;
   
     // Consulta SQL paar mostrar los grupos
-    let query = "";
-    query += `SELECT FIRST(${limit}) SKIP(${skip}) `;
+    let query = `SELECT FIRST(${limit}) SKIP(${skip}) `;
     query +=
       "grupos.codigo_grupo, grupos.grado, grupos.grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel, ciclos.codigo_corto as periodo ";
     query += "FROM grupos ";

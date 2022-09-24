@@ -30,7 +30,7 @@ router.get("/documentos", verifySesion, (req, res) => {
 });
 router.get("/contactar", verifySesion, verifySesion, (req, res) => res.render("others/contacto-screen"));
 
-router.get("/perfil", verifySesion, AlumnosController.show);
+router.get("/perfil", verifySesion, AlumnosController.showById);
 router.post("/perfil/update-contacto", verifySesion, AlumnosController.updateContact);
 router.post("/perfil/update-per-contac", verifySesion, AlumnosController.updatePerContact);
 router.post("/perfil/update-seguro", verifySesion, AlumnosController.updateSeguro);
@@ -40,6 +40,7 @@ router.post("/perfil/update-seguro", verifySesion, AlumnosController.updateSegur
 // Rutas para el Administrador
 router.get("/grupos", [isAdmin, verifySesion], GruposCtr.show);
 router.get("/grupos/:idGrupo", [isAdmin, verifySesion], GruposCtr.show);
-router.get("/nuevo-alumno", [isAdmin, verifySesion], verifySesion, (req, res) => res.render("admin/alumno/crear-screen"));
+router.get("/nuevo-alumno", [isAdmin, verifySesion], verifySesion, (req, res) => res.render("admin/alumnos/crear-screen"));
+router.get('/alumnos', [isAdmin, verifySesion], (req, res) => res.render("admin/alumnos/lista-screen"));
 
 module.exports = router;

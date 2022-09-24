@@ -27,41 +27,38 @@ const changeView = () => {
 const prev = () => {
   if (skip >= limit) {
     skip -= limit;
-    getGrupos();
+    getAlumnos();
   }
 };
 
 const next = () => {
   skip += limit;
-  getGrupos();
+  getAlumnos();
 };
 
 // uncion para buscar por codigo del grupo
-const searchGrupo = () => {
+const searchAlumno = () => {
   search = inputSearch.value
   skip = 0;
-  getGrupos();
+  getAlumnos();
 }
 
 // Hace la llamada a la API
-const getGrupos = async () => {
-  const res = await fetch(`api/grupos?limit=${limit}&skip=${skip}&search=${search}`);
-  const { grupos } = await res.json();
+const getAlumnos = async () => {
+  const res = await fetch(`api/alumnos?limit=${limit}&skip=${skip}&search=${search}`);
+  const { alumnos } = await res.json();
 
   // Vacia la tabla en caso que ya tenga datos
   table.innerHTML = "";
 
   let content = "";
-  grupos.map((item, i) => {
-    content += `<tr onclick="window.location.href='/grupos/${item.CODIGO_GRUPO}'">`;
+  alumnos.map((item, i) => {
+    content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
     content += `<td>${i + 1}</td>`;
-    content += `<td>${item.NIVEL}</td>`;
-    content += `<td>${item.CODIGO_GRUPO}</td>`;
-    content += `<td>${item.PERIODO}</td>`;
-    content += `<td>${item.GRADO}</td>`;
-    content += `<td>${item.GRUPO}</td>`;
-    content += `<td>${item.INSCRITOS} de ${item.CUPO_MAXIMO}</td>`;
-    content += `<td>${item.CLAVEPROFESOR_TITULAR}</td>`;
+    content += `<td>Foto :3</td>`;
+    content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
+    content += `<td>${item.NOMBRE}</td>`;
+    content += `<td>${item.MATRICULA}</td>`;
     content += "</tr>";
   });
 
@@ -70,4 +67,4 @@ const getGrupos = async () => {
   changeView();
 };
 
-getGrupos();
+getAlumnos();

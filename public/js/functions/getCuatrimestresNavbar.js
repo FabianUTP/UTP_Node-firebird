@@ -21,8 +21,8 @@ selectCuatri.addEventListener("change", (e) => {
 })
 
 
-const getCuatris = async () => {
-  const res = await fetch("/api/cuatrimestres");
+const getCuatrisNavbar = async () => {
+  const res = await fetch("/api/cuatris-navbar");
   const { ciclos, periodoSelected } = await res.json();
 
   //Vacia el contenido del select
@@ -37,7 +37,7 @@ const getCuatris = async () => {
   }
   content += "<option value='none'>Todos</option>";
 
-  ciclos.map(item => {
+  ciclos.reverse().map(item => {
     content += `<option value="${item.DESCRIPCION}">`;
     content += `${item.DESCRIPCION}`;
     content += "</option>";
@@ -47,4 +47,4 @@ const getCuatris = async () => {
 
 };
 
-getCuatris();
+getCuatrisNavbar();

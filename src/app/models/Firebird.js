@@ -9,8 +9,11 @@ class Firebird {
   }
 
   // Obtiene todos los registros de la tabla por paginacion
-  all(limit = 10, skip = 0) {
+  all({ limit = 10, skip = 0, searchQuery }) {
     let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table}`;
+    if (searchQuery) {
+      sql += ` ${searchQuery}`;
+    }
     return this.createQuery(sql);
   }
 
@@ -69,9 +72,9 @@ class Firebird {
     return this.createQuery(sql);
   }
 
-  // Create una secuencia SQL personalizada
+  // Creata la consulta SQL
   createQuery(querySql = "", data = []) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       firebird.attach(credential, (error, db) => {
         if (error) throw error;
 

@@ -7,16 +7,12 @@
           <div class="col-xl-12">
             <div class="card">
               <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                <img src="assets/img/CIAU TAH.png" alt="Profile">
                 <div class="col-md-12">
-                  <center>
-                    <h2>Ciau Tah Alan Mauricio</h2>
-                  </center>
                   <p>Subir fotografía</p>
-                  <div class="was-validated">
+                  <div class="">
                     <div class="form-group">
-                      <input type="file" name="fotografia" class="form-control" accept="assets/img/*" />
                       <!--LA FOTOGRAFÍA PUEDE SER NO REQUERIDA-->
+                      <input type="file" name="fotografia" class="form-control" accept="image/*" />
                     </div>
                   </div>
                 </div>
@@ -26,14 +22,11 @@
         </div>
       </section>
 
-
-
       <br>
 
       <div class="card">
         <div class="card-body">
           <h1 class="card-title">Datos de identidad</h1>
-
 
           <!-- Custom Styled Validation -->
           <form class="row g-3 needs-validation" novalidate>
@@ -85,7 +78,7 @@
 
             <div class="col-md-6">
               <label for="validationestadonac" class="form-label">Estado de nacimiento</label>
-              <select id="estado" class="form-control" name="estado" required></select>
+              <select id="estado-nacimiento" class="form-control" name="estado" required></select>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -93,8 +86,10 @@
 
             <div class="col-md-6">
               <label for="validationmunicipionac" class="form-label">Municipio de nacimiento</label>
-              <select id="municipio" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control"
-                name="municipio" required></select>
+              <select id="municipio-nacimiento" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control"
+                name="municipio" required>
+                <option>Primero seleccione un estado</option>
+              </select>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -113,11 +108,10 @@
               <label for="inputedocivil" class="form-label" placeholder="EdoCivil">Estado civil</label>
               <select id="inputState" class="form-select" required>
                 <option selected></option>
-                <option>Soltero</option>
-                <option>Casado</option>
+                <option value="S" >Soltero</option>
+                <option value="C">Casado</option>
               </select>
             </div>
-
 
             <div class="col-md-7">
               <div>
@@ -127,7 +121,6 @@
                   </label>
                   <input id="curp_" name="curp" {{!-- is-valid or is-invalid --}} class="form-control form-control-lg"
                     style="text-transform: uppercase;" maxlength="18" required type="text">
-                  <h2></h2>
                   <pre id="resultado"></pre>
                   <p id="val_res_p_" hidden="hidden"></p>
                   </input>
@@ -182,7 +175,9 @@
 
             <div class="col-md-6">
               <label for="validationmunicipio" class="form-label">Municipio</label>
-              <select id="municipio" class="form-control" name="municipio" required></select>
+              <select id="municipio" class="form-control" name="municipio" required>
+                <option>Primero seleccione un estado</option>
+              </select>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -465,7 +460,7 @@
     </div>
 
   </div>
-  </div>
 </section>
 
-<script src="js/functions/validaCurp.js" />
+<script src="js/functions/validaCurp.js"></script>
+<script src="js/functions/estados-municipios.js"></script>

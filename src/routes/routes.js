@@ -14,6 +14,7 @@ const {
   AlumnosController,
   HomeController,
   GruposCtr,
+  CuatrisCtr,
 } = require("../app/controllers");
 
 // Login y Autenticaciones
@@ -23,7 +24,7 @@ router.get("/logout", AuthController.logout);
 // router.get("/register", (req, res) => res.render("auth/register"));
 
 // Rutas de los Alumnos
-router.get("/", verifySesion, HomeController.show);
+router.get("/", verifySesion, HomeController.index);
 router.get("/boletas", verifySesion, AlumnosController.getBoletas);
 router.get("/documentos", verifySesion, (req, res) => {
   res.render("alumno/documentos/doctos-screen");
@@ -40,7 +41,8 @@ router.post("/perfil/update-seguro", verifySesion, AlumnosController.updateSegur
 // Rutas para el Administrador
 router.get("/grupos", [isAdmin, verifySesion], GruposCtr.show);
 router.get("/grupos/:idGrupo", [isAdmin, verifySesion], GruposCtr.show);
-router.get("/nuevo-alumno", [isAdmin, verifySesion], verifySesion, (req, res) => res.render("admin/alumnos/crear-screen"));
+router.get("/nuevo", [isAdmin, verifySesion], verifySesion, (req, res) => res.render("admin/alumnos/crear-screen"));
 router.get('/alumnos', [isAdmin, verifySesion], (req, res) => res.render("admin/alumnos/lista-screen"));
+router.get('/cuatrimestres', [isAdmin, verifySesion], CuatrisCtr.index);
 
 module.exports = router;

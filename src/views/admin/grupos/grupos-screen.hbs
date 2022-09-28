@@ -1,13 +1,7 @@
-<style>
-  #table-container tr{
-    cursor: pointer;
-  }
-</style>
-
-<section class="section">
+<section class="container">
+  
   <div id="container" class="row d-none">
     <div class="col-lg-12">
-
       <div class="card">
 
         <div class="text-center" style="padding: 13px;">
@@ -18,11 +12,11 @@
           <div class="container">
 
             <div class="row">
-              <div class="col-5">
+              <div class="col-md-4 col-7">
                 <div class="position-relative pr-2 pb-3">
                   <form id="formInput">
                     <div class="d-flex">
-                      <input id="buscar" type="text" class="form-control" placeholder="Codigo de grupo...">
+                      <input id="buscar" type="search" class="form-control" placeholder="Codigo de grupo...">
                       <button class="btn btn-warning" onclick="searchGrupo()" type="submit">
                         <i class="bi bi-search"></i>
                       </button>
@@ -34,8 +28,7 @@
             
             <!-- Table with stripped rows -->
             <div class="table-responsive">
-            <table align="center" border="1" style="#"
-              class="table table-bordered table-hover">
+            <table align="center" class="table table-hover">
               <thead class="table-dark">
                 <tr>
                   <th scope="col">#</th>

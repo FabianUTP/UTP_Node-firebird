@@ -14,41 +14,40 @@ formInput.addEventListener("submit", e => e.preventDefault());
 const prev = () => {
   if (skip >= limit) {
     skip -= limit;
-    getGrupos();
+    getCuatris();
   }
 };
 
 const next = () => {
   skip += limit;
-  getGrupos();
+  getCuatris();
 };
 
 // uncion para buscar por codigo del grupo
-const searchGrupo = () => {
+const searchCuatri = () => {
   search = inputSearch.value
   skip = 0;
-  getGrupos();
+  getCuatris();
 }
 
 // Hace la llamada a la API
-const getGrupos = async () => {
-  const res = await fetch(`api/grupos?limit=${limit}&skip=${skip}&search=${search}`);
-  const { grupos } = await res.json();
+const getCuatris = async () => {
+  const res = await fetch(`api/cuatrimestres?limit=${limit}&skip=${skip}&search=${search}`);
+  const { ciclos } = await res.json();
 
   // Vacia la tabla en caso que ya tenga datos
   table.innerHTML = "";
 
   let content = "";
-  grupos.map((item, i) => {
-    content += `<tr onclick="window.location.href='/grupos/${item.CODIGO_GRUPO}'">`;
+  ciclos.map((item, i) => {
+    content += `<tr>`;
     content += `<td>${i + 1}</td>`;
-    content += `<td>${item.NIVEL}</td>`;
-    content += `<td>${item.CODIGO_GRUPO}</td>`;
+    content += `<td>${item.INICIAL}</td>`;
+    content += `<td>${item.FINAL}</td>`;
     content += `<td>${item.PERIODO}</td>`;
-    content += `<td>${item.GRADO}</td>`;
-    content += `<td>${item.GRUPO}</td>`;
-    content += `<td>${item.INSCRITOS} de ${item.CUPO_MAXIMO}</td>`;
-    content += `<td>${item.CLAVEPROFESOR_TITULAR}</td>`;
+    content += `<td>${item.DESCRIPCION}</td>`;
+    content += `<td>${item.CODIGO_CORTO}</td>`;
+    content += `<td><input type="checkbox" /></td>`;
     content += "</tr>";
   });
 
@@ -57,4 +56,4 @@ const getGrupos = async () => {
   loading();
 };
 
-getGrupos();
+getCuatris();

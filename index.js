@@ -55,7 +55,7 @@ app.use(require("./src/routes/routes"));
 app.use('/api', require('./src/routes/apis'));
 
 // Para la ruta de 404 - Page not found
-app.get("*", (req, res) => res.status(404).render("error404"));
+app.get("*", (req, res) => res.status(404).render("others/error404"));
 
 // Aqui se levanta el servidor y se define el puerto
 let port = process.env.PORT;

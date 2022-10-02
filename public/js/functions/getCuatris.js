@@ -40,7 +40,7 @@ const getCuatris = async () => {
 
   let content = "";
   ciclos.map((item, i) => {
-    content += `<tr>`;
+    content += `<tr onclick="window.location.href='/cuatrimestres/${item.CODIGO_CORTO}'">`;
     content += `<td>${i + 1}</td>`;
     content += `<td>${item.INICIAL}</td>`;
     content += `<td>${item.FINAL}</td>`;

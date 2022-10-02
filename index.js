@@ -40,7 +40,8 @@ app.use(flash());
 
 // Variables Globales
 app.use((req, res, next) => {
-  res.locals.error_msj = req.flash("error_msj");
+  res.locals.msj_error = req.flash("msj_error");
+  res.locals.msj_good = req.flash("msj_good");
   res.locals.isAuthenticated = req.session.isAuthenticated;
   res.locals.IDAuth = req.session.IDAuth;
   res.locals.nameAuth = req.session.nameAuth;

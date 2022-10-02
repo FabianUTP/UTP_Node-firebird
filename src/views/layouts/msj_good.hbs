@@ -1,4 +1,4 @@
-{{#if error_msj}}
+{{#if msj_good}}
 
 <style>
     #close {
@@ -8,8 +8,8 @@
     }
 </style>
 
-<div id="msj" class="alert alert-danger alert-dismissible fade show position-relative" role="alert">
-    {{error_msj}}
+<div id="msj" class="alert alert-primary alert-dismissible fade show position-relative" role="alert">
+    {{msj_good}}
 
     <button id="close" type="button" class="position-absolute" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>

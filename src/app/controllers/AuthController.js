@@ -12,7 +12,7 @@ AuthController.postLogin = async (req = request, res = response) => {
   let alumno = await Alumno.findById(credential);
 
   if(alumno === null) {
-    req.flash('error_msj', 'Usuario no encontrado');
+    req.flash('msj_error', 'Usuario no encontrado');
     return res.redirect('/login');
   }
 

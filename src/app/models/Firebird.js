@@ -17,6 +17,32 @@ class Firebird {
     return this.createQuery(sql);
   }
 
+  create(data) {
+    let sql = `INSERT INTO ${this.table} `;
+    let sqlValues = [];
+
+    sql += "(";
+    Object.keys(data).map((item) => {
+      sql += `${item.toUpperCase()}, `;
+    });
+
+    // Elmina la ultima , de la consulta para la query en la DB
+    sql = sql.slice(0, -2);
+    sql += ") ";
+
+    sql += "VALUES (";
+    Object.values(data).map((item) => {
+      sqlValues.push(item);
+      sql += "?, ";
+    });
+
+    // Elmina la ultima , de la consulta para la query en la DB
+    sql = sql.slice(0, -2);
+    sql += ")";
+
+    return this.createQuery(sql, sqlValues);
+  }
+
   // Obtiene todos los datos por su id
   async findById(id) {
     let sql = `SELECT * FROM ${this.table} WHERE ${this.primaryKey} = ?`;
@@ -28,14 +54,15 @@ class Firebird {
   findByIdAndUpdate(id, data) {
     let updateQuery = "";
     let dataQuery = [];
-    let count = 0;
 
-    for (const item in data) {
-      updateQuery += `${count > 0 ? ", " : ""}${item.toLocaleUpperCase()} = ?`;
-      count++;
-      dataQuery.push(data[item]);
-    }
+    Object.keys(data).map((item) => {
+      updateQuery += `${item.toLocaleUpperCase()} = ?, `;
+    });
 
+    // Elmina la ultima , de la consulta para la query en la DB
+    updateQuery = updateQuery.slice(0, -2);
+
+    Object.values(data).map((item) => dataQuery.push(item));
     dataQuery.push(id);
 
     let sql = `UPDATE ${this.table} SET ${updateQuery} WHERE ${this.primaryKey} = ?`;

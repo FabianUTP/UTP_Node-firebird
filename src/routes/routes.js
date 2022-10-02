@@ -44,5 +44,8 @@ router.get("/grupos/:idGrupo", [isAdmin, verifySesion], GruposCtr.show);
 router.get("/nuevo", [isAdmin, verifySesion], verifySesion, (req, res) => res.render("admin/alumnos/crear-screen"));
 router.get('/alumnos', [isAdmin, verifySesion], (req, res) => res.render("admin/alumnos/lista-screen"));
 router.get('/cuatrimestres', [isAdmin, verifySesion], CuatrisCtr.index);
+router.get('/cuatrimestres-nuevo', [isAdmin, verifySesion], CuatrisCtr.showCreate);
+router.post('/cuatrimestres/nuevo', [isAdmin, verifySesion], CuatrisCtr.create);
+router.get('/cuatrimestres/:id', [isAdmin, verifySesion], CuatrisCtr.showById);
 
 module.exports = router;

@@ -9,39 +9,91 @@
         </div>
 
         <div class="card-body">
+
           <div class="container">
 
-            <div class="row">
-              <div class="col-8 col-md-4">
-                <div class="pr-2 pb-3">
-                  <form id="formInput">
-                    <div class="d-flex">
-                      <input id="buscar" type="search" class="form-control" placeholder="Buscar...">
-                      <button class="btn btn-warning" onclick="searchAlumno()" type="submit">
+            <div class="d-flex w-100">
+
+              <div class="flex-fill">
+                <form id="formInput">
+                  <div class="input-group mb-1">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
                         <i class="bi bi-search"></i>
-                      </button>
+                      </span>
                     </div>
-                  </form>
+                    <input type="search" class="form-control" placeholder="Buscar" id="buscar">
+                  </div>
+                </form>
+              </div>
+
+              <div>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Ordenar
+                  </button>
+                  <ul class="dropdown-menu">
+
+                    <li class="dropdown-item">
+                      <input class="form-check-input" type="radio" id="orderApe" name="orderBy" checked onchange="handleOrder('paterno')">
+                      <label class="form-check-label" for="orderCol">
+                        Apellido
+                      </label>
+                    </li>
+
+                    <li class="dropdown-item">
+                      <input class="form-check-input" type="radio" id="orderName" name="orderBy" onchange="handleOrder('nombre')">
+                      <label class="form-check-label" for="orderCol">
+                        Nombre
+                      </label>
+                    </li>
+
+                    <li class="dropdown-item">
+                      <input class="form-check-input" type="radio" id="orderMatri" name="orderBy" onchange="handleOrder('matricula')">
+                      <label class="form-check-label" for="orderMatri">
+                        Matricula
+                      </label>
+                    </li>
+
+                    <li class="border-top"></li>
+
+
+                    <li class="dropdown-item">
+                      <input class="form-check-input" type="radio" id="orderDesc" name="sort" checked onchange="handleSort('asc')">
+                      <label class="form-check-label" for="orderDesc">
+                        Ascendente
+                      </label>
+                    </li>
+
+                    <li class="dropdown-item">
+                      <input class="form-check-input" type="radio" id="orderAsc" name="sort" onchange="handleSort('desc')">
+                      <label class="form-check-label" for="orderAsc">
+                        Descendente
+                      </label>
+                    </li>
+                  </ul>
                 </div>
               </div>
+
             </div>
-            
+
             <!-- Table with stripped rows -->
             <div class="table-responsive">
-            <table align="center" class="table table-hover">
-              <thead class="table-dark">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Foto</th>
-                  <th scope="col">Apellidos</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Matricula</th>
-                </tr>
-              </thead>
+              <table align="center" class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Matricula</th>
+                  </tr>
+                </thead>
 
-              <tbody id="table-container"></tbody>
+                <tbody id="table-container"></tbody>
 
-            </table>
+              </table>
             </div>
 
             <div class="text-center">

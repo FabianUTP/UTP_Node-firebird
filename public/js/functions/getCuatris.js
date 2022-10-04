@@ -23,7 +23,7 @@ const next = () => {
   getCuatris();
 };
 
-// uncion para buscar por codigo del grupo
+// uncion para buscar por codigo del cuatrimestre
 const searchCuatri = () => {
   search = inputSearch.value
   skip = 0;

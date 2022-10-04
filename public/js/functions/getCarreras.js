@@ -23,7 +23,7 @@ const next = () => {
   getCarrera();
 };
 
-// uncion para buscar por codigo del grupo
+// uncion para buscar por codigo de la carrera
 const searchCarrera = () => {
   search = inputSearch.value
   skip = 0;

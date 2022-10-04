@@ -7,32 +7,23 @@ const formInput = document.getElementById("formInput");
 let limit = 20;
 let skip = 0;
 let search = "";
+let orderBy = "paterno";
+let sort = "asc";
 
-// Hace que no se refresque la pagina en el input de busqueda
-formInput.addEventListener("submit", e => e.preventDefault());
+formInput.addEventListener("submit", (e) => {
+  // Hace que no se refresque la pagina en el input de busqueda
+  e.preventDefault();
 
-const prev = () => {
-  if (skip >= limit) {
-    skip -= limit;
-    getAlumnos();
-  }
-};
-
-const next = () => {
-  skip += limit;
+  search = inputSearch.value;
+  skip = 0; // Reinicia la paginacion
   getAlumnos();
-};
-
-// uncion para buscar por codigo del grupo
-const searchAlumno = () => {
-  search = inputSearch.value
-  skip = 0;
-  getAlumnos();
-}
+});
 
 // Hace la llamada a la API
 const getAlumnos = async () => {
-  const res = await fetch(`api/alumnos?limit=${limit}&skip=${skip}&search=${search}`);
+  const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
+
+  const res = await fetch(url);
   const { alumnos } = await res.json();
 
   // Vacia la tabla en caso que ya tenga datos
@@ -52,6 +43,28 @@ const getAlumnos = async () => {
   table.innerHTML = content;
 
   loading();
+};
+
+const handleOrder = (by) => {
+  orderBy = by;
+  getAlumnos();
+};
+
+const handleSort = (by) => {
+  sort = by;
+  getAlumnos();
+};
+
+const prev = () => {
+  if (skip >= limit) {
+    skip -= limit;
+    getAlumnos();
+  }
+};
+
+const next = () => {
+  skip += limit;
+  getAlumnos();
 };
 
 getAlumnos();

@@ -9,7 +9,7 @@ class Firebird {
   }
 
   // Obtiene todos los registros de la tabla por paginacion
-  all({ limit = 10, skip = 0, searchQuery, orderBy }) {
+  all({ limit = 10, skip = 0, searchQuery, orderBy, sort = "asc" }) {
     let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} `;
 
     if (searchQuery) {
@@ -17,7 +17,7 @@ class Firebird {
     }
 
     if(orderBy) {
-      sql += `ORDER BY ${orderBy} `;
+      sql += `ORDER BY ${orderBy} ${sort}`;
     }
 
     return this.createQuery(sql);

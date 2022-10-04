@@ -92,7 +92,7 @@ router.put("/update/CuatriXGrupos", async (req, res) => {
 });
 
 router.get("/alumnos", async (req, res) => {
-  const { limit = 15, skip = 0, search } = req.query;
+  const { limit = 15, skip = 0, search, orderBy = "paterno", sort } = req.query;
 
   let searchQuery = null;
 
@@ -108,7 +108,8 @@ router.get("/alumnos", async (req, res) => {
     limit,
     skip,
     searchQuery,
-    orderBy: "paterno"
+    orderBy,
+    sort,
   });
 
   res.json({

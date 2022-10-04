@@ -13,7 +13,7 @@ class Firebird {
     let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} `;
 
     if (searchQuery) {
-      sql += `WHERE (${searchQuery}) `;
+      sql += `WHERE ${searchQuery} `;
     }
 
     if(orderBy) {

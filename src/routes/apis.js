@@ -98,7 +98,10 @@ router.get("/alumnos", async (req, res) => {
 
   // Si hay palabras a buscar, lo agrega en la consulta
   if (search) {
-    searchQuery = `matricula LIKE '%${search}%' `
+    searchQuery = `(matricula LIKE '%${search}%') `;
+    searchQuery += `OR (nombre LIKE '%${search}%') `;
+    searchQuery += `OR (paterno LIKE '%${search}%') `;
+    searchQuery += `OR (materno LIKE '%${search}%') `;
   };
 
   const alumnos = await Alumno.all({

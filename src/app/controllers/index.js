@@ -3,6 +3,7 @@ const { AuthController } = require('./AuthController');
 const { HomeController } = require('./HomeController');
 const { GruposCtr } = require('./GruposController');
 const { CuatrisCtr } = require('./CuatrisController');
+const { NivelesCtr } = require('./NivelesController');
 
 module.exports = {
     AlumnosController,
@@ -10,4 +11,5 @@ module.exports = {
     AuthController,
     GruposCtr,
     CuatrisCtr,
+    NivelesCtr,
 }

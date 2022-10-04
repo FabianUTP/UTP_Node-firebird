@@ -8,45 +8,43 @@ let limit = 20;
 let skip = 0;
 let search = "";
 
-// Hace que no se refresque la pagina en el input de busqueda
+// Hace que no se recargue la pagina en el input de busqueda
 formInput.addEventListener("submit", e => e.preventDefault());
 
 const prev = () => {
   if (skip >= limit) {
     skip -= limit;
-    getCuatris();
+    getCarrera();
   }
 };
 
 const next = () => {
   skip += limit;
-  getCuatris();
+  getCarrera();
 };
 
 // uncion para buscar por codigo del grupo
-const searchCuatri = () => {
+const searchCarrera = () => {
   search = inputSearch.value
   skip = 0;
-  getCuatris();
+  getCarrera();
 }
 
 // Hace la llamada a la API
-const getCuatris = async () => {
-  const res = await fetch(`api/cuatrimestres?limit=${limit}&skip=${skip}&search=${search}`);
-  const { ciclos } = await res.json();
+const getCarrera = async () => {
+  const res = await fetch(`api/carreras?limit=${limit}&skip=${skip}&search=${search}`);
+  const { niveles } = await res.json();
 
   // Vacia la tabla en caso que ya tenga datos
   table.innerHTML = "";
 
   let content = "";
-  ciclos.map((item, i) => {
-    content += `<tr onclick="window.location.href='/cuatrimestres/${item.CODIGO_CORTO}'">`;
+  niveles.map((item, i) => {
+    content += `<tr onclick="window.location.href='/carreras/${item.CODIGO_CORTO}'">`;
     content += `<td>${i + 1}</td>`;
-    content += `<td>${item.INICIAL}</td>`;
-    content += `<td>${item.FINAL}</td>`;
-    content += `<td>${item.PERIODO}</td>`;
+    content += `<td>${item.NIVEL}</td>`;
+    content += `<td>${item.ACUERDO}</td>`;
     content += `<td>${item.DESCRIPCION}</td>`;
-    content += `<td>${item.CODIGO_CORTO}</td>`;
     content += "</tr>";
   });
 
@@ -55,4 +53,4 @@ const getCuatris = async () => {
   loading();
 };
 
-getCuatris();
+getCarrera();

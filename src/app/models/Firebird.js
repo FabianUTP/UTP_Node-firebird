@@ -9,11 +9,17 @@ class Firebird {
   }
 
   // Obtiene todos los registros de la tabla por paginacion
-  all({ limit = 10, skip = 0, searchQuery }) {
-    let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table}`;
+  all({ limit = 10, skip = 0, searchQuery, orderBy }) {
+    let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} `;
+
     if (searchQuery) {
-      sql += ` ${searchQuery}`;
+      sql += `WHERE (${searchQuery}) `;
     }
+
+    if(orderBy) {
+      sql += `ORDER BY ${orderBy} `;
+    }
+
     return this.createQuery(sql);
   }
 

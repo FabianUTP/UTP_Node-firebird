@@ -9,6 +9,13 @@ AuthController.postLogin = async (req = request, res = response) => {
 
   const credential = req.body.matricula;
 
+if(credential === "admin") {
+  req.session.isAuthenticated = true;
+  req.session.IDAuth = '';
+  req.session.nameAuth = 'Admin';
+  req.session.lastNameAuth = `Escolar`;
+  req.session.isAdmin = true;
+} else {
   let alumno = await Alumno.findById(credential);
 
   if(alumno === null) {
@@ -20,7 +27,8 @@ AuthController.postLogin = async (req = request, res = response) => {
   req.session.IDAuth = alumno.MATRICULA;
   req.session.nameAuth = alumno.NOMBRE;
   req.session.lastNameAuth = `${alumno.PATERNO} ${alumno.MATERNO}`;
-  req.session.isAdmin = true;
+  req.session.isAdmin = false;
+}
 
   res.redirect('/');
 };

@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { Alumno, Ciclos, Grupos } = require('../app/models')
+const { 
+  Alumno, 
+  Ciclos, 
+  Grupos,
+  Niveles
+} = require('../app/models')
 
 router.get("/grupos", async (req, res) => {
   const { skip = 0, limit = 10, search = "" } = req.query;
@@ -57,7 +62,7 @@ router.get("/cuatrimestres", async (req, res) => {
   let searchQuery = "";
 
   if (search) {
-    // searchQuery = "WHERE periodo"
+    searchQuery = `codigo_corto LIKE '%${search.toLowerCase()}%'`
   }
 
   const ciclos = await Ciclos.all({
@@ -89,21 +94,45 @@ router.put("/update/CuatriXGrupos", async (req, res) => {
 router.get("/alumnos", async (req, res) => {
   const { limit = 15, skip = 0, search } = req.query;
 
-  let query = "";
+  let searchQuery = null;
 
-  // Si hay palabras a bsucar, lo agrega en la consulta
-  if (search) query += `WHERE matricula LIKE '%${search}%' `;
-  query += "ORDER BY paterno ";
+  // Si hay palabras a buscar, lo agrega en la consulta
+  if (search) {
+    searchQuery = `matricula LIKE '%${search}%' `
+  };
 
   const alumnos = await Alumno.all({
     limit,
     skip,
-    searchQuery: query
+    searchQuery,
+    orderBy: "paterno"
   });
 
   res.json({
     querys: req.query,
     alumnos,
+  });
+});
+
+router.get("/carreras", async (req, res) => {
+  const { limit, skip, search } = req.query;
+
+  let searchQuery = null;
+
+  if(search) {
+    searchQuery = `descripcion LIKE '%${search}%'`
+  };
+
+  const niveles = await Niveles.all({
+    limit,
+    skip,
+    searchQuery,
+    orderBy: "descripcion"
+  });
+
+  res.json({
+    querys: req.query,
+    niveles,
   });
 });
 

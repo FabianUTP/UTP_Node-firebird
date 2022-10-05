@@ -7,32 +7,21 @@ const formInput = document.getElementById("formInput");
 let limit = 20;
 let skip = 0;
 let search = "";
+let orderBy = "";
+let sort = "asc"
 
-// Hace que no se refresque la pagina en el input de busqueda
-formInput.addEventListener("submit", e => e.preventDefault());
-
-const prev = () => {
-  if (skip >= limit) {
-    skip -= limit;
-    getGrupos();
-  }
-};
-
-const next = () => {
-  skip += limit;
+formInput.addEventListener("submit", (e) => {
+  // Hace que no se refresque la pagina en el input de busqueda
+  e.preventDefault();
+  search = inputSearch.value;
+  skip = 0; // Reinicia la paginacion
   getGrupos();
-};
-
-// uncion para buscar por codigo del grupo
-const searchGrupo = () => {
-  search = inputSearch.value
-  skip = 0;
-  getGrupos();
-}
+});
 
 // Hace la llamada a la API
 const getGrupos = async () => {
-  const res = await fetch(`api/grupos?limit=${limit}&skip=${skip}&search=${search}`);
+  const url = `api/grupos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
+  const res = await fetch(url);
   const { grupos } = await res.json();
 
   // Vacia la tabla en caso que ya tenga datos
@@ -42,7 +31,7 @@ const getGrupos = async () => {
   grupos.map((item, i) => {
     content += `<tr onclick="window.location.href='/grupos/${item.CODIGO_GRUPO}'">`;
     content += `<td>${i + 1}</td>`;
-    content += `<td>${item.NIVEL}</td>`;
+    content += `<td>${item.CODIGO_CARRERA}</td>`;
     content += `<td>${item.CODIGO_GRUPO}</td>`;
     content += `<td>${item.PERIODO}</td>`;
     content += `<td>${item.GRADO}</td>`;
@@ -55,6 +44,28 @@ const getGrupos = async () => {
   table.innerHTML = content;
 
   loading();
+};
+
+const handleOrder = (by) => {
+  orderBy = by;
+  getGrupos();
+};
+
+const handleSort = (by) => {
+  sort = by;
+  getGrupos();
+};
+
+const prev = () => {
+  if (skip >= limit) {
+    skip -= limit;
+    getGrupos();
+  }
+};
+
+const next = () => {
+  skip += limit;
+  getGrupos();
 };
 
 getGrupos();

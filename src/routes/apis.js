@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
-const { 
-  Alumno, 
-  Ciclos, 
-  Grupos,
-  Niveles
-} = require('../app/models')
+const { Alumno, Ciclos, Grupos, Niveles } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
-  const { skip = 0, limit = 10, search = "" } = req.query;
+  const {
+    skip = 0,
+    limit = 10,
+    search = "",
+    orderBy,
+    sort = "asc",
+  } = req.query;
 
   // Consulta SQL paar mostrar los grupos
   let query = `SELECT FIRST(${limit}) SKIP(${skip}) `;
   query +=
-    "grupos.codigo_grupo, grupos.grado, grupos.grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel, ciclos.codigo_corto as periodo ";
+    "grupos.codigo_grupo as codigo_grupo, grupos.grado, grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera, ciclos.codigo_corto as periodo ";
   query += "FROM grupos ";
-  query +=
-    "JOIN profesores ON grupos.claveprofesor_titular = profesores.claveprofesor ";
+  query += "JOIN profesores ON grupos.claveprofesor_titular = profesores.claveprofesor ";
   query += "JOIN cfgniveles ON grupos.nivel = cfgniveles.nivel ";
   query += "JOIN ciclos ON grupos.periodo = ciclos.periodo ";
 
@@ -28,27 +28,27 @@ router.get("/grupos", async (req, res) => {
 
   // Si hay periodo seleecionado a mostrar lo agrega en la query
   if (req.session.periodoGrupoName) {
-    query += `AND (ciclos.descripcion = '${req.session.periodoGrupoName}')`;
+    query += `AND (ciclos.descripcion = '${req.session.periodoGrupoName}') `;
+  }
+
+  // Codigo para ordenar si existe
+  if (orderBy) {
+    query += `ORDER BY ${orderBy} ${sort}`;
   }
 
   const grupos = await Grupos.createQuery(query);
 
   res.json({
-    querys: {
-      skip,
-      limit,
-      search,
-    },
+    querys: req.query,
     periodo: req.session.periodoGrupo,
     grupos,
   });
 });
 
 router.get("/cuatris-navbar", async (req, res) => {
-
   const ciclos = await Ciclos.where({
     periodo: [1, 2, 3, 4],
-  })
+  });
 
   res.json({
     periodoSelected: req.session.periodoGrupoName,
@@ -62,7 +62,7 @@ router.get("/cuatrimestres", async (req, res) => {
   let searchQuery = "";
 
   if (search) {
-    searchQuery = `codigo_corto LIKE '%${search.toLowerCase()}%'`
+    searchQuery = `codigo_corto LIKE '%${search.toLowerCase()}%'`;
   }
 
   const ciclos = await Ciclos.all({
@@ -102,7 +102,7 @@ router.get("/alumnos", async (req, res) => {
     searchQuery += `OR (nombre LIKE '%${search}%') `;
     searchQuery += `OR (paterno LIKE '%${search}%') `;
     searchQuery += `OR (materno LIKE '%${search}%') `;
-  };
+  }
 
   const alumnos = await Alumno.all({
     limit,
@@ -123,15 +123,15 @@ router.get("/carreras", async (req, res) => {
 
   let searchQuery = null;
 
-  if(search) {
-    searchQuery = `descripcion LIKE '%${search}%'`
-  };
+  if (search) {
+    searchQuery = `descripcion LIKE '%${search}%'`;
+  }
 
   const niveles = await Niveles.all({
     limit,
     skip,
     searchQuery,
-    orderBy: "descripcion"
+    orderBy: "descripcion",
   });
 
   res.json({

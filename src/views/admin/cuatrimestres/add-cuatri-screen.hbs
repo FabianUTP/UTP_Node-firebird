@@ -9,8 +9,9 @@
             Regresar
           </a>
         </div>
-
       </div>
+
+      {{>msj_error}}
 
       <div class="card">
         <div class="card-body">
@@ -68,6 +69,7 @@
             <div class="col-md-8">
               <label for="validationdescripcion" class="form-label">Descripción del cuatrimestre</label>
               <input 
+                id="descripcion"
                 name="descripcion" 
                 maxlength="50"
                 type="text" 
@@ -117,7 +119,7 @@
             <!-- End Quill Editor Default -->
 
             <div class="text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">Crear</button>
 
             </div>
           </form>

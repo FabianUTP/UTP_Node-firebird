@@ -23,6 +23,7 @@ class Firebird {
     return this.createQuery(sql);
   }
 
+  // Recibe un objeto de la tabla del cual se desee nuevo regsitro
   create(data) {
     let sql = `INSERT INTO ${this.table} `;
     let sqlValues = [];
@@ -81,7 +82,7 @@ class Firebird {
     return [`Update with id: ${id}`];
   }
 
-  // Objeto con las condiciones a mostrar
+  // Recibe un objeto con las condiciones a mostrar
   where(conditions = {}) {
     if (conditions.length === 0) return [];
 

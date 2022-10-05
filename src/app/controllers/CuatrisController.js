@@ -18,10 +18,8 @@ CuatrisCtr.create = async (req = request, res = response) => {
   const validaExistencia = await Ciclos.findById(data.codigo_corto);
 
   if(validaExistencia !== null) {
-    return res.json({
-      msj: 'Ya existe ese codigo, intente con otro',
-      data: validaExistencia
-    })
+    req.flash("msj_error", "Ya existe ese codigo, intente con otro");
+    return res.redirect("/cuatrimestres-nuevo");
   }
 
   const addNew = {
@@ -29,7 +27,7 @@ CuatrisCtr.create = async (req = request, res = response) => {
     inicial: data.inicial,
     final: data.final,
     periodo: data.periodo,
-    descripcion: req.descripcion,
+    descripcion: data.descripcion,
     codigo_corto: data.codigo_corto,
     fecha_inicial: data.fecha_inicial,
     fecha_final: data.fecha_final,

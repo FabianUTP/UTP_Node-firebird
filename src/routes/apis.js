@@ -15,20 +15,27 @@ router.get("/grupos", async (req, res) => {
   // Consulta SQL paar mostrar los grupos
   let query = `SELECT FIRST(${limit}) SKIP(${skip}) `;
   query +=
-    "grupos.codigo_grupo as codigo_grupo, grupos.grado, grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera, ciclos.codigo_corto as periodo ";
+    "grupos.codigo_grupo as codigo_grupo, grupos.grado, grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera ";
   query += "FROM grupos ";
-  query += "JOIN profesores ON grupos.claveprofesor_titular = profesores.claveprofesor ";
+  query +=
+    "LEFT JOIN profesores ON grupos.claveprofesor_titular = profesores.claveprofesor ";
   query += "JOIN cfgniveles ON grupos.nivel = cfgniveles.nivel ";
-  query += "JOIN ciclos ON grupos.periodo = ciclos.periodo ";
 
   // Si hay palabras a bsucar, lo agrega en la consulta
   if (search.length > 0) {
     query += `WHERE (grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%') `;
   }
 
-  // Si hay periodo seleecionado a mostrar lo agrega en la query
-  if (req.session.periodoGrupoName) {
-    query += `AND (ciclos.descripcion = '${req.session.periodoGrupoName}') `;
+  // Si hay periodo seleccionado a mostrar lo agrega en la query
+  let periodo = await Ciclos.findById(req.session.periodoSelected);
+  if (periodo !== null) {
+    // Valida si ya tiene la consulta WHERE
+    // si lo tiene agrega un AND,  si no, agrega el WHERE
+    query += query.includes("WHERE") ? "AND" : "WHERE";
+
+    query += ` grupos.inicial = ${periodo?.INICIAL} `;
+    query += `AND grupos.final = ${periodo?.FINAL} `;
+    query += `AND grupos.periodo = ${periodo?.PERIODO} `;
   }
 
   // Codigo para ordenar si existe
@@ -40,7 +47,7 @@ router.get("/grupos", async (req, res) => {
 
   res.json({
     querys: req.query,
-    periodo: req.session.periodoGrupo,
+    periodoSelected: req.session.periodoSelected,
     grupos,
   });
 });
@@ -50,8 +57,10 @@ router.get("/cuatris-navbar", async (req, res) => {
     periodo: [1, 2, 3, 4],
   });
 
+  let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
+
   res.json({
-    periodoSelected: req.session.periodoGrupoName,
+    periodoSelected: periodoSelected?.DESCRIPCION,
     ciclos,
   });
 });
@@ -81,9 +90,9 @@ router.put("/update/CuatriXGrupos", async (req, res) => {
 
   // Actualiza el periodo a mostrar en la API de grupos
   if (periodo === "none") {
-    req.session.periodoGrupoName = null;
+    req.session.periodoSelected = null;
   } else {
-    req.session.periodoGrupoName = periodo;
+    req.session.periodoSelected = periodo;
   }
 
   res.json({

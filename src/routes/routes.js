@@ -59,4 +59,11 @@ router.post("/cuatrimestres/nuevo", [isAdmin, verifySesion], CuatrisCtr.create);
 router.get("/cuatrimestres/:id", [isAdmin, verifySesion], CuatrisCtr.showById);
 router.get("/carreras", [isAdmin, verifySesion], NivelesCtr.show);
 
+router.get("/doctos", (req, res) => res.render("admin/doctos"))
+router.post("/doctos", (req, res) => {
+  res.json({
+    data: req.body.excel
+  })
+});
+
 module.exports = router;

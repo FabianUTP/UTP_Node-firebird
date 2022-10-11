@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { Alumno, Ciclos, Grupos, Niveles } = require("../app/models");
+const { Alumno, Ciclos, Grupos, Niveles, Doctos } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
   const {
@@ -147,6 +147,20 @@ router.get("/carreras", async (req, res) => {
     querys: req.query,
     niveles,
   });
+});
+
+router.get("/doctos/admin", async (req, res) => {
+
+  const { nivel, limit = 10, skip } = req.query;
+
+  const doctos = await Doctos.where({
+    nivel: [nivel]
+  }, limit, skip);
+
+  res.json({
+    nivel,
+    doctos,
+  })
 });
 
 module.exports = router;

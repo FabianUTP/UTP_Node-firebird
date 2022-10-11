@@ -83,7 +83,7 @@ class Firebird {
   }
 
   // Recibe un objeto con las condiciones a mostrar
-  where(conditions = {}, limit = 30, skip = 0) {
+  where(conditions = {}, limit = 30, skip = 0, strict = false) {
     if (conditions.length === 0) return [];
 
     let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} WHERE`;
@@ -91,33 +91,24 @@ class Firebird {
     for (const key in conditions) {
       conditions[key].map((item) => {
         if (typeof item === "string") {
-          sql += ` (${key} = '${item}') OR`;
+  
+          const modeStrict = `(${key} = '${item}')`;
+          const modeNoStrict = `(${key} LIKE '%${item}%')`;
+
+          sql += ` ${strict ? modeStrict : modeNoStrict}`;
         } else {
-          sql += ` (${key} = ${item}) OR`;
+          sql += ` (${key} = ${item})`;
         }
+
+        // Valida si es modo estricto en los filtros
+        sql += ` ${strict ? 'AND' : 'OR'}`
       });
     }
 
-    // Elmina el ultimo OR de la consulta para la query en la DB
+    // Elmina el ultimo OR o AND de la consulta para la query en la DB
     sql = sql.slice(0, -3);
 
     return this.createQuery(sql);
-  }
-
-  // Filtra los resultados que coincidan con la palabra
-  filter(word = '', columnsToFind = []) {
-    let sql = `SELECT * FROM ${this.table} WHERE (`;
-
-    columnsToFind.map(item => {
-      sql += `(${item}) LIKE '%${word}%') OR `;
-    });
-
-    // Elimina el ultimo OR
-    sql = sql.slice(0, -3);
-    // Cierra el WHERE
-    sql += ')';
-
-    return sql;
   }
 
   // Creata la consulta SQL

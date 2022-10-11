@@ -1,5 +1,7 @@
 // Aqui se pueden de definir variables visibles que se usuaran en el proyecto
 
+//cuidado al cambiar las vairables, ya que afecta todas las funciones que lo utilizan
+
 const globals = (req, res, next) => {
   // Mensajes de retorno html
   res.locals.msj_error = req.flash("msj_error");

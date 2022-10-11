@@ -10,7 +10,7 @@ FichasCtr.doctos = async (req = request, res = response) => {
         orderBy: 'acuerdo'
     });
 
-    res.render('admin/alumnos/doctos-screen', {
+    res.render('admin/alumnos/doctos-admin-screen', {
         niveles
     });
 }

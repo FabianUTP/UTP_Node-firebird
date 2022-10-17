@@ -8,8 +8,16 @@ class Firebird {
     this.columns = columns; // Columnas para retornar
   }
 
-  // Obtiene todos los registros de la tabla por paginacion
-  all({ limit = 10, skip = 0, searchQuery, orderBy, sort = "asc" }) {
+  /**
+   * @param {object} query Objeto donde se define las condiciones a retornar
+   * @param {number} query.limit logintud de registros a obtener, retorna 20 por default
+   * @param {number} query.skip logintud de registros a saltar para la paginacion
+   * @param {string} query.searchQuery palabra a buscar para filtrar los registros
+   * @param {string} query.orderBy Columna seleccionado a ordenar 
+   * @param {string} query.sort Ordena de manera *asc* ascendente o *desc* descendente
+   * @returns Los registros de la tabla por paginacion
+   */
+  all({ limit = 20, skip = 0, searchQuery, orderBy, sort = "asc" }) {
     let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} `;
 
     if (searchQuery) {
@@ -20,13 +28,22 @@ class Firebird {
       sql += `ORDER BY ${orderBy} ${sort}`;
     }
 
-    return this.createQuery(sql);
+    return this.createQuery({ querySql: sql });
   }
 
-  // Recibe un objeto de la tabla del cual se desee nuevo regsitro
+  /**
+   * Recibe un objeto de la tabla del cual se desee nuevo regsitro
+   * @param {object} Data Objeto con todos los datos que sean nesesarios para la tabla
+   * Ejemplo: **{ 
+   *  nombre: 'jesus',
+   *  edad: 30,
+   *  correo: jesus@correo.com
+   * }**
+   * @returns 
+   */
   create(data) {
     let sql = `INSERT INTO ${this.table} `;
-    let sqlValues = [];
+    let dataQuery = [];
 
     sql += "(";
     Object.keys(data).map((item) => {
@@ -39,7 +56,7 @@ class Firebird {
 
     sql += "VALUES (";
     Object.values(data).map((item) => {
-      sqlValues.push(item);
+      dataQuery.push(item);
       sql += "?, ";
     });
 
@@ -47,17 +64,33 @@ class Firebird {
     sql = sql.slice(0, -2);
     sql += ")";
 
-    return this.createQuery(sql, sqlValues);
+    return this.createQuery({
+      querySql: sql,
+      data: dataQuery
+    });
   }
 
   // Obtiene todos los datos por su id
+  /**
+   * 
+   * @param {any} id Busca por el id de la columna en la tabla registrado en su Model
+   * @returns Retorna un objeto con el id encontrado, y *null* en caso contrario
+   */
   async findById(id) {
     let sql = `SELECT * FROM ${this.table} WHERE ${this.primaryKey} = ?`;
-    let res = await this.createQuery(sql, [id]);
+    let res = await this.createQuery({
+      querySql: sql,
+      data: [id]
+    });
     return res.length > 0 ? res[0] : null;
   }
 
-  // Busca por id y actualiza los datos
+  /**
+   * Busca por id y actualiza los datos
+   * @param {any} id Busca por el id de la columna en la tabla registrado en su Model
+   * @param {object} data Objeto con los datos a actualizar, ejemplo **{ correo: nuevoCorreo@correo.com }**
+   * @returns 
+   */
   findByIdAndUpdate(id, data) {
     let updateQuery = "";
     let dataQuery = [];
@@ -74,7 +107,10 @@ class Firebird {
 
     let sql = `UPDATE ${this.table} SET ${updateQuery} WHERE ${this.primaryKey} = ?`;
 
-    return this.createQuery(sql, dataQuery);
+    return this.createQuery({
+      querySql: sql,
+      data: dataQuery
+    });
   }
 
   // Busca por id y elimina el registro
@@ -82,7 +118,15 @@ class Firebird {
     return [`Update with id: ${id}`];
   }
 
-  // Recibe un objeto con las condiciones a mostrar
+  /**
+   * Filtra los registros por condiciones
+   * @param {object} conditions Recibe un objeto con las columnas de la tabla a condicionar, 
+   * seguido de un array con las condiciones, ejemplo **{ nombre: ['carlos', 'fabian'], edad: [12] }**
+   * @param {number} limit Limite de registros a obtener, retorna 30 por default
+   * @param {number} skip Limite de registros a saltar para la paginacion
+   * @param {boolean} strict Define si los registros seran si o si los que estan condicionados
+   * @returns Los registros de la tabla condicionados de manera estricta
+   */
   where(conditions = {}, limit = 30, skip = 0, strict = false) {
     if (conditions.length === 0) return [];
 
@@ -91,7 +135,6 @@ class Firebird {
     for (const key in conditions) {
       conditions[key].map((item) => {
         if (typeof item === "string") {
-  
           const modeStrict = `(${key} = '${item}')`;
           const modeNoStrict = `(${key} LIKE '%${item}%')`;
 
@@ -101,18 +144,18 @@ class Firebird {
         }
 
         // Valida si es modo estricto en los filtros
-        sql += ` ${strict ? 'AND' : 'OR'}`
+        sql += ` ${strict ? "AND" : "OR"}`;
       });
     }
 
     // Elmina el ultimo OR o AND de la consulta para la query en la DB
     sql = sql.slice(0, -3);
 
-    return this.createQuery(sql);
+    return this.createQuery({ querySql: sql });
   }
 
   // Creata la consulta SQL
-  createQuery(querySql = "", data = []) {
+  createQuery({ querySql = "", data = [] }) {
     return new Promise((resolve) => {
       firebird.attach(credential, (error, db) => {
         if (error) throw error;

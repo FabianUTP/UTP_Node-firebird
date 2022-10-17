@@ -55,13 +55,28 @@ router.get("/grupos", async (req, res) => {
 router.get("/cuatris-navbar", async (req, res) => {
   const ciclos = await Ciclos.where({
     periodo: [1, 2, 3, 4],
-  });
+  }, 50);
 
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
   res.json({
     periodoSelected: periodoSelected?.DESCRIPCION,
     ciclos,
+  });
+});
+
+router.put("/update/CuatriXGrupos", async (req, res) => {
+  const { periodo } = req.body;
+
+  // Actualiza el periodo a mostrar en la API de grupos
+  if (periodo === "none") {
+    req.session.periodoSelected = null;
+  } else {
+    req.session.periodoSelected = periodo;
+  }
+
+  res.json({
+    res: "Periodo actualizado",
   });
 });
 
@@ -82,21 +97,6 @@ router.get("/cuatrimestres", async (req, res) => {
 
   res.json({
     ciclos,
-  });
-});
-
-router.put("/update/CuatriXGrupos", async (req, res) => {
-  const { periodo } = req.body;
-
-  // Actualiza el periodo a mostrar en la API de grupos
-  if (periodo === "none") {
-    req.session.periodoSelected = null;
-  } else {
-    req.session.periodoSelected = periodo;
-  }
-
-  res.json({
-    res: "Periodo actualizado",
   });
 });
 

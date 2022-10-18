@@ -1,83 +1,71 @@
+<link rel="stylesheet" href="/css/login.css">
 
-<style>
-    .btn-show {
-        position: absolute;
-        right: 1%;
-        background-color: transparent;
-        border: none;
-        top: .3rem;
-        z-index: 9;
-    }
+<div class="w-100 d-flex justify-content-center align-items-center"
+  style="padding-top: 8%; left: 0%; position: absolute;">
+  <div class="card w-75" style="max-width: 620px;">
 
-    .btn-show:hover {
-        color: blue;
-    }
-</style>
-
-<div class="w-100  d-flex justify-content-center align-items-center" style="padding-top: 8%; left: 0%; position: absolute;">
-    <div class="card w-75" style="max-width: 620px;">
-
-        <div class="card-title text-center">
-            <h1>Bienvenido</h1>
-        </div>
-
-        <div class="card-body px-5">
-
-            {{>error_msj}}
-
-            <form action="login" method="post" class="d-flex flex-column justify-content-center">
-                <div>
-                    <label for="matricula" class="form-label">Matricula</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <div class="icon">
-                                    <i class="bi bi-person"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" name="matricula" id="matricula" required>
-                    </div>
-                </div>
-
-                <div>
-                    <label for="pass" class="form-label">Contraseña</label>
-                    <div class="input-group mb-2 ">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <div class="icon">
-                                    <i class="bi bi-key"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="password" class="form-control" name="password" id="pass">
-
-                        <button id="show-pass" class="btn-show" type="button"><span class="bi bi-eye"></span></button>
-                        
-                    </div>
-                </div>
-
-                <div class="pt-1">
-                    <a href="#">Olvidaste tu contraseña?</a>
-                </div>
-
-                <div class="pt-3 text-center">
-                    <button type="submit" class="btn btn-outline-primary">Iniciar sesión</button>
-                </div>
-
-            </form>  
-        </div>
+    <div class="card-title text-center">
+      <h1>Bienvenido</h1>
     </div>
+
+    <div class="card-body px-5">
+
+      {{>msj_error}}
+
+      <form id="form" action="login" method="post" class="d-flex flex-column justify-content-center">
+        <div>
+          <label for="matricula" class="form-label">Matricula</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <div class="icon">
+                  <i class="bi bi-person"></i>
+                </div>
+              </div>
+            </div>
+            <input type="text" class="form-control" name="matricula" id="matricula" required>
+          </div>
+        </div>
+
+        <div>
+          <label for="pass" class="form-label">Contraseña</label>
+          <div class="input-group mb-2 ">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <div class="icon">
+                  <i class="bi bi-key"></i>
+                </div>
+              </div>
+            </div>
+            <input type="password" class="form-control" name="password" id="pass">
+
+            <button id="show-pass" class="btn-show" type="button"><span class="bi bi-eye"></span></button>
+
+          </div>
+        </div>
+
+        <div class="pt-1">
+          <a href="#">Olvidaste tu contraseña?</a>
+        </div>
+
+        <div class="pt-3 text-center">
+          <button type="submit" class="btn btn-outline-primary">Iniciar sesión</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
 </div>
 
 <script>
-    const inputPass = document.getElementById('pass');
-    const btnShow = document.getElementById('show-pass');
+  const form = document.getElementById("form");
+  const inputPass = document.getElementById("pass");
+  const btnShow = document.getElementById("show-pass");
 
-    btnShow.addEventListener('click', () => {
-        (inputPass.type === "password") 
-            ? inputPass.type = "text" 
-            : inputPass.type = "password"
-    });
-
+  // Muestra y oculta la contraseña
+  btnShow.addEventListener("click", () => {
+    inputPass.type === "password"
+      ? (inputPass.type = "text")
+      : (inputPass.type = "password");
+  });
 </script>

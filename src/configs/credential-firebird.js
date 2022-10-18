@@ -1,10 +1,18 @@
 const credentials = {};
 
-credentials.host = process.env.FB_HOST;
+if(process.env.MODE === "local") {
+  credentials.host = process.env.FB_HOST_LOCAL;
+  credentials.database = process.env.FB_DATABASE_LOCAL
+}
+
+if(process.env.MODE === "server"){
+  credentials.host = process.env.FB_HOST_SERVER;
+  credentials.database = process.env.FB_DATABASE_SERVER
+}
+
 credentials.port = process.env.FB_PORT;
-credentials.database = process.env.FB_USER;
-credentials.user = process.env.FB_PASS;
-credentials.password = 'masterkey';
+credentials.user = process.env.FB_USER;
+credentials.password = process.env.FB_PASS;
 credentials.localcase_keys = false;
 credentials.role = null;
 credentials.pageSize = 4096;

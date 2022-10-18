@@ -3,7 +3,7 @@ const dash_items = [
         path_img: './imgs/documentos.png',
         title: 'Documentos del alumno',
         content: 'Ingresa y sube los documentos en formato.pdf',
-        link: '/documents',
+        link: '/documentos',
     },
     {
         path_img: './imgs/datos-del-usuario.png',

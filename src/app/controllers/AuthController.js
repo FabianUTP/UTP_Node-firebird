@@ -1,31 +1,39 @@
 const { request, response } = require("express");
+const { Alumno } = require("../models");
 
 const AuthController = {};
 
-AuthController.login = (req, res) => {
-  res.render("auth/login") ;
-};
+AuthController.login = (req, res) => res.render("auth/login");
 
-AuthController.postLogin = (req = request, res = response) => {
+AuthController.postLogin = async (req = request, res = response) => {
 
   const credential = req.body.matricula;
 
-  if(!["admin", "alumno"].includes(credential)) {
-    req.flash('error_msj', 'Matricula incorrecta');
+if(credential === "admin") {
+  req.session.isAuthenticated = true;
+  req.session.IDAuth = '';
+  req.session.nameAuth = 'Admin';
+  req.session.lastNameAuth = `Escolar`;
+  req.session.isAdmin = true;
+} else {
+  let alumno = await Alumno.findById(credential);
+
+  if(alumno === null) {
+    req.flash('msj_error', 'Usuario no encontrado');
     return res.redirect('/login');
   }
 
   req.session.isAuthenticated = true;
-  req.session.nameAuth = 'Fabian';
-  req.session.IDAuth = '5465';
-  req.session.lastNameAuth = 'Caamal';
-  req.session.isAdmin = credential === "admin";
+  req.session.IDAuth = alumno.MATRICULA;
+  req.session.nameAuth = alumno.NOMBRE;
+  req.session.lastNameAuth = `${alumno.PATERNO} ${alumno.MATERNO}`;
+  req.session.isAdmin = false;
+}
 
   res.redirect('/');
 };
 
 AuthController.logout = (req = request, res = response) => {
-
   req.session.destroy();
   res.redirect('/login');
 }

@@ -1,0 +1,74 @@
+<section class="section">
+  <div id="container" class="row d-none">
+
+    <div class="position-relative pb-4">
+      <a href="/cuatrimestres-nuevo" class="btn btn-outline-primary">
+        <i class="bi bi-file-earmark-plus-fill"></i>
+        Nuevo ciclo
+      </a>
+    </div>
+
+    <div class="col-lg-12">
+
+      <div class="card">
+
+        <div class="text-center" style="padding: 13px;">
+          <h1><i class="bi bi-clipboard-data"></i><span>Ciclos</span></h1>
+        </div>
+
+        <div class="card-body">
+          <div class="container">
+
+            <div class="row">
+              <div class="col-5">
+                <div class="pr-2 pb-3">
+                  <form id="formInput">
+                    <div class="d-flex">
+                      <input id="buscar" type="search" class="form-control" placeholder="Buscar...">
+                      <button class="btn btn-warning" onclick="searchCuatri()" type="submit">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            {{>msj_good}}
+
+            <!-- Table with stripped rows -->
+            <div class="table-responsive">
+
+              <table align="center" class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Inicial</th>
+                    <th scope="col">Final</th>
+                    <th scope="col">Periodo</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Abreviatura</th>
+                  </tr>
+                </thead>
+
+                <tbody id="table-container"></tbody>
+
+              </table>
+            </div>
+
+            <div class="text-center">
+              <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
+              <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
+            </div>
+            <!-- End Table with stripped rows -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="preloader"></div>
+</section>
+
+<script src="js/functions/getCuatris.js"></script>

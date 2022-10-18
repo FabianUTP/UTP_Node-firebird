@@ -37,44 +37,44 @@
             <h5 class="card-title">Datos de identidad</h5>
 
             <div class="row">
-              <div class="col-lg-3 col-md-4 label ">Apellido paterno</div>
-              <div class="col-lg-9 col-md-8">Ciau</div>
+              <div class="col-lg-3 col-md-4 label">Apellido paterno</div>
+              <div class="col-lg-9 col-md-8">{{alumno.PATERNO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label ">Apellido materno</div>
-              <div class="col-lg-9 col-md-8">Tah</div>
+              <div class="col-lg-9 col-md-8">{{alumno.MATERNO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label ">Nombres</div>
-              <div class="col-lg-9 col-md-8">Alan Mauricio</div>
+              <div class="col-lg-9 col-md-8">{{alumno.NOMBRE}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Género</div>
-              <div class="col-lg-9 col-md-8">Masculino</div>
+              <div class="col-lg-9 col-md-8">{{alumno.GENERO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Estado civil</div>
-              <div class="col-lg-9 col-md-8">Soltero</div>
+              <div class="col-lg-9 col-md-8">{{alumno.ESTADO_CIVIL}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Estado de nacimiento</div>
-              <div class="col-lg-9 col-md-8">Yucatán</div>
+              <div class="col-lg-9 col-md-8">{{alumno.ESTADO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Municipio de nacimiento</div>
-              <div class="col-lg-9 col-md-8">Muna</div>
+              <div class="col-lg-9 col-md-8">{{alumno.LUGAR_NACIMIENTO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">CURP</div>
               <div class="col-lg-9 col-md-8">
-                <h3>CAOG740914HDFSCS02</h3>
+                <h3>{{alumno.CLAVE_CIUDADANA}}</h3>
               </div>
             </div>
 
@@ -83,42 +83,48 @@
           <div class="tab-pane fade pt-3" id="contacto">
 
             <!-- Settings Form -->
-            <form>
+            <form method="post" action="/perfil/update-contacto">
 
               <h5 class="card-title">Datos de domicilio</h5>
               <div class="row mb-3">
                 <label for="domicilio" class="col-md-4 col-lg-3 col-form-label">Domicilio</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="domicilio" type="text" class="form-control" id="domicilio"
-                    value="Calle 22 x 39 y 41 No. 274, Col. Pedregales de Tanlum " required>
+                  <input 
+                    id="domicilio"
+                    name="domicilio" 
+                    class="form-control" 
+                    type="text" 
+                    required
+                    value="{{alumno.DOMICILIO}}"
+                  >
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="Estado" type="text" class="form-control" id="estado" value="YUCATÁN" required>
+                  <input name="estado" type="text" class="form-control" id="estado" value="{{alumno.ESTADO}}" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="municipio" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="municipio" type="text" class="form-control" id="municipio" value="Mérida" required>
+                  <input name="ciudad" type="text" class="form-control" id="municipio" value="{{alumno.CIUDAD}}" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="localidad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="localidad" type="text" class="form-control" id="localidad" value="Mérida" required>
+                  <input name="localidad" type="text" class="form-control" id="localidad" value="{{alumno.CIUDAD}}" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="cp" class="col-md-4 col-lg-3 col-form-label">Código postal</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="cp" type="text" class="form-control" id="cp" value="97210" required>
+                  <input name="cp" type="text" class="form-control" id="cp" value="{{alumno.CP}}" required>
                 </div>
               </div>
 
@@ -126,7 +132,7 @@
                 <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email personal</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="email" type="email" class="form-control" id="Email"
-                    value="gaspar.castillo.ocampo@gmail.com">
+                    value="{{alumno.EMAIL}}">
                 </div>
               </div>
 
@@ -134,23 +140,15 @@
                 <label for="Emailutp" class="col-md-4 col-lg-3 col-form-label">Email institucional</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="emailutp" type="email" class="form-control" id="Emailutp"
-                    value="gaspar.castillo@utponiente.edu.mx">
+                    value="{{alumno.EMAIL_ALTERNO}}"
+                    placeholder="a.alumno@utponiente.edu.mx">
                 </div>
               </div>
-
 
               <div class="row mb-3">
                 <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono celular</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="phonecel" type="text" class="form-control" id="Phonecel" value="9991627044">
-                </div>
-              </div>
-
-
-              <div class="row mb-3">
-                <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Teléfono domicilio</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="phone" type="text" class="form-control" id="Phone" value="9991119897">
+                  <input name="telefono_per" type="text" class="form-control" id="telefono_per" value="{{alumno.CELULAR}}" required>
                 </div>
               </div>
 
@@ -163,31 +161,31 @@
 
           <div class="tab-pane fade pt-3" id="autorizada">
             <!-- Change Password Form -->
-            <form>
+            <form method="post" action="/perfil/update-per-contac">
 
               <h5 class="card-title">Persona autorizada para recibir información personal y/o académica</h5>
 
               <div class="row mb-3">
                 <label for="nombre_autirizada" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="domicilio" type="text" class="form-control" id="domicilio"
-                    value="Calle 22 x 39 y 41 No. 274, Col. Pedregales de Tanlum " required>
+                  <input name="perContacto" type="text" class="form-control" id="domicilio" maxlength="25"
+                    value="{{alumno.CONTACTO}}" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
                 <div class="col-md-8 col-lg-9">
-                  <select class="form-select" id="parentesco" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option>Padre</option>
-                    <option>Madre</option>
-                    <option>Hermano(a)</option>
-                    <option>Abuelo(a)</option>
-                    <option>Cónyugue</option>
-                    <option>Pariente</option>
-                    <option>Amigo(a)</option>
-                    <option>Otro</option>
+                  <select class="form-select" id="parentesco" name="PARENTESCO_CONTACTO" required>
+                    <option selected disabled>{{alumno.PARENTESCO_CONTACTO}}</option>
+                    <option value="PADRE">Padre</option>
+                    <option value="MADRE">Madre</option>
+                    <option value="HERMANO(A)">Hermano(a)</option>
+                    <option value="ABUELO(A)">Abuelo(a)</option>
+                    <option value="CONYUGUE">Cónyugue</option>
+                    <option value="PARIENTE">Pariente</option>
+                    <option value="AMIGO(A)">Amigo(a)</option>
+                    <option value="OTRO(A)">Otro</option>
                   </select>
                 </div>
               </div>
@@ -196,12 +194,10 @@
                 <label for="Phoneautorizada" class="col-md-4 col-lg-3 col-form-label">Teléfono persona
                   autorizada</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="phoneautorizada" type="text" class="form-control" id="Phoneautorizada"
-                    value="9993483728">
+                  <input name="telContacto" type="text" class="form-control" id="Phoneautorizada"
+                    value={{alumno.TEL_CONTACTO}}>
                 </div>
               </div>
-
-
 
               <div class="text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -274,15 +270,15 @@
 
           <div class="tab-pane fade pt-3" id="datos_seguro">
             <!-- Change Password Form -->
-            <form>
+            <form action="/perfil/update-seguro" method="post">
 
               <h5 class="card-title">Datos seguro médico</h5>
 
               <div class="row mb-3">
                 <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
                 <div class="col-md-8 col-lg-9">
-                  <select class="form-select" id="tiposeguro" required>
-                    <option selected disabled value="">Choose...</option>
+                  <select class="form-select" id="tiposeguro" name="TIPO_SEG_MED" required>
+                    <option selected disabled>{{alumno.TIPO_SEG_MED}}</option>
                     <option>IMSS-UTP</option>
                     <option>IMSS Familiar</option>
                     <option>ISSTEY</option>
@@ -297,11 +293,9 @@
               <div class="row mb-3">
                 <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="nss" type="text" class="form-control" id="nss" value="68198372635">
+                  <input name="nss" type="text" class="form-control" id="nss" value={{alumno.NUM_IMSS}}>
                 </div>
               </div>
-
-
 
               <div class="text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>

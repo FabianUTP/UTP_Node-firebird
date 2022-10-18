@@ -1,0 +1,18 @@
+{{#if msj_error}}
+
+<div id="msj" class="alert alert-danger alert-dismissible fade show position-relative" role="alert">
+    {{msj_error}}
+
+    <button id="close" type="button" class="position-absolute" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<script>
+    const btn = document.getElementById('close');
+    const msj = document.getElementById('msj');
+
+    btn.addEventListener('click', () => msj.style.display = 'none');
+</script>
+
+{{/if}}

@@ -9,12 +9,12 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps: 
-    - uses: actions/checkout
+    - uses: actions/checkout@v2.0
       with: 
         fetch-depth: 2
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with: 
-        ftp-server: ${{ secrets.SISTEMAS }}
-        ftp-username: ${{ secrets.SISTEMAS }}
-        ftp-password: ${{ secrets.SISTEMAS }}
+        ftp-server: ${{ secrets.SERVER }}
+        ftp-username: ${{ secrets.USERNAME }}
+        ftp-password: ${{ secrets.PASSWORD }}

@@ -12,7 +12,7 @@ class Firebird {
    * @param {object} query Objeto donde se define las condiciones a retornar
    * @param {number} query.limit logintud de registros a obtener, retorna 20 por default
    * @param {number} query.skip logintud de registros a saltar para la paginacion
-   * @param {string} query.searchQuery palabra a buscar para filtrar los registros
+   * @param {string} query.searchQuery sql con la columna para filtrar los registros
    * @param {string} query.orderBy Columna seleccionado a ordenar 
    * @param {string} query.sort Ordena de manera *asc* ascendente o *desc* descendente
    * @returns Los registros de la tabla por paginacion
@@ -73,8 +73,8 @@ class Firebird {
   // Obtiene todos los datos por su id
   /**
    * 
-   * @param {any} id Busca por el id de la columna en la tabla registrado en su Model
-   * @returns Retorna un objeto con el id encontrado, y *null* en caso contrario
+   * @param {string | number} id Busca por el id de la columna en la tabla registrado en su Model
+   * @returns {Object | null} Retorna un objeto con el id encontrado, y *null* en caso contrario
    */
   async findById(id) {
     let sql = `SELECT * FROM ${this.table} WHERE ${this.primaryKey} = ?`;
@@ -87,9 +87,8 @@ class Firebird {
 
   /**
    * Busca por id y actualiza los datos
-   * @param {any} id Busca por el id de la columna en la tabla registrado en su Model
+   * @param {string | number} id Busca por el id de la columna en la tabla registrado en su Model
    * @param {object} data Objeto con los datos a actualizar, ejemplo **{ correo: nuevoCorreo@correo.com }**
-   * @returns 
    */
   findByIdAndUpdate(id, data) {
     let updateQuery = "";

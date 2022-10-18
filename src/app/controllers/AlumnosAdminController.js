@@ -11,7 +11,6 @@ AlumnosAdminCtr.show = (req, res) => {
 };
 
 AlumnosAdminCtr.showById = (req = request, res = response) => {
-  console.log(req.params.id);
   res.render("admin/alumnos/crear-screen");
 };
 

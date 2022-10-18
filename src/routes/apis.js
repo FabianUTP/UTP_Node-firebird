@@ -43,7 +43,7 @@ router.get("/grupos", async (req, res) => {
     query += `ORDER BY ${orderBy} ${sort}`;
   }
 
-  const grupos = await Grupos.createQuery(query);
+  const grupos = await Grupos.createQuery({ querySql: query });
 
   res.json({
     querys: req.query,

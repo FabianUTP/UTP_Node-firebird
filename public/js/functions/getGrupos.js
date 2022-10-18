@@ -36,7 +36,7 @@ const getGrupos = async () => {
     content += `<td>${item.GRADO}</td>`;
     content += `<td>${item.GRUPO}</td>`;
     content += `<td>${item.INSCRITOS} de ${item.CUPO_MAXIMO}</td>`;
-    content += `<td>${item.CLAVEPROFESOR_TITULAR}</td>`;
+    content += `<td>${item.CLAVEPROFESOR_TITULAR ?? ''}</td>`;
     content += "</tr>";
   });
 

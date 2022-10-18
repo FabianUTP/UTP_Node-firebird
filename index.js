@@ -23,8 +23,6 @@ app.engine(
 );
 app.set("view engine", ".hbs");
 
-
-
 // Middlewares
 app.use(express.json()); // Admite en el request datos tipo json
 app.use(express.urlencoded({ extended: false })); // Lee los resultados de los formularios en el request

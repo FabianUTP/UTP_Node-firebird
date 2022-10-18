@@ -7,6 +7,9 @@ require("dotenv").config();
 
 const app = express();
 
+// Definiendo la ruta para acceder en los archivos desde las etiquetas html
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Configuracion de plantillas Handlebars
 app.set("views", path.join(__dirname, "src", "views")); // Definiendo las rutas de las vistas
 app.engine(
@@ -20,8 +23,7 @@ app.engine(
 );
 app.set("view engine", ".hbs");
 
-// Definiendo la ruta para acceder en los archivos desde las etiquetas html
-app.use(express.static(path.join(__dirname, "public")));
+
 
 // Middlewares
 app.use(express.json()); // Admite en el request datos tipo json

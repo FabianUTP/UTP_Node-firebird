@@ -10,6 +10,7 @@ const {
   CuatrisCtr,
   NivelesCtr,
   FichasCtr,
+  AlumnosAdminCtr,
 } = require("../app/controllers");
 
 // Middleware solo proteger las rutas y solo pueda acceder el admin
@@ -18,8 +19,10 @@ router.use(isAdmin);
 // Rutas para el Administrador
 router.get("/grupos", GruposCtr.show);
 router.get("/grupos/:idGrupo", GruposCtr.show);
-router.get("/nuevo", (req, res) => res.render("admin/alumnos/crear-screen"));
-router.get("/alumnos", (req, res) => res.render("admin/alumnos/lista-screen"));
+router.get("/nuevo", AlumnosAdminCtr.createView);
+router.get("/alumnos", AlumnosAdminCtr.show);
+router.get("/alumnos/:id", AlumnosAdminCtr.show);
+
 router.get("/cuatrimestres", CuatrisCtr.index);
 router.get("/cuatrimestres-nuevo", CuatrisCtr.showCreate);
 router.post("/cuatrimestres/nuevo", CuatrisCtr.create);

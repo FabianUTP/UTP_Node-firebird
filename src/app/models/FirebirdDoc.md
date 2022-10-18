@@ -1,7 +1,7 @@
 # Funciones Firebird
 
 # all()
-Esta funcion recibe 5 un objeto con los siguientes parametros OPCIONALES, segun sea el caso.
+Esta funcion recibe un objeto con los siguientes parametros OPCIONALES, segun sea el caso.
 
 - **limit** - Donde se establece el numero de registros a obtener de la consulta, por defecto retorna 20 registros, pero se puede cambiar.
 

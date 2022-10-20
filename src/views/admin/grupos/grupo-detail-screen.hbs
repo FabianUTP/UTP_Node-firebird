@@ -1,0 +1,52 @@
+<section class="section">
+  <div id="container" class="row d-none">
+    <div class="col-lg-12">
+
+      <div class="pb-3">
+        <a href="/grupos" class="btn btn-outline-primary">Atras</a>
+      </div>
+
+      <div class="card">
+
+        <div class="text-center" style="padding: 13px;">
+          <h1><i class="bi bi-people"></i><span>Alumnos en el grupo {{ codigo_grupo }} </span></h1>
+        </div>
+
+        <div class="card-body">
+          <div class="container">
+
+            <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
+
+            <!-- Table with stripped rows -->
+            <div class="table-responsive">
+              <table align="center" class="table table-hover">
+                <thead class="table">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Matricula</th>
+                  </tr>
+                </thead>
+
+                <tbody id="table-container"></tbody>
+
+              </table>
+            </div>
+
+            <div class="text-center">
+              <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
+              <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
+            </div>
+            <!-- End Table with stripped rows -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="preloader"></div>
+</section>
+
+<script src="/js/functions/getGruposAlumnos.js"></script>

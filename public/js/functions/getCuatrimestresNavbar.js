@@ -12,7 +12,7 @@ selectCuatri.addEventListener("change", (e) => {
     })
   }
 
-  fetch("api/update/CuatriXGrupos", configFetch)
+  fetch("/api/update/CuatriXGrupos", configFetch)
   .then(res => res.json())
   .then(res => console.log(res))
   .catch(err => console.warn(err))

@@ -5,7 +5,7 @@ const router = express.Router();
 const { verifySesion, noAuth } = require("../app/middlewares/session");
 
 // Controladores
-const { AuthController } = require("../app/controllers");
+const { AuthController, HomeController } = require("../app/controllers");
 
 // Login y Autenticaciones
 router.get("/login", noAuth, AuthController.login);
@@ -14,6 +14,9 @@ router.get("/logout", AuthController.logout);
 
 // Middleware para que se inicie sesion
 router.use(verifySesion);
+
+// Ruta principal
+router.get("/", HomeController.index);
 
 // Rutas del alumno
 router.use(require('./alumno'));

@@ -177,7 +177,7 @@
                 <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
                 <div class="col-md-8 col-lg-9">
                   <select class="form-select" id="parentesco" name="PARENTESCO_CONTACTO" required>
-                    <option selected disabled>{{alumno.PARENTESCO_CONTACTO}}</option>
+                    <option selected value="{{alumno.PARENTESCO_CONTACTO}}" disabled>{{alumno.PARENTESCO_CONTACTO}}</option>
                     <option value="PADRE">Padre</option>
                     <option value="MADRE">Madre</option>
                     <option value="HERMANO(A)">Hermano(a)</option>
@@ -278,7 +278,7 @@
                 <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
                 <div class="col-md-8 col-lg-9">
                   <select class="form-select" id="tiposeguro" name="TIPO_SEG_MED" required>
-                    <option selected disabled>{{alumno.TIPO_SEG_MED}}</option>
+                    <option selected disabled value="{{alumno.TIPO_SEG_MED}}">{{alumno.TIPO_SEG_MED}}</option>
                     <option>IMSS-UTP</option>
                     <option>IMSS Familiar</option>
                     <option>ISSTEY</option>

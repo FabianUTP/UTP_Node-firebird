@@ -9,7 +9,6 @@ const {
   GruposCtr,
   CuatrisCtr,
   NivelesCtr,
-  FichasCtr,
   AlumnosAdminCtr,
 } = require("../app/controllers");
 
@@ -22,6 +21,7 @@ router.get("/grupos/:idGrupo", GruposCtr.showById);
 router.get("/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);
+router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
 
 router.get("/cuatrimestres", CuatrisCtr.index);
 router.get("/cuatrimestres-nuevo", CuatrisCtr.showCreate);
@@ -29,7 +29,7 @@ router.post("/cuatrimestres/nuevo", CuatrisCtr.create);
 router.get("/cuatrimestres/:id", CuatrisCtr.showById);
 router.get("/carreras", NivelesCtr.show);
 
-router.get("/calificaciones", (req, res) => res.render("admin/califi"));
-router.get("/doctos", FichasCtr.doctos);
+router.get("/calificaciones/subir", (req, res) => res.render("admin/calificaciones/califi"));
+router.get("/calificaciones/subir/:idGrupo", (req, res) => res.render("admin/calificaciones/califi"));
 
 module.exports = router;

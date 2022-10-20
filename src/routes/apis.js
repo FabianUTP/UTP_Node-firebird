@@ -1,7 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { Alumno, Ciclos, Grupos, Niveles, Doctos } = require("../app/models");
+const {
+  Alumno,
+  Ciclos,
+  Grupos,
+  Niveles,
+  Doctos,
+  AlumnosGrupos,
+} = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
   const {
@@ -27,12 +34,11 @@ router.get("/grupos", async (req, res) => {
   }
 
   // Si hay periodo seleccionado a mostrar lo agrega en la query
-  let periodo = await Ciclos.findById(req.session.periodoSelected);
-  if (periodo !== null) {
+  if (req.session.periodoSelected) {
+    let periodo = await Ciclos.findById(req.session.periodoSelected);
     // Valida si ya tiene la consulta WHERE
-    // si lo tiene agrega un AND,  si no, agrega el WHERE
     query += query.includes("WHERE") ? "AND" : "WHERE";
-
+    // si lo tiene agrega un AND,  si no, agrega el WHERE
     query += ` grupos.inicial = ${periodo?.INICIAL} `;
     query += `AND grupos.final = ${periodo?.FINAL} `;
     query += `AND grupos.periodo = ${periodo?.PERIODO} `;
@@ -49,6 +55,35 @@ router.get("/grupos", async (req, res) => {
     querys: req.query,
     periodoSelected: req.session.periodoSelected,
     grupos,
+  });
+});
+
+router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
+  const { limit = 10, skip = 0 } = req.query;
+  const idGrupo = req.params.idGrupo;
+
+  let sql = `SELECT FIRST(${limit}) SKIP(${skip}) `;
+  sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre `;
+  sql += "FROM alumnos_grupos ";
+  sql +=
+    "left join alumnos on alumnos_grupos.numeroalumno = alumnos.numeroalumno ";
+  sql += `where codigo_grupo = '${idGrupo}' `;
+
+  // Si hay periodo seleccionado a mostrar lo agrega en la query
+  if (req.session.periodoSelected) {
+    let periodo = await Ciclos.findById(req.session.periodoSelected);
+
+    sql += `AND alumnos_grupos.inicial = ${periodo?.INICIAL} `;
+    sql += `AND alumnos_grupos.final = ${periodo?.FINAL} `;
+    sql += `AND alumnos_grupos.periodo = ${periodo?.PERIODO} `;
+  }
+
+  const alumnos = await AlumnosGrupos.createQuery({ querySql: sql });
+
+  res.json({
+    querys: req.query,
+    idGrupo,
+    alumnos,
   });
 });
 
@@ -150,17 +185,19 @@ router.get("/carreras", async (req, res) => {
 });
 
 router.get("/doctos/admin", async (req, res) => {
-
   const { nivel, limit = 10, skip } = req.query;
 
   const doctos = await Doctos.where({
-    nivel: [nivel]
-  }, limit, skip);
+    nivel: [nivel],
+  },
+    limit,
+    skip
+  );
 
   res.json({
     nivel,
     doctos,
-  })
+  });
 });
 
 module.exports = router;

@@ -98,7 +98,9 @@
 
           <li class="dropdown-header">
             <h6>{{ nameAuth }} {{ lastNameAuth }}</h6>
-            <span>Matrícula: {{ IDAuth }}</span>
+            {{#if IDAuth}}
+              <span>Matrícula: {{ IDAuth }}</span>
+            {{/if}}
           </li>
           <li>
             <hr class="dropdown-divider">

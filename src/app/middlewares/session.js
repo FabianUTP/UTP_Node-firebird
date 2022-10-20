@@ -24,8 +24,17 @@ const isAdmin = (req = request, res = response, next) => {
     }
 }
 
+const isAlumno = (req = request, res = response, next) => {
+    if(req.session.isAdmin) {
+        res.redirect('/');
+    } else {
+        next();
+    }
+}
+
 module.exports = {
     verifySesion,
     noAuth,
-    isAdmin
+    isAdmin,
+    isAlumno,
 }

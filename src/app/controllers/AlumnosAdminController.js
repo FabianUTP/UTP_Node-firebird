@@ -1,4 +1,5 @@
 const { request, response } = require("express");
+const { Alumno } = require("../models");
 
 const AlumnosAdminCtr = {};
 
@@ -10,8 +11,13 @@ AlumnosAdminCtr.show = (req, res) => {
   res.render("admin/alumnos/lista-screen");
 };
 
-AlumnosAdminCtr.showById = (req = request, res = response) => {
-  res.render("admin/alumnos/crear-screen");
+AlumnosAdminCtr.showById = async (req = request, res = response) => {
+  const alumno = await Alumno.findById(req.params.id);
+  res.render("admin/alumnos/alumno-id-screen", alumno);
+};
+
+AlumnosAdminCtr.doctos = (req = request, res = response) => {
+  res.render("admin/alumnos/doctos-admin-screen");
 };
 
 module.exports = {

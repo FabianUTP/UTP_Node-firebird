@@ -1,28 +1,15 @@
 "use strict";
 
 const table = document.getElementById("table-container");
-const inputSearch = document.getElementById("buscar");
-const formInput = document.getElementById("formInput");
+const idGrupo = document.getElementById("idGrupo");
 
 let limit = 20;
 let skip = 0;
-let search = "";
-let orderBy = "paterno";
-let sort = "asc";
 let alumnosLength = 0;
-
-formInput.addEventListener("submit", (e) => {
-  // Hace que no se refresque la pagina en el input de busqueda
-  e.preventDefault();
-
-  search = inputSearch.value;
-  skip = 0; // Reinicia la paginacion
-  getAlumnos();
-});
 
 // Hace la llamada a la API
 const getAlumnos = async () => {
-  const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
+  const url = `/api/grupos_alumnos/${idGrupo.value}?limit=${limit}&skip=${skip}`;
 
   const res = await fetch(url);
   const { alumnos } = await res.json();
@@ -46,16 +33,6 @@ const getAlumnos = async () => {
   loading();
 };
 
-const handleOrder = (by) => {
-  orderBy = by;
-  getAlumnos();
-};
-
-const handleSort = (by) => {
-  sort = by;
-  getAlumnos();
-};
-
 const prev = () => {
   if (skip >= limit) {
     skip -= limit;
@@ -64,7 +41,7 @@ const prev = () => {
 };
 
 const next = () => {
-  if(!(alumnosLength < limit)) {
+  if (!(alumnosLength < limit)) {
     skip += limit;
     getAlumnos();
   }

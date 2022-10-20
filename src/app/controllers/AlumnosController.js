@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const { Alumno, Doctos } = require("../models/");
+const { Alumno } = require("../models/");
 
 const AlumnosController = {};
 
@@ -60,15 +60,12 @@ AlumnosController.getBoletas = (req = request, res = response) => {
 };
 
 AlumnosController.doctos = async (req = request, res = response) => {
-
   const alumno = await Alumno.findById(req.session.IDAuth);
-  const doctos = await Doctos.where({
-    clave: [alumno.NUMEROALUMNO],
-    grado: [1]
-  }, 10, 0, true)
 
-  res.json({
-    doctos
+  console.log(alumno)
+
+  res.render("alumno/documentos/doctos-screen", {
+    numeroalumno: alumno.NUMEROALUMNO
   });
 }
 

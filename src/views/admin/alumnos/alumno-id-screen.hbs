@@ -39,7 +39,7 @@
           <div class="card-body">
             <h1 class="card-title">Datos de identidad</h1>
 
-            <div class="row g-3">
+            <div class="row g-3">          
               <div class="col-md-6">
                 <label for="paterno" class="form-label">Primer apellido</label>
                 <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Primer apellido"
@@ -57,7 +57,11 @@
               </div>
               <div class="col-md-6">
                 <label for="genero" class="form-label">Genero</label>
-                <select name="genero" id="genero" class="form-select"></select>
+                <select name="genero" id="genero" class="form-select">
+                  <option value="{{GENERO}}" disabled selected>{{GENERO}}</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
               </div>
               <div class="col-md-6">
                 <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
@@ -76,7 +80,7 @@
               <div class="col-md-6">
                 <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
                 <select id="inputState" class="form-select" required>
-                  <option selected></option>
+                  <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
                   <option>Mexicana</option>
                   <option>Extranjera</option>
                 </select>
@@ -115,12 +119,12 @@
               <div class="col-md-8">
                 <label for="domicilio" class="form-label">Domicilio particular</label>
                 <input type="text" id="domicilio" name="domicilio" class="form-control"
-                  placeholder="Calle, número y colonia">
+                  placeholder="Calle, número y colonia" value="{{DOMICILIO}}">
               </div>
               <div class="col-md-4">
                 <label for="cruzamientos" class="form-label">Cruzamientos</label>
                 <input type="text" id="cruzamientos" name="cruzamientos" class="form-control"
-                  placeholder="Cruzamientos">
+                  placeholder="Cruzamientos" value="{{ENTRE_CALLES}}">
               </div>
               <div class="col-md-6">
                 <label for="estado" class="form-label">Estado</label>
@@ -141,7 +145,7 @@
               </div>
               <div class="col-md-4">
                 <label for="postal" class="form-label">Código Postal</label>
-                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P">
+                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}">
               </div>
               <div class="col-md-12">
                 <label for="email_personal" class="form-label">Email personal</label>

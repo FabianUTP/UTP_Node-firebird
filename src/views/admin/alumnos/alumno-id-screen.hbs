@@ -65,11 +65,12 @@
               </div>
               <div class="col-md-6">
                 <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
-                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control">
+                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control" value="{{FECHA_NACIMIENTO}}">
               </div>
               <div class="col-md-6">
                 <label for="estado-nacimiento" class="form-label">Estado de nacimiento</label>
-                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" required></select>
+                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" ></select>
+                            
               </div>
               <div class="col-md-6">
                 <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
@@ -111,6 +112,9 @@
           </div>
         </div>
 
+
+
+
         <div class="card">
           <div class="card-body">
             <h1 class="card-title">Domicilio</h1>
@@ -134,7 +138,7 @@
               </div>
               <div class="col-md-6">
                 <label for="municipio" class="form-label">Municipio</label>
-                <select id="municipio" name="municipio" class="form-select">
+                <select id="municipio" name="municipio" class="form-select"  >
 
                 </select>
               </div>
@@ -150,20 +154,20 @@
               <div class="col-md-12">
                 <label for="email_personal" class="form-label">Email personal</label>
                 <input type="text" id="email_personal" name="email_personal" class="form-control"
-                  placeholder="nombre@servidor.com">
+                  placeholder="nombre@servidor.com" value="{{EMAIL_ALTERNO}}">
               </div>
               <div class="col-md-12">
                 <label for="email_insti" class="form-label">Email institucional</label>
                 <input type="text" id="email_insti" name="email_insti" class="form-control"
-                  placeholder="nombre@utponiente.edu.mx">
+                  placeholder="nombre@utponiente.edu.mx" value="{{EMAIL}}">
               </div>
               <div class="col-md-6">
                 <label for="tel_cel" class="form-label">Teléfono celular</label>
-                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" />
+                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}"/>
               </div>
               <div class="col-md-6">
                 <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
-                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control">
+                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}">
               </div>
             </div>
           </div>
@@ -182,7 +186,7 @@
               <div class="col-md-8">
                 <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
                 <select id="inputcarrera" class="form-select" required>
-                  <option selected></option>
+                  <option ></option>
                   <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
                   <option>TSU en Gastronomía</option>
                   <option>TSU en Procesos Alimentarios</option>
@@ -227,7 +231,7 @@
               <div class="col-md-6">
                 <label for="inputmatricula" class="form-label">MATRÍCULA</label>
                 <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
-                  required>
+                  required value="{{MATRICULA}}">
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -247,8 +251,8 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="inputcuatri" class="form-select" required>
-                  <option selected></option>
+                <select id="inputcuatri" class="form-select" required value>
+                  <option sele></option>
                   <option>Aspirante</option>
                   <option>Activo</option>
                   <option>Baja temporal</option>
@@ -263,7 +267,7 @@
                 <label for="inputAddress2" class="form-label">Fecha de registro</label>
                 <div class="col-md-8" style="padding-right: 0px">
                   <input class="form-control" id="fecha_reg" onblur="calcularEdad(this.value)" name="fecha_nac" required
-                    type="date">
+                    type="date" value="FECHA_NACIMIENTO">
                 </div>
                 <div class="col-md-4" style="padding-left: 0px">
                 </div>

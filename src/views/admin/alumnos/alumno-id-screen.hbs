@@ -39,7 +39,7 @@
           <div class="card-body">
             <h1 class="card-title">Datos de identidad</h1>
 
-            <div class="row g-3">
+            <div class="row g-3">          
               <div class="col-md-6">
                 <label for="paterno" class="form-label">Primer apellido</label>
                 <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Primer apellido"
@@ -57,15 +57,20 @@
               </div>
               <div class="col-md-6">
                 <label for="genero" class="form-label">Genero</label>
-                <select name="genero" id="genero" class="form-select"></select>
+                <select name="genero" id="genero" class="form-select">
+                  <option value="{{GENERO}}" disabled selected>{{GENERO}}</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
               </div>
               <div class="col-md-6">
                 <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
-                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control">
+                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control" value="{{FECHA_NACIMIENTO}}">
               </div>
               <div class="col-md-6">
                 <label for="estado-nacimiento" class="form-label">Estado de nacimiento</label>
-                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" required></select>
+                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" ></select>
+                            
               </div>
               <div class="col-md-6">
                 <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
@@ -76,7 +81,7 @@
               <div class="col-md-6">
                 <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
                 <select id="inputState" class="form-select" required>
-                  <option selected></option>
+                  <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
                   <option>Mexicana</option>
                   <option>Extranjera</option>
                 </select>
@@ -107,6 +112,9 @@
           </div>
         </div>
 
+
+
+
         <div class="card">
           <div class="card-body">
             <h1 class="card-title">Domicilio</h1>
@@ -115,12 +123,12 @@
               <div class="col-md-8">
                 <label for="domicilio" class="form-label">Domicilio particular</label>
                 <input type="text" id="domicilio" name="domicilio" class="form-control"
-                  placeholder="Calle, número y colonia">
+                  placeholder="Calle, número y colonia" value="{{DOMICILIO}}">
               </div>
               <div class="col-md-4">
                 <label for="cruzamientos" class="form-label">Cruzamientos</label>
                 <input type="text" id="cruzamientos" name="cruzamientos" class="form-control"
-                  placeholder="Cruzamientos">
+                  placeholder="Cruzamientos" value="{{ENTRE_CALLES}}">
               </div>
               <div class="col-md-6">
                 <label for="estado" class="form-label">Estado</label>
@@ -130,7 +138,7 @@
               </div>
               <div class="col-md-6">
                 <label for="municipio" class="form-label">Municipio</label>
-                <select id="municipio" name="municipio" class="form-select">
+                <select id="municipio" name="municipio" class="form-select"  >
 
                 </select>
               </div>
@@ -141,25 +149,25 @@
               </div>
               <div class="col-md-4">
                 <label for="postal" class="form-label">Código Postal</label>
-                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P">
+                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}">
               </div>
               <div class="col-md-12">
                 <label for="email_personal" class="form-label">Email personal</label>
                 <input type="text" id="email_personal" name="email_personal" class="form-control"
-                  placeholder="nombre@servidor.com">
+                  placeholder="nombre@servidor.com" value="{{EMAIL_ALTERNO}}">
               </div>
               <div class="col-md-12">
                 <label for="email_insti" class="form-label">Email institucional</label>
                 <input type="text" id="email_insti" name="email_insti" class="form-control"
-                  placeholder="nombre@utponiente.edu.mx">
+                  placeholder="nombre@utponiente.edu.mx" value="{{EMAIL}}">
               </div>
               <div class="col-md-6">
                 <label for="tel_cel" class="form-label">Teléfono celular</label>
-                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" />
+                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}"/>
               </div>
               <div class="col-md-6">
                 <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
-                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control">
+                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}">
               </div>
             </div>
           </div>
@@ -178,7 +186,7 @@
               <div class="col-md-8">
                 <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
                 <select id="inputcarrera" class="form-select" required>
-                  <option selected></option>
+                  <option ></option>
                   <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
                   <option>TSU en Gastronomía</option>
                   <option>TSU en Procesos Alimentarios</option>
@@ -223,7 +231,7 @@
               <div class="col-md-6">
                 <label for="inputmatricula" class="form-label">MATRÍCULA</label>
                 <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
-                  required>
+                  required value="{{MATRICULA}}">
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -243,8 +251,8 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="inputcuatri" class="form-select" required>
-                  <option selected></option>
+                <select id="inputcuatri" class="form-select" required value>
+                  <option sele></option>
                   <option>Aspirante</option>
                   <option>Activo</option>
                   <option>Baja temporal</option>
@@ -259,7 +267,7 @@
                 <label for="inputAddress2" class="form-label">Fecha de registro</label>
                 <div class="col-md-8" style="padding-right: 0px">
                   <input class="form-control" id="fecha_reg" onblur="calcularEdad(this.value)" name="fecha_nac" required
-                    type="date">
+                    type="date" value="FECHA_NACIMIENTO">
                 </div>
                 <div class="col-md-4" style="padding-left: 0px">
                 </div>

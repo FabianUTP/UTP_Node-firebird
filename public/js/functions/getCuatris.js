@@ -32,7 +32,7 @@ const searchCuatri = () => {
 
 // Hace la llamada a la API
 const getCuatris = async () => {
-  const res = await fetch(`api/cuatrimestres?limit=${limit}&skip=${skip}&search=${search}`);
+  const res = await fetch(`/api/cuatrimestres?limit=${limit}&skip=${skip}&search=${search}`);
   const { ciclos } = await res.json();
 
   // Vacia la tabla en caso que ya tenga datos

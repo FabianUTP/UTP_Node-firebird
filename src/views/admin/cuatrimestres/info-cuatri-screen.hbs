@@ -2,18 +2,20 @@
   <div class="row">
     <div class="col-lg-12">
 
-      <div class="row pb-4">
-        <div class="col">
+      <div class="d-flex justify-content-between pb-4">
+        <div>
           <a class="btn btn-outline-primary" href="/cuatrimestres" role="button">
             <i class="bi bi-arrow-left"></i>
             Regresar</a>
         </div>
 
-        <div class="col">
-          <button class="btn btn-outline-danger">
-            <i class="bi bi-x-lg"></i>
-            Eliminar
-          </button>
+        <div>
+          <form action="/cuatrimestres/{{CODIGO_CORTO}}/delete" method="post">
+            <button class="btn btn-outline-danger" onclick="return confirm('Desea eliminar este cuatrimestre?')">
+              <i class="bi bi-x-lg"></i>
+              Eliminar
+            </button>
+          </form>
         </div>
       </div>
 
@@ -23,33 +25,20 @@
           <h1 class="card-title">Creación de cuatrimestre</h1>
 
           <!-- Custom Styled Validation -->
-          <form class="row g-3 needs-validation" novalidate>
+          <form class="row g-3 needs-validation" novalidate action="/cuatrimestres/{{CODIGO_CORTO}}/update"
+            method="post">
             <div class="col-md-4">
               <label for="validationinicial" class="form-label">Año inicial</label>
-              <input 
-                id="validationapellido1"
-                type="text" 
-                class="form-control" 
-                onkeyup="javascript:this.value=this.value.toUpperCase();" 
-                maxlength="4" 
-                placeholder="Año inicial"
-                value={{ciclo.INICIAL}}
-              >
+              <input type="number" class="form-control" maxlength="4" placeholder="Año inicial" name="inicial"
+                value={{INICIAL}}>
               <div class="valid-feedback">
                 Looks good!
               </div>
             </div>
             <div class="col-md-4">
               <label for="validationfinal" class="form-label">Año final</label>
-              <input 
-                id="validationapellido2"
-                type="text" 
-                class="form-control" 
-                onkeyup="javascript:this.value=this.value.toUpperCase();" 
-                maxlength="4" 
-                placeholder="Año final"
-                value="{{ciclo.FINAL}}"
-              >
+              <input type="number" class="form-control" maxlength="4" placeholder="Año final" name="final"
+                value="{{FINAL}}">
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -57,8 +46,9 @@
             <div class="col-md-3">
               <label for="validationperiodo" class="form-label">Período</label>
 
-              <select class="form-control" required>
-                <option disabled selected>{{ciclo.PERIODO}}</option>
+              <select class="form-control" required name="periodo">
+                <option disabled>Seleccionado: {{PERIODO}}</option>
+                <option hidden selected value="{{PERIODO}}">{{PERIODO}}</option>
                 <option value="1">SEP-DIC</option>
                 <option value="2">ENERO-ABR</option>
                 <option value="3">MAY-AGO</option>
@@ -73,14 +63,8 @@
 
             <div class="col-md-8">
               <label for="validationdescripcion" class="form-label">Descripción del cuatrimestre</label>
-              <input 
-                id="validationnombres" 
-                maxlength="50"
-                type="text" 
-                class="form-control" 
-                placeholder="Descripción del cuatrimestre" 
-                value="{{ciclo.DESCRIPCION}}"
-              >
+              <input maxlength="50" type="text" class="form-control" placeholder="Descripción del cuatrimestre"
+                name="descripcion" value="{{DESCRIPCION}}" onload="console.log('w')">
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -88,47 +72,30 @@
 
             <div class="col-md-4">
               <label for="validationcodigo" class="form-label">Código corto</label>
-              <input 
-                id="validationnombres"
-                type="text" 
-                class="form-control" 
-                onkeyup="javascript:this.value=this.value.toUpperCase();" 
-                maxlength="30" 
-                placeholder="Código corto"
-                value="{{ciclo.CODIGO_CORTO}}"
-              >
+              <input type="text" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();"
+                maxlength="30" placeholder="Código corto" name="codigo_corto" value="{{CODIGO_CORTO}}">
               <div class="valid-feedback">
                 Looks good!
               </div>
             </div>
 
             <div class="col-6">
-              <label for="inputfechainicio" class="form-label">Fecha de inicio</label>
-              <div class="col-md-8" style="padding-right: 0px">
-                <input 
-                  id="fecha_nac_" 
-                  class="form-control" 
-                  {{!-- onblur="calcularEdad(this.value)"  --}}
-                  name="fecha_inicio"
-                  type="date"
-                  value="{{ciclo.FECHA_INICIAL}}"
-                  {{!-- value="2022-01-31" --}}
-                >
+              <label for="fecha_inicial" class="form-label">Fecha de inicio</label>
+              <div class="col-md-8">
+                <input id="fecha_ini" type="hidden" value="{{FECHA_INICIAL}}">
+                <input id="fecha_inicial" class="form-control" name="fecha_inicial" type="date">
               </div>
-              <div class="col-md-4" style="padding-left: 0px">
+              <div class="col-md-4">
               </div>
             </div>
 
             <div class="col-6">
-              <label for="inputfechatermino" class="form-label">Fecha de término</label>
-              <div class="col-md-8" style="padding-right: 0px">
-                <input 
-                  id="fecha_nac_" 
-                  class="form-control" 
-                  name="fecha_termino"
-                  type="date">
+              <label for="fecha_final" class="form-label">Fecha de término</label>
+              <div class="col-md-8">
+                <input id="fecha_fin" type="hidden" value="{{FECHA_FINAL}}">
+                <input id="fecha_final" class="form-control" name="fecha_final" type="date">
               </div>
-              <div class="col-md-4" style="padding-left: 0px">
+              <div class="col-md-4">
               </div>
             </div>
 
@@ -143,3 +110,15 @@
     </div>
   </div>
 </section>
+
+<script>
+
+  const valueInicial = document.getElementById('fecha_ini');
+  const valueFinal = document.getElementById('fecha_fin');
+  const inicial = document.getElementById('fecha_inicial');
+  const final = document.getElementById('fecha_final');
+
+  inicial.value = formatDate(valueInicial.value);
+  final.value = formatDate(valueFinal.value);
+
+</script>

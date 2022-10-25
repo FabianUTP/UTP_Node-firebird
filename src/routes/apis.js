@@ -90,7 +90,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
 router.get("/cuatris-navbar", async (req, res) => {
   const ciclos = await Ciclos.where({
     periodo: [1, 2, 3, 4],
-  }, 50);
+  }, { limit: 50 });
 
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
@@ -121,7 +121,8 @@ router.get("/cuatrimestres", async (req, res) => {
   let searchQuery = "";
 
   if (search) {
-    searchQuery = `codigo_corto LIKE '%${search.toLowerCase()}%'`;
+    searchQuery = `(codigo_corto LIKE '%${search.toUpperCase()}%') `;
+    searchQuery += `OR (descripcion LIKE '%${search}%')`;
   }
 
   const ciclos = await Ciclos.all({
@@ -184,18 +185,24 @@ router.get("/carreras", async (req, res) => {
   });
 });
 
-router.get("/doctos/admin", async (req, res) => {
-  const { nivel, limit = 10, skip } = req.query;
+router.get("/doctos/", async (req, res) => {
+  const { grado, numalumno } = req.query;
+
+  if(!grado || !numalumno) {
+    return res.json({
+      error: 'Se necesita el grado a buscar y el numero del alumno'
+    });
+  }
 
   const doctos = await Doctos.where({
-    nivel: [nivel],
-  },
-    limit,
-    skip
-  );
+    grado: [grado],
+    clave: [numalumno]
+  }, {
+    strict: true,
+  });
 
   res.json({
-    nivel,
+    query: req.query,
     doctos,
   });
 });

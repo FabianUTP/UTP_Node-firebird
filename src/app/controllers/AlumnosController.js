@@ -62,8 +62,6 @@ AlumnosController.getBoletas = (req = request, res = response) => {
 AlumnosController.doctos = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.session.IDAuth);
 
-  console.log(alumno)
-
   res.render("alumno/documentos/doctos-screen", {
     numeroalumno: alumno.NUMEROALUMNO
   });

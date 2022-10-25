@@ -112,21 +112,27 @@ class Firebird {
     });
   }
 
-  // Busca por id y elimina el registro
+  /**
+   * Busca por id y elimina el registro
+   * @param {number | string} id Id segun establecido en su Model
+   * @returns 
+   */
   findByIdAndRemove(id) {
-    return [`Update with id: ${id}`];
+    let sql = `DELETE FROM ${this.table} WHERE ${this.primaryKey} = ?`;
+    return this.createQuery({ querySql: sql, data: [id] })
   }
 
   /**
    * Filtra los registros por condiciones
    * @param {object} conditions Recibe un objeto con las columnas de la tabla a condicionar, 
    * seguido de un array con las condiciones, ejemplo **{ nombre: ['carlos', 'fabian'], edad: [12] }**
-   * @param {number} limit Limite de registros a obtener, retorna 30 por default
-   * @param {number} skip Limite de registros a saltar para la paginacion
-   * @param {boolean} strict Define si los registros seran si o si los que estan condicionados
+   * @param {object} config Limite de registros a obtener
+   * @param {number} config.limit Limite de registros a obtener, retorna 30 por default
+   * @param {number} config.skip Limite de registros a saltar para la paginacion
+   * @param {boolean} config.strict Define si los registros seran si o si los que estan condicionados
    * @returns Los registros de la tabla condicionados de manera estricta
    */
-  where(conditions = {}, limit = 30, skip = 0, strict = false) {
+  where(conditions = {}, {limit = 30, skip = 0, strict = false}) {
     if (conditions.length === 0) return [];
 
     let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} WHERE`;

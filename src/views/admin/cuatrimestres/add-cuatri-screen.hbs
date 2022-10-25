@@ -4,10 +4,10 @@
 
       <div class="row">
         <div class="col pb-4">
-          <a class="btn btn-outline-primary" href="/cuatrimestres" role="button">
+          <button class="btn btn-outline-primary" role="button" onclick="window.history.back()">
             <i class="bi bi-arrow-left"></i>
             Regresar
-          </a>
+          </button>
         </div>
       </div>
 
@@ -15,7 +15,9 @@
 
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title">Creación de cuatrimestre</h1>
+          <div class="card-title">
+            <h2 class="text-center">Creación de cuatrimestre</h2>
+          </div>
 
           <!-- Custom Styled Validation -->
           <form class="row g-3 needs-validation" novalidate action="/cuatrimestres/nuevo" method="post">

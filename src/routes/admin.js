@@ -31,7 +31,7 @@ router.post("/cuatrimestres/:id/update", CuatrisCtr.update);
 router.post("/cuatrimestres/:id/delete", CuatrisCtr.delete);
 router.get("/carreras", NivelesCtr.show);
 
-router.get("/calificaciones/subir", (req, res) => res.render("admin/calificaciones/califi"));
+router.get("/calificaciones/subir", GruposCtr.show);
 router.get("/calificaciones/subir/:idGrupo", (req, res) => res.render("admin/calificaciones/califi"));
 
 module.exports = router;

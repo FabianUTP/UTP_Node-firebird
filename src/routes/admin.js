@@ -10,6 +10,7 @@ const {
   CuatrisCtr,
   NivelesCtr,
   AlumnosAdminCtr,
+  CalifiCtr,
 } = require("../app/controllers");
 
 // Middleware solo proteger las rutas y solo pueda acceder el admin
@@ -32,6 +33,6 @@ router.post("/cuatrimestres/:id/delete", CuatrisCtr.delete);
 router.get("/carreras", NivelesCtr.show);
 
 router.get("/calificaciones/subir", GruposCtr.show);
-router.get("/calificaciones/subir/:idGrupo", (req, res) => res.render("admin/calificaciones/califi"));
+router.get("/calificaciones/subir/:idGrupo", CalifiCtr.show);
 
 module.exports = router;

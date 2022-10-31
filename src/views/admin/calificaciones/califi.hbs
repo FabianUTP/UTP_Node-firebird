@@ -1,31 +1,47 @@
 <section>
 
-  <div class="pb-4">
+  <div class="pb-3">
     <a href="/calificaciones/subir" class="btn btn-outline-primary">Regresar</a>
   </div>
 
   <div class="card">
     <div class="card-title text-center">
-      <h1>Calificaciones del grupo {{cod_grupo}}</h1>
+      <h1>Calificaciones del grupo: {{codigo_grupo}}</h1>
+    </div>
+
+    <div>
+      <input type="hidden" id="codigo_grupo" value="{{codigo_grupo}}">
     </div>
 
     <div class="card-body">
+
       <div class="row">
-        <div class="col-md-4">
-          <label for="asignatura" class="form-label">Asignatura</label>
-          <select name="" id="asignatura" class="form-select">
-            <option disabled selected>Seleccione la asignatura</option>
-          </select>
-        </div>
-        <div class="col-md-5">
-          <label for="asignatura" class="form-label">Evaluación</label>
-          <select name="" id="asignatura" class="form-select">
-            <option disabled selected>Seleccione la evaluacion</option>
-          </select>
-        </div>
         <div class="col-md-3">
-          <label for="asignatura" class="form-label">Subir</label>
-          <input type="file" class="form-control">
+          <label for="evaluacion" class="form-label">Evaluación</label>
+          <select id="evaluacion" class="form-select">
+            <option disabled selected>Seleccione la evaluacion</option>
+            <option value="A">Evaluacion Ordinaria</option>
+            <option value="B">% Asistencias</option>
+            <option value="E">Recuperativo</option>
+            <option value="G">Especial</option>
+          </select>
+        </div>
+        
+        <div class="col-md-5">
+          <label for="asignatura" class="form-label">Asignatura</label>
+          <select id="asignatura" class="form-select">
+            <option disabled selected>Seleccione la evaluación</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Subir</label>
+          <div class="d-flex">
+            <input type="file" class="form-control" id="input">
+            <button class="btn btn-primary" title="Subir">
+              <i class="bi bi-arrow-bar-up"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -50,3 +66,6 @@
 
   </div>
 </section>
+
+<script src="/js/functions/ReadExcel.js"></script>
+<script src="/js/functions/setCalifi.js"></script>

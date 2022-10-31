@@ -207,4 +207,27 @@ router.get("/doctos/", async (req, res) => {
   });
 });
 
+router.get("/asignaturas", async (req, res) => {
+  const { idGrupo, eval } = req.query;
+
+  if(!idGrupo) return res.json([]);
+
+  let grupo = await Grupos.findById(idGrupo);
+
+  let sql = `select first(40) alumnos_kardex.claveasignatura, cfgplanes_det.nombreasignatura
+      from alumnos_kardex
+      join cfgplanes_det on alumnos_kardex.claveasignatura = cfgplanes_det.claveasignatura
+        and alumnos_kardex.id_plan = cfgplanes_det.id_plan
+      where alumnos_kardex.inicial = ${grupo.INICIAL}
+        and alumnos_kardex.final = ${grupo.FINAL}
+        and alumnos_kardex.periodo = ${grupo.PERIODO} 
+        and alumnos_kardex.id_eval = '${eval}'`;
+
+  let data = await Grupos.createQuery({ querySql: sql });
+  res.json({
+    querys: req.query,
+    data,
+  })
+});
+
 module.exports = router;

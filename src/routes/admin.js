@@ -30,17 +30,12 @@ router.post("/cuatrimestres/nuevo", CuatrisCtr.create);
 router.get("/cuatrimestres/:id", CuatrisCtr.showById);
 router.post("/cuatrimestres/:id/update", CuatrisCtr.update);
 router.post("/cuatrimestres/:id/delete", CuatrisCtr.delete);
-router.get("/carreras", NivelesCtr.show);
-router.get("/formulario-crear", (req, res) =>
-  res.render("admin/carreras/formulario-crear")
-);
-router.get("/calificaciones/subir", (req, res) =>
-  res.render("admin/calificaciones/califi")
-);
-router.get("/calificaciones/subir/:idGrupo", (req, res) =>
-  res.render("admin/calificaciones/califi")
-);
 
 router.get("/calificaciones/subir", GruposCtr.show);
-router.get("/calificaciones/subir/:idGrupo", (req, res) => res.render("admin/calificaciones/califi"));
+router.get("/calificaciones/subir/:idGrupo", CalifiCtr.show);
 
+router.get("/carreras", NivelesCtr.show);
+router.get("/carreras/crear", NivelesCtr.form), 
+
+
+module.exports = router;

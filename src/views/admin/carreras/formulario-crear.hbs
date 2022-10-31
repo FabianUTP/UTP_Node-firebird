@@ -1,0 +1,93 @@
+<section class="section">
+  <form action="">
+    <div class="row">
+      <div class="col-lg-6">
+
+
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">Agregar carrera</h1>
+
+            <div class="row g-3">          
+              <div class="col-md-6">
+                <label for="paterno" class="form-label">Primer apellido</label>
+                <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Primer apellido"
+                  value="{{PATERNO}}">
+              </div>
+              <div class="col-md-6">
+                <label for="materno" class="form-label">Segundo apellido</label>
+                <input type="text" id="materno" name="materno" class="form-control" placeholder="Segundo apellido"
+                  value="{{MATERNO}}">
+              </div>
+              <div class="col-md-12">
+                <label for="nombre" class="form-label">Nombres</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombres"
+                  value="{{NOMBRE}}">
+              </div>
+              <div class="col-md-6">
+                <label for="genero" class="form-label">Genero</label>
+                <select name="genero" id="genero" class="form-select">
+                  <option value="{{GENERO}}" disabled selected>{{GENERO}}</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="fech_nacimiento" class="form-label">Fecha </label>
+                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control" value="{{FECHA_NACIMIENTO}}">
+              </div>
+              <div class="col-md-6">
+                <label for="estado-nacimiento" class="form-label">Zona Escolar</label>
+                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" ></select>
+                            
+              </div>
+              <div class="col-md-6">
+                <label for="municipio-nacimiento" class="form-label">Municipio </label>
+                <select id="municipio-nacimiento" class="form-select" name="municipio-nacimiento" required>
+                  <option>Primero seleccione un estado</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
+                <select id="inputState" class="form-select" required>
+                  <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
+                  <option>Mexicana</option>
+                  <option>Extranjera</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="paterno" class="form-label">Asignar Matrícula</label>
+                <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Agregar Matrícula">
+              </div>
+           <div class="row g-3">
+              <div class="col-md-8">
+                <label for="inputcarrera" class="form-label" placeholder="EdoCivil"> Escoger Carrera</label>
+                <select id="inputcarrera" class="form-select" required>
+                  <option ></option>
+                  <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
+                  <option>TSU en Gastronomía</option>
+                  <option>TSU en Procesos Alimentarios</option>
+                  <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
+                  <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
+                  <option>Ingeniería en Procesos Bioalimentarios</option>
+                  <option>Ingeniería en Desarrollo y Gestión de Software</option>
+                  <option>Licenciatura en Gestión de Negocios y Proyectos</option>
+                  <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+
+                </select>
+              </div>
+
+    </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+    <div class="text-center">
+      <button class="btn btn-outline-primary">Agregar carrera</button>
+    </div>
+  </form>
+</section>

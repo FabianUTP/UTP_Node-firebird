@@ -121,15 +121,26 @@
             <!-- End Quill Editor Default -->
 
             <div class="text-center">
-              <button type="submit" class="btn btn-primary">Crear</button>
-
+              <button type="submit" class="btn btn-primary" id="add">
+                <span id="loading"></span>
+                Crear
+              </button>
             </div>
           </form>
         </div>
-
 
       </div>
 
     </div>
   </div>
 </section>
+
+<script>
+  const crear = document.getElementById("add");
+
+  crear.addEventListener("click", () => {
+    let content = '<span class="spinner-border spinner-border-sm">';
+    content += '</span>'
+    crear.innerHTML = content;
+  })
+</script>

@@ -43,53 +43,56 @@
               <div class="col-md-6">
                 <label for="paterno" class="form-label">Primer apellido</label>
                 <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Primer apellido"
-                  value="{{PATERNO}}">
+                  value="{{PATERNO}}" disabled>
               </div>
               <div class="col-md-6">
                 <label for="materno" class="form-label">Segundo apellido</label>
                 <input type="text" id="materno" name="materno" class="form-control" placeholder="Segundo apellido"
-                  value="{{MATERNO}}">
+                  value="{{MATERNO}}" disabled>
               </div>
               <div class="col-md-12">
                 <label for="nombre" class="form-label">Nombres</label>
                 <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombres"
-                  value="{{NOMBRE}}">
+                  value="{{NOMBRE}}" disabled>
               </div>
               <div class="col-md-6">
                 <label for="genero" class="form-label">Genero</label>
-                <select name="genero" id="genero" class="form-select">
-                  <option value="{{GENERO}}" disabled selected>{{GENERO}}</option>
+                <select name="genero" id="genero" class="form-select" disabled>
+                  <option value="{{GENERO}}" selected>{{GENERO}}</option>
                   <option value="M">Masculino</option>
                   <option value="F">Femenino</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
-                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control" value="{{FECHA_NACIMIENTO}}">
+                <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
+                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control" disabled>
               </div>
               <div class="col-md-6">
                 <label for="estado-nacimiento" class="form-label">Estado de nacimiento</label>
-                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" ></select>
+                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" disabled>
+                  <option selected>{{ESTADO_NACIMIENTO}}</option>
+                </select>
                             
               </div>
               <div class="col-md-6">
                 <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
-                <select id="municipio-nacimiento" class="form-select" name="municipio-nacimiento" required>
-                  <option>Primero seleccione un estado</option>
+                <select id="municipio-nacimiento" class="form-select" name="municipio-nacimiento" disabled>
+                  <option>{{LUGAR_NACIMIENTO}}</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
-                <select id="inputState" class="form-select" required>
-                  <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
+                <select id="inputState" class="form-select" disabled>
+                  <option selected value="{{NACIONALIDAD}}" disabled disabled>{{NACIONALIDAD}}</option>
                   <option>Mexicana</option>
                   <option>Extranjera</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label for="inputedocivil" class="form-label" placeholder="EdoCivil">Estado civil</label>
-                <select id="inputState" class="form-select" required>
-                  <option selected value="{{ESTADO_CIVIL}}" disabled>{{ESTADO_CIVIL}}</option>
+                <select id="inputState" class="form-select" disabled>
+                  <option selected value="{{ESTADO_CIVIL}}" disabled disabled>{{ESTADO_CIVIL}}</option>
                   <option value="S">Soltero</option>
                   <option value="C">Casado</option>
                 </select>
@@ -100,7 +103,7 @@
                     CURP
                   </label>
                   <input id="curp_" name="curp" class="form-control form-control-lg" style="text-transform: uppercase;"
-                    maxlength="18" required type="text" value="{{CLAVE_CIUDADANA}}">
+                    maxlength="18" required type="text" value="{{CLAVE_CIUDADANA}}" disabled>
                   </input>
                   <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
                     Consulta tu CURP
@@ -123,23 +126,23 @@
               <div class="col-md-8">
                 <label for="domicilio" class="form-label">Domicilio particular</label>
                 <input type="text" id="domicilio" name="domicilio" class="form-control"
-                  placeholder="Calle, número y colonia" value="{{DOMICILIO}}">
+                  placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
               </div>
               <div class="col-md-4">
                 <label for="cruzamientos" class="form-label">Cruzamientos</label>
                 <input type="text" id="cruzamientos" name="cruzamientos" class="form-control"
-                  placeholder="Cruzamientos" value="{{ENTRE_CALLES}}">
+                  placeholder="Cruzamientos" value="{{ENTRE_CALLES}}" disabled>
               </div>
               <div class="col-md-6">
                 <label for="estado" class="form-label">Estado</label>
-                <select name="estado" id="estado" class="form-select">
-
+                <select name="estado" id="estado" class="form-select" disabled>
+                  <option value="">{{ESTADO}}</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label for="municipio" class="form-label">Municipio</label>
-                <select id="municipio" name="municipio" class="form-select"  >
-
+                <select id="municipio" name="municipio" class="form-select" disabled>
+                  <option value="">{{CIUDAD}}</option>
                 </select>
               </div>
               <div class="col-md-8">
@@ -149,25 +152,25 @@
               </div>
               <div class="col-md-4">
                 <label for="postal" class="form-label">Código Postal</label>
-                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}">
+                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}" disabled>
               </div>
               <div class="col-md-12">
                 <label for="email_personal" class="form-label">Email personal</label>
                 <input type="text" id="email_personal" name="email_personal" class="form-control"
-                  placeholder="nombre@servidor.com" value="{{EMAIL_ALTERNO}}">
+                  placeholder="nombre@servidor.com" value="{{EMAIL_ALTERNO}}" disabled>
               </div>
               <div class="col-md-12">
                 <label for="email_insti" class="form-label">Email institucional</label>
                 <input type="text" id="email_insti" name="email_insti" class="form-control"
-                  placeholder="nombre@utponiente.edu.mx" value="{{EMAIL}}">
+                  placeholder="nombre@utponiente.edu.mx" value="{{EMAIL}}" disabled>
               </div>
               <div class="col-md-6">
                 <label for="tel_cel" class="form-label">Teléfono celular</label>
-                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}"/>
+                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}" disabled/>
               </div>
               <div class="col-md-6">
                 <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
-                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}">
+                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}" disabled>
               </div>
             </div>
           </div>
@@ -231,7 +234,7 @@
               <div class="col-md-6">
                 <label for="inputmatricula" class="form-label">MATRÍCULA</label>
                 <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
-                  required value="{{MATRICULA}}">
+                  required value="{{MATRICULA}}" disabled>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -383,10 +386,16 @@
     </div>
 
     <div class="text-center">
-      <button class="btn btn-outline-primary">Registrar alumno</button>
+      <button class="btn btn-outline-primary" disabled>Actualizar</button>
     </div>
   </form>
 </section>
 
-<script src="/js/functions/validaCurp.js"></script>
-<script src="/js/functions/estados-municipios.js"></script>
+<script>
+
+  const fech_nacimiento_ini = document.getElementById("fech_nacimiento_ini");
+  const fech_nacimiento = document.getElementById("fech_nacimiento");
+
+  fech_nacimiento.value = formatDate(fech_nacimiento_ini.value)
+
+</script>

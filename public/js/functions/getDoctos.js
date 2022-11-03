@@ -24,7 +24,7 @@ const getDoctos = async () => {
             </center>
             <br>
             <h4 class="title">  
-              <center><a href="#"> ${item.ID_DOCTO} <br>
+              <center><a href="${item.ID_DOCTO}"> ${item.ID_DOCTO} <br>
                   <font color="GREEN">
                     <B>Entregado</B>
                   </font>

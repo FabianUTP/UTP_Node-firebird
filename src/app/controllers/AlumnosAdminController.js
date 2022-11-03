@@ -19,7 +19,8 @@ AlumnosAdminCtr.showById = async (req = request, res = response) => {
 AlumnosAdminCtr.doctos = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.params.id);
   res.render("alumno/documentos/doctos-screen", {
-    numeroalumno: alumno.NUMEROALUMNO
+    numeroalumno: alumno.NUMEROALUMNO,
+    nombre: alumno.NOMBRE
   });
 };
 

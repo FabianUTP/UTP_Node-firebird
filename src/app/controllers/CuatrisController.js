@@ -5,11 +5,11 @@ const CuatrisCtr = {};
 
 CuatrisCtr.index = (req = request, res = response) => {
   req.flash("msj_good", "Se guardo un nuevo ciclo exitosamente");
-  res.render("admin/cuatrimestres/cuatris-screen");
+  res.render("admin/config_general/cuatrimestres/cuatris-list");
 };
 
 CuatrisCtr.showCreate = (req = request, res = response) => {
-  res.render("admin/cuatrimestres/add-cuatri-screen");
+  res.render("admin/config_general/cuatrimestres/cuatris-add");
 };
 
 CuatrisCtr.create = async (req = request, res = response) => {
@@ -43,7 +43,7 @@ CuatrisCtr.create = async (req = request, res = response) => {
 
 CuatrisCtr.showById = async (req = request, res = response) => {
   const ciclo = await Ciclos.findById(req.params.id);
-  res.render("admin/cuatrimestres/info-cuatri-screen", ciclo);
+  res.render("admin/config_general/cuatrimestres/cuatris-info", ciclo);
 };
 
 CuatrisCtr.update = async (req = request, res = response) => {

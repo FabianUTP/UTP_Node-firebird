@@ -13,7 +13,7 @@ const {
   CalifiCtr,
 } = require("../app/controllers");
 
-// Middleware solo proteger las rutas y solo pueda acceder el admin
+// Middleware para proteger las rutas y solo pueda acceder el admin
 router.use(isAdmin);
 
 // Rutas para el Administrador
@@ -35,7 +35,11 @@ router.get("/calificaciones/subir", GruposCtr.show);
 router.get("/calificaciones/subir/:idGrupo", CalifiCtr.show);
 
 router.get("/carreras", NivelesCtr.show);
-router.get("/carreras/crear", NivelesCtr.form), 
+router.get("/carreras/crear", NivelesCtr.form);
+
+router.get("/academico/planes", (req, res) => {
+  res.render("admin/academico/planes/planes-list");
+});
 
 
 module.exports = router;

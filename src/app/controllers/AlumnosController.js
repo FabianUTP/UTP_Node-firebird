@@ -63,7 +63,8 @@ AlumnosController.doctos = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.session.IDAuth);
 
   res.render("alumno/documentos/doctos-screen", {
-    numeroalumno: alumno.NUMEROALUMNO
+    numeroalumno: alumno.NUMEROALUMNO,
+    nombre: alumno.NOMBRE
   });
 }
 

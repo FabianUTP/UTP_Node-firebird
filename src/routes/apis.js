@@ -8,6 +8,7 @@ const {
   Niveles,
   Doctos,
   AlumnosGrupos,
+  Planes_Det,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -224,10 +225,42 @@ router.get("/asignaturas", async (req, res) => {
         and alumnos_kardex.id_eval = '${eval}'`;
 
   let data = await Grupos.createQuery({ querySql: sql });
+  
   res.json({
     querys: req.query,
     data,
   })
 });
+
+router.get("/planes", async (req, res) => {
+  const { 
+    page = 1, 
+    search, 
+    orderBy = 'nombreasignatura', 
+    sort = 'asc' 
+  } = req.query;
+
+  let searchQuery = '';
+
+  if (page <= 0) page = 1;
+
+  if (search) {
+    searchQuery = `nombreasignatura LIKE '%${search}%'`
+  }
+
+  const planes = await Planes_Det.all({
+    limit: 20,
+    skip: (page - 1) * 20,
+    searchQuery,
+    orderBy,
+    sort,
+  });
+
+  res.json({
+    query: req.query,
+    data: planes
+  })
+
+})
 
 module.exports = router;

@@ -45,18 +45,11 @@ AlumnosController.updateSeguro = async (req = request, res = response) => {
   res.redirect("/perfil");
 };
 
-AlumnosController.getBoletas = (req = request, res = response) => {
-  let cuatrimestres = [
-    "Cuatrimestre 1",
-    "Cuatrimestre 2",
-    "Cuatrimestre 3",
-    "Cuatrimestre 4",
-    "Cuatrimestre 5",
-  ];
+AlumnosController.getBoletas = async (req = request, res = response) => {
 
-  res.render("alumno/boletas/boletas-screen", {
-    cuatrimestres,
-  });
+  const alumno = await Alumno.findById(req.session.IDAuth);
+
+  res.render("alumno/boletas/boletas-screen", alumno);
 };
 
 AlumnosController.doctos = async (req = request, res = response) => {

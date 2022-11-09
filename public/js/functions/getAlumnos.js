@@ -11,14 +11,11 @@ let orderBy = "paterno";
 let sort = "asc";
 let alumnosLength = 0;
 
-formInput.addEventListener("submit", (e) => {
-  // Hace que no se refresque la pagina en el input de busqueda
-  e.preventDefault();
-
+inputSearch.addEventListener("input", debounce(() => {
   search = inputSearch.value;
   skip = 0; // Reinicia la paginacion
   getAlumnos();
-});
+}));
 
 // Hace la llamada a la API
 const getAlumnos = async () => {
@@ -43,7 +40,6 @@ const getAlumnos = async () => {
   table.innerHTML = content;
   alumnosLength = alumnos.length;
 
-  loading();
 };
 
 const handleOrder = (by) => {

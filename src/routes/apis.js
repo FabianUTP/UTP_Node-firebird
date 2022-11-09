@@ -9,6 +9,7 @@ const {
   Doctos,
   AlumnosGrupos,
   Planes_Det,
+  AlumKardex,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -261,6 +262,35 @@ router.get("/planes", async (req, res) => {
     data: planes
   })
 
-})
+});
+
+router.get("/calificaciones/:numalumno", async (req, res) => {
+  const { cuatri, eval = "A" } = req.query;
+  const alumno = req.params.numalumno
+
+  let sql = `select first(30)
+    alumnos_kardex.numeroalumno,
+    alumnos_kardex.claveasignatura,
+    cfgplanes_det.nombreasignatura,
+    alumnos_kardex.id_plan,
+    alumnos_kardex.id_eval,
+    alumnos_kardex.calificacion
+  from alumnos_kardex
+  join cfgplanes_det on alumnos_kardex.claveasignatura = cfgplanes_det.claveasignatura
+    and alumnos_kardex.id_plan = cfgplanes_det.id_plan
+    and alumnos_kardex.id_etapa = cfgplanes_det.id_etapa
+  where (alumnos_kardex.numeroalumno = ${alumno})
+    and (alumnos_kardex.id_eval = '${eval}')`;
+
+  const data = await AlumKardex.createQuery({
+    querySql: sql
+  })
+
+  res.json({
+    query: req.query,
+    data
+  })
+
+});
 
 module.exports = router;

@@ -8,8 +8,12 @@ let limit = 20;
 let skip = 0;
 let search = "";
 
-// Hace que no se recargue la pagina en el input de busqueda
-formInput.addEventListener("submit", e => e.preventDefault());
+// funcion para buscar por codigo de la carrera
+formInput.addEventListener("input", debounce(() => {
+  search = inputSearch.value
+  skip = 0;
+  getCarrera();
+}));
 
 const prev = () => {
   if (skip >= limit) {
@@ -23,13 +27,6 @@ const next = () => {
   getCarrera();
 };
 
-// uncion para buscar por codigo de la carrera
-const searchCarrera = () => {
-  search = inputSearch.value
-  skip = 0;
-  getCarrera();
-}
-
 // Hace la llamada a la API
 const getCarrera = async () => {
   const res = await fetch(`api/carreras?limit=${limit}&skip=${skip}&search=${search}`);
@@ -40,7 +37,7 @@ const getCarrera = async () => {
 
   let content = "";
   niveles.map((item, i) => {
-    content += `<tr onclick="window.location.href='/carreras/${item.CODIGO_CORTO}'">`;
+    content += `<tr onclick="window.location.href='/carreras/${item.NIVEL}'">`;
     content += `<td>${i + 1}</td>`;
     content += `<td>${item.NIVEL}</td>`;
     content += `<td>${item.ACUERDO}</td>`;
@@ -49,8 +46,6 @@ const getCarrera = async () => {
   });
 
   table.innerHTML = content;
-
-  loading();
 };
 
 getCarrera();

@@ -6,7 +6,7 @@ const Ciclos = require("./Ciclos");
 const Niveles = require("./Niveles");
 const AlumnosGrupos = require("./GrupoAlumno");
 const Planes_Det = require("./Planes_Det");
-
+const AlumKardex = require("./Alum_Kardex");
 module.exports = {
     Alumno,
     Doctos,
@@ -16,4 +16,5 @@ module.exports = {
     Niveles,
     AlumnosGrupos,
     Planes_Det,
+    AlumKardex
 }

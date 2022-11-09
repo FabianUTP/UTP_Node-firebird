@@ -8,8 +8,12 @@ let limit = 20;
 let skip = 0;
 let search = "";
 
-// Hace que no se refresque la pagina en el input de busqueda
-formInput.addEventListener("submit", e => e.preventDefault());
+// Funcion para buscar por codigo del cuatrimestre
+formInput.addEventListener("input", debounce(() => {
+  search = inputSearch.value
+  skip = 0;
+  getCuatris();
+}));
 
 const prev = () => {
   if (skip >= limit) {
@@ -22,13 +26,6 @@ const next = () => {
   skip += limit;
   getCuatris();
 };
-
-// uncion para buscar por codigo del cuatrimestre
-const searchCuatri = () => {
-  search = inputSearch.value
-  skip = 0;
-  getCuatris();
-}
 
 // Hace la llamada a la API
 const getCuatris = async () => {
@@ -51,8 +48,6 @@ const getCuatris = async () => {
   });
 
   table.innerHTML = content;
-
-  loading();
 };
 
 getCuatris();

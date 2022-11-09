@@ -11,13 +11,11 @@ let orderBy = "codigo_carrera";
 let sort = "asc";
 let gruposLength = 0;
 
-formInput.addEventListener("submit", (e) => {
-  // Hace que no se refresque la pagina en el input de busqueda
-  e.preventDefault();
+formInput.addEventListener("input", debounce(() => {
   search = inputSearch.value;
   skip = 0; // Reinicia la paginacion
   getGrupos();
-});
+}));
 
 // Hace la llamada a la API
 const getGrupos = async () => {
@@ -44,7 +42,6 @@ const getGrupos = async () => {
   table.innerHTML = content;
   gruposLength = grupos.length;
 
-  loading();
 };
 
 const handleOrder = (by) => {

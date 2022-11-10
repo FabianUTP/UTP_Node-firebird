@@ -2,7 +2,7 @@ const numalumno = document.getElementById("numalumno");
 const tipoEval = document.getElementById("tipo_eval");
 const cuatri = document.getElementById("cuatrimestre");
 const table = document.getElementById("table-content");
-const loading = document.getElementById("loading");
+const load = document.getElementById("loading");
 
 const getCalifi = async () => {
   let url = "/api/calificaciones/" + numalumno.value;
@@ -10,11 +10,11 @@ const getCalifi = async () => {
   url += "&eval=" + tipoEval.value;
 
   table.innerHTML = "";
-  loading.style.display = "block";
+  load.style.display = "block";
 
   const res = await fetch(url);
   const { data } = await res.json();
-  loading.style.display = "none";
+  load.style.display = "none";
 
   let content = "";
 

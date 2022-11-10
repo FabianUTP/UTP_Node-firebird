@@ -19,10 +19,15 @@ AlumnosAdminCtr.showById = async (req = request, res = response) => {
 AlumnosAdminCtr.doctos = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.params.id);
   res.render("alumno/documentos/doctos-screen", {
-    numeroalumno: alumno.NUMEROALUMNO,
-    nombre: alumno.NOMBRE
+    numeroalumno: alumno?.NUMEROALUMNO,
+    nombre: alumno?.NOMBRE
   });
 };
+
+AlumnosAdminCtr.boletas = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id);
+  res.render("alumno/boletas/boletas-screen", alumno);
+}
 
 module.exports = {
   AlumnosAdminCtr,

@@ -2,7 +2,7 @@
 
 const table = document.getElementById("table-container");
 const inputSearch = document.getElementById("buscar");
-const formInput = document.getElementById("formInput");
+const load = document.getElementById("load");
 
 let limit = 20;
 let skip = 0;
@@ -11,7 +11,7 @@ let orderBy = "codigo_carrera";
 let sort = "asc";
 let gruposLength = 0;
 
-formInput.addEventListener("input", debounce(() => {
+inputSearch.addEventListener("input", debounce(() => {
   search = inputSearch.value;
   skip = 0; // Reinicia la paginacion
   getGrupos();
@@ -19,12 +19,16 @@ formInput.addEventListener("input", debounce(() => {
 
 // Hace la llamada a la API
 const getGrupos = async () => {
+
+  // Vacia la tabla en caso que ya tenga datos
+  table.innerHTML = "";
+  load.style.display = "block";
+
   const url = `/api/grupos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
   const res = await fetch(url);
   const { grupos } = await res.json();
 
-  // Vacia la tabla en caso que ya tenga datos
-  table.innerHTML = "";
+  load.style.display = "none";
 
   let content = "";
   grupos.map((item, i) => {

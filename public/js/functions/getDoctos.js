@@ -7,14 +7,17 @@ let gradoSelected = 0;
 const getDoctos = async () => {
   const url = `/api/doctos?numalumno=${numalumno.value}&grado=${gradoSelected}`;
 
+  body.innerHTML = `<div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>`;
+
   try {
     const res = await fetch(url);
     const { doctos = [] } = await res.json();
 
     let content = "";
-    body.innerHTML = content;
 
-    if(doctos.length > 0) {
+    if (doctos.length > 0) {
       doctos.map((item) => {
         content += `<div class="col-md-6 col-lg-4">
           <div class="card border-alert">
@@ -36,11 +39,10 @@ const getDoctos = async () => {
     } else {
       content += `<div class='text-center'>
         <h3>No hay documentos a mostrar</h3>
-      </div>`
+      </div>`;
     }
 
     body.innerHTML = content;
-
   } catch (error) {
     console.error(error);
   }

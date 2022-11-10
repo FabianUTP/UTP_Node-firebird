@@ -2,7 +2,7 @@
 
 const table = document.getElementById("table-container");
 const inputSearch = document.getElementById("buscar");
-const formInput = document.getElementById("formInput");
+const load = document.getElementById("load");
 
 let limit = 20;
 let skip = 0;
@@ -19,13 +19,14 @@ inputSearch.addEventListener("input", debounce(() => {
 
 // Hace la llamada a la API
 const getAlumnos = async () => {
-  const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
-
-  const res = await fetch(url);
-  const { alumnos } = await res.json();
-
   // Vacia la tabla en caso que ya tenga datos
   table.innerHTML = "";
+  load.style.display = "block";
+
+  const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
+  const res = await fetch(url);
+  const { alumnos } = await res.json();
+  load.style.display = "none";
 
   let content = "";
   alumnos.map((item, i) => {
@@ -39,7 +40,6 @@ const getAlumnos = async () => {
 
   table.innerHTML = content;
   alumnosLength = alumnos.length;
-
 };
 
 const handleOrder = (by) => {
@@ -60,7 +60,7 @@ const prev = () => {
 };
 
 const next = () => {
-  if(!(alumnosLength < limit)) {
+  if (!(alumnosLength < limit)) {
     skip += limit;
     getAlumnos();
   }

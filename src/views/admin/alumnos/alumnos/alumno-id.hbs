@@ -18,11 +18,17 @@
 
             <div class="col-6">
               <div class="h-100 py-4 d-flex flex-column justify-content-between">
+
                 <div class="col-md-12">
-                  <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/doctos">Ver documentos</a>
+                  <h4>Fichas</h4>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/doctos">Documentos</a>
+                    <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/boletas">Boletas</a>
+                  </div>
                 </div>
+
                 <div class="col-md-12">
-                  <p>Actualizar fotografia</p>
+                  <h4>Actualizar fotografia</h4>
                   <div class="">
                     <div class="form-group">
                       <!--LA FOTOGRAFÍA PUEDE SER NO REQUERIDA-->
@@ -39,7 +45,7 @@
           <div class="card-body">
             <h1 class="card-title">Datos de identidad</h1>
 
-            <div class="row g-3">          
+            <div class="row g-3">
               <div class="col-md-6">
                 <label for="paterno" class="form-label">Primer apellido</label>
                 <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Primer apellido"
@@ -73,7 +79,7 @@
                 <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" disabled>
                   <option selected>{{ESTADO_NACIMIENTO}}</option>
                 </select>
-                            
+
               </div>
               <div class="col-md-6">
                 <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
@@ -129,30 +135,27 @@
                   placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
               </div>
               <div class="col-md-4">
-                <label for="cruzamientos" class="form-label">Cruzamientos</label>
-                <input type="text" id="cruzamientos" name="cruzamientos" class="form-control"
-                  placeholder="Cruzamientos" value="{{ENTRE_CALLES}}" disabled>
+                <label for="cruzamientos" class="form-label">Municipio</label>
+                <input type="text" id="cruzamientos" name="cruzamientos" class="form-control" placeholder="Cruzamientos"
+                  value="{{ENTRE_CALLES}}" disabled>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <label for="estado" class="form-label">Estado</label>
                 <select name="estado" id="estado" class="form-select" disabled>
                   <option value="">{{ESTADO}}</option>
                 </select>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <label for="municipio" class="form-label">Municipio</label>
                 <select id="municipio" name="municipio" class="form-select" disabled>
                   <option value="">{{CIUDAD}}</option>
                 </select>
               </div>
-              <div class="col-md-8">
-                <label for="localidad" class="form-label">Localidad</label>
-                <input type="text" id="localidad" name="localidad" class="form-control"
-                  placeholder="Ciudadm comisaría, etc.">
-              </div>
+
               <div class="col-md-4">
                 <label for="postal" class="form-label">Código Postal</label>
-                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}" disabled>
+                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}"
+                  disabled>
               </div>
               <div class="col-md-12">
                 <label for="email_personal" class="form-label">Email personal</label>
@@ -166,11 +169,13 @@
               </div>
               <div class="col-md-6">
                 <label for="tel_cel" class="form-label">Teléfono celular</label>
-                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}" disabled/>
+                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}"
+                  disabled />
               </div>
               <div class="col-md-6">
                 <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
-                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}" disabled>
+                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}"
+                  disabled>
               </div>
             </div>
           </div>
@@ -188,8 +193,8 @@
             <div class="row g-3">
               <div class="col-md-8">
                 <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
-                <select id="inputcarrera" class="form-select" required>
-                  <option ></option>
+                <select id="inputcarrera" class="form-select" required disabled>
+                  <option value="">{{NIVEL}}</option>
                   <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
                   <option>TSU en Gastronomía</option>
                   <option>TSU en Procesos Alimentarios</option>
@@ -206,8 +211,8 @@
 
               <div class="col-md-4">
                 <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
-                <select id="inputcuatri" class="form-select" required>
-                  <option selected></option>
+                <select id="inputcuatri" class="form-select" required disabled>
+                  <option selected>{{GRADO}}</option>
                   <option>0</option>
                   <option>1</option>
                   <option>2</option>
@@ -255,7 +260,7 @@
               <div class="col-md-6">
                 <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
                 <select id="inputcuatri" class="form-select" required value>
-                  <option sele></option>
+                  <option>{{STATUS}}</option>
                   <option>Aspirante</option>
                   <option>Activo</option>
                   <option>Baja temporal</option>

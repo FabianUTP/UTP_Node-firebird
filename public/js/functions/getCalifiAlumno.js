@@ -1,11 +1,13 @@
 const numalumno = document.getElementById("numalumno");
 const tipoEval = document.getElementById("tipo_eval");
+const cuatri = document.getElementById("cuatrimestre");
 const table = document.getElementById("table-content");
 const loading = document.getElementById("loading");
 
 const getCalifi = async () => {
   let url = "/api/calificaciones/" + numalumno.value;
-  url += "?eval=" + tipoEval.value;
+  url += "?cuatri=" + cuatri.value;
+  url += "&eval=" + tipoEval.value;
 
   table.innerHTML = "";
   loading.style.display = "block";

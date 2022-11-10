@@ -19,16 +19,14 @@
             <div class="d-flex w-100">
 
               <div class="flex-fill">
-                <form id="formInput">
-                  <div class="input-group mb-1">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="bi bi-search"></i>
-                      </span>
-                    </div>
-                    <input type="search" class="form-control" placeholder="Buscar por codigo del grupo" id="buscar">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="bi bi-search"></i>
+                    </span>
                   </div>
-                </form>
+                  <input type="search" class="form-control" placeholder="Buscar por codigo del grupo" id="buscar">
+                </div>
               </div>
 
               <div>
@@ -105,6 +103,10 @@
                 <tbody id="table-container"></tbody>
 
               </table>
+
+              <div class="d-flex justify-content-center pb-2">
+                <div class="spinner-border" role="status" id="load" style="display: none;"></div>
+              </div>
             </div>
 
             <div class="text-center">

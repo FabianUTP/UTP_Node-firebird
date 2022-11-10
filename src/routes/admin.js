@@ -23,6 +23,7 @@ router.get("/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);
 router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
+router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
 router.get("/cuatrimestres", CuatrisCtr.index);
 router.get("/cuatrimestres/nuevo", CuatrisCtr.showCreate);

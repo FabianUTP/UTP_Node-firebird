@@ -24,6 +24,7 @@ const getAlumnos = async () => {
     content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
     content += `<td>${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;
+    content += `<td>${item.NIVEL}</td>`;
     content += "</tr>";
   });
 

@@ -65,7 +65,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   const idGrupo = req.params.idGrupo;
 
   let sql = `SELECT FIRST(${limit}) SKIP(${skip}) `;
-  sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre `;
+  sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, alumnos.nivel `;
   sql += "FROM alumnos_grupos ";
   sql +=
     "left join alumnos on alumnos_grupos.numeroalumno = alumnos.numeroalumno ";
@@ -90,9 +90,9 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
 });
 
 router.get("/cuatris-navbar", async (req, res) => {
-  const ciclos = await Ciclos.where({
-    periodo: [1, 2, 3, 4],
-  }, { limit: 50 });
+  const ciclos = await Ciclos.all({
+    limit: 50
+  });
 
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
@@ -265,8 +265,8 @@ router.get("/planes", async (req, res) => {
 });
 
 router.get("/calificaciones/:numalumno", async (req, res) => {
-  const { cuatri, eval = "A" } = req.query;
-  const alumno = req.params.numalumno
+  const { cuatri = 1, eval = "A" } = req.query;
+  const alumno = req.params.numalumno;
 
   let sql = `select first(30)
     alumnos_kardex.numeroalumno,
@@ -280,7 +280,8 @@ router.get("/calificaciones/:numalumno", async (req, res) => {
     and alumnos_kardex.id_plan = cfgplanes_det.id_plan
     and alumnos_kardex.id_etapa = cfgplanes_det.id_etapa
   where (alumnos_kardex.numeroalumno = ${alumno})
-    and (alumnos_kardex.id_eval = '${eval}')`;
+    and (alumnos_kardex.id_eval = '${eval}')
+    and (cfgplanes_det.grado = ${cuatri})`;
 
   const data = await AlumKardex.createQuery({
     querySql: sql

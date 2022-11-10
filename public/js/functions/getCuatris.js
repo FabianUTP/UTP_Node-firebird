@@ -2,14 +2,13 @@
 
 const table = document.getElementById("table-container");
 const inputSearch = document.getElementById("buscar");
-const formInput = document.getElementById("formInput");
 
 let limit = 20;
 let skip = 0;
 let search = "";
 
 // Funcion para buscar por codigo del cuatrimestre
-formInput.addEventListener("input", debounce(() => {
+inputSearch.addEventListener("input", debounce(() => {
   search = inputSearch.value
   skip = 0;
   getCuatris();

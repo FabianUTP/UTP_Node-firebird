@@ -92,7 +92,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
 router.get("/cuatris-navbar", async (req, res) => {
   const ciclos = await Ciclos.where({
     periodo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  }, { limit: 50 });
+  }, { limit: 100 });
 
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 

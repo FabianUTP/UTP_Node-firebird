@@ -90,9 +90,9 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
 });
 
 router.get("/cuatris-navbar", async (req, res) => {
-  const ciclos = await Ciclos.all({
-    limit: 50
-  });
+  const ciclos = await Ciclos.where({
+    periodo: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  }, { limit: 50 });
 
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 

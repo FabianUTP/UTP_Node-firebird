@@ -1,60 +1,62 @@
 <section class="section profile">
 
-  <div class="row">
-    <div class="col-xl-12">
+  <div class="container">
 
-      <div class="card">
+    <div class="mb-3">
+      {{>btnBack}}
+    </div>
 
-        <div class="card-title text-center">
-          <h1>Documentos de {{nombre}}</h1>
-          <input type="hidden" value="{{numeroalumno}}" id="numeroalumno">
-        </div>
+    <div class="card">
 
-        <div class="card-body pt-3">
+      <div class="card-title text-center">
+        <h1>Documentos de {{nombre}}</h1>
+        <input type="hidden" value="{{numeroalumno}}" id="numeroalumno">
+      </div>
 
-          <div class="container" data-aos="fade-up">
+      <div class="card-body pt-3">
 
-            <div class="row">
-              <div class="col-md-6">
-                <label class="form-label"><b>*Selecciona el cuatrimestre:</b> </label>
-                <select class="form-control" style="width: 300px;" id="filterDocto">
-                  <option disabled selected>--Haga una elección--</option>
-                  <option value="0">Doctos de registro</option>
-                  <option value="1">Cuatrimestre 1</option>
-                  <option value="2">Cuatrimestre 2</option>
-                  <option value="3">Cuatrimestre 3</option>
-                  <option value="4">Cuatrimestre 4</option>
-                  <option value="5">Cuatrimestre 5</option>
-                  <option value="6">Cuatrimestre 6</option>
-                  <option value="7">Cuatrimestre 7</option>
-                  <option value="8">Cuatrimestre 8</option>
-                  <option value="9">Cuatrimestre 9</option>
-                  <option value="10">Cuatrimestre 10</option>
-                  <option value="11">Cuatrimestre 11</option>
-                </select>
-              </div>
+        <div class="container" data-aos="fade-up">
 
-              {{#if isAdmin}}
-              <div class="col-md-6">
-                <label class="form-label">
-                  <b>Subir documento</b>
-                  <small>(cuatrimestre seleccionado)</small>
-                </label>
-                <div class="d-flex">
-                  <input type="file" class="form-control" id="input" accept="application/pdf">
-                  <button class="btn" title="Subir">
-                    <i class="bi bi-arrow-bar-up"></i>
-                  </button>
-                </div>
-              </div>
-              {{/if}}
+          <div class="row">
+            <div class="col-xs-6 col-md-5">
+              <label class="form-label"><b>*Selecciona el cuatrimestre:</b> </label>
+              <select class="form-control" id="filterDocto">
+                <option disabled selected>--Haga una elección--</option>
+                <option value="0">Doctos de registro</option>
+                <option value="1">Cuatrimestre 1</option>
+                <option value="2">Cuatrimestre 2</option>
+                <option value="3">Cuatrimestre 3</option>
+                <option value="4">Cuatrimestre 4</option>
+                <option value="5">Cuatrimestre 5</option>
+                <option value="6">Cuatrimestre 6</option>
+                <option value="7">Cuatrimestre 7</option>
+                <option value="8">Cuatrimestre 8</option>
+                <option value="9">Cuatrimestre 9</option>
+                <option value="10">Cuatrimestre 10</option>
+                <option value="11">Cuatrimestre 11</option>
+              </select>
             </div>
 
-            <div class="row pt-4" id="content"></div>
-
+            {{#if isAdmin}}
+            <div class="col-xs-6 col-md-7">
+              <label class="form-label">
+                <b>Subir documento</b>
+                <small>(cuatrimestre seleccionado)</small>
+              </label>
+              <div class="d-flex">
+                <input type="file" class="form-control" id="input" accept="application/pdf">
+                <button class="btn btn-outline-secondary" title="Subir">
+                  <i class="bi bi-arrow-bar-up"></i>
+                </button>
+              </div>
+            </div>
+            {{/if}}
           </div>
 
+          <div class="row pt-4" id="content"></div>
+
         </div>
+
       </div>
     </div>
   </div>

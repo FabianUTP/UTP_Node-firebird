@@ -19,7 +19,7 @@ const getDoctos = async () => {
 
     if (doctos.length > 0) {
       doctos.map((item) => {
-        content += `<div class="col-md-6 col-lg-4">
+        content += `<div class="col-md-6 col-lg-4 col-6">
           <div class="card border-alert">
             <br>
             <center>

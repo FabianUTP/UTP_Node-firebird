@@ -229,143 +229,70 @@
             <!-- No Labels Form -->
             <div class="row g-3">
               <div class="col-md-6">
-                <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="inputcuatri" class="form-select" required>
-                  <option selected></option>
-                  <option>Aspirante</option>
-                  <option>Activo</option>
-                  <option>Baja temporal</option>
-                  <option>Baja definitiva</option>
-                  <option>No admitido</option>
-                  <option>Deserción</option>
-
+                <label for="estatus_actual" class="form-label" placeholder="EdoCivil">Estatus actual</label>
+                <select id="estatus_actual" class="form-select" required>
+                  <option selected disabled>--seleccionar estatus--</option>
+                  <option value="aspirante">Aspirante</option>
+                  <option value="activo_tsu">Activo TSU</option>
+                  <option value="baja_tem">Baja temporal</option>
+                  <option value="baja_def">Baja definitiva</option>
+                  <option value="no_admitido">No admitido</option>
+                  <option value="deser">Deserción</option>
                 </select>
               </div>
 
-              <div class="col-6">
-                <label for="inputAddress2" class="form-label">Fecha de registro</label>
-                <div class="col-md-8" style="padding-right: 0px">
-                  <input class="form-control" id="fecha_reg" onblur="calcularEdad(this.value)" name="fecha_nac" required
-                    type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-              </div>
+              <div class="col-md-6"></div>
 
-              <div class="col-6">
-                <label for="inputdate" class="form-label">Fecha de ingreso TSU</label>
-                <div class="col-md-8" style="padding-right: 0px">
+              {{!-- ====== Ingreso TSU ====== --}}
+              <div class="row my-2 d-none" id="ingreso_tsu">
+                <div class="col-6">
+                  <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
+                  <input class="form-control" id="fecha_reg" name="fecha_reg" required type="date">
+                </div>
+
+                <div class="col-6">
+                  <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
                   <input class="form-control" id="fecha_itsu" onblur="calcularEdad(this.value)" name="fecha_nac"
                     required type="date">
                 </div>
-                <div class="col-md-4" style="padding-left: 0px">
+              </div>
+
+              {{!-- ====== Seccion de baja ====== --}}
+              <div class="row my-2 d-none" id="motivo_baja">
+                <div class="col-md-6">
+                  <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
+                  <select id="inputmotivo" class="form-select" required>
+                    <option>REPROBACIÓN</option>
+                    <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
+                    <option>MOTIVOS PERSONALES</option>
+                    <option>CAMBIO DE CARRERA</option>
+                    <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
+                    <option>DISTANCIA DE LA UT</option>
+                    <option>PROBLEMAS ECONÓMICOS</option>
+                    <option>PROBLEMAS DE TRABAJO</option>
+                    <option>CAMBIO DE UT</option>
+                    <option>DEFUNCIÓN</option>
+                    <option>OTRAS CAUSAS</option>
+                  </select>
                 </div>
-              </div>
-
-              <div class="col-md-6">
-                <label for="inputcicloitsu" class="form-label" placeholder="EdoCivil">Ciclo de ingreso TSU</label>
-                <select id="inputcicloitsu" class="form-select" required>
-                  <option selected></option>
-                  <option></option>
-                </select>
-              </div>
-
-              <div class="col-6">
-                <label for="inputdate" class="form-label">Fecha de Egreso TSU</label>
-                <div class="col-md-8" style="padding-right: 0px">
-                  <input class="form-control" id="fecha_etsu" onblur="calcularEdad(this.value)" name="fecha_nac"
-                    required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label for="inputcicloetsu" class="form-label" placeholder="EdoCivil">Ciclo de engreso TSU</label>
-                <select id="inputcicloetsu" class="form-select" required>
-                  <option selected></option>
-                  <option></option>
-                </select>
-              </div>
-
-              <div class="col-6">
-                <label for="inputdate" class="form-label">Fecha de Ingreso Lic.</label>
-                <div class="col-md-8" style="padding-right: 0px">
-                  <input class="form-control" id="fecha_ilic" onblur="calcularEdad(this.value)" name="fecha_nac"
-                    required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="inputcuatri" class="form-select" required>
-                  <option selected></option>
-                  <option></option>
-                </select>
-              </div>
-
-              <div class="col-6">
-                <label for="inputdate" class="form-label">Fecha de Egreso Lic.</label>
-                <div class="col-md-8" style="padding-right: 0px">
-                  <input class="form-control" id="fecha_elic" onblur="calcularEdad(this.value)" name="fecha_nac"
-                    required type="date">
-                </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="inputcuatri" class="form-select" required>
-                  <option selected></option>
-                  <option></option>
-                </select>
-              </div>
-
-              <div class="col-6">
-                <label for="inputdate" class="form-label">Fecha de Baja</label>
-                <div class="col-md-8" style="padding-right: 0px">
+                <div class="col-6">
+                  <label for="inputdate" class="form-label">Fecha de Baja</label>
                   <input class="form-control" id="fecha_baja" onblur="calcularEdad(this.value)" name="fecha_nac"
                     required type="date">
                 </div>
-                <div class="col-md-4" style="padding-left: 0px">
-                </div>
               </div>
 
-              <div class="col-md-6">
-                <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
-                <select id="inputmotivo" class="form-select" required>
-                  <option selected></option>
-                  <option>REPROBACIÓN</option>
-                  <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
-                  <option>MOTIVOS PERSONALES</option>
-                  <option>CAMBIO DE CARRERA</option>
-                  <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
-                  <option>DISTANCIA DE LA UT</option>
-                  <option>PROBLEMAS ECONÓMICOS</option>
-                  <option>PROBLEMAS DE TRABAJO</option>
-                  <option>CAMBIO DE UT</option>
-                  <option>DEFUNCIÓN</option>
-                  <option>OTRAS CAUSAS</option>
-                </select>
-              </div>
-
-            </div><!-- End No Labels Form -->
-
+            </div>
           </div>
         </div>
-
       </div>
 
-    </div>
-
-    <div class="text-center">
-      <button class="btn btn-outline-primary">Registrar alumno</button>
-    </div>
+      <div class="text-center">
+        <button class="btn btn-outline-primary">Registrar alumno</button>
+      </div>
   </form>
 </section>
 
 <script src="/js/helpers/validaCurp.js"></script>
 <script src="/js/helpers/estados-municipios.js"></script>
+<script src="/js/helpers/filtraPorEstatus.js"></script>

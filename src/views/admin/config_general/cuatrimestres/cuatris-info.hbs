@@ -2,21 +2,15 @@
   <div class="row">
     <div class="col-lg-12">
 
-      <div class="d-flex justify-content-between pb-4">
-        <div>
-          <a class="btn btn-outline-primary" href="/cuatrimestres" role="button">
-            <i class="bi bi-arrow-left"></i>
-            Regresar</a>
-        </div>
+      <div class="d-flex justify-content-between pb-3">
+        {{>btnBack}}
 
-        <div>
-          <form action="/cuatrimestres/{{CODIGO_CORTO}}/delete" method="post">
-            <button class="btn btn-outline-danger" onclick="return confirm('Desea eliminar este cuatrimestre?')">
-              <i class="bi bi-x-lg"></i>
-              Eliminar
-            </button>
-          </form>
-        </div>
+        <form action="/cuatrimestres/{{CODIGO_CORTO}}/delete" method="post">
+          <button class="btn btn-outline-danger" onclick="return confirm('Desea eliminar este cuatrimestre?')">
+            <i class="bi bi-x-lg"></i>
+            Eliminar
+          </button>
+        </form>
       </div>
 
 
@@ -100,7 +94,7 @@
             </div>
 
             <div class="text-center py-2">
-              <button class="btn btn-primary">Actualizar</button>
+              <button class="btn btn-primary" id="load">Actualizar</button>
             </div>
 
           </form>
@@ -112,13 +106,16 @@
 </section>
 
 <script>
-
   const valueInicial = document.getElementById('fecha_ini');
   const valueFinal = document.getElementById('fecha_fin');
   const inicial = document.getElementById('fecha_inicial');
   const final = document.getElementById('fecha_final');
+  const load = document.getElementById("load");
 
   inicial.value = formatDate(valueInicial.value);
   final.value = formatDate(valueFinal.value);
 
+  load.addEventListener("click", () => {
+    load.innerHTML = '<div class="spinner-border"></div>'
+  });
 </script>

@@ -80,6 +80,9 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
     sql += `AND alumnos_grupos.periodo = ${periodo?.PERIODO} `;
   }
 
+  // Ordena la tabla por apellidos en orden alfabetico
+  sql += `order by alumnos.paterno asc`;
+
   const alumnos = await AlumnosGrupos.createQuery({ querySql: sql });
 
   res.json({
@@ -117,6 +120,7 @@ router.put("/update/CuatriXGrupos", async (req, res) => {
   });
 });
 
+// Cuatrimestres / Ciclos
 router.get("/cuatrimestres", async (req, res) => {
   const { limit, skip, search } = req.query;
 
@@ -131,6 +135,8 @@ router.get("/cuatrimestres", async (req, res) => {
     limit,
     skip,
     searchQuery,
+    orderBy: 'inicial',
+    sort: 'desc'
   });
 
   res.json({

@@ -1,5 +1,5 @@
 <section class="section">
-  <form action="">
+  <form action="alumno/nuevo" method="post">
     <div class="row">
       <div class="col-lg-6">
 
@@ -42,7 +42,10 @@
               </div>
               <div class="col-md-6">
                 <label for="genero" class="form-label">Genero</label>
-                <select name="genero" id="genero" class="form-select"></select>
+                <select name="genero" id="genero" class="form-select">
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
               </div>
               <div class="col-md-6">
                 <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
@@ -61,16 +64,14 @@
               <div class="col-md-6">
                 <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
                 <select id="inputState" class="form-select" required>
-                  <option selected></option>
-                  <option>Mexicana</option>
-                  <option>Extranjera</option>
+                  <option value="MEXICANA" selected>Mexicana</option>
+                  <option value="EXTRANJERA">Extranjera</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label for="inputedocivil" class="form-label" placeholder="EdoCivil">Estado civil</label>
                 <select id="inputState" class="form-select" required>
-                  <option selected></option>
-                  <option value="S">Soltero</option>
+                  <option value="S" selected>Soltero</option>
                   <option value="C">Casado</option>
                 </select>
               </div>
@@ -104,11 +105,6 @@
                 <input type="text" id="domicilio" name="domicilio" class="form-control"
                   placeholder="Calle, número y colonia">
               </div>
-              <div class="col-md-4">
-                <label for="cruzamientos" class="form-label">Cruzamientos</label>
-                <input type="text" id="cruzamientos" name="cruzamientos" class="form-control"
-                  placeholder="Cruzamientos">
-              </div>
               <div class="col-md-6">
                 <label for="estado" class="form-label">Estado</label>
                 <select name="estado" id="estado" class="form-select">
@@ -128,7 +124,7 @@
               </div>
               <div class="col-md-4">
                 <label for="postal" class="form-label">Código Postal</label>
-                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P">
+                <input type="number" id="postal" name="postal" class="form-control" placeholder="C.P">
               </div>
               <div class="col-md-12">
                 <label for="email_personal" class="form-label">Email personal</label>
@@ -165,7 +161,7 @@
               <div class="col-md-8">
                 <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
                 <select id="inputcarrera" class="form-select" required>
-                  <option selected></option>
+                  <option disabled selected>--seleccione una opcion--</option>
                   <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
                   <option>TSU en Gastronomía</option>
                   <option>TSU en Procesos Alimentarios</option>
@@ -181,39 +177,27 @@
               </div>
 
               <div class="col-md-4">
-                <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
-                <select id="inputcuatri" class="form-select" required>
-                  <option selected></option>
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
+                <label for="cuatriemestre" class="form-label">Cuatrimestre</label>
+                <select id="cuatrimestre" class="form-select" required>
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
                 </select>
               </div>
 
               <div class="col-md-6">
-                <label for="inputgrupo" class="form-label" placeholder="EdoCivil">Grupo</label>
-                <select id="inputgrupo" class="form-select" required>
-                  <option selected></option>
-                  <option></option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label for="inputmatricula" class="form-label">MATRÍCULA</label>
-                <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
+                <label for="matricula" class="form-label">MATRÍCULA</label>
+                <input type="text" class="form-control" id="matricula" maxlength="8" placeholder="AAMMFFFF"
                   required>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
               </div>
 
               </dic><!-- Vertical Form -->
@@ -230,7 +214,7 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="estatus_actual" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="estatus_actual" class="form-select" required>
+                <select id="estatus_actual" class="form-select">
                   <option selected disabled>--seleccionar estatus--</option>
                   <option value="aspirante">Aspirante</option>
                   <option value="activo_tsu">Activo TSU</option>
@@ -247,13 +231,13 @@
               <div class="row my-2 d-none" id="ingreso_tsu">
                 <div class="col-6">
                   <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
-                  <input class="form-control" id="fecha_reg" name="fecha_reg" required type="date">
+                  <input class="form-control" id="fecha_reg" name="fecha_reg" type="date">
                 </div>
 
                 <div class="col-6">
                   <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
-                  <input class="form-control" id="fecha_itsu" onblur="calcularEdad(this.value)" name="fecha_nac"
-                    required type="date">
+                  <input class="form-control" id="fecha_itsu" name="fecha_nac"
+                    type="date">
                 </div>
               </div>
 
@@ -261,7 +245,7 @@
               <div class="row my-2 d-none" id="motivo_baja">
                 <div class="col-md-6">
                   <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
-                  <select id="inputmotivo" class="form-select" required>
+                  <select id="inputmotivo" class="form-select">
                     <option>REPROBACIÓN</option>
                     <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
                     <option>MOTIVOS PERSONALES</option>
@@ -277,8 +261,8 @@
                 </div>
                 <div class="col-6">
                   <label for="inputdate" class="form-label">Fecha de Baja</label>
-                  <input class="form-control" id="fecha_baja" onblur="calcularEdad(this.value)" name="fecha_nac"
-                    required type="date">
+                  <input class="form-control" id="fecha_baja" name="fecha_nac"
+                    type="date">
                 </div>
               </div>
 
@@ -288,7 +272,7 @@
       </div>
 
       <div class="text-center">
-        <button class="btn btn-outline-primary">Registrar alumno</button>
+        <button class="btn btn-outline-primary" type="submit">Registrar alumno</button>
       </div>
   </form>
 </section>

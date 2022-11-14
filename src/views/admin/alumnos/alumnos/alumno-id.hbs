@@ -1,9 +1,10 @@
 <section class="section">
-  <form action="">
 
-    <div class="mb-3">
-      {{>btnBack}}
-    </div>
+  <div class="mb-3">
+    {{>btnBack}}
+  </div>
+
+  <form action="/alumnos/{{MATRICULA}}/update" method="post">
 
     <div class="row">
       <div class="col-lg-6">
@@ -80,24 +81,24 @@
               <div class="col-md-6">
                 <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
                 <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
-                <input type="date" id="fech_nacimiento" name="fech_nacimiento" class="form-control" disabled>
+                <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control" disabled>
               </div>
               <div class="col-md-6">
-                <label for="estado-nacimiento" class="form-label">Estado de nacimiento</label>
-                <select id="estado-nacimiento" class="form-select" name="estado-nacimiento" disabled>
+                <label for="estad_-nacimiento" class="form-label">Estado de nacimiento</label>
+                <select id="estado_nacimiento" class="form-select" name="estado_nacimiento" disabled>
                   <option selected>{{ESTADO_NACIMIENTO}}</option>
                 </select>
 
               </div>
               <div class="col-md-6">
                 <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
-                <select id="municipio-nacimiento" class="form-select" name="municipio-nacimiento" disabled>
+                <select id="municipio-nacimiento" class="form-select" name="municipio_naci" disabled>
                   <option>{{LUGAR_NACIMIENTO}}</option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
-                <select id="inputState" class="form-select" disabled>
+                <select id="inputState" class="form-select" disabled name="nacionalidad">
                   <option selected value="{{NACIONALIDAD}}" disabled disabled>{{NACIONALIDAD}}</option>
                   <option>Mexicana</option>
                   <option>Extranjera</option>
@@ -150,13 +151,7 @@
               <div class="col-md-4">
                 <label for="estado" class="form-label">Estado</label>
                 <select name="estado" id="estado" class="form-select" disabled>
-                  <option value="">{{ESTADO}}</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label for="municipio" class="form-label">Municipio</label>
-                <select id="municipio" name="municipio" class="form-select" disabled>
-                  <option value="">{{CIUDAD}}</option>
+                  <option value="{{ESTADO}}">{{ESTADO}}</option>
                 </select>
               </div>
 
@@ -168,12 +163,12 @@
               <div class="col-md-12">
                 <label for="email_personal" class="form-label">Email personal</label>
                 <input type="text" id="email_personal" name="email_personal" class="form-control"
-                  placeholder="nombre@servidor.com" value="{{EMAIL_ALTERNO}}" disabled>
+                  placeholder="nombre@servidor.com" value="{{EMAIL}}" disabled>
               </div>
               <div class="col-md-12">
                 <label for="email_insti" class="form-label">Email institucional</label>
                 <input type="text" id="email_insti" name="email_insti" class="form-control"
-                  placeholder="nombre@utponiente.edu.mx" value="{{EMAIL}}" disabled>
+                  placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
               </div>
               <div class="col-md-6">
                 <label for="tel_cel" class="form-label">Teléfono celular</label>
@@ -201,8 +196,8 @@
             <div class="row g-3">
               <div class="col-md-8">
                 <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
-                <select id="inputcarrera" class="form-select" required disabled>
-                  <option selected value="{{nivel}}">{{NIVEL}}</option>
+                <select id="inputcarrera" name="nivel" class="form-select" required disabled>
+                  <option selected value="{{NIVEL}}">{{NIVEL}}</option>
                   <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
                   <option>TSU en Gastronomía</option>
                   <option>TSU en Procesos Alimentarios</option>
@@ -219,8 +214,8 @@
 
               <div class="col-md-4">
                 <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
-                <select id="inputcuatri" class="form-select" required disabled>
-                  <option selected>{{GRADO}}</option>
+                <select id="inputcuatri" class="form-select" name="grado" required disabled>
+                  <option selected value="{{GRADO}}">{{GRADO}}</option>
                   <option>0</option>
                   <option>1</option>
                   <option>2</option>
@@ -238,7 +233,7 @@
 
               <div class="col-md-6">
                 <label for="inputgrupo" class="form-label" placeholder="EdoCivil">Grupo</label>
-                <select id="inputgrupo" class="form-select" required>
+                <select id="inputgrupo" class="form-select">
                   <option selected></option>
                   <option></option>
                 </select>
@@ -247,7 +242,7 @@
               <div class="col-md-6">
                 <label for="inputmatricula" class="form-label">MATRÍCULA</label>
                 <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
-                  required value="{{MATRICULA}}" disabled>
+                  required value="{{MATRICULA}}" name="matricula" disabled>
                 <div class="valid-feedback">
                   Looks good!
                 </div>
@@ -267,7 +262,7 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="estatus_actual" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="estatus_actual" class="form-select" required>
+                <select id="estatus_actual" class="form-select">
                   <option selected disabled>--seleccionar estatus--</option>
                   <option value="aspirante">Aspirante</option>
                   <option value="activo_tsu">Activo TSU</option>
@@ -284,13 +279,12 @@
               <div class="row my-2 d-none" id="ingreso_tsu">
                 <div class="col-6">
                   <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
-                  <input class="form-control" id="fecha_reg" name="fecha_reg" required type="date">
+                  <input class="form-control" id="fecha_reg" type="date">
                 </div>
 
                 <div class="col-6">
                   <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
-                  <input class="form-control" id="fecha_itsu" onblur="calcularEdad(this.value)" name="fecha_nac"
-                    required type="date">
+                  <input class="form-control" id="fecha_itsu" type="date">
                 </div>
               </div>
 
@@ -298,7 +292,7 @@
               <div class="row my-2 d-none" id="motivo_baja">
                 <div class="col-md-6">
                   <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
-                  <select id="inputmotivo" class="form-select" required>
+                  <select id="inputmotivo" class="form-select">
                     <option>REPROBACIÓN</option>
                     <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
                     <option>MOTIVOS PERSONALES</option>
@@ -313,12 +307,20 @@
                   </select>
                 </div>
                 <div class="col-6">
-                  <label for="inputdate" class="form-label">Fecha de Baja</label>
-                  <input class="form-control" id="fecha_baja" onblur="calcularEdad(this.value)" name="fecha_nac"
-                    required type="date">
+                  <label for="fechabaja" class="form-label">Fecha de Baja</label>
+                  <input class="form-control" id="fecha_baja" type="date">
                 </div>
               </div>
 
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Nota</h5>
+            <div>
+              <textarea class="form-control" name="nota" disabled>{{OBSERVACIONES}}</textarea>
             </div>
           </div>
         </div>
@@ -329,7 +331,7 @@
 
     <div class="text-center">
       <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar actualizacion</button>
-      <button class="btn btn-outline-primary d-none" id="btn_update">Actualizar</button>
+      <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
     </div>
   </form>
 </section>
@@ -352,6 +354,7 @@
 
     let inputs = document.getElementsByTagName("input");
     let selects = document.getElementsByTagName("select");
+    let txtarea = document.getElementsByTagName("textarea");
 
     for (let i = 0; i < inputs.length; i++) {
       inputs[i].disabled = false;
@@ -359,6 +362,10 @@
 
     for (let i = 0; i < selects.length; i++) {
       selects[i].disabled = false;
+    }
+
+    for (let i = 0; i < txtarea.length; i++) {
+      txtarea[i].disabled = false;
     }
 
     // Manda al principio de la pagina

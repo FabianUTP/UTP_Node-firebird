@@ -22,6 +22,7 @@ router.get("/grupos/:idGrupo", GruposCtr.showById);
 router.get("/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);
+router.post("/alumnos/:id/update", AlumnosAdminCtr.update);
 router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
 router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 

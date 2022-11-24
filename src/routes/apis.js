@@ -17,7 +17,7 @@ router.get("/grupos", async (req, res) => {
     skip = 0,
     limit = 10,
     search = "",
-    orderBy,
+    orderBy = "codigo_carrera",
     sort = "asc",
   } = req.query;
 
@@ -47,14 +47,18 @@ router.get("/grupos", async (req, res) => {
   }
 
   // Codigo para ordenar si existe
-  if (orderBy) {
-    query += `ORDER BY ${orderBy} ${sort}`;
-  }
+  query += `ORDER BY ${orderBy} ${sort}`;
 
   const grupos = await Grupos.createQuery({ querySql: query });
 
   res.json({
-    querys: req.query,
+    querys: {
+      limit,
+      skip,
+      search,
+      orderBy,
+      sort
+    },
     periodoSelected: req.session.periodoSelected,
     grupos,
   });
@@ -86,7 +90,10 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   const alumnos = await AlumnosGrupos.createQuery({ querySql: sql });
 
   res.json({
-    querys: req.query,
+    querys: {
+      limit,
+      skip
+    },
     idGrupo,
     alumnos,
   });
@@ -140,12 +147,17 @@ router.get("/cuatrimestres", async (req, res) => {
   });
 
   res.json({
+    querys: {
+      limit,
+      skip,
+      search
+    },
     ciclos,
   });
 });
 
 router.get("/alumnos", async (req, res) => {
-  const { limit = 15, skip = 0, search, orderBy = "paterno", sort } = req.query;
+  const { limit = 15, skip = 0, search, orderBy = "paterno", sort ="asc" } = req.query;
 
   let searchQuery = null;
 
@@ -166,7 +178,13 @@ router.get("/alumnos", async (req, res) => {
   });
 
   res.json({
-    querys: req.query,
+    querys: {
+      limit,
+      skip,
+      search,
+      orderBy,
+      sort
+    },
     alumnos,
   });
 });
@@ -188,7 +206,11 @@ router.get("/carreras", async (req, res) => {
   });
 
   res.json({
-    querys: req.query,
+    querys: {
+      limit,
+      skip,
+      search
+    },
     niveles,
   });
 });
@@ -210,7 +232,10 @@ router.get("/doctos/", async (req, res) => {
   });
 
   res.json({
-    query: req.query,
+    query: {
+      grado,
+      numalumno
+    },
     doctos,
   });
 });
@@ -234,7 +259,10 @@ router.get("/asignaturas", async (req, res) => {
   let data = await Grupos.createQuery({ querySql: sql });
   
   res.json({
-    querys: req.query,
+    querys: {
+      idGrupo,
+      eval
+    },
     data,
   })
 });
@@ -264,7 +292,12 @@ router.get("/planes", async (req, res) => {
   });
 
   res.json({
-    query: req.query,
+    query: {
+      page,
+      search,
+      orderBy,
+      sort
+    },
     data: planes
   })
 
@@ -294,7 +327,10 @@ router.get("/calificaciones/:numalumno", async (req, res) => {
   })
 
   res.json({
-    query: req.query,
+    query: {
+      cuatri,
+      eval
+    },
     data
   })
 

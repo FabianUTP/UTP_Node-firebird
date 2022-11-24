@@ -12,6 +12,10 @@
     <div class="card">
       <div class="card-body pt-3">
 
+        <div class="card-title text-center">
+          <h1>Calificaciones</h1>
+        </div>
+
         <div class="tab-content pt-2">
           <div class="tab-pane fade show active profile-overview" id="doctos">
 
@@ -29,12 +33,6 @@
                         <th scope="col">
                           MATRÍCULA
                         </th>
-                        <th scope="col">
-                          CARRERA
-                        </th>
-                        <th scope="col">
-                          GRUPO
-                        </th>
                       </tr>
                     </thead>
 
@@ -42,15 +40,12 @@
                       <tr>
                         <th scope="row">{{ NOMBRE }}</th>
                         <td>{{ MATRICULA }}</td>
-                        <td>
-                          TECNOLOGÍAS DE LA INFORMACIÓN ÁREA DESARROLLO DE
-                          SOFTWARE MULTIPLATAFORMA
-                        </td>
-                        <td>6-"A"</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
+
+                <hr>
 
                 <div class="row">
                   <div class="col-md-8">
@@ -76,6 +71,8 @@
                     <select id="tipo_eval" class="form-select" onchange="getCalifi()">
                       <option value="A" selected>Ordinario</option>
                       <option value="B">% Asistencia</option>
+                      <option value="E">Recuperativo</option>
+                      <option value="G">Especial</option>
                     </select>
                   </div>
                 </div>

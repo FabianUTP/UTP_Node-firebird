@@ -18,7 +18,10 @@ router.use(isAdmin);
 
 // Rutas para el Administrador
 router.get("/grupos", GruposCtr.show);
+router.get("/grupos/crear", GruposCtr.addView);
 router.get("/grupos/:idGrupo", GruposCtr.showById);
+router.get("/grupos/:idGrupo/editar", GruposCtr.editView);
+router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoView);
 router.get("/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);

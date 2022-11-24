@@ -4,13 +4,61 @@
 
       <div class="pb-3 d-flex justify-content-between">
         {{>btnBack}}
-        <a href="/grupos/{{codigo_grupo}}/editar" class="btn btn-outline-warning">Editar</a>
+        <div class="btn-group">
+          <a href="/grupos/{{codigo_grupo}}/editar" class="btn btn-outline-success">Editar grupo</a>
+          <a href="/grupos/{{codigo_grupo}}/agregar_alumno" class="btn btn-outline-success">Editar alumnos</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title text-center">
+            <h1>Grupo {{codigo_grupo}}</h1>
+          </div>
+
+          <div>
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    Detalles del grupo
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <ul>
+                          <li><b>Codigo del grupo:</b> {{codigo_grupo}}</li>
+                          <li><b>Nivel:</b> {{grupo.NIVEL}}</li>
+                          <li><b>Inicial: </b> {{grupo.INICIAL}} </li>
+                          <li><b>Final: </b> {{grupo.FINAL}} </li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <ul>
+                          <li><b>Cupo maximo:</b> {{grupo.CUPO_MAXIMO}} </li>
+                          <li><b>Inscritos:</b> {{grupo.INSCRITOS}} </li>
+                          <li><b>Grado:</b> {{grupo.GRADO}} </li>
+                          <li><b>Grupo:</b> {{grupo.GRUPO}} </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       <div class="card">
 
         <div class="text-center" style="padding: 13px;">
-          <h1><i class="bi bi-people"></i><span>Alumnos en el grupo {{ codigo_grupo }} </span></h1>
+          <h1><i class="bi bi-people"></i><span>Alumnos</span></h1>
         </div>
 
         <div class="card-body">

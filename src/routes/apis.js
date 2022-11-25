@@ -69,7 +69,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   const idGrupo = req.params.idGrupo;
 
   let sql = `SELECT FIRST(${limit}) SKIP(${skip}) `;
-  sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, alumnos.nivel `;
+  sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, alumnos.nivel, alumnos.genero, alumnos.status `;
   sql += "FROM alumnos_grupos ";
   sql +=
     "left join alumnos on alumnos_grupos.numeroalumno = alumnos.numeroalumno ";

@@ -29,12 +29,20 @@ const getAlumnos = async () => {
   load.style.display = "none";
 
   let content = "";
+  const status = {
+    A: "Activo",
+    E: "Egresado",
+    BA: "Baja"
+  }
+
   alumnos.map((item, i) => {
     content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
     content += `<td>${i + 1}</td>`;
     content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
     content += `<td>${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;
+    content += `<td>${status[item.STATUS] ?? ""}</td>`;
+    content += `<td>${item.NIVEL}</td>`;
     content += "</tr>";
   });
 

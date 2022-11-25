@@ -2,6 +2,8 @@
 
 const table = document.getElementById("table-container");
 const idGrupo = document.getElementById("idGrupo");
+const num_muj = document.getElementById("num_muj");
+const num_hom = document.getElementById("num_hom");
 
 let limit = 20;
 let skip = 0;
@@ -18,17 +20,37 @@ const getAlumnos = async () => {
   table.innerHTML = "";
 
   let content = "";
+
+  // Conteo de mujeres y hombres
+  let countHom = 0;
+  let countMuj = 0;
+
+  const status = {
+    A: "Activo",
+    E: "Egresado",
+    BA: "Baja"
+  }
+  
   alumnos.map((item, i) => {
+
+    if(item.GENERO === "M") {
+      countHom++
+    } else {
+      countMuj++
+    }
+
     content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
     content += `<td>${i + 1}</td>`;
-    content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
-    content += `<td>${item.NOMBRE}</td>`;
+    content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;
+    content += `<td>${status[item.STATUS] ?? ""}</td>`;
     content += `<td>${item.NIVEL}</td>`;
     content += "</tr>";
   });
 
   table.innerHTML = content;
+  num_hom.innerHTML = `${countHom}`;
+  num_muj.innerHTML = `${countMuj}`;
   alumnosLength = alumnos.length;
 
   loading();

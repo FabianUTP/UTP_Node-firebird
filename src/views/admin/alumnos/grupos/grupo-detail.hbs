@@ -25,7 +25,7 @@
                     Detalles del grupo
                   </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                   data-bs-parent="#accordionExample">
                   <div class="accordion-body">
                     <div class="row">
@@ -33,16 +33,16 @@
                         <ul>
                           <li><b>Codigo del grupo:</b> {{codigo_grupo}}</li>
                           <li><b>Nivel:</b> {{grupo.NIVEL}}</li>
-                          <li><b>Inicial: </b> {{grupo.INICIAL}} </li>
-                          <li><b>Final: </b> {{grupo.FINAL}} </li>
+                          <li><b>Grado:</b> {{grupo.GRADO}} </li>
+                          <li><b>Grupo:</b> {{grupo.GRUPO}} </li>
                         </ul>
                       </div>
                       <div class="col-md-6">
                         <ul>
                           <li><b>Cupo maximo:</b> {{grupo.CUPO_MAXIMO}} </li>
                           <li><b>Inscritos:</b> {{grupo.INSCRITOS}} </li>
-                          <li><b>Grado:</b> {{grupo.GRADO}} </li>
-                          <li><b>Grupo:</b> {{grupo.GRUPO}} </li>
+                          <li><b>Hombres:</b> <span id="num_hom"></span> </li>
+                          <li><b>Mujeres:</b> <span id="num_muj"></span> </li>
                         </ul>
                       </div>
                     </div>
@@ -72,9 +72,9 @@
                 <thead class="table">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Nombre completo</th>
                     <th scope="col">Matricula</th>
+                    <th scope="col">Estatus</th>
                     <th scope="col">Carrera</th>
                   </tr>
                 </thead>

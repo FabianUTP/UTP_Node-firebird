@@ -10,6 +10,8 @@ const {
   AlumnosGrupos,
   Planes_Det,
   AlumKardex,
+  CfgStatus,
+  Planes_Etapas,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -240,32 +242,138 @@ router.get("/doctos/", async (req, res) => {
   });
 });
 
-router.get("/asignaturas", async (req, res) => {
-  const { idGrupo, eval } = req.query;
+router.get("/calificaciones/asignaturas", async (req, res) => {
+  const { idGrupo, idPlan } = req.query;
 
-  if(!idGrupo) return res.json([]);
+  if(!idGrupo || !idPlan) {
+    return res.json({
+      error: "El id del grupo y del plan son necesarios"
+    })
+  };
 
-  let grupo = await Grupos.findById(idGrupo);
+  try {
 
-  let sql = `select first(40) alumnos_kardex.claveasignatura, cfgplanes_det.nombreasignatura
+    let grupo = await Grupos.findById(idGrupo);
+    let plan = await Planes_Etapas.findById(idPlan);
+
+    if(!grupo) {
+      return res.json({
+        error: "No existe el grupo"
+      })
+    }
+
+    if(!plan) {
+      return res.json({
+        error: "No existe el plan"
+      })
+    }
+
+    let sql = `select first(200) 
+        alumnos_kardex.claveasignatura, 
+        cfgplanes_det.nombreasignatura,
+        alumnos_kardex.id_etapa,
+        alumnos_kardex.id_plan
       from alumnos_kardex
       join cfgplanes_det on alumnos_kardex.claveasignatura = cfgplanes_det.claveasignatura
         and alumnos_kardex.id_plan = cfgplanes_det.id_plan
+        and alumnos_kardex.id_etapa = cfgplanes_det.id_etapa
+        and alumnos_kardex.id_tipoeval = cfgplanes_det.id_tipoeval
+
       where alumnos_kardex.inicial = ${grupo.INICIAL}
         and alumnos_kardex.final = ${grupo.FINAL}
         and alumnos_kardex.periodo = ${grupo.PERIODO} 
-        and alumnos_kardex.id_eval = '${eval}'`;
+        and alumnos_kardex.id_eval = 'A'
+        and (alumnos_kardex.id_plan = '${idPlan}')
+        order by alumnos_kardex.claveasignatura`;
 
-  let data = await Grupos.createQuery({ querySql: sql });
-  
-  res.json({
-    querys: {
-      idGrupo,
-      eval
-    },
-    data,
-  })
+    let data = await Grupos.createQuery({ querySql: sql });
+    
+    res.json({
+      querys: {
+        idGrupo,
+        eval
+      },
+      data,
+    });
+
+  } catch (error) {
+    res.json({
+      error: "El id del grupo y el plan no coinciden para la consulta"
+    })
+  }
 });
+
+router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
+  const { idGrupo, idPlan, claveAsig } = req.query;
+
+  if(!idGrupo || !idPlan || !claveAsig) {
+    return res.json({
+      error: "El id del grupo, del plan y la clave asignatura son necesarios"
+    })
+  };
+
+  try {
+
+    let grupo = await Grupos.findById(idGrupo);
+    let plan = await Planes_Etapas.findById(idPlan);
+
+    if(!grupo) {
+      return res.json({
+        error: "No existe el grupo"
+      })
+    }
+
+    if(!plan) {
+      return res.json({
+        error: "No existe el plan"
+      })
+    }
+
+    let sql = `select first(200) 
+        alumnos.paterno,
+        alumnos.materno,
+        alumnos.nombre,
+        alumnos_kardex.numeroalumno, 
+        alumnos_kardex.claveasignatura, 
+        cfgplanes_det.nombreasignatura,
+        alumnos_kardex.calificacion,
+        alumnos_kardex.id_eval,
+        alumnos_kardex.id_tipoeval,
+        alumnos_kardex.id_etapa,
+        alumnos_kardex.id_plan
+      from alumnos_kardex
+
+      join cfgplanes_det on alumnos_kardex.claveasignatura = cfgplanes_det.claveasignatura
+        and alumnos_kardex.id_plan = cfgplanes_det.id_plan
+        and alumnos_kardex.id_etapa = cfgplanes_det.id_etapa
+        and alumnos_kardex.id_tipoeval = cfgplanes_det.id_tipoeval
+      
+      join alumnos on alumnos_kardex.numeroalumno = alumnos.numeroalumno
+
+      where alumnos_kardex.inicial = ${grupo.INICIAL}
+        and alumnos_kardex.final = ${grupo.FINAL}
+        and alumnos_kardex.periodo = ${grupo.PERIODO} 
+        and alumnos_kardex.id_eval = 'A'
+        and (alumnos_kardex.id_plan = '${idPlan}')
+        and (alumnos_kardex.claveasignatura = '${claveAsig}')
+        order by alumnos.paterno`;
+
+    let data = await Grupos.createQuery({ querySql: sql });
+    
+    res.json({
+      querys: {
+        idGrupo,
+        eval
+      },
+      data,
+    });
+
+  } catch (error) {
+    res.json({
+      error: "El id del grupo y el plan no coinciden para la consulta"
+    })
+  }
+})
 
 router.get("/planes", async (req, res) => {
   const { 
@@ -303,6 +411,7 @@ router.get("/planes", async (req, res) => {
 
 });
 
+// Calificaciones por alumno
 router.get("/calificaciones/:numalumno", async (req, res) => {
   const { cuatri = 1, eval = "A" } = req.query;
   const alumno = req.params.numalumno;
@@ -335,5 +444,24 @@ router.get("/calificaciones/:numalumno", async (req, res) => {
   })
 
 });
+
+router.get("/estatus", async (req, res) => {
+  const { search = "" } = req.query;
+
+  let searchQuery = null;
+  if (search) {
+    searchQuery = `descripcion LIKE '%${search}%'`;
+  }
+
+  const status = await CfgStatus.all({
+    limit: 50,
+    searchQuery,
+  })
+
+  res.json({
+    querys: search,
+    data: status
+  })
+})
 
 module.exports = router;

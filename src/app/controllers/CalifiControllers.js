@@ -1,13 +1,17 @@
 const { request, response } = require("express");
 
-const CalifiCtr = {}
+const CalifiCtr = {};
 
-CalifiCtr.show = (req = request, res = response) => {
-    res.render("admin/academico/calificaciones/califi", {
-        codigo_grupo: req.params.idGrupo
-    });
-}
+const path = "admin/academico/calificaciones/";
+
+CalifiCtr.showCalifi = async (req = request, res = response) => {
+  const grupoId = req.params.idGrupo;
+
+  res.render(path + "califi", {
+    codigo_grupo: grupoId,
+  });
+};
 
 module.exports = {
-    CalifiCtr
+  CalifiCtr,
 };

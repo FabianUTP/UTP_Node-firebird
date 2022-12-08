@@ -232,14 +232,6 @@
               </div>
 
               <div class="col-md-6">
-                <label for="inputgrupo" class="form-label" placeholder="EdoCivil">Grupo</label>
-                <select id="inputgrupo" class="form-select">
-                  <option selected></option>
-                  <option></option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
                 <label for="inputmatricula" class="form-label">MATRÍCULA</label>
                 <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
                   required value="{{MATRICULA}}" name="matricula" disabled>
@@ -262,14 +254,9 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="estatus_actual" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <select id="estatus_actual" class="form-select">
+                <input type="hidden" id="status" value="{{STATUS}}">
+                <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
                   <option selected disabled>--seleccionar estatus--</option>
-                  <option value="aspirante">Aspirante</option>
-                  <option value="activo_tsu">Activo TSU</option>
-                  <option value="baja_tem">Baja temporal</option>
-                  <option value="baja_def">Baja definitiva</option>
-                  <option value="no_admitido">No admitido</option>
-                  <option value="deser">Deserción</option>
                 </select>
               </div>
 
@@ -279,12 +266,12 @@
               <div class="row my-2 d-none" id="ingreso_tsu">
                 <div class="col-6">
                   <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
-                  <input class="form-control" id="fecha_reg" type="date">
+                  <input class="form-control" id="fecha_reg" type="date" disabled>
                 </div>
 
                 <div class="col-6">
                   <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
-                  <input class="form-control" id="fecha_itsu" type="date">
+                  <input class="form-control" id="fecha_itsu" type="date" disabled>
                 </div>
               </div>
 
@@ -292,7 +279,7 @@
               <div class="row my-2 d-none" id="motivo_baja">
                 <div class="col-md-6">
                   <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
-                  <select id="inputmotivo" class="form-select">
+                  <select id="inputmotivo" class="form-select" disabled>
                     <option>REPROBACIÓN</option>
                     <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
                     <option>MOTIVOS PERSONALES</option>
@@ -308,7 +295,7 @@
                 </div>
                 <div class="col-6">
                   <label for="fechabaja" class="form-label">Fecha de Baja</label>
-                  <input class="form-control" id="fecha_baja" type="date">
+                  <input class="form-control" id="fecha_baja" type="date" disabled>
                 </div>
               </div>
 
@@ -330,7 +317,7 @@
     </div>
 
     <div class="text-center">
-      <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar actualizacion</button>
+      <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
       <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
     </div>
   </form>

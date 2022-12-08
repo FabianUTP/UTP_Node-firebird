@@ -22,8 +22,8 @@ router.get("/grupos/crear", GruposCtr.addView);
 router.get("/grupos/:idGrupo", GruposCtr.showById);
 router.get("/grupos/:idGrupo/editar", GruposCtr.editView);
 router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoView);
-router.get("/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos", AlumnosAdminCtr.show);
+router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);
 router.post("/alumnos/:id/update", AlumnosAdminCtr.update);
 router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
@@ -36,8 +36,8 @@ router.get("/cuatrimestres/:id", CuatrisCtr.showById);
 router.post("/cuatrimestres/:id/update", CuatrisCtr.update);
 router.post("/cuatrimestres/:id/delete", CuatrisCtr.delete);
 
-router.get("/calificaciones/subir", GruposCtr.show);
-router.get("/calificaciones/subir/:idGrupo", CalifiCtr.show);
+router.get("/calificaciones", GruposCtr.show);
+router.get("/calificaciones/:idGrupo", CalifiCtr.showCalifi);
 
 router.get("/carreras", NivelesCtr.show);
 router.get("/carreras/crear", NivelesCtr.form);

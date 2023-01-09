@@ -1,0 +1,76 @@
+<section>
+  <div>
+    {{>btnBack}}
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title text-center">
+        <h1>Crear Nuevo Plan De Estudio</h1>
+      </div>
+
+      <form action="" method="post">
+        <div class="row g-2">
+          <div class="col-md-4">
+            <label for="clave" class="form-label" >Id del plan</label>
+            <input
+              required
+              placeholder="id plan"
+              type="text"
+              name="id_plan"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label for="clave" class="form-label" >Id del tipo de Evaluación</label>
+            <input
+              required
+              placeholder="id evaluación"
+              type="text"
+              name="id_eval"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label for="clave" class="form-label">Id Etapa</label>
+            <input
+              required
+              placeholder="id etapa"
+              type="text"
+              name="id_etapa"
+              class="form-control"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="name" class="form-label">Nombre asignatura</label>
+            <input
+              required
+              placeholder="nombre asignatura"
+              type="text"
+              name="nombre_asignatura"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="name" class="form-label">Clave asignatura</label>
+            <input
+              required
+              placeholder="clave asignatura"
+              type="text"
+              name="clave_asignatura"
+              class="form-control"
+            />
+          </div>
+
+        </div>
+
+        <div class="mt-3">
+          <button class="btn btn-primary"> Guardar </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>

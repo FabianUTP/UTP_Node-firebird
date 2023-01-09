@@ -11,7 +11,7 @@ let content = ""
 
 api.data.forEach((item, index) => {
 
-    content += "<tr>"
+    content += `<tr onclick="window.location.href='/academico/planes/${item.CLAVEASIGNATURA}'">`
     content += `<td>${index + 1} </td>`
     content += `<td>${item.ID_ETAPA}</td>`
     content += `<td>${item.CLAVEASIGNATURA}</td>`

@@ -45,6 +45,14 @@ router.get("/carreras/crear", NivelesCtr.form);
 router.get("/academico/planes", (req, res) => {
   res.render("admin/academico/planes/planes-list");
 });
+router.get("/academico/planes/nuevo", (req, res) => {
+  res.render("admin/academico/planes/planes-crear");
+})
 
+router.post("/academico/planes/nuevo", (req, res) => {
+  res.json({
+    respuesta: req.body
+  })
+})
 
 module.exports = router;

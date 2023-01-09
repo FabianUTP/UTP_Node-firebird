@@ -9,14 +9,14 @@
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
 
+  {{!-- Si es admin, muestra la seleccion del periodo --}}
   {{#if isAdmin}}
      <div class="col-md-3">                
       <select id="selectciclo" class="form-select">
-
       </select>
     </div>
 
-    <script src="/js/functions/getCuatrimestresNavbar.js" async></script>
+    <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
   {{/if}}
 
   <div class="search-bar">

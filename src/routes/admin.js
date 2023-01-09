@@ -11,6 +11,7 @@ const {
   NivelesCtr,
   AlumnosAdminCtr,
   CalifiCtr,
+  PlanesCtr,
 } = require("../app/controllers");
 
 // Middleware para proteger las rutas y solo pueda acceder el admin
@@ -22,6 +23,7 @@ router.get("/grupos/crear", GruposCtr.addView);
 router.get("/grupos/:idGrupo", GruposCtr.showById);
 router.get("/grupos/:idGrupo/editar", GruposCtr.editView);
 router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoView);
+
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);
@@ -42,17 +44,10 @@ router.get("/calificaciones/:idGrupo", CalifiCtr.showCalifi);
 router.get("/carreras", NivelesCtr.show);
 router.get("/carreras/crear", NivelesCtr.form);
 
-router.get("/academico/planes", (req, res) => {
-  res.render("admin/academico/planes/planes-list");
-});
-router.get("/academico/planes/nuevo", (req, res) => {
-  res.render("admin/academico/planes/planes-crear");
-})
-
-router.post("/academico/planes/nuevo", (req, res) => {
-  res.json({
-    respuesta: req.body
-  })
-})
+router.get("/academico/planes", PlanesCtr.showTable);
+router.get("/academico/planes/nuevo", PlanesCtr.showCreate);
+router.post("/academico/planes/nuevo", PlanesCtr.crear);
+router.get("/academico/planes/:id", PlanesCtr.showById);
+router.post("/academico/planes/:id/actualizar", PlanesCtr.update);
 
 module.exports = router;

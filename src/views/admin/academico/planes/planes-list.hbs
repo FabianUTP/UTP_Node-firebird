@@ -1,33 +1,33 @@
 <section class="container">
-  <div class="pb-3">
-    <a href="/academico/planes/nuevo" class="btn btn-primary"> Crear Plan</a>
-  </div>
-
-  <div class="card">
-    <div class="card-body">
-      <div class="card-title text-center">
-        <h1>Planes de Estudio</h1>
-      </div>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Clave asignatura</th>
-            <th>Nombre asignatura</th>
-            <th>Etapa</th>
-            <th>Plan</th>
-          </tr>
-        </thead>
-        <tbody id="table-content"></tbody>
-      </table>
-      <div>
-        <button class="btn btn-primary" onclick="onPrev()">
-          < </button>
-            <button class="btn btn-primary" onclick="onNext()"> > </button>
+    <div class="pb-3">
+      <a href="/academico/planes/nuevo" class="btn btn-primary"> Crear Plan</a>
+    </div>
+  
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title text-center">
+          <h1>Planes de Estudio</h1>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nivel o seccion</th>
+              <th>Clave de plan</th>
+              <th>Nombre de plan</th>
+              <th>Otros</th>
+            </tr>
+          </thead>
+          <tbody id="table-content"></tbody>
+        </table>
+        <div>
+          <button class="btn btn-primary" onclick="onPrev()">
+            < </button>
+              <button class="btn btn-primary" onclick="onNext()"> > </button>
+        </div>
       </div>
     </div>
-  </div>
-
-</section>
-
-<script src="/js/services/admin/getPlanes.js"></script>
+  
+  </section>
+  
+  <script src="/js/services/admin/getPlanes.js"></script>

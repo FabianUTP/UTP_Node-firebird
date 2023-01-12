@@ -1,4 +1,4 @@
-const { Planes_Det } = require("../models");
+const { Planes_Mst } = require("../models");
 
 const PlanesCtr = {};
 
@@ -11,19 +11,14 @@ PlanesCtr.showCreate = (req, res) => {
 };
 
 PlanesCtr.showById = async (req, res) => {
-  const plan = await Planes_Det.findById(req.params.id);
+  const plan = await Planes_Mst.findById(req.params.id);
   res.render("admin/academico/planes/planes-id", plan);
 };
 
 PlanesCtr.update = async (req, res) => {
-
-  const data = {
-    claveasignatura: req.body.claveasignatura,
-    nombreasignatura: req.body.nombreasignatura
-  }
-
-  await Planes_Det.findByIdAndUpdate(req.params.id, data);
-  res.redirect("admin/academico/planes");
+  res.json({
+    body: req.body,
+  });
 };
 
 PlanesCtr.crear = (req, res) => {

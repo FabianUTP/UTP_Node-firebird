@@ -8,6 +8,7 @@ const AlumnosGrupos = require("./GrupoAlumno");
 const AlumKardex = require("./Alum_Kardex");
 const Planes_Det = require("./Planes_Det");
 const Planes_Etapas = require("./Planes_Etapas");
+const Planes_Mst = require("./Planes_Mst");
 const CfgStatus = require("./CfgStatus");
 
 module.exports = {
@@ -22,4 +23,5 @@ module.exports = {
     Planes_Det,
     Planes_Etapas,
     CfgStatus,
+    Planes_Mst,
 }

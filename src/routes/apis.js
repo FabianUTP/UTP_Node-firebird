@@ -8,10 +8,10 @@ const {
   Niveles,
   Doctos,
   AlumnosGrupos,
-  Planes_Det,
   AlumKardex,
   CfgStatus,
   Planes_Etapas,
+  Planes_Mst,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -379,7 +379,7 @@ router.get("/planes", async (req, res) => {
   const { 
     page = 1, 
     search, 
-    orderBy = 'nombreasignatura', 
+    orderBy = 'nombre_plan', 
     sort = 'asc' 
   } = req.query;
 
@@ -388,10 +388,10 @@ router.get("/planes", async (req, res) => {
   if (page <= 0) page = 1;
 
   if (search) {
-    searchQuery = `nombreasignatura LIKE '%${search}%'`
+    searchQuery = `nombre_plan LIKE '%${search}%'`
   }
 
-  const planes = await Planes_Det.all({
+  const planes = await Planes_Mst.all({
     limit: 20,
     skip: (page - 1) * 20,
     searchQuery,

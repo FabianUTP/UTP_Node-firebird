@@ -9,12 +9,23 @@ async function getPlanes() {
   let content = "";
 
   api.data.forEach((item, index) => {
-    content += `<tr onclick="window.location.href='/academico/planes/${item.CLAVEASIGNATURA}'">`;
+    content += `<tr>`;
     content += `<td>${index + 1} </td>`;
-    content += `<td>${item.CLAVEASIGNATURA}</td>`;
-    content += `<td>${item.NOMBREASIGNATURA}</td>`;
-    content += `<td>${item.ID_ETAPA}</td>`;
+    content += `<td>${item.NIVEL}</td>`;
     content += `<td>${item.ID_PLAN}</td>`;
+    content += `<td>${item.NOMBRE_PLAN}</td>`;
+    content += `<td><div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      Ver Más
+    </a>
+  
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li><a class="dropdown-item" href="#">Ver asignatura</a></li>
+      <li><a class="dropdown-item" href="#">Método de evaluación</a></li>
+      <li><a class="dropdown-item" href="/academico/planes/${item.ID_PLAN}">Editar</a></li>
+      <li><a class="dropdown-item" href="#">Eliminar</a></li>
+    </ul>
+  </div></td>`;
     content += "</tr>";
   });
 

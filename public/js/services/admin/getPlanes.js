@@ -1,13 +1,24 @@
 const table = document.getElementById("table-content");
+const inputSearch = document.getElementById("buscar");
 
 let page = 1;
+let search = "";
+
+//realizacion del boton buscar
+inputSearch.addEventListener(
+  "input",
+  debounce((event) => {
+    search = event.target.value;
+    page = 1;
+    getPlanes();
+  })
+);
 
 async function getPlanes() {
-  const response = await fetch(`/api/planes?page=${page}`);
+  const response = await fetch(`/api/planes?page=${page}&search=${search}`);
   const api = await response.json();
 
   let content = "";
-
   api.data.forEach((item, index) => {
     content += `<tr>`;
     content += `<td>${index + 1} </td>`;

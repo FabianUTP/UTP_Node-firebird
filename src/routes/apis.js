@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const fs = require('fs');
 
 const {
   Alumno,
@@ -14,9 +13,6 @@ const {
   Planes_Etapas,
   Planes_Mst,
 } = require("../app/models");
-
-const firebird = require("node-firebird");
-const options = require("../configs/credential-firebird");
 
 router.get("/grupos", async (req, res) => {
   const {
@@ -467,53 +463,5 @@ router.get("/estatus", async (req, res) => {
     data: status
   })
 });
-
-router.get("/prueba", async (req, res) => {
-  firebird.attach(options, function(err, db) {
-    if(err) throw err;
-
-    db.query("select fotografia from alumnos where matricula = '18090186'", (err, row) => {
-      if(err) throw err;
-
-      row[0].FOTOGRAFIA(function(err, name, e) {
-        if(err) throw err;
-
-        e.on('data', (chunk) => {
-            // reading data
-            let data = Buffer.from(chunk)
-            console.log(data.toString("base64"))
-            return res.send("data")
-        });
-
-        e.on('end', function() {
-            // end reading
-            // IMPORTANT: close the connection
-            db.detach();
-        });
-      })
-    })
-  })
-
-  // res.json("bien")
-})
-
-router.get("/prueba2", async (req, res) => {
-  const alumno = await Alumno.findById("18090186");
-  alumno.FOTOGRAFIA(function(err, name, e) {
-    if(err) throw err;
-
-    e.on('data', (chunk) => {
-        // reading data
-        console.log(chunk)
-        res.json("sii")
-    });
-
-    e.on('end', function() {
-        // end reading
-        // IMPORTANT: close the connection
-        db.detach();
-    });
-  })
-})
 
 module.exports = router;

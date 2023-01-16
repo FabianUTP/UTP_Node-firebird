@@ -76,7 +76,6 @@ AlumnosAdminCtr.showById = async (req = request, res = response) => {
             });
 
             e.on("end", () => {
-              console.log("finish");
               let buffer = Buffer.concat(chunks);
               image += buffer.toString("base64");
 

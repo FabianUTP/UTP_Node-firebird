@@ -12,6 +12,8 @@ const {
   CfgStatus,
   Planes_Etapas,
   Planes_Mst,
+  Planes_Eval,
+  Planes_Det,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -378,7 +380,7 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
 router.get("/planes", async (req, res) => {
   const { 
     page = 1, 
-    search, 
+    search = '', 
     orderBy = 'nombre_plan', 
     sort = 'asc' 
   } = req.query;
@@ -388,7 +390,7 @@ router.get("/planes", async (req, res) => {
   if (page <= 0) page = 1;
 
   if (search) {
-    searchQuery = `nombre_plan LIKE '%${search}%'`
+    searchQuery = `nombre_plan LIKE '%${search.toUpperCase()}%'`
   }
 
   const planes = await Planes_Mst.all({
@@ -409,6 +411,32 @@ router.get("/planes", async (req, res) => {
     data: planes
   })
 
+});
+
+router.get("/planes/:idPlan/asig", async (req, res) => {
+  const { idPlan } = req.params;
+  const asigs = await Planes_Det.where(
+    { id_plan: [idPlan] },
+    { strict: true, limit: 50 }
+  );
+
+  res.json({
+    querys: null,
+    data: asigs
+  });
+});
+
+router.get("/planes/:idPlan/eval", async (req, res) => {
+  const { idPlan } = req.params;
+  const evals = await Planes_Eval.where(
+    { id_plan: [idPlan] },
+    { strict: true }
+  );
+
+  res.json({
+    querys: null,
+    data: evals
+  })
 });
 
 // Calificaciones por alumno

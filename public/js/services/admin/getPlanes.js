@@ -31,8 +31,8 @@ async function getPlanes() {
     </a>
   
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <li><a class="dropdown-item" href="#">Ver asignatura</a></li>
-      <li><a class="dropdown-item" href="#">Método de evaluación</a></li>
+      <li><a class="dropdown-item" href="/academico/planes/${item.ID_PLAN}/asignaturas">Ver asignatura</a></li>
+      <li><a class="dropdown-item" href="/academico/planes/${item.ID_PLAN}/evaluacion">Método de evaluación</a></li>
       <li><a class="dropdown-item" href="/academico/planes/${item.ID_PLAN}">Editar</a></li>
       <li><a class="dropdown-item" href="#">Eliminar</a></li>
     </ul>

@@ -1,5 +1,7 @@
 "use strict";
 
+const loader_table = document.getElementById("loader");
+
 const table = document.getElementById("table-container");
 const idGrupo = document.getElementById("idGrupo");
 const num_muj = document.getElementById("num_muj");
@@ -11,13 +13,16 @@ let alumnosLength = 0;
 
 // Hace la llamada a la API
 const getAlumnos = async () => {
-  const url = `/api/grupos_alumnos/${idGrupo.value}?limit=${limit}&skip=${skip}`;
+  // Vacia la tabla en caso que ya tenga datos
+  table.innerHTML = "";
+  loader_table.style.display = "block";
 
+  const url = `/api/grupos_alumnos/${idGrupo.value}?limit=${limit}&skip=${skip}`;
   const res = await fetch(url);
   const { alumnos } = await res.json();
 
-  // Vacia la tabla en caso que ya tenga datos
-  table.innerHTML = "";
+  // Oculta el spinner "Loading"
+  loader_table.style.display = "none";
 
   let content = "";
 
@@ -28,15 +33,14 @@ const getAlumnos = async () => {
   const status = {
     A: "Activo",
     E: "Egresado",
-    BA: "Baja"
-  }
-  
-  alumnos.map((item, i) => {
+    BA: "Baja",
+  };
 
-    if(item.GENERO === "M") {
-      countHom++
+  alumnos.map((item, i) => {
+    if (item.GENERO === "M") {
+      countHom++;
     } else {
-      countMuj++
+      countMuj++;
     }
 
     content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;

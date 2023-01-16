@@ -10,6 +10,7 @@ const Planes_Det = require("./Planes_Det");
 const Planes_Etapas = require("./Planes_Etapas");
 const Planes_Mst = require("./Planes_Mst");
 const CfgStatus = require("./CfgStatus");
+const Planes_Eval = require("./Planes_Eval");
 
 module.exports = {
     Alumno,
@@ -20,8 +21,9 @@ module.exports = {
     Niveles,
     AlumnosGrupos,
     AlumKardex,
+    CfgStatus,
     Planes_Det,
     Planes_Etapas,
-    CfgStatus,
     Planes_Mst,
+    Planes_Eval
 }

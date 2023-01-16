@@ -1,4 +1,4 @@
-const { Planes_Mst } = require("../models");
+const { Planes_Mst, Planes_Det, Planes_Eval } = require("../models");
 
 const PlanesCtr = {};
 
@@ -13,6 +13,16 @@ PlanesCtr.showCreate = (req, res) => {
 PlanesCtr.showById = async (req, res) => {
   const plan = await Planes_Mst.findById(req.params.id);
   res.render("admin/academico/planes/planes-id", plan);
+};
+
+PlanesCtr.showEval = async (req, res) => {
+  const idPlan = req.params.id;
+  res.render("admin/academico/planes/planes-eval", { idPlan });
+};
+
+PlanesCtr.showAsignaturas = async (req, res) => {
+  const idPlan = req.params.id;
+  res.render("admin/academico/planes/planes-asig", { idPlan });
 };
 
 PlanesCtr.update = async (req, res) => {

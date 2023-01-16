@@ -462,6 +462,6 @@ router.get("/estatus", async (req, res) => {
     querys: search,
     data: status
   })
-})
+});
 
 module.exports = router;

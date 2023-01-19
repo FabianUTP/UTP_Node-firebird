@@ -11,7 +11,7 @@ AlumnosAdminCtr.createView = (req, res) => {
 };
 
 AlumnosAdminCtr.show = (req, res) => {
-  const { search } = req.query
+  const { search } = req.query;
   res.render("admin/alumnos/alumnos/alumnos-lista", { search });
 };
 
@@ -128,6 +128,19 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
   await Alumno.findByIdAndUpdate(body?.matricula, data);
 
   res.redirect(`/alumnos/${body?.matricula}`);
+};
+
+AlumnosAdminCtr.updatePhoto = async (req = request, res = response) => {
+  let id = req.params.id;
+
+  if (req.files?.fotografia) {
+    await Alumno.findByIdAndUpdate(id, {
+      fotografia: req.files.fotografia.data,
+    });
+    res.redirect(`/alumnos/${id}`);
+  } else {
+    res.redirect(`/alumnos/${id}`);
+  }
 };
 
 AlumnosAdminCtr.doctos = async (req = request, res = response) => {

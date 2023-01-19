@@ -4,51 +4,52 @@
     {{>btnBack}}
   </div>
 
-  <form action="/alumnos/{{MATRICULA}}/update" method="post">
 
-    <div class="row">
-      <div class="col-lg-6">
+  <div class="row">
+    <div class="col-lg-6">
 
-        <section class="card text-center">
-          <div class="row p-3">
+      <section class="card text-center">
+        <div class="row p-3">
 
-            <div class="col-6">
-              <div class="pt-2">
-                {{#if image}}
-                <img src="{{image}}" alt="foto" class="img-fluid" width="150">
-                {{else}}
-                <img src="/imgs/studentIcon.png" alt="foto" class="img-fluid">
-                {{/if}}
-              </div>
+          <div class="col-6">
+            <div class="pt-2">
+              {{#if image}}
+              <img src="{{image}}" alt="foto" class="img-fluid" width="150" id="imgCurrent">
+              {{else}}
+              <img src="/imgs/studentIcon.png" alt="foto" class="img-fluid">
+              {{/if}}
             </div>
+          </div>
 
-            <div class="col-6">
-              <div class="row">
+          <div class="col-6">
+            <div class="row">
 
-                <div class="col-md-12">
-                  <h4>Fichas</h4>
-                  <div class="btn-group flex-wrap" role="group">
-                    <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/doctos">Documentos</a>
-                    <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/boletas">Boletas</a>
-                  </div>
+              <div class="col-md-12">
+                <h4>Fichas</h4>
+                <div class="btn-group flex-wrap" role="group">
+                  <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/doctos">Documentos</a>
+                  <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/boletas">Boletas</a>
                 </div>
+              </div>
 
-                <div class="col-md-12 pt-4">
-                  <h4>Actualizar fotografia</h4>
-                  <div class="">
-                    <div class="btn-group">
-                      <!--LA FOTOGRAFÍA PUEDE SER NO REQUERIDA-->
-                      <input type="file" name="fotografia" class="form-control" accept="image/*" />
-                      <button class="btn">
-                        <i class="bi bi-arrow-bar-up"></i>
-                      </button>
-                    </div>
+              <div class="col-md-12 pt-4">
+                <h4>Actualizar fotografia</h4>
+                <form action="/alumnos/{{MATRICULA}}/updatePhoto" method="post" enctype="multipart/form-data">
+                  <div class="btn-group">
+                    <!--LA FOTOGRAFÍA PUEDE SER NO REQUERIDA-->
+                    <input type="file" name="fotografia" class="form-control" accept="image/*" id="imgInput" />
+                    <button class="btn" type="submit">
+                      <i class="bi bi-arrow-bar-up"></i>
+                    </button>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
+
+      <form action="/alumnos/{{MATRICULA}}/update" method="post">
 
         <div class="card">
           <div class="card-body">
@@ -130,9 +131,6 @@
           </div>
         </div>
 
-
-
-
         <div class="card">
           <div class="card-body">
             <h1 class="card-title">Domicilio</h1>
@@ -184,142 +182,142 @@
           </div>
         </div>
 
+    </div>
+
+    <div class="col-lg-6">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Escolaridad</h5>
+
+          <!-- Vertical Form -->
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
+              <select id="inputcarrera" name="nivel" class="form-select" required disabled>
+                <option selected value="{{NIVEL}}">{{NIVEL}}</option>
+                <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
+                <option>TSU en Gastronomía</option>
+                <option>TSU en Procesos Alimentarios</option>
+                <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
+                <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
+                <option>Ingeniería en Procesos Bioalimentarios</option>
+                <option>Ingeniería en Desarrollo y Gestión de Software</option>
+                <option>Licenciatura en Gestión de Negocios y Proyectos</option>
+                <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+                <option>Curso de Inglés Básico</option>
+
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
+              <select id="inputcuatri" class="form-select" name="grado" required disabled>
+                <option selected value="{{GRADO}}">{{GRADO}}</option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="inputmatricula" class="form-label">MATRÍCULA</label>
+              <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF" required
+                value="{{MATRICULA}}" name="matricula" disabled>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+
+            </dic><!-- Vertical Form -->
+
+          </div>
+        </div>
       </div>
 
-      <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Estatus</h5>
 
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Escolaridad</h5>
+          <!-- No Labels Form -->
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="estatus_actual" class="form-label" placeholder="EdoCivil">Estatus actual</label>
+              <input type="hidden" id="status" value="{{STATUS}}">
+              <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
+                <option selected disabled>--seleccionar estatus--</option>
+              </select>
+            </div>
 
-            <!-- Vertical Form -->
-            <div class="row g-3">
-              <div class="col-md-8">
-                <label for="inputcarrera" class="form-label" placeholder="EdoCivil">Carrera</label>
-                <select id="inputcarrera" name="nivel" class="form-select" required disabled>
-                  <option selected value="{{NIVEL}}">{{NIVEL}}</option>
-                  <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
-                  <option>TSU en Gastronomía</option>
-                  <option>TSU en Procesos Alimentarios</option>
-                  <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
-                  <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
-                  <option>Ingeniería en Procesos Bioalimentarios</option>
-                  <option>Ingeniería en Desarrollo y Gestión de Software</option>
-                  <option>Licenciatura en Gestión de Negocios y Proyectos</option>
-                  <option>Licenciatura en Gestión y Desarrollo Turístico</option>
-                  <option>Curso de Inglés Básico</option>
+            <div class="col-md-6"></div>
 
-                </select>
+            {{!-- ====== Ingreso TSU ====== --}}
+            <div class="row my-2 d-none" id="ingreso_tsu">
+              <div class="col-6">
+                <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
+                <input class="form-control" id="fecha_reg" type="date" disabled>
               </div>
 
-              <div class="col-md-4">
-                <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
-                <select id="inputcuatri" class="form-select" name="grado" required disabled>
-                  <option selected value="{{GRADO}}">{{GRADO}}</option>
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                </select>
+              <div class="col-6">
+                <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
+                <input class="form-control" id="fecha_itsu" type="date" disabled>
               </div>
+            </div>
 
+            {{!-- ====== Seccion de baja ====== --}}
+            <div class="row my-2 d-none" id="motivo_baja">
               <div class="col-md-6">
-                <label for="inputmatricula" class="form-label">MATRÍCULA</label>
-                <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
-                  required value="{{MATRICULA}}" name="matricula" disabled>
-                <div class="valid-feedback">
-                  Looks good!
-                </div>
-              </div>
-
-              </dic><!-- Vertical Form -->
-
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Estatus</h5>
-
-            <!-- No Labels Form -->
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label for="estatus_actual" class="form-label" placeholder="EdoCivil">Estatus actual</label>
-                <input type="hidden" id="status" value="{{STATUS}}">
-                <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
-                  <option selected disabled>--seleccionar estatus--</option>
+                <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
+                <select id="inputmotivo" class="form-select" disabled>
+                  <option>REPROBACIÓN</option>
+                  <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
+                  <option>MOTIVOS PERSONALES</option>
+                  <option>CAMBIO DE CARRERA</option>
+                  <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
+                  <option>DISTANCIA DE LA UT</option>
+                  <option>PROBLEMAS ECONÓMICOS</option>
+                  <option>PROBLEMAS DE TRABAJO</option>
+                  <option>CAMBIO DE UT</option>
+                  <option>DEFUNCIÓN</option>
+                  <option>OTRAS CAUSAS</option>
                 </select>
               </div>
-
-              <div class="col-md-6"></div>
-
-              {{!-- ====== Ingreso TSU ====== --}}
-              <div class="row my-2 d-none" id="ingreso_tsu">
-                <div class="col-6">
-                  <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
-                  <input class="form-control" id="fecha_reg" type="date" disabled>
-                </div>
-
-                <div class="col-6">
-                  <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
-                  <input class="form-control" id="fecha_itsu" type="date" disabled>
-                </div>
+              <div class="col-6">
+                <label for="fechabaja" class="form-label">Fecha de Baja</label>
+                <input class="form-control" id="fecha_baja" type="date" disabled>
               </div>
-
-              {{!-- ====== Seccion de baja ====== --}}
-              <div class="row my-2 d-none" id="motivo_baja">
-                <div class="col-md-6">
-                  <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
-                  <select id="inputmotivo" class="form-select" disabled>
-                    <option>REPROBACIÓN</option>
-                    <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
-                    <option>MOTIVOS PERSONALES</option>
-                    <option>CAMBIO DE CARRERA</option>
-                    <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
-                    <option>DISTANCIA DE LA UT</option>
-                    <option>PROBLEMAS ECONÓMICOS</option>
-                    <option>PROBLEMAS DE TRABAJO</option>
-                    <option>CAMBIO DE UT</option>
-                    <option>DEFUNCIÓN</option>
-                    <option>OTRAS CAUSAS</option>
-                  </select>
-                </div>
-                <div class="col-6">
-                  <label for="fechabaja" class="form-label">Fecha de Baja</label>
-                  <input class="form-control" id="fecha_baja" type="date" disabled>
-                </div>
-              </div>
-
             </div>
+
           </div>
         </div>
+      </div>
 
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Nota</h5>
-            <div>
-              <textarea class="form-control" name="nota" disabled>{{OBSERVACIONES}}</textarea>
-            </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Nota</h5>
+          <div>
+            <textarea class="form-control" name="nota" disabled>{{OBSERVACIONES}}</textarea>
           </div>
         </div>
-
       </div>
 
     </div>
 
-    <div class="text-center">
-      <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
-      <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
-    </div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
+    <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
+  </div>
   </form>
 </section>
 

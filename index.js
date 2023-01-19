@@ -3,6 +3,7 @@ const { engine } = require("express-handlebars");
 const session = require("express-session");
 const flash = require("connect-flash");
 const path = require("path");
+const fileUpload = require('express-fileupload');
 require("dotenv").config();
 
 const app = express();
@@ -26,6 +27,7 @@ app.set("view engine", ".hbs");
 // Middlewares
 app.use(express.json()); // Admite en el request datos tipo json
 app.use(express.urlencoded({ extended: false })); // Lee los resultados de los formularios en el request
+app.use(fileUpload())
 
 // Configurando las sesiones
 app.use(session({

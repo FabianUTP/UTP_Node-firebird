@@ -28,6 +28,7 @@ router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);
 router.post("/alumnos/:id/update", AlumnosAdminCtr.update);
+router.post("/alumnos/:id/updatePhoto", AlumnosAdminCtr.updatePhoto);
 router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
 router.get("/alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
 router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);

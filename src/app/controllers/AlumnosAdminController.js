@@ -11,7 +11,8 @@ AlumnosAdminCtr.createView = (req, res) => {
 };
 
 AlumnosAdminCtr.show = (req, res) => {
-  res.render("admin/alumnos/alumnos/alumnos-lista");
+  const { search } = req.query
+  res.render("admin/alumnos/alumnos/alumnos-lista", { search });
 };
 
 AlumnosAdminCtr.showDocto = async (req, res) => {
@@ -101,7 +102,6 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
   const body = req.body;
 
   const data = {
-    fotografia: body?.fotografia,
     paterno: body?.paterno,
     materno: body?.materno,
     nombre: body?.nombre,

@@ -1,4 +1,4 @@
-<!-- ======= Header ======= -->  
+<!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
@@ -11,29 +11,34 @@
 
   {{!-- Si es admin, muestra la seleccion del periodo --}}
   {{#if isAdmin}}
-     <div class="col-md-3">                
-      <select id="selectciclo" class="form-select">
-      </select>
-    </div>
+  <div class="col-md-3">
+    <select id="selectciclo" class="form-select">
+    </select>
+  </div>
 
-    <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
-  {{/if}}
+  <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
 
   <div class="search-bar">
-    <form class="search-form d-flex align-items-center">
-      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+    <form class="search-form d-flex align-items-center" action="/alumnos" method="get">
+      <input type="text" name="search" placeholder="Search" title="Enter search keyword" autocomplete="off">
       <button type="submit" title="Search"><i class="bi bi-search"></i></button>
     </form>
   </div><!-- End Search Bar -->
 
+  {{/if}}
+
+
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
 
+      {{#if isAdmin}}
       <li class="nav-item d-block d-lg-none">
         <a class="nav-link nav-icon search-bar-toggle " href="#">
           <i class="bi bi-search"></i>
         </a>
       </li><!-- End Search Icon-->
+      {{/if}}
+
 
       <li class="nav-item dropdown">
 
@@ -99,7 +104,7 @@
           <li class="dropdown-header">
             <h6>{{ nameAuth }} {{ lastNameAuth }}</h6>
             {{#if IDAuth}}
-              <span>Matrícula: {{ IDAuth }}</span>
+            <span>Matrícula: {{ IDAuth }}</span>
             {{/if}}
           </li>
           <li>

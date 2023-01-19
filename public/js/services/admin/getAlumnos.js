@@ -23,6 +23,8 @@ const getAlumnos = async () => {
   table.innerHTML = "";
   load.style.display = "block";
 
+  search = inputSearch.value
+
   const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
   const res = await fetch(url);
   const { alumnos } = await res.json();

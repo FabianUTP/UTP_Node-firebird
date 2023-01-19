@@ -170,7 +170,11 @@ router.get("/alumnos", async (req, res) => {
     searchQuery = `(matricula LIKE '%${search}%') `;
     searchQuery += `OR (nombre LIKE '%${search}%') `;
     searchQuery += `OR (paterno LIKE '%${search}%') `;
-    searchQuery += `OR (materno LIKE '%${search}%') `;
+    
+    let searchLastName = search.split(" ");
+    if(searchLastName.length > 1) {
+      searchQuery += `OR (paterno LIKE '%${searchLastName[0]}%' AND materno LIKE '%${searchLastName[1]}%') `;
+    }
   }
 
   const alumnos = await Alumno.all({

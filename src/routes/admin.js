@@ -51,6 +51,7 @@ router.post("/academico/planes/nuevo", PlanesCtr.crear);
 router.get("/academico/planes/:id", PlanesCtr.showById);
 router.post("/academico/planes/:id/actualizar", PlanesCtr.update);
 router.get("/academico/planes/:id/asignaturas", PlanesCtr.showAsignaturas)
+router.get("/academico/planes/:id/asignaturas/:idAsig", PlanesCtr.createAsig)
 router.get("/academico/planes/:id/evaluacion", PlanesCtr.showEval)
 
 module.exports = router;

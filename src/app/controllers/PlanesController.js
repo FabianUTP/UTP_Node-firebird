@@ -25,6 +25,11 @@ PlanesCtr.showAsignaturas = async (req, res) => {
   res.render("admin/academico/planes/planes-asig", { idPlan });
 };
 
+PlanesCtr.createAsig = async (req, res) => {
+  const idPlan = req.params.id;
+  res.render("admin/academico/planes/planes-asig-id", { idPlan });
+};
+
 PlanesCtr.update = async (req, res) => {
   res.json({
     body: req.body,

@@ -9,12 +9,13 @@ async function getPlanesAsig() {
 
   let content = "";
   data.data.forEach((item,index) => {
-    content += `<t>`;
+    content += `<tr onclick="window.location.href=window.location.href+'/${item.CLAVEASIGNATURA}'">`;
     content += `<td>${index + 1} </td>`;
     content += `<td>${item.ID_ETAPA} </td>`;
     content += `<td>${item.CLAVEASIGNATURA}</td>`;
     content += `<td>${item.NOMBREASIGNATURA}</td>`;
     content += `<td>${item.NOMBRECORTO}</td>`;
+    
     content += "</tr>";
   });
   table.innerHTML = content;

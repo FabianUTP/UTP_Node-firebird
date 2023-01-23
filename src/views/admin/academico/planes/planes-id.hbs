@@ -1,49 +1,31 @@
 <section>
-<div class="mb-3">
+  <div class="mb-3">
     {{>btnBack}}
   </div>
   <div class="card">
     <div class="card-body">
       <div class="card-title text-center">
-        <h1>Detalles de Plan de Estudio{{NOMBRE_PLAN}} </h1>
+        <h1>Detalles de Plan de Estudio {{NOMBRE_PLAN}} </h1>
       </div>
 
       <form action="" method="post">
         <div class="row g-4">
           <div class="col-md-4">
             <label for="clave" class="form-label">Clave de plan</label>
-            <input
-            value="{{ID_PLAN}}"
-              required
-              placeholder="id clave"
-              type="text"
-              name="id_clave"
-              class="form-control"
-            />
+            <input value="{{ID_PLAN}}" required placeholder="id clave" type="text" name="id_clave"
+              class="form-control" />
           </div>
 
           <div class="col-md-4">
             <label for="name" class="form-label">Nombre de plan</label>
-            <input
-            value="{{NOMBRE_PLAN}}"
-              required
-              placeholder="id nombre"
-              type="text"
-              name="id_plan"
-              class="form-control"
-            />
+            <input value="{{NOMBRE_PLAN}}" required placeholder="id nombre" type="text" name="id_plan"
+              class="form-control" />
           </div>
 
           <div class="col-md-4">
-            <label
-              for="nivel"
-              class="form-label"
-              name="id_nivel"
-              placeholder="id_nivel"
-            >Nivel</label>
+            <label for="nivel" class="form-label" name="id_nivel" placeholder="id_nivel">Nivel</label>
             <select class="form-select">
-              
-              <option selected disabled>{{NIVEL}}</option>
+              <option selected disabled value="{{NIVEL}}">{{NIVEL}}</option>
               <option>TSU en Administración Área Formulación y Evaluación de
                 Proyectos</option>
               <option>TSU en Gastronomía</option>
@@ -60,56 +42,27 @@
 
           <div class="col-md-4">
             <label for="name" class="form-label">Calif. Mínima</label>
-            <input
-            value="{{MINIMO}}"
-              required
-              placeholder="calificacion minima"
-              type="text"
-              name="calif_min"
-              class="form-control"
-            />
+            <input value="{{MINIMO}}" required placeholder="calificacion minima" type="text" name="calif_min"
+              class="form-control" />
           </div>
 
           <div class="col-md-4">
             <label for="name" class="form-label">Calif. Máxima</label>
-            <input
-            value="{{MAXIMO}}"
-              required
-              placeholder="calificacion maxima"
-              type="text"
-              name="calif_max"
-              class="form-control"
-            />
+            <input value="{{MAXIMO}}" required placeholder="calificacion maxima" type="text" name="calif_max"
+              class="form-control" />
           </div>
 
           <div class="col-md-4">
             <label for="name" class="form-label">Mínima Aprobatoria</label>
-            <input
-            value="{{MINIMO_APROBATORIO}}"
-                          required
-              placeholder="minima aprobatoria"
-              type="text"
-              name="min_aprobatoria"
-              class="form-control"
-            />
+            <input value="{{MINIMO_APROBATORIO}}" required placeholder="minima aprobatoria" type="text"
+              name="min_aprobatoria" class="form-control" />
           </div>
 
           <div class="radio">
             <label for="name" class="form-label">Calcular Promedio</label>
-            <input
-              type="radio"
-              name="opciones"
-              id="opciones_1"
-              value="opcion_1"
-              checked
-            />
+            <input type="radio" name="opciones" id="opciones_1" value="opcion_1" checked />
             Si
-            <input
-              type="radio"
-              name="opciones"
-              id="opciones_2"
-              value="opcion_2"
-            />
+            <input type="radio" name="opciones" id="opciones_2" value="opcion_2" />
             No
 
           </div>

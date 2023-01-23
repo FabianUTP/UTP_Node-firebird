@@ -1,3 +1,6 @@
+const firebird = require("node-firebird");
+const options = require("../../configs/credential-firebird")
+
 const { request, response } = require("express");
 const { Alumno } = require("../models/");
 
@@ -58,6 +61,45 @@ AlumnosController.doctos = async (req = request, res = response) => {
   res.render("alumno/documentos/doctos-screen", {
     numeroalumno: alumno.NUMEROALUMNO,
     nombre: alumno.NOMBRE
+  });
+}
+
+AlumnosController.showDocto = async (req, res) => {
+  const { idDocto } = req.params;
+  const alumno = await Alumno.findById(req.session.IDAuth);
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select documento from doctos 
+        where clave = '${alumno.NUMEROALUMNO}' AND id_docto = '${idDocto}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let docto = row[0]?.DOCUMENTO;
+
+        if (docto) {
+          docto(function (err, _name, e) {
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+
+              res.contentType("application/pdf");
+              res.send(buffer);
+              db.detach();
+            });
+          });
+        } else {
+          // res.redirect(`/alumnos/${id}/doctos`);
+          res.send("No hay documento");
+        }
+      }
+    );
   });
 }
 

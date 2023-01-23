@@ -129,13 +129,13 @@ class Firebird {
    * @param {object} config Limite de registros a obtener
    * @param {number} config.limit Limite de registros a obtener, retorna 30 por default
    * @param {number} config.skip Limite de registros a saltar para la paginacion
-   * @param {boolean} config.strict Define si los registros seran si o si los que estan condicionados
-   * @returns Los registros de la tabla condicionados de manera estricta
+   * @param {boolean} config.strict Define si los registros seran si o si los que estan condicionados, por defecto es *true*
+   * @returns Regresa un array de los datos condicionados
    */
-  where(conditions = {}, {limit = 30, skip = 0, strict = false}) {
+  where(conditions = {}, {limit = 30, skip = 0, strict = true}) {
     if (conditions.length === 0) return [];
 
-    let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} WHERE`;
+    let sql = `SELECT FIRST(${limit || 30}) SKIP(${skip || 0}) * FROM ${this.table} WHERE`;
 
     for (const key in conditions) {
       conditions[key].map((item) => {

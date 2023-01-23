@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const { dash_items } = require("../../utils/dahsboard-items");
+const { dash_items } = require("../../utils/dashboard-items");
 
 const HomeController = {};
 

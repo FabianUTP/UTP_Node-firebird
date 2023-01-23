@@ -5,7 +5,6 @@ async function getPlanesAsig() {
   let url = `/api/planes/${idplan.value}/asig`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
 
   let content = "";
   data.data.forEach((item,index) => {
@@ -14,8 +13,6 @@ async function getPlanesAsig() {
     content += `<td>${item.ID_ETAPA} </td>`;
     content += `<td>${item.CLAVEASIGNATURA}</td>`;
     content += `<td>${item.NOMBREASIGNATURA}</td>`;
-    content += `<td>${item.NOMBRECORTO}</td>`;
-    
     content += "</tr>";
   });
   table.innerHTML = content;

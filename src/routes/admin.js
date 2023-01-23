@@ -48,11 +48,16 @@ router.get("/carreras/crear", NivelesCtr.form);
 
 router.get("/academico/planes", PlanesCtr.showTable);
 router.get("/academico/planes/nuevo", PlanesCtr.showCreate);
-router.post("/academico/planes/nuevo", PlanesCtr.crear);
+router.post("/academico/planes/nuevo", PlanesCtr.crearPlan);
 router.get("/academico/planes/:id", PlanesCtr.showById);
-router.post("/academico/planes/:id/actualizar", PlanesCtr.update);
-router.get("/academico/planes/:id/asignaturas", PlanesCtr.showAsignaturas)
-router.get("/academico/planes/:id/asignaturas/:idAsig", PlanesCtr.createAsig)
-router.get("/academico/planes/:id/evaluacion", PlanesCtr.showEval)
+router.post("/academico/planes/:id/actualizar", PlanesCtr.updatePlan);
+
+router.get("/academico/planes/:idPlan/asignaturas", PlanesCtr.showAsignaturas)
+router.get("/academico/planes/:idPlan/asignaturas/:idAsig", PlanesCtr.showPlanesAsigId)
+router.get("/academico/planes/:idPlan/asignaturas/crear", PlanesCtr.showCreatePlanesAsig)
+
+router.get("/academico/planes/:idPlan/evaluacion", PlanesCtr.showEval)
+router.get("/academico/planes/:idPlan/evaluacion/:idEval", PlanesCtr.showPlanesEvalId)
+router.get("/academico/planes/:idPlan/evaluacion/crear", PlanesCtr.showCreatePlanesEval)
 
 module.exports = router;

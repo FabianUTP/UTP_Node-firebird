@@ -45,6 +45,11 @@ h6 {
   cursor: pointer;
 }
 
+.table-hover > tbody > tr {
+  cursor: pointer;
+}
+
+
 #close {
   right: 1%;
   background-color: transparent;

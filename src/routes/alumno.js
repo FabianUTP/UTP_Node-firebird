@@ -8,7 +8,8 @@ const { isAlumno } = require('../app/middlewares/session')
 
 // Rutas de los Alumnos
 router.get("/boletas", isAlumno, AlumnosController.getBoletas);
-router.get("/documentos", isAlumno, AlumnosController.doctos);
+router.get("/doctos", isAlumno, AlumnosController.doctos);
+router.get("/doctos/:idDocto", isAlumno, AlumnosController.showDocto);
 
 router.get("/perfil", isAlumno, AlumnosController.showById);
 router.post("/perfil/update-contacto", AlumnosController.updateContact);

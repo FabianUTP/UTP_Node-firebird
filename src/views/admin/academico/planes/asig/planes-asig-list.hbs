@@ -1,9 +1,8 @@
 <section>
   <input type="hidden" id="idPlan" value="{{idPlan}}" />
-    <div class="mb-3">
-      <a href="/academico/planes/planes-asig-id" class="btn btn-primary"> Editar Asignaturas</a>
-      
-    {{>btnBack}}
+    <div class="d-flex justify-content-between mb-3">
+      {{>btnBack}}
+      <a href="/academico/planes/planes" class="btn btn-primary">Crear asignatura</a>
   </div>
   
 
@@ -20,7 +19,6 @@
             <th>Etapa</th>
             <th>Clave</th>
             <th>Nombre</th>
-            <th>Nombre Corto</th>
           </tr>
         </thead>
         <tbody id="table-content"></tbody>

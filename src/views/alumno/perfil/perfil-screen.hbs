@@ -38,43 +38,43 @@
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Apellido paterno</div>
-              <div class="col-lg-9 col-md-8">{{alumno.PATERNO}}</div>
+              <div class="col-lg-9 col-md-8">{{PATERNO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label ">Apellido materno</div>
-              <div class="col-lg-9 col-md-8">{{alumno.MATERNO}}</div>
+              <div class="col-lg-9 col-md-8">{{MATERNO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label ">Nombres</div>
-              <div class="col-lg-9 col-md-8">{{alumno.NOMBRE}}</div>
+              <div class="col-lg-9 col-md-8">{{NOMBRE}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Género</div>
-              <div class="col-lg-9 col-md-8">{{alumno.GENERO}}</div>
+              <div class="col-lg-9 col-md-8">{{GENERO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Estado civil</div>
-              <div class="col-lg-9 col-md-8">{{alumno.ESTADO_CIVIL}}</div>
+              <div class="col-lg-9 col-md-8">{{ESTADO_CIVIL}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Estado de nacimiento</div>
-              <div class="col-lg-9 col-md-8">{{alumno.ESTADO}}</div>
+              <div class="col-lg-9 col-md-8">{{ESTADO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">Municipio de nacimiento</div>
-              <div class="col-lg-9 col-md-8">{{alumno.LUGAR_NACIMIENTO}}</div>
+              <div class="col-lg-9 col-md-8">{{LUGAR_NACIMIENTO}}</div>
             </div>
 
             <div class="row">
               <div class="col-lg-3 col-md-4 label">CURP</div>
               <div class="col-lg-9 col-md-8">
-                <h3>{{alumno.CLAVE_CIUDADANA}}</h3>
+                <h3>{{CLAVE_CIUDADANA}}</h3>
               </div>
             </div>
 
@@ -95,7 +95,7 @@
                     class="form-control" 
                     type="text" 
                     required
-                    value="{{alumno.DOMICILIO}}"
+                    value="{{DOMICILIO}}"
                   >
                 </div>
               </div>
@@ -103,28 +103,28 @@
               <div class="row mb-3">
                 <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="estado" type="text" class="form-control" id="estado" value="{{alumno.ESTADO}}" required>
+                  <input name="estado" type="text" class="form-control" id="estado" value="{{ESTADO}}" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="municipio" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="ciudad" type="text" class="form-control" id="municipio" value="{{alumno.CIUDAD}}" required>
+                  <input name="ciudad" type="text" class="form-control" id="municipio" value="{{CIUDAD}}" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="localidad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="localidad" type="text" class="form-control" id="localidad" value="{{alumno.CIUDAD}}" required>
+                  <input name="localidad" type="text" class="form-control" id="localidad" value="{{CIUDAD}}" required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="cp" class="col-md-4 col-lg-3 col-form-label">Código postal</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="cp" type="text" class="form-control" id="cp" value="{{alumno.CP}}" required>
+                  <input name="cp" type="text" class="form-control" id="cp" value="{{CP}}" required>
                 </div>
               </div>
 
@@ -132,7 +132,7 @@
                 <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email personal</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="email" type="email" class="form-control" id="Email"
-                    value="{{alumno.EMAIL}}">
+                    value="{{EMAIL}}">
                 </div>
               </div>
 
@@ -140,7 +140,7 @@
                 <label for="Emailutp" class="col-md-4 col-lg-3 col-form-label">Email institucional</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="emailutp" type="email" class="form-control" id="Emailutp"
-                    value="{{alumno.EMAIL_ALTERNO}}"
+                    value="{{EMAIL_ALTERNO}}"
                     placeholder="a.alumno@utponiente.edu.mx">
                 </div>
               </div>
@@ -148,7 +148,7 @@
               <div class="row mb-3">
                 <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono celular</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="telefono_per" type="text" class="form-control" id="telefono_per" value="{{alumno.CELULAR}}" required>
+                  <input name="telefono_per" type="text" class="form-control" id="telefono_per" value="{{CELULAR}}" required>
                 </div>
               </div>
 
@@ -169,7 +169,7 @@
                 <label for="nombre_autirizada" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="perContacto" type="text" class="form-control" id="domicilio" maxlength="25"
-                    value="{{alumno.CONTACTO}}" required>
+                    value="{{CONTACTO}}" required>
                 </div>
               </div>
 
@@ -177,7 +177,7 @@
                 <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
                 <div class="col-md-8 col-lg-9">
                   <select class="form-select" id="parentesco" name="PARENTESCO_CONTACTO" required>
-                    <option selected value="{{alumno.PARENTESCO_CONTACTO}}" disabled>{{alumno.PARENTESCO_CONTACTO}}</option>
+                    <option selected value="{{PARENTESCO_CONTACTO}}" disabled>{{PARENTESCO_CONTACTO}}</option>
                     <option value="PADRE">Padre</option>
                     <option value="MADRE">Madre</option>
                     <option value="HERMANO(A)">Hermano(a)</option>
@@ -195,7 +195,7 @@
                   autorizada</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="telContacto" type="text" class="form-control" id="Phoneautorizada"
-                    value={{alumno.TEL_CONTACTO}}>
+                    value={{TEL_CONTACTO}}>
                 </div>
               </div>
 
@@ -278,7 +278,7 @@
                 <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
                 <div class="col-md-8 col-lg-9">
                   <select class="form-select" id="tiposeguro" name="TIPO_SEG_MED" required>
-                    <option selected disabled value="{{alumno.TIPO_SEG_MED}}">{{alumno.TIPO_SEG_MED}}</option>
+                    <option selected disabled value="{{TIPO_SEG_MED}}">{{TIPO_SEG_MED}}</option>
                     <option>IMSS-UTP</option>
                     <option>IMSS Familiar</option>
                     <option>ISSTEY</option>
@@ -293,7 +293,7 @@
               <div class="row mb-3">
                 <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="nss" type="text" class="form-control" id="nss" value={{alumno.NUM_IMSS}}>
+                  <input name="nss" type="text" class="form-control" id="nss" value={{NUM_IMSS}}>
                 </div>
               </div>
 

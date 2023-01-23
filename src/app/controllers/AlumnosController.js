@@ -8,7 +8,45 @@ const AlumnosController = {};
 
 AlumnosController.showById = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.session.IDAuth);
-  res.render("alumno/perfil/perfil-screen", { alumno });
+  let image = "data:image/jpeg;base64, ";
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select fotografia from alumnos where matricula = '${alumno?.MATRICULA}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let foto = row[0]?.FOTOGRAFIA;
+        if (foto) {
+          foto(function (err, _name, e) {
+            if (err) throw err;
+
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+              image += buffer.toString("base64");
+
+              let newAlumno = {
+                ...alumno,
+                image,
+              };
+
+              db.detach();
+              res.render("alumno/perfil/perfil-screen", newAlumno);
+            });
+          });
+        } else {
+          res.render("alumno/perfil/perfil-screen", alumno);
+        }
+      }
+    );
+  });
 };
 
 AlumnosController.updateContact = async (req = request, res = response) => {

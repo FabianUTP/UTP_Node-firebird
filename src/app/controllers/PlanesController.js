@@ -1,4 +1,4 @@
-const { Planes_Mst, Planes_Det, Planes_Eval } = require("../models");
+const { Planes_Mst, Planes_Det, Planes_Eval, Niveles } = require("../models");
 
 const PlanesCtr = {};
 
@@ -7,19 +7,29 @@ PlanesCtr.showTable = (req, res) => {
   res.render("admin/academico/planes/planes-list");
 };
 
-PlanesCtr.showCreate = (req, res) => {
-  res.render("admin/academico/planes/planes-crear");
+PlanesCtr.showCreate = async (req, res) => {
+  const niveles = await Niveles.all({ limit: 30 });
+  res.render("admin/academico/planes/planes-crear", { niveles });
 };
 
 PlanesCtr.showById = async (req, res) => {
   const plan = await Planes_Mst.findById(req.params.id);
-  res.render("admin/academico/planes/planes-id", plan);
+  let niveles = await Niveles.all({ limit: 30 });
+  res.render("admin/academico/planes/planes-id", {plan, niveles});
 };
 
 PlanesCtr.updatePlan = async (req, res) => {
-  res.json({
-    body: req.body,
-  });
+  const idPlan = req.params.id;
+  const body = {
+    nombre_plan: req.body.nombre,
+    nivel: req.body.id_nivel,
+    maximo: req.body.calif_max,
+    minimo: req.body.calif_min,
+    MINIMO_APROBATORIO: req.body.min_aprobatoria,
+  }
+
+  await Planes_Mst.findByIdAndUpdate(idPlan, body);
+  res.redirect("/academico/planes");
 };
 
 PlanesCtr.crearPlan = (req, res) => {

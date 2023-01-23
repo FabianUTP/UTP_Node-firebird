@@ -6,7 +6,7 @@
   <div class="card">
     <div class="card-body">
       <div class="card-title text-center">
-        <h1>Crear Nuevo Plan De Estcol-md-4udio</h1>
+        <h1>Crear Nuevo Plan De Estudio</h1>
       </div>
 
       <form action="" method="post">
@@ -25,17 +25,11 @@
             <label for="nivel" class="form-label" name="id_nivel" placeholder="id_nivel">Nivel</label>
             <select class="form-select">
               <option selected disabled>Seleccione un nivel</option>
-              <option>TSU en Administración Área Formulación y Evaluación de
-                Proyectos</option>
-              <option>TSU en Gastronomía</option>
-              <option>TSU en Procesos Alimentarios</option>
-              <option>TSU en Tecnologías de la Información Área Desarrollo de
-                Software Multiplataforma</option>
-              <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
-              <option>Ingeniería en Procesos Bioalimentarios</option>
-              <option>Ingeniería en Desarrollo y Gestión de Software</option>
-              <option>Licenciatura en Gestión de Negocios y Proyectos</option>
-              <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+              <option value="null">Ninguno</option>
+              {{#each niveles}}
+              <option value="{{NIVEL}}">{{DESCRIPCION}}</option>
+              {{/each}}
+            </select>
             </select>
           </div>
 

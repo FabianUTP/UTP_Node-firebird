@@ -50,7 +50,7 @@ router.get("/academico/planes", PlanesCtr.showTable);
 router.get("/academico/planes/nuevo", PlanesCtr.showCreate);
 router.post("/academico/planes/nuevo", PlanesCtr.crearPlan);
 router.get("/academico/planes/:id", PlanesCtr.showById);
-router.post("/academico/planes/:id/actualizar", PlanesCtr.updatePlan);
+router.post("/academico/planes/:id", PlanesCtr.updatePlan);
 
 router.get("/academico/planes/:idPlan/asignaturas", PlanesCtr.showAsignaturas)
 router.get("/academico/planes/:idPlan/asignaturas/:idAsig", PlanesCtr.showPlanesAsigId)

@@ -384,9 +384,8 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
 router.get("/planes", async (req, res) => {
   const { 
     page = 1, 
-    search = '', 
-    orderBy = 'nombre_plan', 
-    sort = 'asc' 
+    search = '',
+    nivel = ''
   } = req.query;
 
   let searchQuery = '';
@@ -394,23 +393,27 @@ router.get("/planes", async (req, res) => {
   if (page <= 0) page = 1;
 
   if (search) {
-    searchQuery = `nombre_plan LIKE '%${search.toUpperCase()}%'`
+    searchQuery += `nombre_plan LIKE '%${search.toUpperCase()}%'`
+  }
+
+  if (nivel) {
+    if(search) searchQuery += ' AND '
+    searchQuery += `nivel = '${nivel}'`
   }
 
   const planes = await Planes_Mst.all({
     limit: 20,
     skip: (page - 1) * 20,
     searchQuery,
-    orderBy,
-    sort,
+    orderBy: 'nombre_plan',
+    sort: 'asc',
   });
 
   res.json({
     query: {
       page,
       search,
-      orderBy,
-      sort
+      nivel
     },
     data: planes
   })

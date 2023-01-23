@@ -5,56 +5,49 @@
   <div class="card">
     <div class="card-body">
       <div class="card-title text-center">
-        <h1>Detalles de Plan de Estudio {{NOMBRE_PLAN}} </h1>
+        <h1>Detalles de Plan de Estudio {{plan.NOMBRE_PLAN}} </h1>
       </div>
 
       <form action="" method="post">
         <div class="row g-4">
           <div class="col-md-4">
             <label for="clave" class="form-label">Clave de plan</label>
-            <input value="{{ID_PLAN}}" required placeholder="id clave" type="text" name="id_clave"
+            <input value="{{plan.ID_PLAN}}" required placeholder="id clave" type="text" name="id_clave"
               class="form-control" />
           </div>
 
           <div class="col-md-4">
             <label for="name" class="form-label">Nombre de plan</label>
-            <input value="{{NOMBRE_PLAN}}" required placeholder="id nombre" type="text" name="id_plan"
+            <input value="{{plan.NOMBRE_PLAN}}" required placeholder="id nombre" type="text" name="nombre"
               class="form-control" />
           </div>
 
           <div class="col-md-4">
-            <label for="nivel" class="form-label" name="id_nivel" placeholder="id_nivel">Nivel</label>
-            <select class="form-select">
-              <option selected disabled value="{{NIVEL}}">{{NIVEL}}</option>
-              <option>TSU en Administración Área Formulación y Evaluación de
-                Proyectos</option>
-              <option>TSU en Gastronomía</option>
-              <option>TSU en Procesos Alimentarios</option>
-              <option>TSU en Tecnologías de la Información Área Desarrollo de
-                Software Multiplataforma</option>
-              <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
-              <option>Ingeniería en Procesos Bioalimentarios</option>
-              <option>Ingeniería en Desarrollo y Gestión de Software</option>
-              <option>Licenciatura en Gestión de Negocios y Proyectos</option>
-              <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+            <label for="nivel" class="form-label" placeholder="id_nivel">Nivel</label>
+            <select class="form-select" id="niveles" name="id_nivel">
+              <option selected disabled value="{{plan.NIVEL}}">{{plan.NIVEL}}</option>
+              <option value="null">Ninguno</option>
+              {{#each niveles}}
+              <option value="{{NIVEL}}">{{DESCRIPCION}}</option>
+              {{/each}}
             </select>
           </div>
 
           <div class="col-md-4">
             <label for="name" class="form-label">Calif. Mínima</label>
-            <input value="{{MINIMO}}" required placeholder="calificacion minima" type="text" name="calif_min"
+            <input value="{{plan.MINIMO}}" required placeholder="calificacion minima" type="text" name="calif_min"
               class="form-control" />
           </div>
 
           <div class="col-md-4">
             <label for="name" class="form-label">Calif. Máxima</label>
-            <input value="{{MAXIMO}}" required placeholder="calificacion maxima" type="text" name="calif_max"
+            <input value="{{plan.MAXIMO}}" required placeholder="calificacion maxima" type="text" name="calif_max"
               class="form-control" />
           </div>
 
           <div class="col-md-4">
             <label for="name" class="form-label">Mínima Aprobatoria</label>
-            <input value="{{MINIMO_APROBATORIO}}" required placeholder="minima aprobatoria" type="text"
+            <input value="{{plan.MINIMO_APROBATORIO}}" required placeholder="minima aprobatoria" type="text"
               name="min_aprobatoria" class="form-control" />
           </div>
 
@@ -69,11 +62,11 @@
 
         </div>
 
+        <div class="mt-3">
+          <button class="btn btn-outline-primary"> Guardar </button>
+        </div>
       </form>
 
-      <div class="mt-3">
-        <button class="btn btn-outline-primary"> Guardar </button>
-      </div>
     </div>
   </div>
 

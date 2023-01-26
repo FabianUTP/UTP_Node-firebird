@@ -1,8 +1,10 @@
 const table = document.getElementById("table-content");
 const inputSearch = document.getElementById("buscar");
+const carrerasSelect = document.getElementById("inputcarrera");
 
 let page = 1;
 let search = "";
+let id_nivel = "";
 
 //realizacion del boton buscar
 inputSearch.addEventListener(
@@ -15,7 +17,9 @@ inputSearch.addEventListener(
 );
 
 async function getPlanes() {
-  const response = await fetch(`/api/planes?page=${page}&search=${search}`);
+  const response = await fetch(
+    `/api/planes?page=${page}&search=${search}&nivel=${id_nivel}`
+  );
   const api = await response.json();
 
   let content = "";
@@ -54,4 +58,22 @@ function onNext() {
   getPlanes();
 }
 
+async function getCarreas() {
+  const res = await fetch("/api/carreras");
+  const { niveles } = await res.json();
+
+  let content = "<option value=''>Todos</option>";
+  niveles.forEach((item) => {
+    content += `<option value="${item.NIVEL}">${item.DESCRIPCION}</option>`;
+  });
+
+  carrerasSelect.innerHTML = content;
+}
+
+function changeCarreas() {
+  id_nivel = carrerasSelect.value;
+  getPlanes();
+}
+
 getPlanes();
+getCarreas();

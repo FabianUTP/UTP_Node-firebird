@@ -21,6 +21,18 @@
             placeholder="Buscar"
             id="buscar"
           />
+          <select
+            id="inputcarrera"
+            onchange="changeCarreas()"
+            class="form-select"
+            required
+          >
+            <option disabled selected>--seleccione una opcion--</option>
+            <option value="1"></option>
+            <option value="2"></option>
+
+          </select>
+          <div id="carr"></div>
         </div>
       </div>
       <table class="table table-hover">
@@ -36,8 +48,7 @@
         <tbody id="table-content"></tbody>
       </table>
       <div>
-        <button class="btn btn-primary" onclick="onPrev()"> <
-        </button>
+        <button class="btn btn-primary" onclick="onPrev()"> </button>
         <button class="btn btn-primary" onclick="onNext()"> > </button>
       </div>
     </div>

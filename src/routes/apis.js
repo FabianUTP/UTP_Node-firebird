@@ -14,6 +14,7 @@ const {
   Planes_Mst,
   Planes_Eval,
   Planes_Det,
+  Profesores,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -497,6 +498,31 @@ router.get("/estatus", async (req, res) => {
     querys: search,
     data: status
   })
+});
+
+router.get("/profesores", async (req, res) => {
+  const { search = "", page = 1 } = req.query;
+
+  let searchQuery = "";
+
+  if (search) {
+    searchQuery += `nombreprofesor like '%${search}%'`;
+  }
+
+  const profes = await Profesores.all({
+    searchQuery,
+    limit: 20,
+    skip: (page - 1) * 20,
+  });
+
+  res.json({
+    query: {
+      search,
+      page
+    },
+    data: profes
+  })
+
 });
 
 module.exports = router;

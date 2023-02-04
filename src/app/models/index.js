@@ -1,7 +1,6 @@
 const Alumno = require("./Alumno");
 const Doctos = require("./Doctos");
 const Grupos = require("./Grupos");
-const Profesor = require("./Profesor");
 const Ciclos = require("./Ciclos");
 const Niveles = require("./Niveles");
 const AlumnosGrupos = require("./GrupoAlumno");
@@ -11,12 +10,12 @@ const Planes_Etapas = require("./Planes_Etapas");
 const Planes_Mst = require("./Planes_Mst");
 const CfgStatus = require("./CfgStatus");
 const Planes_Eval = require("./Planes_Eval");
+const Profesores = require("./Profesores");
 
 module.exports = {
     Alumno,
     Doctos,
     Grupos,
-    Profesor,
     Ciclos,
     Niveles,
     AlumnosGrupos,
@@ -25,5 +24,6 @@ module.exports = {
     Planes_Det,
     Planes_Etapas,
     Planes_Mst,
-    Planes_Eval
+    Planes_Eval,
+    Profesores,
 }

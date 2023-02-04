@@ -38,6 +38,10 @@ AuthController.logout = (req = request, res = response) => {
   res.redirect('/login');
 }
 
+AuthController.registro = (req = request, res = response) => {
+  res.render('auth/register');
+}
+
 module.exports = {
   AuthController,
 };

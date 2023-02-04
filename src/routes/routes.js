@@ -11,6 +11,7 @@ const { AuthController, HomeController } = require("../app/controllers");
 router.get("/login", noAuth, AuthController.login);
 router.post("/login", AuthController.postLogin);
 router.get("/logout", AuthController.logout);
+router.get("/registro", noAuth, AuthController.registro);
 
 // Middleware para que se inicie sesion
 router.use(verifySesion);

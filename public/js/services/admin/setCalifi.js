@@ -26,7 +26,7 @@ const getAsignaturas = async () => {
       newData.push(item);
     }
   });
-
+  
   asignatura.innerHTML = "";
   let contentAsig = "<option selected disabled>-- Elija una opción --</option>";
 

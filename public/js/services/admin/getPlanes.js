@@ -17,9 +17,8 @@ inputSearch.addEventListener(
 );
 
 async function getPlanes() {
-  const response = await fetch(
-    `/api/planes?page=${page}&search=${search}&nivel=${id_nivel}`
-  );
+  let url = `/api/planes?page=${page}&search=${search}&nivel=${id_nivel}`;
+  const response = await fetch(url);
   const api = await response.json();
 
   let content = "";

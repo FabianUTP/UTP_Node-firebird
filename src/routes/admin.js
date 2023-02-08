@@ -12,7 +12,10 @@ const {
   AlumnosAdminCtr,
   CalifiCtr,
   PlanesCtr,
+  ProfeCtr,
+
 } = require("../app/controllers");
+
 
 // Middleware para proteger las rutas y solo pueda acceder el admin
 router.use(isAdmin);
@@ -59,5 +62,7 @@ router.get("/academico/planes/:idPlan/asignaturas/crear", PlanesCtr.showCreatePl
 router.get("/academico/planes/:idPlan/evaluacion", PlanesCtr.showEval)
 router.get("/academico/planes/:idPlan/evaluacion/:idEval", PlanesCtr.showPlanesEvalId)
 router.get("/academico/planes/:idPlan/evaluacion/crear", PlanesCtr.showCreatePlanesEval)
+
+router.get("/profesores", ProfeCtr.showList);
 
 module.exports = router;

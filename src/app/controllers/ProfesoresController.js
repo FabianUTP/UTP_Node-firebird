@@ -13,7 +13,7 @@ ProfeCtr.showById = async (req, res) => {
 }
 
 ProfeCtr.update = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; 
     const data = {
         nombreprofesor: req.body.nombre,
         genero: req.body.genero,

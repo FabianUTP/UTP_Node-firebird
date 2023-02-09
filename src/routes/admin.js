@@ -64,5 +64,7 @@ router.get("/academico/planes/:idPlan/evaluacion/:idEval", PlanesCtr.showPlanesE
 router.get("/academico/planes/:idPlan/evaluacion/crear", PlanesCtr.showCreatePlanesEval)
 
 router.get("/profesores", ProfeCtr.showList);
+router.get("/profesores/:id", ProfeCtr.showById);
+router.post("/profesores/:id", ProfeCtr.update);
 
 module.exports = router;

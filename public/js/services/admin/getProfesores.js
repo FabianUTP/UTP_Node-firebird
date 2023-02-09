@@ -23,7 +23,6 @@ async function getProfesores(){
     api.data.forEach((item, index) => {
       content += `<tr>`;
       content += `<td>${index + 1} </td>`;
-      content += `<td>${item.ID_ESCUELA}</td>`;
       content += `<td>${item.CLAVEPROFESOR}</td>`;
       content += `<td>${item.NOMBREPROFESOR}</td>`;
       content += `<td><div class="dropdown">

@@ -21,11 +21,22 @@ async function getProfesores(){
   
     let content = "";
     api.data.forEach((item, index) => {
-      content += `<tr>`;
+      content += `<tr >`;
       content += `<td>${index + 1} </td>`;
       content += `<td>${item.CLAVEPROFESOR}</td>`;
       content += `<td>${item.NOMBREPROFESOR}</td>`;
       content += `<td><div class="dropdown">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      Ver Más
+    </a>
+  
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/">Ver Ficha</a></li>
+      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/asignacion">Asignatura de Grupo</a></li>
+      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/Perfil">Perfil Academico</a></li>
+      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/profesores-list">Horario Contratado</a></li>
+      <li><a class="dropdown-item" href="#">Eliminar</a></li>
+    </ul>
       </div></td>`;
 
     content += "</tr>";

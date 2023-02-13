@@ -35,6 +35,13 @@ ProfeCtr.update = async (req, res) => {
 
     res.redirect("/profesores");
 }
+ProfeCtr.showAsig = (req, res) =>{
+    res.render("admin/profes/asig/profes-asig-id");
+}
+
+ProfeCtr.showPerfil = (req, res) =>{
+    res.render("admin/profes/asig/profes-perfil");
+}
 
 module.exports = {
     ProfeCtr,

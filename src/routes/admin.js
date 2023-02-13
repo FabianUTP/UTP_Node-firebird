@@ -67,4 +67,7 @@ router.get("/profesores", ProfeCtr.showList);
 router.get("/profesores/:id", ProfeCtr.showById);
 router.post("/profesores/:id", ProfeCtr.update);
 
+router.get("/profesores/:id/asignacion", ProfeCtr.showAsig)
+router.get("/profesores/:id/perfil", ProfeCtr.showPerfil)
+
 module.exports = router;

@@ -139,17 +139,19 @@ class Firebird {
 
     for (const key in conditions) {
       conditions[key].map((item) => {
-        if (typeof item === "string") {
-          const modeStrict = `(${key} = '${item}')`;
-          const modeNoStrict = `(${key} LIKE '%${item}%')`;
-
-          sql += ` ${strict ? modeStrict : modeNoStrict}`;
-        } else {
-          sql += ` (${key} = ${item})`;
+        if (item) {
+          if (typeof item === "string") {
+            const modeStrict = `(${key} = '${item}')`;
+            const modeNoStrict = `(${key} LIKE '%${item}%')`;
+  
+            sql += ` ${strict ? modeStrict : modeNoStrict}`;
+          } else {
+            sql += ` (${key} = ${item})`;
+          }
+          
+          // Valida si es modo estricto en los filtros
+          sql += ` ${strict ? "AND" : "OR"}`;
         }
-
-        // Valida si es modo estricto en los filtros
-        sql += ` ${strict ? "AND" : "OR"}`;
       });
     }
 

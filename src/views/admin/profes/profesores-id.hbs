@@ -1,107 +1,102 @@
 <section>
-    <div class="mb-3">
+  <div class="mb-3">
     {{>btnBack}}
   </div>
-    
+
   <div class="card">
     <div class="card-body">
       <div class="card-title text-center">
         <h1>Detalles de {{NOMBREPROFESOR}}</h1>
       </div>
 
-     <form action="" method="post">
+      <form action="/profesores/{{CLAVEPROFESOR}}" method="post">
         <div class="row g-4">
+          
           <div class="col-md-4">
             <label for="clave" class="form-label">Nombre</label>
             <input required placeholder="nombre" type="text" name="nombre" class="form-control"
-            value="{{NOMBREPROFESOR}}" />
+              value="{{NOMBREPROFESOR}}" />
           </div>
 
-    
-    
           <div class="col-md-4">
             <label for="clave" class="form-label">Género</label>
-            <input required placeholder="genero" type="text" name="genero" class="form-control"
-            value="{{GENERO}}" />
+            <input required placeholder="genero" type="text" name="genero" class="form-control" value="{{GENERO}}" />
           </div>
 
-          
+
           <div class="col-md-4">
             <label for="clave" class="form-label">Cédula Profecional</label>
             <input required placeholder="cedula" type="text" name="cedula" class="form-control"
-            value="{{CEDULA_FISCAL}}" />
+              value="{{CEDULA_FISCAL}}" />
           </div>
 
-          
+
           <div class="col-md-4">
             <label for="clave" class="form-label">Clave Ciudadana</label>
             <input required placeholder="clave ciudadana" type="text" name="clave_ciudadana" class="form-control"
-            value="{{CLAVE_CIUDADANA}}" />
+              value="{{CLAVE_CIUDADANA}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Estado Civil</label>
             <input required placeholder="est civil" type="text" name="estado_civil" class="form-control"
-            value="{{ESTADO_CIVIL}}" />
+              value="{{ESTADO_CIVIL}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Fecha de Nacimiento</label>
             <input required placeholder="fech nac" type="text" name="nacimiento" class="form-control"
-            value="{{FECHA_NACIMIENTO}}" />
+              value="{{FECHA_NACIMIENTO}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Lugar de Nacimiento</label>
             <input required placeholder="lug nac" type="text" name="lugar_nacimiento" class="form-control"
-            value="{{LUGAR_NACIMIENTO}}" />
+              value="{{LUGAR_NACIMIENTO}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Estado de Nacimiento</label>
             <input required placeholder="edo nac" type="text" name="estado_nacimiento" class="form-control"
-            value="{{ESTADO_NACIMIENTO}}" />
+              value="{{ESTADO_NACIMIENTO}}" />
           </div>
-          
+
           <div class="col-md-4">
             <label for="clave" class="form-label">Nacionalidad</label>
             <input required placeholder="Nacionalidad" type="text" name="nacionalidad" class="form-control"
-            value="{{NACIONALIDAD}}" />
+              value="{{NACIONALIDAD}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Domicilio</label>
-            <input required placeholder="dom" type="text" name="domicilio" class="form-control"
-            value="{{DOMICILIO}}" />
+            <input required placeholder="dom" type="text" name="domicilio" class="form-control" value="{{DOMICILIO}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Código Postal</label>
-            <input required placeholder="cp" type="text" name="cp" class="form-control"
-            value="{{CP}}" />
+            <input required placeholder="cp" type="text" name="cp" class="form-control" value="{{CP}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Ciudad</label>
-            <input required placeholder="ciu" type="text" name="ciudad" class="form-control"
-            value="{{CIUDAD}}" />
+            <input required placeholder="ciu" type="text" name="ciudad" class="form-control" value="{{CIUDAD}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Estado</label>
-            <input required placeholder="edo" type="text" name="estado" class="form-control"
-            value="{{ESTADO}}" />
+            <input required placeholder="edo" type="text" name="estado" class="form-control" value="{{ESTADO}}" />
           </div>
 
           <div class="col-md-4">
             <label for="clave" class="form-label">Telefono</label>
-            <input required placeholder="CEL" type="text" name="telefono" class="form-control"
-            value="{{CELULAR}}" />
+            <input required placeholder="CEL" type="text" name="telefono" class="form-control" value="{{CELULAR}}" />
           </div>
-<div class="pt-3 text-center">
-        <button class="btn btn-primary">Guardar</button>
-      </div>
-          
-              
+          <div class="pt-3 text-center">
+            <button class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </section>
-<script src="/js/services/admin/getProfesores.js"></script>

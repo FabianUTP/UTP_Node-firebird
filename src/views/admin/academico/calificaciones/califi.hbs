@@ -19,21 +19,18 @@
 
         <div class="col-md-3">
           <label for="plan" class="form-label">Plan de estudio</label>
-          <form id="formPlan">
-            <div class="d-flex">
-              <input type="text" class="form-control" id="planEst">
-              <button class="btn"><i class="bi bi-search"></i></button>
-            </div>
-          </form>
+          <select name="plan" id="plan" class="form-select" >
+            <option disabled selected>-Seleccione un plan-</option>
+            {{#each planes}}
+              <option value="{{ ID_PLAN }}">{{ ID_PLAN }}</option>
+            {{/each}}
+          </select>
         </div>
 
         <div class="col-md-3">
           <label for="evaluacion" class="form-label">Evaluación</label>
           <select id="evaluacion" class="form-select">
-            <option value="A">Evaluacion Ordinaria</option>
-            <option value="B" disabled>% Asistencias</option>
-            <option value="E" disabled>Recuperativo</option>
-            <option value="G" disabled>Especial</option>
+            <option disabled selected>Seleccione un plan</option>
           </select>
         </div>
 
@@ -77,4 +74,4 @@
 </section>
 
 <script src="/js/helpers/ReadExcel.js"></script>
-<script src="/js/functions/setCalifi.js"></script>
+<script src="/js/services/admin/setCalifi.js"></script>

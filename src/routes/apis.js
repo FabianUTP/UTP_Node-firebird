@@ -250,11 +250,17 @@ router.get("/doctos/", async (req, res) => {
 });
 
 router.get("/calificaciones/asignaturas", async (req, res) => {
-  const { idPlan, idAsig, idEval, idGrupo } = req.query;
+  const { idPlan = "", idAsig = "", idEval = "", idGrupo = "" } = req.query;
 
   if(!idGrupo || !idPlan || !idAsig || !idEval) {
     return res.json({
-      error: "El id del grupo, plan, evaluacion y asignatura son necesarios"
+      error: "El id del grupo, plan, evaluacion y asignatura son necesarios",
+      querys: {
+        idPlan,
+        idAsig,
+        idEval,
+        idGrupo,
+      }
     })
   };
 

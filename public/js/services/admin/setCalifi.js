@@ -46,7 +46,7 @@ selectAsig.addEventListener("change", async (event) => {
 
   let url = `/api/calificaciones/asignaturas?idPlan=${idPlan}&idEval=${eval}&idAsig=${idAsig}&idGrupo=${codigo_grupo}`;
   let res = await fetch(url);
-  let { data } = await res.json();
+  let data = await res.json();
 
   console.log(data)
 });

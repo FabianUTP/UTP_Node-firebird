@@ -11,19 +11,25 @@ const Planes_Mst = require("./Planes_Mst");
 const CfgStatus = require("./CfgStatus");
 const Planes_Eval = require("./Planes_Eval");
 const Profesores = require("./Profesores");
+const VillasMst = require("./Villas_Mst");
+const VillasCfg = require("./Villas_Cfg");
+const VillasAlumnos = require("./Villas_Alumnos");
 
 module.exports = {
-    Alumno,
-    Doctos,
-    Grupos,
-    Ciclos,
-    Niveles,
-    AlumnosGrupos,
-    AlumKardex,
-    CfgStatus,
-    Planes_Det,
-    Planes_Etapas,
-    Planes_Mst,
-    Planes_Eval,
-    Profesores,
-}
+  Alumno,
+  Doctos,
+  Grupos,
+  Ciclos,
+  Niveles,
+  AlumnosGrupos,
+  AlumKardex,
+  CfgStatus,
+  Planes_Det,
+  Planes_Etapas,
+  Planes_Mst,
+  Planes_Eval,
+  Profesores,
+  VillasMst,
+  VillasCfg,
+  VillasAlumnos,
+};

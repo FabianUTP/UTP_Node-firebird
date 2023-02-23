@@ -15,6 +15,8 @@ const {
   Planes_Eval,
   Planes_Det,
   Profesores,
+  VillasMst,
+  VillasCfg,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -250,55 +252,40 @@ router.get("/doctos/", async (req, res) => {
 });
 
 router.get("/calificaciones/asignaturas", async (req, res) => {
-  const { idGrupo, idPlan } = req.query;
+  const { idPlan = "", idAsig = "", idEval = "", idGrupo = "" } = req.query;
 
-  if(!idGrupo || !idPlan) {
+  if(!idGrupo || !idPlan || !idAsig || !idEval) {
     return res.json({
-      error: "El id del grupo y del plan son necesarios"
+      error: "El id del grupo, plan, evaluacion y asignatura son necesarios",
+      querys: {
+        idPlan,
+        idAsig,
+        idEval,
+        idGrupo,
+      }
     })
   };
 
   try {
 
     let grupo = await Grupos.findById(idGrupo);
-    let plan = await Planes_Etapas.findById(idPlan);
+    console.log(grupo)
 
-    if(!grupo) {
-      return res.json({
-        error: "No existe el grupo"
-      })
-    }
-
-    if(!plan) {
-      return res.json({
-        error: "No existe el plan"
-      })
-    }
-
-    let sql = `select first(200) 
-        alumnos_kardex.claveasignatura, 
-        cfgplanes_det.nombreasignatura,
-        alumnos_kardex.id_etapa,
-        alumnos_kardex.id_plan
-      from alumnos_kardex
-      join cfgplanes_det on alumnos_kardex.claveasignatura = cfgplanes_det.claveasignatura
-        and alumnos_kardex.id_plan = cfgplanes_det.id_plan
-        and alumnos_kardex.id_etapa = cfgplanes_det.id_etapa
-        and alumnos_kardex.id_tipoeval = cfgplanes_det.id_tipoeval
-
-      where alumnos_kardex.inicial = ${grupo.INICIAL}
-        and alumnos_kardex.final = ${grupo.FINAL}
-        and alumnos_kardex.periodo = ${grupo.PERIODO} 
-        and alumnos_kardex.id_eval = 'A'
-        and (alumnos_kardex.id_plan = '${idPlan}')
-        order by alumnos_kardex.claveasignatura`;
-
-    let data = await Grupos.createQuery({ querySql: sql });
+    let data = await AlumKardex.where({
+      id_plan: [idPlan],
+      id_eval: [idEval],
+      claveasignatura: [idAsig],
+      inicial: [grupo.INICIAL],
+      final: [grupo.FINAL],
+      // periodo: [grupo.PERIODO],
+    }, { limit: 35 });
     
     res.json({
       querys: {
+        idPlan,
+        idAsig,
+        idEval,
         idGrupo,
-        eval
       },
       data,
     });
@@ -422,9 +409,12 @@ router.get("/planes", async (req, res) => {
 });
 
 router.get("/planes/:idPlan/asig", async (req, res) => {
-  const { idPlan } = req.params;
+  const { idPlan = "" } = req.params;
   const asigs = await Planes_Det.where(
-    { id_plan: [idPlan] },
+    { 
+      id_plan: [idPlan], 
+      id_tipoeval: ["A"],
+    },
     { strict: true, limit: 50 }
   );
 
@@ -524,5 +514,28 @@ router.get("/profesores", async (req, res) => {
   })
 
 });
+
+router.get("/villas", async (req, res) => {
+  let villa = await VillasMst.all({
+    limit: 10,
+  })
+  res.json(villa);
+});
+router.get("/villas/:id", async (req, res) => {
+  let villa = await VillasMst.findById(req.params.id);
+  res.json(villa);
+});
+
+router.get("/villas/:idVilla/cfg", async (req, res) => {
+  let cfgVilla = await VillasCfg.where({
+    codigo_villa: [req.params.idVilla]
+  },
+  {
+    limit: 10,
+  });
+
+  res.json(cfgVilla);
+});
+router.get("/villas/:idVilla/cfg/:idCfg", async (req, res) => {});
 
 module.exports = router;

@@ -1,16 +1,16 @@
 const { Profesores } = require("../models");
 
-const ProfeCtr = {}
+const ProfeCtr = {};
 
-ProfeCtr.showList = (req, res) =>{
-    res.render("admin/profes/profesores-list");
-}
+ProfeCtr.showList = (req, res) => {
+  res.render("admin/profes/profesores-list");
+};
 
 ProfeCtr.showById = async (req, res) => {
-    const { id } = req.params;
-    const profe = await Profesores.findById(id);
-    res.render("admin/profes/profesores-id", profe);
-}
+  const { id } = req.params;
+  const profe = await Profesores.findById(id);
+  res.render("admin/profes/profesores-id", profe);
+};
 
 ProfeCtr.update = async (req, res) => {
     const { id } = req.params; 
@@ -78,5 +78,5 @@ ProfeCtr.showPerfil = (req, res) =>{
 }
 
 module.exports = {
-    ProfeCtr,
-  };
+  ProfeCtr,
+};

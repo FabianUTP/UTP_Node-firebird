@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Middleewares para las sesiones
-const { isAdmin } = require("../app/middlewares/session");
+const { isAdmin, test } = require("../app/middlewares/session");
 
 // Controladores
 const {

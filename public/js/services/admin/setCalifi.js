@@ -1,72 +1,52 @@
-const idGrupo = document.getElementById("codigo_grupo");
-const formPlan = document.getElementById("formPlan");
-const planEst = document.getElementById("planEst");
-const asignatura = document.getElementById("asignatura");
+const selectPlan = document.getElementById("plan");
+const selectEval = document.getElementById("evaluacion");
+const selectAsig = document.getElementById("asignatura");
+
 const table = document.getElementById("table-body");
+const codigo_grupo = document.getElementById("codigo_grupo").value;
 
-const pathApi = "/api/calificaciones";
+let idPlan = "";
+let eval = "";
 
-formPlan.addEventListener("submit", (e) => {
-  e.preventDefault();
-  getAsignaturas();
-});
-
-const getAsignaturas = async () => {
-  let url = `/api/calificaciones/asignaturas?idGrupo=${idGrupo.value}&idPlan=${planEst.value}`;
+selectPlan.addEventListener("change", async (event) => {
+  idPlan = event.target.value;
+  let url = `/api/planes/${idPlan}/eval`;
   const res = await fetch(url);
   const { data } = await res.json();
 
-  // Elimina los datos repetidos
-  let noRepitData = [];
-  let newData = [];
+  let content = "";
+  data.forEach((element) => {
+    content += `<option value="${element?.ID_EVAL}">${element?.NOMBRECORTO}</option>`;
+  });
 
+  selectEval.innerHTML = content;
+
+  getAsignaturas();
+});
+
+selectEval.addEventListener("change", (event) => {
+  eval = event.target.value;
+});
+
+const getAsignaturas = async () => {
+  let url = `/api/planes/${idPlan}/asig`;
+  const res = await fetch(url);
+  const { data } = await res.json();
+
+  let content = "<option disabled selected>Seleccione la asignatura</option>";
   data.forEach((item) => {
-    if (!noRepitData.includes(item.CLAVEASIGNATURA)) {
-      noRepitData.push(item.CLAVEASIGNATURA);
-      newData.push(item);
-    }
-  });
-  
-  asignatura.innerHTML = "";
-  let contentAsig = "<option selected disabled>-- Elija una opción --</option>";
-
-  newData.map((item) => {
-    contentAsig += `<option value="${item.CLAVEASIGNATURA}">`;
-    contentAsig += `${item.NOMBREASIGNATURA}`;
-    contentAsig += "</option>";
+    content += `<option value="${item.CLAVEASIGNATURA}">${item.NOMBREASIGNATURA}</option>`;
   });
 
-  asignatura.innerHTML = contentAsig;
+  selectAsig.innerHTML = content;
 };
 
-asignatura.addEventListener("change", async (e) => {
-  console.log(e.target.value);
+selectAsig.addEventListener("change", async (event) => {
+  let idAsig = event.target.value;
 
-  const claveAsig = e.target.value;
+  let url = `/api/calificaciones/asignaturas?idPlan=${idPlan}&idEval=${eval}&idAsig=${idAsig}&idGrupo=${codigo_grupo}`;
+  let res = await fetch(url);
+  let data = await res.json();
 
-  let url =
-    pathApi +
-    `/asignaturas/alumnos?idGrupo=${idGrupo.value}&idPlan=${planEst.value}&claveAsig=${claveAsig}`;
-
-  const res = await fetch(url);
-  const { data, error } = await res.json();
-
-  if(error) {
-    table.innerHTML = "<tr><td>Hubo un error</td></tr>"
-    return;
-  }
-
-  table.innerHTML = "";
-  let content = "";
-
-  data.forEach(item => {
-    content += "<tr>";
-    content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
-    content += `<td>${item.CALIFICACION}</td>`;
-    content += `<td>Ordinario</td>`;
-    content += "<tr>";
-  });
-
-  table.innerHTML = content;
-
+  console.log(data)
 });

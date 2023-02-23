@@ -82,6 +82,7 @@ class Firebird {
       querySql: sql,
       data: [id]
     });
+    console.log(sql)
     return res.length > 0 ? res[0] : null;
   }
 

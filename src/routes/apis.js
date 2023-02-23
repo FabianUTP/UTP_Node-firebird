@@ -15,6 +15,8 @@ const {
   Planes_Eval,
   Planes_Det,
   Profesores,
+  VillasMst,
+  VillasCfg,
 } = require("../app/models");
 
 router.get("/grupos", async (req, res) => {
@@ -512,5 +514,28 @@ router.get("/profesores", async (req, res) => {
   })
 
 });
+
+router.get("/villas", async (req, res) => {
+  let villa = await VillasMst.all({
+    limit: 10,
+  })
+  res.json(villa);
+});
+router.get("/villas/:id", async (req, res) => {
+  let villa = await VillasMst.findById(req.params.id);
+  res.json(villa);
+});
+
+router.get("/villas/:idVilla/cfg", async (req, res) => {
+  let cfgVilla = await VillasCfg.where({
+    codigo_villa: [req.params.idVilla]
+  },
+  {
+    limit: 10,
+  });
+
+  res.json(cfgVilla);
+});
+router.get("/villas/:idVilla/cfg/:idCfg", async (req, res) => {});
 
 module.exports = router;

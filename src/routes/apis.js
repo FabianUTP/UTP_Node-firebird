@@ -269,7 +269,6 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
   try {
 
     let grupo = await Grupos.findById(idGrupo);
-    console.log(grupo)
 
     let data = await AlumKardex.where({
       id_plan: [idPlan],

@@ -33,7 +33,7 @@ const getCuatrisNavbar = async () => {
 
   // Muestra el que ya esta seleccionado
   if(periodoSelected) {
-    content += `<option>${periodoSelected}</option>`;
+    content += `<option disabled selected>${periodoSelected}</option>`;
   }
   content += "<option value='none'>Todos</option>";
 

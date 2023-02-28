@@ -1,5 +1,10 @@
 const Firebird = require("./Firebird");
 
-const Profesores = new Firebird('profesores', 'claveprofesor');
+const Profesores = new Firebird("profesores", "claveprofesor");
 
-module.exports = Profesores;
+const ProfesoresGrupos = new Firebird("profesores_grupos", "");
+
+module.exports = {
+  Profesores,
+  ProfesoresGrupos,
+};

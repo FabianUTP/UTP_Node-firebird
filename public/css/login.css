@@ -1,12 +1,20 @@
+body {
+  background: linear-gradient(#3074db, #6ad6bd, #0d8f71);
+  background-size: 400% 400%;
+  animation: gradient 18s ease infinite;
+  height: 100vh;
+}
+
+
 .btn-show {
-    position: absolute;
-    right: 1%;
-    background-color: transparent;
-    border: none;
-    top: .3rem;
-    z-index: 9;
+  position: absolute;
+  right: 1%;
+  background-color: transparent;
+  border: none;
+  top: 0.3rem;
+  z-index: 9;
 }
 
 .btn-show:hover {
-    color: blue;
+  color: blue;
 }

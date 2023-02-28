@@ -1,18 +1,14 @@
 const { request, response } = require("express");
-const { dash_items } = require("../../utils/dashboard-items");
+const { admin_items, alumno_items } = require("../../utils/dashboard-items");
 
 const HomeController = {};
 
 HomeController.index = (req = request, res = response) => {
-  if (req.session.isAdmin) {
-    // Vista a mostrar para el administrador
-    res.render("admin/dashboard-admin");
-  } else {
-    // vista a mostrar para el alumno
-    res.render("alumno/dashboard", {
-      items: dash_items,
-    });
-  }
+  let isAdmin = req.session.isAdmin;
+  // Vista a mostrar para el administrador
+  res.render("dashboard", {
+    items: isAdmin ? admin_items : alumno_items,
+  });
 };
 
 module.exports = {

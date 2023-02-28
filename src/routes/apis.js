@@ -18,6 +18,7 @@ const {
   VillasMst,
   VillasCfg,
 } = require("../app/models");
+const { ProfesoresGrupos } = require("../app/models/Profesores");
 
 router.get("/grupos", async (req, res) => {
   const {
@@ -269,7 +270,6 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
   try {
 
     let grupo = await Grupos.findById(idGrupo);
-    console.log(grupo)
 
     let data = await AlumKardex.where({
       id_plan: [idPlan],
@@ -511,6 +511,42 @@ router.get("/profesores", async (req, res) => {
       page
     },
     data: profes
+  })
+
+});
+
+router.get("/profesores/:id/grupos", async (req, res) => {
+  const idProfesor = req.params.id;
+
+  const { page = 1 } = req.query;
+
+  if (page <= 0) page = 1
+
+  let periodoSelected = req.session.periodoSelected;
+  let periodos = {
+    inicial: [],
+    final: [],
+    periodo: [],
+  };
+
+  if (periodoSelected) { 
+    let ciclos = await Ciclos.findById(periodoSelected);
+    periodos.inicial = [ciclos?.INICIAL];
+    periodos.final = [ciclos?.FINAL];
+    periodos.periodo = [ciclos?.PERIODO];
+   }
+
+  const grupos = await ProfesoresGrupos.where({
+    claveprofesor: [idProfesor],
+    ...periodos,
+  }, {
+    limit: 20,
+    skip: (page - 1) * 20 
+  });
+
+  res.json({
+    id_profesor: idProfesor,
+    data: grupos,
   })
 
 });

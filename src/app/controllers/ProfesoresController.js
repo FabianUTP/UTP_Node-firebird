@@ -69,12 +69,24 @@ ProfeCtr.update = async (req, res) => {
 
     res.redirect("/profesores");
 }
-ProfeCtr.showAsig = (req, res) =>{
-    res.render("admin/profes/asig/profes-asig-id");
+ProfeCtr.showAsig = async (req, res) =>{
+  const idProfesor = req.params.id
+  const profe = await Profesores.findById(idProfesor)
+    res.render("admin/profes/asig/profes-asig-id", profe);
 }
 
 ProfeCtr.showPerfil = (req, res) =>{
     res.render("admin/profes/asig/profes-perfil");
+}
+
+ProfeCtr.showSubirCalf = (req, res) =>{
+  res.render("admin/profes/cal/subir_calif");
+}
+
+ProfeCtr.showVerCalf = async (req, res) =>{
+  const idProfesor = req.params.id
+  const profe = await Profesores.findById(idProfesor)
+  res.render("admin/profes/cal/ver_calif");
 }
 
 module.exports = {

@@ -32,10 +32,10 @@ async function getProfesores(){
   
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}">Ver Ficha</a></li>
-      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/asignacion">Asignatura de Grupo</a></li>
+      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/asignacion">Asignación de Grupo</a></li>
       <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/Perfil">Perfil Academico</a></li>
       <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/profesores-list">Horario Contratado</a></li>
-      <li><a class="dropdown-item" href="#">Eliminar</a></li>
+      
     </ul>
       </div></td>`;
 

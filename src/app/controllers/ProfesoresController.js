@@ -1,4 +1,4 @@
-const { Profesores } = require("../models");
+const { Profesores, Planes_Eval } = require("../models");
 
 const ProfeCtr = {};
 
@@ -85,8 +85,14 @@ ProfeCtr.showSubirCalf = (req, res) =>{
 
 ProfeCtr.showVerCalf = async (req, res) =>{
   const idProfesor = req.params.id
+  const idAsig = req.params.idAsig
+  const idPlan = req.params.idPlan
   const profe = await Profesores.findById(idProfesor)
-  res.render("admin/profes/cal/ver_calif");
+  const evals = await Planes_Eval.where(
+    { id_plan: [idPlan] },
+    { strict: true }
+  );
+  res.render("admin/profes/cal/ver_calif", {profe, evals});
 }
 
 module.exports = {

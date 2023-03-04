@@ -1,5 +1,6 @@
 const table = document.getElementById("table-content");
 const boton = document.getElementById("buscar");
+const idplan = document.getElementById("idPlan")
 
 
 let page = 1;
@@ -30,8 +31,8 @@ async function getProfesoresAsig(){
     </a>
   
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <li><a class="dropdown-item" href="/profesores/${item.CLAVEASIGNATURA}/ver_calif">Ver calificaciones</a></li>
-      <li><a class="dropdown-item" href="/profesores/${item.CLAVEASIGNATURA}/subir_calif">Subir Calificaciones</a></li>
+      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/ver_calif/${item.CLAVEASIGNATURA}/${item.ID_PLAN}">Ver calificaciones</a></li>
+      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/subir_calif/${item.CLAVEASIGNATURA}">Subir Calificaciones</a></li>
      
     </ul>
       </div></td>`;

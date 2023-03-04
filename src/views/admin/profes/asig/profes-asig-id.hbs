@@ -1,18 +1,15 @@
 <section>
-  <input type="hidden" id="idprofesor" value="{{CLAVEPROFESOR}}">
-    <div class="mb-3">
+  <input type="hidden" id="idprofesor" value="{{CLAVEPROFESOR}}" />
+  <div class="mb-3">
     {{>btnBack}}
   </div>
-
-
-
   <div class="card">
     <div class="card-body">
       <div class="card-title text-center">
         <h1>Asignación de grupos </h1>
         <h4> Mtro. {{NOMBREPROFESOR}}</h4>
       </div>
-       <div class="flex-fill">
+      <div class="flex-fill">
         <div class="input-group mb-1">
           <div class="input-group-prepend">
             <span class="input-group-text">
@@ -27,8 +24,8 @@
           />
         </div>
       </div>
-         
-     <table class="table table-hover">
+
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>Nombre de la asignatura</th>
@@ -39,7 +36,7 @@
       </table>
 
       <div>
-        <button class="btn btn-primary" onclick="onPrev()"> < </button>
+        <button class="btn btn-primary" onclick="onPrev()"> </button>
         <button class="btn btn-primary" onclick="onNext()"> > </button>
       </div>
 

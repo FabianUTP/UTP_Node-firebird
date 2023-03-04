@@ -65,7 +65,7 @@ router.get("/grupos", async (req, res) => {
       skip,
       search,
       orderBy,
-      sort
+      sort,
     },
     periodoSelected: req.session.periodoSelected,
     grupos,
@@ -100,7 +100,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   res.json({
     querys: {
       limit,
-      skip
+      skip,
     },
     idGrupo,
     alumnos,
@@ -108,9 +108,12 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
 });
 
 router.get("/cuatris-navbar", async (req, res) => {
-  const ciclos = await Ciclos.where({
-    periodo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  }, { limit: 100, strict: false });
+  const ciclos = await Ciclos.where(
+    {
+      periodo: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    },
+    { limit: 100, strict: false }
+  );
 
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
@@ -150,22 +153,28 @@ router.get("/cuatrimestres", async (req, res) => {
     limit,
     skip,
     searchQuery,
-    orderBy: 'inicial',
-    sort: 'desc'
+    orderBy: "inicial",
+    sort: "desc",
   });
 
   res.json({
     querys: {
       limit,
       skip,
-      search
+      search,
     },
     ciclos,
   });
 });
 
 router.get("/alumnos", async (req, res) => {
-  const { limit = 15, skip = 0, search, orderBy = "paterno", sort ="asc" } = req.query;
+  const {
+    limit = 15,
+    skip = 0,
+    search,
+    orderBy = "paterno",
+    sort = "asc",
+  } = req.query;
 
   let searchQuery = null;
 
@@ -174,9 +183,9 @@ router.get("/alumnos", async (req, res) => {
     searchQuery = `(matricula LIKE '%${search}%') `;
     searchQuery += `OR (nombre LIKE '%${search}%') `;
     searchQuery += `OR (paterno LIKE '%${search}%') `;
-    
+
     let searchLastName = search.split(" ");
-    if(searchLastName.length > 1) {
+    if (searchLastName.length > 1) {
       searchQuery += `OR (paterno LIKE '%${searchLastName[0]}%' AND materno LIKE '%${searchLastName[1]}%') `;
     }
   }
@@ -195,7 +204,7 @@ router.get("/alumnos", async (req, res) => {
       skip,
       search,
       orderBy,
-      sort
+      sort,
     },
     alumnos,
   });
@@ -221,7 +230,7 @@ router.get("/carreras", async (req, res) => {
     querys: {
       limit,
       skip,
-      search
+      search,
     },
     niveles,
   });
@@ -230,23 +239,26 @@ router.get("/carreras", async (req, res) => {
 router.get("/doctos/", async (req, res) => {
   const { grado, numalumno } = req.query;
 
-  if(!grado || !numalumno) {
+  if (!grado || !numalumno) {
     return res.json({
-      error: 'Se necesita el grado a buscar y el numero del alumno'
+      error: "Se necesita el grado a buscar y el numero del alumno",
     });
   }
 
-  const doctos = await Doctos.where({
-    grado: [grado],
-    clave: [numalumno]
-  }, {
-    strict: true,
-  });
+  const doctos = await Doctos.where(
+    {
+      grado: [grado],
+      clave: [numalumno],
+    },
+    {
+      strict: true,
+    }
+  );
 
   res.json({
     query: {
       grado,
-      numalumno
+      numalumno,
     },
     doctos,
   });
@@ -255,7 +267,7 @@ router.get("/doctos/", async (req, res) => {
 router.get("/calificaciones/asignaturas", async (req, res) => {
   const { idPlan = "", idAsig = "", idEval = "", idGrupo = "" } = req.query;
 
-  if(!idGrupo || !idPlan || !idAsig || !idEval) {
+  if (!idGrupo || !idPlan || !idAsig || !idEval) {
     return res.json({
       error: "El id del grupo, plan, evaluacion y asignatura son necesarios",
       querys: {
@@ -263,23 +275,25 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
         idAsig,
         idEval,
         idGrupo,
-      }
-    })
-  };
+      },
+    });
+  }
 
   try {
-
     let grupo = await Grupos.findById(idGrupo);
 
-    let data = await AlumKardex.where({
-      id_plan: [idPlan],
-      id_eval: [idEval],
-      claveasignatura: [idAsig],
-      inicial: [grupo.INICIAL],
-      final: [grupo.FINAL],
-      // periodo: [grupo.PERIODO],
-    }, { limit: 35 });
-    
+    let data = await AlumKardex.where(
+      {
+        id_plan: [idPlan],
+        id_eval: [idEval],
+        claveasignatura: [idAsig],
+        inicial: [grupo.INICIAL],
+        final: [grupo.FINAL],
+        // periodo: [grupo.PERIODO],
+      },
+      { limit: 35 }
+    );
+
     res.json({
       querys: {
         idPlan,
@@ -289,38 +303,36 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
       },
       data,
     });
-
   } catch (error) {
     res.json({
-      error: "El id del grupo y el plan no coinciden para la consulta"
-    })
+      error: "El id del grupo y el plan no coinciden para la consulta",
+    });
   }
 });
 
 router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
   const { idGrupo, idPlan, claveAsig } = req.query;
 
-  if(!idGrupo || !idPlan || !claveAsig) {
+  if (!idGrupo || !idPlan || !claveAsig) {
     return res.json({
-      error: "El id del grupo, del plan y la clave asignatura son necesarios"
-    })
-  };
+      error: "El id del grupo, del plan y la clave asignatura son necesarios",
+    });
+  }
 
   try {
-
     let grupo = await Grupos.findById(idGrupo);
     let plan = await Planes_Etapas.findById(idPlan);
 
-    if(!grupo) {
+    if (!grupo) {
       return res.json({
-        error: "No existe el grupo"
-      })
+        error: "No existe el grupo",
+      });
     }
 
-    if(!plan) {
+    if (!plan) {
       return res.json({
-        error: "No existe el plan"
-      })
+        error: "No existe el plan",
+      });
     }
 
     let sql = `select first(200) 
@@ -353,66 +365,60 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
         order by alumnos.paterno`;
 
     let data = await Grupos.createQuery({ querySql: sql });
-    
+
     res.json({
       querys: {
         idGrupo,
-        eval
+        eval,
       },
       data,
     });
-
   } catch (error) {
     res.json({
-      error: "El id del grupo y el plan no coinciden para la consulta"
-    })
+      error: "El id del grupo y el plan no coinciden para la consulta",
+    });
   }
-})
+});
 
 router.get("/planes", async (req, res) => {
-  const { 
-    page = 1, 
-    search = '',
-    nivel = ''
-  } = req.query;
+  const { page = 1, search = "", nivel = "" } = req.query;
 
-  let searchQuery = '';
+  let searchQuery = "";
 
   if (page <= 0) page = 1;
 
   if (search) {
-    searchQuery += `nombre_plan LIKE '%${search.toUpperCase()}%'`
+    searchQuery += `nombre_plan LIKE '%${search.toUpperCase()}%'`;
   }
 
   if (nivel) {
-    if(search) searchQuery += ' AND '
-    searchQuery += `nivel = '${nivel}'`
+    if (search) searchQuery += " AND ";
+    searchQuery += `nivel = '${nivel}'`;
   }
 
   const planes = await Planes_Mst.all({
     limit: 20,
     skip: (page - 1) * 20,
     searchQuery,
-    orderBy: 'nombre_plan',
-    sort: 'asc',
+    orderBy: "nombre_plan",
+    sort: "asc",
   });
 
   res.json({
     query: {
       page,
       search,
-      nivel
+      nivel,
     },
-    data: planes
-  })
-
+    data: planes,
+  });
 });
 
 router.get("/planes/:idPlan/asig", async (req, res) => {
   const { idPlan = "" } = req.params;
   const asigs = await Planes_Det.where(
-    { 
-      id_plan: [idPlan], 
+    {
+      id_plan: [idPlan],
       id_tipoeval: ["A"],
     },
     { strict: true, limit: 50 }
@@ -420,7 +426,7 @@ router.get("/planes/:idPlan/asig", async (req, res) => {
 
   res.json({
     querys: null,
-    data: asigs
+    data: asigs,
   });
 });
 
@@ -433,8 +439,8 @@ router.get("/planes/:idPlan/eval", async (req, res) => {
 
   res.json({
     querys: null,
-    data: evals
-  })
+    data: evals,
+  });
 });
 
 // Calificaciones por alumno
@@ -458,17 +464,16 @@ router.get("/calificaciones/:numalumno", async (req, res) => {
     and (cfgplanes_det.grado = ${cuatri})`;
 
   const data = await AlumKardex.createQuery({
-    querySql: sql
-  })
+    querySql: sql,
+  });
 
   res.json({
     query: {
       cuatri,
-      eval
+      eval,
     },
-    data
-  })
-
+    data,
+  });
 });
 
 router.get("/estatus", async (req, res) => {
@@ -482,12 +487,12 @@ router.get("/estatus", async (req, res) => {
   const status = await CfgStatus.all({
     limit: 50,
     searchQuery,
-  })
+  });
 
   res.json({
     querys: search,
-    data: status
-  })
+    data: status,
+  });
 });
 
 router.get("/profesores", async (req, res) => {
@@ -508,11 +513,10 @@ router.get("/profesores", async (req, res) => {
   res.json({
     query: {
       search,
-      page
+      page,
     },
-    data: profes
-  })
-
+    data: profes,
+  });
 });
 
 router.get("/profesores/:id/grupos", async (req, res) => {
@@ -520,7 +524,7 @@ router.get("/profesores/:id/grupos", async (req, res) => {
 
   const { page = 1 } = req.query;
 
-  if (page <= 0) page = 1
+  if (page <= 0) page = 1;
 
   let periodoSelected = req.session.periodoSelected;
   let periodos = {
@@ -529,32 +533,34 @@ router.get("/profesores/:id/grupos", async (req, res) => {
     periodo: [],
   };
 
-  if (periodoSelected) { 
+  if (periodoSelected) {
     let ciclos = await Ciclos.findById(periodoSelected);
     periodos.inicial = [ciclos?.INICIAL];
     periodos.final = [ciclos?.FINAL];
     periodos.periodo = [ciclos?.PERIODO];
-   }
+  }
 
-  const grupos = await ProfesoresGrupos.where({
-    claveprofesor: [idProfesor],
-    ...periodos,
-  }, {
-    limit: 20,
-    skip: (page - 1) * 20 
-  });
+  const grupos = await ProfesoresGrupos.where(
+    {
+      claveprofesor: [idProfesor],
+      ...periodos,
+    },
+    {
+      limit: 20,
+      skip: (page - 1) * 20,
+    }
+  );
 
   res.json({
     id_profesor: idProfesor,
     data: grupos,
-  })
-
+  });
 });
 
 router.get("/villas", async (req, res) => {
   let villa = await VillasMst.all({
     limit: 10,
-  })
+  });
   res.json(villa);
 });
 router.get("/villas/:id", async (req, res) => {
@@ -563,12 +569,14 @@ router.get("/villas/:id", async (req, res) => {
 });
 
 router.get("/villas/:idVilla/cfg", async (req, res) => {
-  let cfgVilla = await VillasCfg.where({
-    codigo_villa: [req.params.idVilla]
-  },
-  {
-    limit: 10,
-  });
+  let cfgVilla = await VillasCfg.where(
+    {
+      codigo_villa: [req.params.idVilla],
+    },
+    {
+      limit: 10,
+    }
+  );
 
   res.json(cfgVilla);
 });

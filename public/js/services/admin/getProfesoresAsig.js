@@ -51,7 +51,7 @@ async function getProfesoresAsig() {
       <li>
         <a 
           class="dropdown-item" 
-          href="/profesores/${item.CLAVEPROFESOR}/subir_calif"
+          href="/profesores/${item.CLAVEPROFESOR}/subir_calif?${query}"
         >
           Subir Calificaciones
         </a>

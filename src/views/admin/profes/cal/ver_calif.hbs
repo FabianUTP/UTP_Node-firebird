@@ -1,29 +1,35 @@
 <section>
-    <div class="mb-3">
+<div class="mb-3">
     {{>btnBack}}
   </div>
   <div class="card">
     <div class="card-body">
       <div class="card-title text-center">
-        <h1>Ver Calificaciones</h1>
-        <h4>Mtro {{NOMBREPROFESOR}} </h4>
+        <h1>Calificaciones</h1>
+        <h4>Mtro {{profe.NOMBREPROFESOR}}</h4>
         <h4> Asignatura </h4>
         <h4> Grupo </h4>
       </div>
+
+      <select name="plan" id="idPlan" class="form-select">
+        <option disabled selected>-Seleccione un plan-</option>
+        {{#each evals}}
+          <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
+        {{/each}}
+      </select>
       <table class="table table-hover">
         <thead>
           <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Materia</th>
+            <th>Matricula</th>
             <th>Calificación</th>
           </tr>
         </thead>
         <tbody id="table-content"></tbody>
       </table>
-      </div>
-      </div>
-    
+    </div>
+  </div>
 
 </section>
 

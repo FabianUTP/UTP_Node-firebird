@@ -1,2 +1,51 @@
+const selectEval = document.getElementById("idPlan");
+const statusLoading = document.getElementById("loading");
+const table = document.getElementById("table-content");
 
-getVerCalificacion();
+const url = new URL(location.href);
+const searchQuery = url.searchParams;
+
+let params = {
+  idPlan: searchQuery.get("idPlan"),
+  claveAsig: searchQuery.get("claveAsig"),
+  idEtapa: searchQuery.get("idEtapa"),
+  idEval: "A",
+  inicial: searchQuery.get("inicial"),
+  final: searchQuery.get("final"),
+  periodo: searchQuery.get("periodo"),
+};
+
+async function main() {
+  table.innerHTML = ""
+  statusLoading.classList.remove("d-none");
+
+  let urlApi = "/api/calificaciones/asignaturas/alumnos?";
+
+  Object.keys(params).forEach((item) => {
+    urlApi += `${item}=${params[item]}&`;
+  });
+
+  const res = await fetch(urlApi);
+  const { data } = await res.json();
+
+  let content = "";
+  data.forEach((item, index) => {
+    content += "<tr>";
+    content += `<td>${index + 1}</td>`;
+    content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
+    content += `<td>${item.MATRICULA}</td>`;
+    content += `<td>${item.CALIFICACION}</td>`;
+    content += "</tr>";
+  });
+
+  statusLoading.classList.add("d-none");
+  table.innerHTML = content;
+}
+
+selectEval.addEventListener("change", ({ target }) => {
+  params["idEval"] = target.value;
+
+  main();
+});
+
+main();

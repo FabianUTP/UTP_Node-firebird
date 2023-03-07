@@ -1,3 +1,4 @@
+const { request } = require("express");
 const { Profesores, Planes_Eval } = require("../models");
 
 const ProfeCtr = {};
@@ -83,10 +84,9 @@ ProfeCtr.showSubirCalf = (req, res) =>{
   res.render("admin/profes/cal/subir_calif");
 }
 
-ProfeCtr.showVerCalf = async (req, res) =>{
-  const idProfesor = req.params.id
-  const idAsig = req.params.idAsig
-  const idPlan = req.params.idPlan
+ProfeCtr.showVerCalf = async (req = request, res) =>{
+  const idProfesor = req.params.id;
+  const { idPlan } = req.query;
   const profe = await Profesores.findById(idProfesor)
   const evals = await Planes_Eval.where(
     { id_plan: [idPlan] },

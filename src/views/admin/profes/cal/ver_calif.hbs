@@ -1,5 +1,5 @@
 <section>
-<div class="mb-3">
+  <div class="mb-3">
     {{>btnBack}}
   </div>
   <div class="card">
@@ -11,12 +11,12 @@
         <h4> Grupo </h4>
       </div>
 
-      <select name="plan" id="idPlan" class="form-select">
-        <option disabled selected>-Seleccione un plan-</option>
+      <select id="idPlan" class="form-select">
         {{#each evals}}
           <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
         {{/each}}
       </select>
+      
       <table class="table table-hover">
         <thead>
           <tr>
@@ -28,6 +28,9 @@
         </thead>
         <tbody id="table-content"></tbody>
       </table>
+      <div id="loading" class="text-center">
+        <div class="spinner-border" role="status"></div>
+      </div>
     </div>
   </div>
 

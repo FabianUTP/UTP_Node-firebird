@@ -298,7 +298,8 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
 
 router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
   const { 
-    idPlan, 
+    idPlan,
+    grupo,
     claveAsig,
     idEtapa,
     idEval = "A", 
@@ -320,7 +321,7 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
     if(!plan) {
       return res.json({
         error: "No existe el plan"
-      })
+      });
     }
 
     let sql = `
@@ -335,14 +336,19 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
       from alumnos_kardex
 
       inner join alumnos on alumnos_kardex.numeroalumno = alumnos.numeroalumno
+      inner join alumnos_grupos on alumnos_kardex.numeroalumno = alumnos_grupos.numeroalumno
+        and alumnos_kardex.inicial = alumnos_grupos.inicial
+        and alumnos_kardex.final = alumnos_grupos.final
+        and alumnos_kardex.periodo = alumnos_grupos.periodo
 
-      where id_plan = '${idPlan}'
-        and claveasignatura = '${claveAsig}'
-        and id_etapa = '${idEtapa}'
-        and id_eval = '${idEval}'
-        and inicial = '${inicial}'
-        and final = '${final}'
-        and periodo = '${periodo}'
+      where alumnos_kardex.id_plan = '${idPlan}'
+        and alumnos_kardex.claveasignatura = '${claveAsig}'
+        and alumnos_kardex.id_etapa = '${idEtapa}'
+        and alumnos_kardex.id_eval = '${idEval}'
+        and alumnos_kardex.inicial = '${inicial}'
+        and alumnos_kardex.final = '${final}'
+        and alumnos_kardex.periodo = '${periodo}'
+        and alumnos_grupos.codigo_grupo = '${grupo}'
 
       order by paterno`;
 
@@ -350,7 +356,8 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
     
     res.json({
       querys: {
-        idPlan, 
+        idPlan,
+        grupo, 
         claveAsig,
         idEtapa,
         idEval, 
@@ -363,7 +370,8 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
 
   } catch (error) {
     res.json({
-      error: "Algunos datos no coinciden para la consulta"
+      error: "Algunos datos no coinciden para la consulta",
+      querys: req.query
     })
   }
 })
@@ -519,29 +527,25 @@ router.get("/profesores/:id/grupos", async (req, res) => {
 
   const { page = 1 } = req.query;
 
-  if (page <= 0) page = 1
+  if (page <= 0) page = 1;
+  
+  let sql = `select first(${page * 20}) skip(${(page - 1) * 20}) *
+    from profesores_grupos
+    join cfgplanes_det as asig
+    on profesores_grupos.id_plan = asig.id_plan
+    and profesores_grupos.id_etapa = asig.id_etapa
+    where claveprofesor = '${idProfesor}' `;
 
   let periodoSelected = req.session.periodoSelected;
-  let periodos = {
-    inicial: [],
-    final: [],
-    periodo: [],
-  };
 
   if (periodoSelected) { 
     let ciclos = await Ciclos.findById(periodoSelected);
-    periodos.inicial = [ciclos?.INICIAL];
-    periodos.final = [ciclos?.FINAL];
-    periodos.periodo = [ciclos?.PERIODO];
-   }
+    sql += `and inicial = ${ciclos.INICIAL} `;
+    sql += `and final = ${ciclos.FINAL} `;
+    sql += `and periodo = ${ciclos.PERIODO} `;
+  }
 
-  const grupos = await ProfesoresGrupos.where({
-    claveprofesor: [idProfesor],
-    ...periodos,
-  }, {
-    limit: 20,
-    skip: (page - 1) * 20 
-  });
+  let grupos = await ProfesoresGrupos.createQuery({ querySql: sql });
 
   res.json({
     id_profesor: idProfesor,

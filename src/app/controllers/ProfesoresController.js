@@ -80,8 +80,15 @@ ProfeCtr.showPerfil = (req, res) =>{
     res.render("admin/profes/asig/profes-perfil");
 }
 
-ProfeCtr.showSubirCalf = (req, res) =>{
-  res.render("admin/profes/cal/subir_calif");
+ProfeCtr.showSubirCalf = async (req, res) =>{
+  const idProfesor = req.params.id;
+  const { idPlan } = req.query;
+  const profe = await Profesores.findById(idProfesor)
+  const evals = await Planes_Eval.where(
+    { id_plan: [idPlan] },
+    { strict: true }
+  );
+  res.render("admin/profes/cal/subir_calif", {profe, evals});
 }
 
 ProfeCtr.showVerCalf = async (req = request, res) =>{

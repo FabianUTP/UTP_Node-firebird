@@ -7,9 +7,9 @@
     <div class="card-body">
       <div class="card-title text-center">
         <h1>Registro de Calificaciones</h1>
-        <h4>Mtro {{profe.NOMBREPROFESOR}}</h4>
-        <h4> Asignatura {{CLAVEASIGNATURA}} </h4>
-        <h4> Grupo </h4>
+        <h4>Mtro: {{profe.NOMBREPROFESOR}}</h4>
+        <h4 id="asig"> Asignatura </h4>
+        <h4 id="grupo"> Grupo </h4>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
        <button type="button" class="btn btn-success">
@@ -39,18 +39,7 @@
             <th>Calificación</th>
           </tr>
         </thead>
-        <tr>
-        <td>1</td>
-        <td>daniela</td>
-        <td>18090155</td>
-        <td><input type="text" value="10"></td>
-        </tr>
-        <tr>
-        <td>2</td>
-        <td>fabian</td>
-        <td>18090166</td>
-        <td><input type="text" value="8"></td>
-        </tr>
+        
         
         <tbody id="table-content"></tbody>
       </table>
@@ -62,4 +51,4 @@
 
 </section>
 
-<script src="/js/services/admin/getVerCalificacion.js"></script>
+<script src="/js/services/admin/setSubirCalificacion.js"></script>

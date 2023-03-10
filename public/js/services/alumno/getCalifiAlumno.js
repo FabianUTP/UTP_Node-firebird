@@ -10,6 +10,7 @@ const getCalifi = async () => {
   url += "&eval=" + tipoEval.value;
 
   table.innerHTML = "";
+  
   load.style.display = "block";
 
   const res = await fetch(url);

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// Middleewares para las sesiones
+// Middleware para las sesiones
 const { verifySesion, noAuth } = require("../app/middlewares/session");
 
 // Controladores

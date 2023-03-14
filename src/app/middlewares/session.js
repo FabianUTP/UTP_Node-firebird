@@ -1,7 +1,7 @@
 const { request, response } = require("express");
 
 /**
- * Verifica que se haya iniciado sesion para acceder
+ * Verifica que se haya iniciado sesión para acceder
  */
 const verifySesion = (req = request, res = response, next) => {
     if(req.session.isAuthenticated) {
@@ -12,7 +12,7 @@ const verifySesion = (req = request, res = response, next) => {
 }
 
 /**
- * Deniega el acceso a los que tienen iniciado sesion
+ * Deniega el acceso a los que tienen iniciado sesión
  */
 const noAuth = (req = request, res = response, next) => {
     if(req.session.isAuthenticated) {
@@ -46,7 +46,7 @@ const isAlumno = (req = request, res = response, next) => {
 }
 
 /**
- * Se puede acceder sin iniciar sesion
+ * Se puede acceder sin iniciar sesión
  */
 const test = (req = request, res = response, next) => {
     next();

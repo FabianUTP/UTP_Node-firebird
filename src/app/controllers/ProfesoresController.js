@@ -83,6 +83,7 @@ ProfeCtr.showPerfil = (req, res) =>{
 ProfeCtr.showSubirCalf = async (req, res) =>{
   const idProfesor = req.params.id;
   const { idPlan } = req.query;
+  
   const profe = await Profesores.findById(idProfesor)
   const evals = await Planes_Eval.where(
     { id_plan: [idPlan] },
@@ -94,11 +95,13 @@ ProfeCtr.showSubirCalf = async (req, res) =>{
 ProfeCtr.showVerCalf = async (req = request, res) =>{
   const idProfesor = req.params.id;
   const { idPlan } = req.query;
+
   const profe = await Profesores.findById(idProfesor)
   const evals = await Planes_Eval.where(
     { id_plan: [idPlan] },
     { strict: true }
   );
+
   res.render("admin/profes/cal/ver_calif", {profe, evals});
 }
 

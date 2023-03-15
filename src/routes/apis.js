@@ -378,7 +378,7 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
 });
 
 // Api para subir calificaciones
-router.post("/calificaciones", async (req, res) => {
+router.post("/calificaciones", (req, res) => {
 
   const {
     claveAsig,
@@ -391,9 +391,9 @@ router.post("/calificaciones", async (req, res) => {
   } = req.query;
 
   const dataCalif = req.body;
+  let promises = [];
 
-  
-  Object.keys(dataCalif).forEach( async (item) => {
+  Object.keys(dataCalif).forEach((item) => {
     let sql = `UPDATE alumnos_kardex SET calificacion = ?
       WHERE numeroalumno = ? 
         and claveasignatura = '${claveAsig}' 
@@ -404,17 +404,17 @@ router.post("/calificaciones", async (req, res) => {
         and final = ${final}
         and periodo = ${periodo}`;
 
-    await AlumKardex.createQuery({
+    promises.push(AlumKardex.createQuery({
       querySql: sql,
       data: [dataCalif[item], item],
-    });
+    }));
   });
 
-  setTimeout(() => {
+  Promise.all(promises).then(() => {
     res.json({
       msj: "Datos actualizados correctamente",
     })
-  }, 10000);
+  })
 });
 
 router.get("/planes", async (req, res) => {

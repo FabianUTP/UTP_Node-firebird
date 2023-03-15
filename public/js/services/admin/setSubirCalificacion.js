@@ -25,7 +25,6 @@ let params = {
 asigName.innerHTML = `Asignatura: ${params.nombreAsig}`;
 grupoName.innerHTML = `Grupo: ${params.grupo}`;
 
-
 // Almacena la información de la tabla
 let dataTable = [];
 let initialDataTable = [];
@@ -51,7 +50,7 @@ async function main() {
 }
 
 // Función que se encarga de rellena la tabla
-function writeTable () {
+function writeTable() {
   let content = "";
   dataTable.forEach((item, index) => {
     content += "<tr>";
@@ -80,42 +79,41 @@ formCalif.addEventListener("submit", async (event) => {
   background.classList.remove("d-none");
 
   const formData = new FormData(event.target);
-  
-  // Obtiene los datos en forma de un Objeto
+
+  // Obtiene los datos de la tabla en forma de un Objeto
   const data = Object.fromEntries(formData);
 
-  // Variable que se manda en la DB
-  let finalData = {}
+  // Variable final que se mandara en el fetch
+  let finalData = {};
 
   // Filtra solo los datos modificados
-  Object.keys(data).filter(key => {
-    let info = initialDataTable.find(item => item.NUMEROALUMNO == key);
+  Object.keys(data).filter((key) => {
+    let info = initialDataTable.find((item) => item.NUMEROALUMNO == key);
     if (info.CALIFICACION !== data[key]) {
       finalData = {
         ...finalData,
-        [key]: data[key]
-      }
+        [key]: data[key],
+      };
     }
   });
 
   // Ruta de la api
   let url = "/api/calificaciones?";
-  
+
   // Manda las query necesarias
-  Object.keys(params).forEach(item => {
+  Object.keys(params).forEach((item) => {
     url += `${item}=${params[item]}&`;
-  })
-  
+  });
+
   // Proceso para subir las calificaciones
   await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(finalData),
   });
 
   background.classList.add("d-none");
   main();
-  
 });
 
 // Función que lee el excel y manda en la tabla
@@ -129,29 +127,29 @@ fileExcel.addEventListener("change", () => {
       }
     });
 
-    let formatJson = excelFiltrado.map((value) => {
-      return {
-        nombre: value[1],
-        matricula: value[2],
-        calificacion: value[3],
-      };
-    });
+    // Filtra los datos del excel y lo formatea
+    let formatJson = excelFiltrado.map((value) => ({
+      nombre: value[1],
+      matricula: value[2],
+      calificacion: value[3],
+    }));
 
-    dataTable = dataTable.map(item => {      
-      let data = formatJson.find(itemJson => itemJson.matricula == item.MATRICULA);
+    dataTable = dataTable.map((item) => {
+      let data = formatJson.find(
+        (itemJson) => itemJson.matricula == item.MATRICULA
+      );
 
       if (data) {
         return {
           ...item,
-          CALIFICACION: data.calificacion
-        }
+          CALIFICACION: data.calificacion,
+        };
       } else {
         return item;
       }
     });
 
-    writeTable()
-
+    writeTable();
   });
 });
 

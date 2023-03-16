@@ -23,15 +23,17 @@
         <h1>Bienvenido</h1>
       </div>
 
+      <div class="px-5">
+        {{>msj_error}}
+      </div>
+
       {{!-- Section Alumno Login --}}
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
         <div class="card-body px-5">
 
-          {{>msj_error}}
-
-          <form id="form" action="login" method="post" class="d-flex flex-column justify-content-center">
+          <form id="form" action="/login/alumno" method="post" class="d-flex flex-column justify-content-center">
             <div>
-              <label for="matricula" class="form-label">Matricula</label>
+              <label for="User" class="form-label">Matricula</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
@@ -40,7 +42,7 @@
                     </div>
                   </div>
                 </div>
-                <input type="text" class="form-control" name="matricula" id="matricula" required>
+                <input type="text" class="form-control" name="user" id="user" required>
               </div>
             </div>
 
@@ -77,9 +79,7 @@
       <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
         <div class="card-body px-5">
 
-          {{>msj_error}}
-
-          <form id="form" action="login" method="post" class="d-flex flex-column justify-content-center">
+          <form id="form" action="/login/aspirante" method="post" class="d-flex flex-column justify-content-center">
             <div>
               <label for="matricula" class="form-label">Folio de registro</label>
               <div class="input-group mb-2">
@@ -90,7 +90,7 @@
                     </div>
                   </div>
                 </div>
-                <input type="text" class="form-control" name="matricula" id="matricula" required>
+                <input type="text" class="form-control" name="user" id="user" required>
               </div>
             </div>
 
@@ -127,11 +127,9 @@
       <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
         <div class="card-body px-5">
 
-          {{>msj_error}}
-
-          <form id="form" action="login" method="post" class="d-flex flex-column justify-content-center">
+          <form id="form" action="/login/profe" method="post" class="d-flex flex-column justify-content-center">
             <div>
-              <label for="matricula" class="form-label">Usuario</label>
+              <label for="matricula" class="form-label">Folio de profesor</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
@@ -140,7 +138,7 @@
                     </div>
                   </div>
                 </div>
-                <input type="text" class="form-control" name="matricula" id="matricula" required>
+                <input type="text" class="form-control" name="user" id="user" required>
               </div>
             </div>
 
@@ -177,9 +175,7 @@
       <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
         <div class="card-body px-5">
 
-          {{>msj_error}}
-
-          <form id="form" action="login" method="post" class="d-flex flex-column justify-content-center">
+          <form id="form" action="/login/admin" method="post" class="d-flex flex-column justify-content-center">
             <div>
               <label for="matricula" class="form-label">Usuario</label>
               <div class="input-group mb-2">
@@ -190,7 +186,7 @@
                     </div>
                   </div>
                 </div>
-                <input type="text" class="form-control" name="matricula" id="matricula" required>
+                <input type="text" class="form-control" name="user" id="user" required>
               </div>
             </div>
 
@@ -233,7 +229,7 @@
 <script>
   const inputPass = document.getElementById("pass");
   const btnShow = document.getElementById("show-pass");
-  const btn = document.getElementById("btn");
+  const btnLogin = document.getElementById("btn");
 
   // Muestra y oculta la contraseña
   btnShow.addEventListener("click", () => {
@@ -242,7 +238,7 @@
       : (inputPass.type = "password");
   });
 
-  btn.addEventListener("click", () => {
-    btn.innerHTML = '<div class="spinner-border"></div>'
+  btnLogin.addEventListener("click", () => {
+    btnLogin.innerHTML = '<div class="spinner-border"></div>'
   });
 </script>

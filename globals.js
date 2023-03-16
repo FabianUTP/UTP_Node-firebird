@@ -1,6 +1,6 @@
-// Aqui se pueden de definir variables visibles que se usuaran en el proyecto
+// Aquí se pueden de definir variables visibles que se usarán en el proyecto
 
-//cuidado al cambiar las vairables, ya que afecta todas las funciones que lo utilizan
+//cuidado al cambiar las variables, ya que afecta todas las funciones que lo utilizan
 
 const globals = (req, res, next) => {
   // Mensajes de retorno html
@@ -13,6 +13,9 @@ const globals = (req, res, next) => {
   res.locals.nameAuth = req.session.nameAuth;
   res.locals.lastNameAuth = req.session.lastNameAuth;
   res.locals.isAdmin = req.session.isAdmin;
+  res.locals.isAlumno = req.session.isAlumno;
+  res.locals.isProfe = req.session.isProfe;
+  res.locals.isAspirante = req.session.isAspirante;
   next();
 };
 

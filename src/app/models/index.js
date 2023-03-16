@@ -1,4 +1,4 @@
-const { Alumno, AlumKardex } = require("./Alumno");
+const { Alumno, AlumKardex, Aspirante } = require("./Alumno");
 const Doctos = require("./Doctos");
 const Grupos = require("./Grupos");
 const Ciclos = require("./Ciclos");
@@ -16,6 +16,7 @@ const { VillasAlumnos, VillasCfg, VillasMst } = require("./Villas");
 
 module.exports = {
   Alumno,
+  Aspirante,
   Doctos,
   Grupos,
   Ciclos,

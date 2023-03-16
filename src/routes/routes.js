@@ -8,15 +8,19 @@ const { verifySesion, noAuth } = require("../app/middlewares/session");
 const { AuthController, HomeController } = require("../app/controllers");
 
 // Login y Autenticaciones
-router.get("/login", noAuth, AuthController.login);
-router.post("/login", AuthController.postLogin);
-router.get("/logout", AuthController.logout);
-router.get("/aspirantes", noAuth, AuthController.registro);
+router.get("/login", noAuth, AuthController.login); // Vista principal
+router.get("/logout", AuthController.logout); // Para cerrar sesión
 
-// Middleware para que se inicie sesion
+// Ruta para autenticar las diferentes sesiones
+router.post("/login/alumno", AuthController.authAlumno);
+router.post("/login/aspirante", AuthController.authAspirante);
+router.post("/login/profe", AuthController.authProfe);
+router.post("/login/admin", AuthController.authAdmin);
+
+// Middleware para que se inicie sesión
 router.use(verifySesion);
 
-// Ruta principal
+// Ruta principal para el dashboard de todas las sesiones
 router.get("/", HomeController.index);
 
 // Rutas del alumno
@@ -25,7 +29,7 @@ router.use(require('./alumno'));
 // Rutas del administrador
 router.use(require('./admin'));
 
-// Para la ruta de 404 - Page not found
+// Devuelve la vista de la pagina 404 - Page not found
 router.get("*", (req, res) => res.status(404).render("others/error404"));
 
 module.exports = router;

@@ -40,8 +40,24 @@ const alumno_items = [
     link: "/boletas",
   },
 ];
+const profe_items = [
+  {
+    path_img: "./imgs/datos-del-usuario.png",
+    title: "Datos personales",
+    content:
+      "Ingresa y actualiza tus datos personales; de jornada, datos exclusivos de la institución",
+    link: "/datos",
+  },
+  {
+    path_img: "./imgs/satisfaccion.png",
+    title: "Calificaciones",
+    content: "Ver o subir calificaciones de grupos.",
+    link: "/profesores",
+  },
+];
 
 module.exports = {
   admin_items,
   alumno_items,
+  profe_items,
 };

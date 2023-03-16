@@ -25,6 +25,8 @@ router.get("/", HomeController.index);
 
 // Rutas del alumno
 router.use(require('./alumno'));
+router.use(require('./profes'));
+router.use(require('./aspirantes'));
 
 // Rutas del administrador
 router.use(require('./admin'));

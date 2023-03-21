@@ -13,6 +13,7 @@ const {
 const CfgStatus = require("./CfgStatus");
 const { Profesores, ProfesoresGrupos } = require("./Profesores");
 const { VillasAlumnos, VillasCfg, VillasMst } = require("./Villas");
+const Usuarios = require("./Usuarios");
 
 module.exports = {
   Alumno,
@@ -33,4 +34,5 @@ module.exports = {
   VillasMst,
   VillasCfg,
   VillasAlumnos,
+  Usuarios,
 };

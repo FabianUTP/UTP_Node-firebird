@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const { Alumno, Profesores, Aspirante } = require("../models");
+const { Alumno, Profesores, Aspirante, Usuarios } = require("../models");
 
 const AuthController = {};
 
@@ -11,6 +11,11 @@ AuthController.authAlumno = async (req = request, res = response) => {
   const alumno = await Alumno.findById(user);
 
   if(alumno) { 
+    // Valida que no sea aspirante
+    if (alumno?.STATUS.trim() === "S") {
+      req.flash('msj_error', 'No pueden ingresar los aspirantes');
+      return res.redirect('/login');
+    }
     req.session.isAuthenticated = true;
     req.session.isAlumno = true;
     req.session.IDAuth = alumno.MATRICULA;
@@ -31,7 +36,7 @@ AuthController.authAspirante = async (req = request, res = response) => {
 
   if(aspirante) { 
 
-    if (aspirante?.nose === "A") {
+    if (aspirante?.STATUS.trim() !== "S") {
       req.flash('msj_error', 'Ya no puede ingresar con el folio');
       return res.redirect('/login');
     }
@@ -69,12 +74,20 @@ AuthController.authProfe = async (req = request, res = response) => {
 AuthController.authAdmin = async (req = request, res = response) => {
   const { user, password } = req.body;
 
-  if(user === "admin") { 
+  const userData = await Usuarios.findById(user);
+
+  // Valida que exista el usuario
+  if(userData) {
+    // Valida que sea administrador
+    if (userData.ADMINISTRADOR.trim() === "N") {
+      req.flash('msj_error', 'El usuario no es administrador');
+      return res.redirect('/login');
+    }
     req.session.isAuthenticated = true;
     req.session.isAdmin = true;
-    req.session.IDAuth = "";
-    req.session.nameAuth = "Administrador";
-    req.session.lastNameAuth = "Escolar";
+    req.session.IDAuth = userData.EMAIL;
+    req.session.nameAuth = userData.NOMBRE;
+    req.session.lastNameAuth = "";
     return res.redirect('/');
   } else {
     req.flash('msj_error', 'Usuario no encontrado');

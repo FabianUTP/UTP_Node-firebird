@@ -1,6 +1,6 @@
 // Aquí se pueden de definir variables visibles que se usarán en el proyecto
 
-//cuidado al cambiar las variables, ya que afecta todas las funciones que lo utilizan
+//cuidado al cambiar las variables locals, ya que afecta todas las funciones que lo utilizan
 
 const globals = (req, res, next) => {
   // Mensajes de retorno html

@@ -1,4 +1,5 @@
 const express = require("express");
+require("express-group-routes");
 const router = express.Router();
 
 // Middleware para las sesiones
@@ -25,9 +26,10 @@ router.get("/", HomeController.index);
 
 // Rutas del alumno
 router.use(require('./alumno'));
-router.use(require('./profes'));
+// Rutas de los aspirantes
 router.use(require('./aspirantes'));
-
+// Rutas de los profesores
+router.use(require('./profes'));
 // Rutas del administrador
 router.use(require('./admin'));
 

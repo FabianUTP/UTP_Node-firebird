@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
-// Middleewares para las sesiones
-const { isAdmin, test } = require("../app/middlewares/session");
+const { isAdmin } = require("../app/middlewares/session");
 
 // Controladores
 const {
@@ -16,8 +14,6 @@ const {
 
 } = require("../app/controllers");
 
-
-// Middleware para proteger las rutas y solo pueda acceder el admin
 router.use(isAdmin);
 
 // Rutas para el Administrador

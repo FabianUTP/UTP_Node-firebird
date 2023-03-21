@@ -296,7 +296,8 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
   }
 });
 
-router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
+// Api para consultar calificaciones por grupos
+router.get("/calificaciones", async (req, res) => {
   const { 
     idPlan,
     grupo,
@@ -310,7 +311,7 @@ router.get("/calificaciones/asignaturas/alumnos", async (req, res) => {
 
   if(!idPlan || !claveAsig) {
     return res.json({
-      error: "El id del plan y la clave de la asignatura son necesarios"
+      error: "Hace faltan datos para la operación"
     });
   };
 
@@ -393,7 +394,7 @@ router.post("/calificaciones", (req, res) => {
   const dataCalif = req.body;
   let promises = [];
 
-  Object.keys(dataCalif).forEach((item) => {
+  for (const key in dataCalif) {
     let sql = `UPDATE alumnos_kardex SET calificacion = ?
       WHERE numeroalumno = ? 
         and claveasignatura = '${claveAsig}' 
@@ -406,9 +407,9 @@ router.post("/calificaciones", (req, res) => {
 
     promises.push(AlumKardex.createQuery({
       querySql: sql,
-      data: [dataCalif[item], item],
+      data: [dataCalif[key], key],
     }));
-  });
+  }
 
   Promise.all(promises).then(() => {
     res.json({
@@ -575,6 +576,7 @@ router.get("/profesores/:id/grupos", async (req, res) => {
     join cfgplanes_det as asig
     on profesores_grupos.id_plan = asig.id_plan
     and profesores_grupos.id_etapa = asig.id_etapa
+    and profesores_grupos.claveasignatura = asig.claveasignatura
     where claveprofesor = '${idProfesor}' `;
 
   let periodoSelected = req.session.periodoSelected;
@@ -601,6 +603,7 @@ router.get("/villas", async (req, res) => {
   })
   res.json(villa);
 });
+
 router.get("/villas/:id", async (req, res) => {
   let villa = await VillasMst.findById(req.params.id);
   res.json(villa);

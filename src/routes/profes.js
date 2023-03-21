@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+// Siempre poner este middleware al crear una ruta get
+const { isProfesor } = require("../app/middlewares/session");
 
+router.get("/datos", isProfesor, (req, res) => res.render("profes/profesores-id"));
 
-
-
-router.get("/datos", (req, res) => res.render("profes/profesores-id"));
-
-
-//el primero es la ruta y el regundo es la ruta la vista
 module.exports = router;

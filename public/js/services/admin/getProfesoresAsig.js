@@ -21,7 +21,7 @@ async function getProfesoresAsig() {
   let content = "";
   api.data.forEach((item, index) => {
 
-    // Querys que serviran para la consulta de los alumnos en el grupo
+    // Querys que servirán para la consulta de los alumnos en el grupo
     let query = `idPlan=${item.ID_PLAN}`;
     query += `&claveAsig=${item.CLAVEASIGNATURA}`;
     query += `&nombreAsig=${item.NOMBREASIGNATURA}`;

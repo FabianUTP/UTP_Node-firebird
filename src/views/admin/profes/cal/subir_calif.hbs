@@ -1,3 +1,4 @@
+{{!-- Es la pantalla de carga --}}
 <style>
   #setCalifi {
     position: absolute;
@@ -8,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0.5;
+    opacity: 0.4;
   }
 </style>
 
@@ -27,13 +28,12 @@
     <div class="text-center">
       <div class="spinner-border" role="status"></div>
     </div>
-    <strong>Subiendo calificaciones, esto podría tardar un poco :)</strong>
   </div>
 
   <div class="card">
     <div class="card-body">
-      <div class="card-title text-center">
-        <h1>Registro de Calificaciones</h1>
+      <div class="card-title">
+        <h1 class="text-center">Registro de Calificaciones</h1>
         <h4>Mtro: {{profe.NOMBREPROFESOR}}</h4>
         <h4 id="asig"> Asignatura </h4>
         <h4 id="grupo"> Grupo </h4>
@@ -41,14 +41,15 @@
 
       <Form id="formCalif">
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-between align-items-end">
 
           <div>
             <button class="btn btn-primary">Guardar</button>
           </div>
 
-          <div>
-            <input id="input" type="file" accept=".xlsx, .xls, .csv" />
+          <div class="d-flex flex-column">
+            <input id="input" type="file" accept=".xlsx, .xls, .csv"  />
+            <span id="info_excel"></span>
           </div>
 
         </div>

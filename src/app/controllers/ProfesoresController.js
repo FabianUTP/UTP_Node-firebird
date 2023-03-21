@@ -70,6 +70,7 @@ ProfeCtr.update = async (req, res) => {
 
     res.redirect("/profesores");
 }
+
 ProfeCtr.showAsig = async (req, res) =>{
   const idProfesor = req.params.id
   const profe = await Profesores.findById(idProfesor)

@@ -48,5 +48,4 @@ selectAsig.addEventListener("change", async (event) => {
   let res = await fetch(url);
   let data = await res.json();
 
-  console.log(data)
 });

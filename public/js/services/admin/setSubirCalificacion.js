@@ -34,7 +34,7 @@ async function main() {
   table.innerHTML = "";
   statusLoading.classList.remove("d-none");
 
-  let urlApi = "/api/calificaciones/asignaturas/alumnos?";
+  let urlApi = "/api/calificaciones?";
 
   Object.keys(params).forEach((item) => {
     urlApi += `${item}=${params[item]}&`;
@@ -49,7 +49,7 @@ async function main() {
   statusLoading.classList.add("d-none");
 }
 
-// Función que se encarga de rellena la tabla
+// Función que se encarga de rellenar la tabla
 function writeTable() {
   let content = "";
   dataTable.forEach((item, index) => {
@@ -57,7 +57,14 @@ function writeTable() {
     content += `<td>${index + 1}</td>`;
     content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;
-    content += `<td><input size="3" name="${item.NUMEROALUMNO}" value="${item.CALIFICACION}"></input></td>`;
+    content += `<td><input 
+                      name="${item.NUMEROALUMNO}" 
+                      value="${item.CALIFICACION}"
+                      size="3"
+                      autocomplete="off"
+                    >
+                    </input>
+                </td>`;
     content += "</tr>";
   });
 
@@ -120,7 +127,9 @@ formCalif.addEventListener("submit", async (event) => {
 fileExcel.addEventListener("change", () => {
   readXlsxFile(fileExcel.files[0]).then((data = []) => {
     let excelFiltrado = [];
+    let calif_changed = 0;
 
+    // Utiliza el excel a partir de la octava columna
     data.forEach((item, index) => {
       if (index > 7) {
         excelFiltrado.push(item);
@@ -134,12 +143,14 @@ fileExcel.addEventListener("change", () => {
       calificacion: value[3],
     }));
 
+    // Sobrescribe los datos correspondientes en la tabla
     dataTable = dataTable.map((item) => {
       let data = formatJson.find(
         (itemJson) => itemJson.matricula == item.MATRICULA
       );
 
       if (data) {
+        calif_changed++;
         return {
           ...item,
           CALIFICACION: data.calificacion,
@@ -148,6 +159,10 @@ fileExcel.addEventListener("change", () => {
         return item;
       }
     });
+
+    // Muestra en pantalla el numero de registros modificados
+    let span = document.getElementById("info_excel");
+    span.innerText = `Se han modificado ${calif_changed}/${dataTable.length} registros`;
 
     writeTable();
   });

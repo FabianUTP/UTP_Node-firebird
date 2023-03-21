@@ -27,7 +27,7 @@ async function main() {
   table.innerHTML = ""
   statusLoading.classList.remove("d-none");
 
-  let urlApi = "/api/calificaciones/asignaturas/alumnos?";
+  let urlApi = "/api/calificaciones?";
 
   Object.keys(params).forEach((item) => {
     urlApi += `${item}=${params[item]}&`;

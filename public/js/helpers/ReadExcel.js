@@ -25,6 +25,5 @@ input.addEventListener("change", () => {
       };
     });
 
-    console.log(formatJson);
   });
 });

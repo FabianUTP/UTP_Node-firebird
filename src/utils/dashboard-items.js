@@ -40,6 +40,29 @@ const alumno_items = [
     link: "/boletas",
   },
 ];
+
+const aspirante_items = [
+  {
+    path_img: "./imgs/datos-del-usuario.png",
+    title: "Datos personales",
+    content:
+      "Ingresa y actualiza tu dirección y teléfono; la persona autorizada para recibir información, datos de becas y seguro médico",
+    link: "/perfil",
+  },
+  {
+    path_img: "./imgs/documentos.png",
+    title: "Documentos del alumno",
+    content: "Ingresa y sube los documentos en formato.pdf",
+    link: "/doctos",
+  },
+  {
+    path_img: "./imgs/satisfaccion.png",
+    title: "Boletas",
+    content: "Ingresa, consulta y descarga tu boleta de calificaciones.",
+    link: "/boletas",
+  },
+];
+
 const profe_items = [
   {
     path_img: "./imgs/datos-del-usuario.png",
@@ -60,4 +83,5 @@ module.exports = {
   admin_items,
   alumno_items,
   profe_items,
+  aspirante_items,
 };

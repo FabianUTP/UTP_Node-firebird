@@ -11,8 +11,8 @@ const {
   Planes_Eval,
 } = require("./Planes");
 const CfgStatus = require("./CfgStatus");
-const { Profesores, ProfesoresGrupos } = require("./Profesores");
-const { VillasAlumnos, VillasCfg, VillasMst } = require("./Villas");
+const profes = require("./Profesores");
+const villas = require("./Villas");
 const Usuarios = require("./Usuarios");
 
 module.exports = {
@@ -29,10 +29,7 @@ module.exports = {
   Planes_Etapas,
   Planes_Mst,
   Planes_Eval,
-  Profesores,
-  ProfesoresGrupos,
-  VillasMst,
-  VillasCfg,
-  VillasAlumnos,
   Usuarios,
+  ...profes,
+  ...villas,
 };

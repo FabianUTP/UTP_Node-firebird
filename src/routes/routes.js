@@ -1,5 +1,4 @@
 const express = require("express");
-require("express-group-routes");
 const router = express.Router();
 
 // Middleware para las sesiones

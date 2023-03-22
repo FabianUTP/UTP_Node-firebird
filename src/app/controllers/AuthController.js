@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const { Alumno, Profesores, Aspirante, Usuarios } = require("../models");
+const { Alumno, ProfeAuth, Aspirante, Usuarios } = require("../models");
 
 const AuthController = {};
 
@@ -56,7 +56,7 @@ AuthController.authAspirante = async (req = request, res = response) => {
 AuthController.authProfe = async (req = request, res = response) => {
   const { user, password } = req.body;
 
-  let profe = await Profesores.findById(user);
+  let profe = await ProfeAuth.findById(user);
 
   if(profe) { 
     req.session.isAuthenticated = true;

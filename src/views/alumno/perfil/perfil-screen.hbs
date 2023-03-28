@@ -157,11 +157,19 @@
               </div>
 
               <div class="row mb-3">
-                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono celular</label>
+                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="telefono_per" type="text" class="form-control" id="telefono_per" value="{{TELEFONO}}" required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Celular</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="telefono_per" type="text" class="form-control" id="telefono_per" value="{{CELULAR}}" required>
                 </div>
               </div>
+
 
               <div class="text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -227,14 +235,14 @@
               <div class="row mb-3">
                 <label for="instbecabach" class="col-md-4 col-lg-3 col-form-label">Institución beca bach.</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="instbecabach" type="text" class="form-control" id="instbecabach" value="CNBBBJ" required>
+                  <input name="instbecabach" type="text" class="form-control" id="instbecabach" value={{NIVELCOMPLETO}} required>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="becabach" class="col-md-4 col-lg-3 col-form-label">Nombre beca bach.</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="becabach" type="text" class="form-control" id="becabach" value="Benito Juárez" required>
+                  <input name="becabach" type="text" class="form-control" id="becabach" value={{CARRERACOMPLETO}} required>
                 </div>
               </div>
 
@@ -244,7 +252,7 @@
               <div class="row mb-3">
                 <label for="instbeca" class="col-md-4 col-lg-3 col-form-label">Institución de la beca</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="becainst" type="text" class="form-control" id="becainst" value="CNBBBJ" required>
+                  <input name="becainst" type="text" class="form-control" id="becainst" value={{HIJOS6A12}} required>
                 </div>
               </div>
 
@@ -252,21 +260,21 @@
                 <label for="becanombre" class="col-md-4 col-lg-3 col-form-label">Nombre de la beca</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="becanombre" type="text" class="form-control" id="becanombre"
-                    value="JÓVENES ESCRIBIENDO EL FUTURO" required>
+                    value={{BECA}} >
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Estatus de la beca</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="becaestatus" type="text" class="form-control" id="becaestatus" value="No aceptada">
+                  <input name="becaestatus" type="text" class="form-control" id="becaestatus" value={{HIJOS13A18}}>
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="becafolio" class="col-md-4 col-lg-3 col-form-label">Folio de la beca</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="becafolio" type="text" class="form-control" id="becafolio" value="8739473">
+                  <input name="becafolio" type="text" class="form-control" id="becafolio" value={{HIJOSMAYORES}}>
                 </div>
               </div>
 
@@ -305,6 +313,13 @@
                 <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
                 <div class="col-md-8 col-lg-9">
                   <input name="nss" type="text" class="form-control" id="nss" value={{NUM_IMSS}}>
+                </div>
+              </div>
+                
+                <div class="row mb-3">
+                <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número Verificador</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="nss" type="text" class="form-control" id="nss" value={{NUM_IMSS_VERIFICADOR}}>
                 </div>
               </div>
 

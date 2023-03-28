@@ -1,6 +1,8 @@
 <section class="section profile">
-
-  <div class="">
+<div class="mb-3">
+    {{>btnBack}}
+  </div>
+  
 
     <div class="card">
       <div class="card-body pt-3">
@@ -217,9 +219,10 @@
                 </div>
               </div>
 
-            <div class="pt-3 text-center">
-        <button class="btn btn-primary">Guardar</button>
-      </div>
+            <div class="text-center">
+    <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
+    <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Guardar</button>
+  </div>
 
           </div>
 
@@ -328,9 +331,10 @@
                 </div>
               </div>
 
-            <div class="pt-3 text-center">
-        <button class="btn btn-primary">Guardar</button>
-      </div>
+            <div class="text-center">
+    <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
+    <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Guardar</button>
+  </div>
 
 
             </form><!-- End Change Password Form -->
@@ -448,9 +452,10 @@
                 </div>
               </div>
               
-               <div class="pt-3 text-center">
-        <button class="btn btn-primary">Guardar</button>
-      </div>
+               <div class="text-center">
+    <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
+    <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Guardar</button>
+  </div>
               
             </form><!-- End Change Password Form -->
 
@@ -465,3 +470,33 @@
   </div>
 
 </section>
+<script>
+  const btn_act = document.getElementById("btn_act");
+  const btn_update = document.getElementById("btn_update");
+
+  btn_act.addEventListener("click", () => {
+    btn_act.classList.add("d-none");
+    btn_update.classList.remove("d-none");
+
+    let inputs = document.getElementsByTagName("input");
+    let selects = document.getElementsByTagName("select");
+    let txtarea = document.getElementsByTagName("textarea");
+
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].disabled = false;
+    }
+
+    for (let i = 0; i < selects.length; i++) {
+      selects[i].disabled = false;
+    }
+
+    for (let i = 0; i < txtarea.length; i++) {
+      txtarea[i].disabled = false;
+    }
+
+    // Manda al principio de la pagina
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  });
+
+</script>

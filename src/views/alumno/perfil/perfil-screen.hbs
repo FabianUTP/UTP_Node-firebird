@@ -159,14 +159,14 @@
               <div class="row mb-3">
                 <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="telefono_per" type="text" class="form-control" id="telefono_per" value="{{TELEFONO}}" required>
+                  <input name="telefono" type="text" class="form-control" id="telefono" value="{{TELEFONO}}" >
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Celular</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="telefono_per" type="text" class="form-control" id="telefono_per" value="{{CELULAR}}" required>
+                  <input name="celular" type="text" class="form-control" id="celular" value="{{CELULAR}}" required>
                 </div>
               </div>
 
@@ -298,13 +298,12 @@
                 <div class="col-md-8 col-lg-9">
                   <select class="form-select" id="tiposeguro" name="TIPO_SEG_MED" required>
                     <option selected disabled value="{{TIPO_SEG_MED}}">{{TIPO_SEG_MED}}</option>
-                    <option>IMSS-UTP</option>
-                    <option>IMSS Familiar</option>
-                    <option>ISSTEY</option>
-                    <option>ISSSTE(a)</option>
-                    <option>Bienestar</option>
-                    <option>Particular</option>
-                    <option>Otro</option>
+                    <option value="imss_utp">IMSS-UTP</option>
+                    <option value="imms_fam">IMSS Familiar</option>
+                    <option value="isstey">ISSTEY</option>
+                    <option value="bienestar">Bienestar</option>
+                    <option value="particular">Particular</option>
+                    <option value="otro">Otro</option>
                   </select>
                 </div>
               </div>
@@ -319,7 +318,7 @@
                 <div class="row mb-3">
                 <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número Verificador</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="nss" type="text" class="form-control" id="nss" value={{NUM_IMSS_VERIFICADOR}}>
+                  <input name="nss_verif" type="text" class="form-control" id="nss" value={{NUM_IMSS_VERIFICADOR}}>
                 </div>
               </div>
 

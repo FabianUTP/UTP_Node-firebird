@@ -58,10 +58,10 @@ AlumnosController.updateContact = async (req = request, res = response) => {
     cp: req.body.cp,
     email: req.body.email,
     email_alterno: req.body.emailutp,
-    celular: req.body.telefono_per,
+    telefono: req.body.telefono,  
   };
 
-  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
+ await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
   res.redirect("/perfil");
 };
 
@@ -80,6 +80,7 @@ AlumnosController.updateSeguro = async (req = request, res = response) => {
   const body = {
     TIPO_SEG_MED: req.body.TIPO_SEG_MED,
     num_imss: req.body.nss,
+    num_imss_verificador: req.body.nss_verif,
   };
 
   await Alumno.findByIdAndUpdate(req.session.IDAuth, body);

@@ -28,6 +28,7 @@
 
           <!-- Ficha -->
           <div class="tab-pane fade show active profile-overview" id="ficha">
+            <form method="post" action="/profesores/{{CLAVEPROFESOR}}/update_ficha">
 
             <h5 class="card-title">Detalles de {{NOMBREPROFESOR}}</h5>
 
@@ -221,13 +222,13 @@
             <div class="text-center">
               <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
             </div>
-
+</form>
 
           </div>
 
           <!-- Otros datos -->
           <div class="tab-pane fade pt-3" id="contacto">
-            <form method="post" action="/perfil/update-contacto">
+            <form method="post" action="/profesores/{{CLAVEPROFESOR}}/update_otros_campos">
 
               <h5 class="card-title">Jornada</h5>
 
@@ -341,7 +342,7 @@
 
           <!-- Campos personalizados -->
           <div class="tab-pane fade pt-3" id="autorizada">
-            <form method="post" action="/perfil/update-per-contac">
+            <form method="post" action="/profesores/{{CLAVEPROFESOR}}/update_personalizados">
 
               <h5 class="card-title">Campos particulares de uso exclusivo de la institución</h5>
 
@@ -477,10 +478,10 @@
   const btn_act = document.getElementById("btn-habilitar");
   const btn_update = document.getElementsByName("guardarForm");
 
+    btn_update.forEach(item => item.classList.remove("d-none"));
   btn_act.addEventListener("click", () => {
     
     btn_act.style.display = "none";
-    btn_update.forEach(item => item.classList.remove("d-none"));
 
     let inputs = document.getElementsByTagName("input");
     let selects = document.getElementsByTagName("select");

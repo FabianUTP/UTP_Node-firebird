@@ -81,6 +81,11 @@ selectEval.addEventListener("change", ({ target }) => {
 // Función para actualizar calificaciones
 formCalif.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  // Función para prevenir guardar sin preguntar
+  const accept = confirm("Desea guardar los siguientes cambios?");
+  if(!accept) return;
+
   const background = document.getElementById("setCalifi");
 
   background.classList.remove("d-none");

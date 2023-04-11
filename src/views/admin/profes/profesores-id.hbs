@@ -30,199 +30,200 @@
           <div class="tab-pane fade show active profile-overview" id="ficha">
             <form method="post" action="/profesores/{{CLAVEPROFESOR}}/update_ficha">
 
-            <h5 class="card-title">Detalles de {{NOMBREPROFESOR}}</h5>
+              <h5 class="card-title">Detalles de {{NOMBREPROFESOR}}</h5>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Clave de Profesor</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="clave_profesor" type="text" class="form-control" id="claveProf" value="{{CLAVEPROFESOR}}"
-                  disabled>
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Clave de Profesor</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="clave_profesor" type="text" class="form-control" id="claveProf" value="{{CLAVEPROFESOR}}"
+                    disabled>
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Número de empleado</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="num_empleado" type="text" name="numero_empleado" class="form-control"
-                  value="{{NUMEMPLEADO}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Número de empleado</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="num_empleado" type="text" name="numero_empleado" class="form-control"
+                    value="{{NUMEMPLEADO}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Nombre</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="nombre" placeholder="nombre" type="text" class="form-control" id="nombre"
-                  value="{{NOMBREPROFESOR}}" disabled>
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Nombre</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="nombre" placeholder="nombre" type="text" class="form-control" id="nombre"
+                    value="{{NOMBREPROFESOR}}" disabled>
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Género</label>
-              <div class="col-md-8 col-lg-9">
-                <input name="genero" placeholder="genero" type="text" class="form-control" id="genero"
-                  value="{{GENERO}}" disabled>
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Género</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="genero" placeholder="genero" type="text" class="form-control" id="genero"
+                    value="{{GENERO}}" disabled>
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Fecha de Nacimiento</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="fech nac" type="text" name="nacimiento" class="form-control"
-                  value="{{FECHA_NACIMIENTO}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Fecha de Nacimiento</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="fech nac" type="text" name="nacimiento" class="form-control"
+                    value="{{FECHA_NACIMIENTO}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Lugar de Nacimiento</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="lug nac" type="text" name="lugar_nacimiento" class="form-control"
-                  value="{{LUGAR_NACIMIENTO}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Lugar de Nacimiento</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="lug nac" type="text" name="lugar_nacimiento" class="form-control"
+                    value="{{LUGAR_NACIMIENTO}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado de Nacimiento</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="edo nac" type="text" name="estado_nacimiento" class="form-control"
-                  value="{{ESTADO_NACIMIENTO}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado de Nacimiento</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="edo nac" type="text" name="estado_nacimiento" class="form-control"
+                    value="{{ESTADO_NACIMIENTO}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Nacionalidad</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="nacionalidad" type="text" name="nacionalidad" class="form-control"
-                  value="{{NACIONALIDAD}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Nacionalidad</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="nacionalidad" type="text" name="nacionalidad" class="form-control"
+                    value="{{NACIONALIDAD}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado Civil</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="est civil" type="text" name="estado_civil" class="form-control"
-                  value="{{ESTADO_CIVIL}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado Civil</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="est civil" type="text" name="estado_civil" class="form-control"
+                    value="{{ESTADO_CIVIL}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Clave Poblacional</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="clave_poblacional" type="text" name="clave_ciudadana" class="form-control"
-                  value="{{CLAVE_CIUDADANA}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Clave Poblacional</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="clave_poblacional" type="text" name="clave_ciudadana" class="form-control"
+                    value="{{CLAVE_CIUDADANA}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">No. Seguro Social</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="seguroSocial" type="text" name="seguro_social" class="form-control"
-                  value="{{NUMERO_SEGURIDADSOCIAL}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">No. Seguro Social</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="seguroSocial" type="text" name="seguro_social" class="form-control"
+                    value="{{NUMERO_SEGURIDADSOCIAL}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Cédula Fiscal</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="cedula" type="text" name="cedula" class="form-control" value="{{CEDULA_FISCAL}}"
-                  disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Cédula Fiscal</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="cedula" type="text" name="cedula" class="form-control" value="{{CEDULA_FISCAL}}"
+                    disabled />
+                </div>
               </div>
-            </div>
 
-            <h5 class="card-title">Domicilio</h5>
+              <h5 class="card-title">Domicilio</h5>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Domicilio Particular</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="domicilio" type="text" name="domicilio" class="form-control" value="{{DOMICILIO}}"
-                  disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Domicilio Particular</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="domicilio" type="text" name="domicilio" class="form-control" value="{{DOMICILIO}}"
+                    disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Ciudad</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="ciudad" type="text" name="ciudad" class="form-control" value="{{CIUDAD}}"
-                  disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Ciudad</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="ciudad" type="text" name="ciudad" class="form-control" value="{{CIUDAD}}"
+                    disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Código Postal</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="cp" type="text" name="cp" class="form-control" value="{{CP}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Código Postal</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="cp" type="text" name="cp" class="form-control" value="{{CP}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="edo" type="text" name="estado" class="form-control" value="{{ESTADO}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="edo" type="text" name="estado" class="form-control" value="{{ESTADO}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Correo Electrónico</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="correo" type="text" name="correo_electronico" class="form-control" value="{{EMAIL}}"
-                  disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Correo Electrónico</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="correo" type="text" name="correo_electronico" class="form-control"
+                    value="{{EMAIL}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <h5 class="card-title">Teléfonos</h5>
+              <h5 class="card-title">Teléfonos</h5>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Particular</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="tel" type="text" name="telefono" class="form-control" value="{{TELEFONO}}"
-                  disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Particular</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="tel" type="text" name="telefono" class="form-control" value="{{TELEFONO}}"
+                    disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Móvil</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="cel" type="text" name="celular" class="form-control" value="{{CELULAR}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Móvil</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="cel" type="text" name="celular" class="form-control" value="{{CELULAR}}"
+                    disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Trabajo</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="oficina" type="text" name="tel_ofi" class="form-control"
-                  value="{{TELEFONO_OFICINA}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Trabajo</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="oficina" type="text" name="tel_ofi" class="form-control"
+                    value="{{TELEFONO_OFICINA}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <h5 class="card-title">Academicos</h5>
+              <h5 class="card-title">Academicos</h5>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Nivel Educativo</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="nivel" type="text" name="nivel_edu" class="form-control" value="{{NIVEL}}"
-                  disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Nivel Educativo</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="nivel" type="text" name="nivel_edu" class="form-control" value="{{NIVEL}}"
+                    disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estatus Actual</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="estatus" type="text" name="estatus_act" class="form-control"
-                  value="{{STATUSACTUAL}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estatus Actual</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="estatus" type="text" name="estatus_act" class="form-control"
+                    value="{{STATUSACTUAL}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="row mb-3">
-              <label for="estado" class="col-md-4 col-lg-3 col-form-label">Fecha de Ingreso</label>
-              <div class="col-md-8 col-lg-9">
-                <input placeholder="fech_ingreso" type="text" name="fech_ingreso" class="form-control"
-                  value="{{FECHA_INGRESO}}" disabled />
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Fecha de Ingreso</label>
+                <div class="col-md-8 col-lg-9">
+                  <input placeholder="fech_ingreso" type="text" name="fech_ingreso" class="form-control"
+                    value="{{FECHA_INGRESO}}" disabled />
+                </div>
               </div>
-            </div>
 
-            <div class="text-center">
-              <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
-            </div>
-</form>
+              <div class="text-center">
+                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+              </div>
+            </form>
 
           </div>
 
@@ -443,14 +444,6 @@
                 </div>
               </div>
 
-              <div class="row mb-3">
-                <label for="estado" class="col-md-4 col-lg-3 col-form-label"> Núm. de empleado</label>
-                <div class="col-md-8 col-lg-9">
-                  <input required placeholder="num_empleado" type="text" name="num_empleado" class="form-control"
-                    value="{{NUM_EMPLEADO}}" disabled />
-                </div>
-              </div>
-
               <div class="text-center">
                 <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
               </div>
@@ -478,9 +471,9 @@
   const btn_act = document.getElementById("btn-habilitar");
   const btn_update = document.getElementsByName("guardarForm");
 
-    btn_update.forEach(item => item.classList.remove("d-none"));
   btn_act.addEventListener("click", () => {
-    
+    btn_update.forEach(item => item.classList.remove("d-none"));
+
     btn_act.style.display = "none";
 
     let inputs = document.getElementsByTagName("input");

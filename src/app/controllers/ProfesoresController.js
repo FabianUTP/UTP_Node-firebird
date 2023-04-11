@@ -16,11 +16,11 @@ ProfeCtr.showById = async (req, res) => {
 ProfeCtr.update_ficha = async (req, res) => {
   const { id } = req.params;
   const data = {
-    clave_profesor: req.body.clave_profesor,
-    numero_empleado: req.body.numero_empleado,
+    claveprofesor: req.body.clave_profesor,
+    numempleado: req.body.numero_empleado,
     nombreprofesor: req.body.nombre,
     genero: req.body.genero,
-    seguro_social: req.body.seguro_social,
+    numero_seguridadsocial: req.body.seguro_social,
     cedula_fiscal: req.body.cedula,
     clave_ciudadana: req.body.clave_ciudadana,
     estado_civil: req.body.estado_civil,
@@ -34,11 +34,11 @@ ProfeCtr.update_ficha = async (req, res) => {
     estado: req.body.estado,
     celular: req.body.celular,
     telefono: req.body.telefono,
-    tel_ofi: req.body.tel_ofi,
-    correo: req.body.correo_electronico,
-    nivel_edu: req.body.nivel_edu,
-    estatus_act: req.body.estatus_act,
-    fech_ingreso: req.body.fech_ingreso,
+    telefono_oficina: req.body.tel_ofi,
+    email: req.body.correo_electronico,
+    nivel_estudios: req.body.nivel_edu,
+    statusactual: req.body.estatus_act,
+    fecha_ingreso: req.body.fech_ingreso,
     
   };
 
@@ -50,30 +50,18 @@ ProfeCtr.update_otros_campos = async (req, res) => {
   const { id } = req.params;
   const data = {
     departamento: req.body.departamento,
-    cargo_desempeñar: req.body.cargo_desempeñar,
-    tipo_contrato: req.body.tipo_contrato,
-    niv_estudios: req.body.niv_estudios,
-    instituto_estudios: req.body.instituto_estudios,
-    cedula_prof: req.body.cedula_prof,
-    doc_migratorio: req.body.doc_migratorio,
+    cargo: req.body.cargo_desempeñar,
+    contrato: req.body.tipo_contrato,
+    nivel_estudios: req.body.niv_estudios,
+    institucion_estudios: req.body.instituto_estudios,
+    cedula_profecional: req.body.cedula_prof,
+    documento_migratorio: req.body.doc_migratorio,
     especialidad: req.body.especialidad,
-    horas_admin: req.body.horas_admin,
-    horas_inv: req.body.horas_inv,
-    horas_docencia: req.body.horas_docencia,
-    sueldo_asig: req.body.sueldo_asig,
-    cuerpos_Academ: req.body.cuerpos_Academ,
-    PROMEP: req.body.PROMEP,
-    tipo_sangre: req.body.tipo_sangre,
-    persona_contacto: req.body.persona_contacto,
-    parentesco_contac: req.body.parentesco_contac,
-    tel_contac: req.body.tel_contac,
-    area_dep: req.body.area_dep,
-    direccion: req.body.direccion,
-    puesto: req.body.puesto,
-    password: req.body.password,
-    folio_credencial: req.body.folio_credencial,
-    num_credencial: req.body.num_credencial,
-    num_empleado: req.body.num_empleado,
+    horasadministrativas: req.body.horas_admin,
+    horasinvestigacion: req.body.horas_inv,
+    horasdocencia: req.body.horas_docencia,
+    sueldo: req.body.sueldo_asig,
+   
   };
 
   await Profesores.findByIdAndUpdate(id, data);
@@ -84,19 +72,19 @@ ProfeCtr.update_otros_campos = async (req, res) => {
 ProfeCtr.update_personalizados = async (req, res) => {
   const { id } = req.params;
   const data = {
-    cuerpos_Academ: req.body.cuerpos_Academ,
+    cuerposacademicos: req.body.cuerpos_Academ,
     PROMEP: req.body.PROMEP,
     tipo_sangre: req.body.tipo_sangre,
-    persona_contacto: req.body.persona_contacto,
-    parentesco_contac: req.body.parentesco_contac,
-    tel_contac: req.body.tel_contac,
-    area_dep: req.body.area_dep,
+    emergencia_persona: req.body.persona_contacto,
+    parentesco_contacto: req.body.parentesco_contac,
+    emergencia_telefono: req.body.tel_contac,
+    departamento: req.body.area_dep,
     direccion: req.body.direccion,
     puesto: req.body.puesto,
     password: req.body.password,
-    folio_credencial: req.body.folio_credencial,
-    num_credencial: req.body.num_credencial,
-    num_empleado: req.body.num_empleado,
+    cred_folio: req.body.folio_credencial,
+    cred_numero: req.body.num_credencial,
+    numempleado: req.body.num_empleado,
   };
 
   await Profesores.findByIdAndUpdate(id, data);

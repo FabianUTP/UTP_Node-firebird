@@ -39,13 +39,13 @@ ProfeCtr.update_ficha = async (req, res) => {
     nivel_estudios: req.body.nivel_edu,
     statusactual: req.body.estatus_act,
     fecha_ingreso: req.body.fech_ingreso,
-    
   };
 
   await Profesores.findByIdAndUpdate(id, data);
 
-  res.redirect(`/profesores + ${id}`);
+  res.redirect(`/profesores/${id}`);
 };
+
 ProfeCtr.update_otros_campos = async (req, res) => {
   const { id } = req.params;
   const data = {
@@ -54,19 +54,18 @@ ProfeCtr.update_otros_campos = async (req, res) => {
     contrato: req.body.tipo_contrato,
     nivel_estudios: req.body.niv_estudios,
     institucion_estudios: req.body.instituto_estudios,
-    cedula_profecional: req.body.cedula_prof,
+    cedula_profesional: req.body.cedula_prof,
     documento_migratorio: req.body.doc_migratorio,
     especialidad: req.body.especialidad,
     horasadministrativas: req.body.horas_admin,
     horasinvestigacion: req.body.horas_inv,
     horasdocencia: req.body.horas_docencia,
     sueldo: req.body.sueldo_asig,
-   
   };
 
   await Profesores.findByIdAndUpdate(id, data);
 
-  res.redirect(`/profesores + ${id}`);
+  res.redirect(`/profesores/${id}`);
 };
 
 ProfeCtr.update_personalizados = async (req, res) => {
@@ -75,21 +74,21 @@ ProfeCtr.update_personalizados = async (req, res) => {
     cuerposacademicos: req.body.cuerpos_Academ,
     PROMEP: req.body.PROMEP,
     tipo_sangre: req.body.tipo_sangre,
-    emergencia_persona: req.body.persona_contacto,
-    parentesco_contacto: req.body.parentesco_contac,
-    emergencia_telefono: req.body.tel_contac,
+    contacto: req.body.persona_contacto,
+    patentesco_contacto: req.body.parentesco_contac,
+    tel_contacto: req.body.tel_contac,
     departamento: req.body.area_dep,
     direccion: req.body.direccion,
     puesto: req.body.puesto,
     password: req.body.password,
-    cred_folio: req.body.folio_credencial,
-    cred_numero: req.body.num_credencial,
-    numempleado: req.body.num_empleado,
+    // cred_folio: req.body.folio_credencial,
+    // cred_numero: req.body.num_credencial,
+    // numempleado: req.body.num_empleado,
   };
 
   await Profesores.findByIdAndUpdate(id, data);
 
-  res.redirect(`/profesores + ${id}`);
+  res.redirect(`/profesores/${id}`);
 };
 
 ProfeCtr.showAsig = async (req, res) => {

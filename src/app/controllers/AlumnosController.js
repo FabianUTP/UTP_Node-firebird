@@ -87,12 +87,26 @@ AlumnosController.updateSeguro = async (req = request, res = response) => {
   res.redirect("/perfil");
 };
 
+AlumnosController.updateBeca = async (req = request, res = response) => {
+  const body = {
+    NIVELCOMPLETO: req.body.instbecabach,
+    CARRERACOMPLETO: req.body.becabach,
+    hijos6a12: req.body.becainst,
+    beca: req.body.becanombre,
+    hijos13a18: req.body.becaestatus,
+    hijosmayores: req.body.becafolio,
+  };
+
+  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
+  res.redirect("/perfil");
+};
 AlumnosController.getBoletas = async (req = request, res = response) => {
 
   const alumno = await Alumno.findById(req.session.IDAuth);
 
   res.render("alumno/boletas/boletas-screen", alumno);
 };
+
 
 AlumnosController.doctos = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.session.IDAuth);

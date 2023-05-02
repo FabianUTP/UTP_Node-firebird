@@ -7,7 +7,7 @@ const { isAlumno } = require("../app/middlewares/session");
 // Controladores
 const { AlumnosController } = require("../app/controllers");
 
-// Rutas de los Alumnos
+// Rutas de los Alumnos.
 router.get("/boletas", isAlumno, AlumnosController.getBoletas);
 router.get("/doctos", isAlumno, AlumnosController.doctos);
 router.get("/doctos/:idDocto", AlumnosController.showDocto);

@@ -15,11 +15,24 @@
     background: #106eea;
 }
 
+.animate-hover:hover{
+    cursor: pointer;
+}
+
+.animate-hover div h4{
+    color: black;
+    font-weight: 500;
+}
+
 .animate-hover:hover div h4{
     color: #fff;
 }
 
-.animate-hover:hover a p {
+.animate-hover div p {
+    color: #106eea;
+}
+
+.animate-hover:hover div p {
     color: #fff;
 }
 

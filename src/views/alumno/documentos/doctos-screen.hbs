@@ -1,152 +1,65 @@
 <section class="section profile">
-  <div class="row">
 
-    <div class="col-xl-12">
+  <div class="container">
 
-      <div class="card">
-        <div class="card-body pt-3">
-          <!-- Bordered Tabs -->
+    <div class="mb-3">
+      {{>btnBack}}
+    </div>
 
-          <div class="tab-content pt-2">
-            <div class="tab-pane fade show active profile-overview" id="doctos">
-              <section id="accesos_index" class="featured-services">
-                <br>
-                <div class="container" data-aos="fade-up">
-                  <div class="section-title">
-                    <label for="motivos"><b>*Selecciona el cuatrimestre:</b> </label>
-                    <select id="motivos" class="form-control" style="width: 300px;">
-                      <option value="">--Haga una elección--</option>
-                      <option value="desercion">Doctos de registro</option>
-                      <option value="desercion">Cuatrimestre 1</option>
-                      <option value="reprobacion">Cuatrimestre 2</option>
-                      <option value="personales">Cuatrimestre 3</option>
-                      <option value="cambiocarrera">Cuatrimestre 4</option>
-                      <option value="trabajo">Cuatrimestre 5</option>
-                      <option value="expectativas">Cuatrimestre 6</option>
-                      <option value="cambiout">Cuatrimestre 7</option>
-                      <option value="distancia">Cuatrimestre 8</option>
-                      <option value="reglamento">Cuatrimestre 9</option>
-                      <option value="defuncion">Cuatrimestre 10</option>
-                      <option value="otras">Cuatrimestre 11</option>
-                  </div>
-                  </select>
-                  <br>
-                  <br>
+    <div class="card">
 
-                  <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/pdf.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">ACTA DE NACIMIENTO<br>
-                              <FONT COLOR="GREEN"><B>Entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
+      <div class="card-title text-center">
+        <h1>Documentos de {{nombre}}</h1>
+        <input type="hidden" value="{{numeroalumno}}" id="numeroalumno">
+      </div>
 
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/eliminar.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">CERTIFICADO de BACHILLERATO<br>
-                              <FONT COLOR="red"><B>No entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
+      <div class="card-body pt-3">
 
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/pdf.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">CURP (CLAVE CIUDADANA)<br>
-                              <FONT COLOR="GREEN"><B>Entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
+        <div class="container" data-aos="fade-up">
 
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/pdf.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">REGISTRO DE INGRESO A LA UTP<br>
-                              <FONT COLOR="GREEN"><B>Entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/pdf.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">6 FOTOGRAFÍAS TAMAÑO INFANTIL<br>
-                              <FONT COLOR="GREEN"><B>Entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/pdf.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">EXAMEN DE INGRESO (EXANI II)<br>
-                              <FONT COLOR="GREEN"><B>Entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/eliminar.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">NÚMERO DE SEGURO SOCIAL (NSS)<br>
-                              <FONT COLOR="red"><B>No entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                      <div class="card border-alert">
-                        <br>
-                        <center><img src="imgs/pdf.png" alt="" width="30%" height="30%"></center><br>
-                        <h4 class="title">
-                          <center><a href="">CUOTA DE PAGO EXANI II / REGISTRO<br>
-                              <FONT COLOR="GREEN"><B>Entregado</B></FONT>
-                          </center>
-                        </h4>
-                        <p class="description"></p></a>
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </section>
+          <div class="row">
+            <div class="col-xs-6 col-md-5">
+              <label class="form-label"><b>*Selecciona el cuatrimestre:</b> </label>
+              <select class="form-control" id="filterDocto">
+                <option disabled selected>--Haga una elección--</option>
+                <option value="0">Doctos de registro</option>
+                <option value="1">Cuatrimestre 1</option>
+                <option value="2">Cuatrimestre 2</option>
+                <option value="3">Cuatrimestre 3</option>
+                <option value="4">Cuatrimestre 4</option>
+                <option value="5">Cuatrimestre 5</option>
+                <option value="6">Cuatrimestre 6</option>
+                <option value="7">Cuatrimestre 7</option>
+                <option value="8">Cuatrimestre 8</option>
+                <option value="9">Cuatrimestre 9</option>
+                <option value="10">Cuatrimestre 10</option>
+                <option value="11">Cuatrimestre 11</option>
+              </select>
             </div>
-          </div><!-- End Bordered Tabs -->
+
+            {{#if isAdmin}}
+            <div class="col-xs-6 col-md-7">
+              <label class="form-label">
+                <b>Subir documento</b>
+                <small>(cuatrimestre seleccionado)</small>
+              </label>
+              <div class="d-flex">
+                <input type="file" class="form-control" id="input" accept="application/pdf">
+                <button class="btn btn-outline-secondary" title="Subir">
+                  <i class="bi bi-arrow-bar-up"></i>
+                </button>
+              </div>
+            </div>
+            {{/if}}
+          </div>
+
+          <div class="row pt-4" id="content"></div>
+
         </div>
+
       </div>
     </div>
   </div>
 </section>
+
+<script src="/js/services/alumno/getDoctos.js"></script>

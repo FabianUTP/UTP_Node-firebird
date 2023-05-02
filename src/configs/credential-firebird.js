@@ -18,5 +18,6 @@ credentials.role = null;
 credentials.pageSize = 4096;
 credentials.pageSize = 4096;
 credentials.retryConnectionInterval = 1000;
+credentials.blobAsText = false;
 
 module.exports = credentials;

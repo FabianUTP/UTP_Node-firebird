@@ -1,0 +1,57 @@
+<section class="container">
+  <div class="pb-3">
+    <a href="/academico/planes/nuevo" class="btn btn-primary"> Crear Plan</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title text-center">
+        <h1>Planes de Estudio</h1>
+      </div>
+      <div class="flex-fill">
+        <div class="input-group mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Buscar"
+            id="buscar"
+          />
+          <select
+            id="inputcarrera"
+            onchange="changeCarreas()"
+            class="form-select"
+            required
+          >
+            <option disabled selected>--seleccione una opcion--</option>
+            
+          </select>
+          <div id="carr"></div>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nivel o seccion</th>
+            <th>Clave de plan</th>
+            <th>Nombre de plan</th>
+            <th>Otros</th>
+          </tr>
+        </thead>
+        <tbody id="table-content"></tbody>
+      </table>
+      <div>
+        <button class="btn btn-primary" onclick="onPrev()"> < </button>
+        <button class="btn btn-primary" onclick="onNext()"> > </button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script src="/js/services/admin/getPlanes.js"></script>

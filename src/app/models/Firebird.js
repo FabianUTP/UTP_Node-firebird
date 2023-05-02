@@ -112,38 +112,46 @@ class Firebird {
     });
   }
 
-  // Busca por id y elimina el registro
+  /**
+   * Busca por id y elimina el registro
+   * @param {number | string} id Id segun establecido en su Model
+   * @returns 
+   */
   findByIdAndRemove(id) {
-    return [`Update with id: ${id}`];
+    let sql = `DELETE FROM ${this.table} WHERE ${this.primaryKey} = ?`;
+    return this.createQuery({ querySql: sql, data: [id] })
   }
 
   /**
    * Filtra los registros por condiciones
    * @param {object} conditions Recibe un objeto con las columnas de la tabla a condicionar, 
    * seguido de un array con las condiciones, ejemplo **{ nombre: ['carlos', 'fabian'], edad: [12] }**
-   * @param {number} limit Limite de registros a obtener, retorna 30 por default
-   * @param {number} skip Limite de registros a saltar para la paginacion
-   * @param {boolean} strict Define si los registros seran si o si los que estan condicionados
-   * @returns Los registros de la tabla condicionados de manera estricta
+   * @param {object} config Limite de registros a obtener
+   * @param {number} config.limit Limite de registros a obtener, retorna 30 por default
+   * @param {number} config.skip Limite de registros a saltar para la paginacion
+   * @param {boolean} config.strict Define si los registros seran si o si los que estan condicionados, por defecto es *true*
+   * @returns Regresa un array de los datos condicionados
    */
-  where(conditions = {}, limit = 30, skip = 0, strict = false) {
+  where(conditions = {}, {limit = 30, skip = 0, strict = true}) {
     if (conditions.length === 0) return [];
 
-    let sql = `SELECT FIRST(${limit}) SKIP(${skip}) * FROM ${this.table} WHERE`;
+    let sql = `SELECT FIRST(${limit || 30}) SKIP(${skip || 0}) * FROM ${this.table} WHERE`;
 
     for (const key in conditions) {
       conditions[key].map((item) => {
-        if (typeof item === "string") {
-          const modeStrict = `(${key} = '${item}')`;
-          const modeNoStrict = `(${key} LIKE '%${item}%')`;
-
-          sql += ` ${strict ? modeStrict : modeNoStrict}`;
-        } else {
-          sql += ` (${key} = ${item})`;
+        if (item) {
+          if (typeof item === "string") {
+            const modeStrict = `(${key} = '${item}')`;
+            const modeNoStrict = `(${key} LIKE '%${item}%')`;
+  
+            sql += ` ${strict ? modeStrict : modeNoStrict}`;
+          } else {
+            sql += ` (${key} = ${item})`;
+          }
+          
+          // Valida si es modo estricto en los filtros
+          sql += ` ${strict ? "AND" : "OR"}`;
         }
-
-        // Valida si es modo estricto en los filtros
-        sql += ` ${strict ? "AND" : "OR"}`;
       });
     }
 

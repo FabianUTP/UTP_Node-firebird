@@ -1,4 +1,4 @@
-<!-- ======= Header ======= -->  
+<!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
@@ -9,103 +9,59 @@
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
 
+  {{!-- Si es admin, muestra la seleccion del periodo --}}
   {{#if isAdmin}}
-     <div class="col-md-3">                
-      <select id="selectciclo" class="form-select">
+  <div class="col-md-3">
+    <select id="selectciclo" class="form-select">
+    </select>
+  </div>
 
-      </select>
-    </div>
-
-    <script src="/js/functions/getCuatrimestresNavbar.js" async></script>
-  {{/if}}
+  <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
 
   <div class="search-bar">
-    <form class="search-form d-flex align-items-center">
-      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+    <form class="search-form d-flex align-items-center" action="/alumnos" method="get">
+      <input type="text" name="search" placeholder="Buscar alumno" title="Enter search keyword" autocomplete="off">
       <button type="submit" title="Search"><i class="bi bi-search"></i></button>
     </form>
   </div><!-- End Search Bar -->
 
+  {{/if}}
+
+
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
 
+      {{#if isAdmin}}
       <li class="nav-item d-block d-lg-none">
         <a class="nav-link nav-icon search-bar-toggle " href="#">
           <i class="bi bi-search"></i>
         </a>
       </li><!-- End Search Icon-->
-
-      <li class="nav-item dropdown">
-
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <i class="bi bi-bell"></i>
-          <span class="badge bg-primary badge-number">2</span>
-        </a><!-- End Notification Icon -->
-
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-          <li class="dropdown-header">
-            You have 2 new notifications
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="notification-item">
-            <i class="bi bi-check-circle text-success"></i>
-            <div>
-              <h4>Sit rerum fuga</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>2 hrs. ago</p>
-            </div>
-          </li>
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="notification-item">
-            <i class="bi bi-info-circle text-primary"></i>
-            <div>
-              <h4>Dicta reprehenderit</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>4 hrs. ago</p>
-            </div>
-          </li>
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li class="dropdown-footer">
-            <a href="#">Show all notifications</a>
-          </li>
-
-        </ul><!-- End Notification Dropdown Items -->
-
-      </li><!-- End Notification Nav -->
+      {{/if}}
 
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <span class="d-none d-md-block dropdown-toggle ps-2">{{ nameAuth }}</span>
-        </a><!-- End Profile Iamge Icon -->
+        </a>
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 
           <li class="dropdown-header">
             <h6>{{ nameAuth }} {{ lastNameAuth }}</h6>
-            <span>Matrícula: {{ IDAuth }}</span>
+            {{#if isAlumno}}
+              <span>Matrícula: {{ IDAuth }}</span>
+            {{/if}}
+            {{#if isAdmin}}
+              <span>{{ IDAuth }}</span>
+            {{/if}}
           </li>
           <li>
             <hr class="dropdown-divider">
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="/logout"></method=>>
+            <a class="dropdown-item d-flex align-items-center" href="/logout"></method=>
               <i class="bi bi-box-arrow-right"></i>
               <span>Cerrar sesión</span>
             </a>

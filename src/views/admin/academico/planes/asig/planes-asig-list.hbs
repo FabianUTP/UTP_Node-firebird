@@ -1,0 +1,39 @@
+<section>
+  <input type="hidden" id="idPlan" value="{{idPlan}}" />
+    <div class="d-flex justify-content-between mb-3">
+      {{>btnBack}}
+      <a href="/academico/planes/planes" class="btn btn-primary">Crear asignatura</a>
+  </div>
+  
+
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title text-center">
+        <h1>Asignaturas</h1>
+      </div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Etapa</th>
+            <th>Clave</th>
+            <th>Nombre</th>
+          </tr>
+        </thead>
+        <tbody id="table-content"></tbody>
+      </table>
+      <div>
+        <button class="btn btn-primary" onclick="onPrev()"> <
+        </button>
+        <button class="btn btn-primary" onclick="onNext()"> > </button>
+      </div>
+
+      
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script src="/js/services/admin/getPlanesAsig.js"></script>

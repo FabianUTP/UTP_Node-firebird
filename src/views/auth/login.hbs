@@ -4,68 +4,242 @@
   style="padding-top: 8%; left: 0%; position: absolute;">
   <div class="card w-75" style="max-width: 620px;">
 
-    <div class="card-title text-center">
-      <h1>Bienvenido</h1>
-    </div>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+          role="tab" aria-controls="nav-home" aria-selected="true">Alumno</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+          role="tab" aria-controls="nav-profile" aria-selected="false">Aspirante</button>
+        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button"
+          role="tab" aria-controls="nav-contact" aria-selected="false">Profesor</button>
+        <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button"
+          role="tab" aria-controls="nav-disabled" aria-selected="false">Admin</button>
+      </div>
+    </nav>
 
-    <div class="card-body px-5">
+    <div class="tab-content" id="nav-tabContent">
 
-      {{>msj_error}}
+      <div class="card-title text-center">
+        <img src="./imgs/logoUTP.png" width="180" alt="">
+        <h1>SII-UTPoniente</h1>
+      </div>
 
-      <form id="form" action="login" method="post" class="d-flex flex-column justify-content-center">
-        <div>
-          <label for="matricula" class="form-label">Matricula</label>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <div class="icon">
-                  <i class="bi bi-person"></i>
+      <div class="px-5">
+        {{>msj_error}}
+      </div>
+
+      {{!-- Section Alumno Login --}}
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        <div class="card-body px-5">
+
+          <form id="form" action="/login/alumno" method="post" class="d-flex flex-column justify-content-center">
+            <div>
+              <label for="User" class="form-label">Matricula</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-person"></i>
+                    </div>
+                  </div>
                 </div>
+                <input type="text" class="form-control" name="user" id="user" required>
               </div>
             </div>
-            <input type="text" class="form-control" name="matricula" id="matricula" required>
-          </div>
-        </div>
 
-        <div>
-          <label for="pass" class="form-label">Contraseña</label>
-          <div class="input-group mb-2 ">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <div class="icon">
-                  <i class="bi bi-key"></i>
+            <div>
+              <label for="pass" class="form-label">Contraseña</label>
+              <div class="input-group mb-2 ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-key"></i>
+                    </div>
+                  </div>
                 </div>
+                <input type="password" class="form-control" name="password" id="pass">
+
+                <button id="show-pass" class="btn-show" type="button"><span class="bi bi-eye"></span></button>
+
               </div>
             </div>
-            <input type="password" class="form-control" name="password" id="pass">
 
-            <button id="show-pass" class="btn-show" type="button"><span class="bi bi-eye"></span></button>
+            <div class="pt-1">
+              <a href="#">Olvidaste tu contraseña?</a>
+            </div>
 
-          </div>
+            <div class="pt-3 text-center">
+              <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
+            </div>
+
+          </form>
         </div>
+      </div>
 
-        <div class="pt-1">
-          <a href="#">Olvidaste tu contraseña?</a>
+      {{!-- Section Aspirante Login --}}
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+        <div class="card-body px-5">
+
+          <form id="form" action="/login/aspirante" method="post" class="d-flex flex-column justify-content-center">
+            <div>
+              <label for="matricula" class="form-label">Folio de registro</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-person"></i>
+                    </div>
+                  </div>
+                </div>
+                <input type="text" class="form-control" name="user" id="user" required>
+              </div>
+            </div>
+
+            <div>
+              <label for="pass" class="form-label">Contraseña</label>
+              <div class="input-group mb-2 ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-key"></i>
+                    </div>
+                  </div>
+                </div>
+                <input type="password" class="form-control" name="password" id="pass">
+
+                <button id="show-pass" class="btn-show" type="button"><span class="bi bi-eye"></span></button>
+
+              </div>
+            </div>
+
+            <div class="pt-1">
+              <a href="#">Olvidaste tu contraseña?</a>
+            </div>
+
+            <div class="pt-3 text-center">
+              <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
+            </div>
+
+          </form>
         </div>
+      </div>
 
-        <div class="pt-3 text-center">
-          <button type="submit" class="btn btn-outline-primary">Iniciar sesión</button>
+      {{!-- Section Profesor Login --}}
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+        <div class="card-body px-5">
+
+          <form id="form" action="/login/profe" method="post" class="d-flex flex-column justify-content-center">
+            <div>
+              <label for="matricula" class="form-label">Folio de profesor</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-person"></i>
+                    </div>
+                  </div>
+                </div>
+                <input type="text" class="form-control" name="user" id="user" required>
+              </div>
+            </div>
+
+            <div>
+              <label for="pass" class="form-label">Contraseña</label>
+              <div class="input-group mb-2 ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-key"></i>
+                    </div>
+                  </div>
+                </div>
+                <input type="password" class="form-control" name="password" id="pass">
+
+                <button id="show-pass" class="btn-show" type="button"><span class="bi bi-eye"></span></button>
+
+              </div>
+            </div>
+
+            <div class="pt-1">
+              <a href="#">Olvidaste tu contraseña?</a>
+            </div>
+
+            <div class="pt-3 text-center">
+              <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
+            </div>
+
+          </form>
         </div>
+      </div>
 
-      </form>
+      {{!-- Section Admin Login --}}
+      <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+        <div class="card-body px-5">
+
+          <form id="form" action="/login/admin" method="post" class="d-flex flex-column justify-content-center">
+            <div>
+              <label for="matricula" class="form-label">Usuario</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-person"></i>
+                    </div>
+                  </div>
+                </div>
+                <input type="text" class="form-control" name="user" id="user" required>
+              </div>
+            </div>
+
+            <div>
+              <label for="pass" class="form-label">Contraseña</label>
+              <div class="input-group mb-2 ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <div class="icon">
+                      <i class="bi bi-key"></i>
+                    </div>
+                  </div>
+                </div>
+                <input type="password" class="form-control" name="password" id="pass">
+
+                <button id="show-pass" class="btn-show" type="button"><span class="bi bi-eye"></span></button>
+
+              </div>
+            </div>
+
+            <div class="pt-1">
+              <a href="#">Olvidaste tu contraseña?</a>
+            </div>
+
+            <div class="pt-3 text-center">
+              <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-  const form = document.getElementById("form");
+
+</script>
+
+<script>
   const inputPass = document.getElementById("pass");
   const btnShow = document.getElementById("show-pass");
+  const btnLogin = document.getElementById("btn");
 
   // Muestra y oculta la contraseña
   btnShow.addEventListener("click", () => {
     inputPass.type === "password"
       ? (inputPass.type = "text")
       : (inputPass.type = "password");
+  });
+
+  btnLogin.addEventListener("click", () => {
+    btnLogin.innerHTML = '<div class="spinner-border"></div>'
   });
 </script>

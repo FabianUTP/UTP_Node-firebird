@@ -1,0 +1,72 @@
+<section class="section profile">
+  <div class="container">
+
+    <div class="my-3 d-flex justify-content-between">
+      {{>btnBack}}
+      <button type="button" class="btn btn-success">
+        <i class="bi bi-cloud-arrow-down"></i>
+        Descargar boleta
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-body pt-3">
+
+        <div class="card-title text-center">
+          <h1>Estadía</h1>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <label for="cuatrimestre" class="form-label"><b>*Selecciona el cuatrimestre:</b> </label>
+            <select id="cuatrimestre" class="form-select" onchange="getEstadia()">
+              <option disabled selected>Elegir cuatrimestre</option>
+              <option value="1">Cuatrimestre 1</option>
+              <option value="2">Cuatrimestre 2</option>
+              <option value="3">Cuatrimestre 3</option>
+              <option value="4">Cuatrimestre 4</option>
+              <option value="5">Cuatrimestre 5</option>
+              <option value="6">Cuatrimestre 6</option>
+              <option value="7">Cuatrimestre 7</option>
+              <option value="8">Cuatrimestre 8</option>
+              <option value="9">Cuatrimestre 9</option>
+              <option value="10">Cuatrimestre 10</option>
+              <option value="11">Cuatrimestre 11</option>
+            </select>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table table-bordered table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Fecha de inicio</th>
+                    <th scope="col">Fecha de término</th>
+                    <th scope="col">Horas acreditadas</th>
+                  </tr>
+                </thead>
+                <tbody id="table-content">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center" id="loading" style="display: none;">
+          <div class="spinner-border"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" value="{{NUMEROALUMNO}}" id="numalumno">
+
+</section>
+
+<script src="/js/services/alumno/getEstadiaAlumno.js"></script>

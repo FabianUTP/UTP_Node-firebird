@@ -58,10 +58,10 @@ AlumnosController.updateContact = async (req = request, res = response) => {
     cp: req.body.cp,
     email: req.body.email,
     email_alterno: req.body.emailutp,
-    celular: req.body.telefono_per,
+    telefono: req.body.telefono,  
   };
 
-  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
+ await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
   res.redirect("/perfil");
 };
 
@@ -80,18 +80,33 @@ AlumnosController.updateSeguro = async (req = request, res = response) => {
   const body = {
     TIPO_SEG_MED: req.body.TIPO_SEG_MED,
     num_imss: req.body.nss,
+    num_imss_verificador: req.body.nss_verif,
   };
 
   await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
   res.redirect("/perfil");
 };
 
+AlumnosController.updateBeca = async (req = request, res = response) => {
+  const body = {
+    NIVELCOMPLETO: req.body.instbecabach,
+    CARRERACOMPLETO: req.body.becabach,
+    hijos6a12: req.body.becainst,
+    beca: req.body.becanombre,
+    hijos13a18: req.body.becaestatus,
+    hijosmayores: req.body.becafolio,
+  };
+
+  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
+  res.redirect("/perfil");
+};
 AlumnosController.getBoletas = async (req = request, res = response) => {
 
   const alumno = await Alumno.findById(req.session.IDAuth);
 
   res.render("alumno/boletas/boletas-screen", alumno);
 };
+
 
 AlumnosController.doctos = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.session.IDAuth);

@@ -40,6 +40,12 @@ const alumno_items = [
     link: "/boletas",
   },
   {
+    path_img: "./imgs/estadias.png",
+    title: "Estadia",
+    content: "Ingresa y sube los documentos en formato.pdf, de tus estadias",
+    link: "/estadia",
+  },
+  {
     path_img: "./imgs/calendario.png",
     title: "Calendario Escolar",
     content: "Consulta nuestro Calendario Escolar y Actividades Académico-Administrativas, del ciclo 2022-2023.",

@@ -1,0 +1,32 @@
+body {
+  background: linear-gradient(-45deg, #3074db, #6ad6bd, #6ad6bd, #6aabd6);
+  background-size: 400% 400%;
+  height: 100vh;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+.btn-show {
+  position: absolute;
+  right: 1%;
+  background-color: transparent;
+  border: none;
+  top: 0.3rem;
+  z-index: 9;
+}
+
+.btn-show:hover {
+  color: blue;
+}

@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="/css/dashboard.css">
+
+<div class="text-center">
+
+  <p><b><h1>Sistema Integral de Información Institucional</h1></b></p>
+  <p><b><h2>Universidad Tecnológica del Poniente</h2></b></p>
+
+  <div class="header-dash text-center">
+    <h2>¡Bienvenido, <span class="name-alumno">{{ nameAuth }}</span>!</h2>
+    <p>Selecciona la opción que deseas consultar.</p>
+  </div>
+</div>
+
+
+<div class="row pt-3">
+
+{{#each items }}
+  <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0 justify-content-center card-dash">
+    <div class="card w-75">
+      <div class="icon-box animate-hover">
+        <div class="text-center p-2">
+          <img class="image" src={{ path_img }} alt="">
+        </div>
+        <div>
+          <h4 class="title">{{ title }}</h4>
+          <font class="sub-title">EXPEDIENTE</font>
+        </div>
+        <a class="information" href={{ link }}>
+          <p>{{ content }}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+{{/each }}
+</div>

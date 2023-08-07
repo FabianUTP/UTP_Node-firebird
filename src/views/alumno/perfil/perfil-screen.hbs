@@ -1,0 +1,370 @@
+
+<section class="section profile">
+
+  <div class="pb-3">
+    {{>btnBack}}
+  </div>
+
+  <div class="col-xl-9">
+
+    <div class="card">
+      <div class="card-body pt-3">
+        <!-- Bordered Tabs -->
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+          <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#datos">Identidad</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contacto">Contacto</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#autorizada">Persona autorizada</button>
+          </li>
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_beca">Datos beca</button>
+          </li>
+
+
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_seguro">Datos Seguro</button>
+          </li>
+
+        </ul>
+        <div class="tab-content pt-2">
+
+          <div class="tab-pane fade show active profile-overview" id="datos">
+
+            <h5 class="card-title">Datos de identidad</h5>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Fotografia</div>
+              <div class="col-lg-9 col-md-8">
+                <img src="{{image}}" alt="foto" class="img-fluid" width="120">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Apellido paterno</div>
+              <div class="col-lg-9 col-md-8">{{PATERNO}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">Apellido materno</div>
+              <div class="col-lg-9 col-md-8">{{MATERNO}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label ">Nombres</div>
+              <div class="col-lg-9 col-md-8">{{NOMBRE}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Género</div>
+              <div class="col-lg-9 col-md-8">{{GENERO}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Estado civil</div>
+              <div class="col-lg-9 col-md-8">{{ESTADO_CIVIL}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Estado de nacimiento</div>
+              <div class="col-lg-9 col-md-8">{{ESTADO}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">Municipio de nacimiento</div>
+              <div class="col-lg-9 col-md-8">{{LUGAR_NACIMIENTO}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label">CURP</div>
+              <div class="col-lg-9 col-md-8">
+                <h3>{{CLAVE_CIUDADANA}}</h3>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tab-pane fade pt-3" id="contacto">
+
+            <!-- Settings Form -->
+            <form method="post" action="/perfil/update-contacto">
+
+              <h5 class="card-title">Datos de domicilio</h5>
+              <div class="row mb-3">
+                <label for="domicilio" class="col-md-4 col-lg-3 col-form-label">Domicilio</label>
+                <div class="col-md-8 col-lg-9">
+                  <input 
+                    id="domicilio"
+                    name="domicilio" 
+                    class="form-control" 
+                    type="text" 
+                    required
+                    value="{{DOMICILIO}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="estado" type="text" class="form-control" id="estado" value="{{ESTADO}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="municipio" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="ciudad" type="text" class="form-control" id="municipio" value="{{CIUDAD}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="localidad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="localidad" type="text" class="form-control" id="localidad" value="{{CIUDAD}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="cp" class="col-md-4 col-lg-3 col-form-label">Código postal</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="cp" type="text" class="form-control" id="cp" value="{{CP}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email personal</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="email" type="email" class="form-control" id="Email"
+                    value="{{EMAIL}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Emailutp" class="col-md-4 col-lg-3 col-form-label">Email institucional</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="emailutp" type="email" class="form-control" id="Emailutp"
+                    value="{{EMAIL_ALTERNO}}"
+                    placeholder="a.alumno@utponiente.edu.mx" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="telefono" type="text" class="form-control" id="telefono" value="{{TELEFONO}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Celular</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="celular" type="text" class="form-control" id="celular" value="{{CELULAR}}" disabled />
+                </div>
+              </div>
+
+
+              <div class="text-center">
+                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+
+          <div class="tab-pane fade pt-3" id="autorizada">
+            <!-- Change Password Form -->
+            <form method="post" action="/perfil/update-per-contac">
+
+              <h5 class="card-title">Persona autorizada para recibir información personal y/o académica</h5>
+
+              <div class="row mb-3">
+                <label for="nombre_autirizada" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="perContacto" type="text" class="form-control" id="domicilio" maxlength="25"
+                    value="{{CONTACTO}}" disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
+                <div class="col-md-8 col-lg-9">
+                  <select class="form-select" id="parentesco" name="PARENTESCO_CONTACTO" disabled />
+                    <option selected value="{{PARENTESCO_CONTACTO}}" disabled>{{PARENTESCO_CONTACTO}}</option>
+                    <option value="PADRE">Padre</option>
+                    <option value="MADRE">Madre</option>
+                    <option value="HERMANO(A)">Hermano(a)</option>
+                    <option value="ABUELO(A)">Abuelo(a)</option>
+                    <option value="CONYUGUE">Cónyugue</option>
+                    <option value="PARIENTE">Pariente</option>
+                    <option value="AMIGO(A)">Amigo(a)</option>
+                    <option value="OTRO(A)">Otro</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="Phoneautorizada" class="col-md-4 col-lg-3 col-form-label">Teléfono persona
+                  autorizada</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="telContacto" type="text" class="form-control" id="Phoneautorizada"
+                    value={{TEL_CONTACTO}} disabled />
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+
+          <div class="tab-pane fade pt-3" id="datos_beca">
+            <!-- Change Password Form -->
+            
+            <form method="post" action="/perfil/update-beca">
+              <h5 class="card-title">Beca bachillerato</h5>
+
+
+              <div class="row mb-3">
+                <label for="instbecabach" class="col-md-4 col-lg-3 col-form-label">Institución beca bach.</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="instbecabach" type="text" class="form-control" id="instbecabach" value={{NIVELCOMPLETO}} disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becabach" class="col-md-4 col-lg-3 col-form-label">Nombre beca bach.</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becabach" type="text" class="form-control" id="becabach" value={{CARRERACOMPLETO}} disabled />
+                </div>
+              </div>
+
+              <h5 class="card-title">Beca UTP</h5>
+
+
+              <div class="row mb-3">
+                <label for="instbeca" class="col-md-4 col-lg-3 col-form-label">Institución de la beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becainst" type="text" class="form-control" id="becainst" value={{HIJOS6A12}} disabled/>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Nombre de la Beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becanombre" type="text" class="form-control" id="becanombre" value={{BECA}} disabled />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Estatus de la beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becaestatus" type="text" class="form-control" id="becaestatus" value={{HIJOS13A18}} disabled/>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="becafolio" class="col-md-4 col-lg-3 col-form-label">Folio de la beca</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="becafolio" type="text" class="form-control" id="becafolio" value={{HIJOSMAYORES}} disabled/>
+                </div>
+              </div>
+
+
+
+              <div class="text-center">
+                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+
+          <div class="tab-pane fade pt-3" id="datos_seguro">
+            <!-- Change Password Form -->
+            <form action="/perfil/update-seguro" method="post">
+
+              <h5 class="card-title">Datos seguro médico</h5>
+
+              <div class="row mb-3">
+                <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
+                <div class="col-md-8 col-lg-9">
+                  <select class="form-select" id="tiposeguro" name="TIPO_SEG_MED" disabled />
+                    <option selected disabled value="{{TIPO_SEG_MED}}">{{TIPO_SEG_MED}}</option>
+                    <option value="imss_utp">IMSS-UTP</option>
+                    <option value="imms_fam">IMSS Familiar</option>
+                    <option value="isstey">ISSTEY</option>
+                    <option value="bienestar">Bienestar</option>
+                    <option value="particular">Particular</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="nss" type="text" class="form-control" id="nss" value={{NUM_IMSS}} disabled />
+                </div>
+              </div>
+                
+                <div class="row mb-3">
+                <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número Verificador</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="nss_verif" type="text" class="form-control" id="nss" value={{NUM_IMSS_VERIFICADOR}} disabled />
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+<div class="text-center pt-3">
+            <button class="btn btn-outline-primary" type="button" id="btn-habilitar">Habilitar edición</button>
+          </div>
+        </div><!-- End Bordered Tabs -->
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
+<script>
+  const btn_act = document.getElementById("btn-habilitar");
+  const btn_update = document.getElementsByName("guardarForm");
+
+  btn_act.addEventListener("click", () => {
+    btn_update.forEach(item => item.classList.remove("d-none"));
+
+    btn_act.style.display = "none";
+
+    let inputs = document.getElementsByTagName("input");
+    let selects = document.getElementsByTagName("select");
+    let txtarea = document.getElementsByTagName("textarea");
+
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].disabled = false;
+    }
+
+    for (let i = 0; i < selects.length; i++) {
+      selects[i].disabled = false;
+    }
+
+    for (let i = 0; i < txtarea.length; i++) {
+      txtarea[i].disabled = false;
+    }
+
+    // Manda al principio de la pagina
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  });
+
+</script>

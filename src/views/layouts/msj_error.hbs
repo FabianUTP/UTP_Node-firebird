@@ -1,0 +1,27 @@
+{{#if msj_error}}
+
+<div id="msj" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <div class="d-flex justify-content-between aling-items-center">
+    {{msj_error}}
+
+    <button type="button" class="btn" onclick="cerrar()" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+</div>
+
+<script>
+  const msj = document.getElementById('msj');
+
+  function cerrar() {
+    msj.style.display = 'none';
+  }
+
+  // Cierra automáticamente el mensaje
+  setTimeout(() => {
+    cerrar();
+  }, 4000);
+</script>
+
+{{/if}}

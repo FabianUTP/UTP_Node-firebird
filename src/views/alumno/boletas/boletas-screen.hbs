@@ -1,0 +1,113 @@
+<section class="section profile">
+  <div class="container">
+
+    <div class="my-3 d-flex justify-content-between">
+      {{>btnBack}}
+      <button type="button" class="btn btn-success">
+        <i class="bi bi-cloud-arrow-down"></i>
+        Descargar boleta
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-body pt-3">
+
+        <div class="card-title text-center">
+          <h1>Calificaciones</h1>
+        </div>
+
+        <div class="tab-content pt-2">
+          <div class="tab-pane fade show active profile-overview" id="doctos">
+
+            <section id="accesos_index" class="featured-services">
+
+              <div class="container" data-aos="fade-up">
+
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">
+                          NOMBRE
+                        </th>
+                        <th scope="col">
+                          MATRÍCULA
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <th scope="row">{{ NOMBRE }} {{PATERNO}} {{MATERNO}} </th>
+                        <td>{{ MATRICULA }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-8">
+                    <label for="motivos" class="form-label"><b>*Selecciona el cuatrimestre:</b> </label>
+                    <select id="cuatrimestre" class="form-select" onchange="getCalifi()">
+                      <option disabled selected>Elegir cuatrimestre</option>
+                      <option value="1">Cuatrimestre 1</option>
+                      <option value="2">Cuatrimestre 2</option>
+                      <option value="3">Cuatrimestre 3</option>
+                      <option value="4">Cuatrimestre 4</option>
+                      <option value="5">Cuatrimestre 5</option>
+                      <option value="6">Cuatrimestre 6</option>
+                      <option value="7">Cuatrimestre 7</option>
+                      <option value="8">Cuatrimestre 8</option>
+                      <option value="9">Cuatrimestre 9</option>
+                      <option value="10">Cuatrimestre 10</option>
+                      <option value="11">Cuatrimestre 11</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="tipo_eval" class="form-label"><b>Tipo de evaluación</b></label>
+                    <select id="tipo_eval" class="form-select" onchange="getCalifi()">
+                      <option value="A" selected>Ordinario</option>
+                      <option value="B">% Asistencia</option>
+                      <option value="E">Recuperativo</option>
+                      <option value="G">Especial</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered table-responsive">
+                    <thead>
+                      <tr>
+                        <th scope="col">Asignatura</th>
+                        <th scope="col">Calificacion</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table-content">
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="text-center" id="loading" style="display: none;">
+                  <div class="spinner-border"></div>
+                </div>
+
+              </div>
+
+            </section>
+
+          </div>
+
+        </div><!-- End Bordered Tabs -->
+
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" value="{{NUMEROALUMNO}}" id="numalumno">
+
+</section>
+
+<script src="/js/services/alumno/getCalifiAlumno.js"></script>

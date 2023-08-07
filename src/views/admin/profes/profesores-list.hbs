@@ -1,0 +1,36 @@
+<section>
+    <div class="mb-3">
+    {{>btnBack}}
+  </div>
+    
+  <div class="card">
+    <div class="card-body">
+      <div class="card-title text-center">
+        <h1>Lista de Profesores</h1>
+      </div>
+      <div class="flex-fill">
+        <div class="input-group mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
+          <input type="search" class="form-control" placeholder="Buscar" id="buscar" />
+            <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Clave del Profesor</th>
+            <th>Nombre del Profesor</th>
+          </tr>
+        </thead>
+        <tbody id="table-content"></tbody>
+      </table>
+      <div>
+        <button class="btn btn-primary" onclick="onPrev()"> < </button>
+        <button class="btn btn-primary" onclick="onNext()"> > </button>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/js/services/admin/getProfesores.js"></script>

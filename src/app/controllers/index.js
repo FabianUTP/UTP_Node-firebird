@@ -11,6 +11,7 @@ const { PlanesCtr } = require("./PlanesController");
 const { ProfeCtr } = require("./ProfesoresController");
 
 
+
 module.exports = {
   AlumnosController,
   HomeController,
@@ -23,4 +24,5 @@ module.exports = {
   CalifiCtr,
   PlanesCtr,
   ProfeCtr,
+
 };

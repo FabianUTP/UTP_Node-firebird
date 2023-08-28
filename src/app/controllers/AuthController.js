@@ -58,7 +58,7 @@ AuthController.authProfe = async (req = request, res = response) => {
 
   let profe = await ProfeAuth.findById(user);
 
-  if(profe) { 
+  if (profe && profe.PASSWORD === password) { 
     req.session.isAuthenticated = true;
     req.session.isProfe = true;
     req.session.IDAuth = profe.CLAVEPROFESOR;
@@ -66,10 +66,11 @@ AuthController.authProfe = async (req = request, res = response) => {
     req.session.lastNameAuth = "";
     return res.redirect('/');
   } else {
-    req.flash('msj_error', 'Folio no encontrado');
+    req.flash('msj_error', 'Correo o contraseña incorrectos');
     return res.redirect('/login');
   }
 };
+
 
 AuthController.authAdmin = async (req = request, res = response) => {
   const { user, password } = req.body;

@@ -27,6 +27,33 @@
 
   {{/if}}
 
+    {{!-- Si es alumno, muestra la seleccion del periodo --}}
+  {{#if isAlumno}}
+  <div class="col-md-3">
+    <select id="selectciclo" class="form-select">
+    </select>
+  </div>
+
+  <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
+
+<!-- End Search Bar -->
+
+  {{/if}}
+
+
+{{!-- Si es profe, muestra la seleccion del periodo --}}
+    {{#if isProfe}}
+  <div class="col-md-3">
+    <select id="selectciclo" class="form-select">
+    </select>
+  </div>
+
+  <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
+
+
+
+  {{/if}}
+
 
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
@@ -68,6 +95,7 @@
           </li>
 
         </ul><!-- End Profile Dropdown Items -->
+        
       </li><!-- End Profile Nav -->
 
     </ul>

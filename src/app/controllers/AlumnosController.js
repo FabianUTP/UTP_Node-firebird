@@ -1,6 +1,5 @@
 const firebird = require("node-firebird");
 const options = require("../../configs/credential-firebird")
-
 const { request, response } = require("express");
 const { Alumno } = require("../models/");
 

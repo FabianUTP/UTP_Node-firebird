@@ -105,7 +105,7 @@ const profe_items = [
     path_img: "./imgs/satisfaccion.png",
     title: "Calificaciones",
     content: "Ver o subir calificaciones de grupos.",
-    link: "/profesores",
+    link: "/grupoprofe",
   },
 ];
 

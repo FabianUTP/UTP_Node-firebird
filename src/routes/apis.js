@@ -17,7 +17,11 @@ const {
   VillasMst,
   VillasCfg,
   ProfesoresGrupos,
+  Empresas,
+  Empleados,
+  CFGDoctos, // Agrega esta línea para importar el modelo CFGDoctos
 } = require("../app/models");
+const Firebird = require("../app/models/Firebird");
 
 router.get("/grupos", async (req, res) => {
   const {
@@ -78,7 +82,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   let sql = `SELECT FIRST(${limit}) SKIP(${skip}) `;
   sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, alumnos.nivel, alumnos.genero, alumnos.status `;
   sql += "FROM alumnos_grupos ";
-  sql +=
+  sql +={}
     "left join alumnos on alumnos_grupos.numeroalumno = alumnos.numeroalumno ";
   sql += `where codigo_grupo = '${idGrupo}' `;
 
@@ -599,6 +603,171 @@ router.get("/profesores/:id/grupos", async (req, res) => {
 
 });
 
+// Obtener todas las empresas
+router.get('/empresas', async (req, res) => {
+  try {
+    const empresas = await Empresas.getAll();
+    res.json(empresas);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener las empresas' });
+  }
+});
+
+// Obtener una empresa por su ID
+router.get('/empresas/:id_empresa', async (req, res) => {
+  const id_empresa = req.params.id_empresa;
+  try {
+    const empresa = await Empresas.findById(id_empresa);
+    if (empresa) {
+      res.json(empresa);
+    } else {
+      res.status(404).json({ error: 'Empresa no encontrada' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener la empresa' });
+  }
+});
+
+// Agregar una nueva empresa
+router.post('/empresas', async (req, res) => {
+  const nuevaEmpresa = req.body; // Obtener los datos del cuerpo de la solicitud
+
+  // Extraer los campos individuales de nuevaEmpresa
+  const {
+    ID_EMPRESA,
+    NOMBRE_EMPRESA,
+    CEDULA_FISCAL_EMPRESA,
+    DOMICILIO_EMPRESA,
+    NUMEXT_EMPRESA,
+    NUMINT_EMPRESA,
+    COLONIA_EMPRESA,
+    CP_EMPRESA,
+    LOCALIDAD_EMPRESA,
+    CIUDAD_EMPRESA,
+    ESTADO_EMPRESA,
+    TELEFONO1_EMPRESA,
+    EMAIL
+  } = nuevaEmpresa;
+
+  // Ejecutar la sentencia INSERT en la base de datos
+  const query = `
+    INSERT INTO CFGEMPRESAS (
+      ID_EMPRESA,
+      NOMBRE_EMPRESA,
+      CEDULA_FISCAL_EMPRESA,
+      DOMICILIO_EMPRESA,
+      NUMEXT_EMPRESA,
+      NUMINT_EMPRESA,
+      COLONIA_EMPRESA,
+      CP_EMPRESA,
+      LOCALIDAD_EMPRESA,
+      CIUDAD_EMPRESA,
+      ESTADO_EMPRESA,
+      TELEFONO1_EMPRESA,
+      EMAIL
+    )
+    VALUES (
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?,
+      ?
+    )
+  `;
+
+  // Crear un array con los valores en el mismo orden que las ? en la consulta
+  const values = [
+    ID_EMPRESA,
+    NOMBRE_EMPRESA,
+    CEDULA_FISCAL_EMPRESA,
+    DOMICILIO_EMPRESA,
+    NUMEXT_EMPRESA,
+    NUMINT_EMPRESA,
+    COLONIA_EMPRESA,
+    CP_EMPRESA,
+    LOCALIDAD_EMPRESA,
+    CIUDAD_EMPRESA,
+    ESTADO_EMPRESA,
+    TELEFONO1_EMPRESA,
+    EMAIL
+  ];
+
+  try {
+    // Ejecutar la consulta en la base de datos
+    await new Firebird("EMPLEADOS").createQuery({querySql: query, data: values})
+
+    res.status(201).json({ message: 'Empresa creada exitosamente' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear la empresa' });
+  }
+});
+
+
+// Obtener todos los empleados
+router.get('/empleados', async (req, res) => {
+  try {
+    const empleados = await Empleados.getAll();
+    res.json(empleados);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los empleados' });
+  }
+});
+
+// Obtener un empleado por su NUMEMPLEADO
+router.get('/empleados/:numEmpleado', async (req, res) => {
+  const numEmpleado = req.params.numEmpleado;
+  try {
+    const empleado = await Empleados.findByNumEmpleado(numEmpleado);
+    if (empleado) {
+      res.json(empleado);
+    } else {
+      res.status(404).json({ error: 'Empleado no encontrado' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el empleado' });
+  }
+});
+
+router.get('/edoctos/', async (req, res) => {
+  const { grado, numalumno } = req.query;
+
+  if (!grado || !numalumno) {
+    return res.json({
+      error: 'Se necesita el grado a buscar y el número del alumno',
+    });
+  }
+
+  try {
+    const edoctos = await CFGDoctos.findAll({
+      where: {
+        GRADO: grado,
+        NUMALUMNO: numalumno,
+      },
+    });
+
+    res.json({
+      query: {
+        grado,
+        numalumno,
+      },
+      edoctos,
+    });
+  } catch (error) {
+    console.error('Error al consultar los edoctos:', error);
+    res.status(500).json({
+      error: 'Ocurrió un error al obtener los edoctos.',
+    });
+  }
+});
+
 router.get("/villas", async (req, res) => {
   let villa = await VillasMst.all({
     limit: 10,
@@ -607,7 +776,7 @@ router.get("/villas", async (req, res) => {
 });
 
 router.get("/villas/:id", async (req, res) => {
-  let villa = await VillasMst.findById(req.params.id);
+  let villa = await VillasMst.findById(req.params. id);
   res.json(villa);
 });
 

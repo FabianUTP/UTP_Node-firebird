@@ -1,0 +1,169 @@
+<head>
+  <!-- Estilos de Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+  <!-- Iconos de Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.25.0/font/bootstrap-icons.css"
+    rel="stylesheet">
+</head>
+
+<body>
+  <p></p>
+  <h3 style="text-align: center;"><i class="bi bi-building"></i><strong>
+      Información de
+      la Empresa</strong></h3>
+  <p></p>
+  <!-- Cuadro de selección -->
+  <div class="form">
+    <div class="row">
+      <div class="col-sm-3">
+        <p class="text-right">Selecciona Empresa:</p>
+      </div>
+      <div class="col-sm-9">
+        <select class="form-select form-control" id="selectEmpresa">
+          <option selected>Seleccione una Empresa</option>
+          <option value="opcion1">No existe en catálogo</option>
+          {{#each nombresEmpresas}}
+          <option value="{{@index}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <button id="btnAgregarEmpresa" class="btn btn-primary" style="display: none;">Agregar
+    Empresa</button>
+
+  <!-- Modal de Agregar Empresa -->
+  <div class="modal" id="modalAgregarEmpresa" tabindex="-1" role="dialog"
+    aria-labelledby="modalAgregarEmpresaLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAgregarEmpresaLabel">Agregar Empresa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modalContent">
+          <!-- Contenido del formulario -->
+          <div class="form">
+            <!-- Campos del formulario de agregar empresa -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal">Cerrar</button>
+          <!-- Cambiamos el tipo de botón a "button" y le agregamos la clase "btnGuardarEmpresa" -->
+          <button type="button" class="btn btn-primary btnGuardarEmpresa">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p></p>
+
+  <!-- Formulario muestra seleccionado -->
+
+  <div class="container" style="max-width: 400px; margin: 0 auto;">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input type="text" class="form-control" id="nombre" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="rfc">RFC:</label>
+      <input type="text" class="form-control" id="rfc" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="domicilio">Domicilio:</label>
+      <input type="text" class="form-control" id="domicilio" readonly>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="numeroExt">Número Ext:</label>
+        <input type="text" class="form-control" id="numeroExt" readonly>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="numeroInt">Número Int:</label>
+        <input type="text" class="form-control" id="numeroInt" readonly>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="colonia">Colonia:</label>
+        <input type="text" class="form-control" id="colonia" readonly>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="cp">CP:</label>
+        <input type="text" class="form-control" id="cp" readonly>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="localidad">Localidad:</label>
+        <input type="text" class="form-control" id="localidad" readonly>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="municipio">Municipio:</label>
+      <input type="text" class="form-control" id="municipio" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="estado">Estado:</label>
+      <input type="text" class="form-control" id="estado" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono:</label>
+      <input type="text" class="form-control" id="telefono" readonly>
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo Electrónico:</label>
+      <input type="email" class="form-control" id="correo" readonly>
+    </div>
+  </div>
+
+  {{!-- Fin del Formulario de seleccion --}}
+
+  <p></p>
+
+  <div class="d-grid gap-2 mt-3">
+    <button id="btnGuardar" class="btn btn-primary" type="button">
+      <i class="bi bi-check"></i> Guardar
+    </button>
+  </div>
+
+  <p></p>
+
+  <!-- Bibliotecas de JavaScript de Bootstrap (jQuery y Popper.js) -->
+  <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript de Bootstrap -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Tu archivo de JavaScript personalizado -->
+  <script src="/js/services/alumno/estadia/Empresa/stemp_model.js"></script>
+  <script src="/js/services/alumno/estadia/Empresa/custombutton.js"></script>
+  <script src="/js/services/alumno/estadia/Empresa/getDataFromAPI.js"></script>
+  <script src="/js/services/alumno/estadia/Empresa/guardar.js"></script>
+
+  
+
+</body>

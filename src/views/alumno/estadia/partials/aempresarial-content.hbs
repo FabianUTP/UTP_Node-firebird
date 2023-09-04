@@ -1,0 +1,131 @@
+<!-- Resto del código HBS -->
+
+<p></p>
+<div class="container" style="max-width: 600px; margin: 0 auto;">
+  <h3><strong><i class="bi bi-person-badge"></i> Datos de Asesor Empresarial</strong></h3>
+
+  <div class="form-group row">
+    <label for="tipoAsesor" class="col-sm-3 col-form-label">Tipo de Asesor:</label>
+    <div class="col-sm-9">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" value="interno"
+          id="checkInterno" onclick="toggleInternoForm()">
+        <label class="form-check-label" for="checkInterno">
+          Interno
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" value="externo"
+          id="checkExterno" onclick="toggleExternoForm()">
+        <label class="form-check-label" for="checkExterno">
+          Externo
+        </label>
+      </div>
+    </div>
+  </div>
+  <p></p>
+
+  <!-- Formulario para asesor interno -->
+  <div class="form-group" id="internoForm" style="display: none;">
+    <div class="form">
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="text-right">Selecciona Asesor empresarial:</p>
+        </div>
+        <div class="col-sm-9">
+            <select class="form-select form-control" id="selectEmpresa">
+    <option selected>Lista de Empleados</option>
+    {{#each nombresEmpleados}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+
+    <!-- Agregar los nombres de los maestros -->
+    {{#each nombresMaestros}}
+    <option value="{{this}}">{{this}}</option>
+    {{/each}}
+  </select>
+
+        </div>
+      </div>
+    </div>
+    <p></p>
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" class="form-control" id="nombre"
+      value="{{nombreEmpleado}}" readonly>
+
+    <label for="puesto">Puesto:</label>
+    <input type="text" class="form-control" id="puesto"
+      value="{{puestoEmpleado}}" readonly>
+
+    <label for="telCel">Tel/Cel:</label>
+    <input type="text" class="form-control" id="telCel"
+      value="{{telCelEmpleado}}" readonly>
+
+    <label for="correo">Correo:</label>
+    <input type="text" class="form-control" id="correo"
+      value="{{correoEmpleado}}" readonly>
+  </div>
+
+  <p></p>
+
+  <!-- Formulario para asesor externo -->
+  <div class="form-group" id="externoForm" style="display: none;">
+    <label for="nombre">Nombre:</label>
+    <input type="text" class="form-control" id="nombre">
+
+    <label for="puesto">Puesto:</label>
+    <input type="text" class="form-control" id="puesto">
+
+    <label for="telCel">Tel/Cel:</label>
+    <input type="text" class="form-control" id="telCel">
+
+    <label for="correo">Correo:</label>
+    <input type="text" class="form-control" id="correo">
+  </div>
+  <p></p>
+
+  <!-- Resto del código HBS -->
+  <p></p>
+  <hr>
+  <!-- Tabla con formularios de fechas -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Fecha Inicio</th>
+        <th>Fecha Término</th>
+        <th>Fecha Carta Liberacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="date" class="form-control" id="fechaInicio">
+        </td>
+        <td>
+          <input type="date" class="form-control"
+            id="fechaTerminoEstadiaEmpresa"
+            onchange="validarFechaCartaLiberacion()">
+        </td>
+        <td>
+          <input type="date" class="form-control" id="fechaCartaLiberacion"
+            disabled>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+   <p>
+    <div class="d-grid gap-2 mt-3">
+    <button id="btnGuardar" class="btn btn-primary" type="button">
+      <i class="bi bi-check"></i> Guardar
+    </button>
+  </div>
+   </p>
+  
+</div>
+
+<!-- Resto del código HBS -->
+
+<script src="/js/services/alumno/estadia/AEmpresarial/chekes.js"></script>
+<script src="/js/services/alumno/estadia/AEmpresarial/fechaveri.js"></script>
+<script src="/js/services/alumno/estadia/AEmpresarial/guardar.js"></script>

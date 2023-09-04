@@ -42,8 +42,14 @@ const alumno_items = [
   {
     path_img: "./imgs/estadias.png",
     title: "Estadia",
-    content: "Ingresa y sube los documentos en formato.pdf, de tus estadias",
+    content: "Ingresa y sube los documentos en formato.pdf e verifica tu informacion, de tus estadias",
     link: "/estadia",
+  },
+  {
+    path_img: "./imgs/titulacion.png",
+    title: "Titulación",
+    content: "Ingresa y sube los documentos en formato.pdf, de tus estadias",
+    link: "/titulacion",
   },
   {
     path_img: "./imgs/calendario.png",

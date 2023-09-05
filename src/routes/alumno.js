@@ -9,12 +9,12 @@ const { isAlumno } = require("../app/middlewares/session");
 const {AlumnosController} = require("../app/controllers");
 const {EstadiaController} = require("../app/controllers/EstadiaController");
 const {TitulacionController} = require("../app/controllers/TitulacionController");
-
+const PDFController = require("../app/controllers/PdfController");
 
 // Rutas de los Alumnos.
 
 //Apartado Boletas y Documentos
-router.get("/boletas", isAlumno, AlumnosController.getBoletas);
+router.get("/BoletasAlumnos", isAlumno, PDFController.showById);
 router.get("/doctos", isAlumno, AlumnosController.doctos);
 router.get("/doctos/:idDocto", AlumnosController.showDocto);
 

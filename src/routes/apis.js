@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 const {
   Alumno,
   Ciclos,
@@ -17,6 +18,7 @@ const {
   VillasMst,
   VillasCfg,
   ProfesoresGrupos,
+  CiclosAdmins,
   Empresas,
   Empleados,
   CFGDoctos, // Agrega esta línea para importar el modelo CFGDoctos
@@ -167,6 +169,16 @@ router.get("/cuatrimestres", async (req, res) => {
     },
     ciclos,
   });
+});
+
+router.get('/ciclosAdmi', async (_req, res) => {
+  try {
+    const ciclosAdmins = await CiclosAdmins.createQuery({querySql: "SELECT * FROM CICLOS_ADMINS"})
+    res.json(ciclosAdmins);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error en la consulta de la base de datos' });
+  }
 });
 
 router.get("/alumnos", async (req, res) => {

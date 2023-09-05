@@ -33,6 +33,10 @@ router.get("/alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
 router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
 router.get("/cuatrimestres", CuatrisCtr.index);
+router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Calificacion/Calificaciones.hbs")})
+router.get("/Cuatri-Reins", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Reinscripcion/Reinscripciones.hbs")})
+router.get("/Cuatri-Estadia", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Estadias/Estadias.hbs")})
+router.get("/Cuatri-NIngreso", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Nuevo Ingreso/Nuevo_Ingreso.hbs")})
 router.get("/cuatrimestres/nuevo", CuatrisCtr.showCreate);
 router.post("/cuatrimestres/nuevo", CuatrisCtr.create);
 router.get("/cuatrimestres/:id", CuatrisCtr.showById);

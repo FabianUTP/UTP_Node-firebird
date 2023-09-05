@@ -37,7 +37,7 @@ const alumno_items = [
     path_img: "./imgs/satisfaccion.png",
     title: "Boletas",
     content: "Ingresa, consulta y descarga tu boleta de calificaciones.",
-    link: "/boletas",
+    link: "/BoletasAlumnos",
   },
   {
     path_img: "./imgs/estadias.png",

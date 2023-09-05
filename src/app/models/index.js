@@ -14,6 +14,7 @@ const CfgStatus = require("./CfgStatus");
 const profes = require("./Profesores");
 const villas = require("./Villas");
 const Usuarios = require("./Usuarios");
+const CiclosAdmins = require("./CiclosAdmins");
 
 module.exports = {
   Alumno,
@@ -21,6 +22,7 @@ module.exports = {
   Doctos,
   Grupos,
   Ciclos,
+  CiclosAdmins,
   Niveles,
   AlumnosGrupos,
   AlumKardex,

@@ -1,0 +1,901 @@
+<section class="section">
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <img src="imgs/logoUTP.png" alt width="160" height="60">
+
+  <div class="d-flex">
+    <a href="/verificacionCURP" class="btn btn-danger ms-auto"><span>&larr;</span>
+      Regresar</a>
+  </div>
+
+  <div class="container">
+    <h1 class="text-primary">Registro de Nuevo Aspirante</h1>
+    <form id="registroForm" action="/pegar" method="POST">
+      <div class="card">
+        <div class="card-body">
+
+          <h5 class="text-primary">DATOS PERSONALES</h5><br>
+          <div class="form-group">
+
+            <div class="row">
+              <!-- Campo Año Inicial alineado a la izquierda -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="inputAnio">Año Inicial:</label>
+                  <input type="number" id="inputAnio" name="ALUMNO_ALTAINICIAL"
+                    class="form-control" maxlength="4"
+                    onchange="actualizarAnioFinal()" value="2023">
+                  <p>*Colocar el año actual según el ciclo escolar a trabajar</p>
+                </div>
+              </div>
+
+              <!-- Campo Año Final alineado a la derecha -->
+              <div class="col-md-6 text-right">
+                <div class="form-group">
+                  <label for="inputSiguienteAnio">Siguiente Año:</label>
+                  <input type="text" id="inputSiguienteAnio"
+                    name="ALUMNO_ALTAFINAL" class="form-control" readonly
+                    value="2024">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="paterno">Apellido Paterno:</label>
+              <input type="text" id="paterno" name="PATERNO" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="materno">Apellido Materno:</label>
+              <input type="text" id="materno" name="MATERNO" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="NOMBRE" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="selectTipoSeguro">Selecciona el tipo de seguro médico:</label>
+              <select id="selectTipoSeguro" name="TIPO_SEG_MED"
+                class="form-select">
+                <option value disabled selected>Seleccionar</option>
+                <option value="IMSS">IMSS</option>
+                <option value="ISSSTE">ISSSTE</option>
+                <option value="Sin Especificar">Sin Especificar</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="numIMSS">Número de IMSS:</label>
+              <input type="number" id="numIMSS" name="NUM_IMSS" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="selectGenero">Selecciona un género:</label>
+              <select id="selectGenero" name="GENERO" class="form-select">
+                <option value disabled selected>Seleccionar</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="selectNivel">Selecciona un nivel:</label>
+              <select id="selectNivel" name="NIVEL" class="form-select" required>
+                <option value disabled selected>Seleccionar</option>
+                <option value="TSUTI_DSM">TSU en Tecnologías de la Información
+                  ADSM</option>
+                <option value="TSUTU">TSU en Turismo Área Desarrollo de
+                  Productos Alternativos</option>
+                <option value="TSUPA">TSU en Procesos Alimentarios</option>
+                <option value="TSUADF">TSU en Administración Área Formulación y
+                  Evaluación de Proyectos</option>
+                <option value="TSUGA">TSU en Gastronomía</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="claveCiudadana">Clave Ciudadana:</label>
+              <input type="text" id="claveCiudadana" name="CLAVE_CIUDADANA"
+                required class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="estadoCivil">Estado Civil:</label>
+              <select id="estadoCivil" name="ESTADO_CIVIL" class="form-select">
+                <option value disabled selected>Seleccionar</option>
+                <option value="S">Soltero/a</option>
+                <option value="C">Casado/a</option>
+                <option value="D">Divorciado/a</option>
+                <option value="V">Viudo/a</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+              <input type="date" id="fechaNacimiento" name="FECHA_NACIMIENTO"
+                required class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="domicilio">Domicilio:</label>
+              <input type="text" id="domicilio" name="DOMICILIO" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="entreCalles">Entre Calles:</label>
+              <input type="text" id="entreCalles" name="ENTRE_CALLES" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+              <p>*Colocar una ciudad que cruce por tu ciudad. En el caso de que
+                no exista una ciudad o localidad que cruce con mi ciudad, se
+                considerará únicamente el nombre de mi ciudad como referencia
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label for="cp">Código Postal:</label>
+              <input type="number" id="cp" name="CP" required
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="ciudad">Ciudad:</label>
+              <input type="text" id="ciudad" name="CIUDAD" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="selectEstado">Estado:</label>
+              <select id="selectEstado" name="ESTADO" class="form-select">
+                <option value disabled selected>Seleccionar</option>
+                <option value="AGS">Aguascalientes</option>
+                <option value="BC">Baja California</option>
+                <option value="BCS">Baja California Sur</option>
+                <option value="CAM">Campeche</option>
+                <option value="CHIS">Chiapas</option>
+                <option value="CHIH">Chihuahua</option>
+                <option value="CDMX">Ciudad de México</option>
+                <option value="COAH">Coahuila</option>
+                <option value="COL">Colima</option>
+                <option value="DGO">Durango</option>
+                <option value="EDOMEX">Estado de México</option>
+                <option value="GTO">Guanajuato</option>
+                <option value="GRO">Guerrero</option>
+                <option value="HGO">Hidalgo</option>
+                <option value="JAL">Jalisco</option>
+                <option value="MICH">Michoacán</option>
+                <option value="MOR">Morelos</option>
+                <option value="NAY">Nayarit</option>
+                <option value="NL">Nuevo León</option>
+                <option value="OAX">Oaxaca</option>
+                <option value="PUE">Puebla</option>
+                <option value="QRO">Querétaro</option>
+                <option value="QROO">Quintana Roo</option>
+                <option value="SLP">San Luis Potosí</option>
+                <option value="SIN">Sinaloa</option>
+                <option value="SON">Sonora</option>
+                <option value="TAB">Tabasco</option>
+                <option value="TAMPS">Tamaulipas</option>
+                <option value="TLAX">Tlaxcala</option>
+                <option value="VER">Veracruz</option>
+                <option value="YUC">Yucatán</option>
+                <option value="ZAC">Zacatecas</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="telefono" class="form-label">Teléfono:</label>
+              <input type="tel" id="telefono" name="TELEFONO"
+                class="form-control" inputmode="numeric">
+              <p style="color: red;">*campo no obligatorio</p>
+            </div>
+
+            <div class="form-group">
+              <label for="celular" class="form-label">Celular:</label>
+              <input type="tel" id="celular" name="CELULAR" required
+                class="form-control" inputmode="numeric">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="EMAIL" required
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="emailAlterno">Email Alterno:</label>
+              <input type="email" id="emailAlterno" name="EMAIL_ALTERNO"
+                class="form-control">
+              <p style="color: red;">*campo no obligatorio</p>
+            </div>
+
+            <div class="form-group">
+              <label for="lugarNacimiento">Lugar de Nacimiento:</label>
+              <input type="text" id="lugarNacimiento" name="LUGAR_NACIMIENTO"
+                required class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="selectEstadoNacimiento">Estado Nacimiento:</label>
+              <select id="selectEstadoNacimiento" name="ESTADO_NACIMIENTO"
+                class="form-select">
+                <option value disabled selected>Seleccionar</option>
+                <option value="AGS">Aguascalientes</option>
+                <option value="BC">Baja California</option>
+                <option value="BCS">Baja California Sur</option>
+                <option value="CAM">Campeche</option>
+                <option value="CHIS">Chiapas</option>
+                <option value="CHIH">Chihuahua</option>
+                <option value="CDMX">Ciudad de México</option>
+                <option value="COAH">Coahuila</option>
+                <option value="COL">Colima</option>
+                <option value="DGO">Durango</option>
+                <option value="EDOMEX">Estado de México</option>
+                <option value="GTO">Guanajuato</option>
+                <option value="GRO">Guerrero</option>
+                <option value="HGO">Hidalgo</option>
+                <option value="JAL">Jalisco</option>
+                <option value="MICH">Michoacán</option>
+                <option value="MOR">Morelos</option>
+                <option value="NAY">Nayarit</option>
+                <option value="NL">Nuevo León</option>
+                <option value="OAX">Oaxaca</option>
+                <option value="PUE">Puebla</option>
+                <option value="QRO">Querétaro</option>
+                <option value="QROO">Quintana Roo</option>
+                <option value="SLP">San Luis Potosí</option>
+                <option value="SIN">Sinaloa</option>
+                <option value="SON">Sonora</option>
+                <option value="TAB">Tabasco</option>
+                <option value="TAMPS">Tamaulipas</option>
+                <option value="TLAX">Tlaxcala</option>
+                <option value="VER">Veracruz</option>
+                <option value="YUC">Yucatán</option>
+                <option value="ZAC">Zacatecas</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="selectNacionalidad">Nacionalidad:</label>
+              <select id="selectNacionalidad" name="NACIONALIDAD"
+                class="form-select" required>
+                <option value disabled selected>Seleccionar</option>
+                <option value="Mexico">México</option>
+                <option value="Extranjero">Extranjero</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-primary">DATOS ADICIONALES</h5><br>
+
+            <div class="form-group">
+              <label for="escuelaProcedencia">Escuela de Procedencia:</label>
+              <input type="text" id="escuelaProcedencia"
+                name="ESCUELA_PROCEDENCIA" required class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="selectEstadoEscolaridad">Estado Escolaridad:</label>
+              <select id="selectEstadoEscolaridad" name="ESTADO_ESCOLARIDAD"
+                class="form-select">
+                <option value disabled selected>Seleccionar</option>
+                <option value="AGS">Aguascalientes</option>
+                <option value="BC">Baja California</option>
+                <option value="BCS">Baja California Sur</option>
+                <option value="CAM">Campeche</option>
+                <option value="CHIS">Chiapas</option>
+                <option value="CHIH">Chihuahua</option>
+                <option value="CDMX">Ciudad de México</option>
+                <option value="COAH">Coahuila</option>
+                <option value="COL">Colima</option>
+                <option value="DGO">Durango</option>
+                <option value="EDOMEX">Estado de México</option>
+                <option value="GTO">Guanajuato</option>
+                <option value="GRO">Guerrero</option>
+                <option value="HGO">Hidalgo</option>
+                <option value="JAL">Jalisco</option>
+                <option value="MICH">Michoacán</option>
+                <option value="MOR">Morelos</option>
+                <option value="NAY">Nayarit</option>
+                <option value="NL">Nuevo León</option>
+                <option value="OAX">Oaxaca</option>
+                <option value="PUE">Puebla</option>
+                <option value="QRO">Querétaro</option>
+                <option value="QROO">Quintana Roo</option>
+                <option value="SLP">San Luis Potosí</option>
+                <option value="SIN">Sinaloa</option>
+                <option value="SON">Sonora</option>
+                <option value="TAB">Tabasco</option>
+                <option value="TAMPS">Tamaulipas</option>
+                <option value="TLAX">Tlaxcala</option>
+                <option value="VER">Veracruz</option>
+                <option value="YUC">Yucatán</option>
+                <option value="ZAC">Zacatecas</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="lenguaindigenas">Lengua Indígena:</label>
+              <input type="text" id="lenguaindigenas" name="LENGUAINDIGENA"
+                required class="form-control"
+                oninput="this.value = this.value.toUpperCase();"
+                placeholder="Ejemplo: SI, (LENGUA)">
+              <p>*si no tienes solo colocar "NO" mayúscula</p>
+            </div>
+
+            <div class="form-group">
+              <label for="discapacidad">Discapacidad:</label>
+              <input type="text" id="discapacidad" name="DISCAPACIDAD" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();"
+                placeholder="Ejemplo: SI, (DISCAPACIDAD)">
+              <p>*si no tienes solo colocar "NO" mayúscula</p>
+            </div>
+
+            <div class="form-group">
+              <label for="enfernedad">Enfermedad:</label>
+              <input type="text" id="enfernedad" name="ENFERNEDAD" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();"
+                placeholder="Ejemplo: SI, (ENFERMEDAD)">
+              <p>*si no tienes solo colocar "NO" mayúscula</p>
+            </div>
+
+            <div class="form-group">
+              <label for="alergias">Alergias:</label>
+              <input type="text" id="alergias" name="ALERGIAS" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();"
+                placeholder="Ejemplo: SI, (ALERGIAS)">
+              <p>*si no tienes solo colocar "NO" mayúscula</p>
+            </div>
+
+            <div class="form-group">
+              <label for="pesokg">Peso kg: </label>
+              <input type="number" id="pesokg" name="PESO_KG" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="inputTalla" class="form-label">Talla:</label>
+              <select id="inputTalla" name="TALLA" class="form-select" required>
+                <option value disabled selected>Seleccionar</option>
+                <option value="G">G</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3-->
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="text-primary">DATOS FAMILIARES</h5><br>
+
+            <div class="form-group">
+              <label for="inputContacto" class="form-label">Contacto:</label>
+              <input type="text" class="form-control" id="inputContacto"
+                name="CONTACTO" required
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="inputParentesco" class="form-label">Parentesco de
+                contacto:</label>
+              <select id="inputParentesco" name="PARENTESCO_CONTACTO"
+                class="form-select" required>
+                <option value disabled selected>SELECCIONAR</option>
+                <option value="PADRE">PADRE</option>
+                <option value="MADRE">MADRE</option>
+                <option value="HERMANO">HERMANO(A)</option>
+                <option value="ABUELO">ABUELO(A)</option>
+                <option value="TÍO">TÍO(A)</option>
+                <option value="PRIMO">PRIMO(A)</option>
+                <option value="OTRO">OTRO</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="inputTelefono" class="form-label">Teléfono de
+                contacto:</label>
+              <input type="number" class="form-control" id="inputTelefono"
+                name="TEL_CONTACTO" required>
+            </div>
+
+            <div class="form-group">
+              <label for="nombrePadre" class="form-label">Nombre del Padre:</label>
+              <input type="text" id="nombrePadre" name="NOMBREPADRE" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="nombreMadre" class="form-label">Nombre de la Madre:</label>
+              <input type="text" id="nombreMadre" name="NOMBREMADRE" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="escolaridadPadre" class="form-label">Escolaridad del
+                Padre:</label>
+              <select id="escolaridadPadre" name="ESCOLARIDADPADRE"
+                class="form-select" required>
+                <option value selected disabled>Selecciona una opción</option>
+                <option value="SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA">SIN
+                  ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
+                <option value="PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA">PRIMARIA
+                  TERMINADA / SECUNDARIA INCOMPLETA</option>
+                <option
+                  value="SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLETO">SECUNDARIA
+                  O COMERCIAL TERMINADA / BACH. INCOMPLETO</option>
+                <option
+                  value="BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA">BACHILLERATO
+                  COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
+                <option
+                  value="EDUC. SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INCOMPLETO">EDUC.
+                  SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INCOMPLETO</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="escolaridadMadre" class="form-label">Escolaridad de la
+                Madre:</label>
+              <select id="escolaridadMadre" name="ESCOLARIDADMADRE"
+                class="form-select" required>
+                <option value selected disabled>Selecciona una opción</option>
+                <option value="SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA">SIN
+                  ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
+                <option value="PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA">PRIMARIA
+                  TERMINADA / SECUNDARIA INCOMPLETA</option>
+                <option
+                  value="SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLETO">SECUNDARIA
+                  O COMERCIAL TERMINADA / BACH. INCOMPLETO</option>
+                <option
+                  value="BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA">BACHILLERATO
+                  COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
+                <option
+                  value="EDUC. SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INCOMPLETO">EDUC.
+                  SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INCOMPLETO</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="actividadPadre" class="form-label">Actividad del
+                Padre:</label>
+              <select id="actividadPadre" name="ACTIVIDADPADRE"
+                class="form-select" required>
+                <option value disabled selected>Seleccionar actividad del padre</option>
+                <option value="OBRERO DE LA INDUSTRIA O MAQUILADORA">OBRERO DE
+                  LA INDUSTRIA O MAQUILADORA</option>
+                <option
+                  value="OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)">OPERADOR
+                  DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                <option
+                  value="ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO)">ARTESANO
+                  (PRODUCTOS DE MADERA, BARRO, CUERO, YESO)</option>
+                <option
+                  value="PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC">PEQUEÑO
+                  AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC</option>
+                <option
+                  value="PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)">PRESTADOR
+                  DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
+                <option
+                  value="EMPLEADO GOB. MUNICIPAL, ESTATAL O FEDERAL (INCLUYE MILITAR)">EMPLEADO
+                  GOB. MUNICIPAL, ESTATAL O FEDERAL (INCLUYE MILITAR)</option>
+                <option value="JUBILADO O PENSIONADO">JUBILADO O PENSIONADO</option>
+                <option value="NINGUNA DE LAS ANTERIORES">NINGUNA DE LAS
+                  ANTERIORES</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="actividadMadre" class="form-label">Actividad de la
+                Madre:</label>
+              <select id="actividadMadre" name="ACTIVIDADMADRE"
+                class="form-select" required>
+                <option value disabled selected>Seleccionar actividad de la
+                  madre</option>
+                <option value="AMA DE CASA">AMA DE CASA</option>
+                <option value="EMPLEADO DE LA INDUSTRIA O DE LA BANCA">EMPLEADO
+                  DE LA INDUSTRIA O DE LA BANCA</option>
+                <option
+                  value="COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)">COMERCIANTE
+                  (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                <option
+                  value="FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN.MUNIC.EST.O FED.">FUNCIONARIO
+                  (MEDIO ALTO) DE INST. GUBERN.MUNIC.EST.O FED.</option>
+                <option
+                  value="PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING., ETC)">PROFESIONISTA
+                  QUE TRABAJA POR SU CUENTA (MÉDICO, ING., ETC)</option>
+                <option
+                  value="PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)">PROFESOR
+                  DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="automovilFamiliar" class="form-label">¿Tiene Automóvil
+                Familiar?:</label>
+              <select id="automovilFamiliar" name="AUTOMOVILFAMILIAR"
+                class="form-select" required>
+                <option value disabled selected>Seleccionar</option>
+                <option value="SI">Sí</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="computadora" class="form-label">¿Tiene Computadora?:</label>
+              <select id="computadora" name="COMPUTADORA" class="form-select"
+                required>
+                <option value disabled selected>Seleccionar</option>
+                <option value="SI">Sí</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="tamano" class="form-label">Tamaño de la Casa:</label>
+              <select id="tamano" name="TAMANOCASA" required
+                class="form-control">
+                <option value selected disabled>Selecciona una opción</option>
+                <option value="Menos de 100 m2">Menos de 100 m2</option>
+                <option value="De 101 a 200 m2">De 101 a 200 m2</option>
+                <option value="De 201 a 300 m2">De 201 a 300 m2</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ingresofamiliar" class="form-label">Ingreso Familiar:</label>
+              <select id="ingresofamiliar" name="INFRESOFAMILIAR"
+                class="form-select" class="form-control" required>
+                <option value selected disabled>Selecciona una opción</option>
+                <option value="Menos de $1,950">Menos de $1,950</option>
+                <option value="Entre $1,951 y $3,900">Entre $1,951 y $3,900</option>
+                <option value="Entre $3,901 y $6,500">Entre $3,901 y $6,500</option>
+                <option value="Entre $6,501 y $13,000">Entre $6,501 y $13,000</option>
+                <option value="Entre $13,001 y $26,500">Entre $13,001 y $26,500</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="personasdependeingreso" class="form-label">Personas
+                que Depende del Ingreso:</label>
+              <input type="number" id="personasdependeingreso"
+                name="PERSONASDEPENDENINGRESO" required class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="viveencasa" class="form-label">Personas que Viven en
+                tu Casa:</label>
+              <input type="number" id="viveencasa" name="VIVENENCASA" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="hermanos" class="form-label">Hermanos que tienes:</label>
+              <input type="number" id="hermanos" name="HERMANOS" required
+                class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="lugarnacimiento" class="form-label">Lugar de
+                Nacimiento:</label>
+              <input type="number" id="lugarnacimiento" name="LUGARNACIMIENTO"
+                required class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+              <p>*Colocar cuantos hermanos nacieron en el mismo lugar de
+                nacimiento en cantidad</p>
+            </div>
+
+            <div class="form-group">
+              <label for="hermanosestudian" class="form-label">Hermanos que
+                Estudian:</label>
+              <input type="number" id="hermanosestudian" name="HERMANOSESTUDIAN"
+                required class="form-control"
+                oninput="this.value = this.value.toUpperCase();">
+            </div>
+
+            <div class="form-group">
+              <label for="trabajas" class="form-label">¿Trabajas?:</label>
+              <select id="trabajas" name="TRABAJAS" class="form-select" required
+                onchange="mostrarOcultarActividad()">
+                <option value disabled selected>Seleccionar</option>
+                <option value="SI">Sí</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="actividadtrabaja" class="form-label">Actividad en la
+                que trabaja:</label>
+              <select id="actividadtrabaja" name="ACTIVIDADTRABAJAS"
+                class="form-select" required>
+                <option value disabled selected>Selecciona</option>
+                <option value="EMPLEADO DE LA INDUSTRIA O DE LA BANCA">EMPLEADO
+                  DE LA INDUSTRIA O DE LA BANCA</option>
+                <option
+                  value="EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS">EMPLEADO
+                  DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
+                <option value="PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)">PEQUEÑO
+                  COMERCIANTE (INSTALADO O AMBULANTE)</option>
+                <option
+                  value="COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)">COMERCIANTE
+                  (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                <option
+                  value="PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO ETC)">PEQUEÑO
+                  AGRICULTOR, GANADERO O PESCADOR, CAMPESINO ETC)</option>
+                <option
+                  value="PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)">PRESTADOR
+                  DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
+                <option value="OBRERO DE LA INDUSTRIA O MAQUILADORA">OBRERO DE
+                  LA INDUSTRIA O MAQUILADORA</option>
+                <option value="NINGUNA DE LAS ANTERIORES">NINGUNA DE LAS
+                  ANTERIORES</option>
+                <option value="NINGUNO">NINGUNO</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="horariotrabajo" class="form-label">Horario de trabajo:</label>
+              <input type="text" id="horariotrabajo" name="HORARIOTRABAJO"
+                required class="form-control"
+                oninput="this.value = this.value.toUpperCase();"
+                placeholder="Ejemplo: 9:00am - 17:00pm">
+            </div>
+
+            <div class="form-group">
+              <label for="estadocivil" class="form-label">¿Está usted Casado/a?:</label>
+              <select id="estadocivil" name="ESTADOCIVIL" class="form-select"
+                required onchange="habilitarConyuge()">
+                <option value disabled selected>Seleccionar</option>
+                <option value="SI">Sí</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="nombreconyuge" class="form-label">Nombre del Conyuge:</label>
+              <input type="text" id="nombreconyuge" name="NOMBRECONYUGE"
+                required class="form-control"
+                oninput="this.value = this.value.toUpperCase();" disabled>
+            </div>
+
+            <div class="form-group">
+              <label for="escolaridadconyuge" class="form-label">Escolaridad del
+                Conyuge:</label>
+              <select id="escolaridadconyuge" name="ESCOLARIDADCONYUGE"
+                class="form-select" required disabled>
+                <option value selected disabled>Selecciona una opción</option>
+                <option value="SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA">SIN
+                  ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
+                <option value="PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA">PRIMARIA
+                  TERMINADA / SECUNDARIA INCOMPLETA</option>
+                <option
+                  value="SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLETO">SECUNDARIA
+                  O COMERCIAL TERMINADA / BACH. INCOMPLETO</option>
+                <option
+                  value="BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA">BACHILLERATO
+                  COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
+                <option
+                  value="EDUC. SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INCOMPLETO">EDUC.
+                  SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INCOMPLETO</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="actividadconyuge" class="form-label">Actividad del
+                Conyuge:</label>
+              <select id="actividadconguye" name="ACTIVIDADCONYUGE"
+                class="form-select" required disabled>
+                <option value disabled selected>Seleccionar actividad del padre</option>
+                <option value="OBRERO DE LA INDUSTRIA O MAQUILADORA">OBRERO DE
+                  LA INDUSTRIA O MAQUILADORA</option>
+                <option
+                  value="OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)">OPERADOR
+                  DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                <option
+                  value="ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO)">ARTESANO
+                  (PRODUCTOS DE MADERA, BARRO, CUERO, YESO)</option>
+                <option
+                  value="PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC">PEQUEÑO
+                  AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC</option>
+                <option
+                  value="PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)">PRESTADOR
+                  DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
+                <option
+                  value="EMPLEADO GOB. MUNICIPAL, ESTATAL O FEDERAL (INCLUYE MILITAR)">EMPLEADO
+                  GOB. MUNICIPAL, ESTATAL O FEDERAL (INCLUYE MILITAR)</option>
+                <option value="JUBILADO O PENSIONADO">JUBILADO O PENSIONADO</option>
+                <option value="NINGUNA DE LAS ANTERIORES">NINGUNA DE LAS
+                  ANTERIORES</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="hijos0a5">Hijos de 0 a 5 años:</label>
+              <input type="number" id="hijos0a5" name="HIJOS0A5"
+                class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="hijos6a12">Hijos de 6 a 12 años:</label>
+              <input type="number" id="hijos6a12" name="HIJOS6A12"
+                class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="hijos13a18">Hijos de 13 a 18 años:</label>
+              <input type="number" id="hijos13a18" name="HIJOS13A18"
+                class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="hijosmayores">Hijos mayores de 18 años:</label>
+              <input type="number" id="hijosmayores" name="HIJOSMAYORES"
+                class="form-control" required>
+            </div>
+
+            <input type="hidden" id="hiddenAnioInicial" name="hiddenAnioInicial">
+            <input type="hidden" id="hiddenAnioFinal" name="hiddenAnioFinal">
+            <input type="hidden" id="hiddenNivel" name="hiddenNivel">
+
+            <br><button type="button" class="btn btn-primary"
+              onclick="prepararSegundoFormulario()">Cargar</button><br>
+            <p>Darle click al boton cargar para registra los datos en el sistema</p>
+            <br><button type="submit" class="btn btn-primary">Registrar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+  document.getElementById("registroForm").addEventListener("submit", function(event) {
+    // Verificar si el formulario se envió correctamente (método POST)
+    if (event.target.method === 'post') {
+      // Mostrar alerta
+      alert("¡Registro completado!");
+
+      // Esperar un breve tiempo antes de redirigir
+      setTimeout(function() {
+        window.location.href = "/gruposalumnos"; // Cambia la URL a la que deseas redirigir
+      }, 1000); // Espera 1 segundo antes de redirigir
+    }
+  });
+
+  function updateSelectLabel(selectElement) {
+    var selectedOption = $(selectElement).find('option:selected');
+    var abbreviation = selectedOption.text().match(/\((.*?)\)/)[1];
+
+    selectedOption.text(abbreviation);
+  }
+</script>
+  <script>
+  function mostrarOcultarActividad() {
+    var selectTrabajas = document.getElementById("trabajas");
+    var selectActividad = document.getElementById("actividadtrabaja");
+    var selectHorario = document.getElementById("horariotrabajo");
+    var opcionSeleccionada = selectTrabajas.options[selectTrabajas.selectedIndex].value;
+
+    if (opcionSeleccionada === "NO") {
+      selectActividad.value = "NINGUNO";
+      selectActividad.disabled = true;
+      selectHorario.value = "NINGUNO";
+      selectHorario.disabled = true;
+    } else {
+      selectActividad.disabled = false;
+      selectHorario.disabled = false;
+    }
+  }
+</script>
+
+  <script>
+  function habilitarConyuge() {
+    var selectEstadocivil = document.getElementById("estadocivil");
+    var inputNombreconyuge = document.getElementById("nombreconyuge");
+    var selectEscolaridadconyuge = document.getElementById("escolaridadconyuge");
+    var selectActividadconyuge = document.getElementById("actividadconguye");
+
+    if (selectEstadocivil.value === "SI") {
+      inputNombreconyuge.disabled = false;
+      selectEscolaridadconyuge.disabled = false;
+      selectActividadconyuge.disabled = false;
+    } else {
+      inputNombreconyuge.disabled = true;
+      selectEscolaridadconyuge.disabled = true;
+      selectActividadconyuge.disabled = true;
+    }
+  }
+</script>
+
+  <script>
+  function actualizarAnioFinal() {
+    // Obtener los elementos select de "Año Inicial" y "Año Final"
+    const selectAnioInicial = document.getElementById('alumnoinicial');
+    const selectAnioFinal = document.getElementById('alumnofinal');
+
+    // Obtener el valor seleccionado del "Año Inicial"
+    const anioInicialSeleccionado = parseInt(selectAnioInicial.value);
+
+    // Vaciar las opciones actuales del "Año Final"
+    selectAnioFinal.innerHTML = '';
+
+    // Calcular el año siguiente al "Año Inicial"
+    const anioSiguiente = anioInicialSeleccionado + 1;
+
+    // Agregar la opción para el "Año Siguiente" al "Año Final"
+    const opcionSiguiente = document.createElement('option');
+    opcionSiguiente.value = anioSiguiente;
+    opcionSiguiente.textContent = anioSiguiente;
+    selectAnioFinal.appendChild(opcionSiguiente);
+
+    // Agregar las opciones adicionales para los años posteriores
+    for (let anio = anioSiguiente + 1; anio <= new Date().getFullYear(); anio++) {
+      const opcion = document.createElement('option');
+      opcion.value = anio;
+      opcion.textContent = anio;
+      selectAnioFinal.appendChild(opcion);
+    }
+  }
+
+  // Llamar a la función al cargar la página para inicializar las opciones del "Año Final"
+  actualizarAnioFinal();
+
+  // Agregar un event listener al cambio en el "Año Inicial" para actualizar automáticamente el "Año Final"
+  document.getElementById('alumnoinicial').addEventListener('change', actualizarAnioFinal);
+</script>
+
+  <script>
+    function prepararSegundoFormulario() {
+        // Obtener los valores del primer formulario
+        const anoInicial = document.getElementById('inputAnio').value;
+        const anoFinal = document.getElementById('inputSiguienteAnio').value;
+        const nivel = document.getElementById('selectNivel').value;
+
+        // Almacenar los valores en el almacenamiento local del navegador
+        localStorage.setItem('anoInicial', anoInicial);
+        localStorage.setItem('anoFinal', anoFinal);
+        localStorage.setItem('nivel', nivel);
+
+        // Redirigir al segundo formulario en la ruta correspondiente
+         document.getElementById('registrarButton').removeAttribute('disabled');
+
+    }
+</script>
+</body>

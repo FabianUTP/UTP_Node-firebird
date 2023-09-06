@@ -10,7 +10,9 @@ const {AlumnosController} = require("../app/controllers");
 const {EstadiaController} = require("../app/controllers/EstadiaController");
 const {TitulacionController} = require("../app/controllers/TitulacionController");
 const PDFController = require("../app/controllers/PdfController");
-
+const { ReinscripcionController } = require("../app/controllers");
+const { GrupController,  } = require("../app/controllers");
+const { GrupaluController } = require("../app/controllers");
 // Rutas de los Alumnos.
 
 //Apartado Boletas y Documentos
@@ -37,5 +39,19 @@ router.get('/estadia/asesor-academico', EstadiaController.asesorAcademico);
 router.get("/titulacion", isAlumno, TitulacionController.showById);
 
 router.get("/contactar", (req, res) => res.render("others/contacto-screen"));
+
+// Reinscripcion
+router.get("/reinscrip-cion", isAlumno, ReinscripcionController.showById);
+router.post("/reinscrip-cion/update-contacto", ReinscripcionController.updateContact);
+router.post("/reinscrip-cion/update-per-contac", ReinscripcionController.updatePerContact);
+router.post("/reinscrip-cion/update-seguro", ReinscripcionController.updateSeguro);
+
+router.get("/pagos", (req, res) => (res.render("alumno/reinscripcion/pago.hbs")));
+router.get("/validacion", (req, res) => (res.render("alumno/reinscripcion/validacion.hbs")));
+
+// Grupos
+router.get("/gruposs", isAlumno, GrupController.showById);
+router.post("/grupos_post", GrupController.updateContacto);
+
 
 module.exports = router;

@@ -6,9 +6,11 @@ const {
   Alumno,
   Ciclos,
   Grupos,
+  Pagosalum,
   Niveles,
   Doctos,
   AlumnosGrupos,
+  AlumnosNiveles,
   AlumKardex,
   CfgStatus,
   Planes_Mst,
@@ -24,20 +26,25 @@ const {
   CFGDoctos, // Agrega esta línea para importar el modelo CFGDoctos
 } = require("../app/models");
 const Firebird = require("../app/models/Firebird");
+const GrupoAlumnos = require("../app/models/GrupoAlumno");
+
 
 router.get("/grupos", async (req, res) => {
   const {
     skip = 0,
-    limit = 10,
+    limit = 30,
     search = "",
     orderBy = "codigo_carrera",
     sort = "asc",
+    grupo = "",
+    grado = 0,
   } = req.query;
+  //    "grupos.codigo_grupo as codigo_grupo,grupos.grado, grupos.inicial as inicial,grupos.final as final,grupos.periodo as periodo,grupos.id_escuela as id_escuela,CASE WHEN grupos.grado + 1 >= 5 THEN grupos.grado ELSE grupos.grado + 1  END  as siguiente_grupo , grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera ";
 
   // Consulta SQL paar mostrar los grupos
   let query = `SELECT FIRST(${limit}) SKIP(${skip}) `;
   query +=
-    "grupos.codigo_grupo as codigo_grupo, grupos.grado, grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera ";
+  "grupos.codigo_grupo as codigo_grupo,grupos.grado, grupos.inicial as inicial,grupos.final as final,grupos.periodo as periodo,grupos.id_escuela as id_escuela, grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera ";
   query += "FROM grupos ";
   query +=
     "LEFT JOIN profesores ON grupos.claveprofesor_titular = profesores.claveprofesor ";
@@ -47,7 +54,13 @@ router.get("/grupos", async (req, res) => {
   if (search.length > 0) {
     query += `WHERE (grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%') `;
   }
-
+  if (grupo.length > 0) {
+    query += `AND (grupos.nivel LIKE '%${grupo.toLocaleUpperCase()}%') `;
+  }
+  if (grado > 0) {
+    let grado_alumno = parseFloat(grado) + 1;
+    query += `AND grupos.grado <= '${grado_alumno}' AND grupos.grado >= '${grado}'`;
+  }
   // Si hay periodo seleccionado a mostrar lo agrega en la query
   if (req.session.periodoSelected) {
     let periodo = await Ciclos.findById(req.session.periodoSelected);
@@ -84,7 +97,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   let sql = `SELECT FIRST(${limit}) SKIP(${skip}) `;
   sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, alumnos.nivel, alumnos.genero, alumnos.status `;
   sql += "FROM alumnos_grupos ";
-  sql +={}
+  sql +=
     "left join alumnos on alumnos_grupos.numeroalumno = alumnos.numeroalumno ";
   sql += `where codigo_grupo = '${idGrupo}' `;
 
@@ -434,6 +447,106 @@ router.post("/calificaciones", (req, res) => {
       msj: "Datos actualizados correctamente",
     })
   })
+});
+
+router.post("/grupos_add", async(req, res) => {
+
+  const gruposAlumnos = req.body; // Obtener los datos del cuerpo de la solicitud
+
+  // Extraer los campos individuales de nueva grupos alumno
+  const {
+    ID_ESCUELA,
+    INICIAL,
+    FINAL,
+    PERIODO,
+    NUMEROALUMNO,
+    NUM,
+    TIPO,
+    CODIGO_GRUPO,
+    GRADO,
+    NIVEL,
+    STATUS,
+    TIPOEXAMEN,
+    FECHA_CREACION,
+    REINSCRITO,
+    INFORMACIONALUMNO
+  } = gruposAlumnos;
+  // Ejecutar la sentencia INSERT en la base de datos
+  const query = `
+    INSERT INTO ALUMNOS_GRUPOS (
+      ID_ESCUELA,
+      INICIAL,
+      FINAL,
+      PERIODO,
+      NUMEROALUMNO,
+      NUM,
+      TIPO,
+      CODIGO_GRUPO,
+      TIPOEXAMEN,
+      REINSCRITO
+    )
+    VALUES (
+      ${ID_ESCUELA},
+      '${INICIAL}',
+      '${FINAL}',
+      '${PERIODO}',
+      '${NUMEROALUMNO}',
+      '${NUM}',
+      '${TIPO}',
+      '${CODIGO_GRUPO}',
+      '${TIPOEXAMEN}',
+      '${REINSCRITO}'
+    )
+  `;
+
+  const queryNivel = `
+    INSERT INTO ALUMNOS_NIVELES (
+      ID_ESCUELA,
+      NUMEROALUMNO,
+      INICIAL,
+      FINAL,
+      PERIODO,
+      NIVEL,
+      GRADO,
+      STATUS,
+      FECHA_CREACION
+    )
+    VALUES (
+      ${ID_ESCUELA},
+      '${NUMEROALUMNO}',
+      '${INICIAL}',
+      '${FINAL}',
+      '${PERIODO}',
+      '${NIVEL}',
+      '${GRADO}',
+      '${STATUS}',
+      '${FECHA_CREACION}'
+    )
+  `;
+
+
+
+const data = {
+  grado: INFORMACIONALUMNO.GRADO+1,
+  matricula: INFORMACIONALUMNO.MATRICULA
+};
+
+
+
+try {
+  
+  
+  // Ejecutar la consulta en la base de datos (asegúrate de tener configurada la conexión a la base de datos correctamente)
+  const alumnos = await AlumnosGrupos.createQuery({ querySql: query });
+  const alumnos_nivel = await AlumnosNiveles.createQuery({ querySql: queryNivel });
+  const alumno = await Alumno.findByIdAndUpdate(INFORMACIONALUMNO.MATRICULA, data);
+
+
+    res.status(200)({ message: 'Registro realizado correctamente' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al realizar el regisro'});
+  }
+
 });
 
 router.get("/planes", async (req, res) => {
@@ -805,4 +918,102 @@ router.get("/villas/:idVilla/cfg", async (req, res) => {
 
 router.get("/villas/:idVilla/cfg/:idCfg", async (req, res) => {});
 
+router.post('/GrupAlumnos', async (req, res) => {
+  try {
+
+    let data = req.body;
+    //se obtiene los datos del alumno
+    const {
+      ID_ESCUELA,
+      INICIAL,
+      FINAL,
+      PERIODO,
+      NUMEROALUMNO,
+      NUM,
+      TIPO,
+      CODIGO_GRUPO
+    } = data;
+    //se crea el query para grabar en alumnos_grupos
+    let query = `SELECT first (1)
+    alumnos_grupos.id_escuela,
+    alumnos_grupos.inicial,
+    alumnos_grupos.final,
+    alumnos_grupos.periodo,
+    alumnos_grupos.numeroalumno,
+    alumnos_grupos.codigo_grupo
+    from alumnos_grupos`;
+    
+    query += ` WHERE alumnos_grupos.id_escuela = '${ID_ESCUELA}'`;
+    query += `AND alumnos_grupos.inicial = ${INICIAL} `;
+    query += `AND alumnos_grupos.final = ${FINAL} `;
+    query += `AND alumnos_grupos.periodo = ${PERIODO} `;
+    query += `AND alumnos_grupos.numeroalumno = ${NUMEROALUMNO} `;
+    query += `AND alumnos_grupos.codigo_grupo = '${CODIGO_GRUPO}' `;
+    //return res.json(query);
+    //se retorna el registro
+    const pagosalumData = await GrupoAlumnos.createQuery({ querySql: query });
+    res.json(pagosalumData[0]);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error en la consulta de la base de datos' });
+  }
+});
+
+router.post('/AlumnosNivel', async (req, res) => {
+  try {
+
+    let data = req.body;
+    //se obtiene los datos del alumno
+    const {
+      ID_ESCUELA,
+      INICIAL,
+      FINAL,
+      PERIODO,
+      NUMEROALUMNO,
+      NUM,
+      TIPO,
+      NIVEL,
+      GRADO,
+      CODIGO_GRUPO,
+      CUATRIMESTRE
+    } = data;
+    //se crea el query para grabar en alumnos_grupos
+    let query = `SELECT first (1)
+    alumnos_niveles.id_escuela,
+    alumnos_niveles.inicial,
+    alumnos_niveles.final,
+    alumnos_niveles.periodo,
+    alumnos_niveles.numeroalumno,
+    alumnos_niveles.nivel,
+    alumnos_niveles.grado
+    from alumnos_niveles`;
+    
+    query += ` WHERE alumnos_niveles.id_escuela = '${ID_ESCUELA}'`;
+    query += `AND alumnos_niveles.numeroalumno = ${NUMEROALUMNO} `;
+    query += `AND alumnos_niveles.inicial = ${INICIAL} `;
+    query += `AND alumnos_niveles.final = ${FINAL} `;
+    query += `AND alumnos_niveles.periodo = ${PERIODO} `;
+    query += `AND alumnos_niveles.nivel = '${NIVEL}' `;
+    query += `AND alumnos_niveles.grado = '${CUATRIMESTRE}' `;
+    //se retorna el registro
+    const pagosalumData = await AlumnosNiveles.createQuery({ querySql: query });
+    res.json(pagosalumData[0]);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error en la consulta de la base de datos' });
+  }
+});
+
+router.get('/GrupAl', async (_req, res) => {
+  try {
+    const pagosalumData = await Pagosalum.createQuery({ querySql: "SELECT * FROM CFGPAGOS_DET" });
+
+    res.json(pagosalumData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error en la consulta de la base de datos' });
+  }
+});
 module.exports = router;

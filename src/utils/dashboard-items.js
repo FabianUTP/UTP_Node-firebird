@@ -52,6 +52,12 @@ const alumno_items = [
     link: "/titulacion",
   },
   {
+    path_img: "./imgs/Reincripción.png",
+    title: "Reinscripción",
+    content: "Ingresa y verifica tus datos y tramita tu reinscripción",
+    link: "/reinscrip-cion",
+  },
+  {
     path_img: "./imgs/calendario.png",
     title: "Calendario Escolar",
     content: "Consulta nuestro Calendario Escolar y Actividades Académico-Administrativas, del ciclo 2022-2023.",

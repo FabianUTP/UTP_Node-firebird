@@ -97,7 +97,7 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   let sql = `SELECT FIRST(${limit}) SKIP(${skip}) `;
   sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, alumnos.nivel, alumnos.genero, alumnos.status `;
   sql += "FROM alumnos_grupos ";
-  sql +=
+  //sql +={}
     "left join alumnos on alumnos_grupos.numeroalumno = alumnos.numeroalumno ";
   sql += `where codigo_grupo = '${idGrupo}' `;
 

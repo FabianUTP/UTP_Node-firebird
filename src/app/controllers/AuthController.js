@@ -1,5 +1,6 @@
 const { request, response } = require("express");
 const { Alumno, ProfeAuth, Aspirante, Usuarios } = require("../models");
+const { user } = require("../../configs/credential-firebird");
 
 const AuthController = {};
 
@@ -37,36 +38,98 @@ AuthController.authAlumno = async (req = request, res = response) => {
   }
 };
 
+
+
 // Autenticación de aspirantes
+// AuthController.authAspirante = async (req = request, res = response) => {
+//   const { user, password } = req.body;
+
+//   try {
+//     const aspirante = await Aspirante.findById(user);
+
+//     if (!aspirante) {
+//       req.flash('msj_error', 'Folio de aspirante no encontrado');
+//       console.log('Corrige el valor antes de enviarlo a la base de datos.');
+//       return res.redirect('/login');
+//     }
+
+//     if (aspirante.STATUS.trim() !== "S") {
+//       req.flash('msj_error', 'Ya no puede ingresar con el folio');
+//       console.log('Corrige el valor antes de enviarlo a la base de datos.');
+//       return res.redirect('/login');
+//     }
+
+//     req.session.isAuthenticated = true;
+//     req.session.isAspirante = true;
+//     req.session.IDAuth = aspirante.NUMEROALUMNO;
+//     req.session.nameAuth = aspirante.NOMBRE;
+//     req.session.lastNameAuth = aspirante.PATERNO;
+
+//     return res.redirect('/');
+//   } catch (error) {
+//     console.error('Error en authAspirante:', error);
+//     req.flash('msj_error', 'Hubo un problema al procesar su solicitud');
+//     return res.redirect('/login');
+//   }
+// };
+
+
+
+// Autenticacion de Aspirantes cambios para los ingresos de numeros...
+
 AuthController.authAspirante = async (req = request, res = response) => {
   const { user, password } = req.body;
 
   try {
-    const aspirante = await Aspirante.findById(user);
+    if (!user || !password) {
+      req.flash('msj_error', 'Por favor, ingrese su folio y contraseña.');
+      return res.redirect('/login');
+    }
+
+    const sanitizedUser = user.trim();
+    const aspirante = await Aspirante.findById(sanitizedUser);
 
     if (!aspirante) {
-      req.flash('msj_error', 'Folio de aspirante no encontrado');
+      req.flash('msj_error', 'Folio de aspirante no encontrado.');
       return res.redirect('/login');
     }
 
     if (aspirante.STATUS.trim() !== "S") {
-      req.flash('msj_error', 'Ya no puede ingresar con el folio');
+      req.flash('msj_error', 'Ya no puede ingresar con el folio proporcionado.');
       return res.redirect('/login');
     }
 
-    req.session.isAuthenticated = true;
-    req.session.isAspirante = true;
-    req.session.IDAuth = aspirante.NUMEROALUMNO;
-    req.session.nameAuth = aspirante.NOMBRE;
-    req.session.lastNameAuth = aspirante.PATERNO;
+    // Verificar contraseña
+    if (!bcrypt.compareSync(password, aspirante.password)) {
+      req.flash('msj_error', 'Contraseña incorrecta.');
+      return res.redirect('/login');
+    }
 
-    return res.redirect('/');
+    // Configurar sesión
+    req.session.regenerate((err) => {
+      if (err) {
+        console.error('Error regenerando la sesión:', err);
+        req.flash('msj_error', 'Error al iniciar sesión.');
+        return res.redirect('/login');
+      }
+
+      req.session.isAuthenticated = true;
+      req.session.isAspirante = true;
+      req.session.IDAuth = aspirante.NUMEROALUMNO;
+      req.session.nameAuth = aspirante.NOMBRE;
+      req.session.lastNameAuth = aspirante.PATERNO;
+
+      return res.redirect('/');
+    });
   } catch (error) {
-    console.error('Error en authAspirante:', error);
-    req.flash('msj_error', 'Hubo un problema al procesar su solicitud');
+    console.error('Error en authAspirante:', error.message);
+    req.flash('msj_error', 'Hubo un problema al procesar su solicitud. Inténtelo de nuevo más tarde.');
     return res.redirect('/login');
   }
 };
+
+
+
 
 // Autenticación de profesores
 AuthController.authProfe = async (req = request, res = response) => {
@@ -99,6 +162,7 @@ AuthController.authProfe = async (req = request, res = response) => {
     return res.redirect('/login');
   }
 };
+
 
 // Autenticación de administradores
 AuthController.authAdmin = async (req = request, res = response) => {

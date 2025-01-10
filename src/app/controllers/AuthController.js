@@ -76,36 +76,41 @@ AuthController.authAlumno = async (req = request, res = response) => {
 
 
 // Autenticacion de Aspirantes cambios para los ingresos de numeros...
-
 AuthController.authAspirante = async (req = request, res = response) => {
-  const { user, password } = req.body;
+  const { user } = req.body;
 
   try {
-    if (!user || !password) {
-      req.flash('msj_error', 'Por favor, ingrese su folio y contraseña.');
+    // Validar que el número no esté vacío
+    if (!user) {
+      req.flash('msj_error', 'Por favor, ingrese su número de folio.');
       return res.redirect('/login');
     }
 
+    // Limpiar y validar el formato del número de folio
     const sanitizedUser = user.trim();
+
+    // Asegurar que el valor es un número válido
+    if (isNaN(sanitizedUser)) {
+      req.flash('msj_error', 'El folio debe ser un número válido.');
+      return res.redirect('/login');
+    }
+
+    // Buscar aspirante por el número de folio
     const aspirante = await Aspirante.findById(sanitizedUser);
 
+    // Verificar si el folio no existe
     if (!aspirante) {
       req.flash('msj_error', 'Folio de aspirante no encontrado.');
       return res.redirect('/login');
     }
 
+    // Verificar si el estatus no permite el acceso
     if (aspirante.STATUS.trim() !== "S") {
       req.flash('msj_error', 'Ya no puede ingresar con el folio proporcionado.');
       return res.redirect('/login');
     }
 
-    // Verificar contraseña
-    if (!bcrypt.compareSync(password, aspirante.password)) {
-      req.flash('msj_error', 'Contraseña incorrecta.');
-      return res.redirect('/login');
-    }
-
-    // Configurar sesión
+    // Configurar la sesión
     req.session.regenerate((err) => {
       if (err) {
         console.error('Error regenerando la sesión:', err);

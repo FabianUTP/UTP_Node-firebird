@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+
+</head>
+<body>
+  <div class="text-left">
+  {{>btnBack}}
+
+    <div class="header-dash text-center">
+    
+      <h1>Selecciona la opción que deseas consultar.</h1>
+    </div>
+  </div>
+
+  <div class="row pt-3 justify-content-center">
+    <div class="col-md-4 d-flex align-items-stretch mb-5 card-dash" onclick="location.href='/GruposCalifi'">
+      <div class="card">
+        <div class="icon-box animate-hover">
+          <div class="text-center p-2">
+            <img class="image" src="/imgs/califi-grupo.png" alt="">
+          </div>
+          <div>
+            <h4>Califi x Grupo</h4>
+          </div>
+          <div>
+            <p>Ver y Subir Calificaciones</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 d-flex align-items-stretch mb-5 card-dash" onclick="location.href='/profesores'">
+      <div class="card">
+        <div class="icon-box animate-hover">
+          <div class="text-center p-2">
+            <img class="image" src="/imgs/califi-profe.png" alt="">
+          </div>
+          <div>
+            <h4>Califi x Profesor</h4>
+          </div>
+          <div>
+            <p>Ver y Subir Calificaciones</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 d-flex align-items-stretch mb-5 card-dash" onclick="location.href='/alumnos'">
+      <div class="card">
+        <div class="icon-box animate-hover">
+          <div class="text-center p-2">
+            <img class="image" src="/imgs/califi-alumno.png" alt="">
+          </div>
+          <div>
+            <h4>Califi x Alumno</h4>
+          </div>
+          <div>
+            <p>Ver y Subir Calificaciones</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

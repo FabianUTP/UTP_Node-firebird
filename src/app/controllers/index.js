@@ -9,6 +9,13 @@ const { AlumnosAdminCtr } = require("./AlumnosAdminController");
 const { CalifiCtr } = require("./CalifiControllers");
 const { PlanesCtr } = require("./PlanesController");
 const { ProfeCtr } = require("./ProfesoresController");
+const {InscripcionesController} = require("./InscripcionesController");
+const {RegistroController} = require("./RegistroController");
+const {OtroController} = require("./OtroController");
+const {GruposalumnosController} = require("./GruposalumnoController");
+const { ReinscripcionController } = require("./ReinscripcionController");
+const {PagosController} = require("./PagosController");
+const{GrupController} = require("./GrupControllers");
 
 
 module.exports = {
@@ -23,4 +30,13 @@ module.exports = {
   CalifiCtr,
   PlanesCtr,
   ProfeCtr,
+  InscripcionesController,
+  RegistroController,
+  OtroController,
+  GruposalumnosController,
+  GrupController,
+  ReinscripcionController,
+  PagosController,
+
+
 };

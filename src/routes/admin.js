@@ -22,6 +22,8 @@ router.get("/grupos/crear", GruposCtr.addView);
 router.get("/grupos/:idGrupo", GruposCtr.showById);
 router.get("/grupos/:idGrupo/editar", GruposCtr.editView);
 router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoView);
+router.get("/gruposCalifi", GruposCtr.showAnother);
+router.get("/gruposCalifi/:idGrupo", GruposCtr.showByIdAnother);
 
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
@@ -33,11 +35,20 @@ router.get("/alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
 router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
 router.get("/cuatrimestres", CuatrisCtr.index);
+router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Calificacion/Calificaciones.hbs")})
+router.get("/Cuatri-Reins", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Reinscripcion/Reinscripciones.hbs")})
+router.get("/Cuatri-Estadia", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Estadias/Estadias.hbs")})
+router.get("/Cuatri-NIngreso", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Nuevo Ingreso/Nuevo_Ingreso.hbs")})
 router.get("/cuatrimestres/nuevo", CuatrisCtr.showCreate);
 router.post("/cuatrimestres/nuevo", CuatrisCtr.create);
 router.get("/cuatrimestres/:id", CuatrisCtr.showById);
 router.post("/cuatrimestres/:id/update", CuatrisCtr.update);
 router.post("/cuatrimestres/:id/delete", CuatrisCtr.delete);
+
+// Ruta que renderiza una vista simple
+router.get('/admin/calificacion', (req, res) => {
+  res.render('admin/calificacion.hbs'); // Renderiza la vista 'admin/profes/hola'
+});
 
 router.get("/calificaciones", GruposCtr.show);
 router.get("/calificaciones/:idGrupo", CalifiCtr.showCalifi);

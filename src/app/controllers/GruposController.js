@@ -8,13 +8,28 @@ GruposCtr.show = (req, res) => {
   res.render(path + '/grupos-list');
 };
 
-GruposCtr.showById = async (req, res) => {
+GruposCtr.showAnother = (req, res) => {
+  res.render(path + '/grupos-list-califi');
+};
+
+GruposCtr.showByIdAnother = async (req, res) => {
   const grupo = await Grupos.findById(req.params.idGrupo);
-  res.render('admin/alumnos/grupos/grupo-detail', {
+  res.render(path + '/grupo-detail-califi', {
     codigo_grupo: req.params.idGrupo,
     grupo
   })
 };
+
+GruposCtr.showById = async (req, res) => {
+  const grupo = await Grupos.findById(req.params.idGrupo);
+  res.render(path + '/grupo-detail', {
+    codigo_grupo: req.params.idGrupo,
+    grupo
+  })
+};
+
+
+
 
 GruposCtr.addView = (req, res) => {
   res.render(path + "/grupo-add")

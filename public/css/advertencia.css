@@ -1,0 +1,58 @@
+.warning-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+  .warning {
+    background-color: #ffc107;
+    padding: 100px;
+    color: #000000;
+    font-size: 25px;
+    text-align: center;
+    animation: bounceIn 0.5s;
+  }
+  .close-button {
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-200%);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(30%);
+    }
+    80% {
+      transform: translateY(-10%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  button {  
+    padding: 10px 20px;
+    background-color: #0091ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #c81515;
+  }
+
+  .hide-search {
+    display: none;
+  }
+  

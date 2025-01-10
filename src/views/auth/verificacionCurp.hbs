@@ -1,0 +1,93 @@
+
+  <title>Verificación de la CURP</title>
+  <!-- Agrega el enlace al archivo CSS de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    .invalid-input {
+      border: 1px solid red;
+    }
+    .strong-text {
+      color: black;
+      font-weight: bold;
+    }
+    .error-message {
+      color: red;
+      margin-top: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="d-flex">
+      <a href="auth/nuevos.hbs" class="btn btn-danger ms-auto"><span>&larr;</span> Regresar</a>
+    </div>
+
+    <div class="container">
+      <h1 style="color: blue;">Verificación de la CURP</h1>
+      <form id="myForm" action="/clave" method="GET">
+        <div class="form-group">
+          <label for="curp">CURP:</label>
+          <input type="text" id="curp_" name="CLAVE_CIUDADANA" required class="form-control strong-text">
+          <div id="curpErrorMessage" class="error-message">CURP inválida</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Verificar</button>
+        <br><a target="_blank" href="https://www.gob.mx/curp/">Consultar Curp</a><br>
+      </form>
+    </div>
+
+<br><div class="alert alert-info" role="alert">
+  El CURP (Clave Única de Registro de Población) proporcionado por el aspirante será utilizado como método de 
+  identificación confiable para verificar su existencia en el sistema de control escolar de la Universidad 
+  Tecnológica del Poniente (UTP). La utilización de los datos proporcionados se llevará a cabo de manera segura 
+  y adecuada, siguiendo los principios y lineamientos establecidos en la normativa vigente de protección de 
+  datos personales  <a target="_blank" href="https://controlescolarutp.wixsite.com/utp-yucatan/aviso-de-privacidad">Aviso de Privacidad</a>
+  </section>
+
+</div>
+
+  <!-- Agrega el enlace al archivo JavaScript de Bootstrap -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  <script>
+    function validaCurp() {
+      const inputCurp = document.getElementById("curp_");
+      const curpValue = inputCurp.value.trim().toUpperCase().replace(/\s+/g, "");
+
+      var re = /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]{2}$/;
+      var validado = curpValue.match(re);
+
+      if (!validado) {
+        inputCurp.classList.add("invalid-input");
+        document.getElementById("curpErrorMessage").style.display = "block";
+        setTimeout(function() {
+          inputCurp.classList.remove("invalid-input");
+          document.getElementById("curpErrorMessage").style.display = "none";
+        }, 1000);
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      if (!validaCurp()) {
+        event.preventDefault();
+      }
+    });
+
+    document.getElementById("curp_").addEventListener("input", function() {
+      const curpValue = this.value.trim().toUpperCase().replace(/\s+/g, "");
+
+      this.value = curpValue;
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.ctrlKey && event.key === "z") {
+        event.preventDefault();
+        const inputCurp = document.getElementById("curp_");
+        inputCurp.value = "";
+      }
+    });
+  </script>
+

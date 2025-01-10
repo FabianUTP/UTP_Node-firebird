@@ -78,13 +78,32 @@ selectEval.addEventListener("change", ({ target }) => {
   main();
 });
 
+let changesSaved = true;
+
+// Función para mostrar el mensaje de confirmación al intentar salir de la página
+window.onbeforeunload = function () {
+  if (!changesSaved) {
+    return "¿Está seguro de salir sin guardar los cambios?";
+  }
+};
+
+// Función para marcar los cambios como no guardados
+function markChangesUnsaved() {
+  changesSaved = false;
+}
+
+// Función para marcar los cambios como guardados
+function markChangesSaved() {
+  changesSaved = true;
+}
+
 // Función para actualizar calificaciones
 formCalif.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   // Función para prevenir guardar sin preguntar
-  const accept = confirm("Desea guardar los siguientes cambios?");
-  if(!accept) return;
+  const accept = confirm("¿Desea guardar los siguientes cambios?");
+  if (!accept) return;
 
   const background = document.getElementById("setCalifi");
 
@@ -95,7 +114,7 @@ formCalif.addEventListener("submit", async (event) => {
   // Obtiene los datos de la tabla en forma de un Objeto
   const data = Object.fromEntries(formData);
 
-  // Variable final que se mandara en el fetch
+  // Variable final que se mandará en el fetch
   let finalData = {};
 
   // Filtra solo los datos modificados
@@ -126,6 +145,8 @@ formCalif.addEventListener("submit", async (event) => {
 
   background.classList.add("d-none");
   main();
+
+  markChangesSaved(); // Marcar los cambios como guardados después de guardar
 });
 
 // Función que lee el excel y manda en la tabla
@@ -165,11 +186,12 @@ fileExcel.addEventListener("change", () => {
       }
     });
 
-    // Muestra en pantalla el numero de registros modificados
+    // Muestra en pantalla el número de registros modificados
     let span = document.getElementById("info_excel");
     span.innerText = `Se han modificado ${calif_changed}/${dataTable.length} registros`;
 
     writeTable();
+    markChangesUnsaved(); // Marcar los cambios como no guardados después de modificar la tabla
   });
 });
 

@@ -19,11 +19,11 @@ const getDoctos = async () => {
 
     if (doctos.length > 0) {
       doctos.map((item) => {
-        content += `<div class="col-md-6 col-lg-4 col-6">
+        content += `<div class="col-md-3 col-lg-4 col-3">
           <div class="card border-alert">
             <br>
             <center>
-              <img src="/imgs/pdf.png" alt="" class="img-fluid">
+              <img src="/imgs/pdf.png" alt="" class="img-fluid" style="width: 100px; height: auto;">
             </center>
             <br>
             <h4 class="title">  
@@ -41,6 +41,7 @@ const getDoctos = async () => {
         <h3>No hay documentos a mostrar</h3>
       </div>`;
     }
+    
 
     body.innerHTML = content;
   } catch (error) {

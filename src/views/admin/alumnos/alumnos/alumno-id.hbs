@@ -6,12 +6,12 @@
 
 
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
 
       <section class="card text-center">
         <div class="row p-3">
 
-          <div class="col-6">
+          <div class="col-3">
             <div class="pt-2">
               {{#if image}}
               <img src="{{image}}" alt="foto" class="img-fluid" width="150" id="imgCurrent">
@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-3">
             <div class="row">
 
               <div class="col-md-12">
@@ -56,22 +56,53 @@
             <h1 class="card-title">Datos de identidad</h1>
 
             <div class="row g-3">
-              <div class="col-md-6">
+              <div class="col-md-3">
+                <label for="proyecto_obs" class="form-label">Nivel ingles TSU</label>
+                <input type="text" id="proyecto_obs" name="proyecto_obs" class="form-control" placeholder="TSU"
+                  value="{{PROYECTO_OBS}}" disabled>
+              </div>
+              <div class="col-md-3">
+                <label for="obs_proyecto_lic" class="form-label">Nivel ingles LIC</label>
+                <input type="text" id="obs_proyecto_lic" name="obs_proyecto_lic" class="form-control" placeholder="LIC"
+                  value="{{OBS_PROYECTO_LIC}}" disabled>
+              </div>
+
+
+            <div class="col-md-4">
+              <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
+              <select id="inputcuatri" class="form-select" name="grado" required disabled>
+                <option selected value="{{GRADO}}">{{GRADO}}</option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+              </select>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-3">
                 <label for="paterno" class="form-label">Primer apellido</label>
                 <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Primer apellido"
                   value="{{PATERNO}}" disabled>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="materno" class="form-label">Segundo apellido</label>
                 <input type="text" id="materno" name="materno" class="form-control" placeholder="Segundo apellido"
                   value="{{MATERNO}}" disabled>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-3">
                 <label for="nombre" class="form-label">Nombres</label>
                 <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombres"
                   value="{{NOMBRE}}" disabled>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="genero" class="form-label">Genero</label>
                 <select name="genero" id="genero" class="form-select" disabled>
                   <option value="{{GENERO}}" selected>{{GENERO}}</option>
@@ -79,25 +110,25 @@
                   <option value="F">Femenino</option>
                 </select>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
                 <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
                 <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control" disabled>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="estad_-nacimiento" class="form-label">Estado de nacimiento</label>
                 <select id="estado_nacimiento" class="form-select" name="estado_nacimiento" disabled>
                   <option selected>{{ESTADO_NACIMIENTO}}</option>
                 </select>
 
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
                 <select id="municipio-nacimiento" class="form-select" name="municipio_naci" disabled>
                   <option>{{LUGAR_NACIMIENTO}}</option>
                 </select>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="inputnacionalidad" class="form-label" placeholder="Nacionalidad">Nacionalidad</label>
                 <select id="inputState" class="form-select" disabled name="nacionalidad">
                   <option selected value="{{NACIONALIDAD}}" disabled disabled>{{NACIONALIDAD}}</option>
@@ -105,7 +136,7 @@
                   <option>Extranjera</option>
                 </select>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="inputedocivil" class="form-label" placeholder="EdoCivil">Estado civil</label>
                 <select id="inputState" class="form-select" disabled>
                   <option selected value="{{ESTADO_CIVIL}}" disabled disabled>{{ESTADO_CIVIL}}</option>
@@ -168,12 +199,12 @@
                 <input type="text" id="email_insti" name="email_insti" class="form-control"
                   placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="tel_cel" class="form-label">Teléfono celular</label>
                 <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}"
                   disabled />
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
                 <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}"
                   disabled>
@@ -184,7 +215,7 @@
 
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-12">
 
       <div class="card">
         <div class="card-body">
@@ -210,26 +241,9 @@
               </select>
             </div>
 
-            <div class="col-md-4">
-              <label for="inputcuatri" class="form-label" placeholder="EdoCivil">Cuatrimestre</label>
-              <select id="inputcuatri" class="form-select" name="grado" required disabled>
-                <option selected value="{{GRADO}}">{{GRADO}}</option>
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-              </select>
-            </div>
+          
 
-            <div class="col-md-6">
+            <div class="col-md-3">
               <label for="inputmatricula" class="form-label">MATRÍCULA</label>
               <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF" required
                 value="{{MATRICULA}}" name="matricula" disabled>
@@ -250,7 +264,7 @@
 
           <!-- No Labels Form -->
           <div class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-3">
               <label for="estatus_actual" class="form-label" placeholder="EdoCivil">Estatus actual</label>
               <input type="hidden" id="status" value="{{STATUS}}">
               <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
@@ -258,24 +272,26 @@
               </select>
             </div>
 
-            <div class="col-md-6"></div>
+            <div class="col-md-3"></div>
 
             {{!-- ====== Ingreso TSU ====== --}}
             <div class="row my-2 d-none" id="ingreso_tsu">
-              <div class="col-6">
+              <div class="col-3">
                 <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
-                <input class="form-control" id="fecha_reg" type="date" disabled>
+                <input class="form-control" id="fecha_reg" type="date" disabled
+                Value="{{FECHA_CREACION}}" name="" disabled >
               </div>
 
-              <div class="col-6">
+              <div class="col-3">
                 <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
-                <input class="form-control" id="fecha_itsu" type="date" disabled>
+                <input class="form-control" id="fecha_itsu" type="TEXT" disabled
+                value="{{FECHA_INGRESO}}" name="" disabled>
               </div>
             </div>
 
             {{!-- ====== Seccion de baja ====== --}}
             <div class="row my-2 d-none" id="motivo_baja">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label for="inputmotivo" class="form-label" placeholder="EdoCivil">Motivo de la baja</label>
                 <select id="inputmotivo" class="form-select" disabled>
                   <option>REPROBACIÓN</option>
@@ -291,7 +307,7 @@
                   <option>OTRAS CAUSAS</option>
                 </select>
               </div>
-              <div class="col-6">
+              <div class="col-3">
                 <label for="fechabaja" class="form-label">Fecha de Baja</label>
                 <input class="form-control" id="fecha_baja" type="date" disabled>
               </div>

@@ -13,7 +13,7 @@ let alumnosLength = 0;
 
 // Hace la llamada a la API
 const getAlumnos = async () => {
-  // Vacia la tabla en caso que ya tenga datos
+  // Vacía la tabla en caso de que ya tenga datos
   table.innerHTML = "";
   loader_table.style.display = "block";
 
@@ -36,7 +36,7 @@ const getAlumnos = async () => {
     BA: "Baja",
   };
 
-  alumnos.map((item, i) => {
+  alumnos.forEach((item, i) => {
     if (item.GENERO === "M") {
       countHom++;
     } else {
@@ -44,11 +44,12 @@ const getAlumnos = async () => {
     }
 
     content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
-    content += `<td>${i + 1}</td>`;
+    content += `<td>${skip + i + 1}</td>`;  // Ajuste de la numeración aquí
     content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;
     content += `<td>${status[item.STATUS] ?? ""}</td>`;
     content += `<td>${item.NIVEL}</td>`;
+
     content += "</tr>";
   });
 

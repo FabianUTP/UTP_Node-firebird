@@ -43,6 +43,7 @@ async function main() {
     content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;
     content += `<td>${item.CALIFICACION}</td>`;
+    content += `<td>${item.FECHA}</td>`;
     content += "</tr>";
   });
 

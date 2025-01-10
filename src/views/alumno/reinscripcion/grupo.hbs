@@ -1,0 +1,269 @@
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/advertencia.css">
+</head>
+
+<body>
+  <div class="pb-3" >
+    <button class="btn btn-outline-primary" onclick="regresar()">
+        <i class="bi bi-arrow-bar-left"></i>
+        Atrás
+    </button>
+  </div>
+
+  <section class="container">
+  <div id="container" class="row d-none">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="text-center" style="padding: 13px;">
+          <h1><i class="bi bi-people"></i><span>Grupos</span></h1>
+          <center> <div class="col-lg-9 col-md-8">{{carrera}}</div></center>
+        </div>
+        <div class="card-body">
+          <div class="container">
+<div class="d-flex w-100">
+  <div class="flex-fill hide-search"> <!-- Agrega la clase hide-search aquí -->
+    <div class="input-group mb-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="bi bi-search"></i>
+        </span>
+      </div>
+      <input type="search" class="form-control" placeholder="Buscar por codigo del grupo" id="buscar">
+    </div>
+  </div>
+</div>
+
+            </div>
+            <div class="table-responsive">
+              <select id="select-container"  class="form-select show-select">
+                  <option  id="object" selected value="{{NIVEL}}">{{NIVEL}}</option>     
+              </select>
+              <div class="d-flex justify-content-center pb-2">
+                <div class="spinner-border" role="status" id="load" style="display: none;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="preloader"></div>
+</section>
+
+<div class="tab-content pt-2">
+  <form id="form" action="/grupos_add" method="post">
+    <div class="row g-3">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Escolaridad</h5>
+            <!-- Vertical Form -->
+            <div class="row g-3">
+              <div class="col-md-8">
+                <label for="inputcarrera" class="form-label">Carrera</label>
+                <select id="inputcarrera" name="nivel" class="form-select" required disabled>
+                  <option selected value="{{NIVEL}}">{{NIVEL}}</option>
+                </select>
+              </div>
+              <option id="num_alumno" value="{{NUMEROALUMNO}}"></option>
+              <option id="infoAlumno" value="{{informacionAlumno}}"></option>
+              <div class="col-md-4">
+                <label for="inputcuatri" class="form-label">Cuatrimestre</label>
+                <select id="inputcuatri" class="form-select" name="grado" required disabled>
+                  <option selected value="{{GRADO}}">{{GRADO}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Estatus</h5>
+            <!-- No Labels Form -->
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="estatus_actual" class="form-label">Estatus actual</label>
+                <input type="hidden" id="status" value="{{STATUS}}">
+                <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
+                  <option selected disabled>--seleccionar estatus--</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+  </form>
+</div>
+
+
+  <!-- Scripts adicionales -->
+  <script src="/js/helpers/filtrogrup.js"></script>
+  <script src="/js/services/alumno/getGrup.js"></script>
+
+  <button onclick="irARuta()">Continuar</button>
+
+  <script>
+
+    window.onload = async () => {
+
+        var grupo = JSON.parse(document.getElementById("select-container").value);
+        var numero_alumno = document.getElementById("num_alumno").value;
+        var carrera = document.getElementById("inputcarrera").value;
+        var cuatrimestre = document.getElementById("inputcuatri").value;
+        var infoAlumno = JSON.parse(document.getElementById("infoAlumno").value);
+        ///////////
+
+        /// se forma un objeto para que se guarde en alumnos Niveles y su consulta 
+        let finalData = {
+          ID_ESCUELA:grupo.ID_ESCUELA,
+          INICIAL:grupo.INICIAL,
+          FINAL:grupo.FINAL,
+          PERIODO:grupo.PERIODO,
+          TIPO:'A',
+          NUMEROALUMNO:numero_alumno,
+          NUM:1,
+          CODIGO_GRUPO:grupo.CODIGO_GRUPO,
+          GRADO:grupo.GRADO,
+          NIVEL:carrera,
+          STATUS:'A',
+          CUATRIMESTRE:cuatrimestre
+        };
+
+        const settings = {
+          method: 'POST',
+          body: JSON.stringify(finalData),
+          headers: { "Content-Type": "application/json" },
+        };
+
+        let registro_alumno='';
+        ///Se hace peticion para alumnos nivel se verifica que ya esta grabado el alumno
+        const registro = await fetch("api/AlumnosNivel",settings).then((response) => { 
+              return response.json().then((data) =>  {
+                console.log(data);
+                //se asigna el registro obtenido de la peticion para su evaluacion de los datos(vacio o no)
+                registro_alumno=JSON.stringify(data);
+              }).catch((err) => {
+                  console.log(err);
+              }) 
+          });
+
+
+            if(registro_alumno == ''){
+              console.log('No Tiene datos');
+              // Ejecutar la consulta en la base de datos (asegúrate de tener configurada la conexión a la base de datos correctamente)
+              document.getElementById('select-container').removeAttribute("disabled");
+
+            }else{
+              console.log('Tiene datos');
+              //Se desabilita el option de seleccion de grupos
+              document.getElementById('select-container').setAttribute("disabled","disabled");
+            };
+      
+    }
+
+    function regresar() {
+      // Redireccionar a la ruta deseada dentro del sitio web
+      window.location.href = "/reinscrip-cion";
+    }
+
+    const irARuta = async () => {
+        //Se obtiene la informacion para el registro de alumnos_grupo
+      var grupo = JSON.parse(document.getElementById("select-container").value);
+      var numero_alumno = document.getElementById("num_alumno").value;
+      var carrera = document.getElementById("inputcarrera").value;
+      var cuatrimestre = document.getElementById("inputcuatri").value;
+      var infoAlumno = JSON.parse(document.getElementById("infoAlumno").value);
+
+      let date = new Date();
+      let year;
+      let month;
+      let day;
+      hours = date.toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second : '2-digit'
+      });
+      minuts = date.getMinutes();
+      year = date.getFullYear();
+      month = date.getMonth();
+      day = date.getDate();
+      var fechaFormateada = day + "/" + month + "/" + year +" "+ hours;
+        ///////////
+
+        ///validaciones que se evitan con el filtro a grupos
+        if(grupo.CODIGO_CARRERA!=carrera){
+          console.log('No se esta seleccionando la carrera correspondiente');
+          return;
+        }
+        
+        if(grupo.SIGUIENTE_GRUPO<=cuatrimestre){
+          console.log('El periodo debe de ser el siguiente');
+          return;
+        }
+        /////
+
+
+        /// se forma un objeto para que se guarde en alumnos grupo
+        let finalData = {
+          ID_ESCUELA:grupo.ID_ESCUELA,
+          INICIAL:grupo.INICIAL,
+          FINAL:grupo.FINAL,
+          PERIODO:grupo.PERIODO,
+          TIPO:'A',
+          NUMEROALUMNO:numero_alumno,
+          NUM:1,
+          CODIGO_GRUPO:grupo.CODIGO_GRUPO,
+          GRADO:grupo.GRADO,
+          NIVEL:carrera,
+          STATUS:'A',
+          FECHA_CREACION:fechaFormateada,
+          TIPOEXAMEN:'-1',
+          REINSCRITO:'S',
+          INFORMACIONALUMNO:infoAlumno,
+          CUATRIMESTRE:cuatrimestre
+        };
+
+        console.log(finalData);
+        ///Se configura el metodo a utilizar en ambas peticiones
+        const settings = {
+          method: 'POST',
+          body: JSON.stringify(finalData),
+          headers: { "Content-Type": "application/json" },
+        };
+
+        //
+        let registro_alumno='';
+
+        const registro = await fetch("api/AlumnosNivel",settings).then((response) => { 
+              return response.json().then((data) =>  {
+                console.log(data);
+                //se asigna el registro obtenido de la peticion para su evaluacion de los datos(vacio o no)
+                registro_alumno=JSON.stringify(data);
+              }).catch((err) => {
+                  console.log(err);
+              }) 
+          });
+          console.log(registro_alumno+finalData);
+
+          if(registro_alumno == ''){
+
+                // Ejecutar la consulta en la base de datos (asegúrate de tener configurada la conexión a la base de datos correctamente)
+              const registro =  await fetch("api/grupos_add",settings);
+                //se registro y se manda a la ruta de pagos
+              window.location.href = "/pagos";
+
+            }else{
+
+              window.location.href = "/pagos";
+            };
+    }
+  </script>
+</body>
+
+

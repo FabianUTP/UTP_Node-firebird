@@ -7,13 +7,13 @@ const load = document.getElementById("load");
 let limit = 20;
 let skip = 0;
 let search = "";
-let orderBy = "paterno";
+let orderBy = "numeroalumno";
 let sort = "asc";
 let alumnosLength = 0;
 
 inputSearch.addEventListener("input", debounce(() => {
-  search = inputSearch.value;
-  skip = 0; // Reinicia la paginacion
+  search = inputSearch.value; 
+  skip = 0; // Reinicia la paginación
   getAlumnos();
 }));
 
@@ -23,9 +23,10 @@ const getAlumnos = async () => {
   table.innerHTML = "";
   load.style.display = "block";
 
-  search = inputSearch.value
+  // Convertir el valor de búsqueda a mayúsculas
+  const upperCaseSearch = search.toUpperCase();
 
-  const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
+  const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${upperCaseSearch}&orderBy=${orderBy}&sort=${sort}`;
   const res = await fetch(url);
   const { alumnos } = await res.json();
   load.style.display = "none";
@@ -34,19 +35,23 @@ const getAlumnos = async () => {
   const status = {
     A: "Activo",
     E: "Egresado",
-    BA: "Baja"
+    BA: "Baja",
+    S: "Aspirantes"
   }
-
   alumnos.map((item, i) => {
     content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
-    content += `<td>${i + 1}</td>`;
-    content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
-    content += `<td>${item.NOMBRE}</td>`;
-    content += `<td>${item.MATRICULA}</td>`;
-    content += `<td>${status[item.STATUS] ?? ""}</td>`;
-    content += `<td>${item.NIVEL}</td>`;
+    content += `<td style="text-align: center;">${i + 1}</td>`;
+    content += `<td style="text-align: center;">${item.NUMEROALUMNO}</td>`;
+    content += `<td style="text-align: center;">${item.PATERNO} ${item.MATERNO}</td>`;
+    content += `<td style="text-align: center;">${item.NOMBRE}</td>`;
+    content += `<td style="text-align: center;">${item.MATRICULA}</td>`;
+    content += `<td style="text-align: center;">${status[item.STATUS] ?? ""}</td>`;
+    content += `<td style="text-align: center;">${item.NIVEL}</td>`;
+    content += `<td style="text-align: center;">${item.PROYECTO_OBS}</td>`;
+    content += `<td style="text-align: center;">${item.OBS_PROYECTO_LIC}</td>`;
     content += "</tr>";
-  });
+});
+
 
   table.innerHTML = content;
   alumnosLength = alumnos.length;

@@ -24,7 +24,7 @@ const getGrupos = async () => {
   table.innerHTML = "";
   load.style.display = "block";
 
-  const url = `/api/grupos?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
+  const url = `/api/gruposCalifi?limit=${limit}&skip=${skip}&search=${search}&orderBy=${orderBy}&sort=${sort}`;
   const res = await fetch(url);
   const { grupos } = await res.json();
 
@@ -33,6 +33,7 @@ const getGrupos = async () => {
   let content = "";
   grupos.map((item, i) => {
     content += `<tr onclick="window.location.href=window.location.href+'/${item.CODIGO_GRUPO}'">`;
+
     content += `<td>${i + 1}</td>`;
     content += `<td>${item.CODIGO_CARRERA}</td>`;
     content += `<td>${item.CODIGO_GRUPO}</td>`;
@@ -40,6 +41,7 @@ const getGrupos = async () => {
     content += `<td>${item.GRUPO}</td>`;
     content += `<td>${item.INSCRITOS} de ${item.CUPO_MAXIMO}</td>`;
     content += `<td>${item.CLAVEPROFESOR_TITULAR ?? ''}</td>`;
+    
     content += "</tr>";
   });
 

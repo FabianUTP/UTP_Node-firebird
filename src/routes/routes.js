@@ -5,7 +5,7 @@ const router = express.Router();
 const { verifySesion, noAuth } = require("../app/middlewares/session");
 
 // Controladores
-const { AuthController, HomeController } = require("../app/controllers");
+const { AuthController, HomeController, InscripcionesController, RegistroController, OtroController, GruposalumnosController } = require("../app/controllers");
 
 // Login y Autenticaciones
 router.get("/login", noAuth, AuthController.login); // Vista principal
@@ -16,6 +16,24 @@ router.post("/login/alumno", AuthController.authAlumno);
 router.post("/login/aspirante", AuthController.authAspirante);
 router.post("/login/profe", AuthController.authProfe);
 router.post("/login/admin", AuthController.authAdmin);
+
+
+//Rutas Externas Para iniciar sesion
+router.get("/verificacionCURP", (req, res) => {res.render("auth/verificacionCurp");});
+router.get("/registroAspirante", (req, res) => {res.render("auth/registroAspirante");});
+router.get("/gruposalumnos", (req, res) => {res.render("auth/verificacionGrupos");});
+router.get("/correcto", (req, res) => {res.render("others/correcto");});
+
+
+//Rutas Solicitudes HTPP
+router.get('/clave', InscripcionesController.curp);
+router.post('/pegar', RegistroController.guardar);
+router.put('/vincular', OtroController.vincular);
+router.get('/obtener', GruposalumnosController.obtenerGrupos);
+
+
+
+
 
 // Middleware para que se inicie sesión
 router.use(verifySesion);

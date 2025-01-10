@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de Nivel y Año</title>
+    <!-- Agregar la referencia al archivo CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+
+
+<!-- mi_vista.hbs -->
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <title>Mi Vista</title>
+</head>
+<body>
+    <h1>Folio del Alumno:</h1>
+    <ul>
+        {{#each resultadoConsulta}}
+            <h1>{{this}}</h1>
+        {{/each}}
+    </ul>
+
+    
+</body>
+</html>
+ <br><div class="alert alert-info" role="alert">
+Advertencia: Guardar o Capturar el Folio del Alumno para ingresar en tu cuenta
+</div><br>
+
+    
+    <div class="container">
+        <h1>Verificar los Datos en lo que se registra el alumno en el grupo :</h1>
+        <!-- En tu vista HTML -->
+        <span id="numeroAlumnoDisplay"></span>
+
+ 
+  
+   
+
+    
+     
+      
+
+        
+        <form>
+            <div class="form-group">
+                <label for="nivel">Nivel:</label>
+                <input type="text" class="form-control" id="nivel" name="nivel" readonly>
+            </div>
+            <div class="form-group">
+                <label for="inicial">Año Inicial:</label>
+                <input type="text" class="form-control" id="inicial" name="inicial" readonly>
+            </div>
+            <div class="form-group">
+                <label for="final">Año Final:</label>
+                <input type="text" class="form-control" id="final" name="final" readonly>
+            </div>
+            <!-- Agregar un botón de Bootstrap para obtener el grupo -->
+            <button type="button" class="btn btn-primary" id="obtenerGrupo">Obtener Grupo</button>
+        </form>
+
+        <!-- Campo de entrada para mostrar el grupo -->
+        <form action="/vincular" method="POST" id="updateForm">
+            <div class="form-group">
+                <label for="grupo">Grupo:</label>
+                <input type="text" class="form-control" id="grupo" name="CODIGO_GRUPO" readonly>
+            </div>
+            <div class="form-group">
+                <label for="numeroAlumno">Folio del Alumno:</label>
+                <input type="text" class="form-control" id="numeroAlumno" name="NUMEROALUMNO" required>
+                <p>*Colocar Folio del Alumno:</p>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+        <div class="mt-3">
+            <div id="message" class="alert alert-success" style="display: none;"></div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/tu_script.js"></script>
+           
+    <!-- Agregar la referencia al archivo JavaScript de Bootstrap (opcional) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // JavaScript restante aquí...
+    </script>
+</body>
+</html>
+
+ <script>
+    document.getElementById('updateForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evitar que se envíe el formulario de manera predeterminada
+      const formData = new FormData(this);
+      fetch('/vincular', {
+        method: 'PUT',
+        body: formData
+      })
+      .then(response => response.json())
+     .then(data => {
+  document.getElementById('message').innerText = data.message;
+  document.getElementById('message').style.display = 'block';
+  
+  // Obtener el valor del campo oculto "redirect"
+  const redirect = data.redirect;
+  
+  // Redirigir a la URL especificada
+  if (redirect) {
+    window.location.href = redirect;
+  }
+})
+      .catch(error => {
+        console.error(error);
+        document.getElementById('message').innerText = 'Error al actualizar el registro.';
+        document.getElementById('message').style.display = 'block';
+      });
+    });
+  </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const nivelInput = document.getElementById('nivel');
+            const inicialInput = document.getElementById('inicial');
+            const finalInput = document.getElementById('final');
+            const grupoInput = document.getElementById('grupo');
+            const obtenerGrupoButton = document.getElementById('obtenerGrupo');
+
+            const obtenerGrupos = async () => {
+                const nivelSeleccionado = nivelInput.value;
+                const inicial = inicialInput.value;
+                const final = finalInput.value;
+
+                // Validar que los campos no estén vacíos antes de enviar la solicitud
+                if (nivelSeleccionado.trim() === '' || inicial.trim() === '' || final.trim() === '') {
+                    grupoInput.value = 'Por favor, ingresa valores válidos';
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`/obtener?nivel=${nivelSeleccionado}&inicial=${inicial}&final=${final}`);
+
+                    if (!response.ok) {
+                        throw new Error('Error al obtener grupos');
+                    }
+
+                    const grupos = await response.json();
+
+                    if (grupos.length > 0) {
+                        // Mostrar el primer grupo en el campo de entrada
+                        grupoInput.value = grupos[0].CODIGO_GRUPO;
+                    } else {
+                        grupoInput.value = 'No se encontraron grupos';
+                    }
+                } catch (error) {
+                    console.error(error);
+                    grupoInput.value = 'Error al obtener grupos';
+                }
+            };
+
+            // Agregar un evento click al botón para obtener el grupo
+            obtenerGrupoButton.addEventListener('click', obtenerGrupos);
+        });
+    </script>
+</body>
+</html>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener los valores del almacenamiento local
+        const nivel = localStorage.getItem('nivel');
+        const anoInicial = localStorage.getItem('anoInicial');
+        const anoFinal = localStorage.getItem('anoFinal');
+
+        // Asignar los valores a los campos del segundo formulario
+        document.getElementById('nivel').value = nivel;
+        document.getElementById('inicial').value = anoInicial;
+        document.getElementById('final').value = anoFinal;
+
+        // Limpiar los valores del almacenamiento local después de usarlos
+        localStorage.removeItem('nivel');
+        localStorage.removeItem('anoInicial');
+        localStorage.removeItem('anoFinal');
+    });
+</script>
+
+  <script>
+        // Espera a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tu código aquí
+            executeQuery(ssql, values)
+                .then(result => {
+                    console.log(result); // Imprime el resultado en la consola
+                    // Aquí puedes hacer cualquier otra cosa que necesites con el resultado
+                    const numeroAlumnoInput = document.getElementById('numeroAlumno');
+
+                    if (numeroAlumnoInput) {
+                        numeroAlumnoInput.value = result; // Establece el valor del campo de entrada
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        });
+    </script>
+
+    <script>
+        // tu_script.js
+
+// Esperar a que se cargue el documento
+$(document).ready(function () {
+    // Manejar el evento de clic en el botón
+    $('#cargarNumeroAlumno').click(function () {
+        // Realizar una solicitud AJAX para obtener el número de alumno
+        $.ajax({
+            url: '/obtenerNumeroAlumno', // Debes definir esta ruta en tu servidor
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Cuando se obtenga la respuesta exitosa, mostrar el número de alumno
+                $('#numeroAlumno').text(data.numeroAlumno);
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+});
+
+    </script>
+
+
+</body>
+</html>

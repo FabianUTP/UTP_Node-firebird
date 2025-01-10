@@ -123,6 +123,8 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
     grado: body?.grado,
     matricula: body?.matricula,
     observaciones: body?.nota,
+    proyecto_obs: body?.proyecto_obs,
+    obs_proyecto_lic: body?.obs_proyecto_lic,
   };
 
   await Alumno.findByIdAndUpdate(body?.matricula, data);

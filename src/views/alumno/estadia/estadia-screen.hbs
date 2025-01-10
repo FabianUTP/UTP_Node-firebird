@@ -1,72 +1,207 @@
-<section class="section profile">
-  <div class="container">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadia Profesional</title>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <!-- Enlace a la fuente Roboto de Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="public/css/estadia/estilos.css">
 
-    <div class="my-3 d-flex justify-content-between">
-      {{>btnBack}}
-      <button type="button" class="btn btn-success">
-        <i class="bi bi-cloud-arrow-down"></i>
-        Descargar boleta
-      </button>
+  <style>
+    /* Estilos CSS personalizados */
+    h3, h5 {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+
+</head>
+
+<body>
+  <section class="section profile">
+    <div class="pb-3">
+      {{>btnBack}} <!-- Incluye el botón de retroceso -->
     </div>
 
-    <div class="card">
-      <div class="card-body pt-3">
-
-        <div class="card-title text-center">
-          <h1>Estadía</h1>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <label for="cuatrimestre" class="form-label"><b>*Selecciona el cuatrimestre:</b> </label>
-            <select id="cuatrimestre" class="form-select" onchange="getEstadia()">
-              <option disabled selected>Elegir cuatrimestre</option>
-              <option value="1">Cuatrimestre 1</option>
-              <option value="2">Cuatrimestre 2</option>
-              <option value="3">Cuatrimestre 3</option>
-              <option value="4">Cuatrimestre 4</option>
-              <option value="5">Cuatrimestre 5</option>
-              <option value="6">Cuatrimestre 6</option>
-              <option value="7">Cuatrimestre 7</option>
-              <option value="8">Cuatrimestre 8</option>
-              <option value="9">Cuatrimestre 9</option>
-              <option value="10">Cuatrimestre 10</option>
-              <option value="11">Cuatrimestre 11</option>
-            </select>
+    <div class="container">
+      <div class="card mx-auto text-center" style="max-width: 1180px;">
+        <!-- Encabezado de la tarjeta -->
+        <div class="card-header bg-white border">
+          <h5 class="card-title text-start">Estadia Profesional</h5>
+          <!-- Título de la tarjeta -->
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-6 mx-auto">
+              <img src="{{image}}" alt="foto" class="img-fluid rounded"
+                width="120">
+              <!-- Muestra la imagen del estudiante como un cuadrado -->
+            </div>
           </div>
-        </div>
-
-        <hr>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table class="table table-bordered table-responsive">
-                <thead>
-                  <tr>
-                    <th scope="col">Actividad</th>
-                    <th scope="col">Fecha de inicio</th>
-                    <th scope="col">Fecha de término</th>
-                    <th scope="col">Horas acreditadas</th>
-                  </tr>
-                </thead>
-                <tbody id="table-content">
-                </tbody>
-              </table>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="text-start">
+                <span><strong>No. Alumno: </strong></span>
+                <span>{{noalumno}}</span> <!-- Muestra el número de alumno -->
+              </div>
+              <div class="text-start">
+                <span><strong>No. Seguro Social: </strong></span>
+                <span>{{numeroimss}}</span>
+                <!-- Muestra el número de seguro social -->
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="text-end">
+                <span><strong>Matrícula: </strong></span>
+                <span>{{matricula}}</span>
+                <!-- Muestra la matrícula del estudiante -->
+              </div>
+              <div class="text-end">
+                <span><strong>Carrera: </strong></span>
+                <span>{{carrera}}</span>
+                <!-- Muestra la carrera del estudiante -->
+              </div>
+              <div class="text-end">
+                <span><strong>Cuatrimestre: </strong></span>
+                <span>{{cuatrimestre}}</span>
+                <!-- Muestra el cuatrimestre del estudiante -->
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="text-center" id="loading" style="display: none;">
-          <div class="spinner-border"></div>
+        <!--Termina el Encabezado de la Tarjeta -->
+        <div class="card-body pt-3 mx-auto text-center">
+          <!-- Bordered Tabs -->
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active btn btn-outline-secondary fade-in"
+                data-bs-toggle="tab"
+                data-bs-target="#datos">
+                <i class="fas fa-file-alt"></i> Documentos
+              </button>
+              <!-- Botón para la pestaña de Documentos -->
+            </li>
+            <li class="nav-item">
+              <button class="nav-link btn btn-outline-secondary fade-out"
+                data-bs-toggle="tab"
+                data-bs-target="#empresa">
+                <i class="bi bi-building"></i> Datos Empresa
+              </button>
+              <!-- Botón para la pestaña de Datos Empresa -->
+            </li>
+            <li class="nav-item">
+              <button class="nav-link btn btn-outline-secondary fade-out"
+                data-bs-toggle="tab"
+                data-bs-target="#empresarial">
+                <i class="fas fa-user-tie"></i> Asesor Empresarial
+              </button>
+              <!-- Botón para la pestaña de Asesor Empresarial -->
+            </li>
+            <li class="nav-item">
+              <button class="nav-link btn btn-outline-secondary fade-out"
+                data-bs-toggle="tab"
+                data-bs-target="#academico">
+                <i class="fas fa-user-graduate"></i> Asesor Académico
+              </button>
+              <!-- Botón para la pestaña de Asesor Académico -->
+            </li>
+            
+          </ul>
+          <div class="row">
+            <div class="col-sm-6">
+              <!-- Contenido 1 -->
+            </div>
+            <div class="col-sm-6">
+              <!-- Contenido 2 -->
+            </div>
+          </div>
         </div>
+      </div>
 
+      <!-- Modal de bienvenida e instrucciones -->
+      <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog"
+        aria-labelledby="welcomeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="welcomeModalLabel"><i
+                  class="bi bi-info-circle-fill"></i> ¡Bienvenido(a)!
+                {{ nameAuth }}</h5>
+              <!-- Icono de información en el título -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Contenido del modal de bienvenida e instrucciones -->
+              <p>Hola, bienvenido(a) a esta sección. Aquí encontrarás
+                información relevante para tu estancia
+                profesional.</p>
+              <h6><i class="bi bi-check2"></i> Instrucciones:</h6>
+              <!-- Icono de marca de verificación en el título -->
+              <ol class="text-start">
+                <li><i class="bi bi-arrow-right"></i> Selecciona una de las
+                  pestañas para acceder a la información
+                  relacionada.</li>
+                <!-- Icono de flecha hacia la derecha en el primer elemento -->
+                <li><i class="bi bi-arrow-right"></i> Cada pestaña contiene
+                  diferentes secciones con los documentos y
+                  datos correspondientes.</li>
+                <!-- Icono de flecha hacia la derecha en el segundo elemento -->
+                <li><i class="bi bi-arrow-right"></i> Puedes navegar entre las
+                  pestañas para ver toda la información
+                  necesaria.</li>
+                <!-- Icono de flecha hacia la derecha en el tercer elemento -->
+                <li><i class="bi bi-arrow-right"></i> Si tienes alguna duda,
+                  contacta a tu asesor empresarial o
+                  académico.</li>
+                <!-- Icono de flecha hacia la derecha en el cuarto elemento -->
+              </ol>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary"
+                data-bs-dismiss="modal"><i class="bi bi-x"></i> Cerrar
+              </button>
+              <!-- Icono de "X" en el botón de cerrar -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta adicional -->
+      <div class="card mx-auto text-center" style="max-width: 1180px;">
+        <!-- Contenido de la tarjeta adicional -->
+        <div class="tab-content mx-auto text-center">
+          <div class="tab-pane fade show active" id="datos">
+            {{> documentos-content}}
+            <!-- Incluye el contenido de documentos-content.hbs -->
+          </div>
+
+          <div class="tab-pane fade" id="empresa">
+            {{> empresa-content}}
+            <!-- Contenido de la pestaña de Datos Empresa -->
+          </div>
+
+          <div class="tab-pane fade" id="empresarial">
+            {{> aempresarial-content}}
+            <!-- Contenido de la pestaña de Asesor Empresarial -->
+          </div>
+
+          <div class="tab-pane fade" id="academico">
+            {{> aacademico-content}}
+            <!-- Contenido de la pestaña de Asesor Académico -->
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <input type="hidden" value="{{NUMEROALUMNO}}" id="numalumno">
-
-</section>
-
-<script src="/js/services/alumno/getEstadiaAlumno.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--Scripts-->
+  <script src="/js/services/alumno/estadia/bienvenida.js"></script>
+  <script src="/js/services/alumno/estadia/advertencia.js"></script>
+  <script src="/js/services/alumno/estadia/adverbutton.js"></script>
+</body>

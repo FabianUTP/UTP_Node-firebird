@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <div class="text-center">
+    <p><b>
+      <h1>Sistema Integral de Información Institucional</h1>
+    </b></p>
+  </div>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body onload="mostrarCiclosFiltrados()">
+
+  <h1>Configuración &gt; Cuatrimestre &gt; Estadia</h1>
+
+  <h1>Estadias:</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Inicial</th>
+        <th>Final</th>
+        <th>Periodo</th>
+        <th>Funcion Ciclos</th>
+      </tr>
+    </thead>
+    <tbody id="ciclosContainer">
+      <!-- Aquí se mostrarán los ciclos filtrados -->
+    </tbody>
+  </table>
+
+  <script>
+    function mostrarCiclosFiltrados() {
+      const funcionCiclos = 'E'; // Funcion Ciclos que se desee obtener los datos
+      fetch(`/api/ciclosAdmi`)
+        .then(response => response.json()) // Parseamos la respuesta como JSON
+        .then(data => {
+          let ciclosHTML = '';
+          const ciclosFiltrados = data.filter(ciclo => ciclo.FUNCION_CICLOS === funcionCiclos);
+          ciclosFiltrados.forEach(ciclo => {
+            ciclosHTML += '<tr>';
+            ciclosHTML += '<td>' + ciclo.INICIAL + '</td>';
+            ciclosHTML += '<td>' + ciclo.FINAL + '</td>';
+            ciclosHTML += '<td>' + ciclo.PERIODO + '</td>';
+            ciclosHTML += '<td>' + ciclo.FUNCION_CICLOS + '</td>';
+            ciclosHTML += '</tr>';
+          });
+          document.getElementById('ciclosContainer').innerHTML = ciclosHTML;
+        })
+        .catch(error => {
+          console.error('Error al obtener los datos de la API:', error.message);
+          document.getElementById('ciclosContainer').innerHTML = '<tr><td colspan="4">Error al obtener los datos de la API</td></tr>';
+        });
+    }
+  </script>
+</body>
+</html>

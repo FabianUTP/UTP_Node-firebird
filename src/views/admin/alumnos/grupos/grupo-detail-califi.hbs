@@ -1,0 +1,185 @@
+<section class="section">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .card-title h1 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .group-code-and-professor {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .professor-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .professor-info img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .asignatura-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 600px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .asignatura-item {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #ddd;
+      transition: background-color 0.3s, font-weight 0.3s;
+    }
+
+    .asignatura-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .asignatura-item.selected {
+      background-color: #1579e3b8;
+      color: #000000;
+      
+    }
+
+    .table-responsive {
+      margin-top: 20px;
+    }
+
+    #loader {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #eval-select {
+      width: 50%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      appearance: none;
+    }
+
+
+
+    .btn-primary {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      color: #fff;
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .left-column {
+      float: left;
+      width: 26%;
+      margin-right: 20px;
+    }
+  </style>
+
+  <div class="col-lg-12">
+    <div class="pb-3 d-flex justify-content-between">
+      {{>btnBack}}
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">
+          <div class="group-code-and-professor">
+            <h1>Grupo {{codigo_grupo}}</h1>
+            <div class="professor-info">
+              <!--<img id="professor-img" src="placeholder.png" alt="Foto del Profesor">\-->  
+              <h1 id="claveProfesor"></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <select id="eval-select">
+      <option value="">Seleccione una evaluación</option>
+    </select>
+    <button id="update-date-btn" class="btn btn-secondary">Actualizar Fecha</button>
+
+    <button id="update-all-btn" class="btn btn-primary">Actualizar Calificación</button>
+
+
+        </div>
+    <div class="clearfix">
+      <div class="left-column">
+        <div class="card">
+          <div class="card-body">
+            <h5>Asignaturas</h5>
+            <ul id="asignatura-list" class="asignatura-list"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="float: right; width: 72%;">
+        <div class="card-body">
+          <div class="container">
+            <input  type="hidden" id="idGrupo" value="{{codigo_grupo}}">
+
+            <div class="table-responsive">
+              <table  style="border: #333;" align="center" class="table table-hover">
+                <thead class="table">
+                  <tr  style="border: #333;background-color: rgb(187, 217, 255); text-align: center;" >
+                    <th class="col">#</th>
+                    <th scope="col">Nombre completo</th>
+                    <th scope="col">Matrícula</th>
+                    <th scope="col">Calificación</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody id="table-container"></tbody>
+              </table>
+              <div class="text-center" id="loader">
+                <div class="spinner-border"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/services/admin/getGruposAlumnosCalifi.js"></script>

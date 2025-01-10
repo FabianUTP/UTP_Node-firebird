@@ -1,0 +1,94 @@
+<link rel="stylesheet" type="text/css" href="/css/advertencia.css">
+
+<body>
+  <div class="pb-3">
+    <button class="btn btn-outline-primary" onclick="regresar()">
+      <i class="bi bi-arrow-bar-left"></i>
+        Atrás
+    </button>
+  </div>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plan de Pagos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /* Estilos personalizados */
+    .card {
+      margin-top: 80px;
+      width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transform: translateY(-10px);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      background-color: #f8f9fa;
+      border-bottom: none;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Selecciona Plan de pagos</h5>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="opciones">Plan de pagos:</label>
+          <select id="opciones" name="opciones" class="form-control">
+            {{#each opciones}}
+              <option value="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="aceptacion">Aceptación Financiera</label>
+          <input type="checkbox" id="aceptacion" name="aceptacion" checked>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+ 
+  <button onclick="irARuta()">Continuar</button>
+
+  <script>
+    function regresar() {
+      // Redireccionar a la ruta deseada dentro del sitio web
+      window.location.href = "/gruposs";
+    }
+    function irARuta() {
+      // Redireccionar a la ruta deseada dentro del sitio web
+      window.location.href = "/validacion";
+    }
+  </script>
+
+

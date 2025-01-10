@@ -3,7 +3,7 @@
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="/" class="logo d-flex align-items-center">
-      <img src="assets/img/logo.png" alt="">
+      <img src="/imgs/logorojo.jpg" alt="">
       <span class="d-none d-lg-block">SII-UTPoniente</span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -24,6 +24,33 @@
       <button type="submit" title="Search"><i class="bi bi-search"></i></button>
     </form>
   </div><!-- End Search Bar -->
+
+  {{/if}}
+
+    {{!-- Si es alumno, muestra la seleccion del periodo --}}
+  {{#if isAlumno}}
+  <div class="col-md-3">
+    <select id="selectciclo" class="form-select">
+    </select>
+  </div>
+
+  <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
+
+<!-- End Search Bar -->
+
+  {{/if}}
+
+
+{{!-- Si es profe, muestra la seleccion del periodo --}}
+    {{#if isProfe}}
+  <div class="col-md-3">
+    <select id="selectciclo" class="form-select">
+    </select>
+  </div>
+
+  <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
+
+
 
   {{/if}}
 
@@ -68,6 +95,7 @@
           </li>
 
         </ul><!-- End Profile Dropdown Items -->
+        
       </li><!-- End Profile Nav -->
 
     </ul>

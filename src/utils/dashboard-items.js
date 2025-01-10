@@ -1,3 +1,5 @@
+//para futuras generaciones Dashboard atrae todoslos datos de los aministraciones
+
 const admin_items = [
   {
     path_img: "./imgs/alumnos.png",
@@ -19,6 +21,8 @@ const admin_items = [
     link: "admin/calificacion",
   },
 ];
+
+//para futuras generaciones Dashboard atrae todoslos datos de los Alumonos
 
 const alumno_items = [
   {
@@ -86,6 +90,8 @@ const alumno_items = [
   },
 ];
 
+//para futuras generaciones Dashboard atrae todoslos datos de los aspirantes
+
 const aspirante_items = [
   {
     path_img: "./imgs/datos-del-usuario.png",
@@ -108,14 +114,20 @@ const aspirante_items = [
   },
 ];
 
+
+//para futuras generaciones Dashboard atrae todoslos datos de los maestros
+
 const profe_items = [
-  {
-    path_img: "./imgs/datos-del-usuario.png",
-    title: "Datos personales",
-    content:
-      "Ingresa y actualiza tus datos personales; de jornada, datos exclusivos de la institución",
-    link: "/datos",
-  },
+  //se omite los datos personales de los maestros en el sistema.
+
+  // {
+  //   path_img: "./imgs/datos-del-usuario.png",
+  //   title: "Datos personales",
+  //   content:
+  //     "Ingresa y actualiza tus datos personales; de jornada, datos exclusivos de la institución",
+  //   link: "/datos",
+  // },
+
   {
     path_img: "./imgs/satisfaccion.png",
     title: "Calificaciones",

@@ -21,6 +21,9 @@ const { ProfGrp } = require("../app/controllers/profesorGrupoController");
 router.get("/profesores/:id", ProfeCtr.showById);
 router.get("/datos", isProfesor, (req, res) => res.render("profes/profesores-id"));
 router.get("/grupoprofe", ProfGrp.showGrupo);
+
+
+//mostrar datos y subir calificaciones
 router.get("/grupoprofe/:id/ver_calif", ProfGrp.showViewCalif);
 router.get("/grupoprofe/:id/subir_calif", ProfGrp.showSubirCalif);
 

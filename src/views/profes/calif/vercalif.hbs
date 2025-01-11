@@ -1,50 +1,62 @@
 <section>
-  <div class="mb-3 d-flex justify-content-between align-items-center">
+  <!-- Botones de navegación y descarga -->
+  <div class="mb-4 d-flex justify-content-between align-items-center">
     {{>btnBack}}
-    
+
     <div>
-      <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-success">
-        <i class="bi bi-file-earmark-excel"></i>
-        Descargar
+      <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-success text-uppercase px-4 py-2">
+        <i class="bi bi-file-earmark-excel"></i> DESCARGAR EXCEL
       </button>
     </div>
   </div>
-  
-  <div class="card">
+
+  <!-- Tarjeta principal con detalles -->
+  <div class="card shadow-lg border-0 rounded">
     <div class="card-body">
-      <div id="datosProfesor" class="card-title">
-        <h1 class="text-center">Calificaciones</h1>
-        <h4><b>Mtro:</b> {{profe.NOMBREPROFESOR}}</h4>
-        <h4 id="asig"> Asignatura </h4>
-        <h4 id="grupo"> Grupo </h4>
+      <div id="datosProfesor" class="card-title mb-4 text-center">
+        <h1 class="text-primary text-uppercase font-weight-bold">CALIFICACIONES</h1>
+        <h4><strong>MTRO.:</strong> {{profe.NOMBREPROFESOR}}</h4>
+        <h4 id="asig"><strong>ASIGNATURA:</strong> {{profe.NOMBREASIGNATURA}}</h4> <!-- Agregando información sobre la asignatura -->
+        <h4 id="grupo"><strong>GRUPO:</strong> {{profe.GRUPO}}</h4> <!-- Agregando información sobre el grupo -->
       </div>
 
-      <select id="idPlan" class="form-select">
-        {{#each evals}}
-          <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
-        {{/each}}
-      </select>
-      
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Matricula</th>
-            <th>Calificación</th>
-          </tr>
-        </thead>
-        <tbody id="table-content"></tbody>
-      </table>
-      <div id="loading" class="text-center">
+      <!-- Selector de evaluación -->
+      <div class="mb-4">
+        <label for="idPlan" class="form-label text-uppercase">SELECCIONAR EVALUACIÓN</label>
+        <select id="idPlan" class="form-select text-uppercase">
+          {{#each evals}}
+            <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <!-- Tabla de calificaciones -->
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead class="thead-light text-uppercase">
+            <tr>
+              <th>#</th>
+              <th>NOMBRE</th>
+              <th>MATRICULA</th>
+              <th>CALIFICACIÓN</th>
+              <th>FECHA</th> <!-- Se agrega la columna para la fecha -->
+            </tr>
+          </thead>
+          <tbody id="table-content">
+            <!-- El contenido de la tabla será generado dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Indicador de carga -->
+      <div id="loading" class="text-center d-none">
         <div class="spinner-border" role="status"></div>
       </div>
     </div>
   </div>
-
 </section>
 
-
+<!-- Archivos de scripts -->
 <script src="/js/FileSaver.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="/js/services/profe/exportarExcel.js"></script>

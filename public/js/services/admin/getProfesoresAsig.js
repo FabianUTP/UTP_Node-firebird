@@ -19,55 +19,52 @@ async function getProfesoresAsig() {
   const api = await response.json();
 
   let content = "";
-  
   api.data.forEach((item, index) => {
-    // Verificar si los campos INICIAL y FINAL son válidos
-    if (item.INICIAL && item.FINAL) {  // Si INICIAL y FINAL son diferentes de 0 o null
-      // Querys que servirán para la consulta de los alumnos en el grupo
-      let query = `idPlan=${item.ID_PLAN}`;
-      query += `&claveAsig=${item.CLAVEASIGNATURA}`;
-      query += `&nombreAsig=${item.NOMBREASIGNATURA}`;
-      query += `&grupo=${item.CODIGO_GRUPO}`;
-      query += `&idEtapa=${item.ID_ETAPA}`;
-      query += `&inicial=${item.INICIAL}`;
-      query += `&final=${item.FINAL}`;
-      query += `&periodo=${item.PERIODO}`;
 
-      content += `<tr>`;
-      content += `<td>${index + 1}</td>`;
-      content += `<td>${item.CLAVEASIGNATURA}</td>`;
-      content += `<td>${item.NOMBREASIGNATURA}</td>`;
-      content += `<td>${item.CODIGO_GRUPO}</td>`;
-      content += `<td><div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        Ver más
-      </a>
+    // Querys que servirán para la consulta de los alumnos en el grupo
+    let query = `idPlan=${item.ID_PLAN}`;
+    query += `&claveAsig=${item.CLAVEASIGNATURA}`;
+    query += `&nombreAsig=${item.NOMBREASIGNATURA}`;
+    query += `&grupo=${item.CODIGO_GRUPO}`;
+    query += `&idEtapa=${item.ID_ETAPA}`;
+    query += `&inicial=${item.INICIAL}`;
+    query += `&final=${item.FINAL}`;
+    query += `&periodo=${item.PERIODO}`;
 
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      
-        <li>
-          <a 
-            class="dropdown-item" 
-            href="/profesores/${item.CLAVEPROFESOR}/ver_calif?${query}"
-          >
-            Ver calificaciones
-          </a>
-        </li>
+    content += `<tr>`;
+    content += `<td>${index + 1}</td>`;
+    content += `<td>${item.CLAVEASIGNATURA}</td>`;
+    content += `<td>${item.NOMBREASIGNATURA}</td>`;
+    content += `<td>${item.CODIGO_GRUPO}</td>`;
+    content += `<td><div class="dropdown">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      Ver más
+    </a>
+  
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    
+      <li>
+        <a 
+          class="dropdown-item" 
+          href="/profesores/${item.CLAVEPROFESOR}/ver_calif?${query}"
+        >
+          Ver calificaciones
+        </a>
+      </li>
 
-        <li>
-          <a 
-            class="dropdown-item" 
-            href="/profesores/${item.CLAVEPROFESOR}/subir_calif?${query}"
-          >
-            Subir Calificaciones
-          </a>
-        </li>
-       
-      </ul>
-        </div></td>`;
+      <li>
+        <a 
+          class="dropdown-item" 
+          href="/profesores/${item.CLAVEPROFESOR}/subir_calif?${query}"
+        >
+          Subir Calificaciones
+        </a>
+      </li>
+     
+    </ul>
+      </div></td>`;
 
-      content += "</tr>";
-    }
+    content += "</tr>";
   });
 
   table.innerHTML = content;

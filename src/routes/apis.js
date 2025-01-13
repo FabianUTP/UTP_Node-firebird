@@ -203,7 +203,9 @@ router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   sql += `grupos.grado, `;
   sql += `alumnos_grupos.codigo_grupo, `;
   sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, `;
+
   sql += `alumnos_kardex.id_plan, alumnos_kardex.claveasignatura, alumnos_kardex.id_eval, alumnos_kardex.calificacion, alumnos_kardex.inicial, alumnos_kardex.final, ALUMNOS_KARDEX.PERIODO, ALUMNOS_KARDEX.NUMEROALUMNO, alumnos_kardex.fecha, `;
+  
   sql += `cfgplanes_mst.nombre_plan, `;
   sql += `cfgplanes_det.nombreasignatura, `;
   sql += `cfgplanes_eval.descripcion AS nombre_eval, `;
@@ -310,17 +312,31 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
 router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
 
+  // Obtener los ciclos (limitados por parámetro 'limit')
   const ciclos = await Ciclos.all({
     limit,
   });
 
+  // Si no hay ciclos disponibles, enviamos una respuesta vacía o un indicador
+  if (!ciclos || ciclos.length === 0) {
+    return res.json({
+      periodoSelected: null,
+      ciclos: [],
+      noCiclos: true, // Indicador de que no hay ciclos disponibles
+    });
+  }
+
+  // Obtener el periodo seleccionado en la sesión
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
+  // Enviar los ciclos y el periodo seleccionado en la respuesta
   res.json({
     periodoSelected: periodoSelected?.DESCRIPCION,
     ciclos,
+    noCiclos: false, // Indicador de que hay ciclos disponibles
   });
 });
+
 
 router.put("/update/CuatriXGrupos", async (req, res) => {
   const { periodo } = req.body;

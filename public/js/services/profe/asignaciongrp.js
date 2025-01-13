@@ -19,18 +19,10 @@ async function getProfesoresAsig() {
   const api = await response.json();
 
   let content = "";
-
-  // Verificar si api.data tiene datos
-  if (!api.data || api.data.length === 0) {
-    table.innerHTML = "<tr><td colspan='4'>No hay datos disponibles</td></tr>";
-    return; // Salir si no hay datos
-  }
-
-  // Iterar sobre los datos si existen
   api.data.forEach((item, index) => {
-    // Verificar si el grupo o los valores clave están vacíos
-    if (!item.CLAVEASIGNATURA || !item.NOMBREASIGNATURA || !item.CODIGO_GRUPO) {
-      return; // No agregar fila si los datos están vacíos
+    // Si el periodo es 2, no mostrar los datos
+    if (item.PERIODO === 2) {
+      return; // Salir de la iteración sin mostrar nada
     }
 
     // Querys que servirán para la consulta de los alumnos en el grupo
@@ -52,7 +44,7 @@ async function getProfesoresAsig() {
       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
       Ver más
     </a>
-  
+
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     
       <li>
@@ -75,13 +67,12 @@ async function getProfesoresAsig() {
      
     </ul>
       </div></td>`;
-    content += `</tr>`;
+
+    content += "</tr>";
   });
 
-  // Insertar el contenido en la tabla
   table.innerHTML = content;
 }
-
 
 function onPrev() {
   if (page > 1) {

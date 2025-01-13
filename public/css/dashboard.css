@@ -1,88 +1,130 @@
+/* Base Hover Effect */
 .animate-hover::before {
     content: "";
     position: absolute;
-    background: #cbe0fb;
-    right: 0%;
-    left: 0%;
-    bottom: 0%;
+    background: linear-gradient(135deg, #4facfe, #00f2fe); /* Mejorado con degradado */
+    right: 0;
+    left: 0;
+    bottom: 0;
     top: 100%;
-    transition: all .3s;
+    transition: all 0.4s ease; /* Transición más suave */
     z-index: -1;
+    border-radius: 10px; /* Bordes redondeados */
 }
 
 .animate-hover:hover::before {
     top: 0;
-    background: #106eea;
 }
 
-.animate-hover:hover{
+.animate-hover:hover {
     cursor: pointer;
+    transform: translateY(-3px); /* Efecto de elevación */
 }
 
-.animate-hover div h4{
-    color: black;
-    font-weight: 500;
+/* Heading and Text Styling */
+.animate-hover div h4 {
+    color: #333;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif; /* Fuente moderna */
+    transition: color 0.3s;
 }
 
-.animate-hover:hover div h4{
+.animate-hover:hover div h4 {
     color: #fff;
 }
 
 .animate-hover div p {
-    color: #106eea;
+    color: #4facfe;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.3s;
 }
 
 .animate-hover:hover div p {
     color: #fff;
 }
 
+/* Icon Box Styling */
 .icon-box {
     padding: 30px;
     position: relative;
     overflow: hidden;
     background: #fff;
-    box-shadow: 0 0 29px 0 rgb(68 88 144 / 12%);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 10%);
     transition: all 0.3s ease-in-out;
-    border-radius: 8px;
+    border-radius: 12px;
     z-index: 1;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.title{
-    font-weight: 700;
-    font-size: 17px;
-    color: #111;
-    font-family: 'Roboto', sans-serif;
+.icon-box:hover {
+    background: linear-gradient(135deg, #4facfe, #00f2fe); /* Degradado al hacer hover */
+    box-shadow: 0 6px 30px rgb(0 0 0 / 15%);
+}
+
+/* Title Styling */
+.title {
+    font-weight: 800;
+    font-size: 18px;
+    color: #222;
+    font-family: 'Poppins', sans-serif;
     text-transform: uppercase;
     margin: 0;
+    letter-spacing: 0.5px;
 }
 
 .sub-title {
-    color: orange;
+    color: #ff8c00;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
+    text-transform: capitalize;
 }
 
-.information p{
+/* Information Styling */
+.information p {
     padding-top: 1rem;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
+    line-height: 1.6;
+    text-align: center;
 }
 
+/* Image Styling */
 .image {
-    width: 100px;
+    width: 120px; /* Imagen más grande */
     padding-bottom: 1rem;
+    transition: transform 0.3s;
 }
 
+.icon-box:hover .image {
+    transform: scale(1.1); /* Efecto de zoom al hacer hover */
+}
+
+/* Dashboard Header */
 .header-dash h2 {
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .header-dash p {
     font-size: 15px;
     font-weight: 600;
+    color: #555;
+    text-align: center;
 }
 
+/* Name Highlight */
 .name-alumno {
     color: #106eea;
+    font-weight: 700;
+    font-size: 18px;
 }

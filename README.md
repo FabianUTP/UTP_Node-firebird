@@ -1,77 +1,144 @@
-# Este proyecto es creado con el ambiente de NodeJS, para ello, es necesario tener instalado Node version 15 o superior.
+El contenido que compartiste describe de manera clara y detallada el proceso de configuración, desarrollo y extensibilidad de un proyecto basado en Node.js utilizando el patrón de diseño **MVC** (Model-View-Controller). A continuación, proporcionaré un esquema más organizado de la estructura del proyecto, incluyendo pasos clave para cada componente mencionado y consejos para crear nuevas APIs o funcionalidades:
 
-Mi recomendacon es trabajar con el editor de codigo **Visual Studio Code**.
+---
 
-#
-# Dependencias
+## **Pasos para la Configuración Inicial del Proyecto**
 
-Para poder correr el proyecto es necesario instalar las dependencias que requiere el proyecto, para ello, es necesario hacer los siguientes comandos en consola.
+1. **Instalación de Dependencias**:
+   - Ejecuta `npm install` una sola vez para instalar las dependencias del proyecto especificadas en el archivo `package.json`.
 
-#  
+2. **Inicio del Servidor**:
+   - Para iniciar el servidor en modo desarrollo, utiliza:  
+     ```bash
+     npm run dev
+     ```
+   - Si usas `nodemon` para reinicios automáticos al cambiar los archivos:
+     ```bash
+     nodemon app.js
+     ```
 
+3. **Versiones y Herramientas Requeridas**:
+   - **Node.js** versión 15 o superior.
+   - Editor de código recomendado: **Visual Studio Code**.
 
-## Descargar dependencias del proyecto (Solo una vez)
-    $ npm install
+---
 
-## Correr el proyecto (Cada vez que se desee trabajar)
-    $ npm run dev
+## **Estructura del Proyecto**
 
+### **1. Rutas (`routes/`)**
+- Rutas principales para **Administrador** y **Alumno**:
+  - **admin.js**: Define rutas relacionadas con la administración.
+  - **alumno.js**: Define rutas específicas para alumnos.
 
-# Enlaces a documentaciones necesarias
- * [Express Session - Para el manejo de las sesiones](https://www.npmjs.com/package/express-session)
- * [Express - Declarando rutas](http://expressjs.com/es/starter/basic-routing.html)
- * [Express - Creacion de Middlewares](https://expressjs.com/es/guide/using-middleware.html)
- * [Handlebars - Motor de plantillas para las vitas](https://www.npmjs.com/package/express-handlebars)
- * [Conexion a Firebird](https://www.npmjs.com/package/node-firebird)
- * [Bootstrap - Para el diseño y estilos](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
- * [Bootstrap Icons - Para lso iconos](https://icons.getbootstrap.com)
-
-# Creando una nueva ruta
- Para crear una nueva ruta en la web, es necesario saber si la ruta sera para el **Administrador** o para el **Alumno** colocarse en la carpeta **routes**, y ahi se elige el archivo (**admin.js o alumno.js**), y ahi se definiran sus respectivas rutas. Ejemplo: 
-
- ```js
-    route.get('/nombre-de-la-ruta', (req, res) => res.render('nombre-vista'));
- ```
-
-Donde **/nombre-de-la-ruta** es el nombre de la ruta que desea declarar, ejemplo **/perfil**, de igual forma, puede agregar más paths, ejemplo **/perfil/direccion** o **/perfil/direccion/editar**, a libre elección siguiendo el patron de las vistas.
-
-Ahora, **nombre-vista**, es el nombre del archivo donde esta la vista que se desea mostrar, las vistas se almacenan dentro de la carpeta **src/views/** con la extención **.hbs** en lugar de **.html**
-
-Si el arhcivo esta dentro de una carpeta o más, entonces solo se coloca el nombre de la carpeta seguido del nombre del arhivo, ejemplo:
-
- ```js
-    route.get('/login', (req, res) => res.render('auth/login'));
-    route.get('/perfil', (req, res) => res.render('admin/alumnos/perfil'));
- ```
-
- Donde **/login** es mi ruta declarada y **auth/login** es la ruta donde se encuentra el archivo de la vista.
-
-# Patron de diseño utilizado - MVC (Model - View - Controller)
-
-# Creando nuevo Model
-El modelo se crea en la carpeta **src/models**, el modelo principal es **Firebird.js**, el cual recibe 2 paramtros, que sera, muy importantes, el primero es el *nombre de la tabla* donde se definira el nombre de la tabla a cual se desee apuntar, luego es la *columna primaria* el cual se define la columna de la tabla el cual podria considerarse su **Primary Key**, hay tablas que ya tienen definida su propia clave primaria y ese se utlizaria. Como en el siguinete ejemplo:
-
+#### **Creación de Nuevas Rutas**:
 ```js
-    const { Firebird } from './Firebird.js';
-    const Alumno = new Firebird('alumnos', 'alumno_id');
-    module.exports = Alumno;
+route.get('/ruta-ejemplo', (req, res) => res.render('vista-ejemplo'));
 ```
 
-En caso de que la tabla tenga multiples claves primarias, y no tenga uno deinido como tal, es hablar con el encargado del sistema y utilizar la columna que tendra un registro que NUNCA  se repitira, en ese caso, es podria ser su columna de llave primaria. Como en el siguinete ejemplo:
+- **Estructura**:
+  - `/ruta-ejemplo` es el endpoint.
+  - `vista-ejemplo` es el archivo de la vista (almacenado en `src/views/` con extensión `.hbs`).
 
+---
+
+### **2. Modelos (`src/models/`)**
+- Los modelos utilizan la clase principal `Firebird` para interactuar con la base de datos.
+
+#### **Ejemplo de Modelo**:
 ```js
-    const { Firebird } from './Firebird.js';
-    const Ciclos = new Firebird('ciclos', 'codigo');
-    module.exports = Ciclos;
+const { Firebird } = require('./Firebird.js');
+const Alumno = new Firebird('alumnos', 'alumno_id');
+module.exports = Alumno;
 ```
 
-## Importante
-Luego el archivo se tendra que registrar en el arhcivo **index.js** dentro la misma carpeta.
+- **Parámetros Importantes**:
+  - Primer parámetro: Nombre de la tabla.
+  - Segundo parámetro: Columna de clave primaria (`Primary Key`).
 
-Para saber más sobre la funcionalidad del modelo Firebird, revisar el **FirebirdDoc.md** dentro la carpeta **models**
+#### **Registro en el Archivo Principal (`index.js`)**:
+- Cada nuevo modelo debe importarse y registrarse en `models/index.js`.
 
-# Creando nuevo Controller
+---
 
-# Creando nueva View
+### **3. Controladores (`src/controllers/`)**
+- Los controladores manejan la lógica de negocio y coordinan entre el modelo y la vista.
 
-# Creando nueva Api para las vitas
+#### **Crear un Nuevo Controlador**:
+- Define funciones específicas que interactúen con los modelos y envíen datos a las vistas.
+
+Ejemplo:
+```js
+const Alumno = require('../models/Alumno');
+
+const obtenerAlumnos = async (req, res) => {
+  const alumnos = await Alumno.all();
+  res.render('admin/alumnos', { alumnos });
+};
+
+module.exports = { obtenerAlumnos };
+```
+
+---
+
+### **4. Vistas (`src/views/`)**
+- Las vistas utilizan **Handlebars** (`.hbs`) como motor de plantillas.
+- Las vistas deben respetar una estructura clara y reutilizar componentes mediante parciales (`partials/`).
+
+#### **Ejemplo de Vista**:
+Archivo: `src/views/admin/alumnos.hbs`
+```html
+<h1>Lista de Alumnos</h1>
+<ul>
+  {{#each alumnos}}
+    <li>{{this.nombre}} - {{this.matricula}}</li>
+  {{/each}}
+</ul>
+```
+
+---
+
+### **5. API para Vistas**
+- Crear APIs para alimentar las vistas dinámicamente con datos del servidor.
+
+#### **Ejemplo de API**:
+Archivo: `routes/admin.js`
+```js
+router.get('/api/alumnos', async (req, res) => {
+  const alumnos = await Alumno.all();
+  res.json({ alumnos });
+});
+```
+
+- Desde el cliente, puedes consumir esta API usando `fetch` o cualquier librería como `axios`.
+
+#### **Ejemplo de Consumo en Frontend**:
+```js
+fetch('/api/alumnos')
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data.alumnos);
+  })
+  .catch((error) => console.error('Error:', error));
+```
+
+---
+
+## **Enlaces Útiles**
+- [Express.js - Rutas y Middlewares](http://expressjs.com/es/guide/routing.html)
+- [Handlebars.js - Plantillas](https://handlebarsjs.com/guide/)
+- [Node-Firebird - Conexión a Base de Datos Firebird](https://www.npmjs.com/package/node-firebird)
+- [Bootstrap Icons](https://icons.getbootstrap.com)
+
+---
+
+## **Recomendaciones Finales**
+1. **Mantén la consistencia en la estructura del proyecto**:
+   - Modelos en `src/models/`.
+   - Controladores en `src/controllers/`.
+   - Vistas en `src/views/`.
+
+2. **Uso del Patrón MVC**:
+   - Divide claramente las responsabilidades entre Modelos, Vistas y Controladores para facilitar la mantenibilidad del proyecto.
+
+3. **Documentación del Código**:
+   - Documenta todas las rutas, APIs y funcionalidades críticas para que otros desarrolladores puedan entenderlas fácilmente.

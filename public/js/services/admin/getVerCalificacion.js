@@ -26,7 +26,7 @@ let params = {
 grupoName.innerHTML = `Grupo: ${params.grupo || "No definido"}`;
 asigName.innerHTML = `Asignatura: ${params.nombreAsig || "No definida"}`;
 
-// Función principal
+// Función para actualizar la tabla con los datos de la API
 async function main() {
   console.log("Ejecutando función main...");
   
@@ -39,6 +39,7 @@ async function main() {
   Object.entries(params).forEach(([key, value]) => {
     if (value) urlApi += `${key}=${value}&`;
   });
+
   console.log("URL generada para la API:", urlApi);
 
   try {
@@ -51,43 +52,37 @@ async function main() {
     const { data } = await res.json();
     console.log("Datos recibidos:", data);
 
-    // Construir el contenido de la tabla
+    // Si no hay datos de calificación o calificaciones son "0", "null", o no definidas
     if (!data || data.length === 0) {
-      table.innerHTML = "<tr><td colspan='5'>No hay datos disponibles</td></tr>";
+      // En este caso, los nombres y matrículas pueden estar disponibles
+      const noDataMessage = "<tr><td colspan='5'>No hay Datos:</td></tr>";
+      table.innerHTML = noDataMessage;
     } else {
+      // Construir el contenido de la tabla
       let content = data
         .map((item, index) => {
-          // Filtrar valores nulos o cero
-          const calificacion = (item.CALIFICACION && item.CALIFICACION !== '0') ? item.CALIFICACION : "No disponible";
-          const fecha = item.FECHA || "Fecha no disponible";
-          const nombreCompleto = (item.PATERNO && item.MATERNO && item.NOMBRE) ? `${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}` : "Nombre no disponible";
-          const matricula = (item.MATRICULA && item.MATRICULA !== '0') ? item.MATRICULA : "Matrícula no disponible";
+          // Obtener nombre completo del alumno
+          const nombre = `${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}`;
+          const matricula = item.MATRICULA || "Matrícula no disponible";
 
-          // Si algún dato es nulo o cero, no lo mostramos en la tabla
-          if (!calificacion || !matricula || !nombreCompleto || !fecha) {
-            return ''; // Si algún campo está vacío o es 0, no generar la fila
-          }
+          // Verificar si la calificación es válida, si no mostrar "No disponible"
+          const calificacion = (item.CALIFICACION && item.CALIFICACION !== "0" && item.CALIFICACION !== null) ? item.CALIFICACION : "";
+
+          // Si la calificación es vacía, no mostrarla
+          const calificacionCell = calificacion === "" ? "" : calificacion;
 
           return `
             <tr>
               <td>${index + 1}</td>
-              <td>${nombreCompleto}</td>
+              <td>${nombre}</td>
               <td>${matricula}</td>
-              <td>${calificacion}</td>
-              <td>${fecha}</td>
+              <td>${calificacionCell || ""}</td>
+              <td>${item.FECHA || ""}</td>
             </tr>
           `;
         })
-        .filter(item => item !== '') // Eliminar filas vacías
         .join("");
-
-
-      // Si no hay contenido válido para mostrar, mostrar un mensaje adecuado
-      if (content === "") {
-        table.innerHTML = "<tr><td colspan='5'>No hay datos disponibles con la información actual</td></tr>";
-      } else {
-        table.innerHTML = content;
-      }
+      table.innerHTML = content;
     }
   } catch (error) {
     console.error("Error al cargar los datos:", error);
@@ -98,12 +93,27 @@ async function main() {
   }
 }
 
-// Manejar cambios en el selector
+// Detectar cambios en los parámetros de la URL
+function updateParamsFromURL() {
+  // Actualizar los parámetros con los valores más recientes de la URL
+  params.inicial = searchQuery.get("inicial");
+  params.final = searchQuery.get("final");
+  params.periodo = searchQuery.get("periodo");
+
+  // Mostrar los nuevos valores en el DOM
+  grupoName.innerHTML = `Grupo: ${params.grupo || "No definido"}`;
+  asigName.innerHTML = `Asignatura: ${params.nombreAsig || "No definida"}`;
+
+  // Llamar nuevamente a la función principal para actualizar los datos
+  main();
+}
+
+// Llamar a la función de actualización al cargar la página
+updateParamsFromURL();
+
+// Manejar cambios en el parámetro `idPlan`
 selectEval?.addEventListener("change", ({ target }) => {
   params["idEval"] = target.value;
   console.log("Nuevo idEval seleccionado:", target.value);
   main();
 });
-
-// Llamar a la función principal al cargar la página
-main();

@@ -13,7 +13,7 @@ const admin_items = [
     content: "Ver los grupos existentes y a sus alumnos.",
     link: "/Grupos",
   },
-  
+
   {
     path_img: "./imgs/satisfaccion.png",
     title: "Calificaciones",
@@ -22,7 +22,7 @@ const admin_items = [
   },
 ];
 
-//para futuras generaciones Dashboard atrae todoslos datos de los Alumonos
+//para futuras generaciones Dashboard atrae todos los datos de los Alumonos
 
 const alumno_items = [
   {
@@ -69,6 +69,12 @@ const alumno_items = [
     link: "http://www.utponiente.edu.mx/utp/doctos/CALENDARIO%20ESCOLAR%20UTP%202022-2023_AUTORIZADO_FIRMAS.pdf",
   },
   {
+    path_img: "./imgs/constancias.png",
+    title: "Solicitar Constancias",
+    content: "Solicita algún documento que avale que estudias con nosotros.",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSdNuf2y0l21Qbh1E6fBZaCXgG7t8GRHwYuvsnB7NA6DnMIfDQ/viewform",
+  },
+  {
     path_img: "./imgs/reglas.png",
     title: "Reglamento Escolar",
     content: "Consulta nuestro Reglamento de Ingreso, Permanencia y Egreso de Alumnos de la UTP (RAPEA-UTP) y conoce tus derechos y obligaciones.",
@@ -82,12 +88,7 @@ const alumno_items = [
     content: "Consulta nuestro Aviso de Privacidad, y conoce cómo son tratados tus datos personales.",
     link: "https://controlescolarutp.wixsite.com/utp-yucatan/aviso-de-privacidad",
   },
-  {
-    path_img: "./imgs/constancias.png",
-    title: "Solicitar Constancias",
-    content: "Solicita algún documento que avale que estudias con nosotros.",
-    link: "https://docs.google.com/forms/d/e/1FAIpQLSdNuf2y0l21Qbh1E6fBZaCXgG7t8GRHwYuvsnB7NA6DnMIfDQ/viewform",
-  },
+
 ];
 
 //para futuras generaciones Dashboard atrae todoslos datos de los aspirantes
@@ -118,6 +119,7 @@ const aspirante_items = [
 //para futuras generaciones Dashboard atrae todoslos datos de los maestros
 
 const profe_items = [
+
   //se omite los datos personales de los maestros en el sistema.
 
   // {
@@ -127,12 +129,17 @@ const profe_items = [
   //     "Ingresa y actualiza tus datos personales; de jornada, datos exclusivos de la institución",
   //   link: "/datos",
   // },
-
   {
     path_img: "./imgs/satisfaccion.png",
     title: "Calificaciones",
     content: "Ver o subir calificaciones de grupos.",
     link: "/grupoprofe",
+  },
+  {
+    path_img: "./imgs/calendario.png",
+    title: "Calendario Escolar",
+    content: "Consulta nuestro Calendario Escolar y Actividades Académico-Administrativas, del ciclo 2023-2024.",
+    link: "https://utponiente.edu.mx/utp/doctos/CALENDARIO%20ESCOLAR%20UTP%202023-2024_FIRMADO.pdf",
   },
   {
     path_img: "./imgs/reglas.png",
@@ -148,12 +155,7 @@ const profe_items = [
     content: "Consulta nuestro Aviso de Privacidad, y conoce cómo son tratados tus datos personales.",
     link: "https://controlescolarutp.wixsite.com/utp-yucatan/aviso-de-privacidad",
   },
-  {
-    path_img: "./imgs/calendario.png",
-    title: "Calendario Escolar",
-    content: "Consulta nuestro Calendario Escolar y Actividades Académico-Administrativas, del ciclo 2023-2024.",
-    link: "https://utponiente.edu.mx/utp/doctos/CALENDARIO%20ESCOLAR%20UTP%202023-2024_FIRMADO.pdf",
-  },
+
 ];
 
 module.exports = {

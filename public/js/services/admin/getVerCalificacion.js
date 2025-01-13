@@ -51,7 +51,7 @@ async function main() {
 
     const { data } = await res.json();
     console.log("Datos recibidos:", data);
-
+/////
     // Si no hay datos de calificación o calificaciones son "0", "null", o no definidas
     if (!data || data.length === 0) {
       // En este caso, los nombres y matrículas pueden estar disponibles

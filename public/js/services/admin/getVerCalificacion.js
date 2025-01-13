@@ -41,7 +41,7 @@ async function main() {
   });
 
   console.log("URL generada para la API:", urlApi);
-
+// error
   try {
     // Realizar la solicitud a la API
     const res = await fetch(urlApi);

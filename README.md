@@ -7,11 +7,6 @@ El contenido que compartiste describe de manera clara y detallada el proceso de 
 1. **Instalación de Dependencias**:
    - Ejecuta `npm install` una sola vez para instalar las dependencias del proyecto especificadas en el archivo `package.json`.
 
-2. **Inicio del Servidor**:
-   - Para iniciar el servidor en modo desarrollo, utiliza:  
-     ```bash
-     npm run dev
-     ```
    - Si usas `nodemon` para reinicios automáticos al cambiar los archivos:
      ```bash
      nodemon app.js
@@ -142,3 +137,102 @@ fetch('/api/alumnos')
 
 3. **Documentación del Código**:
    - Documenta todas las rutas, APIs y funcionalidades críticas para que otros desarrolladores puedan entenderlas fácilmente.
+
+### **Instalación de `nodemon` y su Función**
+
+#### **¿Qué es `nodemon`?**
+`nodemon` es una herramienta que ayuda a los desarrolladores de Node.js a reiniciar automáticamente la aplicación del servidor cuando detecta cambios en los archivos del proyecto. Esto elimina la necesidad de detener y reiniciar manualmente el servidor cada vez que realizas modificaciones en el código.
+
+---
+
+### **Instalación de `nodemon`**
+
+1. **Instalar `nodemon` de manera global (recomendado):**
+   - Esto permite usar el comando `nodemon` en cualquier proyecto.
+   ```bash
+   npm install -g nodemon
+   ```
+
+2. **Instalar `nodemon` como dependencia de desarrollo en tu proyecto:**
+   - Si prefieres usarlo solo dentro del proyecto.
+   ```bash
+   npm install --save-dev nodemon
+   ```
+
+---
+
+### **Uso Básico de `nodemon`**
+
+1. **Ejecutar tu aplicación con `nodemon`:**
+   - Reemplaza el comando habitual de `node` con `nodemon` para iniciar tu aplicación.
+   ```bash
+   nodemon app.js
+   ```
+
+2. **Configurar un script en `package.json`:**
+   - Agrega un script para facilitar el uso:
+   ```json
+   "scripts": {
+     "dev": "nodemon app.js"
+   }
+   ```
+   - Luego ejecuta:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+### **Beneficios de `nodemon`**
+
+- **Ahorro de tiempo:** Detecta automáticamente cambios en los archivos y reinicia el servidor.
+- **Configuración sencilla:** No requiere cambios complejos en el proyecto.
+- **Compatibilidad:** Funciona con cualquier aplicación Node.js.
+- **Soporte para configuraciones personalizadas:** Permite especificar extensiones de archivos, ignorar carpetas específicas, entre otros.
+
+---
+
+### **Configuración Opcional de `nodemon`**
+
+Puedes personalizar el comportamiento de `nodemon` creando un archivo de configuración llamado `nodemon.json` en la raíz del proyecto.
+
+Ejemplo de archivo `nodemon.json`:
+```json
+{
+  "watch": ["src", "config"], // Directorios a observar
+  "ext": "js,json,hbs",       // Extensiones de archivos a observar
+  "ignore": ["node_modules"], // Directorios a ignorar
+  "exec": "node app.js"       // Comando para ejecutar la aplicación
+}
+```
+
+---
+
+### **Ejemplo Práctico**
+
+Supongamos que tienes un archivo `app.js` como este:
+```js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('¡Hola, Mundo!');
+});
+
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
+```
+
+1. Inicia el servidor con:
+   ```bash
+   nodemon app.js
+   ```
+
+2. Modifica el archivo `app.js`, por ejemplo, cambia el mensaje a:
+   ```js
+   res.send('¡Hola, Mundo! Actualizado con nodemon');
+   ```
+
+3. Observa cómo `nodemon` reinicia automáticamente el servidor al detectar el cambio.
+
+---

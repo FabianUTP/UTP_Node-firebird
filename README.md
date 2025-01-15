@@ -236,3 +236,6 @@ app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
 3. Observa cómo `nodemon` reinicia automáticamente el servidor al detectar el cambio.
 
 ---
+
+se realizo cambios a la api calificaciones...
+mostrando los datos que tiene los ciclos por el nombre de los alumnos 

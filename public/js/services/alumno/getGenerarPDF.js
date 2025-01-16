@@ -112,7 +112,7 @@ function downloadPDF() {
             successAlertTimeout = setTimeout(removeAlert, 3000); // Elimina la alerta de éxito después de 3 segundos
         })
         .catch(error => {
-            console.log(error);
+            //console.log(error);
             downloadInProgress = false; // Marca la descarga como fallida
             showAlert('Ha ocurrido un error al generar el PDF. Por favor, inténtalo de nuevo.', false); // Muestra una alerta indicando que ocurrió un error durante la generación del PDF
         });

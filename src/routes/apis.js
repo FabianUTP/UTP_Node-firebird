@@ -203,9 +203,7 @@ router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   sql += `grupos.grado, `;
   sql += `alumnos_grupos.codigo_grupo, `;
   sql += `alumnos.matricula, alumnos.paterno, alumnos.materno, alumnos.nombre, `;
-
   sql += `alumnos_kardex.id_plan, alumnos_kardex.claveasignatura, alumnos_kardex.id_eval, alumnos_kardex.calificacion, alumnos_kardex.inicial, alumnos_kardex.final, ALUMNOS_KARDEX.PERIODO, ALUMNOS_KARDEX.NUMEROALUMNO, alumnos_kardex.fecha, `;
-  
   sql += `cfgplanes_mst.nombre_plan, `;
   sql += `cfgplanes_det.nombreasignatura, `;
   sql += `cfgplanes_eval.descripcion AS nombre_eval, `;
@@ -219,12 +217,12 @@ router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   sql += `LEFT JOIN grupos ON alumnos_grupos.codigo_grupo = grupos.codigo_grupo `;
   sql += `AND alumnos_grupos.INICIAL = GRUPOS.INICIAL `;
   sql += `AND alumnos_grupos.FINAL = GRUPOS.FINAL `;
-  
+
   sql += `left join alumnos_kardex on alumnos_grupos.numeroalumno = alumnos_kardex.numeroalumno `;
   sql += `AND alumnos_grupos.INICIAL = alumnos_kardex.INICIAL `;
   sql += `AND alumnos_grupos.FINAL = alumnos_kardex.FINAL `;
   sql += `AND alumnos_grupos.PERIODO = alumnos_kardex.PERIODO `;
-  
+
   sql += `left join cfgplanes_mst on alumnos_kardex.id_plan = cfgplanes_mst.id_plan `;
   sql += `left join cfgplanes_det on alumnos_kardex.claveasignatura = cfgplanes_det.claveasignatura `;
   sql += `AND grupos.grado = cfgplanes_det.grado `;
@@ -240,7 +238,7 @@ router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
 
   sql += `left join profesores on profesores_grupos.claveprofesor = profesores.claveprofesor `;
 
- 
+
 
 
   sql += `WHERE alumnos_grupos.codigo_grupo = '${idGrupo}' `;
@@ -284,7 +282,7 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
     sql += `fecha = '${fecha}', `;
   }
   // Elimina la última coma y espacio adicional
-  sql = sql.slice(0, -2); 
+  sql = sql.slice(0, -2);
   sql += ` WHERE numeroalumno = '${numeroalumno}' `;
   sql += `AND claveasignatura = '${claveasignatura}' `;
   sql += `AND id_eval = '${id_eval}' `;
@@ -307,8 +305,7 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
 
 
 
-///////////////////////////////////Fin de filtro de calificacion por alumno//////////////////////////////////////////////////////////////////////
-
+///////////////////////////////////Fin de filtro de calificacion por filtro//////////////////////////////////////////////////////////////////////
 router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
 
@@ -326,16 +323,20 @@ router.get("/cuatris-navbar", async (req, res) => {
     });
   }
 
+  // Filtrar los ciclos para incluir solo los que tienen los periodos 1, 2 o 3
+  const filteredCiclos = ciclos.filter(ciclo => ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3);
+
   // Obtener el periodo seleccionado en la sesión
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
-  // Enviar los ciclos y el periodo seleccionado en la respuesta
+  // Enviar los ciclos filtrados y el periodo seleccionado en la respuesta
   res.json({
     periodoSelected: periodoSelected?.DESCRIPCION,
-    ciclos,
-    noCiclos: false, // Indicador de que hay ciclos disponibles
+    ciclos: filteredCiclos, // Ciclos ya filtrados
+    noCiclos: filteredCiclos.length === 0, // Indicador si no hay ciclos después de filtrar
   });
 });
+
 
 
 router.put("/update/CuatriXGrupos", async (req, res) => {
@@ -392,6 +393,8 @@ router.get('/ciclosAdmi', async (_req, res) => {
   }
 });
 
+
+//Api Alumnos
 router.get("/alumnos", async (req, res) => {
   const { limit = 15, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
 
@@ -428,6 +431,8 @@ router.get("/alumnos", async (req, res) => {
     alumnos,
   });
 });
+
+
 
 router.get("/carreras", async (req, res) => {
   const { limit, skip, search } = req.query;
@@ -479,7 +484,7 @@ router.get("/doctos/", async (req, res) => {
     doctos,
   });
 });
-
+//Ciclos
 router.get("/calificaciones/asignaturas", async (req, res) => {
   const { idPlan = "", idAsig = "", idEval = "", idGrupo = "" } = req.query;
 
@@ -505,7 +510,7 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
       claveasignatura: [idAsig],
       inicial: [grupo.INICIAL],
       final: [grupo.FINAL],
-      // periodo: [grupo.PERIODO],
+      periodo: [grupo.PERIODO],
     }, { limit: 35 });
 
     res.json({
@@ -525,8 +530,12 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
   }
 });
 
-// Api para consultar calificaciones por grupos
-router.get("/calificaciones", async (req, res) => {
+
+
+//ya esta realizando los cambios por periodo por grupos y alumnos_grupos
+// se realizo el periodo--por inicio-final,por gruppo - por alumnos grupos y por 
+// el tipo de plan y asignatura. permitiendo asi generar las calificaciones con los alumnos que no tengan calificacion y si tengan.
+router.get("/Califi", async (req, res) => {
   const {
     idPlan,
     grupo,
@@ -538,53 +547,70 @@ router.get("/calificaciones", async (req, res) => {
     periodo,
   } = req.query;
 
-  if (!idPlan || !claveAsig) {
+  // Verificación de que los datos principales existen
+  if (!idPlan || !claveAsig || !grupo || !inicial || !final || !periodo) {
     return res.json({
-      error: "Hace faltan datos para la operación"
+      error: "Faltan datos importantes para la operación",
     });
-  };
+  }
 
   try {
-
+    // Verificar si el plan existe
     let plan = await Planes_Mst.findById(idPlan);
 
     if (!plan) {
       return res.json({
-        error: "No existe el plan"
+        error: "No existe el plan",
       });
     }
 
+    // Generación de la consulta SQL con LEFT JOIN para incluir alumnos sin calificaciones
     let sql = `
-      select alumnos.matricula,
+      SELECT 
+        alumnos.matricula,
         alumnos.numeroalumno,
         alumnos.nombre,
         alumnos.paterno,
         alumnos.materno,
-        alumnos_kardex.calificacion,
+        COALESCE(alumnos_kardex.calificacion, '0') AS calificacion,
         alumnos_kardex.fecha,
         alumnos_kardex.id_eval,
         alumnos_kardex.id_plan
+      FROM alumnos
+      LEFT JOIN alumnos_kardex 
+        ON alumnos.numeroalumno = alumnos_kardex.numeroalumno
+        AND alumnos_kardex.id_plan = ?
+        AND alumnos_kardex.claveasignatura = ?
+        AND alumnos_kardex.id_etapa = ?
+        AND alumnos_kardex.id_eval = ?
+        AND alumnos_kardex.inicial = ?
+        AND alumnos_kardex.final = ?
+        AND alumnos_kardex.periodo = ?
+      INNER JOIN alumnos_grupos 
+        ON alumnos.numeroalumno = alumnos_grupos.numeroalumno
+        AND alumnos_grupos.codigo_grupo = ?
+        AND alumnos_grupos.inicial = ?
+        AND alumnos_grupos.final = ?
+        AND alumnos_grupos.periodo = ?
+      ORDER BY alumnos.paterno`;
 
-      from alumnos_kardex
-
-      inner join alumnos on alumnos_kardex.numeroalumno = alumnos.numeroalumno
-      inner join alumnos_grupos on alumnos_kardex.numeroalumno = alumnos_grupos.numeroalumno
-        and alumnos_kardex.inicial = alumnos_grupos.inicial
-        and alumnos_kardex.final = alumnos_grupos.final
-        and alumnos_kardex.periodo = alumnos_grupos.periodo
-
-      where alumnos_kardex.id_plan = '${idPlan}'
-        and alumnos_kardex.claveasignatura = '${claveAsig}'
-        and alumnos_kardex.id_etapa = '${idEtapa}'
-        and alumnos_kardex.id_eval = '${idEval}'
-        and alumnos_kardex.inicial = '${inicial}'
-        and alumnos_kardex.final = '${final}'
-        and alumnos_kardex.periodo = '${periodo}'
-        and alumnos_grupos.codigo_grupo = '${grupo}'
-
-      order by paterno`;
-
-    let data = await Grupos.createQuery({ querySql: sql });
+    // Ejecución de la consulta
+    let data = await Grupos.createQuery({
+      querySql: sql,
+      data: [
+        idPlan,
+        claveAsig,
+        idEtapa,
+        idEval,
+        inicial,
+        final,
+        periodo,
+        grupo,
+        inicial,
+        final,
+        periodo
+      ],
+    });
 
     res.json({
       querys: {
@@ -601,16 +627,62 @@ router.get("/calificaciones", async (req, res) => {
     });
 
   } catch (error) {
+    console.error(error);
     res.json({
-      error: "Algunos datos no coinciden para la consulta",
-      querys: req.query
-    })
+      error: "Ocurrió un error durante la consulta",
+      querys: req.query,
+    });
   }
 });
 
-// Api para subir calificaciones
-router.post("/calificaciones", (req, res) => {
 
+
+//aqui la api de subirCalificaciones y editar 
+
+// // Api para subir calificaciones
+// router.post("/subircalificaciones", (req, res) => {
+
+//   const {
+//     claveAsig,
+//     idEtapa,
+//     idPlan,
+//     idEval,
+//     inicial,
+//     final,
+//     periodo
+//   } = req.query;
+
+//   const dataCalif = req.body;
+//   let promises = [];
+
+//   for (const key in dataCalif) {
+//     let sql = `UPDATE alumnos_kardex SET calificacion = ?
+//       WHERE numeroalumno = ? 
+//         and claveasignatura = '${claveAsig}' 
+//         and id_plan = '${idPlan}'
+//         and id_eval = '${idEval}'
+//         and id_etapa = '${idEtapa}'
+//         and inicial = ${inicial} 
+//         and final = ${final}
+//         and periodo = ${periodo}`;
+
+//     promises.push(AlumKardex.createQuery({
+//       querySql: sql,
+//       data: [dataCalif[key], key],
+//     }));
+//   }
+
+//   Promise.all(promises).then(() => {
+//     res.json({
+//       msj: "Datos actualizados correctamente",
+//     })
+//   })
+// });
+
+
+//cambios errro de formato ----////
+// API para subir calificaciones
+router.post("/calificaciones", async (req, res) => {
   const {
     claveAsig,
     idEtapa,
@@ -622,31 +694,53 @@ router.post("/calificaciones", (req, res) => {
   } = req.query;
 
   const dataCalif = req.body;
-  let promises = [];
 
-  for (const key in dataCalif) {
-    let sql = `UPDATE alumnos_kardex SET calificacion = ?
-      WHERE numeroalumno = ? 
-        and claveasignatura = '${claveAsig}' 
-        and id_plan = '${idPlan}'
-        and id_eval = '${idEval}'
-        and id_etapa = '${idEtapa}'
-        and inicial = ${inicial} 
-        and final = ${final}
-        and periodo = ${periodo}`;
-
-    promises.push(AlumKardex.createQuery({
-      querySql: sql,
-      data: [dataCalif[key], key],
-    }));
+  // Validar si los parámetros de consulta están presentes
+  if (!claveAsig || !idEtapa || !idPlan || !idEval || !inicial || !final || !periodo) {
+    return res.status(400).json({ msj: "Faltan parámetros en la solicitud" });
   }
 
-  Promise.all(promises).then(() => {
+  let promises = [];
+
+  // try {
+    for (const key in dataCalif) {
+      let sql = `
+        UPDATE alumnos_kardex 
+        SET calificacion = ? 
+        WHERE numeroalumno = ? 
+          AND claveasignatura = ? 
+          AND id_plan = ? 
+          AND id_eval = ? 
+          AND id_etapa = ? 
+          AND inicial = ? 
+          AND final = ? 
+          AND periodo = ?
+      `;
+      console.log(dataCalif)
+      // Usar parámetros para evitar inyección SQL
+      promises.push(AlumKardex.createQuery({
+        querySql: sql,
+        data: [dataCalif[key], key, claveAsig, idPlan, idEval, idEtapa, inicial, final, periodo],
+      }));
+    }
+
+    // Esperar a que todas las promesas se resuelvan
+    await Promise.all(promises);
+
     res.json({
       msj: "Datos actualizados correctamente",
-    })
-  })
+    });
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({ msj: "Error al actualizar los datos", error: error.message });
+  // }
 });
+
+
+
+
+
+
 
 router.post("/grupos_add", async (req, res) => {
 
@@ -1158,6 +1252,62 @@ router.post('/GrupAlumnos', async (req, res) => {
     res.status(500).json({ error: 'Error en la consulta de la base de datos' });
   }
 });
+
+// ///Api prueba del Kardex_alumno
+// Endpoint: Consultar datos filtrados por periodos
+router.get("/kardex/periodo", async (req, res) => {
+  try {
+    const { inicio, final } = req.query;
+
+    // Validar parámetros obligatorios
+    if (!inicio || !final) {
+      return res.status(400).json({
+        error: "Los parámetros 'inicio' y 'final' son obligatorios",
+      });
+    }
+
+    // Construir consulta SQL
+    const query = `
+      SELECT 
+        ID_ESCUELA,
+        NUMEROALUMNO,
+        ID_PLAN,
+        ID_ETAPA,
+        ID_TIPOEVAL,
+        CLAVEASIGNATURA,
+        TIPOEXAMEN,
+        ID_EVAL
+      FROM tu_tabla
+      WHERE inicio = ${inicio} AND final = ${final};
+    `;
+
+    // Realizar la consulta a la base de datos
+    const data = await TuModeloDeBaseDeDatos.query(query);
+
+    // Verificar si hay resultados
+    if (!data.length) {
+      return res.status(404).json({
+        message: "No se encontraron datos para el periodo especificado",
+      });
+    }
+
+    // Respuesta con los datos encontrados
+    res.json(data);
+  } catch (error) {
+    console.error("Error al consultar los periodos:", error);
+    res.status(500).json({
+      error: "Ocurrió un error al consultar la base de datos",
+    });
+  }
+});
+
+module.exports = router;
+
+
+
+
+
+
 
 router.post('/AlumnosNivel', async (req, res) => {
   try {

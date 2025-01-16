@@ -14,7 +14,7 @@ const idProfesor = document.getElementById("idprofesor").value;
 // Función para cargar los datos de las asignaciones
 async function getAsignaciones() {
   let url = `/api/asignaciones?page=${page}&search=${search}&idProfesor=${idProfesor}&grupo=${selectedGroup}&asignatura=${selectedAsignatura}`;
-  console.log("Solicitando datos de:", url);
+  //console.log("Solicitando datos de:", url);
 
   try {
     const response = await fetch(url);
@@ -23,7 +23,7 @@ async function getAsignaciones() {
     }
 
     const api = await response.json();
-    console.log("Datos recibidos:", api);
+   // console.log("Datos recibidos:", api);
 
     // Verificar si hay datos
     if (!api.data || api.data.length === 0) {

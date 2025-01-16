@@ -145,7 +145,7 @@
         ///Se hace peticion para alumnos nivel se verifica que ya esta grabado el alumno
         const registro = await fetch("api/AlumnosNivel",settings).then((response) => { 
               return response.json().then((data) =>  {
-                console.log(data);
+                //console.log(data);
                 //se asigna el registro obtenido de la peticion para su evaluacion de los datos(vacio o no)
                 registro_alumno=JSON.stringify(data);
               }).catch((err) => {
@@ -242,14 +242,14 @@
 
         const registro = await fetch("api/AlumnosNivel",settings).then((response) => { 
               return response.json().then((data) =>  {
-                console.log(data);
+               // console.log(data);
                 //se asigna el registro obtenido de la peticion para su evaluacion de los datos(vacio o no)
                 registro_alumno=JSON.stringify(data);
               }).catch((err) => {
-                  console.log(err);
+                  //console.log(err);
               }) 
           });
-          console.log(registro_alumno+finalData);
+          //console.log(registro_alumno+finalData);
 
           if(registro_alumno == ''){
 

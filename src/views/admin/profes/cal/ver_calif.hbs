@@ -1,0 +1,110 @@
+{{!-- <section>
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    {{>btnBack}}
+    
+    <div>
+      <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-success">
+        <i class="bi bi-file-earmark-excel"></i>
+        Descargar
+      </button>
+    </div>
+  </div>
+  
+  <div class="card">
+    <div class="card-body">
+      <div id="datosProfesor" class="card-title">
+        <h1 class="text-center">Calificaciones</h1>
+        <h4><b>Mtro:</b> {{profe.NOMBREPROFESOR}}</h4>
+        <h4 id="asig"> Asignatura: {{profe.NOMBREASIGNATURA}}</h4>
+        <h4 id="grupo"> Grupo: {{profe.GRUPO}}</h4>
+      </div>
+
+      <select id="idPlan" class="form-select">
+        {{#each evals}}
+          <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
+        {{/each}}
+      </select>
+      
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Matricula</th>
+            <th>Calificación</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="table-content"></tbody>
+      </table>
+
+      <!-- Spinner de carga -->
+      <div id="loading" class="text-center d-none">
+        <div class="spinner-border" role="status"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/FileSaver.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="/js/services/profe/exportarExcel.js"></script>
+<script src="/js/services/admin/getVerCalificacion.js"></script>
+
+<script>
+  // Función para cargar y mostrar los datos de la tabla
+  async function cargarDatosCalificaciones() {
+    const table = document.getElementById("table-content");
+    const statusLoading = document.getElementById("loading");
+    
+    // Mostrar el spinner de carga
+    statusLoading.classList.remove("d-none");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const params = {
+      idPlan: urlParams.get("idPlan"),
+      claveAsig: urlParams.get("claveAsig"),
+      nombreAsig: urlParams.get("nombreAsig"),
+      grupo: urlParams.get("grupo"),
+      idEtapa: urlParams.get("idEtapa"),
+      periodo: urlParams.get("periodo"),
+    };
+    
+    let urlApi = "/api/calificaciones?";
+    
+    // Construir URL de API con los parámetros
+    Object.keys(params).forEach(key => {
+      urlApi += `${key}=${params[key]}&`;
+    });
+    
+    const res = await fetch(urlApi);
+    const { data } = await res.json();
+
+    let content = "";
+
+    // Llenar la tabla con los datos
+    data.forEach((item, index) => {
+      content += "<tr>";
+      content += `<td>${index + 1}</td>`;
+      content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
+      content += `<td>${item.MATRICULA}</td>`;
+      content += `<td>${item.CALIFICACION || 'Sin calificación'}</td>`;
+      content += `<td>${item.FECHA || 'Sin fecha'}</td>`;
+      content += "</tr>";
+    });
+
+    // Actualizar la tabla y ocultar el spinner
+    table.innerHTML = content;
+    statusLoading.classList.add("d-none");
+  }
+
+  // Llamada a la función para cargar los datos cuando se cargue la página
+  document.addEventListener("DOMContentLoaded", cargarDatosCalificaciones);
+
+  // Función para manejar la descarga de la tabla como un archivo Excel
+  function descargarTablaExcel() {
+    const table = document.querySelector("table");
+    const wb = XLSX.utils.table_to_book(table);
+    XLSX.writeFile(wb, "calificaciones.xlsx");
+  }
+</script> --}}

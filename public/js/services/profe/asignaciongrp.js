@@ -20,9 +20,9 @@ async function getProfesoresAsig() {
 
   let content = "";
   api.data.forEach((item, index) => {
-    // Si el periodo es 2, no mostrar los datos
-    if (item.PERIODO === 2) {
-      return; // Salir de la iteración sin mostrar nada
+    // Filtrar solo los periodos 1, 2 y 3
+    if (item.PERIODO < 1 || item.PERIODO > 3) {
+      return; // Si el periodo no está entre 1 y 3, se omite el item
     }
 
     // Querys que servirán para la consulta de los alumnos en el grupo

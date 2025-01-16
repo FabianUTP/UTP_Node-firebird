@@ -147,7 +147,7 @@ AuthController.authProfe = async (req = request, res = response) => {
     }
 
     const profe = await ProfeAuth.findById(user);
-    console.log('Resultado de la consulta:', profe);
+    //console.log('Resultado de la consulta:', profe);
 
     if (!profe) {
       req.flash('msj_error', 'Correo o contraseña incorrectos');

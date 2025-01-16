@@ -1,0 +1,50 @@
+<section class="container my-5">
+    <input type="hidden" id="idprofesor" value="{{CLAVEPROFESOR}}" />
+
+    <!-- Botón de regreso -->
+    <div class="mb-4 d-flex justify-content-between align-items-center">
+        {{>btnBack}}
+    </div>
+
+    <!-- Información del Profesor -->
+    <div class="card shadow-lg mb-4 border-0">
+        <div class="card-body">
+            <div class="text-center">
+                <h1 class="text-primary fw-bold mb-3">Asignación de Grupos</h1>
+                <h4 class="text-secondary"><strong>Mtro:</strong> {{NOMBREPROFESOR}}</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buscador (completamente oculto) -->
+    <input type="search" class="form-control d-none" placeholder="Buscar" id="buscar" />
+
+    <!-- Tabla de Asignación de Grupos -->
+    <div class="card shadow-lg mb-4 border-0">
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <!-- Estilo personalizado para el encabezado -->
+                <thead class="text-center" style="background-color: #007bff;">
+                    <tr>
+                        <th class="text-white">#</th>
+                        <th class="text-white">Código</th>
+                        <th class="text-white">Nombre de la Asignatura</th>
+                        <th class="text-white">Grupo</th>
+                        <th class="text-white">Ver Calificaciones</th>
+                    </tr>
+                </thead>
+                <tbody id="table-content" class="text-center">
+                    <!-- Las filas se generarán dinámicamente -->
+                </tbody>
+            </table>
+
+            <!-- Paginación -->
+            <div class="d-flex justify-content-between align-items-center">
+                <button class="btn btn-primary" onclick="onPrev()">&lt;&lt; Anterior</button>
+                <button class="btn btn-primary" onclick="onNext()">Siguiente &gt;&gt;</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/services/profe/asignaciongrp.js"></script>

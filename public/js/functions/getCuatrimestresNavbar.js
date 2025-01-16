@@ -23,7 +23,7 @@ selectCuatri.addEventListener("change", async (e) => {
     }
 
     const result = await response.json();
-    console.log("Resultado de la actualización:", result);
+    //console.log("Resultado de la actualización:", result);
 
     // Recargar la página para reflejar cambios
     location.reload();

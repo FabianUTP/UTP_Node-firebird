@@ -34,7 +34,7 @@ async function main() {
   table.innerHTML = "";
   statusLoading.classList.remove("d-none");
 
-  let urlApi = "/api/calificaciones?";
+  let urlApi = "/api/Califi?";
 
   Object.keys(params).forEach((item) => {
     urlApi += `${item}=${params[item]}&`;
@@ -57,9 +57,10 @@ function writeTable() {
     content += `<td>${index + 1}</td>`;
     content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;
+    // Campo editable para las nuevas calificaciones
     content += `<td><input 
                       name="${item.NUMEROALUMNO}" 
-                      value="${item.CALIFICACION}"
+                      value="${item.CALIFICACION || ''}"
                       size="3"
                       autocomplete="off"
                     >
@@ -153,7 +154,7 @@ formCalif.addEventListener("submit", async (event) => {
 fileExcel.addEventListener("change", () => {
   readXlsxFile(fileExcel.files[0]).then((data = []) => {
     let excelFiltrado = [];
-    let calif_changed = 0;
+    let calif_changed = [];
 
     // Utiliza el excel a partir de la octava columna
     data.forEach((item, index) => {

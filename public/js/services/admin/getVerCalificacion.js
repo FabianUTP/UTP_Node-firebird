@@ -35,13 +35,13 @@ async function main() {
   statusLoading.classList.remove("d-none");
 
   // Construir la URL para la API
-  let urlApi = "/api/calificaciones?";
+  let urlApi = "/api/Califi?";
   Object.entries(params).forEach(([key, value]) => {
     if (value) urlApi += `${key}=${value}&`;
   });
 
-  console.log("URL generada para la API:", urlApi);
-// error
+  //console.log("URL generada para la API:", urlApi);
+
   try {
     // Realizar la solicitud a la API
     const res = await fetch(urlApi);
@@ -50,43 +50,46 @@ async function main() {
     }
 
     const { data } = await res.json();
-    console.log("Datos recibidos:", data);
-/////
+    //console.log("Datos recibidos:", data);
+
     // Si no hay datos de calificación o calificaciones son "0", "null", o no definidas
     if (!data || data.length === 0) {
-      // En este caso, los nombres y matrículas pueden estar disponibles
-      const noDataMessage = "<tr><td colspan='5'>No hay Datos:</td></tr>";
+      // Mostrar mensaje si no hay registros
+      const noDataMessage = `
+        <tr>
+          <td colspan='4'>Actualmente no hay datos registrados para los alumnos.</td>
+        </tr>`;
       table.innerHTML = noDataMessage;
     } else {
       // Construir el contenido de la tabla
       let content = data
         .map((item, index) => {
           // Obtener nombre completo del alumno
-          const nombre = `${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}`;
+          const nombre = `${item.PATERNO || ""} ${item.MATERNO || ""} ${item.NOMBRE || ""}`.trim();
           const matricula = item.MATRICULA || "Matrícula no disponible";
 
-          // Verificar si la calificación es válida, si no mostrar "No disponible"
-          const calificacion = (item.CALIFICACION && item.CALIFICACION !== "0" && item.CALIFICACION !== null) ? item.CALIFICACION : "";
-
-          // Si la calificación es vacía, no mostrarla
-          const calificacionCell = calificacion === "" ? "" : calificacion;
+          // Verificar si la calificación es válida
+          const calificacion = item.CALIFICACION && item.CALIFICACION !== "0" && item.CALIFICACION !== null 
+            ? item.CALIFICACION 
+            : "";
 
           return `
             <tr>
               <td>${index + 1}</td>
               <td>${nombre}</td>
               <td>${matricula}</td>
-              <td>${calificacionCell || ""}</td>
-              <td>${item.FECHA || ""}</td>
-            </tr>
-          `;
+              <td>${calificacion}</td>
+            </tr>`;
         })
         .join("");
       table.innerHTML = content;
     }
   } catch (error) {
     console.error("Error al cargar los datos:", error);
-    table.innerHTML = "<tr><td colspan='5'>Error al cargar los datos</td></tr>";
+    table.innerHTML = `
+      <tr>
+        <td colspan='4'>Error al cargar los datos. Inténtelo de nuevo más tarde.</td>
+      </tr>`;
   } finally {
     // Ocultar indicador de carga
     statusLoading.classList.add("d-none");
@@ -114,6 +117,6 @@ updateParamsFromURL();
 // Manejar cambios en el parámetro `idPlan`
 selectEval?.addEventListener("change", ({ target }) => {
   params["idEval"] = target.value;
-  console.log("Nuevo idEval seleccionado:", target.value);
+  //console.log("Nuevo idEval seleccionado:", target.value);
   main();
 });

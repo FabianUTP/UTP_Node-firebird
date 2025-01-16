@@ -35,7 +35,7 @@ const getCuatrisNavbar = async () => {
   if(periodoSelected) {
     content += `<option disabled selected>${periodoSelected}</option>`;
   }
-  content += "<option value='none'>Todos</option>";
+  content += "<option value='none'>Seleccionar Ciclo</option>";
 
   ciclos.reverse().map(item => {
     content += `<option value="${item.CODIGO_CORTO}">`;

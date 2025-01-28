@@ -284,6 +284,28 @@ Para instalar y configurar Docker en **Windows**, sigue estos pasos:
 
 Sigue los mismos pasos que te di en el mensaje anterior para crear el archivo `Dockerfile` en la raíz de tu proyecto.
 
+# version de nuestro Node.js
+FROM node:16-bullseye
+
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# Copia solo el archivo package.json y package-lock.json para aprovechar el cache de Docker
+COPY package*.json ./
+
+# Instala las dependencias
+RUN npm install
+
+# Copia el resto de los archivos
+COPY . .
+
+# Expón el puerto 3000 (o el que uses)
+EXPOSE 2020
+
+# Comando para iniciar la aplicación
+CMD ["npm", "start"]
+
+
 #### 2. Construir la Imagen Docker
 
 1. Abre **PowerShell** o **Command Prompt** y navega a la raíz del proyecto donde creaste el `Dockerfile`.

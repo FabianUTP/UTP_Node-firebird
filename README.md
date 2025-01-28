@@ -358,3 +358,12 @@ Con esto, ya tendrás Docker configurado y funcionando correctamente en tu entor
 
 
 
+una vez terminado el contenedor y la imagen de doker crear un post=2020 en la terminal de nuestro servidor---->
+
+
+![image](https://github.com/user-attachments/assets/f15a802b-1c63-472c-9e2f-559bf62cd4a3)
+
+
+
+
+

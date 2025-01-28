@@ -1,7 +1,3 @@
-El contenido que compartiste describe de manera clara y detallada el proceso de configuración, desarrollo y extensibilidad de un proyecto basado en Node.js utilizando el patrón de diseño **MVC** (Model-View-Controller). A continuación, proporcionaré un esquema más organizado de la estructura del proyecto, incluyendo pasos clave para cada componente mencionado y consejos para crear nuevas APIs o funcionalidades:
-
----
-
 ## **Pasos para la Configuración Inicial del Proyecto**
 
 1. **Instalación de Dependencias**:

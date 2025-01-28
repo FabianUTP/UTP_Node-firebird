@@ -239,3 +239,100 @@ app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
 
 se realizo cambios a la api calificaciones...
 mostrando los datos que tiene los ciclos por el nombre de los alumnos 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Para instalar y configurar Docker en **Windows**, sigue estos pasos:
+
+### Paso 1: Instalar Docker en Windows
+
+1. **Descargar Docker Desktop**:
+   - Dirígete a la [página oficial de Docker Desktop para Windows](https://www.docker.com/products/docker-desktop).
+   - Haz clic en **Get Docker** para descargar el instalador.
+
+2. **Instalar Docker Desktop**:
+   - Ejecuta el archivo descargado para iniciar el proceso de instalación.
+   - Sigue las instrucciones en pantalla. Durante la instalación, asegúrate de que Docker se integrará con **Windows Subsystem for Linux 2 (WSL 2)**. Docker Desktop requiere WSL 2 para funcionar en Windows 10 y versiones posteriores.
+
+3. **Reiniciar el sistema**:
+   - Una vez completada la instalación, es posible que debas reiniciar tu computadora para finalizar la configuración de Docker.
+
+4. **Verificar la instalación**:
+   - Después de reiniciar, abre la aplicación **Docker Desktop** desde el menú de inicio de Windows.
+   - Docker debería iniciarse y aparecer en la bandeja del sistema. Si todo está correctamente instalado, deberías ver el icono de Docker en la bandeja de tareas y un mensaje indicando que Docker está corriendo.
+
+5. **Comprobar la versión de Docker**:
+   - Abre la terminal de **PowerShell** o **Command Prompt** (cmd) y ejecuta:
+     ```bash
+     docker --version
+     ```
+   - Si Docker está correctamente instalado, deberías ver la versión de Docker que tienes instalada.
+
+### Paso 2: Configurar tu Proyecto con Docker
+
+#### 1. Crear el `Dockerfile`
+
+Sigue los mismos pasos que te di en el mensaje anterior para crear el archivo `Dockerfile` en la raíz de tu proyecto.
+
+#### 2. Construir la Imagen Docker
+
+1. Abre **PowerShell** o **Command Prompt** y navega a la raíz del proyecto donde creaste el `Dockerfile`.
+2. Ejecuta el siguiente comando para construir la imagen Docker:
+
+   ```bash
+   docker build . -t node-api-utp:latest
+   ```
+
+   Este comando construye una imagen llamada `node-api-utp` con la etiqueta `latest`.
+
+#### 3. Ejecutar el Contenedor
+
+Para ejecutar el contenedor en Windows, usa el siguiente comando en la terminal (PowerShell o Command Prompt):
+
+```bash
+docker run --env-file=./.env -p 2020:2020 node-api-utp:latest
+```
+
+- `--env-file=./.env`: Este parámetro carga las variables de entorno desde un archivo `.env` si lo tienes en el proyecto.
+- `-p 2020:2020`: Mapea el puerto 2020 del contenedor al puerto 2020 en tu máquina local.
+
+### Paso 3: Verificar
+
+Una vez que el contenedor esté ejecutándose, puedes verificar que tu API está funcionando correctamente abriendo un navegador y visitando `http://localhost:2020`.
+
+### Paso 4: Detener el Contenedor
+
+Para detener el contenedor en Windows, puedes usar:
+
+```bash
+docker stop <container_id>
+```
+
+Para encontrar el `container_id`, ejecuta:
+
+```bash
+docker ps
+```
+
+Esto te mostrará los contenedores en ejecución, y podrás copiar el ID del contenedor que deseas detener.
+
+### Consideraciones Especiales para Windows
+
+- **WSL 2 (Windows Subsystem for Linux 2)**: Docker en Windows requiere que tengas **WSL 2** habilitado para funcionar correctamente. Si no tienes WSL 2 instalado, el instalador de Docker Desktop te guiará en el proceso de configuración.
+- **Recursos de Docker**: Docker Desktop usa recursos de tu computadora (CPU, RAM). Puedes configurar estos recursos desde la configuración de Docker Desktop (haciendo clic derecho en el icono de Docker en la bandeja del sistema y seleccionando **Settings**). Asegúrate de asignar suficientes recursos a Docker, especialmente si estás ejecutando contenedores grandes.
+
+Con esto, ya tendrás Docker configurado y funcionando correctamente en tu entorno de Windows. ¡Ahora puedes comenzar a trabajar con tu API Node.js en un contenedor Docker!
+
+
+
+

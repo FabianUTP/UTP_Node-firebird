@@ -3,14 +3,15 @@
   <div class="mb-3">
     {{>btnBack}} <!-- Botón de regreso -->
   </div>
+
   <div class="container">
-    <div class="text-center">
-      <h1>Asignación de grupos</h1>
-      <h4> Mtro. {{NOMBREPROFESOR}}</h4>
+    <div class="text-center mb-4">
+      <h1 class="h4">Asignación de grupos</h1>
+      <h5>Mtro. {{NOMBREPROFESOR}}</h5>
     </div>
-    
-    <!-- Campo de búsqueda oculto en dispositivos móviles -->
-    <div class="input-group mb-3 d-none d-md-flex">
+
+    <!-- Campo de búsqueda -->
+    <div class="input-group mb-3 d-none d-md-flex justify-content-center">
       <span class="input-group-text">
         <i class="bi bi-search"></i>
       </span>
@@ -18,8 +19,8 @@
     </div>
 
     <!-- Tabla responsiva -->
-    <div class="table-responsive">
-      <table class="table table-hover">
+    <div class="table-container mb-4">
+      <table class="table table-hover table-sm">
         <thead>
           <tr>
             <th>#</th>
@@ -34,9 +35,9 @@
     </div>
 
     <!-- Botones de paginación -->
-    <div class="d-flex justify-content-between mb-3 d-none d-md-flex">
-      <button class="btn btn-primary btn-sm" onclick="onPrev()">◀ Anterior</button>
-      <button class="btn btn-primary btn-sm" onclick="onNext()">Siguiente ▶</button>
+    <div class="button-container mb-4">
+      <button class="btn btn-primary btn-sm" onclick="onPrev()">◀</button>
+      <button class="btn btn-primary btn-sm" onclick="onNext()">▶</button>
     </div>
   </div>
 </section>
@@ -44,52 +45,92 @@
 <script src="/js/services/profe/asignaciongrp.js"></script>
 
 <style>
-  /* Hacer que los botones se adapten al ancho en móviles */
+  /* Contenedor de los botones */
   .button-container {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin: 20px 0;
+    justify-content: center; /* Centra los botones */
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 20px;
   }
 
-  /* Asegurar que los botones se vean bien */
+  /* Estilo de los botones */
   .btn {
-    padding: 8px 15px;
+    padding: 8px 16px;
     font-size: 14px;
+    border-radius: 0; /* Botones cuadrados */
+    background-color: #911820;
+    color: white;
+    border: none;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+
+  /* Efecto hover para los botones */
+  .btn:hover {
+    background-color: #911820;
+    transform: scale(1.05);
   }
 
   /* Ajustes de la tabla */
-  .table-responsive {
+  .table-container {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
   }
 
-  /* Hacer la tabla más compacta en pantallas pequeñas */
   table {
     width: 100%;
     font-size: 12px;
+    border-collapse: collapse; /* Bordes limpios */
   }
 
-  /* Media queries para móviles */
+  table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Bordes suaves */
+  }
+
+  table th {
+    background-color: #f8f9fa; /* Fondo claro para los encabezados */
+    font-weight: bold;
+  }
+
+  /* Ajustes de la búsqueda */
+  .input-group {
+    width: 100%;
+    max-width: 500px; /* Ancho máximo para el campo de búsqueda */
+    margin: 0 auto; /* Centrar el campo de búsqueda */
+  }
+
+  .input-group-text {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+  }
+
+  .form-control {
+    border: 1px solid #ddd;
+    border-radius: 0; /* Cuadrado */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estilos para pantallas pequeñas */
   @media (max-width: 768px) {
-    /* Ocultar el campo de búsqueda en móviles */
-    .d-none {
-      display: none !important;
+    .input-group {
+      width: 100%;
     }
 
-    /* Asegurar que los botones de paginación se ajusten bien */
-    .d-flex {
+    .btn {
+      width: 100%; /* Los botones ocupan todo el ancho en dispositivos móviles */
+      padding: 10px 0;
+      font-size: 16px;
+    }
+
+    .button-container {
       flex-direction: column;
     }
 
+    /* Ajuste en el tamaño de la tabla */
     .table th, .table td {
       font-size: 10px;
-      padding: 8px;
-    }
-
-    /* Hacer la tabla más legible en pantallas pequeñas */
-    .table-container {
-      overflow-x: auto;
+      padding: 6px;
     }
   }
 </style>

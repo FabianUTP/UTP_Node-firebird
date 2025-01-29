@@ -41,8 +41,8 @@ async function getProfesoresAsig() {
     content += `<td>${item.NOMBREASIGNATURA}</td>`;
     content += `<td>${item.CODIGO_GRUPO}</td>`;
     content += `<td><div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-      Ver más
+      <a class="btn btn-custom dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-three-dots"></i> Opciones
     </a>
 
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -52,7 +52,7 @@ async function getProfesoresAsig() {
           class="dropdown-item" 
           href="/grupoprofe/${item.CLAVEPROFESOR}/ver_calif?${query}"
         >
-          Ver calificaciones
+          <i class="bi bi-eye"></i> Ver calificaciones
         </a>
       </li>
 
@@ -61,7 +61,7 @@ async function getProfesoresAsig() {
           class="dropdown-item" 
           href="/grupoprofe/${item.CLAVEPROFESOR}/subir_calif?${query}"
         >
-          Subir Calificaciones
+          <i class="bi bi-upload"></i> Subir Calificaciones
         </a>
       </li>
      

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,8 @@
     "body-parser": "^1.20.2",
     "bootstrap": "^5.3.1",
     "connect-flash": "^0.1.1",
-    "dotenv": "^16.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "ex": "^0.1.4",
     "exceljs": "^4.3.0",
     "express": "^4.18.2",

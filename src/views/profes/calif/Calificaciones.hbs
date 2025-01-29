@@ -1,153 +1,124 @@
-<section>
-    <div class="mb-3 d-flex justify-content-between align-items-center">
-        {{>btnBack}}
+<section class="container">
+  <!-- Sección de cabecera y botones -->
+  <div class="mb-3 d-flex justify-content-between align-items-center flex-wrap">
+    {{>btnBack}} <!-- Botón de regreso -->
 
-        <div>
-            <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-success">
-                <i class="bi bi-file-earmark-excel"></i>
-                Descargar
-            </button>
-        </div>
-    </div>
+    <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-success btn-sm">
+      <i class="bi bi-file-earmark-excel"></i> Descargar
+    </button>
+  </div>
 
-    <!-- Información del Profesor -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <h1 class="text-center text-primary fw-bold mb-4">Calificaciones</h1>
-            <h4 id="datosProfesor">Nombre del Profesor</h4>
-            <h4 id="asig">Asignatura</h4>
-            <h4 id="grupo">Grupo</h4>
-        </div>
-    </div>
+  <!-- Título y datos del profesor -->
+  <div id="datosProfesor" class="text-center">
+    <h1 class="h4">Calificaciones</h1>
+    <h5><b>Mtro:</b> {{profe.NOMBREPROFESOR}}</h5>
+    <h6 id="asig">Asignatura</h6>
+    <h6 id="grupo">Grupo</h6>
+  </div>
 
+  <!-- Selector de evaluación -->
+  <div class="mb-3">
+    <label for="idPlan" class="form-label">Seleccionar evaluación:</label>
+    <select id="idPlan" class="form-select form-select-sm">
+      {{#each evals}}
+        <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
+      {{/each}}
+    </select>
+  </div>
 
-    <!-- Selección de Plan de Evaluación -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <label for="idPlan" class="form-label text-primary fw-bold">
-                <strong>Seleccione un Plan de Evaluación:</strong>
-            </label>
-            <select id="idPlan" class="form-select border-primary shadow-sm">
-                {{#each evals}}
-                <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
-                {{/each}}
-            </select>
-        </div>
-    </div>
+  <!-- Tabla sin scroll lateral en móviles -->
+  <table class="table text-center">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Matrícula</th>
+        <th>Calificación</th>
+      </tr>
+    </thead>
+    <tbody id="table-content"></tbody>
+  </table>
 
-    <!-- Tabla de Calificaciones -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead class="table-dark text-center">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Matrícula</th>
-                            <th scope="col">Calificación</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-content" class="text-center">
-                        <!-- Filas dinámicas -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Spinner de Carga -->
-    <div id="loading" class="text-center my-4">
-        <div class="spinner-border text-primary" role="status"></div>
-        <p class="mt-3 text-secondary">Cargando datos, por favor espere...</p>
-    </div>
+  <!-- Spinner de carga -->
+  <div id="loading" class="text-center d-none">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
 </section>
 
-
-
-
-
-
-
-
-
-{{!-- diseños --}}
-
-<style>
-    .card {
-        border-radius: 15px;
-        border: 1px solid #ddd;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-    }
-
-    .card-header {
-        background-color: #f7f7f7;
-        padding: 20px;
-        border-bottom: 1px solid #ddd;
-        text-align: center;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-    }
-
-    .btn-success {
-        background-color: #28a745;
-        border-color: #28a745;
-    }
-
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
-
-    .input-group input {
-        border-radius: 10px 0 0 10px;
-        border: 1px solid #ddd;
-    }
-
-    .input-group button {
-        border-radius: 0 10px 10px 0;
-        border: 1px solid #ddd;
-    }
-
-    .table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    .table th,
-    .table td {
-        text-align: center;
-        padding: 12px;
-        border: 1px solid #ddd;
-    }
-
-    .table th {
-        background-color: #007bff;
-        color: white;
-    }
-
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f9f9f9;
-    }
-</style>
-
-
-<!-- Scripts -->
+<!-- Scripts para la exportación y carga de datos -->
 <script src="/js/FileSaver.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="/js/services/profe/exportarExcel.js"></script>
 <script src="/js/services/admin/getVerCalificacion.js"></script>
+
+<style>
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  padding: 10px;
+  margin: 0;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 100%;
+  padding: 10px;
+}
+
+/* Títulos */
+h1, h5, h6 {
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Selector de evaluación */
+.form-select {
+  font-size: 14px;
+  padding: 6px;
+}
+
+/* Ajustes de la tabla para ocupar toda la pantalla */
+.table {
+  font-size: 14px;
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+/* Ajustes en móviles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 18px;
+  }
+  
+  h5, h6 {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+}
+
+/* Spinner de carga */
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Estilo de los botones */
+.btn {
+  border-radius: 8px;
+}
+</style>

@@ -129,8 +129,6 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   }
 });
 
-
-
 //////////////////////////Filtro para calificacion por alumno/////////////////////////////////////////////////////////////////
 
 router.get("/gruposCalifi", async (req, res) => {
@@ -301,10 +299,6 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   }
 });
 
-
-
-
-
 ///////////////////////////////////Fin de filtro de calificacion por filtro//////////////////////////////////////////////////////////////////////
 router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
@@ -336,8 +330,6 @@ router.get("/cuatris-navbar", async (req, res) => {
     noCiclos: filteredCiclos.length === 0, // Indicador si no hay ciclos después de filtrar
   });
 });
-
-
 
 router.put("/update/CuatriXGrupos", async (req, res) => {
   const { periodo } = req.body;
@@ -393,7 +385,6 @@ router.get('/ciclosAdmi', async (_req, res) => {
   }
 });
 
-
 //Api Alumnos
 router.get("/alumnos", async (req, res) => {
   const { limit = 15, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
@@ -431,8 +422,6 @@ router.get("/alumnos", async (req, res) => {
     alumnos,
   });
 });
-
-
 
 router.get("/carreras", async (req, res) => {
   const { limit, skip, search } = req.query;
@@ -530,18 +519,14 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
   }
 });
 
-
-
-//ya esta realizando los cambios por periodo por grupos y alumnos_grupos
-// se realizo el periodo--por inicio-final,por gruppo - por alumnos grupos y por 
-// el tipo de plan y asignatura. permitiendo asi generar las calificaciones con los alumnos que no tengan calificacion y si tengan.
-router.get("/Califi", async (req, res) => {
+router.get("/calificaciones", async (req, res) => {
   const {
     idPlan,
+    numeroalumno,
     grupo,
     claveAsig,
     idEtapa,
-    idEval = "A",
+    idEval = "A", // Valor predeterminado
     inicial,
     final,
     periodo,
@@ -550,82 +535,100 @@ router.get("/Califi", async (req, res) => {
   // Verificación de que los datos principales existen
   if (!idPlan || !claveAsig || !grupo || !inicial || !final || !periodo) {
     return res.json({
-      error: "Faltan datos importantes para la operación",
+      error: "Faltan datos importantes para la operación. Verifique que el plan, grupo, clave de asignatura, etapa, y periodo estén definidos.",
     });
   }
 
   try {
     // Verificar si el plan existe
     let plan = await Planes_Mst.findById(idPlan);
-
     if (!plan) {
       return res.json({
         error: "No existe el plan",
       });
     }
 
-    // Generación de la consulta SQL con LEFT JOIN para incluir alumnos sin calificaciones
+    console.log("Query Parameters Received:", req.query);
+
+    // Consulta SQL optimizada para asignatura, grupo y alumnos
     let sql = `
-      SELECT 
-        alumnos.matricula,
-        alumnos.numeroalumno,
-        alumnos.nombre,
-        alumnos.paterno,
-        alumnos.materno,
-        COALESCE(alumnos_kardex.calificacion, '0') AS calificacion,
-        alumnos_kardex.fecha,
-        alumnos_kardex.id_eval,
-        alumnos_kardex.id_plan
-      FROM alumnos
-      LEFT JOIN alumnos_kardex 
-        ON alumnos.numeroalumno = alumnos_kardex.numeroalumno
-        AND alumnos_kardex.id_plan = ?
-        AND alumnos_kardex.claveasignatura = ?
-        AND alumnos_kardex.id_etapa = ?
-        AND alumnos_kardex.id_eval = ?
-        AND alumnos_kardex.inicial = ?
-        AND alumnos_kardex.final = ?
-        AND alumnos_kardex.periodo = ?
-      INNER JOIN alumnos_grupos 
-        ON alumnos.numeroalumno = alumnos_grupos.numeroalumno
-        AND alumnos_grupos.codigo_grupo = ?
-        AND alumnos_grupos.inicial = ?
-        AND alumnos_grupos.final = ?
-        AND alumnos_grupos.periodo = ?
-      ORDER BY alumnos.paterno`;
+    SELECT 
+      alumnos.matricula,
+      alumnos.numeroalumno,
+      alumnos.nombre,
+      alumnos.paterno,
+      alumnos.materno,
+      COALESCE(alumnos_kardex.calificacion, '0') AS calificacion,
+      alumnos_kardex.fecha,
+      alumnos_kardex.id_eval,
+      alumnos_kardex.id_plan
+    FROM alumnos
+    LEFT JOIN alumnos_kardex 
+      ON alumnos.numeroalumno = alumnos_kardex.numeroalumno
+      AND alumnos_kardex.id_plan = ?
+      AND alumnos_kardex.claveasignatura = ?
+      AND alumnos_kardex.id_etapa = ?
+      AND alumnos_kardex.id_eval = ?
+      AND alumnos_kardex.inicial = ?
+      AND alumnos_kardex.final = ?
+      AND alumnos_kardex.periodo = ?
+    INNER JOIN alumnos_grupos 
+      ON alumnos.numeroalumno = alumnos_grupos.numeroalumno
+      AND alumnos_grupos.codigo_grupo = ?
+      AND alumnos_grupos.inicial = ?
+      AND alumnos_grupos.final = ?
+      AND alumnos_grupos.periodo = ?
+    ORDER BY alumnos.paterno;
+  `;
+  
+  let data = await Grupos.createQuery({
+    querySql: sql,
+    data: [
+      idPlan,
+      claveAsig,
+      idEtapa,
+      idEval,
+      inicial,
+      final,
+      periodo,
+      grupo,
+      inicial,
+      final,
+      periodo,
+    ],
+  });
+  
 
-    // Ejecución de la consulta
-    let data = await Grupos.createQuery({
-      querySql: sql,
-      data: [
-        idPlan,
-        claveAsig,
-        idEtapa,
-        idEval,
-        inicial,
-        final,
-        periodo,
-        grupo,
-        inicial,
-        final,
-        periodo
-      ],
-    });
+    // Filtrar datos para asegurar que las calificaciones no sean "0" o valores nulos
+    data = data.filter((item) => item.calificacion !== "0" && item.calificacion !== null);
 
+    // Si no hay datos con calificación válida, obtener solo nombre y matrícula
+    if (data.length === 0) {
+      data = await Grupos.createQuery({
+        querySql: sql.replace("AND alumnos_kardex.calificacion != '0'", ""),
+        data: [
+          idPlan,
+          claveAsig,
+          idEtapa,
+          idEval,
+          inicial,
+          final,
+          periodo,
+          grupo,
+          inicial,
+          final,
+          periodo,
+        ],
+      });
+    }
+
+    // Responder con los datos de la asignatura, grupo y alumnos
     res.json({
-      querys: {
-        idPlan,
-        grupo,
-        claveAsig,
-        idEtapa,
-        idEval,
-        inicial,
-        final,
-        periodo,
-      },
-      data,
+      querys: req.query,
+      data, // Responder con los datos filtrados
     });
 
+    console.log("Datos recibidos de la API:", data);
   } catch (error) {
     console.error(error);
     res.json({
@@ -636,52 +639,6 @@ router.get("/Califi", async (req, res) => {
 });
 
 
-
-//aqui la api de subirCalificaciones y editar 
-
-// // Api para subir calificaciones
-// router.post("/subircalificaciones", (req, res) => {
-
-//   const {
-//     claveAsig,
-//     idEtapa,
-//     idPlan,
-//     idEval,
-//     inicial,
-//     final,
-//     periodo
-//   } = req.query;
-
-//   const dataCalif = req.body;
-//   let promises = [];
-
-//   for (const key in dataCalif) {
-//     let sql = `UPDATE alumnos_kardex SET calificacion = ?
-//       WHERE numeroalumno = ? 
-//         and claveasignatura = '${claveAsig}' 
-//         and id_plan = '${idPlan}'
-//         and id_eval = '${idEval}'
-//         and id_etapa = '${idEtapa}'
-//         and inicial = ${inicial} 
-//         and final = ${final}
-//         and periodo = ${periodo}`;
-
-//     promises.push(AlumKardex.createQuery({
-//       querySql: sql,
-//       data: [dataCalif[key], key],
-//     }));
-//   }
-
-//   Promise.all(promises).then(() => {
-//     res.json({
-//       msj: "Datos actualizados correctamente",
-//     })
-//   })
-// });
-
-
-//cambios errro de formato ----////
-// API para subir calificaciones
 router.post("/calificaciones", async (req, res) => {
   const {
     claveAsig,
@@ -694,53 +651,39 @@ router.post("/calificaciones", async (req, res) => {
   } = req.query;
 
   const dataCalif = req.body;
-
-  // Validar si los parámetros de consulta están presentes
-  if (!claveAsig || !idEtapa || !idPlan || !idEval || !inicial || !final || !periodo) {
-    return res.status(400).json({ msj: "Faltan parámetros en la solicitud" });
-  }
-
   let promises = [];
 
-  // try {
+  try {
     for (const key in dataCalif) {
-      let sql = `
-        UPDATE alumnos_kardex 
-        SET calificacion = ? 
+      let sql = `UPDATE alumnos_kardex SET calificacion = ? 
         WHERE numeroalumno = ? 
-          AND claveasignatura = ? 
-          AND id_plan = ? 
-          AND id_eval = ? 
-          AND id_etapa = ? 
-          AND inicial = ? 
-          AND final = ? 
-          AND periodo = ?
-      `;
-      console.log(dataCalif)
-      // Usar parámetros para evitar inyección SQL
+        AND claveasignatura = ? 
+        AND id_plan = ? 
+        AND id_eval = ? 
+        AND id_etapa = ? 
+        AND inicial = ? 
+        AND final = ? 
+        AND periodo = ?`;
+
       promises.push(AlumKardex.createQuery({
         querySql: sql,
         data: [dataCalif[key], key, claveAsig, idPlan, idEval, idEtapa, inicial, final, periodo],
       }));
     }
 
-    // Esperar a que todas las promesas se resuelvan
+    // Esperamos que todas las promesas se resuelvan
     await Promise.all(promises);
 
     res.json({
       msj: "Datos actualizados correctamente",
     });
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ msj: "Error al actualizar los datos", error: error.message });
-  // }
+  } catch (error) {
+    console.error("Error al actualizar las calificaciones:", error);
+    res.status(500).json({
+      error: "Ocurrió un error al actualizar las calificaciones",
+    });
+  }
 });
-
-
-
-
-
-
 
 router.post("/grupos_add", async (req, res) => {
 
@@ -1045,7 +988,6 @@ router.get('/empresas/:id_empresa', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener la empresa' });
   }
 });
-
 // Agregar una nueva empresa
 router.post('/empresas', async (req, res) => {
   const nuevaEmpresa = req.body; // Obtener los datos del cuerpo de la solicitud
@@ -1127,8 +1069,6 @@ router.post('/empresas', async (req, res) => {
     res.status(500).json({ error: 'Error al crear la empresa' });
   }
 });
-
-
 // Obtener todos los empleados
 router.get('/empleados', async (req, res) => {
   try {
@@ -1138,7 +1078,6 @@ router.get('/empleados', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los empleados' });
   }
 });
-
 // Obtener un empleado por su NUMEMPLEADO
 router.get('/empleados/:numEmpleado', async (req, res) => {
   const numEmpleado = req.params.numEmpleado;
@@ -1302,12 +1241,6 @@ router.get("/kardex/periodo", async (req, res) => {
 });
 
 module.exports = router;
-
-
-
-
-
-
 
 router.post('/AlumnosNivel', async (req, res) => {
   try {

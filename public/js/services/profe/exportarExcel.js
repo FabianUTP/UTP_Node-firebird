@@ -35,9 +35,6 @@ function descargarTablaExcel() {
       [`Asignatura: ${asignatura}`],
       [`Grupo: ${grupo}`],
       [],
-      [],
-      [],
-      [],
       ["#", "Nombre", "Matrícula", "Calificación"], // Encabezados
       ...data // Los datos de la tabla
     ];
@@ -45,47 +42,52 @@ function descargarTablaExcel() {
     // Convertir los datos a una hoja de trabajo
     const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-    // Estilo para los encabezados (color, fuente, etc.)
-    const headerStyle = {
-      font: { bold: true, color: { rgb: "FFFFFF" }, sz: 12 },  // Texto en negrita, color blanco, tamaño 12
-      fill: { fgColor: { rgb: "007bff" } },  // Color de fondo azul (similar al de la página)
-      alignment: { horizontal: "center", vertical: "center" },
-      border: {
-        top: { style: "thin", color: { rgb: "000000" } },
-        right: { style: "thin", color: { rgb: "000000" } },
-        bottom: { style: "thin", color: { rgb: "000000" } },
-        left: { style: "thin", color: { rgb: "000000" } }
-      }
-    };
+    // Aplicar estilos personalizados
+    ws["!cols"] = [
+      { wch: 5 },  // Ancho de la columna #
+      { wch: 30 }, // Ancho de la columna Nombre
+      { wch: 15 }, // Ancho de la columna Matrícula
+      { wch: 15 }  // Ancho de la columna Calificación
+    ];
 
-    // Estilo para las celdas de datos
-    const rowStyle = {
-      alignment: { horizontal: "center" },  // Alineación del texto
-      border: {
-        top: { style: "thin", color: { rgb: "000000" } },
-        right: { style: "thin", color: { rgb: "000000" } },
-        bottom: { style: "thin", color: { rgb: "000000" } },
-        left: { style: "thin", color: { rgb: "000000" } }
-      }
-    };
+    const range = XLSX.utils.decode_range(ws["!ref"]);
+    for (let row = range.s.r; row <= range.e.r; row++) {
+      for (let col = range.s.c; col <= range.e.c; col++) {
+        const cellRef = XLSX.utils.encode_cell({ r: row, c: col });
+        const cell = ws[cellRef];
 
-    // Aplicar estilo a los encabezados
-    for (let i = 0; i < 4; i++) {
-      ws["A" + (8 + i)].s = headerStyle;
-      ws["B" + (8 + i)].s = headerStyle;
-      ws["C" + (8 + i)].s = headerStyle;
-      ws["D" + (8 + i)].s = headerStyle;
+        if (row === 4) {
+          // Aplicar estilos a los encabezados
+          if (cell) {
+            cell.s = {
+              font: { bold: true, color: { rgb: "FFFFFF" }, sz: 12 }, // Texto en negrita, blanco
+              fill: { fgColor: { rgb: "007BFF" } }, // Fondo azul
+              alignment: { horizontal: "center", vertical: "center" },
+              border: {
+                top: { style: "thin", color: { rgb: "000000" } },
+                right: { style: "thin", color: { rgb: "000000" } },
+                bottom: { style: "thin", color: { rgb: "000000" } },
+                left: { style: "thin", color: { rgb: "000000" } }
+              }
+            };
+          }
+        } else if (row > 4) {
+          // Aplicar estilos a las filas de datos
+          if (cell) {
+            cell.s = {
+              font: { sz: 11, color: { rgb: "000000" } },
+              alignment: { horizontal: "center", vertical: "center" },
+              border: {
+                top: { style: "thin", color: { rgb: "CCCCCC" } },
+                right: { style: "thin", color: { rgb: "CCCCCC" } },
+                bottom: { style: "thin", color: { rgb: "CCCCCC" } },
+                left: { style: "thin", color: { rgb: "CCCCCC" } }
+              }
+            };
+          }
+        }
+      }
     }
-
-    // Aplicar estilo a las filas de datos
-    let rowIndex = 9;  // Iniciar después de los encabezados
-    data.forEach(row => {
-      row.forEach((cell, i) => {
-        let cellRef = XLSX.utils.encode_cell({ r: rowIndex, c: i });
-        ws[cellRef] = { v: cell, s: rowStyle };
-      });
-      rowIndex++;
-    });
 
     // Agregar la hoja al libro
     XLSX.utils.book_append_sheet(wb, ws, "Calificaciones");

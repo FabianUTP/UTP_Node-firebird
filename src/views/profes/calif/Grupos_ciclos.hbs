@@ -1,50 +1,95 @@
-<section class="container my-5">
-    <input type="hidden" id="idprofesor" value="{{CLAVEPROFESOR}}" />
-
-    <!-- Botón de regreso -->
-    <div class="mb-4 d-flex justify-content-between align-items-center">
-        {{>btnBack}}
+<section>
+  <input type="hidden" id="idprofesor" value="{{CLAVEPROFESOR}}" />
+  <div class="mb-3">
+    {{>btnBack}} <!-- Botón de regreso -->
+  </div>
+  <div class="container">
+    <div class="text-center">
+      <h1>Asignación de grupos</h1>
+      <h4> Mtro. {{NOMBREPROFESOR}}</h4>
+    </div>
+    
+    <!-- Campo de búsqueda oculto en dispositivos móviles -->
+    <div class="input-group mb-3 d-none d-md-flex">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+      <input type="search" class="form-control" placeholder="Buscar" id="buscar" />
     </div>
 
-    <!-- Información del Profesor -->
-    <div class="card shadow-lg mb-4 border-0">
-        <div class="card-body">
-            <div class="text-center">
-                <h1 class="text-primary fw-bold mb-3">Asignación de Grupos</h1>
-                <h4 class="text-secondary"><strong>Mtro:</strong> {{NOMBREPROFESOR}}</h4>
-            </div>
-        </div>
+    <!-- Tabla responsiva -->
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre Código</th>
+            <th>Nombre de la asignatura</th>
+            <th>Grupo</th>
+            <th>Ver Más</th>
+          </tr>
+        </thead>
+        <tbody id="table-content"></tbody>
+      </table>
     </div>
 
-    <!-- Buscador (completamente oculto) -->
-    <input type="search" class="form-control d-none" placeholder="Buscar" id="buscar" />
-
-    <!-- Tabla de Asignación de Grupos -->
-    <div class="card shadow-lg mb-4 border-0">
-        <div class="card-body">
-            <table class="table table-bordered table-hover">
-                <!-- Estilo personalizado para el encabezado -->
-                <thead class="text-center" style="background-color: #007bff;">
-                    <tr>
-                        <th class="text-white">#</th>
-                        <th class="text-white">Código</th>
-                        <th class="text-white">Nombre de la Asignatura</th>
-                        <th class="text-white">Grupo</th>
-                        <th class="text-white">Ver Calificaciones</th>
-                    </tr>
-                </thead>
-                <tbody id="table-content" class="text-center">
-                    <!-- Las filas se generarán dinámicamente -->
-                </tbody>
-            </table>
-
-            <!-- Paginación -->
-            <div class="d-flex justify-content-between align-items-center">
-                <button class="btn btn-primary" onclick="onPrev()">&lt;&lt; Anterior</button>
-                <button class="btn btn-primary" onclick="onNext()">Siguiente &gt;&gt;</button>
-            </div>
-        </div>
+    <!-- Botones de paginación -->
+    <div class="d-flex justify-content-between mb-3 d-none d-md-flex">
+      <button class="btn btn-primary btn-sm" onclick="onPrev()">◀ Anterior</button>
+      <button class="btn btn-primary btn-sm" onclick="onNext()">Siguiente ▶</button>
     </div>
+  </div>
 </section>
 
 <script src="/js/services/profe/asignaciongrp.js"></script>
+
+<style>
+  /* Hacer que los botones se adapten al ancho en móviles */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  /* Asegurar que los botones se vean bien */
+  .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  /* Ajustes de la tabla */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hacer la tabla más compacta en pantallas pequeñas */
+  table {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  /* Media queries para móviles */
+  @media (max-width: 768px) {
+    /* Ocultar el campo de búsqueda en móviles */
+    .d-none {
+      display: none !important;
+    }
+
+    /* Asegurar que los botones de paginación se ajusten bien */
+    .d-flex {
+      flex-direction: column;
+    }
+
+    .table th, .table td {
+      font-size: 10px;
+      padding: 8px;
+    }
+
+    /* Hacer la tabla más legible en pantallas pequeñas */
+    .table-container {
+      overflow-x: auto;
+    }
+  }
+</style>

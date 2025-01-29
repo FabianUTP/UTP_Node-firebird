@@ -304,9 +304,7 @@ router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
 
   // Obtener los ciclos (limitados por parámetro 'limit')
-  const ciclos = await Ciclos.all({
-    limit,
-  });
+  let ciclos = await Ciclos.all({ limit });
 
   // Si no hay ciclos disponibles, enviamos una respuesta vacía o un indicador
   if (!ciclos || ciclos.length === 0) {
@@ -317,17 +315,35 @@ router.get("/cuatris-navbar", async (req, res) => {
     });
   }
 
-  // Filtrar los ciclos para incluir solo los que tienen los periodos 1, 2 o 3
-  const filteredCiclos = ciclos.filter(ciclo => ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3);
+  // Filtrar los ciclos para el primer filtro, que corresponde al ciclo 2024-2025
+  let filteredCiclos = ciclos.filter(ciclo => {
+    const cicloInicial = parseInt(ciclo.INICIAL, 10);
+    const cicloFinal = parseInt(ciclo.FINAL, 10);
+    return ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3 && cicloInicial === 2024 && cicloFinal === 2025;
+  });
 
   // Obtener el periodo seleccionado en la sesión
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
-  // Enviar los ciclos filtrados y el periodo seleccionado en la respuesta
+  // Si no hay un periodo seleccionado en la sesión, usar el ciclo más reciente de los ciclos filtrados
+  if (!periodoSelected) {
+    // Ordenar los ciclos por fecha de inicio (de más reciente a más antiguo)
+    filteredCiclos.sort((a, b) => new Date(b.FECHA_INICIAL) - new Date(a.FECHA_INICIAL));
+
+    // Tomar el ciclo más reciente
+    periodoSelected = filteredCiclos[0] || null;
+  }
+
+  // Filtrar los ciclos para el segundo filtro: solo los que tienen los períodos 1, 2 o 3 (sin restricción de año)
+  let periodFilterCiclos = ciclos.filter(ciclo => ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3);
+
+  // Enviar los ciclos filtrados (solo los de 2024-2025 en el primer filtro y los de 1, 2 y 3 en el segundo) 
+  // y el ciclo seleccionado (periodoSelected) en la respuesta
   res.json({
-    periodoSelected: periodoSelected?.DESCRIPCION,
-    ciclos: filteredCiclos, // Ciclos ya filtrados
-    noCiclos: filteredCiclos.length === 0, // Indicador si no hay ciclos después de filtrar
+    periodoSelected: periodoSelected?.DESCRIPCION || null,
+    cicloSelected: periodoSelected, // Ciclo más reciente seleccionado
+    ciclos: periodFilterCiclos, // Mostrar todos los ciclos con períodos 1, 2, 3
+    noCiclos: periodFilterCiclos.length === 0, // Indicador si no hay ciclos después de filtrar
   });
 });
 
@@ -551,53 +567,53 @@ router.get("/calificaciones", async (req, res) => {
     console.log("Query Parameters Received:", req.query);
 
     // Consulta SQL optimizada para asignatura, grupo y alumnos
-    let sql = `
-    SELECT 
-      alumnos.matricula,
-      alumnos.numeroalumno,
-      alumnos.nombre,
-      alumnos.paterno,
-      alumnos.materno,
-      COALESCE(alumnos_kardex.calificacion, '0') AS calificacion,
-      alumnos_kardex.fecha,
-      alumnos_kardex.id_eval,
-      alumnos_kardex.id_plan
-    FROM alumnos
-    LEFT JOIN alumnos_kardex 
-      ON alumnos.numeroalumno = alumnos_kardex.numeroalumno
-      AND alumnos_kardex.id_plan = ?
-      AND alumnos_kardex.claveasignatura = ?
-      AND alumnos_kardex.id_etapa = ?
-      AND alumnos_kardex.id_eval = ?
-      AND alumnos_kardex.inicial = ?
-      AND alumnos_kardex.final = ?
-      AND alumnos_kardex.periodo = ?
-    INNER JOIN alumnos_grupos 
-      ON alumnos.numeroalumno = alumnos_grupos.numeroalumno
-      AND alumnos_grupos.codigo_grupo = ?
-      AND alumnos_grupos.inicial = ?
-      AND alumnos_grupos.final = ?
-      AND alumnos_grupos.periodo = ?
-    ORDER BY alumnos.paterno;
-  `;
-  
-  let data = await Grupos.createQuery({
-    querySql: sql,
-    data: [
-      idPlan,
-      claveAsig,
-      idEtapa,
-      idEval,
-      inicial,
-      final,
-      periodo,
-      grupo,
-      inicial,
-      final,
-      periodo,
-    ],
-  });
-  
+   let sql = `
+  SELECT 
+    alumnos.matricula,
+    alumnos.numeroalumno,
+    alumnos.nombre,
+    alumnos.paterno,
+    alumnos.materno,
+    COALESCE(alumnos_kardex.calificacion, '0') AS calificacion,
+    alumnos_kardex.fecha,
+    alumnos_kardex.id_eval,
+    alumnos_kardex.id_plan
+  FROM alumnos
+  LEFT JOIN alumnos_kardex 
+    ON alumnos.numeroalumno = alumnos_kardex.numeroalumno
+    AND alumnos_kardex.id_plan = ?
+    AND alumnos_kardex.claveasignatura = ?
+    AND alumnos_kardex.id_etapa = ?
+    AND alumnos_kardex.id_eval = ?
+    AND alumnos_kardex.inicial = ?
+    AND alumnos_kardex.final = ?
+    AND alumnos_kardex.periodo = ?
+  INNER JOIN alumnos_grupos 
+    ON alumnos.numeroalumno = alumnos_grupos.numeroalumno
+    AND alumnos_grupos.codigo_grupo = ?
+    AND alumnos_grupos.inicial = ?
+    AND alumnos_grupos.final = ?
+    AND alumnos_grupos.periodo = ?
+  ORDER BY alumnos.paterno;
+`;
+
+let data = await Grupos.createQuery({
+  querySql: sql,
+  data: [
+    idPlan,
+    claveAsig,
+    idEtapa,
+    idEval,
+    inicial,
+    final,
+    periodo,
+    grupo,
+    inicial,
+    final,
+    periodo,
+  ],
+});
+
 
     // Filtrar datos para asegurar que las calificaciones no sean "0" o valores nulos
     data = data.filter((item) => item.calificacion !== "0" && item.calificacion !== null);

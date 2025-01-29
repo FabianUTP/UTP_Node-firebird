@@ -1,27 +1,27 @@
 <section class="section profile">
+  <div class="container my-5">
 
-  <div class="container">
-
+    <!-- Botón para regresar -->
     <div class="mb-3">
       {{>btnBack}}
     </div>
 
-    <div class="card">
-
-      <div class="card-title text-center">
-        <h1>Documentos de {{nombre}}</h1>
+    <!-- Tarjeta Principal -->
+    <div class="card shadow-lg border-light">
+      <div class="card-header" style="background-color: #911820; color: white; text-align: center; padding: 2rem;">
+        <h3 class="mb-0">Documentos de {{nombre}}</h3>
         <input type="hidden" value="{{numeroalumno}}" id="numeroalumno">
       </div>
 
-      <div class="card-body pt-3">
-
-        <div class="container" data-aos="fade-up">
-
-          <div class="row">
-            <div class="col-xs-6 col-md-5">
-              <label class="form-label"><b>*Selecciona el cuatrimestre:</b> </label>
-              <select class="form-control" id="filterDocto">
-                <option disabled selected>--Haga una elección--</option>
+      <div class="card-body">
+        <!-- Filtros y subir documento -->
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <!-- Selección de cuatrimestre -->
+          <div class="col">
+            <div class="mb-4">
+              <label class="form-label fs-5"><b>*Selecciona el cuatrimestre:</b></label>
+              <select class="form-select" id="filterDocto">
+                <option disabled selected>-- Haga una elección --</option>
                 <option value="0">Doctos de registro</option>
                 <option value="1">Cuatrimestre 1</option>
                 <option value="2">Cuatrimestre 2</option>
@@ -36,25 +36,28 @@
                 <option value="11">Cuatrimestre 11</option>
               </select>
             </div>
+          </div>
 
-            {{#if isAdmin}}
-            <div class="col-xs-6 col-md-7">
-              <label class="form-label">
-                <b>Subir documento</b>
-                <small>(cuatrimestre seleccionado)</small>
-              </label>
-              <div class="d-flex">
+          <!-- Subir documentos (visible solo para admins) -->
+          {{#if isAdmin}}
+          <div class="col">
+            <div class="mb-4">
+              <label class="form-label fs-5"><b>Subir documento</b> <small>(cuatrimestre seleccionado)</small></label>
+              <div class="d-flex align-items-center">
                 <input type="file" class="form-control" id="input" accept="application/pdf">
-                <button class="btn btn-outline-secondary" title="Subir">
-                  <i class="bi bi-arrow-bar-up"></i>
+                <button class="btn btn-outline-light ms-3" title="Subir">
+                  <i class="bi bi-upload"></i> Subir
                 </button>
               </div>
             </div>
-            {{/if}}
           </div>
+          {{/if}}
 
-          <div class="row pt-4" id="content"></div>
+        </div>
 
+        <!-- Contenido de los documentos -->
+        <div class="row pt-3" id="content">
+          <!-- Aquí se cargarán los documentos dependiendo del cuatrimestre seleccionado -->
         </div>
 
       </div>
@@ -63,3 +66,32 @@
 </section>
 
 <script src="/js/services/alumno/getDoctos.js"></script>
+
+<!-- Estilos adicionales -->
+<style>
+  .card {
+    border-radius: 1rem;
+  }
+  .card-header {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  .form-select, .form-control {
+    font-size: 1rem;
+  }
+  .btn-outline-light {
+    font-weight: 500;
+    border-color: #911820;
+    color: #911820;
+  }
+  .btn-outline-light:hover {
+    background-color: #911820;
+    color: white;
+  }
+  .d-flex {
+    display: flex;
+  }
+  .ms-3 {
+    margin-left: 1rem;
+  }
+</style>

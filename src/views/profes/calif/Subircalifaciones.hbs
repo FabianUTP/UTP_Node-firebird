@@ -1,5 +1,5 @@
-<!-- Es la pantalla de carga -->
 <style>
+  /* Estilo para la pantalla de carga */
   #setCalifi {
     position: absolute;
     z-index: 9;
@@ -11,10 +11,122 @@
     align-items: center;
     opacity: 0.4;
   }
+
+  /* Estilo para el color del botón */
+  .btn-custom {
+    background-color: #911820;
+    border-color: #911820;
+    color: white;
+    width: 100%; /* Botón completo en pantallas pequeñas */
+    padding: 10px;
+  }
+
+  /* Hover effect para el botón */
+  .btn-custom:hover {
+    background-color: #7a0f1a;
+    border-color: #7a0f1a;
+  }
+
+  /* Eliminar la tarjeta y agregar márgenes */
+  .no-card {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Estilo para el select dentro del formulario */
+  #idPlan {
+    background-color: white;
+    width: 100%; /* Hace que el select ocupe todo el ancho disponible */
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  /* Estilo para el contenedor del select */
+  .py-3 {
+    margin-bottom: 20px;
+  }
+
+  /* Estilo responsivo */
+  @media (max-width: 768px) {
+    #setCalifi {
+      padding: 20px;
+    }
+
+    .no-card-body {
+      padding: 15px;
+    }
+
+    #datosProfe h1 {
+      font-size: 20px;
+    }
+
+    #datosProfe h4 {
+      font-size: 16px;
+    }
+
+    .d-grid {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .d-md-flex {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-select {
+      width: 100%;
+    }
+
+    #tablaCalificaciones {
+      font-size: 12px;
+    }
+
+    #tablaCalificaciones th,
+    #tablaCalificaciones td {
+      padding: 8px;
+    }
+  }
+
+  /* Para pantallas más grandes */
+  @media (min-width: 768px) {
+    .d-md-flex {
+      flex-direction: row;
+    }
+
+    .d-grid {
+      flex-direction: row;
+    }
+
+    .form-select {
+      width: auto;
+    }
+  }
+
+  /* Estilo del botón de regresar */
+  .btn-custom-back {
+    background-color: #911820;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .btn-custom-back:hover {
+    background-color: #7a0f1a;
+    transform: scale(1.05);
+  }
 </style>
+
 <section>
   <div onclick="return cambiosGuardados()" class="mb-3">
-    {{>btnBack}}
+    <button class="btn btn-custom-back" onclick="window.history.back();">
+      <i class="bi bi-arrow-left"></i> Atrás
+    </button>
   </div>
   <section class="position-relative">
 
@@ -24,37 +136,33 @@
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-body">
-        <div id="datosProfe" class="card-title">
+    <!-- Eliminando la tarjeta y ajustando los márgenes -->
+    <div class="no-card">
+      <div class="no-card-body">
+        <div id="datosProfe" class="no-card-title">
           <h1 class="text-center">Registro de Calificaciones</h1>
           <h4>Mtro: {{profe.NOMBREPROFESOR}}</h4>
           <h4 id="asig"> Asignatura </h4>
           <h4 id="grupo"> Grupo </h4>
         </div>
 
-        <Form id="formCalif">
-
+        <form id="formCalif">
           <div class="d-grid gap-2 d-md-flex justify-content-md-between align-items-end">
-
             <div>
-              <button class="btn btn-primary">Guardar</button>
+              <button class="btn btn-custom">Guardar</button>
             </div>
 
             <div class="d-flex flex-column">
               <input id="input" type="file" accept=".xlsx, .xls, .csv" />
               <span id="info_excel"></span>
             </div>
-
           </div>
-
 
           <div class="py-3">
             <select id="idPlan" class="form-select">
               {{#each evals}}
               <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
               {{/each}}
-
             </select>
           </div>
 
@@ -67,23 +175,17 @@
                 <th>Calificación</th>
               </tr>
             </thead>
-
-
             <tbody id="table-content"></tbody>
           </table>
 
           <div id="loading" class="text-center">
             <div class="spinner-border" role="status"></div>
           </div>
-
-        </Form>
+        </form>
       </div>
-
-
-    </div>
     </div>
 
   </section>
+</section>
 
-
-  <script src="/js/services/admin/setSubirCalificacion.js"></script>
+<script src="/js/services/admin/setSubirCalificacion.js"></script>

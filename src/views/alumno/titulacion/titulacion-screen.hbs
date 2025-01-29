@@ -41,6 +41,26 @@
             font-size: 2rem;
             margin-bottom: 1rem;
         }
+
+        /* Estilo de los botones */
+        .btn {
+            background-color: #911820;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #740f1c; /* Un color más oscuro al pasar el mouse */
+        }
+
+        .btn-block {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -97,21 +117,21 @@
             </div>
         </div>
 
-               <div class="container">
+        <div class="container">
             <!-- Botones para separar las diferentes secciones de opciones -->
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" id="btnRequisitos">
+                    <button class="btn btn-block" id="btnRequisitos">
                         <i class="fas fa-list-alt"></i> Requisitos de Titulación
                     </button>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" id="btnOpciones">
+                    <button class="btn btn-block" id="btnOpciones">
                         <i class="fas fa-graduation-cap"></i> Opciones de Titulación
                     </button>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary btn-block" id="btnProceso">
+                    <button class="btn btn-block" id="btnProceso">
                         <i class="fas fa-clipboard-list"></i> Proceso de Titulación
                     </button>
                 </div>

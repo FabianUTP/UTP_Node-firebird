@@ -1,8 +1,12 @@
 <section class="container">
   <!-- Sección de cabecera y botones -->
   <div class="mb-3 d-flex justify-content-between align-items-center flex-wrap">
-    {{>btnBack}} <!-- Botón de regreso -->
+    <!-- Botón de regreso -->
+    <button type="button" class="btn btn-custom-back" onclick="window.history.back();">
+      <i class="bi bi-arrow-left"></i> Atrás
+    </button>
 
+    <!-- Botón de descarga -->
     <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-custom-download">
       <i class="bi bi-file-earmark-excel"></i> Descargar
     </button>
@@ -26,7 +30,7 @@
     </select>
   </div>
 
-  <!-- Tabla sin scroll lateral en móviles -->
+  <!-- Tabla de calificaciones -->
   <table class="table text-center">
     <thead>
       <tr>
@@ -79,7 +83,7 @@ h1, h5, h6 {
   padding: 6px;
 }
 
-/* Ajustes de la tabla para ocupar toda la pantalla */
+/* Ajustes de la tabla */
 .table {
   font-size: 14px;
   width: 100%;
@@ -90,26 +94,21 @@ h1, h5, h6 {
 /* Ajustes en móviles */
 @media (max-width: 768px) {
   h1 {
-    font-size: 18px;  /* Tamaño más pequeño en móvil */
+    font-size: 18px;
   }
-
   h5 {
-    font-size: 14px;  /* Ajuste para nombre del profesor */
+    font-size: 14px;
   }
-
   h6 {
-    font-size: 12px;  /* Ajuste para las asignaturas y grupo */
+    font-size: 12px;
   }
-
   .btn {
-    font-size: 12px;  /* Botón con texto más pequeño */
-    padding: 8px;  /* Ajustar el padding del botón */
+    font-size: 12px;
+    padding: 8px;
   }
-
   .table {
-    font-size: 12px;  /* Hacer la tabla más compacta */
+    font-size: 12px;
   }
-
   th, td {
     padding: 8px;
   }
@@ -124,7 +123,7 @@ h1, h5, h6 {
 /* Estilo de los botones */
 .btn {
   font-size: 14px;
-  border-radius: 50px;
+  border-radius: 0; /* Botones cuadrados */
   padding: 10px 20px;
   font-weight: bold;
   text-transform: uppercase;
@@ -132,15 +131,27 @@ h1, h5, h6 {
   transition: background-color 0.3s, transform 0.3s;
 }
 
+/* Estilo del botón de regresar */
+.btn-custom-back {
+  background-color: #911820;
+  color: white;
+  border: none;
+}
+
+.btn-custom-back:hover {
+  background-color: #7a141a;
+  transform: scale(1.05);
+}
+
 /* Estilo del botón de descargar */
 .btn-custom-download {
-  background-color: #28a745;
+  background-color: #911820;
   color: white;
   border: none;
 }
 
 .btn-custom-download:hover {
-  background-color: #218838;
+  background-color: #7a141a;
   transform: scale(1.05);
 }
 </style>

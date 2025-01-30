@@ -1,47 +1,44 @@
-<section>
+<section class="p-3">
   <input type="hidden" id="idprofesor" value="{{CLAVEPROFESOR}}" />
   <div class="mb-3">
     {{>btnBack}}
   </div>
+
   <div class="card">
     <div class="card-body">
-      <div class="card-title text-center">
-        <h1>Asignación de grupos </h1>
-        <h4> Mtro. {{NOMBREPROFESOR}}</h4>
-      </div>
-      <div class="flex-fill">
-        <div class="input-group mb-1">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="bi bi-search"></i>
-            </span>
-          </div>
-          <input
-            type="search"
-            class="form-control"
-            placeholder="Buscar"
-            id="buscar"
-          />
+      <header class="text-center mb-4">
+        <h1>Asignación de Grupos</h1>
+        <h4>Mtro. {{NOMBREPROFESOR}}</h4>
+      </header>
+
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-search"></i>
+          </span>
+          <input type="search" class="form-control" placeholder="Buscar" id="buscar" />
         </div>
       </div>
 
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nombre Código</th>
-            <th>Nombre de la asignatura</th>
-            <th>Grupo</th>
-          </tr>
-        </thead>
-        <tbody id="table-content"></tbody>
-      </table>
-
-      <div>
-        <button class="btn btn-primary" onclick="onPrev()"> < </button>
-        <button class="btn btn-primary" onclick="onNext()"> > </button>
+      <div class="table-responsive">
+        <table class="table" style="background-color: white; color: black;">
+          <thead style="background-color: #911820; color: white;">
+            <tr>
+              <th>#</th>
+              <th>Nombre Código</th>
+              <th>Nombre de la Asignatura</th>
+              <th>Grupo</th>
+              <th>Ver Mas</th>
+            </tr>
+          </thead>
+          <tbody id="table-content"></tbody>
+        </table>
       </div>
 
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-primary mx-2" onclick="onPrev()">&lt;</button>
+        <button class="btn btn-primary mx-2" onclick="onNext()">&gt;</button>
+      </div>
     </div>
   </div>
 </section>

@@ -1,36 +1,43 @@
-<section>
-    <div class="mb-3">
+<section class="p-3">
+  <div class="mb-3">
     {{>btnBack}}
   </div>
-    
+
   <div class="card">
     <div class="card-body">
-      <div class="card-title text-center">
+      <header class="text-center mb-4">
         <h1>Lista de Profesores</h1>
-      </div>
-      <div class="flex-fill">
-        <div class="input-group mb-1">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="bi bi-search"></i>
-            </span>
-          </div>
+      </header>
+
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-search"></i>
+          </span>
           <input type="search" class="form-control" placeholder="Buscar" id="buscar" />
-            <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Clave del Profesor</th>
-            <th>Nombre del Profesor</th>
-          </tr>
-        </thead>
-        <tbody id="table-content"></tbody>
-      </table>
-      <div>
-        <button class="btn btn-primary" onclick="onPrev()"> < </button>
-        <button class="btn btn-primary" onclick="onNext()"> > </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table" style="background-color: white; color: black;">
+          <thead style="background-color: #911820; color: white;">
+            <tr>
+              <th>#</th>
+              <th>Clave del Profesor</th>
+              <th>Nombre del Profesor</th>
+              <th>Ver Mas</th>
+            </tr>
+          </thead>
+          <tbody id="table-content"></tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-primary mx-2" onclick="onPrev()">&lt;</button>
+        <button class="btn btn-primary mx-2" onclick="onNext()">&gt;</button>
       </div>
     </div>
   </div>
 </section>
+
 <script src="/js/services/admin/getProfesores.js"></script>

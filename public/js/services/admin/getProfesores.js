@@ -21,28 +21,27 @@ async function getProfesores(){
   
     let content = "";
     api.data.forEach((item, index) => {
-      content += `<tr >`;
-      content += `<td>${index + 1} </td>`;
+      content += `<tr>`;
+      content += `<td>${index + 1}</td>`;
       content += `<td>${item.CLAVEPROFESOR}</td>`;
       content += `<td>${item.NOMBREPROFESOR}</td>`;
-      content += `<td><div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-      Ver Más
-    </a>
-  
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}">Ver Ficha</a></li>
-      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/asignacion">Asignación de Grupo</a></li>
-      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/Perfil">Perfil Academico</a></li>
-      <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/profesores-list">Horario Contratado</a></li>
-      
-    </ul>
-      </div></td>`;
+      content += `<td>
+        <div class="dropdown">
+          <button class="btn btn-custom-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Ver Más
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}">Ver Ficha</a></li>
+            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/asignacion">Asignación de Grupo</a></li>
+            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/Perfil">Perfil Académico</a></li>
+            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/profesores-list">Horario Contratado</a></li>
+          </ul>
+        </div>
+      </td>`;
+      content += "</tr>";
+    });
 
-    content += "</tr>";
-  });
-
-  table.innerHTML = content;
+    table.innerHTML = content;
 }
 
 function onPrev() {
@@ -50,11 +49,11 @@ function onPrev() {
       page--;
       getProfesores();
     }
-  }
+}
   
-  function onNext() {
+function onNext() {
     page++;
     getProfesores();
-  }
+}
 
 getProfesores();

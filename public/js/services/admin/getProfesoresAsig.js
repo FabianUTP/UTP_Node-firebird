@@ -1,6 +1,6 @@
 const table = document.getElementById("table-content");
 const boton = document.getElementById("buscar");
-const idplan = document.getElementById("idPlan");
+const idprofesor = document.getElementById("idprofesor");
 
 let page = 1;
 
@@ -20,8 +20,6 @@ async function getProfesoresAsig() {
 
   let content = "";
   api.data.forEach((item, index) => {
-
-    // Querys que servirán para la consulta de los alumnos en el grupo
     let query = `idPlan=${item.ID_PLAN}`;
     query += `&claveAsig=${item.CLAVEASIGNATURA}`;
     query += `&nombreAsig=${item.NOMBREASIGNATURA}`;
@@ -37,33 +35,22 @@ async function getProfesoresAsig() {
     content += `<td>${item.NOMBREASIGNATURA}</td>`;
     content += `<td>${item.CODIGO_GRUPO}</td>`;
     content += `<td><div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-      Ver más
-    </a>
-  
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    
-      <li>
-        <a 
-          class="dropdown-item" 
-          href="/profesores/${item.CLAVEPROFESOR}/ver_calif?${query}"
-        >
-          Ver calificaciones
-        </a>
-      </li>
-
-      <li>
-        <a 
-          class="dropdown-item" 
-          href="/profesores/${item.CLAVEPROFESOR}/subir_calif?${query}"
-        >
-          Subir Calificaciones
-        </a>
-      </li>
-     
-    </ul>
+      <a class="btn btn-custom-dropdown dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Ver más
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li>
+          <a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/ver_calif?${query}">
+            Ver calificaciones
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/subir_calif?${query}">
+            Subir Calificaciones
+          </a>
+        </li>
+      </ul>
       </div></td>`;
-
     content += "</tr>";
   });
 

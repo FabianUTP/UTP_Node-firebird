@@ -1,94 +1,69 @@
-{{!-- Es la pantalla de carga --}}
-<style>
-  #setCalifi {
-    position: absolute;
-    z-index: 9;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.4;
-  }
-</style>
-
-
-<section class="position-relative">
-  <div class="mb-3 d-flex justify-content-between">
+<section class="position-relative p-3">
+ <div class="d-flex justify-content-between align-items-center mb-3">
     {{>btnBack}}
-
-    <button type="button" class="btn btn-success">
-      <i class="bi bi-file-earmark-excel"></i>
-      Descargar
+    <button onclick="descargarTablaExcel()" id="botonDescargarExcel" class="btn btn-custom-download" style="background-color: #911820; color: white; border: none;">
+      <i class="bi bi-file-earmark-excel"></i> Descargar
     </button>
   </div>
 
-  <div id="setCalifi" class="bg-secondary d-none">
-    <div class="text-center">
-      <div class="spinner-border" role="status"></div>
-    </div>
+  <!-- Pantalla de carga -->
+  <div id="setCalifi" class="bg-secondary d-none text-center p-3">
+    <div class="spinner-border" role="status"></div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <div class="card-title">
-        <h1 class="text-center">Registro de Calificaciones</h1>
-        <h4>Mtro: {{profe.NOMBREPROFESOR}}</h4>
-        <h4 id="asig"> Asignatura </h4>
-        <h4 id="grupo"> Grupo </h4>
+  <!-- Contenedor de contenido -->
+  <div class="container-custom">
+    <header class="text-center mb-4">
+      <h1>Registro de Calificaciones</h1>
+      <h4>Mtro: {{profe.NOMBREPROFESOR}}</h4>
+      <h4 id="asig">Asignatura</h4>
+      <h4 id="grupo">Grupo</h4>
+    </header>
+
+    <form id="formCalif">
+      <!-- Acciones del formulario -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-primary">Guardar</button>
+        <div>
+          <input id="input" type="file" accept=".xlsx, .xls, .csv" class="form-control" />
+          <small id="info_excel" class="text-muted"></small>
+        </div>
       </div>
 
-      <Form id="formCalif">
+      <!-- Selección de plan de evaluación -->
+      <div class="mb-3">
+        <select id="idPlan" class="form-select">
+          {{#each evals}}
+          <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
+          {{/each}}
+        </select>
+      </div>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-between align-items-end">
-
-          <div>
-            <button class="btn btn-primary">Guardar</button>
-          </div>
-
-          <div class="d-flex flex-column">
-            <input id="input" type="file" accept=".xlsx, .xls, .csv"  />
-            <span id="info_excel"></span>
-          </div>
-
-        </div>
-
-
-        <div class="py-3">
-          <select id="idPlan" class="form-select">
-            {{#each evals}}
-            <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
-            {{/each}}
-
-          </select>
-        </div>
-
-        <table class="table table-hover">
-          <thead>
+      <!-- Tabla de calificaciones -->
+      <div class="table-responsive">
+        <table class="table" style="background-color: white; color: black;">
+          <thead style="background-color: #911820; color: white;">
             <tr>
               <th>#</th>
               <th>Nombre</th>
-              <th>Matricula</th>
+              <th>Matrícula</th>
               <th>Calificación</th>
             </tr>
           </thead>
-
-
           <tbody id="table-content"></tbody>
         </table>
+      </div>
 
-        <div id="loading" class="text-center">
-          <div class="spinner-border" role="status"></div>
-        </div>
-
-      </Form>
-    </div>
-
-
+      <!-- Indicador de carga -->
+      <div id="loading" class="text-center d-none">
+        <div class="spinner-border" role="status"></div>
+      </div>
+    </form>
   </div>
-  </div>
-
 </section>
 
+<!-- Scripts -->
 <script src="/js/services/admin/setSubirCalificacion.js"></script>
+<script src="/js/FileSaver.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="/js/services/profe/exportarExel.js"></script>

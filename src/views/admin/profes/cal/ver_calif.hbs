@@ -1,39 +1,44 @@
-<section>
+<section class="p-3">
   <div class="mb-3">
     {{>btnBack}}
   </div>
+
   <div class="card">
     <div class="card-body">
-      <div class="card-title">
-        <h1 class="text-center">Calificaciones</h1>
+      <header class="text-center mb-4">
+        <h1>Calificaciones</h1>
         <h4><b>Mtro:</b> {{profe.NOMBREPROFESOR}}</h4>
-        <h4 id="asig"> Asignatura </h4>
-        <h4 id="grupo"> Grupo </h4>
+        <h4 id="asig">Asignatura</h4>
+        <h4 id="grupo">Grupo</h4>
+      </header>
+
+      <div class="mb-3">
+        <select id="idPlan" class="form-select">
+          {{#each evals}}
+          <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
+          {{/each}}
+        </select>
       </div>
 
-      <select id="idPlan" class="form-select">
-        {{#each evals}}
-          <option value="{{ID_EVAL}}">{{DESCRIPCION}}</option>
-        {{/each}}
-      </select>
-      
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Matricula</th>
-            <th>Calificación</th>
-          </tr>
-        </thead>
-        <tbody id="table-content"></tbody>
-      </table>
-      <div id="loading" class="text-center">
+      <div class="table-responsive">
+        <table class="table" style="background-color: white; color: black;">
+          <thead style="background-color: #911820; color: white;">
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Matrícula</th>
+              <th>Calificación</th>
+            </tr>
+          </thead>
+          <tbody id="table-content"></tbody>
+        </table>
+      </div>
+
+      <div id="loading" class="text-center d-none">
         <div class="spinner-border" role="status"></div>
       </div>
     </div>
   </div>
-
 </section>
 
 <script src="/js/services/admin/getVerCalificacion.js"></script>

@@ -1,9 +1,6 @@
 <section class="section">
   <div id="container" class="row d-none">
     <div class="col-lg-12">
-       <div class="mb-3">
-    {{>btnBack}}
-  </div>
 
       <div class="card">
 
@@ -36,14 +33,6 @@
                   <ul class="dropdown-menu">
 
                     <li class="dropdown-item">
-                      <input class="form-check-input" type="radio" id="ordernum" name="orderBy" checked
-                        onchange="handleOrder('numeroalumno')">
-                      <label class="form-check-label" for="ordernum">
-                        Numero alumno
-                      </label>
-                    </li>
-
-                      <li class="dropdown-item">
                       <input class="form-check-input" type="radio" id="orderApe" name="orderBy" checked
                         onchange="handleOrder('paterno')">
                       <label class="form-check-label" for="orderApe">
@@ -96,15 +85,12 @@
               <table align="center" class="table table-hover">
                 <thead class="table-dark">
                   <tr>
-                    <th style="text-align: center;" scope="col">#</th>
-                    <th style="text-align: center;" scope="col">Numero Alumno</th>
-                    <th style="text-align: center;" scope="col">Apellidos</th>
-                    <th style="text-align: center;" scope="col">Nombre</th>
-                    <th style="text-align: center;" scope="col">Matricula</th>
-                    <th style="text-align: center;" scope="col">Estatus</th>
-                    <th style="text-align: center;" scope="col">Nivel</th>
-                    <th style="text-align: center;" scope="col">TSU</th>
-                    <th style="text-align: center;" scope="col">LIC</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Matricula</th>
+                    <th scope="col">Estatus</th>
+                    <th scope="col">Nivel</th>
                   </tr>
                 </thead>
 

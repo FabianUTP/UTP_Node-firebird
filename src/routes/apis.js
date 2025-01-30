@@ -315,37 +315,37 @@ router.get("/cuatris-navbar", async (req, res) => {
     });
   }
 
-  // Filtrar los ciclos para el primer filtro, que corresponde al ciclo 2024-2025
+  // Obtener el año actual (2024 en este caso) y el siguiente (2025)
+  const currentYear = new Date().getFullYear();
+  const nextYear = currentYear + 1;
+
+  // Filtrar los ciclos para el primer filtro que corresponde al ciclo actual 2024-2025
   let filteredCiclos = ciclos.filter(ciclo => {
-    const cicloInicial = parseInt(ciclo.INICIAL, 10);
-    const cicloFinal = parseInt(ciclo.FINAL, 10);
-    return ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3 && cicloInicial === 2024 && cicloFinal === 2025;
+    const cicloYear = parseInt(ciclo.ANIO, 10); // Asegúrate de que 'ANIO' esté representando el año correctamente
+    return ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3 && cicloYear >= 2024 && cicloYear <= 2025;
   });
 
   // Obtener el periodo seleccionado en la sesión
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
-  // Si no hay un periodo seleccionado en la sesión, usar el ciclo más reciente de los ciclos filtrados
+  // Si no hay un periodo seleccionado, usar PERIODO 1 por defecto
   if (!periodoSelected) {
-    // Ordenar los ciclos por fecha de inicio (de más reciente a más antiguo)
-    filteredCiclos.sort((a, b) => new Date(b.FECHA_INICIAL) - new Date(a.FECHA_INICIAL));
-
-    // Tomar el ciclo más reciente
-    periodoSelected = filteredCiclos[0] || null;
+    periodoSelected = filteredCiclos.find(ciclo => ciclo.PERIODO === 1) || null;
   }
 
-  // Filtrar los ciclos para el segundo filtro: solo los que tienen los períodos 1, 2 o 3 (sin restricción de año)
+  // Filtrar los ciclos para el segundo filtro: solo los que tienen los períodos 1, 2 o 3
   let periodFilterCiclos = ciclos.filter(ciclo => ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3);
 
-  // Enviar los ciclos filtrados (solo los de 2024-2025 en el primer filtro y los de 1, 2 y 3 en el segundo) 
-  // y el ciclo seleccionado (periodoSelected) en la respuesta
+  // Enviar los ciclos filtrados (solo los de 2024-2025 en el primer filtro y los de 1, 2 y 3 en el segundo) y el periodo seleccionado en la respuesta
   res.json({
     periodoSelected: periodoSelected?.DESCRIPCION || null,
-    cicloSelected: periodoSelected, // Ciclo más reciente seleccionado
     ciclos: periodFilterCiclos, // Mostrar todos los ciclos con períodos 1, 2, 3
     noCiclos: periodFilterCiclos.length === 0, // Indicador si no hay ciclos después de filtrar
   });
 });
+
+
+
 
 router.put("/update/CuatriXGrupos", async (req, res) => {
   const { periodo } = req.body;
@@ -489,11 +489,12 @@ router.get("/doctos/", async (req, res) => {
     doctos,
   });
 });
+
 //Ciclos
 router.get("/calificaciones/asignaturas", async (req, res) => {
   const { idPlan = "", idAsig = "", idEval = "", idGrupo = "" } = req.query;
 
-  if (!idGrupo || !idPlan || !idAsig || !idEval) {
+  if(!idGrupo || !idPlan || !idAsig || !idEval) {
     return res.json({
       error: "El id del grupo, plan, evaluacion y asignatura son necesarios",
       querys: {
@@ -515,9 +516,9 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
       claveasignatura: [idAsig],
       inicial: [grupo.INICIAL],
       final: [grupo.FINAL],
-      periodo: [grupo.PERIODO],
+      // periodo: [grupo.PERIODO],
     }, { limit: 35 });
-
+    
     res.json({
       querys: {
         idPlan,
@@ -534,6 +535,7 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
     })
   }
 });
+
 
 router.get("/calificaciones", async (req, res) => {
   const {
@@ -653,7 +655,6 @@ let data = await Grupos.createQuery({
     });
   }
 });
-
 
 router.post("/calificaciones", async (req, res) => {
   const {

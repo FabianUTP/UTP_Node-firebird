@@ -42,6 +42,9 @@ function descargarTablaExcel() {
         [`Asignatura: ${asignatura}`],
         [`Grupo: ${grupo}`],
         [],
+        [],
+        [],
+        [],
         ["#", "Nombre", "Matrícula", "Calificación"],
         ...data
       ];

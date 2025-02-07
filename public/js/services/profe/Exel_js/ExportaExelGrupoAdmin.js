@@ -45,7 +45,10 @@ function descargarTablaExcel() {
         [`Profesor: ${nombreProfesor}`],
         [`Asignatura: ${asignatura}`],
         [`Grupo: ${grupo}`],
-        [], // Espacio entre los metadatos y la tabla
+        [],
+        [],
+        [],
+        [],
         ["#", "Nombre", "Matrícula", "Calificación"], // Encabezados sin la columna de fecha
         ...data
       ];

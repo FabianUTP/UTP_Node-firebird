@@ -1,16 +1,19 @@
 function descargarTablaExcel() {
   try {
-    // Obtener los datos de la asignatura y el grupo
-    const asignaturaElement = document.getElementById("asig");
-    const grupoElement = document.getElementById("grupo");
+    // Obtener los datos del profesor, asignatura y grupo
+    const nombreProfesorElement = document.querySelector("#datosProfesor h5 b");
+    const asignaturaElement = document.querySelector("#asig");
+    const grupoElement = document.querySelector("#grupo");
 
-    if (!asignaturaElement || !grupoElement) {
-      throw new Error("No se encontraron los datos de la asignatura o grupo en el DOM.");
+    if (!nombreProfesorElement || !asignaturaElement || !grupoElement) {
+      throw new Error("No se encontraron los datos del profesor, asignatura o grupo en el DOM.");
     }
 
-    const asignatura = asignaturaElement.textContent.replace("Asignatura: ", "").trim();
-    const grupo = grupoElement.textContent.replace("Grupo: ", "").trim();
+    const nombreProfesor = nombreProfesorElement.textContent.trim();
+    const asignatura = asignaturaElement.textContent.trim();
+    const grupo = grupoElement.textContent.trim();
 
+    console.log("Nombre Profesor:", nombreProfesor);
     console.log("Asignatura:", asignatura);
     console.log("Grupo:", grupo);
 
@@ -39,8 +42,12 @@ function descargarTablaExcel() {
     // Crear un nuevo libro de Excel
     const wb = XLSX.utils.book_new();
     const wsData = [
+      [`Profesor: ${nombreProfesor}`],
       [`Asignatura: ${asignatura}`],
       [`Grupo: ${grupo}`],
+      [],
+      [],
+      [],
       [],
       ["#", "Nombre", "Matrícula", "Calificación"],
       ...data

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,9 @@
     }
 
     /* Títulos */
-    h1, h5, h6 {
+    h1,
+    h5,
+    h6 {
       color: #333;
       font-weight: bold;
       text-align: center;
@@ -45,20 +48,26 @@
       h1 {
         font-size: 18px;
       }
+
       h5 {
         font-size: 14px;
       }
+
       h6 {
         font-size: 12px;
       }
+
       .btn {
         font-size: 12px;
         padding: 8px;
       }
+
       .table {
         font-size: 12px;
       }
-      th, td {
+
+      th,
+      td {
         padding: 8px;
       }
     }
@@ -98,9 +107,12 @@
       background-color: #911820;
       color: white;
       border: none;
-      position: fixed; /* Cambiado a posición fija */
-      right: 20px; /* 20px desde la derecha */
-      bottom: 20px; /* 20px desde la parte inferior */
+      position: fixed;
+      /* Cambiado a posición fija */
+      right: 20px;
+      /* 20px desde la derecha */
+      bottom: 20px;
+      /* 20px desde la parte inferior */
       padding: 10px 20px;
       font-size: 14px;
       border-radius: 0;
@@ -114,40 +126,38 @@
       background-color: #7a141a;
       transform: scale(1.05);
     }
-
   </style>
 </head>
+
 <body>
 
-<section>
-  <div onclick="return cambiosGuardados()" class="mb-3">
-    <button class="btn btn-custom-back" onclick="window.history.back();">
-      <i class="bi bi-arrow-left"></i> Atrás
-    </button>
-  </div>
-
-  <section class="position-relative">
-
-    <div id="setCalifi" class="bg-secondary d-none">
-      <div class="text-center">
-        <div class="spinner-border" role="status"></div>
-      </div>
+  <section>
+    <div onclick="return cambiosGuardados()" class="mb-3">
+      <button class="btn btn-custom-back" onclick="window.history.back();">
+        <i class="bi bi-arrow-left"></i> Atrás
+      </button>
     </div>
 
-    <!-- Eliminando la tarjeta y ajustando los márgenes -->
-    <div class="no-card">
-      <div class="no-card-body">
-        <div id="datosProfe" class="no-card-title">
-          <h1 class="text-center">Registro de Calificaciones</h1>
-          <h4>Mtro: {{profe.NOMBREPROFESOR}}</h4>
-          <h4 id="asig"> Asignatura </h4>
-          <h4 id="grupo"> Grupo </h4>
-        </div>
+    <section class="position-relative">
 
-        <!-- Botón Descargar flotante en la parte inferior derecha -->
-        <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-custom-download">
-          <i class="bi bi-file-earmark-excel"></i> Descargar
-        </button>
+      <div id="setCalifi" class="bg-secondary d-none">
+        <div class="text-center">
+          <div class="spinner-border" role="status"></div>
+        </div>
+      </div>
+
+      <!-- Eliminando la tarjeta y ajustando los márgenes -->
+      <div id="datosProfesor" class="text-center">
+        <h1 class="h4">Calificaciones</h1>
+        <h5><b>Mtro:{{profe.NOMBREPROFESOR}}</b></h5>
+        <h6 id="asig">Asignatura</h6>
+        <h6 id="grupo">Grupo</h6>
+      </div>
+
+      <!-- Botón Descargar flotante en la parte inferior derecha -->
+      <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-custom-download">
+        <i class="bi bi-file-earmark-excel"></i> Descargar
+      </button>
       </div>
 
       <form id="formCalif">
@@ -187,15 +197,16 @@
           <div class="spinner-border" role="status"></div>
         </div>
       </form>
-    </div>
+      </div>
+    </section>
+
   </section>
 
-</section>
-
-<script src="/js/services/admin/GetCalificaciones/GetSubirCalificaciones_Profesor.js"></script>
-<script src="/js/FileSaver.js"></script>
-<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<script src="/js/services/profe/Exel_js/ExportExelSubirCalif_profe.js"></script>
+  <script src="/js/services/admin/GetCalificaciones/GetSubirCalificaciones_Profesor.js"></script>
+  <script src="/js/FileSaver.js"></script>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="/js/services/profe/Exel_js/ExportExelSubirCalif_profe.js"></script>
 
 </body>
+
 </html>

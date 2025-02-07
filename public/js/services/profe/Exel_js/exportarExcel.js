@@ -60,11 +60,12 @@ function descargarTablaExcel() {
 
     const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
 
-    // Limpiar el nombre de la asignatura para que sea un nombre válido de archivo
-    const asignaturaLimpia = asignatura.replace(/[^a-zA-Z0-9]/g, "_"); // Reemplaza caracteres especiales con "_"
-    
-    // Definir el nombre del archivo con la asignatura
-    const nombreArchivo = `Calificaciones_${asignaturaLimpia}.xlsx`;
+    // Limpiar caracteres especiales del nombre del archivo
+    const asignaturaLimpia = asignatura.replace(/[^a-zA-Z0-9]/g, "_");
+    const grupoLimpio = grupo.replace(/[^a-zA-Z0-9]/g, "_");
+
+    // Definir el nombre del archivo con la asignatura y grupo
+    const nombreArchivo = `Calificaciones_${asignaturaLimpia}_${grupoLimpio}.xlsx`;
 
     saveAs(new Blob([wbout], { type: "application/octet-stream" }), nombreArchivo);
 

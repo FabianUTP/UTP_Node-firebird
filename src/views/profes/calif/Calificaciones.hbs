@@ -6,7 +6,7 @@
       <i class="bi bi-arrow-left"></i> Atrás
     </button>
 
-    <!-- Botón de descarga -->
+    <!-- Botón de descarga (este será flotante abajo a la derecha) -->
     <button onclick="descargarTablaExcel()" id="botonDescargarExcel" type="button" class="btn btn-custom-download">
       <i class="bi bi-file-earmark-excel"></i> Descargar
     </button>
@@ -52,8 +52,8 @@
 <!-- Scripts para la exportación y carga de datos -->
 <script src="/js/FileSaver.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<script src="/js/services/profe/exportarExcel.js"></script>
-<script src="/js/services/admin/getVerCalificacion.js"></script>
+<script src="/js/services/profe/Exel_js/exportarExcel.js"></script>
+<script src="/js/services/admin/GetCalificaciones/GetVercalificaciones_Profesor.js"></script>
 
 <style>
 /* Estilos generales */
@@ -143,11 +143,21 @@ h1, h5, h6 {
   transform: scale(1.05);
 }
 
-/* Estilo del botón de descargar */
+/* Estilo del botón de descargar flotante */
 .btn-custom-download {
   background-color: #911820;
   color: white;
   border: none;
+  position: fixed; /* Fija la posición */
+  right: 20px; /* 20px desde la derecha */
+  bottom: 20px; /* 20px desde la parte inferior */
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .btn-custom-download:hover {

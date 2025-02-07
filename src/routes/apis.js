@@ -288,6 +288,7 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   sql += `AND final = '${final}' `;
   sql += `AND periodo = '${periodo}'`;
 
+  
   try {
     await AlumnosGrupos.createQuery({ querySql: sql });
 
@@ -299,12 +300,15 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   }
 });
 
-///////////////////////////////////Fin de filtro de calificacion por filtro//////////////////////////////////////////////////////////////////////
+
+
 router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
 
   // Obtener los ciclos (limitados por parámetro 'limit')
-  let ciclos = await Ciclos.all({ limit });
+  const ciclos = await Ciclos.all({
+    limit,
+  });
 
   // Si no hay ciclos disponibles, enviamos una respuesta vacía o un indicador
   if (!ciclos || ciclos.length === 0) {
@@ -315,36 +319,16 @@ router.get("/cuatris-navbar", async (req, res) => {
     });
   }
 
-  // Obtener el año actual (2024 en este caso) y el siguiente (2025)
-  const currentYear = new Date().getFullYear();
-  const nextYear = currentYear + 1;
-
-  // Filtrar los ciclos para el primer filtro que corresponde al ciclo actual 2024-2025
-  let filteredCiclos = ciclos.filter(ciclo => {
-    const cicloYear = parseInt(ciclo.ANIO, 10); // Asegúrate de que 'ANIO' esté representando el año correctamente
-    return ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3 && cicloYear >= 2024 && cicloYear <= 2025;
-  });
-
   // Obtener el periodo seleccionado en la sesión
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
 
-  // Si no hay un periodo seleccionado, usar PERIODO 1 por defecto
-  if (!periodoSelected) {
-    periodoSelected = filteredCiclos.find(ciclo => ciclo.PERIODO === 1) || null;
-  }
-
-  // Filtrar los ciclos para el segundo filtro: solo los que tienen los períodos 1, 2 o 3
-  let periodFilterCiclos = ciclos.filter(ciclo => ciclo.PERIODO >= 1 && ciclo.PERIODO <= 3);
-
-  // Enviar los ciclos filtrados (solo los de 2024-2025 en el primer filtro y los de 1, 2 y 3 en el segundo) y el periodo seleccionado en la respuesta
+  // Enviar los ciclos y el periodo seleccionado en la respuesta
   res.json({
-    periodoSelected: periodoSelected?.DESCRIPCION || null,
-    ciclos: periodFilterCiclos, // Mostrar todos los ciclos con períodos 1, 2, 3
-    noCiclos: periodFilterCiclos.length === 0, // Indicador si no hay ciclos después de filtrar
+    periodoSelected: periodoSelected?.DESCRIPCION,
+    ciclos,
+    noCiclos: false, // Indicador de que hay ciclos disponibles
   });
 });
-
-
 
 
 router.put("/update/CuatriXGrupos", async (req, res) => {
@@ -391,19 +375,8 @@ router.get("/cuatrimestres", async (req, res) => {
   });
 });
 
-router.get('/ciclosAdmi', async (_req, res) => {
-  try {
-    const ciclosAdmins = await CiclosAdmins.createQuery({ querySql: "SELECT * FROM CICLOS_ADMINS" })
-    res.json(ciclosAdmins);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error en la consulta de la base de datos' });
-  }
-});
-
-//Api Alumnos
 router.get("/alumnos", async (req, res) => {
-  const { limit = 15, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
+  const { limit = 15, skip = 0, search, orderBy = "paterno", sort ="asc" } = req.query;
 
   let searchQuery = null;
 
@@ -412,9 +385,9 @@ router.get("/alumnos", async (req, res) => {
     searchQuery = `(matricula LIKE '%${search}%') `;
     searchQuery += `OR (nombre LIKE '%${search}%') `;
     searchQuery += `OR (paterno LIKE '%${search}%') `;
-
+    
     let searchLastName = search.split(" ");
-    if (searchLastName.length > 1) {
+    if(searchLastName.length > 1) {
       searchQuery += `OR (paterno LIKE '%${searchLastName[0]}%' AND materno LIKE '%${searchLastName[1]}%') `;
     }
   }
@@ -468,7 +441,7 @@ router.get("/carreras", async (req, res) => {
 router.get("/doctos/", async (req, res) => {
   const { grado, numalumno } = req.query;
 
-  if (!grado || !numalumno) {
+  if(!grado || !numalumno) {
     return res.json({
       error: 'Se necesita el grado a buscar y el numero del alumno'
     });
@@ -490,7 +463,6 @@ router.get("/doctos/", async (req, res) => {
   });
 });
 
-//Ciclos
 router.get("/calificaciones/asignaturas", async (req, res) => {
   const { idPlan = "", idAsig = "", idEval = "", idGrupo = "" } = req.query;
 

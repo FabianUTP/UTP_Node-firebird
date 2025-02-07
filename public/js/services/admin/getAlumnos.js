@@ -12,7 +12,7 @@ let sort = "asc";
 let alumnosLength = 0;
 
 inputSearch.addEventListener("input", debounce(() => {
-  search = inputSearch.value; 
+  search = inputSearch.value;
   skip = 0; // Reinicia la paginación
   getAlumnos();
 }));
@@ -27,34 +27,49 @@ const getAlumnos = async () => {
   const upperCaseSearch = search.toUpperCase();
 
   const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${upperCaseSearch}&orderBy=${orderBy}&sort=${sort}`;
-  const res = await fetch(url);
-  const { alumnos } = await res.json();
-  load.style.display = "none";
+  try {
+    const res = await fetch(url);
+    const { alumnos } = await res.json();
 
-  let content = "";
-  const status = {
-    A: "Activo",
-    E: "Egresado",
-    BA: "Baja",
-    S: "Aspirantes"
+    load.style.display = "none";
+
+    if (!alumnos || alumnos.length === 0) {
+      table.innerHTML = "<tr><td colspan='9' style='text-align: center;'>No se encontraron resultados</td></tr>";
+      return;
+    }
+
+    let content = "";
+    const status = {
+      A: "Activo",
+      E: "Egresado",
+      BA: "Baja",
+      S: "Aspirantes"
+    };
+
+    alumnos.forEach((item, i) => {
+      content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
+      content += `<td>${item.NUMEROALUMNO}</td>`;
+      content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
+      content += `<td>${item.NOMBRE}</td>`;
+      content += `<td>${item.MATRICULA}</td>`;
+      content += `<td>${status[item.STATUS] ?? ""}</td>`;
+      content += `<td>${item.NIVEL}</td>`;
+      
+      // Revisa si las fechas son null o 0, en caso contrario las muestra
+      const proyectoObs = (item.PROYECTO_OBS && item.PROYECTO_OBS !== 0) ? item.PROYECTO_OBS : "";
+      const obsProyectoLic = (item.OBS_PROYECTO_LIC && item.OBS_PROYECTO_LIC !== 0) ? item.OBS_PROYECTO_LIC : "";
+
+      content += `<td>${proyectoObs}</td>`;
+      content += `<td>${obsProyectoLic}</td>`;
+      content += "</tr>";
+    });
+
+    table.innerHTML = content;
+    alumnosLength = alumnos.length;
+  } catch (error) {
+    console.error("Error al obtener los datos:", error);
+    load.style.display = "none";
   }
-  alumnos.map((item, i) => {
-    content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
-    content += `<td style="text-align: center;">${i + 1}</td>`;
-    content += `<td style="text-align: center;">${item.NUMEROALUMNO}</td>`;
-    content += `<td style="text-align: center;">${item.PATERNO} ${item.MATERNO}</td>`;
-    content += `<td style="text-align: center;">${item.NOMBRE}</td>`;
-    content += `<td style="text-align: center;">${item.MATRICULA}</td>`;
-    content += `<td style="text-align: center;">${status[item.STATUS] ?? ""}</td>`;
-    content += `<td style="text-align: center;">${item.NIVEL}</td>`;
-    content += `<td style="text-align: center;">${item.PROYECTO_OBS}</td>`;
-    content += `<td style="text-align: center;">${item.OBS_PROYECTO_LIC}</td>`;
-    content += "</tr>";
-});
-
-
-  table.innerHTML = content;
-  alumnosLength = alumnos.length;
 };
 
 const handleOrder = (by) => {
@@ -75,10 +90,11 @@ const prev = () => {
 };
 
 const next = () => {
-  if (!(alumnosLength < limit)) {
+  if (alumnosLength >= limit) {
     skip += limit;
     getAlumnos();
   }
 };
 
+// Inicializa la carga de alumnos
 getAlumnos();

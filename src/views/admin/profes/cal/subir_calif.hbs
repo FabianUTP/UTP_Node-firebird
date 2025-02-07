@@ -1,9 +1,6 @@
 <section class="position-relative p-3">
- <div class="d-flex justify-content-between align-items-center mb-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
     {{>btnBack}}
-    <button onclick="descargarTablaExcel()" id="botonDescargarExcel" class="btn btn-custom-download" style="background-color: #911820; color: white; border: none;">
-      <i class="bi bi-file-earmark-excel"></i> Descargar
-    </button>
   </div>
 
   <!-- Pantalla de carga -->
@@ -62,8 +59,33 @@
   </div>
 </section>
 
+<!-- Botón flotante de descarga -->
+<button onclick="descargarTablaExcel()" id="botonDescargarExcel" class="btn btn-custom-download">
+  <i class="bi bi-file-earmark-excel"></i> Descargar
+</button>
+
 <!-- Scripts -->
-<script src="/js/services/admin/setSubirCalificacion.js"></script>
+<script src="/js/services/admin/GetCalificaciones/GetSubircalificaciones_Admin.js"></script>
 <script src="/js/FileSaver.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<script src="/js/services/profe/exportarExel.js"></script>
+<script src="/js/services/profe/Exel_js/exportarExel_subes_admin.js"></script>
+
+<style>
+  /* Estilos para el botón flotante */
+  #botonDescargarExcel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #911820;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 9999;
+  }
+
+  #botonDescargarExcel:hover {
+    background-color: #7c1517;
+  }
+</style>

@@ -1,5 +1,9 @@
 <section class="section">
   <style>
+    .hidden {
+      display: none !important;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background-color: #f8f9fa;
@@ -63,9 +67,8 @@
     }
 
     .asignatura-item.selected {
-      background-color: #1579e3b8;
-      color: #000000;
-      
+      background-color: #911820;
+      color: #ffffff;
     }
 
     .table-responsive {
@@ -78,27 +81,69 @@
     }
 
     #eval-select {
-      width: 50%;
-      padding: 10px;
+      width: 100%;
+      padding: 12px;
       margin-bottom: 20px;
-      border: 1px solid #ddd;
+      border: 2px solid #911820;
       border-radius: 5px;
       background-color: #fff;
       appearance: none;
     }
 
-
+    /* Estilo para los botones cuadrados */
+    .btn {
+      padding: 12px 20px;
+      border-radius: 0;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
 
     .btn-primary {
       color: #fff;
-      background-color: #007bff;
-      border-color: #007bff;
+      background-color: #911820;
+      border-color: #911820;
     }
 
     .btn-primary:hover {
       color: #fff;
-      background-color: #0056b3;
-      border-color: #004085;
+      background-color: #7c1517;
+      border-color: #911820;
+    }
+
+    .btn-custom-download {
+      background-color: #911820;
+      color: white;
+      border: none;
+      font-size: 16px;
+      padding: 12px 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom-download:hover {
+      background-color: #7c1517;
+    }
+
+    /* Estilos para la tabla */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    .table thead {
+      background-color: #911820;
+      color: white;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
     }
 
     .clearfix::after {
@@ -112,20 +157,106 @@
       width: 26%;
       margin-right: 20px;
     }
+
+    /* Estilo para el botón de descarga flotante */
+    #botonDescargarExcel {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Icono del botón */
+    #botonDescargarExcel i {
+      margin-right: 8px;
+    }
+
+
+    /* Estilo para la tabla */
+    /* Ajustes para hacer la tabla responsiva */
+    .table-responsive {
+      margin-top: -20px;
+      display: flex;
+      justify-content: flex-end;
+      /* Centrar la tabla a la derecha */
+      overflow-x: auto;
+      /* Permite desplazamiento horizontal si es necesario */
+    }
+
+    .table {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      /* Evita que la tabla se estire al hacer zoom */
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px 15px;
+      text-align: left;
+      /* Alinear los textos a la izquierda */
+      border: none;
+      /* Eliminar bordes */
+      word-wrap: break-word;
+      /* Permite que el texto largo se ajuste */
+      min-width: 100px;
+      /* Establecer un ancho mínimo */
+    }
+
+    .table thead {
+      background-color: #911820;
+      color: white;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    .table td,
+    .table th {
+      font-size: 14px;
+    }
+
+    /* Agregar un estilo para que el contenido sea más flexible */
+    .table th {
+      text-align: left;
+      padding: 12px 15px;
+      white-space: nowrap;
+      /* Evita que el texto se desborde */
+    }
+
+    .table td {
+      padding: 12px 15px;
+      text-align: left;
+      max-width: 300px;
+      /* Definir un ancho máximo para que las celdas no se estiren demasiado */
+    }
   </style>
 
   <div class="col-lg-12">
+    <!-- Botón de regreso -->
     <div class="pb-3 d-flex justify-content-between">
       {{>btnBack}}
     </div>
 
+    <!-- Botón para descargar Excel -->
+    <button onclick="descargarTablaExcel()" id="botonDescargarExcel" class="btn btn-custom-download">
+      <i class="bi bi-file-earmark-excel"></i> Descargar
+    </button>
+
+    <!-- Información del grupo y profesor -->
     <div class="card">
       <div class="card-body">
         <div class="card-title">
           <div class="group-code-and-professor">
             <h1>Grupo {{codigo_grupo}}</h1>
             <div class="professor-info">
-              <!--<img id="professor-img" src="placeholder.png" alt="Foto del Profesor">\-->  
               <h1 id="claveProfesor"></h1>
             </div>
           </div>
@@ -133,40 +264,46 @@
       </div>
     </div>
 
+    <!-- Selección de evaluación -->
     <select id="eval-select">
       <option value="">Seleccione una evaluación</option>
     </select>
-    <button id="update-date-btn" class="btn btn-secondary">Actualizar Fecha</button>
 
-    <button id="update-all-btn" class="btn btn-primary">Actualizar Calificación</button>
-
-
-        </div>
-    <div class="clearfix">
-      <div class="left-column">
-        <div class="card">
-          <div class="card-body">
-            <h5>Asignaturas</h5>
-            <ul id="asignatura-list" class="asignatura-list"></ul>
-          </div>
+    <!-- Lista de asignaturas -->
+    <div class="left-column">
+      <div class="card">
+        <div class="card-body">
+          <h5>Asignaturas</h5>
+          <ul id="asignatura-list" class="asignatura-list"></ul>
         </div>
       </div>
+    </div>
 
-      <div class="card" style="float: right; width: 72%;">
-        <div class="card-body">
-          <div class="container">
-            <input  type="hidden" id="idGrupo" value="{{codigo_grupo}}">
+    <!-- Tabla de estudiantes y calificaciones -->
+    <div class="card" style="float: right; width: 72%;">
+      <div class="card-body">
+        <div class="container">
+          <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
+
+          <form id="formCalif">
+            <!-- Acciones del formulario -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <button class="btn btn-primary">Guardar</button>
+              <div>
+                <input id="input" type="file" accept=".xlsx, .xls, .csv" class="form-control" />
+                <small id="info_excel" class="text-muted"></small>
+              </div>
+            </div>
 
             <div class="table-responsive">
-              <table  style="border: #333;" align="center" class="table table-hover">
-                <thead class="table">
-                  <tr  style="border: #333;background-color: rgb(187, 217, 255); text-align: center;" >
-                    <th class="col">#</th>
-                    <th scope="col">Nombre completo</th>
-                    <th scope="col">Matrícula</th>
-                    <th scope="col">Calificación</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col"></th>
+              <table class="table table-hover">
+                <thead>
+                  <tr style="background-color: #911820;">
+                    <th>#</th>
+                    <th>Nombre completo</th>
+                    <th>Matrícula</th>
+                    <th>Calificación</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody id="table-container"></tbody>
@@ -175,7 +312,7 @@
                 <div class="spinner-border"></div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -183,3 +320,6 @@
 </section>
 
 <script src="/js/services/admin/getGruposAlumnosCalifi.js"></script>
+<script src="/js/FileSaver.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="/js/services/profe/Exel_js/ExportaExelGrupoAdmin.js"></script>

@@ -1,12 +1,12 @@
 <section class="container">
- <div class="mb-3">
+  <div class="mb-3">
     {{>btnBack}}
   </div>
 
   <div id="container" class="row d-none">
 
     <div class="d-flex flex-row-reverse pb-3">
-      <a class="btn btn-outline-primary" href="/grupos/crear">Crear grupo</a>
+      <a class="btn btn-custom" href="/grupos/crear">Crear grupo</a>
     </div>
 
     <div class="col-lg-12">
@@ -19,18 +19,16 @@
         <div class="card-body">
           <div class="container">
 
-            <div class="d-flex w-100">
 
-              
 
+            <div class="d-flex w-100" style="margin-top: -10px;>
               <div>
                 <div class="dropdown">
-                  <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  <button class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Ordenar
                   </button>
                   <ul class="dropdown-menu">
-
                     <li class="dropdown-item">
                       <input class="form-check-input" type="radio" id="orderApe" name="orderBy" checked
                         onchange="handleOrder('codigo_carrera')">
@@ -45,7 +43,6 @@
                         Inicio
                       </label>
                     </li>
-
                     <li class="dropdown-item">
                       <input class="form-check-input" type="radio" id="orderName" name="orderBy"
                         onchange="handleOrder('codigo_grupo')">
@@ -53,7 +50,6 @@
                         Codigo grupo
                       </label>
                     </li>
-
                     <li class="dropdown-item">
                       <input class="form-check-input" type="radio" id="orderMatri" name="orderBy"
                         onchange="handleOrder('grupo')">
@@ -61,10 +57,7 @@
                         Grupo
                       </label>
                     </li>
-
                     <li class="border-top"></li>
-
-
                     <li class="dropdown-item">
                       <input class="form-check-input" type="radio" id="orderDesc" name="sort"
                         onchange="handleSort('asc')">
@@ -72,9 +65,8 @@
                         Ascendente
                       </label>
                     </li>
-
                     <li class="dropdown-item">
-                      <input class="form-check-input" type="radio" id="orderAsc" name="sort"checked
+                      <input class="form-check-input" type="radio" id="orderAsc" name="sort" checked
                         onchange="handleSort('desc')">
                       <label class="form-check-label" for="orderAsc">
                         Descendente
@@ -83,13 +75,12 @@
                   </ul>
                 </div>
               </div>
-
             </div>
 
-            <!-- Table with stripped rows -->
-            <div  id="buscar" class="table-responsive">
-              <table align="center" class="table table-hover">
-                <thead class="table-dark">
+            <!-- Tabla sin bordes y con color personalizado en encabezados -->
+            <div id="buscar" class="table-responsive">
+              <table align="center" class="table">
+                <thead class="table-custom">
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Codigo carrera</th>
@@ -100,8 +91,6 @@
                     <th scope="col">Grupo</th>
                     <th scope="col">Inscritos</th>
                     <th scope="col">Tutor</th>
-                    
-
                   </tr>
                 </thead>
 
@@ -115,12 +104,11 @@
             </div>
 
             <div class="text-center">
-              <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
-              <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
+              <button onclick="prev()" class="btn btn-custom"><i class="bi bi-arrow-left"></i></button>
+              <button onclick="next()" class="btn btn-custom"><i class="bi bi-arrow-right"></i></button>
             </div>
-            <!-- End Table with stripped rows -->
+            <!-- End Tabla sin bordes -->
           </div>
-
         </div>
       </div>
     </div>
@@ -130,3 +118,84 @@
 </section>
 
 <script src="/js/services/admin/getGruposCalifi.js"></script>
+
+<style>
+  /* Colores personalizados */
+  .btn-custom {
+    background-color: #911820;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+
+  .btn-custom:hover {
+    background-color: #7c0f1e;
+    color: white;
+  }
+
+  .table-custom {
+    background-color: #911820;
+    color: white;
+    text-align: center;
+    word-wrap: break-word; /* Para que el texto se ajuste a las celdas */
+    table-layout: fixed; /* Para evitar que las celdas se alarguen más de lo necesario */
+  }
+
+  .table-custom th, .table-custom td {
+    padding: 10px;
+    font-size: 12px; /* Tamaño de fuente ajustado */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es muy largo */
+  }
+
+  .table-custom th {
+    background-color: #911820;
+    color: white;
+  }
+
+  .table-custom tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .dropdown-menu {
+    width: 250px;
+    background-color: #f9f9f9;
+  }
+
+  .dropdown-item {
+    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .dropdown-item:hover {
+    background-color: #e9e9e9;
+  }
+
+  .spinner-border {
+    border-top-color: #911820;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .w-100 {
+    width: 100%;
+  }
+
+  .mb-3 {
+    margin-bottom: 1rem;
+  }
+
+  .d-flex {
+  margin-top: -10px; /* Mueve el botón un poco hacia arriba */
+}
+
+</style>

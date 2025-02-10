@@ -123,7 +123,25 @@ const mostrarAlumnos = () => {
     input.addEventListener('keydown', (event) => {
       if (event.key === "Enter") {
         const row = input.closest('tr');
-        const numeroalumno = row.dataset.numeroalumno;
+        const numeroalumno = row.dataset.numeroalumno;const guardarCalificacion = async (numeroalumno) => {
+          const row = document.querySelector(`tr[data-numeroalumno="${numeroalumno}"]`);
+          if (!row) return;
+        
+          const { claveasignatura, id_eval, inicial, final, periodo } = row.dataset;
+          const calificacion = parseFloat(row.querySelector('.calificacion-input').value);
+        
+          // Preguntar al usuario antes de proceder
+          const confirmacion = window.confirm("¿Está seguro de editar estos datos?");
+          if (!confirmacion) return; // Si el usuario cancela, salir de la función
+        
+          try {
+            await actualizarAlumno({ numeroalumno, claveasignatura, id_eval, inicial, final, periodo, calificacion });
+            row.querySelector('.calificacion-input').value = calificacion;
+          } catch (error) {
+            console.error("Error al actualizar la calificación", error);
+          }
+        };
+        
         guardarCalificacion(numeroalumno);
       }
     });
@@ -133,17 +151,23 @@ const mostrarAlumnos = () => {
 // Función para guardar la calificación de un alumno
 const guardarCalificacion = async (numeroalumno) => {
   const row = document.querySelector(`tr[data-numeroalumno="${numeroalumno}"]`);
-  if (!row) return; // Si no se encuentra la fila, no hacer nada
+  if (!row) return;
+
   const { claveasignatura, id_eval, inicial, final, periodo } = row.dataset;
   const calificacion = parseFloat(row.querySelector('.calificacion-input').value);
+
+  // Preguntar al usuario antes de proceder
+  const confirmacion = window.confirm("¿Está seguro de editar estos datos?");
+  if (!confirmacion) return; // Si el usuario cancela, salir de la función
+
   try {
     await actualizarAlumno({ numeroalumno, claveasignatura, id_eval, inicial, final, periodo, calificacion });
-    // Actualizar solo la fila
     row.querySelector('.calificacion-input').value = calificacion;
   } catch (error) {
-    // No mostrar ningún mensaje de error
+    console.error("Error al actualizar la calificación", error);
   }
 };
+
 
 // Función para actualizar los datos del alumno
 const actualizarAlumno = async (alumno) => {
@@ -157,12 +181,13 @@ const actualizarAlumno = async (alumno) => {
 
 // Función para actualizar todas las calificaciones
 const actualizarTodasCalificaciones = async () => {
+  const confirmacion = window.confirm("¿Está seguro de actualizar todas las calificaciones?");
+  if (!confirmacion) return; // Si el usuario cancela, salir de la función
+
   const updates = Array.from(table.querySelectorAll('tr')).map(row => {
     const { numeroalumno, claveasignatura, id_eval, inicial, final, periodo } = row.dataset;
     const calificacion = parseFloat(row.querySelector('.calificacion-input').value);
-    if (isNaN(calificacion)) {
-      return null; // No hacer nada si la calificación no es válida
-    }
+    if (isNaN(calificacion)) return null; // No hacer nada si la calificación no es válida
     return { numeroalumno, claveasignatura, id_eval, inicial, final, periodo, calificacion };
   }).filter(alumno => alumno !== null);
 
@@ -171,7 +196,7 @@ const actualizarTodasCalificaciones = async () => {
       await actualizarAlumno(alumno);
     }
   } catch (error) {
-    // No mostrar ningún mensaje de error
+    console.error("Error al actualizar todas las calificaciones", error);
   }
   getAlumnos();
 };
@@ -181,6 +206,89 @@ evalSelect.addEventListener("change", ({ target }) => {
   selectedEval = target.value;
   mostrarAlumnos();
 });
+
+
+document.getElementById("guardarCalifBtn").addEventListener("click", async (event) => {
+  event.preventDefault(); // Evita que el formulario se envíe si está dentro de un <form>
+  await actualizarTodasCalificaciones();
+});
+
+// Se generar EXEL
+
+document.getElementById("input").addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.readAsArrayBuffer(file);
+
+  reader.onload = async (e) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+
+      // Obtener la primera hoja del archivo
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+
+      // Convertir el contenido en un array de objetos
+      const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+      // Procesar los datos y comparar con la tabla
+      procesarExcel(excelData);
+  };
+});
+
+
+const procesarExcel = (excelData) => {
+  const tablaRows = document.querySelectorAll("#table-container tr");
+
+  // Se asume que los datos de alumnos comienzan en la fila 9 del Excel
+  excelData.slice(8).forEach((row) => {
+      const [, nombre, matricula, nuevaCalificacion] = row; // Datos desde Excel
+
+      tablaRows.forEach((tr) => {
+          const tds = tr.getElementsByTagName("td");
+          if (tds.length >= 3) {
+              const nombreTabla = tds[1].textContent.trim();
+              const matriculaTabla = tds[2].textContent.trim();
+              const inputCalificacion = tr.querySelector(".calificacion-input");
+
+              if (nombreTabla === nombre && matriculaTabla === matricula) {
+                  const calificacionActual = inputCalificacion.value.trim();
+
+                  if (calificacionActual !== nuevaCalificacion) {
+                      inputCalificacion.style.backgroundColor = "#ffeb3b"; // Resaltar en amarillo
+                      inputCalificacion.dataset.nuevaCalificacion = nuevaCalificacion; // Guardar temporalmente
+                  }
+              }
+          }
+      });
+  });
+
+  alert("Se han resaltado las calificaciones modificadas.");
+};
+
+
+document.getElementById("guardarCalifBtn").addEventListener("click", async () => {
+  const confirmacion = confirm("¿Está seguro de actualizar las calificaciones resaltadas?");
+  if (!confirmacion) return;
+
+  const tablaRows = document.querySelectorAll("#table-container tr");
+
+  for (const tr of tablaRows) {
+      const inputCalificacion = tr.querySelector(".calificacion-input");
+
+      if (inputCalificacion && inputCalificacion.dataset.nuevaCalificacion) {
+          inputCalificacion.value = inputCalificacion.dataset.nuevaCalificacion;
+          inputCalificacion.style.backgroundColor = ""; // Quitar resaltado
+          delete inputCalificacion.dataset.nuevaCalificacion;
+
+          const numeroAlumno = tr.dataset.numeroalumno;
+          await guardarCalificacion(numeroAlumno);
+      }
+  }
+});
+
 
 // Cargar los alumnos iniciales
 getAlumnos();

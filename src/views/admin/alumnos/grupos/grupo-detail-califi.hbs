@@ -285,10 +285,9 @@
         <div class="container">
           <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
 
-          <form id="formCalif">
-            <!-- Acciones del formulario -->
+
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <button class="btn btn-primary">Guardar</button>
+              <button id="guardarCalifBtn" class="btn btn-primary">Guardar</button>
               <div>
                 <input id="input" type="file" accept=".xlsx, .xls, .csv" class="form-control" />
                 <small id="info_excel" class="text-muted"></small>
@@ -323,3 +322,4 @@
 <script src="/js/FileSaver.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="/js/services/profe/Exel_js/ExportaExelGrupoAdmin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

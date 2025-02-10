@@ -7,7 +7,6 @@ const asignaturaList = document.getElementById("asignatura-list");
 const evalSelect = document.getElementById("eval-select");
 const claveProfesorSpan = document.getElementById("claveProfesor");
 const updateAllBtn = document.getElementById("update-all-btn");
-
 const formCalif = document.getElementById("formCalif");
 const fileExcel = document.getElementById("input");
 
@@ -31,7 +30,6 @@ const getAlumnos = async () => {
     mostrarAlumnos();
   } catch (error) {
     loaderTable.style.display = "none";
-    // No mostrar errores al usuario
   }
 };
 
@@ -62,7 +60,6 @@ const llenarAsignaturas = (alumnos) => {
     }
   });
 
-  // Si ya hay una asignatura seleccionada, marcarla como seleccionada
   if (selectedAsignatura) {
     const selectedItem = document.querySelector(`li[data-clave="${selectedAsignatura}"]`);
     if (selectedItem) selectedItem.classList.add('selected');
@@ -111,41 +108,10 @@ const mostrarAlumnos = () => {
       <td style="text-align: left; width: 30%;">${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>
       <td style="text-align: left; width: 20%;">${item.MATRICULA}</td>
       <td style="text-align: center; width: 15%;"><input style="text-align: center; font-size: 14px;" class="calificacion-input" value="${item.CALIFICACION}" size="1"></td>
-      <td style="text-align: center; width: 20%;"><button class="save-btn" onclick="guardarCalificacion(${item.NUMEROALUMNO})" style="background-color: #911820; color: white; padding: 5px 10px; border: none; border-radius: 5px; font-size: 12px;">Guardar</button></td>
     </tr>`;
     counter++;
   });
   table.innerHTML = content;
-  
-
-  // Añadir el evento de "Enter" para guardar automáticamente
-  document.querySelectorAll('.calificacion-input').forEach(input => {
-    input.addEventListener('keydown', (event) => {
-      if (event.key === "Enter") {
-        const row = input.closest('tr');
-        const numeroalumno = row.dataset.numeroalumno;const guardarCalificacion = async (numeroalumno) => {
-          const row = document.querySelector(`tr[data-numeroalumno="${numeroalumno}"]`);
-          if (!row) return;
-        
-          const { claveasignatura, id_eval, inicial, final, periodo } = row.dataset;
-          const calificacion = parseFloat(row.querySelector('.calificacion-input').value);
-        
-          // Preguntar al usuario antes de proceder
-          const confirmacion = window.confirm("¿Está seguro de editar estos datos?");
-          if (!confirmacion) return; // Si el usuario cancela, salir de la función
-        
-          try {
-            await actualizarAlumno({ numeroalumno, claveasignatura, id_eval, inicial, final, periodo, calificacion });
-            row.querySelector('.calificacion-input').value = calificacion;
-          } catch (error) {
-            console.error("Error al actualizar la calificación", error);
-          }
-        };
-        
-        guardarCalificacion(numeroalumno);
-      }
-    });
-  });
 };
 
 // Función para guardar la calificación de un alumno
@@ -158,7 +124,7 @@ const guardarCalificacion = async (numeroalumno) => {
 
   // Preguntar al usuario antes de proceder
   const confirmacion = window.confirm("¿Está seguro de editar estos datos?");
-  if (!confirmacion) return; // Si el usuario cancela, salir de la función
+  if (!confirmacion) return;
 
   try {
     await actualizarAlumno({ numeroalumno, claveasignatura, id_eval, inicial, final, periodo, calificacion });
@@ -168,7 +134,6 @@ const guardarCalificacion = async (numeroalumno) => {
   }
 };
 
-
 // Función para actualizar los datos del alumno
 const actualizarAlumno = async (alumno) => {
   const res = await fetch(`/api/gruposcalifi_alumnos/${idGrupo.value}`, {
@@ -176,18 +141,18 @@ const actualizarAlumno = async (alumno) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(alumno)
   });
-  if (!res.ok) return; // No hacer nada si hay error
+  if (!res.ok) return;
 };
 
 // Función para actualizar todas las calificaciones
 const actualizarTodasCalificaciones = async () => {
   const confirmacion = window.confirm("¿Está seguro de actualizar todas las calificaciones?");
-  if (!confirmacion) return; // Si el usuario cancela, salir de la función
+  if (!confirmacion) return;
 
   const updates = Array.from(table.querySelectorAll('tr')).map(row => {
     const { numeroalumno, claveasignatura, id_eval, inicial, final, periodo } = row.dataset;
     const calificacion = parseFloat(row.querySelector('.calificacion-input').value);
-    if (isNaN(calificacion)) return null; // No hacer nada si la calificación no es válida
+    if (isNaN(calificacion)) return null;
     return { numeroalumno, claveasignatura, id_eval, inicial, final, periodo, calificacion };
   }).filter(alumno => alumno !== null);
 
@@ -200,18 +165,6 @@ const actualizarTodasCalificaciones = async () => {
   }
   getAlumnos();
 };
-
-// Manejo del evento de cambio en la evaluación seleccionada
-evalSelect.addEventListener("change", ({ target }) => {
-  selectedEval = target.value;
-  mostrarAlumnos();
-});
-
-
-document.getElementById("guardarCalifBtn").addEventListener("click", async (event) => {
-  event.preventDefault(); // Evita que el formulario se envíe si está dentro de un <form>
-  await actualizarTodasCalificaciones();
-});
 
 // Se generar EXEL
 
@@ -226,25 +179,20 @@ document.getElementById("input").addEventListener("change", async (event) => {
       const data = new Uint8Array(e.target.result);
       const workbook = XLSX.read(data, { type: "array" });
 
-      // Obtener la primera hoja del archivo
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
 
-      // Convertir el contenido en un array de objetos
       const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-      // Procesar los datos y comparar con la tabla
       procesarExcel(excelData);
   };
 });
 
-
 const procesarExcel = (excelData) => {
   const tablaRows = document.querySelectorAll("#table-container tr");
 
-  // Se asume que los datos de alumnos comienzan en la fila 9 del Excel
   excelData.slice(8).forEach((row) => {
-      const [, nombre, matricula, nuevaCalificacion] = row; // Datos desde Excel
+      const [, nombre, matricula, nuevaCalificacion] = row; 
 
       tablaRows.forEach((tr) => {
           const tds = tr.getElementsByTagName("td");
@@ -257,8 +205,8 @@ const procesarExcel = (excelData) => {
                   const calificacionActual = inputCalificacion.value.trim();
 
                   if (calificacionActual !== nuevaCalificacion) {
-                      inputCalificacion.style.backgroundColor = "#ffeb3b"; // Resaltar en amarillo
-                      inputCalificacion.dataset.nuevaCalificacion = nuevaCalificacion; // Guardar temporalmente
+                      inputCalificacion.style.backgroundColor = "#ffeb3b"; 
+                      inputCalificacion.dataset.nuevaCalificacion = nuevaCalificacion; 
                   }
               }
           }
@@ -268,9 +216,8 @@ const procesarExcel = (excelData) => {
   alert("Se han resaltado las calificaciones modificadas.");
 };
 
-
 document.getElementById("guardarCalifBtn").addEventListener("click", async () => {
-  const confirmacion = confirm("¿Está seguro de actualizar las calificaciones resaltadas?");
+  const confirmacion = confirm("¿Está seguro de actualizar todas las calificaciones?");
   if (!confirmacion) return;
 
   const tablaRows = document.querySelectorAll("#table-container tr");
@@ -280,13 +227,18 @@ document.getElementById("guardarCalifBtn").addEventListener("click", async () =>
 
       if (inputCalificacion && inputCalificacion.dataset.nuevaCalificacion) {
           inputCalificacion.value = inputCalificacion.dataset.nuevaCalificacion;
-          inputCalificacion.style.backgroundColor = ""; // Quitar resaltado
+          inputCalificacion.style.backgroundColor = "#73b43e"; // Cambiar el color al indicado
           delete inputCalificacion.dataset.nuevaCalificacion;
 
           const numeroAlumno = tr.dataset.numeroalumno;
           await guardarCalificacion(numeroAlumno);
       }
   }
+
+  alert("Todas las calificaciones han sido actualizadas.");
+
+  // Recargar la página después de actualizar las calificaciones
+  window.location.reload();
 });
 
 

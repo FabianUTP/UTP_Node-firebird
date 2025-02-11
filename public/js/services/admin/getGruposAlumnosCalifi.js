@@ -109,6 +109,7 @@ const mostrarAlumnos = () => {
       <td style="text-align: left; width: 30%;">${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>
       <td style="text-align: left; width: 20%;">${item.MATRICULA}</td>
       <td style="text-align: center; width: 15%;"><input style="text-align: center; font-size: 14px;" class="calificacion-input" value="${item.CALIFICACION}" size="1"></td>
+      <td style="text-align: center; width: 20%;"><button class="save-btn" onclick="guardarCalificacion(${item.NUMEROALUMNO})" style="background-color: #911820; color: white; padding: 5px 10px; border: none; border-radius: 5px; font-size: 12px;">Guardar</button></td>
     </tr>`;
     counter++;
   });
@@ -211,6 +212,7 @@ const procesarExcel = (excelData) => {
 };
 
 // Guardar las calificaciones modificadas
+// Guardar las calificaciones modificadas
 document.getElementById("guardarCalifBtn").addEventListener("click", async () => {
   const guardarBtn = document.getElementById("guardarCalifBtn");
 
@@ -225,7 +227,7 @@ document.getElementById("guardarCalifBtn").addEventListener("click", async () =>
       const inputCalificacion = tr.querySelector(".calificacion-input");
 
       if (inputCalificacion && inputCalificacion.dataset.nuevaCalificacion) {
-          inputCalificacion.value = inputCalificacion.dataset.nuevaCalificacion;
+          inputCalificacion.value = parseFloat(inputCalificacion.dataset.nuevaCalificacion).toFixed(1);  // Asegurar que tenga un decimal
           inputCalificacion.style.backgroundColor = "#73b43e"; // Cambiar el color al indicado
           delete inputCalificacion.dataset.nuevaCalificacion;
 

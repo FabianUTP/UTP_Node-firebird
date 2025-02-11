@@ -306,9 +306,7 @@ router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
 
   // Obtener los ciclos (limitados por parámetro 'limit')
-  const ciclos = await Ciclos.all({
-    limit,
-  });
+  let ciclos = await Ciclos.all({ limit });
 
   // Si no hay ciclos disponibles, enviamos una respuesta vacía o un indicador
   if (!ciclos || ciclos.length === 0) {
@@ -319,16 +317,25 @@ router.get("/cuatris-navbar", async (req, res) => {
     });
   }
 
-  // Obtener el periodo seleccionado en la sesión
+  // Filtrar los ciclos para omitir el periodo 0 y ordenar de mayor a menor
+  ciclos = ciclos
+    .filter(ciclo => ciclo.PERIODO > 0)  // Omitir periodo 0
+    .sort((a, b) => b.PERIODO - a.PERIODO);  // Ordenar de mayor a menor
+
+  // Obtener el periodo seleccionado en la sesión y verificar que no sea 0
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
+  if (periodoSelected && periodoSelected.PERIODO === 0) {
+    periodoSelected = null; // No mostrar el periodo 0 como seleccionado
+  }
 
   // Enviar los ciclos y el periodo seleccionado en la respuesta
   res.json({
-    periodoSelected: periodoSelected?.DESCRIPCION,
+    periodoSelected: periodoSelected ? periodoSelected.DESCRIPCION : null,
     ciclos,
     noCiclos: false, // Indicador de que hay ciclos disponibles
   });
 });
+
 
 
 router.put("/update/CuatriXGrupos", async (req, res) => {

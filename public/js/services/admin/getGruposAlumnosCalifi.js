@@ -7,6 +7,7 @@ const asignaturaList = document.getElementById("asignatura-list");
 const evalSelect = document.getElementById("eval-select");
 const claveProfesorSpan = document.getElementById("claveProfesor");
 const updateAllBtn = document.getElementById("update-all-btn");
+
 const formCalif = document.getElementById("formCalif");
 const fileExcel = document.getElementById("input");
 
@@ -217,8 +218,14 @@ const procesarExcel = (excelData) => {
 };
 
 document.getElementById("guardarCalifBtn").addEventListener("click", async () => {
+  const guardarBtn = document.getElementById("guardarCalifBtn");
   const confirmacion = confirm("¿Está seguro de actualizar todas las calificaciones?");
   if (!confirmacion) return;
+
+  // Deshabilitar el botón y cambiar el texto mientras se guarda
+  guardarBtn.disabled = true;
+  const originalText = guardarBtn.textContent;
+  guardarBtn.textContent = "Espere un momento...";
 
   const tablaRows = document.querySelectorAll("#table-container tr");
 
@@ -227,7 +234,7 @@ document.getElementById("guardarCalifBtn").addEventListener("click", async () =>
 
       if (inputCalificacion && inputCalificacion.dataset.nuevaCalificacion) {
           inputCalificacion.value = inputCalificacion.dataset.nuevaCalificacion;
-          inputCalificacion.style.backgroundColor = "#73b43e"; // Cambiar el color al indicado
+          inputCalificacion.style.backgroundColor = "#911820"; // Cambiar el color al indicado
           delete inputCalificacion.dataset.nuevaCalificacion;
 
           const numeroAlumno = tr.dataset.numeroalumno;
@@ -237,9 +244,14 @@ document.getElementById("guardarCalifBtn").addEventListener("click", async () =>
 
   alert("Todas las calificaciones han sido actualizadas.");
 
+  // Restaurar el botón
+  guardarBtn.textContent = originalText;
+  guardarBtn.disabled = false;
+
   // Recargar la página después de actualizar las calificaciones
   window.location.reload();
 });
+
 
 
 // Cargar los alumnos iniciales

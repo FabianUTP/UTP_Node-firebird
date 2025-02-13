@@ -1,93 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-   <div class="text-center">
-    <p><b>
-      <h1>Sistema Integral de Información Institucional</h1>
-    </b></p>
-  </div>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-
-    tr:hover {
-      background-color: #ddd;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema Integral de Información Institucional</title>
+  <link rel="stylesheet" href="/css/Styeles_ciclos.css">
 </head>
+
 <body onload="mostrarCiclosFiltrados()">
 
-  <h1>Configuración &gt; Cuatrimestre &gt; Reinscripcion</h1>
+  <div class="container">
+    <h1>Configuración &gt; Cuatrimestre &gt; Calificaciones</h1>
+    <h2>Calificaciones</h2>
 
-  <h1>Reinscripcion:</h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Inicial</th>
-        <th>Final</th>
-        <th>Periodo</th>
-        <th>Funcion Ciclos</th>
-      </tr>
-    </thead>
-    <tbody id="ciclosContainer">
-      <!-- Aquí se mostrarán los ciclos filtrados -->
-    </tbody>
-  </table>
 
-  <script>
-    function mostrarCiclosFiltrados() {
-      const funcionCiclos = 'R'; // Funcion Ciclos que se desee obtener los datos
-      fetch(`/api/ciclosAdmi`)
-        .then(response => response.json()) // Parseamos la respuesta como JSON
-        .then(data => {
-          let ciclosHTML = '';
-          const ciclosFiltrados = data.filter(ciclo => ciclo.FUNCION_CICLOS === funcionCiclos);
-          ciclosFiltrados.forEach(ciclo => {
-            ciclosHTML += '<tr>';
-            ciclosHTML += '<td>' + ciclo.INICIAL + '</td>';
-            ciclosHTML += '<td>' + ciclo.FINAL + '</td>';
-            ciclosHTML += '<td>' + ciclo.PERIODO + '</td>';
-            ciclosHTML += '<td>' + ciclo.FUNCION_CICLOS + '</td>';
-            ciclosHTML += '</tr>';
-          });
-          document.getElementById('ciclosContainer').innerHTML = ciclosHTML;
-        })
-        .catch(error => {
-          console.error('Error al obtener los datos de la API:', error.message);
-          document.getElementById('ciclosContainer').innerHTML = '<tr><td colspan="4">Error al obtener los datos de la API</td></tr>';
-        });
-    }
-  </script>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Inicial</th>
+            <th>Final</th>
+            <th>Periodo</th>
+            <th>Función Ciclos</th>
+            <th>Bloquear</th>
+          </tr>
+        </thead>
+        <tbody id="ciclosContainer">
+          <!-- Aquí se mostrarán los ciclos filtrados -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/js/services/admin/Calificaciones_admin/calificacionesR.js"></script>
+
 </body>
+
 </html>

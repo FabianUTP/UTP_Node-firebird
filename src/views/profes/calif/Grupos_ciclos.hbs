@@ -45,6 +45,11 @@
 <script src="/js/services/profe/asignaciongrp.js"></script>
 
 <style>
+  /* General: todos los textos en negro */
+  body, table, h1, h5, .input-group-text, .form-control {
+    color: black; /* Todos los textos en color negro */
+  }
+
   /* Contenedor de los botones */
   .button-container {
     display: flex;
@@ -56,9 +61,9 @@
   /* Estilo de los botones */
   .btn {
     padding: 8px 16px;
-    font-size: 14px;
+    font-size: 20px; /* Cambié el tamaño de la fuente a 20px */
     border-radius: 0; /* Botones cuadrados */
-    background-color: #911820;
+    background-color: #911820; /* Color de fondo de los botones */
     color: white;
     border: none;
     transition: background-color 0.3s, transform 0.3s;
@@ -79,7 +84,7 @@
 
   table {
     width: 100%;
-    font-size: 12px;
+    font-size: 20px; /* Cambié el tamaño de la fuente a 20px */
     border-collapse: collapse; /* Bordes limpios */
   }
 
@@ -88,9 +93,17 @@
     border: 1px solid #ddd; /* Bordes suaves */
   }
 
+  /* Cambiar color de fondo y texto de los encabezados */
   table th {
-    background-color: #f8f9fa; /* Fondo claro para los encabezados */
+    background-color: #a4273d; /* Fondo de los encabezados con el color solicitado */
+    color: black; /* Texto en negro */
     font-weight: bold;
+  }
+
+  /* Cambiar el color de las celdas de la tabla */
+  table td {
+    background-color: #a4273d; /* Fondo de las celdas con el color solicitado */
+    color: black; /* Texto en negro */
   }
 
   /* Ajustes de la búsqueda */
@@ -109,6 +122,7 @@
     border: 1px solid #ddd;
     border-radius: 0; /* Cuadrado */
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 20px; /* Cambié el tamaño de la fuente a 20px */
   }
 
   /* Estilos para pantallas pequeñas */
@@ -120,7 +134,7 @@
     .btn {
       width: 100%; /* Los botones ocupan todo el ancho en dispositivos móviles */
       padding: 10px 0;
-      font-size: 16px;
+      font-size: 20px; /* Aumento del tamaño de los botones */
     }
 
     .button-container {
@@ -129,8 +143,8 @@
 
     /* Ajuste en el tamaño de la tabla */
     .table th, .table td {
-      font-size: 10px;
-      padding: 6px;
+      font-size: 20px; /* Cambié el tamaño de la fuente a 20px */
+      padding: 10px; /* Ajusté el padding para pantallas pequeñas */
     }
   }
 </style>

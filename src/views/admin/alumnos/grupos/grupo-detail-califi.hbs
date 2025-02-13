@@ -73,6 +73,50 @@
 
     .table-responsive {
       margin-top: 20px;
+      display: flex;
+      justify-content: center; /* Centra la tabla */
+      overflow-x: auto; /* Permite desplazamiento horizontal */
+    }
+
+    .table {
+      width: 80%; /* Reduce el tamaño de la tabla */
+      border-collapse: collapse;
+      table-layout: fixed; /* Evita que la tabla se estire */
+    }
+
+    .table th, .table td {
+      padding: 8px 10px; /* Reduce el padding en las celdas */
+      text-align: center; /* Centra el contenido de las celdas */
+      border: 1px solid #ddd; /* Bordes sutiles */
+      word-wrap: break-word;
+      min-width: 70px; /* Tamaño mínimo de las celdas */
+    }
+
+    .table th {
+      background-color: #911820;
+      color: white;
+      font-weight: bold; /* Hace el texto más fuerte */
+      font-size: 14px; /* Tamaño de fuente más pequeño */
+    }
+
+    .table tbody tr {
+      background-color: #ffffff;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f5f5f5; /* Color de fondo cuando el mouse pasa por encima */
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #f9f9f9; /* Fondo gris claro para filas pares */
+    }
+
+    .table tbody tr:nth-child(odd) {
+      background-color: #ffffff; /* Fondo blanco para filas impares */
+    }
+
+    .table td {
+      font-size: 12px; /* Tamaño de fuente para los datos más pequeño */
     }
 
     #loader {
@@ -90,7 +134,6 @@
       appearance: none;
     }
 
-    /* Estilo para los botones cuadrados */
     .btn {
       padding: 12px 20px;
       border-radius: 0;
@@ -123,29 +166,6 @@
       background-color: #7c1517;
     }
 
-    /* Estilos para la tabla */
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    .table th,
-    .table td {
-      padding: 12px 15px;
-      text-align: center;
-      border: 1px solid #ddd;
-    }
-
-    .table thead {
-      background-color: #911820;
-      color: white;
-    }
-
-    .table tbody tr:hover {
-      background-color: #f5f5f5;
-    }
-
     .clearfix::after {
       content: "";
       display: table;
@@ -158,7 +178,6 @@
       margin-right: 20px;
     }
 
-    /* Estilo para el botón de descarga flotante */
     #botonDescargarExcel {
       position: fixed;
       bottom: 20px;
@@ -171,71 +190,13 @@
       align-items: center;
     }
 
-    /* Icono del botón */
     #botonDescargarExcel i {
       margin-right: 8px;
     }
 
-
-    /* Estilo para la tabla */
-    /* Ajustes para hacer la tabla responsiva */
-    .table-responsive {
-      margin-top: -20px;
-      display: flex;
-      justify-content: flex-end;
-      /* Centrar la tabla a la derecha */
-      overflow-x: auto;
-      /* Permite desplazamiento horizontal si es necesario */
-    }
-
-    .table {
-      width: 100%;
-      max-width: 100%;
-      table-layout: fixed;
-      /* Evita que la tabla se estire al hacer zoom */
-      border-collapse: collapse;
-    }
-
-    .table th,
-    .table td {
-      padding: 12px 15px;
-      text-align: left;
-      /* Alinear los textos a la izquierda */
-      border: none;
-      /* Eliminar bordes */
-      word-wrap: break-word;
-      /* Permite que el texto largo se ajuste */
-      min-width: 100px;
-      /* Establecer un ancho mínimo */
-    }
-
-    .table thead {
-      background-color: #911820;
-      color: white;
-    }
-
-    .table tbody tr:hover {
-      background-color: #f5f5f5;
-    }
-
-    .table td,
-    .table th {
-      font-size: 14px;
-    }
-
-    /* Agregar un estilo para que el contenido sea más flexible */
-    .table th {
-      text-align: left;
-      padding: 12px 15px;
-      white-space: nowrap;
-      /* Evita que el texto se desborde */
-    }
-
-    .table td {
-      padding: 12px 15px;
-      text-align: left;
-      max-width: 300px;
-      /* Definir un ancho máximo para que las celdas no se estiren demasiado */
+    .right-column {
+      float: right;
+      width: 72%;
     }
   </style>
 
@@ -250,9 +211,10 @@
       <i class="bi bi-file-earmark-excel"></i> Descargar
     </button>
 
-    <!-- Información del grupo y profesor -->
+    <!-- Todo el contenido dentro de un solo card -->
     <div class="card">
       <div class="card-body">
+        <!-- Información del grupo y profesor -->
         <div class="card-title">
           <div class="group-code-and-professor">
             <h1>Grupo {{codigo_grupo}}</h1>
@@ -261,57 +223,57 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Selección de evaluación -->
-    <select id="eval-select">
-      <option value="">Seleccione una evaluación</option>
-    </select>
+        <!-- Selección de evaluación -->
+        <select id="eval-select">
+          <option value="">Seleccione una evaluación</option>
+        </select>
 
-    <!-- Lista de asignaturas -->
-    <div class="left-column">
-      <div class="card">
-        <div class="card-body">
-          <h5>Asignaturas</h5>
-          <ul id="asignatura-list" class="asignatura-list"></ul>
+        <!-- Lista de asignaturas -->
+        <div class="left-column">
+          <div class="card-body">
+            <h5>Asignaturas</h5>
+            <ul id="asignatura-list" class="asignatura-list"></ul>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Tabla de estudiantes y calificaciones -->
-    <div class="card" style="float: right; width: 72%;">
-      <div class="card-body">
-        <div class="container">
-          <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
+        <!-- Tabla de estudiantes y calificaciones en un card diferente y a la derecha -->
+        <div class="right-column">
+          <div class="card">
+            <div class="card-body">
+              <div class="container">
+                <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
 
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <button id="guardarCalifBtn" class="btn btn-primary">Guardar</button>
+                  <div>
+                    <input id="input" type="file" accept=".xlsx, .xls, .csv" class="form-control" />
+                    <small id="info_excel" class="text-muted"></small>
+                  </div>
+                </div>
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <button id="guardarCalifBtn" class="btn btn-primary">Guardar</button>
-              <div>
-                <input id="input" type="file" accept=".xlsx, .xls, .csv" class="form-control" />
-                <small id="info_excel" class="text-muted"></small>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr style="background-color: #911820;">
+                        <th>#</th>
+                        <th>Nombre completo</th>
+                        <th>Matrícula</th>
+                        <th>Calificación</th>
+                        <th>Guardar calificaciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table-container"></tbody>
+                  </table>
+                  <div class="text-center" id="loader">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr style="background-color: #911820;">
-                    <th>#</th>
-                    <th>Nombre completo</th>
-                    <th>Matrícula</th>
-                    <th>Calificación</th>
-                  </tr>
-                </thead>
-                <tbody id="table-container"></tbody>
-              </table>
-              <div class="text-center" id="loader">
-                <div class="spinner-border"></div>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
+
       </div>
     </div>
   </div>

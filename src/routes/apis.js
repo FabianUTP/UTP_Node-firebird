@@ -302,11 +302,14 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
 
 
 
+
 router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
 
   // Obtener los ciclos (limitados por parámetro 'limit')
-  let ciclos = await Ciclos.all({ limit });
+  const ciclos = await Ciclos.all({
+    limit,
+  });
 
   // Si no hay ciclos disponibles, enviamos una respuesta vacía o un indicador
   if (!ciclos || ciclos.length === 0) {
@@ -317,25 +320,22 @@ router.get("/cuatris-navbar", async (req, res) => {
     });
   }
 
-  // Filtrar los ciclos para omitir el periodo 0 y ordenar de mayor a menor
-  ciclos = ciclos
-    .filter(ciclo => ciclo.PERIODO > 0)  // Omitir periodo 0
-    .sort((a, b) => b.PERIODO - a.PERIODO);  // Ordenar de mayor a menor
+  // Filtrar los ciclos para omitir el periodo 0
+  const ciclosFiltrados = ciclos.filter(ciclo => ciclo.PERIODO !== 0);
 
-  // Obtener el periodo seleccionado en la sesión y verificar que no sea 0
+  // Obtener el periodo seleccionado en la sesión
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
   if (periodoSelected && periodoSelected.PERIODO === 0) {
-    periodoSelected = null; // No mostrar el periodo 0 como seleccionado
+    periodoSelected = null; // Si el periodo seleccionado es 0, lo omitimos
   }
 
-  // Enviar los ciclos y el periodo seleccionado en la respuesta
+  // Enviar los ciclos filtrados y el periodo seleccionado en la respuesta
   res.json({
-    periodoSelected: periodoSelected ? periodoSelected.DESCRIPCION : null,
-    ciclos,
+    periodoSelected: periodoSelected?.DESCRIPCION,
+    ciclos: ciclosFiltrados,
     noCiclos: false, // Indicador de que hay ciclos disponibles
   });
 });
-
 
 
 router.put("/update/CuatriXGrupos", async (req, res) => {
@@ -381,6 +381,8 @@ router.get("/cuatrimestres", async (req, res) => {
     ciclos,
   });
 });
+
+
 
 router.get("/alumnos", async (req, res) => {
   const { limit = 15, skip = 0, search, orderBy = "paterno", sort ="asc" } = req.query;
@@ -646,6 +648,15 @@ router.post("/calificaciones", async (req, res) => {
     periodo
   } = req.query;
 
+  // Verificar si el ciclo está bloqueado antes de proceder
+  const bloqueados = JSON.parse(localStorage.getItem('ciclosBloqueados')) || {};
+  const cicloIndex = `${inicial}-${final}-${periodo}`; // Identificador único para el ciclo
+  if (bloqueados[cicloIndex]) {
+    return res.json({
+      error: "No se pueden subir calificaciones, el ciclo está bloqueado."
+    });
+  }
+
   const dataCalif = req.body;
   let promises = [];
 
@@ -680,6 +691,7 @@ router.post("/calificaciones", async (req, res) => {
     });
   }
 });
+
 
 router.post("/grupos_add", async (req, res) => {
 
@@ -847,6 +859,25 @@ router.get("/planes/:idPlan/eval", async (req, res) => {
     querys: null,
     data: evals
   })
+});
+
+//Posdata la tabla ciclo no cuenta con un Update y el ciclos admin no permite la acutalizacion de los foramtos
+router.get('/ciclosAdmi', async (_req, res) => {
+  try {
+    // Realizar la consulta SQL
+    const ciclosAdmins = await CiclosAdmins.createQuery({ querySql: "SELECT * FROM CICLOS_ADMINS" });
+
+    // Verifica si se encontraron datos
+    if (ciclosAdmins && ciclosAdmins.length > 0) {
+      res.json(ciclosAdmins); // Devuelve los datos si se encontraron
+    } else {
+      res.status(404).json({ error: 'No se encontraron ciclos administradores' }); // Maneja el caso sin resultados
+    }
+  } catch (error) {
+    // Manejo de errores con más detalle
+    console.error('Error al consultar la base de datos:', error);
+    res.status(500).json({ error: 'Error en la consulta de la base de datos', message: error.message });
+  }
 });
 
 // Calificaciones por alumno

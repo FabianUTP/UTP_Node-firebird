@@ -11,8 +11,8 @@ AlumnosAdminCtr.createView = (req, res) => {
 };
 
 AlumnosAdminCtr.show = (req, res) => {
-  const { search } = req.query;
-  res.render("admin/alumnos/alumnos/alumnos-lista", { search });
+  const { search } = req.query;i
+  res.render("admin/alumnos/alumnos/alumnos-lsta", { search });
 };
 
 AlumnosAdminCtr.showDocto = async (req, res) => {

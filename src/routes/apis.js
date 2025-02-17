@@ -380,7 +380,7 @@ router.get("/cuatrimestres", async (req, res) => {
 
 
 router.get("/alumnos", async (req, res) => {
-  const { limit = 15, skip = 0, search, orderBy = "paterno", sort ="asc" } = req.query;
+  const { limit = 15, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
 
   let searchQuery = null;
 
@@ -389,12 +389,22 @@ router.get("/alumnos", async (req, res) => {
     searchQuery = `(matricula LIKE '%${search}%') `;
     searchQuery += `OR (nombre LIKE '%${search}%') `;
     searchQuery += `OR (paterno LIKE '%${search}%') `;
-    
+
     let searchLastName = search.split(" ");
-    if(searchLastName.length > 1) {
+    if (searchLastName.length > 1) {
       searchQuery += `OR (paterno LIKE '%${searchLastName[0]}%' AND materno LIKE '%${searchLastName[1]}%') `;
     }
   }
+
+  // Imprimir la consulta en la consola para depuración
+  console.log("Consulta generada:", {
+    limit,
+    skip,
+    search,
+    searchQuery,
+    orderBy,
+    sort
+  });
 
   const alumnos = await Alumno.all({
     limit,
@@ -415,6 +425,7 @@ router.get("/alumnos", async (req, res) => {
     alumnos,
   });
 });
+
 
 router.get("/carreras", async (req, res) => {
   const { limit, skip, search } = req.query;

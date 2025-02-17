@@ -1,3 +1,23 @@
+"use strict";
+
+const table = document.getElementById("table-container");
+const inputSearch = document.getElementById("buscar");
+const load = document.getElementById("load");
+
+let limit = 20;
+let skip = 0;
+let search = "";
+let orderBy = "numeroalumno";
+let sort = "asc";
+let alumnosLength = 0;
+
+inputSearch.addEventListener("input", debounce(() => {
+  search = inputSearch.value;
+  skip = 0; // Reinicia la paginación
+  getAlumnos();
+}));
+
+// Llamada a la API para obtener alumnos
 const getAlumnos = async () => {
   table.innerHTML = "";
   load.style.display = "block";
@@ -7,8 +27,6 @@ const getAlumnos = async () => {
   try {
     const res = await fetch(url);
     const { alumnos } = await res.json();
-
-    console.log('Datos obtenidos de la API:', alumnos); // Agrega este log para ver los datos
 
     load.style.display = "none";
 
@@ -33,7 +51,6 @@ const getAlumnos = async () => {
       content += `<td>${item.MATRICULA}</td>`;
       content += `<td>${status[item.STATUS] ?? ""}</td>`;
       content += `<td>${item.NIVEL}</td>`;
-      content += `<td>${item.ADICIONALES}</td>`;
 
       // TÍTULO LICENCIATURA
       content += `<td>${item.FOLIO_TITLIC ?? ""}</td>`; // Folio Titulación
@@ -54,6 +71,7 @@ const getAlumnos = async () => {
 
       content += "</tr>";
     });
+
 
     table.innerHTML = content;
     alumnosLength = alumnos.length;

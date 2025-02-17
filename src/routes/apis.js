@@ -27,7 +27,7 @@ const {
 } = require("../app/models");
 const Firebird = require("../app/models/Firebird");
 const GrupoAlumnos = require("../app/models/GrupoAlumno");
-
+console.log("GrupoAlumnos", GrupoAlumnos);
 
 router.get("/grupos", async (req, res) => {
   const {
@@ -235,9 +235,6 @@ router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   sql += `AND grupos.codigo_grupo = profesores_grupos.codigo_grupo `;
 
   sql += `left join profesores on profesores_grupos.claveprofesor = profesores.claveprofesor `;
-
-
-
 
   sql += `WHERE alumnos_grupos.codigo_grupo = '${idGrupo}' `;
 

@@ -1,0 +1,110 @@
+<!-- Mostrar alumnos con búsqueda y ordenamiento -->
+<section class="position-relative p-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    {{> btnBack}}
+  </div>
+
+  <section class="section">
+    <div id="container" class="row d-none">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="text-center" style="padding: 13px;">
+            <h1><i class="bi bi-people"></i><span>Alumnos</span></h1>
+          </div>
+
+          <div class="card-body">
+            <div class="container">
+
+              <div class="d-flex w-100">
+                <div class="flex-fill">
+                  <div class="input-group mb-1">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="background-color: #911820; color: white;">
+                        <i class="bi bi-search"></i>
+                      </span>
+                    </div>
+                    <input type="search" class="form-control" placeholder="Buscar" id="buscar" value="{{search}}"
+                      style="border-color: #911820;">
+                  </div>
+                </div>
+
+                <div>
+                  <div class="dropdown">
+                    <button class="btn" style="background-color: #911820; color: white; border-radius: 0;" type="button"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      Ordenar
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-item">
+                        <input class="form-check-input" type="radio" id="orderApe" name="orderBy" checked
+                          onchange="handleOrder('paterno')">
+                        <label class="form-check-label" for="orderApe">Apellido</label>
+                      </li>
+                      <li class="dropdown-item">
+                        <input class="form-check-input" type="radio" id="orderName" name="orderBy"
+                          onchange="handleOrder('nombre')">
+                        <label class="form-check-label" for="orderName">Nombre</label>
+                      </li>
+                      <li class="dropdown-item">
+                        <input class="form-check-input" type="radio" id="orderMatri" name="orderBy"
+                          onchange="handleOrder('matricula')">
+                        <label class="form-check-label" for="orderMatri">Matricula</label>
+                      </li>
+                      <li class="border-top"></li>
+                      <li class="dropdown-item">
+                        <input class="form-check-input" type="radio" id="orderDesc" name="sort" checked
+                          onchange="handleSort('asc')">
+                        <label class="form-check-label" for="orderDesc">Ascendente</label>
+                      </li>
+                      <li class="dropdown-item">
+                        <input class="form-check-input" type="radio" id="orderAsc" name="sort"
+                          onchange="handleSort('desc')">
+                        <label class="form-check-label" for="orderAsc">Descendente</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Tabla de alumnos -->
+              <div class="table-responsive">
+                <table align="center" class="table table-hover" style="border-color: #911820;">
+                  <thead class="table-dark" style="background-color: #911820; color: white;">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Apellidos</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Matricula</th>
+                      <th scope="col">Estatus</th>
+                      <th scope="col">Nivel</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="table-container"></tbody>
+                </table>
+
+                <div class="d-flex justify-content-center pb-2">
+                  <div class="spinner-border" role="status" id="load" style="display: none;"></div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button onclick="prev()" class="btn" style="background-color: #911820; color: white; border-radius: 0;">
+                  <i class="bi bi-arrow-left"></i>
+                </button>
+                <button onclick="next()" class="btn" style="background-color: #911820; color: white; border-radius: 0;">
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="preloader"></div>
+  </section>
+
+  <script src="js/services/admin/getAlumnosTitulo.js"></script>
+</section>

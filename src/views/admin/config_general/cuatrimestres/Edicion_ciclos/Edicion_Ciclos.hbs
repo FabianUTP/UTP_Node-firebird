@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Ciclos</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    .container {
+      margin: 20px;
+    }
+
+    .blocked {
+      background-color: #f2f2f2;
+      color: #d3d3d3;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Tabla de Ciclos</h2>
+
+    <!-- Botones para bloquear y desbloquear todos los datos -->
+    <button onclick="bloquearTodos()">Bloquear Todos</button>
+    <button onclick="desbloquearTodos()">Desbloquear Todos</button>
+
+    <!-- Tabla de ciclos -->
+    <table id="ciclosTable">
+      <thead>
+        <tr>
+          <th>Periodo</th>
+          <th>Código Corto</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí se llenarán los datos dinámicamente -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const ciclosTableBody = document.getElementById("ciclosTable").getElementsByTagName("tbody")[0];
+
+    // Función para cargar los ciclos desde la API
+    const cargarCiclos = async () => {
+      try {
+        const response = await fetch("/api/cuatris-navbar");
+        const { ciclos } = await response.json();
+
+        if (ciclos && ciclos.length > 0) {
+          // Filtrar ciclos bloqueados si el parámetro "bloqueado" es falso
+          const estadoBloqueo = new URLSearchParams(window.location.search).get('bloqueado');
+          if (estadoBloqueo === 'false') {
+            ciclos = ciclos.filter(ciclo => !ciclo.bloqueado);
+          }
+
+          mostrarCiclosEnTabla(ciclos);
+        } else {
+          console.log("No hay ciclos disponibles.");
+        }
+      } catch (error) {
+        console.error("Error al cargar los ciclos:", error);
+        console.log("Hubo un problema al cargar los ciclos. Por favor, inténtalo de nuevo más tarde.");
+      }
+    };
+
+    // Función para mostrar los ciclos en la tabla
+    const mostrarCiclosEnTabla = (ciclos) => {
+      ciclosTableBody.innerHTML = ""; // Limpiar tabla
+
+      ciclos.forEach(ciclo => {
+        const row = document.createElement("tr");
+
+        // Aplicar clase "blocked" si el ciclo está bloqueado
+        if (ciclo.bloqueado) row.classList.add("blocked");
+
+        // Verificar si el estado está bien definido
+        const estadoTexto = ciclo.bloqueado ? "❌ Bloqueado" : "✅ Activo";
+
+        row.innerHTML = `
+      <td class="${ciclo.bloqueado ? 'blocked' : ''}">${ciclo.PERIODO}</td>
+      <td class="${ciclo.bloqueado ? 'blocked' : ''}">${ciclo.CODIGO_CORTO}</td>
+      <td class="${ciclo.bloqueado ? 'blocked' : ''}">${ciclo.DESCRIPCION}</td>
+      <td>${estadoTexto}</td>
+    `;
+        ciclosTableBody.appendChild(row);
+      });
+
+      // Aplicar estado de bloqueo desde localStorage
+      aplicarEstadoBloqueo();
+    };
+
+    // Función para bloquear todos los datos
+    const bloquearTodos = async () => {
+      const filas = document.querySelectorAll('#ciclosTable tbody tr');
+      filas.forEach(fila => {
+        fila.querySelectorAll('td').forEach(td => {
+          td.classList.add("blocked");
+        });
+        fila.querySelector('td:nth-child(4)').textContent = "❌ Bloqueado";
+      });
+      localStorage.setItem('bloqueado', 'true');
+      await fetch('/api/update/CuatriXGrupos', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ bloqueado: true })
+      });
+      location.reload();
+    };
+
+    // Función para desbloquear todos los datos
+    const desbloquearTodos = async () => {
+      const filas = document.querySelectorAll('#ciclosTable tbody tr');
+      filas.forEach(fila => {
+        fila.querySelectorAll('td').forEach(td => {
+          td.classList.remove("blocked");
+        });
+        fila.querySelector('td:nth-child(4)').textContent = "✅ Activo";
+      });
+      localStorage.setItem('bloqueado', 'false');
+      await fetch('/api/update/CuatriXGrupos', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ bloqueado: false })
+      });
+      location.reload();
+    };
+
+    // Función para aplicar el estado de bloqueo desde localStorage
+    const aplicarEstadoBloqueo = () => {
+      const estadoBloqueo = localStorage.getItem('bloqueado');
+      if (estadoBloqueo === 'true') {
+        const filas = document.querySelectorAll('#ciclosTable tbody tr');
+        filas.forEach(fila => {
+          fila.querySelectorAll('td').forEach(td => {
+            td.classList.add("blocked");
+          });
+          fila.querySelector('td:nth-child(4)').textContent = "❌ Bloqueado";
+        });
+      }
+    };
+
+    // Función para cargar los ciclos al abrir la página
+    window.onload = cargarCiclos;
+  </script>
+
+</body>
+
+</html>

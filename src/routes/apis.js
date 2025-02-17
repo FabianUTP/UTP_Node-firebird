@@ -301,8 +301,7 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
 });
 
 
-
-
+////NAVBAR CUATRIMESTRES
 router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 100 } = req.query;
 
@@ -336,7 +335,6 @@ router.get("/cuatris-navbar", async (req, res) => {
     noCiclos: false, // Indicador de que hay ciclos disponibles
   });
 });
-
 
 router.put("/update/CuatriXGrupos", async (req, res) => {
   const { periodo } = req.body;

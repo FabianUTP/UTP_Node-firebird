@@ -36,6 +36,7 @@ router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
 router.get("/cuatrimestres", CuatrisCtr.index);
 router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Calificacion/Calificaciones.hbs")})
+router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Edicion_ciclos/Edicion_Ciclos.hbs")})
 router.get("/Cuatri-Reins", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Reinscripcion/Reinscripciones.hbs")})
 router.get("/Cuatri-Estadia", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Estadias/Estadias.hbs")})
 router.get("/Cuatri-NIngreso", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Nuevo Ingreso/Nuevo_Ingreso.hbs")})
@@ -59,7 +60,9 @@ router.get("/carreras/crear", NivelesCtr.form);
 router.get("/academico/planes", PlanesCtr.showTable);
 router.get("/academico/planes/nuevo", PlanesCtr.showCreate);
 router.post("/academico/planes/nuevo", PlanesCtr.crearPlan);
+
 router.get("/academico/planes/:id", PlanesCtr.showById);
+
 router.post("/academico/planes/:id", PlanesCtr.updatePlan);
 
 router.get("/academico/planes/:idPlan/asignaturas", PlanesCtr.showAsignaturas)
@@ -82,5 +85,10 @@ router.get("/profesores/:id/subir_calif", ProfeCtr.showSubirCalf);
 router.post("/profesores/:id/update_otros_campos", ProfeCtr.update_otros_campos);
 router.post("/profesores/:id/update_ficha", ProfeCtr.update_ficha);
 router.post("/profesores/:id/update_personalizados", ProfeCtr.update_personalizados);
+
+
+// Navbar ___> Titulacion  src\
+router.get("/Navegacion_Titulacion", (_req, res) => { res.render("../views/Titulos/Formatotitulos_buscar.hbs")})
+
 
 module.exports = router;

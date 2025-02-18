@@ -34,6 +34,16 @@ router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
 router.get("/alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
 router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
+//datos para los AlumnosTitulos
+router.get("/formato", AlumnosAdminCtr.showTitul);
+router.get("/formato/crear", AlumnosAdminCtr.createViewTitul);
+router.get("/formato/:id", AlumnosAdminCtr.showByIdTitul);
+router.post("/formato/:id/update", AlumnosAdminCtr.updateTitul);
+router.post("/formato/:id/updatePhoto", AlumnosAdminCtr.updatePhotoTitul);
+router.get("/formato/:id/doctos", AlumnosAdminCtr.doctosTitul);
+router.get("/formato/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoTitul);
+
+// Rutas para los cuatrimestres
 router.get("/cuatrimestres", CuatrisCtr.index);
 router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Calificacion/Calificaciones.hbs")})
 router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Edicion_ciclos/Edicion_Ciclos.hbs")})
@@ -88,7 +98,7 @@ router.post("/profesores/:id/update_personalizados", ProfeCtr.update_personaliza
 
 
 // Navbar ___> Titulacion  src\
-router.get("/Navegacion_Titulacion", (_req, res) => { res.render("../views/Titulos/Formatotitulos_buscar.hbs")})
+router.get("/TitulacionNav", (_req, res) => { res.render("../views/admin/alumnos/alumnos/Titulacion/titulacion-lista.hbs")})
 
 
 module.exports = router;

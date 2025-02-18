@@ -15,6 +15,7 @@ AlumnosAdminCtr.show = (req, res) => {
   res.render("admin/alumnos/alumnos/alumnos-lista", { search });
 };
 
+
 AlumnosAdminCtr.showDocto = async (req, res) => {
   const { id, idDocto } = req.params;
   const alumno = await Alumno.findById(id);
@@ -84,7 +85,6 @@ AlumnosAdminCtr.showById = async (req = request, res = response) => {
                 ...alumno,
                 image,
               };
-
               res.render("admin/alumnos/alumnos/alumno-id", newAlumno);
 
               db.detach();
@@ -172,8 +172,194 @@ AlumnosAdminCtr.doctos = async (req = request, res = response) => {
 };
 
 AlumnosAdminCtr.boletas = async (req, res) => {
+  const alumnos = await Alumno.findById(req.params.id);
+  res.render("alumno/boletas/boletas-screen", alumnos);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// formato de conexiones para Titulacion 
+
+AlumnosAdminCtr.createViewTitul = (req, res) => {
+  res.render("admin/alumnos/alumnos/Titulacion/titulacion-crear");
+};
+// Mostrar listado de Titulaciones
+AlumnosAdminCtr.showTitul = (req, res) => {
+  const { search } = req.query;
+  res.render("admin/alumnos/alumnos/Titulacion/titulacion-lista", { search });
+};
+// Mostrar documento de Titulación
+AlumnosAdminCtr.showDoctoTitul = async (req, res) => {
+  const { id, idDocto } = req.params;
+  const formato = await Alumno.findById(id);
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select documento from doctos where clave = '${formato.NUMEROALUMNO}' AND id_docto = '${idDocto}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let docto = row[0]?.DOCUMENTO;
+
+        if (docto) {
+          docto(function (err, _name, e) {
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+              res.contentType("application/pdf");
+              res.send(buffer);
+              db.detach();
+            });
+          });
+        } else {
+          res.send("No hay documento");
+        }
+      }
+    );
+  });
+};
+// Mostrar información de un alumno por ID
+AlumnosAdminCtr.showByIdTitul = async (req = request, res = response) => {
+  const formato = await Alumno.findById(req.params.id);
+  let image = "data:image/jpeg;base64, ";
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select fotografia from alumnos where matricula = '${formato?.MATRICULA}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let foto = row[0]?.FOTOGRAFIA;
+        if (foto) {
+          foto(function (err, _name, e) {
+            if (err) throw err;
+
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+              image += buffer.toString("base64");
+
+              let newAlumno = {
+                ...formato,
+                image,
+              };
+              res.render("admin/alumnos/alumnos/Titulacion/titulacion-id", newAlumno);
+
+              db.detach();
+            });
+          });
+        } else {
+          res.render("admin/alumnos/alumnos/Titulacion/titulacion-id", formato);
+        }
+      }
+    );
+  });
+};
+
+
+AlumnosAdminCtr.updateTitul = async (req = request, res = response) => {
+  const body = req.body;
+
+  const data = {
+    paterno: body?.paterno,
+    materno: body?.materno,
+    nombre: body?.nombre,
+    genero: body?.genero,
+    fecha_nacimiento: body?.fecha_nacimiento,
+    estado_nacimiento: body?.estado_nacimiento,
+    lugar_nacimiento: body?.municipio_naci,
+    nacionalidad: body?.nacionalidad,
+    clave_ciudadana: body?.curp,
+    domicilio: body?.domicilio,
+    entre_calles: body?.cruzamientos,
+    estado: body?.estado,
+    cp: body?.postal,
+    email: body?.email_personal,
+    email_alterno: body?.email_insti,
+    celular: body?.tel_cel,
+    telefono: body?.tel_domicilio,
+    nivel: body?.nivel,
+    grado: body?.grado,
+    matricula: body?.matricula,
+    observaciones: body?.nota,
+    proyecto_obs: body?.proyecto_obs,
+    obs_proyecto_lic: body?.obs_proyecto_lic,
+    // TÍTULO LICENCIATURA
+    folio_titlic: body?.folio_titlic,
+    libro_titlic: body?.libro_titlic,
+    foja_titlic: body?.foja_titlic,
+    // CERTIFICADO LICENCIATURA
+    folio_cerlic: body?.folio_cerlic,
+    libro_cerlic: body?.libro_cerlic,
+    foja_cerlic: body?.foja_cerlic,
+    // ACTA EXENCIÓN LICENCENCIATURA
+    folio_aexlic: body?.folio_aexlic,
+    libro_aexlic: body?.libro_aexlic,
+    foja_aexlic: body?.foja_aexlic,
+    //SERVICIO SOCIAL LICENCIATURA
+    folio_csslic: body?.folio_csslic,
+    libro_csslic: body?.libro_csslic,
+    foja_csslic: body?.foja_csslic,
+    //NOTAS--->format JSON
+    adicionales: body?.adicionales,
+  };
+
+  await Alumno.findByIdAndUpdate(body?.matricula, data);
+
+  res.redirect(`/formato/${body?.matricula}`);
+};
+
+AlumnosAdminCtr.updatePhotoTitul = async (req = request, res = response) => {
+  let id = req.params.id;
+
+  if (req.files?.fotografia) {
+    await Alumno.findByIdAndUpdate(id, {
+      fotografia: req.files.fotografia.data,
+    });
+    res.redirect(`/formato/${id}`);
+  } else {
+    res.redirect(`/formato/${id}`);
+  }
+};
+
+AlumnosAdminCtr.doctosTitul = async (req = request, res = response) => {
   const alumno = await Alumno.findById(req.params.id);
-  res.render("alumno/boletas/boletas-screen", alumno);
+  res.render("alumno/documentos/doctos-screen", {
+    numeroalumno: formato?.NUMEROALUMNO,
+    nombre: formato?.NOMBRE,
+  });
+};
+
+AlumnosAdminCtr.boletasTitul = async (req, res) => {
+  const alumnos = await Alumno.findById(req.params.id);
+  res.render("alumno/boletas/boletas-screen", formato);
 };
 
 module.exports = {

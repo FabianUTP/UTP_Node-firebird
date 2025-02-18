@@ -68,6 +68,8 @@ const getAlumnos = async () => {
       content += `<td>${item.FOLIO_CSSLIC ?? ""}</td>`; // Folio Servicio Social
       content += `<td>${item.LIBRO_CSSLIC ?? ""}</td>`; // Libro Servicio Social
       content += `<td>${item.FOJA_CSSLIC ?? ""}</td>`;  // Foja Servicio Social
+      //Notas
+      content += `<td>${item.ADICIONALES ?? ""}</td>`; // Notas
 
       content += "</tr>";
     });

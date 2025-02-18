@@ -125,6 +125,24 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
     observaciones: body?.nota,
     proyecto_obs: body?.proyecto_obs,
     obs_proyecto_lic: body?.obs_proyecto_lic,
+    // TÍTULO LICENCIATURA
+    folio_titlic: body?.folio_titlic,
+    libro_titlic: body?.libro_titlic,
+    foja_titlic: body?.foja_titlic,
+    // CERTIFICADO LICENCIATURA
+    folio_cerlic: body?.folio_cerlic,
+    libro_cerlic: body?.libro_cerlic,
+    foja_cerlic: body?.foja_cerlic,
+    // ACTA EXENCIÓN LICENCENCIATURA
+    folio_aexlic: body?.folio_aexlic,
+    libro_aexlic: body?.libro_aexlic,
+    foja_aexlic: body?.foja_aexlic,
+    //SERVICIO SOCIAL LICENCIATURA
+    folio_csslic: body?.folio_csslic,
+    libro_csslic: body?.libro_csslic,
+    foja_csslic: body?.foja_csslic,
+    //NOTAS--->format JSON
+    adicionales: body?.adicionales,
   };
 
   await Alumno.findByIdAndUpdate(body?.matricula, data);

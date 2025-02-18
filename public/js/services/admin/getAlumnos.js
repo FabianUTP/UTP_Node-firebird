@@ -54,7 +54,26 @@ const getAlumnos = async () => {
       content += `<td>${item.MATRICULA}</td>`;
       content += `<td>${status[item.STATUS] ?? ""}</td>`;
       content += `<td>${item.NIVEL}</td>`;
-      
+      // TÍTULO LICENCIATURA
+      content += `<td>${item.FOLIO_TITLIC ?? ""}</td>`; // Folio Titulación
+      content += `<td>${item.LIBRO_TITLIC ?? ""}</td>`; // Libro Titulación
+      content += `<td>${item.FOJA_TITLIC ?? ""}</td>`;  // Foja Titulación
+      // CERTIFICADO LICENCIATURA
+      content += `<td>${item.FOLIO_CERLIC ?? ""}</td>`; // Folio Certificado
+      content += `<td>${item.LIBRO_CERLIC ?? ""}</td>`; // Libro Certificado
+      content += `<td>${item.FOJA_CERLIC ?? ""}</td>`;  // Foja Certificado
+      // ACTA EXENCIÓN LICENCENCIATURA
+      content += `<td>${item.FOLIO_AEXLIC ?? ""}</td>`; // Folio Acta Exención
+      content += `<td>${item.LIBRO_AEXLIC ?? ""}</td>`; // Libro Acta Exención
+      content += `<td>${item.FOJA_AEXLIC ?? ""}</td>`;  // Foja Acta Exención
+      //SERVICIO SOCIAL LICENCIATURA
+      content += `<td>${item.FOLIO_CSSLIC ?? ""}</td>`; // Folio Servicio Social
+      content += `<td>${item.LIBRO_CSSLIC ?? ""}</td>`; // Libro Servicio Social
+      content += `<td>${item.FOJA_CSSLIC ?? ""}</td>`;  // Foja Servicio Social
+      //notas
+      content += `<td>${item.ADICIONALES ?? ""}</td>`; // Notas
+
+
       // Revisa si las fechas son null o 0, en caso contrario las muestra
       const proyectoObs = (item.PROYECTO_OBS && item.PROYECTO_OBS !== 0) ? item.PROYECTO_OBS : "";
       const obsProyectoLic = (item.OBS_PROYECTO_LIC && item.OBS_PROYECTO_LIC !== 0) ? item.OBS_PROYECTO_LIC : "";

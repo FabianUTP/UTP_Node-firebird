@@ -56,6 +56,7 @@ const getAlumnos = async () => {
       content += `<td>${item.FOLIO_TITLIC ?? ""}</td>`; // Folio Titulación
       content += `<td>${item.LIBRO_TITLIC ?? ""}</td>`; // Libro Titulación
       content += `<td>${item.FOJA_TITLIC ?? ""}</td>`;  // Foja Titulación
+      
       // CERTIFICADO LICENCIATURA
       content += `<td>${item.FOLIO_CERLIC ?? ""}</td>`; // Folio Certificado
       content += `<td>${item.LIBRO_CERLIC ?? ""}</td>`; // Libro Certificado

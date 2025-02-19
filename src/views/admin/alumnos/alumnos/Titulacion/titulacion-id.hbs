@@ -27,8 +27,8 @@
               <div class="col-md-12">
                 <h4>Fichas</h4>
                 <div class="btn-group flex-wrap" role="group">
-                  <a class="btn btn-outline-primary" href="/formato/{{MATRICULA}}/doctos">Documentos</a>
-                  <a class="btn btn-outline-primary" href="/formato/{{MATRICULA}}/boletas">Boletas</a>
+                  <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/doctos">Documentos</a>
+                  <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/boletas">Boletas</a>
                 </div>
               </div>
 
@@ -316,90 +316,101 @@
 
 
 
-      {{!--CERTIFICADO LICENCIATURA--}}
-      <div class="card">
+      <!-- Primer Card (Datos de Certificado Licenciatura) -->
+      <div class="card" id="card1">
         <div class="card-body">
           <h1 class="card-title">CERTIFICADO LICENCIATURA</h1>
-
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_cerlic" class="form-label">FOLIO_CERLIC</label>
-              <input type="text" id="folio_cerlic" name="folio_cerlic" class="form-control" placeholder="folio_cerlic"
-                value="{{FOLIO_CERLIC}}" disabled>
+              <label for="folio_cerlic_1" class="form-label">FOLIO_CERLIC</label>
+              <input type="text" id="folio_cerlic_1" name="folio_cerlic_1" class="form-control"
+                placeholder="folio_cerlic">
             </div>
             <div class="col-md-6">
-              <label for="libro_cerlic" class="form-label">LIBRO_CERLIC</label>
-              <input type="text" id="libro_cerlic" name="libro_cerlic" class="form-control" placeholder="libro_cerlic"
-                value="{{LIBRO_CERLIC}}" disabled>
+              <label for="libro_cerlic_1" class="form-label">LIBRO_CERLIC</label>
+              <input type="text" id="libro_cerlic_1" name="libro_cerlic_1" class="form-control"
+                placeholder="libro_cerlic">
             </div>
             <div class="col-md-12">
-              <label for="foja_cerlic" class="form-label">FOJA_CERLIC</label>
-              <input type="text" id="foja_cerlic" name="foja_cerlic" class="form-control" placeholder="foja_cerlic"
-                value="{{FOJA_CERLIC}}" disabled>
+              <label for="foja_cerlic_1" class="form-label">FOJA_CERLIC</label>
+              <input type="text" id="foja_cerlic_1" name="foja_cerlic_1" class="form-control" placeholder="foja_cerlic">
             </div>
-            </select>
-
           </div>
         </div>
       </div>
 
-
-
-      {{!-- Card para los datos de CERTIFICADO LICENCIATURA--}}
-      <div class="card">
+      <!-- Segundo Card -->
+      <div class="card" id="card2">
         <div class="card-body">
-          <h1 class="card-title">ACTA EXENCIÓN LICENCENCIATURA</h1>
-
+          <h1 class="card-title">CERTIFICADO LICENCIATURA</h1>
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_aexlic" class="form-label">FOLIO_AEXLIC</label>
-              <input type="text" id="folio_aexlic" name="folio_aexlic" class="form-control" placeholder="folio_aexlic"
-                value="{{FOLIO_AEXLIC}}" disabled>
+              <label for="folio_cerlic_2" class="form-label">FOLIO_CERLIC</label>
+              <input type="text" id="folio_cerlic_2" name="folio_cerlic_2" class="form-control"
+                placeholder="folio_cerlic" disabled>
             </div>
             <div class="col-md-6">
-              <label for="libro_aexlic" class="form-label">LIBRO_AEXLIC</label>
-              <input type="text" id="libro_aexlic" name="libro_aexlic" class="form-control" placeholder="libro_aexlic"
-                value="{{LIBRO_AEXLIC}}" disabled>
+              <label for="libro_cerlic_2" class="form-label">LIBRO_CERLIC</label>
+              <input type="text" id="libro_cerlic_2" name="libro_cerlic_2" class="form-control"
+                placeholder="libro_cerlic" disabled>
             </div>
             <div class="col-md-12">
-              <label for="foja_aexlic" class="form-label">FOJA_AEXLIC</label>
-              <input type="text" id="foja_aexlic" name="foja_aexlic" class="form-control" placeholder="foja_aexlic"
-                value="{{FOJA_AEXLIC}}" disabled>
+              <label for="foja_cerlic_2" class="form-label">FOJA_CERLIC</label>
+              <input type="text" id="foja_cerlic_2" name="foja_cerlic_2" class="form-control" placeholder="foja_cerlic"
+                disabled>
             </div>
-            </select>
-
           </div>
         </div>
       </div>
 
-
-
-
-      <div class="card">
+      <!-- Tercer Card -->
+      <div class="card" id="card3">
         <div class="card-body">
-          <h1 class="card-title">SERVICIO SOCIAL LICENCIATURA</h1>
-
+          <h1 class="card-title">CERTIFICADO LICENCIATURA</h1>
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_csslic" class="form-label">FOLIO_CSSLIC</label>
-              <input type="text" id="folio_csslic" name="folio_csslic" class="form-control" placeholder="folio_csslic"
-                value="{{FOLIO_CSSLIC}}" disabled>
+              <label for="folio_cerlic_3" class="form-label">FOLIO_CERLIC</label>
+              <input type="text" id="folio_cerlic_3" name="folio_cerlic_3" class="form-control"
+                placeholder="folio_cerlic" disabled>
             </div>
             <div class="col-md-6">
-              <label for="libro_csslic" class="form-label">LIBRO_CSSLIC</label>
-              <input type="text" id="libro_csslic" name="libro_csslic" class="form-control" placeholder="libro_csslic"
-                value="{{LIBRO_CSSLIC}}" disabled>
+              <label for="libro_cerlic_3" class="form-label">LIBRO_CERLIC</label>
+              <input type="text" id="libro_cerlic_3" name="libro_cerlic_3" class="form-control"
+                placeholder="libro_cerlic" disabled>
             </div>
             <div class="col-md-12">
-              <label for="foja_csslic" class="form-label">FOJA_CSSLIC</label>
-              <input type="text" id="foja_csslic" name="foja_csslic" class="form-control" placeholder="foja_csslic"
-                value="{{FOJA_CSSLIC}}" disabled>
+              <label for="foja_cerlic_3" class="form-label">FOJA_CERLIC</label>
+              <input type="text" id="foja_cerlic_3" name="foja_cerlic_3" class="form-control" placeholder="foja_cerlic"
+                disabled>
             </div>
-            </select>
-
           </div>
         </div>
       </div>
+
+      <script>
+        // Función para copiar el valor del primer card a los otros cards
+        document.getElementById("folio_cerlic_1").addEventListener("input", function () {
+          // Copiar el valor del primer card a los otros cards
+          const value = this.value;
+          document.getElementById("folio_cerlic_2").value = value;
+          document.getElementById("folio_cerlic_3").value = value;
+        });
+
+        document.getElementById("libro_cerlic_1").addEventListener("input", function () {
+          // Copiar el valor del primer card a los otros cards
+          const value = this.value;
+          document.getElementById("libro_cerlic_2").value = value;
+          document.getElementById("libro_cerlic_3").value = value;
+        });
+
+        document.getElementById("foja_cerlic_1").addEventListener("input", function () {
+          // Copiar el valor del primer card a los otros cards
+          const value = this.value;
+          document.getElementById("foja_cerlic_2").value = value;
+          document.getElementById("foja_cerlic_3").value = value;
+        });
+      </script>
+
 
 
 
@@ -464,8 +475,10 @@
   /* Estilos para centrar y dar más ancho al card de Fichas */
   .card-fichas {
     width: 100%;
-    max-width: 1000px; /* Ajusta el ancho máximo según tus necesidades */
-    margin: 0 auto 20px auto; /* Centra el card horizontalmente */
+    max-width: 1000px;
+    /* Ajusta el ancho máximo según tus necesidades */
+    margin: 0 auto 20px auto;
+    /* Centra el card horizontalmente */
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -474,8 +487,10 @@
   /* Estilos para los demás cards */
   .card {
     width: 100%;
-    max-width: 1000px; /* Mismo ancho que el card de Fichas */
-    margin: 0 auto 20px auto; /* Centra los cards horizontalmente */
+    max-width: 1000px;
+    /* Mismo ancho que el card de Fichas */
+    margin: 0 auto 20px auto;
+    /* Centra los cards horizontalmente */
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -518,20 +533,47 @@
 
   .row {
     display: flex;
-    flex-direction: column; /* Organiza los cards verticalmente */
-    align-items: center; /* Centra los cards horizontalmente */
+    flex-direction: column;
+    /* Organiza los cards verticalmente */
+    align-items: center;
+    /* Centra los cards horizontalmente */
     gap: 20px;
   }
 
   .col-lg-6 {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    max-width: 1000px; /* Mismo ancho que el card de Fichas */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    max-width: 1000px;
+    /* Mismo ancho que el card de Fichas */
   }
 
   @media (max-width: 768px) {
+
     .card-fichas,
     .card {
-      max-width: 100%; /* Ajusta el ancho en pantallas pequeñas */
+      max-width: 100%;
+      /* Ajusta el ancho en pantallas pequeñas */
     }
+  }
+
+
+  /* Estilos para los botones */
+  .btn-container {
+    margin-top: 20px;
+    /* Espacio entre el contenido y los botones */
+    text-align: center;
+    /* Centra los botones */
+  }
+
+  .btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+    margin: 5px;
+    /* Espacio entre los botones */
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
   }
 </style>

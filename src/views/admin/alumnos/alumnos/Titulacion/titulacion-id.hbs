@@ -316,102 +316,81 @@
 
 
 
-      <!-- Primer Card (Datos de Certificado Licenciatura) -->
-      <div class="card" id="card1">
+      {{!-- TÍTULO CERTIFICADO LICENCIATURA--}}
+      <!-- CERTIFICADO LICENCIATURA -->
+      <div class="card">
         <div class="card-body">
           <h1 class="card-title">CERTIFICADO LICENCIATURA</h1>
+
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_cerlic_1" class="form-label">FOLIO_CERLIC</label>
-              <input type="text" id="folio_cerlic_1" name="folio_cerlic_1" class="form-control"
-                placeholder="folio_cerlic">
+              <label for="folio_cerlic" class="form-label">FOLIO_CERLIC</label>
+              <input type="text" id="folio_cerlic" name="folio_cerlic" class="form-control" placeholder="folio_cerlic"
+                value="{{FOLIO_CERLIC}}">
             </div>
             <div class="col-md-6">
-              <label for="libro_cerlic_1" class="form-label">LIBRO_CERLIC</label>
-              <input type="text" id="libro_cerlic_1" name="libro_cerlic_1" class="form-control"
-                placeholder="libro_cerlic">
+              <label for="libro_cerlic" class="form-label">LIBRO_CERLIC</label>
+              <input type="text" id="libro_cerlic" name="libro_cerlic" class="form-control" placeholder="libro_cerlic"
+                value="{{LIBRO_CERLIC}}">
             </div>
             <div class="col-md-12">
-              <label for="foja_cerlic_1" class="form-label">FOJA_CERLIC</label>
-              <input type="text" id="foja_cerlic_1" name="foja_cerlic_1" class="form-control" placeholder="foja_cerlic">
+              <label for="foja_cerlic" class="form-label">FOJA_CERLIC</label>
+              <input type="text" id="foja_cerlic" name="foja_cerlic" class="form-control" placeholder="foja_cerlic"
+                value="{{FOJA_CERLIC}}">
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Segundo Card -->
-      <div class="card" id="card2">
+      <!-- ACTA EXENCIÓN LICENCIATURA -->
+      <div class="card">
         <div class="card-body">
-          <h1 class="card-title">CERTIFICADO LICENCIATURA</h1>
+          <h1 class="card-title">ACTA EXENCIÓN LICENCIATURA</h1>
+
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_cerlic_2" class="form-label">FOLIO_CERLIC</label>
-              <input type="text" id="folio_cerlic_2" name="folio_cerlic_2" class="form-control"
-                placeholder="folio_cerlic" disabled>
+              <label for="folio_aexlic" class="form-label">FOLIO_AEXLIC</label>
+              <input type="text" id="folio_aexlic" name="folio_aexlic" class="form-control" placeholder="folio_aexlic"
+                value="{{FOLIO_AEXLIC}}">
             </div>
             <div class="col-md-6">
-              <label for="libro_cerlic_2" class="form-label">LIBRO_CERLIC</label>
-              <input type="text" id="libro_cerlic_2" name="libro_cerlic_2" class="form-control"
-                placeholder="libro_cerlic" disabled>
+              <label for="libro_aexlic" class="form-label">LIBRO_AEXLIC</label>
+              <input type="text" id="libro_aexlic" name="libro_aexlic" class="form-control" placeholder="libro_aexlic"
+                value="{{LIBRO_AEXLIC}}">
             </div>
             <div class="col-md-12">
-              <label for="foja_cerlic_2" class="form-label">FOJA_CERLIC</label>
-              <input type="text" id="foja_cerlic_2" name="foja_cerlic_2" class="form-control" placeholder="foja_cerlic"
-                disabled>
+              <label for="foja_aexlic" class="form-label">FOJA_AEXLIC</label>
+              <input type="text" id="foja_aexlic" name="foja_aexlic" class="form-control" placeholder="foja_aexlic"
+                value="{{FOJA_AEXLIC}}">
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Tercer Card -->
-      <div class="card" id="card3">
+      <!-- SERVICIO SOCIAL LICENCIATURA -->
+      <div class="card">
         <div class="card-body">
-          <h1 class="card-title">CERTIFICADO LICENCIATURA</h1>
+          <h1 class="card-title">SERVICIO SOCIAL LICENCIATURA</h1>
+
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_cerlic_3" class="form-label">FOLIO_CERLIC</label>
-              <input type="text" id="folio_cerlic_3" name="folio_cerlic_3" class="form-control"
-                placeholder="folio_cerlic" disabled>
+              <label for="folio_csslic" class="form-label">FOLIO_CSSLIC</label>
+              <input type="text" id="folio_csslic" name="folio_csslic" class="form-control" placeholder="folio_csslic"
+                value="{{FOLIO_CSSLIC}}">
             </div>
             <div class="col-md-6">
-              <label for="libro_cerlic_3" class="form-label">LIBRO_CERLIC</label>
-              <input type="text" id="libro_cerlic_3" name="libro_cerlic_3" class="form-control"
-                placeholder="libro_cerlic" disabled>
+              <label for="libro_csslic" class="form-label">LIBRO_CSSLIC</label>
+              <input type="text" id="libro_csslic" name="libro_csslic" class="form-control" placeholder="libro_csslic"
+                value="{{LIBRO_CSSLIC}}">
             </div>
             <div class="col-md-12">
-              <label for="foja_cerlic_3" class="form-label">FOJA_CERLIC</label>
-              <input type="text" id="foja_cerlic_3" name="foja_cerlic_3" class="form-control" placeholder="foja_cerlic"
-                disabled>
+              <label for="foja_csslic" class="form-label">FOJA_CSSLIC</label>
+              <input type="text" id="foja_csslic" name="foja_csslic" class="form-control" placeholder="foja_csslic"
+                value="{{FOJA_CSSLIC}}">
             </div>
           </div>
         </div>
       </div>
-
-      <script>
-        // Función para copiar el valor del primer card a los otros cards
-        document.getElementById("folio_cerlic_1").addEventListener("input", function () {
-          // Copiar el valor del primer card a los otros cards
-          const value = this.value;
-          document.getElementById("folio_cerlic_2").value = value;
-          document.getElementById("folio_cerlic_3").value = value;
-        });
-
-        document.getElementById("libro_cerlic_1").addEventListener("input", function () {
-          // Copiar el valor del primer card a los otros cards
-          const value = this.value;
-          document.getElementById("libro_cerlic_2").value = value;
-          document.getElementById("libro_cerlic_3").value = value;
-        });
-
-        document.getElementById("foja_cerlic_1").addEventListener("input", function () {
-          // Copiar el valor del primer card a los otros cards
-          const value = this.value;
-          document.getElementById("foja_cerlic_2").value = value;
-          document.getElementById("foja_cerlic_3").value = value;
-        });
-      </script>
-
-
 
 
 
@@ -426,6 +405,33 @@
   </div>
   </form>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Función genérica para copiar valores de un campo a otros
+    function copiarValor(origenId, destinoIds) {
+      const origen = document.getElementById(origenId);
+      if (origen) {
+        origen.addEventListener("input", function () {
+          destinoIds.forEach(destinoId => {
+            const destino = document.getElementById(destinoId);
+            if (destino) {
+              destino.removeAttribute("disabled"); // Habilitar antes de modificar
+              destino.value = this.value;
+            }
+          });
+        });
+      }
+    }
+
+    // Llamar la función para cada conjunto de campos (IDs corregidos)
+    copiarValor("folio_cerlic", ["folio_aexlic", "folio_csslic"]);
+    copiarValor("libro_cerlic", ["libro_aexlic", "libro_csslic"]);
+    copiarValor("foja_cerlic", ["foja_aexlic", "foja_csslic"]);
+  });
+</script>
+
+
 
 {{!-- // Ajusta las fechas --}}
 <script>

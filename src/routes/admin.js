@@ -25,6 +25,8 @@ router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoView);
 router.get("/gruposCalifi", GruposCtr.showAnother);
 router.get("/gruposCalifi/:idGrupo", GruposCtr.showByIdAnother);
 
+
+// Rutas para los alumnos
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
 router.get("/alumnos/:id", AlumnosAdminCtr.showById);
@@ -35,13 +37,23 @@ router.get("/alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
 router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
 //datos para los AlumnosTitulos
-router.get("/formato", AlumnosAdminCtr.showTitul);
-router.get("/formato/crear", AlumnosAdminCtr.createViewTitul);
-router.get("/formato/:id", AlumnosAdminCtr.showByIdTitul);
-router.post("/formato/:id/update", AlumnosAdminCtr.updateTitul);
-router.post("/formato/:id/updatePhoto", AlumnosAdminCtr.updatePhotoTitul);
-router.get("/formato/:id/doctos", AlumnosAdminCtr.doctosTitul);
-router.get("/formato/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoTitul);
+router.get("/titulaciones", AlumnosAdminCtr.showTitul);
+router.get("/titulaciones/nuevo", AlumnosAdminCtr.createViewTitul);
+router.get("/titulaciones/:id", AlumnosAdminCtr.showByIdTitul);
+router.post("/titulaciones/:id/update", AlumnosAdminCtr.updateTitul);
+router.post("/titulaciones/:id/updatePhoto", AlumnosAdminCtr.updatePhotoTitul);
+router.get("/titulaciones/:id/doctos", AlumnosAdminCtr.doctosTitul);
+router.get("/titulaciones/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoTitul);
+
+//datos para los AlumnosTSU
+router.get("/tsu", AlumnosAdminCtr.showTSU);
+router.get("/tsu/nuevo", AlumnosAdminCtr.createViewTSU);
+router.get("/tsu/:id", AlumnosAdminCtr.showByIdTSU);
+router.post("/tsu/:id/update", AlumnosAdminCtr.updateTSU);
+router.post("/tsu/:id/updatePhoto", AlumnosAdminCtr.updatePhotoTSU);
+router.get("/tsu/:id/doctos", AlumnosAdminCtr.doctosTSU);
+router.get("/tsu/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoTSU);
+
 
 // Rutas para los cuatrimestres
 router.get("/cuatrimestres", CuatrisCtr.index);

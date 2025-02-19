@@ -193,7 +193,7 @@ AlumnosAdminCtr.boletas = async (req, res) => {
 
 
 
-// formato de conexiones para Titulacion 
+// TITULACIÓN formato TITULACION
 
 AlumnosAdminCtr.createViewTitul = (req, res) => {
   res.render("admin/alumnos/alumnos/Titulacion/titulacion-crear");
@@ -206,13 +206,13 @@ AlumnosAdminCtr.showTitul = (req, res) => {
 // Mostrar documento de Titulación
 AlumnosAdminCtr.showDoctoTitul = async (req, res) => {
   const { id, idDocto } = req.params;
-  const formato = await Alumno.findById(id);
+  const titulaciones = await Alumno.findById(id);
 
   firebird.attach(options, function (err, db) {
     if (err) throw err;
 
     db.query(
-      `select documento from doctos where clave = '${formato.NUMEROALUMNO}' AND id_docto = '${idDocto}'`,
+      `select documento from doctos where clave = '${titulaciones.NUMEROALUMNO}' AND id_docto = '${idDocto}'`,
       (err, row) => {
         if (err) throw err;
 
@@ -241,14 +241,14 @@ AlumnosAdminCtr.showDoctoTitul = async (req, res) => {
 };
 // Mostrar información de un alumno por ID
 AlumnosAdminCtr.showByIdTitul = async (req = request, res = response) => {
-  const formato = await Alumno.findById(req.params.id);
+  const titulaciones = await Alumno.findById(req.params.id);
   let image = "data:image/jpeg;base64, ";
 
   firebird.attach(options, function (err, db) {
     if (err) throw err;
 
     db.query(
-      `select fotografia from alumnos where matricula = '${formato?.MATRICULA}'`,
+      `select fotografia from alumnos where matricula = '${titulaciones?.MATRICULA}'`,
       (err, row) => {
         if (err) throw err;
 
@@ -267,7 +267,7 @@ AlumnosAdminCtr.showByIdTitul = async (req = request, res = response) => {
               image += buffer.toString("base64");
 
               let newAlumno = {
-                ...formato,
+                ...titulaciones,
                 image,
               };
               res.render("admin/alumnos/alumnos/Titulacion/titulacion-id", newAlumno);
@@ -276,13 +276,12 @@ AlumnosAdminCtr.showByIdTitul = async (req = request, res = response) => {
             });
           });
         } else {
-          res.render("admin/alumnos/alumnos/Titulacion/titulacion-id", formato);
+          res.render("admin/alumnos/alumnos/Titulacion/titulacion-id", titulaciones);
         }
       }
     );
   });
 };
-
 
 AlumnosAdminCtr.updateTitul = async (req = request, res = response) => {
   const body = req.body;
@@ -333,7 +332,7 @@ AlumnosAdminCtr.updateTitul = async (req = request, res = response) => {
 
   await Alumno.findByIdAndUpdate(body?.matricula, data);
 
-  res.redirect(`/formato/${body?.matricula}`);
+  res.redirect(`/titulaciones/${body?.matricula}`);
 };
 
 AlumnosAdminCtr.updatePhotoTitul = async (req = request, res = response) => {
@@ -343,23 +342,223 @@ AlumnosAdminCtr.updatePhotoTitul = async (req = request, res = response) => {
     await Alumno.findByIdAndUpdate(id, {
       fotografia: req.files.fotografia.data,
     });
-    res.redirect(`/formato/${id}`);
+    res.redirect(`/titulaciones/${id}`);
   } else {
-    res.redirect(`/formato/${id}`);
+    res.redirect(`/titulaciones/${id}`);
   }
 };
 
 AlumnosAdminCtr.doctosTitul = async (req = request, res = response) => {
-  const alumno = await Alumno.findById(req.params.id);
+  const titulaciones = await Alumno.findById(req.params.id);
   res.render("alumno/documentos/doctos-screen", {
-    numeroalumno: formato?.NUMEROALUMNO,
-    nombre: formato?.NOMBRE,
+    numeroalumno: titulaciones?.NUMEROALUMNO,
+    nombre: titulaciones?.NOMBRE,
   });
 };
 
 AlumnosAdminCtr.boletasTitul = async (req, res) => {
-  const alumnos = await Alumno.findById(req.params.id);
-  res.render("alumno/boletas/boletas-screen", formato);
+  const titulaciones = await Alumno.findById(req.params.id);
+  res.render("alumno/boletas/boletas-screen", titulaciones);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// TITULACIÓN formato TSU
+AlumnosAdminCtr.createViewTSU = (req, res) => {
+  res.render("admin/alumnos/alumnos/TSU/Tsu-crear");
+};
+// Mostrar listado de Titulaciones
+AlumnosAdminCtr.showTSU = (req, res) => {
+  const { search } = req.query;
+  res.render("admin/alumnos/alumnos/TSU/Tsu-lista", { search });
+};
+// Mostrar documento de Titulación
+AlumnosAdminCtr.showDoctoTSU = async (req, res) => {
+  const { id, idDocto } = req.params;
+  const tsu = await Alumno.findById(id);
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select documento from doctos where clave = '${tsu.NUMEROALUMNO}' AND id_docto = '${idDocto}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let docto = row[0]?.DOCUMENTO;
+
+        if (docto) {
+          docto(function (err, _name, e) {
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+              res.contentType("application/pdf");
+              res.send(buffer);
+              db.detach();
+            });
+          });
+        } else {
+          res.send("No hay documento");
+        }
+      }
+    );
+  });
+};
+// Mostrar información de un alumno por ID
+AlumnosAdminCtr.showByIdTSU = async (req = request, res = response) => {
+  const tsu = await Alumno.findById(req.params.id);
+  let image = "data:image/jpeg;base64, ";
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select fotografia from alumnos where matricula = '${tsu?.MATRICULA}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let foto = row[0]?.FOTOGRAFIA;
+        if (foto) {
+          foto(function (err, _name, e) {
+            if (err) throw err;
+
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+              image += buffer.toString("base64");
+
+              let newAlumno = {
+                ...tsu,
+                image,
+              };
+              res.render("admin/alumnos/alumnos/TSU/Tsu-id", newAlumno);
+              db.detach();
+            });
+          });
+        } else {
+          res.render("admin/alumnos/alumnos/TSU/Tsu-id", tsu);
+        }
+      }
+    );
+  });
+};
+
+AlumnosAdminCtr.updateTSU= async (req = request, res = response) => {
+  const body = req.body;
+
+  const data = {
+    paterno: body?.paterno,
+    materno: body?.materno,
+    nombre: body?.nombre,
+    genero: body?.genero,
+    fecha_nacimiento: body?.fecha_nacimiento,
+    estado_nacimiento: body?.estado_nacimiento,
+    lugar_nacimiento: body?.municipio_naci,
+    nacionalidad: body?.nacionalidad,
+    clave_ciudadana: body?.curp,
+    domicilio: body?.domicilio,
+    entre_calles: body?.cruzamientos,
+    estado: body?.estado,
+    cp: body?.postal,
+    email: body?.email_personal,
+    email_alterno: body?.email_insti,
+    celular: body?.tel_cel,
+    telefono: body?.tel_domicilio,
+    nivel: body?.nivel,
+    grado: body?.grado,
+    matricula: body?.matricula,
+    observaciones: body?.nota,
+    proyecto_obs: body?.proyecto_obs,
+    obs_proyecto_lic: body?.obs_proyecto_lic,
+
+
+    //licencitura TSU
+    folio_titulo_tsu: body?.folio_titulo_tsu,
+    libro_titulo_tsu: body?.libro_titulo_tsu,
+    fojas_titulo_tsu: body?.fojas_titulo_tsu,
+    //certificado TSU
+    folio_certificado_tsu: body?.folio_certificado_tsu,
+    libro_certificado_tsu: body?.libro_certificado_tsu,
+    fojas_certificado_tsu: body?.fojas_certificado_tsu,
+    //SERVICIO SOCIAL TSU
+    folio_css: body?.folio_css,
+    libro_css: body?.libro_css,
+    fojas_css: body?.fojas_css,
+    // ACTA EXENCIÓN TSU
+    folio_cex: body?.folio_cex,
+    libro_cex: body?.libro_cex,
+    fojas_cex: body?.fojas_cex,
+    
+     
+
+    adicionales: body?.adicionales,
+  };
+
+  await Alumno.findByIdAndUpdate(body?.matricula, data);
+
+  res.redirect(`/tsu/${body?.matricula}`);
+};
+
+AlumnosAdminCtr.updatePhotoTSU = async (req = request, res = response) => {
+  let id = req.params.id;
+
+  if (req.files?.fotografia) {
+    await Alumno.findByIdAndUpdate(id, {
+      fotografia: req.files.fotografia.data,
+    });
+    res.redirect(`/tsu/${id}`);
+  } else {
+    res.redirect(`/tsu/${id}`);
+  }
+};
+
+AlumnosAdminCtr.doctosTSU = async (req = request, res = response) => {
+  const alumno = await Alumno.findById(req.params.id);
+  res.render("alumno/documentos/doctos-screen", {
+    numeroalumno: tsu?.NUMEROALUMNO,
+    nombre: tsu?.NOMBRE,
+  });
+};
+
+AlumnosAdminCtr.boletasTSU = async (req, res) => {
+  const tsu = await Alumno.findById(req.params.id);
+  res.render("alumno/boletas/boletas-screen", tsu);
 };
 
 module.exports = {

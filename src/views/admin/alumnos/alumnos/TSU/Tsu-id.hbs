@@ -36,7 +36,7 @@
 
               <div class="col-md-12 pt-4">
                 <h4>Actualizar fotografia</h4>
-                <form action="/titulaciones/{{MATRICULA}}/updatePhoto" method="post" enctype="multipart/form-data">
+                <form action="/tsu/{{MATRICULA}}/updatePhoto" method="post" enctype="multipart/form-data">
                   <div class="btn-group">
                     <!--LA FOTOGRAFÍA PUEDE SER NO REQUERIDA-->
                     <input type="file" name="fotografia" class="form-control" accept="image/*" id="imgInput" />
@@ -51,7 +51,7 @@
         </div>
       </section>
 
-      <form action="/titulaciones/{{MATRICULA}}/update" method="post">
+      <form action="/tsu/{{MATRICULA}}/update" method="post">
         <div class="card d-none">
           <div class="card-body">
             <h1 class="card-title">Datos de identidad</h1>
@@ -291,23 +291,26 @@
       {{!-- TÍTULO LICENCIATURA--}}
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title">TÍTULO LICENCIATURA</h1>
+          <h1 class="card-title">TÍTULO TSU</h1>
 
           <div class="row g-3">
+
+
+
             <div class="col-md-6">
-              <label for="folio_titlic" class="form-label">FOLIO_TITLIC</label>
-              <input type="text" id="folio" name="folio_titlic" class="form-control" placeholder="folio_titlic"
-                value="{{FOLIO_TITLIC}}" disabled>
+              <label for="libro_titulo_tsu" class="form-label">FOLIO_TITULO_TSU</label>
+              <input type="text" id="libro_titulo_tsu" name="libro_titulo_tsu" class="form-control"
+                placeholder="libro_titulo_tsu" value="{{LIBRO_TITULO_TSU}}" disabled>
             </div>
             <div class="col-md-6">
-              <label for="libro_titlic" class="form-label">LIBRO_TITLIC</label>
-              <input type="text" id="libro_titlic" name="libro_titlic" class="form-control" placeholder="libro_titlic"
-                value="{{LIBRO_TITLIC}}" disabled>
+              <label for="folio_titulo_tsu" class="form-label">LIBRO_TITULO_TSU</label>
+              <input type="text" id="folio" name="folio_titulo_tsu" class="form-control" placeholder="folio_titulo_tsu"
+                value="{{FOLIO_TITULO_TSU}}" disabled>
             </div>
             <div class="col-md-12">
-              <label for="foja_titlic" class="form-label">FOJA_TITLIC</label>
-              <input type="text" id="foja_titlic" name="foja_titlic" class="form-control" placeholder="foja_titlic"
-                value="{{FOJA_TITLIC}}" disabled>
+              <label for="fojas_titulo_tsu" class="form-label">FOJAS_TITULO_TSU</label>
+              <input type="text" id="fojas_titulo_tsu" name="fojas_titulo_tsu" class="form-control" placeholder="fojas_titulo_tsu"
+                value="{{FOJAS_TITULO_TSU}}" disabled>
             </div>
             </select>
           </div>
@@ -320,23 +323,23 @@
       <!-- CERTIFICADO LICENCIATURA -->
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title">CERTIFICADO LICENCIATURA</h1>
+          <h1 class="card-title">CERTIFICADO TSU</h1>
 
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_cerlic" class="form-label">FOLIO_CERLIC</label>
-              <input type="text" id="folio_cerlic" name="folio_cerlic" class="form-control" placeholder="folio_cerlic"
-                value="{{FOLIO_CERLIC}}">
+              <label for="folio_certificado_tsu" class="form-label">LIBRO_CERTIFICADO_TSU</label>
+              <input type="text" id="folio_certificado_tsu" name="folio_certificado_tsu" class="form-control" placeholder="folio_certificado_tsu"
+                value="{{FOLIO_CERTIFICADO_TSU}}" disabled>
             </div>
             <div class="col-md-6">
-              <label for="libro_cerlic" class="form-label">LIBRO_CERLIC</label>
-              <input type="text" id="libro_cerlic" name="libro_cerlic" class="form-control" placeholder="libro_cerlic"
-                value="{{LIBRO_CERLIC}}">
+              <label for="libro_certificado_tsu" class="form-label">FOLIO_CERTIFICADO_TSU</label>
+              <input type="text" id="libro_certificado_tsu" name="libro_certificado_tsu" class="form-control" placeholder="libro_certificado_tsu"
+                value="{{LIBRO_CERTIFICADO_TSU}}" disabled>
             </div>
             <div class="col-md-12">
-              <label for="foja_cerlic" class="form-label">FOJA_CERLIC</label>
-              <input type="text" id="foja_cerlic" name="foja_cerlic" class="form-control" placeholder="foja_cerlic"
-                value="{{FOJA_CERLIC}}">
+              <label for="fojas_certificado_tsu" class="form-label">FOJAS_CERTIFICADO_TSU</label>
+              <input type="text" id="fojas_certificado_tsu" name="fojas_certificado_tsu" class="form-control" placeholder="fojas_certificado_tsu"
+                value="{{FOJAS_CERTIFICADO_TSU}}" disabled>
             </div>
           </div>
         </div>
@@ -345,23 +348,23 @@
       <!-- ACTA EXENCIÓN LICENCIATURA -->
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title">ACTA EXENCIÓN LICENCIATURA</h1>
+          <h1 class="card-title">ACTA EXENCIÓN TSU</h1>
 
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_aexlic" class="form-label">FOLIO_AEXLIC</label>
-              <input type="text" id="folio_aexlic" name="folio_aexlic" class="form-control" placeholder="folio_aexlic"
-                value="{{FOLIO_AEXLIC}}">
+              <label for="folio_css" class="form-label">FOLIO_CSS</label>
+              <input type="text" id="folio_css" name="folio_css" class="form-control" placeholder="folio_css"
+                value="{{FOLIO_CSS}}" disabled>
             </div>
             <div class="col-md-6">
-              <label for="libro_aexlic" class="form-label">LIBRO_AEXLIC</label>
-              <input type="text" id="libro_aexlic" name="libro_aexlic" class="form-control" placeholder="libro_aexlic"
-                value="{{LIBRO_AEXLIC}}">
+              <label for="libro_css" class="form-label">LIBRO_CSS</label>
+              <input type="text" id="libro_css" name="libro_css" class="form-control" placeholder="libro_css"
+                value="{{LIBRO_CSS}}" disabled>
             </div>
             <div class="col-md-12">
-              <label for="foja_aexlic" class="form-label">FOJA_AEXLIC</label>
-              <input type="text" id="foja_aexlic" name="foja_aexlic" class="form-control" placeholder="foja_aexlic"
-                value="{{FOJA_AEXLIC}}">
+              <label for="fojas_css" class="form-label">FOJAS_CSS</label>
+              <input type="text" id="fojas_css" name="fojas_css" class="form-control" placeholder="fojas_css"
+                value="{{FOJAS_CSS}}" disabled>
             </div>
           </div>
         </div>
@@ -370,23 +373,23 @@
       <!-- SERVICIO SOCIAL LICENCIATURA -->
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title">SERVICIO SOCIAL LICENCIATURA</h1>
+          <h1 class="card-title">SERVICIO SOCIAL TSU</h1>
 
           <div class="row g-3">
             <div class="col-md-6">
-              <label for="folio_csslic" class="form-label">FOLIO_CSSLIC</label>
-              <input type="text" id="folio_csslic" name="folio_csslic" class="form-control" placeholder="folio_csslic"
-                value="{{FOLIO_CSSLIC}}">
+              <label for="folio_cex" class="form-label">FOLIO_CEX</label>
+              <input type="text" id="folio_cex" name="folio_cex" class="form-control" placeholder="folio_cex"
+                value="{{FOLIO_CEX}}" disabled>
             </div>
             <div class="col-md-6">
-              <label for="libro_csslic" class="form-label">LIBRO_CSSLIC</label>
-              <input type="text" id="libro_csslic" name="libro_csslic" class="form-control" placeholder="libro_csslic"
-                value="{{LIBRO_CSSLIC}}">
+              <label for="libro_cex" class="form-label">LIBRO_CEX</label>
+              <input type="text" id="libro_cex" name="libro_cex" class="form-control" placeholder="libro_cex"
+                value="{{LIBRO_CEX}}" disabled>
             </div>
             <div class="col-md-12">
-              <label for="foja_csslic" class="form-label">FOJA_CSSLIC</label>
-              <input type="text" id="foja_csslic" name="foja_csslic" class="form-control" placeholder="foja_csslic"
-                value="{{FOJA_CSSLIC}}">
+              <label for="fojas_cex" class="form-label">FOJAS_CEX</label>
+              <input type="text" id="fojas_cex" name="fojas_cex" class="form-control" placeholder="fojas_cex"
+                value="{{FOJAS_CEX}}" disabled>
             </div>
           </div>
         </div>
@@ -421,9 +424,9 @@
     }
 
     // Llamar la función para cada conjunto de campos (IDs corregidos)
-    copiarValor("folio_cerlic", ["folio_aexlic", "folio_csslic"]);
-    copiarValor("libro_cerlic", ["libro_aexlic", "libro_csslic"]);
-    copiarValor("foja_cerlic", ["foja_aexlic", "foja_csslic"]);
+    copiarValor("folio_certificado_tsu", ["folio_css", "folio_cex"]);
+    copiarValor("libro_certificado_tsu", ["libro_css", "libro_cex"]);
+    copiarValor("fojas_certificado_tsu", ["fojas_css", "fojas_cex"]);
   });
 </script>
 

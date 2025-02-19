@@ -44,7 +44,7 @@ const getAlumnos = async () => {
     };
 
     alumnos.forEach((item, i) => {
-      content += `<tr onclick="window.location.href='/formato/${item.MATRICULA}'">`;
+      content += `<tr onclick="window.location.href='/titulaciones/${item.MATRICULA}'">`;
       content += `<td>${item.NUMEROALUMNO}</td>`;
       content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
       content += `<td>${item.NOMBRE}</td>`;

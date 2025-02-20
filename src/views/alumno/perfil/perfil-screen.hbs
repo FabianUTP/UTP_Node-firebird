@@ -24,15 +24,6 @@
             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#autorizada">Persona autorizada</button>
           </li>
 
-          <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_beca">Datos beca</button>
-          </li>
-
-
-          <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_seguro">Datos Seguro</button>
-          </li>
-
         </ul>
         <div class="tab-content pt-2">
 
@@ -342,34 +333,7 @@
   </div>
   </div>
 </section>
-<script>
-  const btn_act = document.getElementById("btn-habilitar");
-  const btn_update = document.getElementsByName("guardarForm");
 
-  btn_act.addEventListener("click", () => {
-    btn_update.forEach(item => item.classList.remove("d-none"));
+<script src="/js/services/Perfil_Screen.js"></script>
 
-    btn_act.style.display = "none";
 
-    let inputs = document.getElementsByTagName("input");
-    let selects = document.getElementsByTagName("select");
-    let txtarea = document.getElementsByTagName("textarea");
-
-    for (let i = 0; i < inputs.length; i++) {
-      inputs[i].disabled = false;
-    }
-
-    for (let i = 0; i < selects.length; i++) {
-      selects[i].disabled = false;
-    }
-
-    for (let i = 0; i < txtarea.length; i++) {
-      txtarea[i].disabled = false;
-    }
-
-    // Manda al principio de la pagina
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  });
-
-</script>

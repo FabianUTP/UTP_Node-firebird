@@ -1,11 +1,13 @@
 const { request, response } = require("express");
 const { Alumno, ProfeAuth, Aspirante, Usuarios } = require("../models");
 const { user } = require("../../configs/credential-firebird");
+const bcrypt = require('bcrypt'); // Importa bcrypt para comparar contraseñas
 
 const AuthController = {};
 
 // Renderiza la vista de login
 AuthController.login = (req, res) => res.render("auth/login");
+
 
 // Autenticación de alumnos
 AuthController.authAlumno = async (req = request, res = response) => {
@@ -24,6 +26,21 @@ AuthController.authAlumno = async (req = request, res = response) => {
       return res.redirect('/login');
     }
 
+    console.log("MATRÍCULA:", alumno.MATRICULA);
+    console.log("CONTRASEÑA EN BD:", alumno.ALUMNO_PASSWORD || "No registrada");
+
+    // Si no hay contraseña en la BD, dejarlo pasar solo con la matrícula
+    if (!alumno.ALUMNO_PASSWORD || alumno.ALUMNO_PASSWORD.trim() === "") {
+      console.log("No se encontró contraseña, permitiendo acceso solo con matrícula.");
+    } else {
+      // Validar que la contraseña ingresada coincida con la de la BD
+      if (password !== alumno.ALUMNO_PASSWORD) {
+        req.flash('msj_error', 'Contraseña incorrecta');
+        return res.redirect('/login');
+      }
+    }
+
+    // Iniciar sesión
     req.session.isAuthenticated = true;
     req.session.isAlumno = true;
     req.session.IDAuth = alumno.MATRICULA;
@@ -37,7 +54,6 @@ AuthController.authAlumno = async (req = request, res = response) => {
     return res.redirect('/login');
   }
 };
-
 
 
 // Autenticación de aspirantes

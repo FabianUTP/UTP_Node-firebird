@@ -111,6 +111,7 @@ router.post("/profesores/:id/update_personalizados", ProfeCtr.update_personaliza
 
 // Navbar ___> Titulacion  src\
 router.get("/TitulacionNav", (_req, res) => { res.render("../views/admin/alumnos/alumnos/Titulacion/titulacion-lista.hbs")})
+router.get("/OlvidastesContraseña_Alumnos", (_req, res) => { res.render("../auth/contraseña/Olvidastes_Contraseña_Login.hbs")})
 
 
 module.exports = router;

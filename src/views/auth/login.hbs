@@ -73,7 +73,7 @@
             </div>
 
             <div class="pt-3 text-center">
-              <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
+              <button type="submit" class="btn btn-outline-primary" id="btn" >Iniciar sesión</button>
             </div>
 
           </form>
@@ -277,5 +277,26 @@
     errorMessage.style.display = 'none';
     return true; // Permite el envío del formulario
   }
+
+
+    document.getElementById("btn").addEventListener("click", async () => {
+    const user = document.getElementById("user").value;
+    const password = document.getElementById("pass").value;
+
+    const response = await fetch("/login/alumno", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user, password })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      sessionStorage.setItem("matriculaAuth", data.matricula); // Guardar la matrícula
+      window.location.href = "/"; // Redirigir al inicio
+    } else {
+      alert(data.error); // Mostrar error si la autenticación falla
+    }
+  });
 
 </script>

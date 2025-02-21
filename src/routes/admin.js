@@ -45,6 +45,17 @@ router.post("/titulaciones/:id/updatePhoto", AlumnosAdminCtr.updatePhotoTitul);
 router.get("/titulaciones/:id/doctos", AlumnosAdminCtr.doctosTitul);
 router.get("/titulaciones/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoTitul);
 
+
+//datos para password
+router.get("/password", AlumnosAdminCtr.showPassword);
+router.get("/password/nuevo", AlumnosAdminCtr.createViewPassword);
+router.get("/password/:id", AlumnosAdminCtr.showByIdPassword);
+router.post("/password/:id/update", AlumnosAdminCtr.updatePassword);
+router.post("/password/:id/updatePhoto", AlumnosAdminCtr.updatePhotoPassword);
+router.get("/password/:id/doctos", AlumnosAdminCtr.doctosPassword);
+router.get("/password/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoPassword);
+
+
 //datos para los AlumnosTSU
 router.get("/tsu", AlumnosAdminCtr.showTSU);
 router.get("/tsu/nuevo", AlumnosAdminCtr.createViewTSU);
@@ -111,7 +122,6 @@ router.post("/profesores/:id/update_personalizados", ProfeCtr.update_personaliza
 
 // Navbar ___> Titulacion  src\
 router.get("/TitulacionNav", (_req, res) => { res.render("../views/admin/alumnos/alumnos/Titulacion/titulacion-lista.hbs")})
-router.get("/OlvidastesContraseña_Alumnos", (_req, res) => { res.render("../auth/contraseña/Olvidastes_Contraseña_Login.hbs")})
 
 
 module.exports = router;

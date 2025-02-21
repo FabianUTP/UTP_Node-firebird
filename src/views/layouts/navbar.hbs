@@ -27,7 +27,7 @@
 
   {{/if}}
 
-    {{!-- Si es alumno, muestra la seleccion del periodo --}}
+  {{!-- Si es alumno, muestra la seleccion del periodo --}}
   {{#if isAlumno}}
   <div class="col-md-3">
     <select id="selectciclo" class="form-select">
@@ -36,13 +36,13 @@
 
   <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
 
-<!-- End Search Bar -->
+  <!-- End Search Bar -->
 
   {{/if}}
 
 
-{{!-- Si es profe, muestra la seleccion del periodo --}}
-    {{#if isProfe}}
+  {{!-- Si es profe, muestra la seleccion del periodo --}}
+  {{#if isProfe}}
   <div class="col-md-3">
     <select id="selectciclo" class="form-select">
     </select>
@@ -77,10 +77,10 @@
           <li class="dropdown-header">
             <h6>{{ nameAuth }} {{ lastNameAuth }}</h6>
             {{#if isAlumno}}
-              <span>Matrícula: {{ IDAuth }}</span>
+            <span>Matrícula: {{ IDAuth }}</span>
             {{/if}}
             {{#if isAdmin}}
-              <span>{{ IDAuth }}</span>
+            <span>{{ IDAuth }}</span>
             {{/if}}
           </li>
           <li>
@@ -88,6 +88,12 @@
           </li>
 
           <li>
+
+
+            <a class="dropdown-item d-flex align-items-center" href="/Password"></method=>
+              <i class="bi bi-lock-fill me-2"></i>
+               <span>Cambiar Contraseña</span>
+            </a>
             <a class="dropdown-item d-flex align-items-center" href="/logout"></method=>
               <i class="bi bi-box-arrow-right"></i>
               <span>Cerrar sesión</span>
@@ -95,7 +101,7 @@
           </li>
 
         </ul><!-- End Profile Dropdown Items -->
-        
+
       </li><!-- End Profile Nav -->
 
     </ul>

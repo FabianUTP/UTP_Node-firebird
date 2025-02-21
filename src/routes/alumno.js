@@ -4,15 +4,6 @@ const fileUpload = require('express-fileupload');
 
 // Siempre poner este middleware al crear una ruta get
 const { isAlumno } = require("../app/middlewares/session");
-// Controladores
-const {
-
-  AlumnosAdminCtr,
-
-} = require("../app/controllers");
-
-
-
 
 // Controladores
 const {AlumnosController} = require("../app/controllers");
@@ -35,6 +26,12 @@ router.post("/perfil/update-contacto", AlumnosController.updateContact);
 router.post("/perfil/update-per-contac", AlumnosController.updatePerContact);
 router.post("/perfil/update-seguro", AlumnosController.updateSeguro);
 router.post("/perfil/update-beca", AlumnosController.updateBeca);
+
+router.get("/passworddata",isAlumno, AlumnosController.showByIdpasswords);
+router.post("/passworddata/update-contactos", AlumnosController.updateContactpasswords);
+router.post("/passworddata/update-per-contac", AlumnosController.updatePerContact);
+router.post("/passworddata/update-seguro", AlumnosController.updateSeguro);
+router.post("/passworddata/update-beca", AlumnosController.updateBeca);
 
 //Apartado de modulo Estadia
 router.get("/estadia", isAlumno, EstadiaController.showById);
@@ -62,16 +59,5 @@ router.get("/validacion", (req, res) => (res.render("alumno/reinscripcion/valida
 router.get("/gruposs", isAlumno, GrupController.showById);
 router.post("/grupos_post", GrupController.updateContacto);
 
-
-//datos para password
-router.get("/password", AlumnosAdminCtr.showPassword);
-router.get("/password/nuevo", AlumnosAdminCtr.createViewPassword);
-router.get("/password/:id", AlumnosAdminCtr.showByIdPassword);
-router.post("/password/:id/update", AlumnosAdminCtr.updatePassword);
-router.post("/password/:id/updatePhoto", AlumnosAdminCtr.updatePhotoPassword);
-router.get("/password/:id/doctos", AlumnosAdminCtr.doctosPassword);
-router.get("/password/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoPassword);
-
-router.get("/Password", (_req, res) => { res.render("../admin/alumnos/alumnos/Password/password-lista.hbs")})
 
 module.exports = router;

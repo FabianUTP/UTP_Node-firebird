@@ -57,10 +57,11 @@ AlumnosController.updateContact = async (req = request, res = response) => {
     cp: req.body.cp,
     email: req.body.email,
     email_alterno: req.body.emailutp,
-    telefono: req.body.telefono,  
+    telefono: req.body.telefono,
+    alumno_password: req.body.alumno_password,
   };
 
- await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
+  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
   res.redirect("/perfil");
 };
 
@@ -154,6 +155,157 @@ AlumnosController.showDocto = async (req, res) => {
     );
   });
 }
+
+
+
+AlumnosController.showByIdpasswords = async (req = request, res = response) => {
+  try {
+    const passworddata = await Alumno.findById(req.session.IDAuth);
+    let image = "data:image/jpeg;base64, ";
+
+    firebird.attach(options, function (err, db) {
+      if (err) {
+        console.error("Error al conectar a la base de datos:", err);
+        return res.status(500).send("Error al conectar con la base de datos.");
+      }
+
+      db.query(
+        `select fotografia from alumnos where matricula = '${passworddata?.MATRICULA}'`,
+        (err, row) => {
+          if (err) {
+            console.error("Error al ejecutar la consulta:", err);
+            db.detach();
+            return res.status(500).send("Error al obtener la fotografía.");
+          }
+
+          let foto = row[0]?.FOTOGRAFIA;
+          if (foto) {
+            foto(function (err, _name, e) {
+              if (err) {
+                console.error("Error al obtener la foto:", err);
+                db.detach();
+                return res.status(500).send("Error al procesar la foto.");
+              }
+
+              let chunks = [];
+              e.on("data", (chunk) => {
+                chunks.push(chunk);
+              });
+
+              e.on("end", () => {
+                let buffer = Buffer.concat(chunks);
+                image += buffer.toString("base64");
+
+                // Nuevos datos del alumno, con la imagen procesada
+                let newAlumno = {
+                  ...passworddata,
+                  image,
+                };
+
+                db.detach(); // Desconectar de la base de datos
+
+                // Renderizar la vista
+                res.render("alumno/perfil/password-screen", newAlumno);
+              });
+            });
+          } else {
+            // Si no hay foto, simplemente se renderiza la vista con los datos del alumno
+            db.detach();
+            res.render("alumno/perfil/password-screen", passworddata);
+          }
+        }
+      );
+    });
+  } catch (error) {
+    console.error("Error al mostrar la información del alumno:", error);
+    res.status(500).send("Hubo un error al cargar la información del alumno.");
+  }
+};
+
+
+
+AlumnosController.updateContactpasswords = async (req = request, res = response) => {
+  // Obtén solo el nuevo valor de la contraseña
+  const body = {
+    alumno_password: req.body.alumno_password, // Solo la contraseña se actualizará
+  };
+
+  // Utiliza findByIdAndUpdate pero no modificas otros campos que no se incluyen en el body
+  await Alumno.findByIdAndUpdate(req.session.IDAuth, body, { new: true });
+
+  // Redirige al usuario después de la actualización
+  res.redirect("/");
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = {
   AlumnosController,

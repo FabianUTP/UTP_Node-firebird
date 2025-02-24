@@ -59,6 +59,7 @@ AlumnosController.updateContact = async (req = request, res = response) => {
     email_alterno: req.body.emailutp,
     telefono: req.body.telefono,
     alumno_password: req.body.alumno_password,
+    entre_calles: req.body.entre_calles,
   };
 
   await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
@@ -95,11 +96,26 @@ AlumnosController.updateBeca = async (req = request, res = response) => {
     beca: req.body.becanombre,
     hijos13a18: req.body.becaestatus,
     hijosmayores: req.body.becafolio,
+    proyecto_obs: req.body.proyecto_obs,
+    obs_proyecto_lic: req.body.obs_proyecto_lic,
   };
 
   await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
   res.redirect("/perfil");
 };
+
+
+
+AlumnosController.updateNivelingles = async (req = request, res = response) => {
+  const body = {
+    proyecto_obs: req.body.proyecto_obs,
+    obs_proyecto_lic: req.body.obs_proyecto_lic,
+  };
+
+  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
+  res.redirect("/perfil");
+};
+
 AlumnosController.getBoletas = async (req = request, res = response) => {
 
   const alumno = await Alumno.findById(req.session.IDAuth);

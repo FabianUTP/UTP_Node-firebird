@@ -22,63 +22,71 @@
           <li class="nav-item">
             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#autorizada">Persona autorizada</button>
           </li>
-             <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_seguro">IMS</button>
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_seguro">IMSS</button>
+          </li>
+          <li>
+          <li class="nav-item">
+            <button class="nav-link" data-bs-target="#datos_nivel" data-bs-toggle="tab">Nivel Ingles</button>
+          </li>
           </li>
 
         </ul>
-        <div class="tab-content pt-2">
 
+        <div class="tab-content pt-4">
           <div class="tab-pane fade show active profile-overview" id="datos">
+            <h5 class="card-title mb-4">Datos de identidad</h5>
 
-            <h5 class="card-title">Datos de identidad</h5>
-
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">Fotografia</div>
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Fotografía</div>
               <div class="col-lg-9 col-md-8">
-                <img src="{{image}}" alt="foto" class="img-fluid" width="120">
+                <img src="{{image}}" alt="foto" class="img-fluid rounded-circle" width="120">
               </div>
             </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label ">NOMBRE</div>
-              <div class="col-lg-9 col-md-8">{{NOMBRE}}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">NOMBRE PATERNO</div>
-              <div class="col-lg-9 col-md-8">{{PATERNO}}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label ">APELLIDO MATERNO</div>
-              <div class="col-lg-9 col-md-8">{{MATERNO}}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">GÉNERO</div>
-              <div class="col-lg-9 col-md-8">{{GENERO}}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">ESTADO CIVIL</div>
-              <div class="col-lg-9 col-md-8">{{ESTADO_CIVIL}}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">ESTADO DE NACIMIENTO</div>
-              <div class="col-lg-9 col-md-8">{{ESTADO}}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">MUNICIPIO</div>
-              <div class="col-lg-9 col-md-8">{{LUGAR_NACIMIENTO}}</div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">NIVEL INGLES</div>
-              <div class="col-lg-9 col-md-8">{{CALIFI_INGLES}}</div>
+
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Nombre</div>
+              <div class="col-lg-9 col-md-8"><strong>{{NOMBRE}}</strong></div>
             </div>
 
-            <div class="row">
-              <div class="col-lg-3 col-md-4 label">CURP</div>
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Nombre Paterno</div>
+              <div class="col-lg-9 col-md-8"><strong>{{PATERNO}}</strong></div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Apellido Materno</div>
+              <div class="col-lg-9 col-md-8"><strong>{{MATERNO}}</strong></div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Género</div>
+              <div class="col-lg-9 col-md-8">{{GENERO}}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Estado Civil</div>
+              <div class="col-lg-9 col-md-8">{{ESTADO_CIVIL}}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Estado de Nacimiento</div>
+              <div class="col-lg-9 col-md-8">{{ESTADO}}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-lg-3 col-md-4 label">Municipio</div>
+              <div class="col-lg-9 col-md-8">{{LUGAR_NACIMIENTO}}</div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-lg-3 col-md-4 label fw-bold fs-5">CURP</div>
               <div class="col-lg-9 col-md-8">
-                <h6 class="text-muted">{{CLAVE_CIUDADANA}}</h6>
+                <h6 class="text-muted fw-bold fs-4">{{CLAVE_CIUDADANA}}</h6>
               </div>
             </div>
           </div>
+
 
           <div class="tab-pane fade pt-3" id="contacto">
 
@@ -102,16 +110,16 @@
               </div>
 
               <div class="row mb-3">
-                <label for="municipio" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
+                <label for="entre_calles" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="ciudad" type="text" class="form-control" id="municipio" value="{{CIUDAD}}" disabled />
+                  <input name="entre_calles" type="text" class="form-control" id="entre_calles" value="{{ENTRE_CALLES}}" disabled />
                 </div>
               </div>
 
               <div class="row mb-3">
-                <label for="localidad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
+                <label for="ciudad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
                 <div class="col-md-8 col-lg-9">
-                  <input name="localidad" type="text" class="form-control" id="localidad" value="{{ESTADO}}" disabled />
+                  <input name="ciudad" type="text" class="form-control" id="ciudad" value="{{CIUDAD}}" disabled />
                 </div>
               </div>
 
@@ -259,6 +267,42 @@
                 <div class="col-md-8 col-lg-9">
                   <input name="becafolio" type="text" class="form-control" id="becafolio" value={{HIJOSMAYORES}}
                     disabled />
+                </div>
+              </div>
+
+
+
+              <div class="text-center">
+                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+              </div>
+            </form><!-- End Change Password Form -->
+
+          </div>
+
+
+          <div class="tab-pane fade pt-3" id="datos_nivel">
+            <!-- Change Password Form -->
+
+            <form method="post" action="/ingles/update-nivel">
+              <h5 class="card-title">Nivel de ingles</h5>
+
+
+              <div class="row mb-3">
+                <label for="proyecto_obs" class="col-md-4 col-lg-3 col-form-label">Nivel de ingles TSU</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="proyecto_obs" type="text" class="form-control" id="proyecto_obs" value="{{PROYECTO_OBS}}"
+                    disabled />
+
+
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <label for="obs_proyecto_lic" class="col-md-4 col-lg-3 col-form-label">Nivel de ingles LIC</label>
+                <div class="col-md-8 col-lg-9">
+                  <input name="obs_proyecto_lic" type="text" class="form-control" id="obs_proyecto_lic"
+                    value={{OBS_PROYECTO_LIC}} disabled />
                 </div>
               </div>
 

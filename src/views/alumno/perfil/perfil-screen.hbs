@@ -5,365 +5,354 @@
   </div>
 
   <div class="col-xl-9">
-
-    <div class="card">
+    <div class="card shadow-sm">
       <div class="card-body pt-3">
         <!-- Bordered Tabs -->
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-
+        <ul class="nav nav-pills mb-3 gap-2 d-flex flex-wrap" id="pills-tab" role="tablist">
           <li class="nav-item">
-            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#datos">Identidad</button>
-          </li>
-
-          <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#contacto">Contacto</button>
-          </li>
-
-          <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#autorizada">Persona autorizada</button>
+            <button class="nav-link active text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#datos">Identidad</button>
           </li>
           <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#datos_seguro">IMSS</button>
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#contacto">Contacto</button>
           </li>
-          <li>
           <li class="nav-item">
-            <button class="nav-link" data-bs-target="#datos_nivel" data-bs-toggle="tab">Nivel Ingles</button>
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#autorizada">Persona Autorizada</button>
           </li>
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#datos_seguro">IMSS</button>
           </li>
-
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#datos_nivel">Nivel Inglés</button>
+          </li>
         </ul>
+      </div>
 
-        <div class="tab-content pt-4">
-          <div class="tab-pane fade show active profile-overview" id="datos">
-            <h5 class="card-title mb-4">Datos de identidad</h5>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Fotografía</div>
-              <div class="col-lg-9 col-md-8">
-                <img src="{{image}}" alt="foto" class="img-fluid rounded-circle" width="120">
-              </div>
+
+    <div class="tab-content pt-4">
+      <div class="tab-pane fade show active profile-overview" id="datos">
+        <h5 class="card-title mb-4">Datos de identidad</h5>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 fw-semibold">Fotografía</div>
+          <div class="col-lg-9 col-md-8">
+            <img src="{{image}}" alt="foto" class="img-fluid" width="120">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 label">Nombre</div>
+          <div class="col-lg-9 col-md-8"><strong>{{NOMBRE}}</strong></div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 label">Nombre Paterno</div>
+          <div class="col-lg-9 col-md-8"><strong>{{PATERNO}}</strong></div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 label">Apellido Materno</div>
+          <div class="col-lg-9 col-md-8"><strong>{{MATERNO}}</strong></div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 label">Género</div>
+          <div class="col-lg-9 col-md-8">{{GENERO}}</div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 label">Estado Civil</div>
+          <div class="col-lg-9 col-md-8">{{ESTADO_CIVIL}}</div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 label">Estado de Nacimiento</div>
+          <div class="col-lg-9 col-md-8">{{ESTADO}}</div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-lg-3 col-md-4 label">Municipio</div>
+          <div class="col-lg-9 col-md-8">{{LUGAR_NACIMIENTO}}</div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-lg-3 col-md-4 label fw-bold fs-5">CURP</div>
+          <div class="col-lg-9 col-md-8">
+            <h6 class="text-muted fw-bold fs-4">{{CLAVE_CIUDADANA}}</h6>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="tab-pane fade pt-3" id="contacto">
+
+        <!-- Settings Form -->
+        <form method="post" action="/perfil/update-contacto">
+
+          <h5 class="card-title">Datos de domicilio</h5>
+          <div class="row mb-3">
+            <label for="domicilio" class="col-md-4 col-lg-3 col-form-label">Domicilio</label>
+            <div class="col-md-8 col-lg-9">
+              <input id="domicilio" name="domicilio" class="form-control" type="text" required value="{{DOMICILIO}}"
+                disabled />
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Nombre</div>
-              <div class="col-lg-9 col-md-8"><strong>{{NOMBRE}}</strong></div>
+          <div class="row mb-3">
+            <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="estado" type="text" class="form-control" id="estado" value="{{ESTADO}}" disabled />
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Nombre Paterno</div>
-              <div class="col-lg-9 col-md-8"><strong>{{PATERNO}}</strong></div>
+          <div class="row mb-3">
+            <label for="entre_calles" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="entre_calles" type="text" class="form-control" id="entre_calles" value="{{ENTRE_CALLES}}"
+                disabled />
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Apellido Materno</div>
-              <div class="col-lg-9 col-md-8"><strong>{{MATERNO}}</strong></div>
+          <div class="row mb-3">
+            <label for="ciudad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="ciudad" type="text" class="form-control" id="ciudad" value="{{CIUDAD}}" disabled />
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Género</div>
-              <div class="col-lg-9 col-md-8">{{GENERO}}</div>
+          <div class="row mb-3">
+            <label for="cp" class="col-md-4 col-lg-3 col-form-label">Código postal</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="cp" type="text" class="form-control" id="cp" value="{{CP}}" disabled />
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Estado Civil</div>
-              <div class="col-lg-9 col-md-8">{{ESTADO_CIVIL}}</div>
+          <div class="row mb-3">
+            <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email personal</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="email" type="email" class="form-control" id="Email" value="{{EMAIL}}" disabled />
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Estado de Nacimiento</div>
-              <div class="col-lg-9 col-md-8">{{ESTADO}}</div>
+          <div class="row mb-3">
+            <label for="Emailutp" class="col-md-4 col-lg-3 col-form-label">Email institucional</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="emailutp" type="email" class="form-control" id="Emailutp" value="{{EMAIL_ALTERNO}}"
+                placeholder="a.alumno@utponiente.edu.mx" disabled />
             </div>
+          </div>
 
-            <div class="row mb-3">
-              <div class="col-lg-3 col-md-4 label">Municipio</div>
-              <div class="col-lg-9 col-md-8">{{LUGAR_NACIMIENTO}}</div>
+          <div class="row mb-3">
+            <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="telefono" type="text" class="form-control" id="telefono" value="{{TELEFONO}}" disabled />
             </div>
+          </div>
 
-            <div class="row mb-4">
-              <div class="col-lg-3 col-md-4 label fw-bold fs-5">CURP</div>
-              <div class="col-lg-9 col-md-8">
-                <h6 class="text-muted fw-bold fs-4">{{CLAVE_CIUDADANA}}</h6>
-              </div>
+          <div class="row mb-3">
+            <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Celular</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="celular" type="text" class="form-control" id="celular" value="{{CELULAR}}" disabled />
             </div>
           </div>
 
 
-          <div class="tab-pane fade pt-3" id="contacto">
-
-            <!-- Settings Form -->
-            <form method="post" action="/perfil/update-contacto">
-
-              <h5 class="card-title">Datos de domicilio</h5>
-              <div class="row mb-3">
-                <label for="domicilio" class="col-md-4 col-lg-3 col-form-label">Domicilio</label>
-                <div class="col-md-8 col-lg-9">
-                  <input id="domicilio" name="domicilio" class="form-control" type="text" required value="{{DOMICILIO}}"
-                    disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="estado" type="text" class="form-control" id="estado" value="{{ESTADO}}" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="entre_calles" class="col-md-4 col-lg-3 col-form-label">Municipio</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="entre_calles" type="text" class="form-control" id="entre_calles" value="{{ENTRE_CALLES}}" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="ciudad" class="col-md-4 col-lg-3 col-form-label">Localidad</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="ciudad" type="text" class="form-control" id="ciudad" value="{{CIUDAD}}" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="cp" class="col-md-4 col-lg-3 col-form-label">Código postal</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="cp" type="text" class="form-control" id="cp" value="{{CP}}" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email personal</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="email" type="email" class="form-control" id="Email" value="{{EMAIL}}" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="Emailutp" class="col-md-4 col-lg-3 col-form-label">Email institucional</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="emailutp" type="email" class="form-control" id="Emailutp" value="{{EMAIL_ALTERNO}}"
-                    placeholder="a.alumno@utponiente.edu.mx" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Teléfono</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="telefono" type="text" class="form-control" id="telefono" value="{{TELEFONO}}" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="Phonecel" class="col-md-4 col-lg-3 col-form-label">Celular</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="celular" type="text" class="form-control" id="celular" value="{{CELULAR}}" disabled />
-                </div>
-              </div>
-
-
-              <div class="text-center">
-                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
-              </div>
-            </form><!-- End Change Password Form -->
-
+          <div class="text-center">
+            <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
           </div>
-
-          <div class="tab-pane fade pt-3" id="autorizada">
-            <!-- Change Password Form -->
-            <form method="post" action="/perfil/update-per-contac">
-
-              <h5 class="card-title">Persona autorizada para recibir información personal y/o académica</h5>
-
-              <div class="row mb-3">
-                <label for="nombre_autirizada" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="perContacto" type="text" class="form-control" id="domicilio" maxlength="25"
-                    value="{{CONTACTO}}" disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
-                <div class="col-md-8 col-lg-9">
-                  <select class="form-select" id="parentesco" name="PARENTESCO_CONTACTO" disabled />
-                  <option selected value="{{PARENTESCO_CONTACTO}}" disabled>{{PARENTESCO_CONTACTO}}</option>
-                  <option value="PADRE">Padre</option>
-                  <option value="MADRE">Madre</option>
-                  <option value="HERMANO(A)">Hermano(a)</option>
-                  <option value="ABUELO(A)">Abuelo(a)</option>
-                  <option value="CONYUGUE">Cónyugue</option>
-                  <option value="PARIENTE">Pariente</option>
-                  <option value="AMIGO(A)">Amigo(a)</option>
-                  <option value="OTRO(A)">Otro</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="Phoneautorizada" class="col-md-4 col-lg-3 col-form-label">Teléfono persona
-                  autorizada</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="telContacto" type="text" class="form-control" id="Phoneautorizada" value={{TEL_CONTACTO}}
-                    disabled />
-                </div>
-              </div>
-
-              <div class="text-center">
-                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
-              </div>
-            </form><!-- End Change Password Form -->
-
-          </div>
-
-          <div class="tab-pane fade pt-3" id="datos_beca">
-            <!-- Change Password Form -->
-
-            <form method="post" action="/perfil/update-beca">
-              <h5 class="card-title">Beca bachillerato</h5>
-
-
-              <div class="row mb-3">
-                <label for="instbecabach" class="col-md-4 col-lg-3 col-form-label">Institución beca bach.</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="instbecabach" type="text" class="form-control" id="instbecabach" value={{NIVELCOMPLETO}}
-                    disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="becabach" class="col-md-4 col-lg-3 col-form-label">Nombre beca bach.</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="becabach" type="text" class="form-control" id="becabach" value={{CARRERACOMPLETO}}
-                    disabled />
-                </div>
-              </div>
-
-              <h5 class="card-title">Beca UTP</h5>
-
-
-              <div class="row mb-3">
-                <label for="instbeca" class="col-md-4 col-lg-3 col-form-label">Institución de la beca</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="becainst" type="text" class="form-control" id="becainst" value={{HIJOS6A12}} disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Nombre de la Beca</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="becanombre" type="text" class="form-control" id="becanombre" value={{BECA}} disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Estatus de la beca</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="becaestatus" type="text" class="form-control" id="becaestatus" value={{HIJOS13A18}}
-                    disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="becafolio" class="col-md-4 col-lg-3 col-form-label">Folio de la beca</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="becafolio" type="text" class="form-control" id="becafolio" value={{HIJOSMAYORES}}
-                    disabled />
-                </div>
-              </div>
-
-
-
-              <div class="text-center">
-                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
-              </div>
-            </form><!-- End Change Password Form -->
-
-          </div>
-
-
-          <div class="tab-pane fade pt-3" id="datos_nivel">
-            <!-- Change Password Form -->
-
-            <form method="post" action="/ingles/update-nivel">
-              <h5 class="card-title">Nivel de ingles</h5>
-
-
-              <div class="row mb-3">
-                <label for="proyecto_obs" class="col-md-4 col-lg-3 col-form-label">Nivel de ingles TSU</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="proyecto_obs" type="text" class="form-control" id="proyecto_obs" value="{{PROYECTO_OBS}}"
-                    disabled />
-
-
-                </div>
-              </div>
-
-
-              <div class="row mb-3">
-                <label for="obs_proyecto_lic" class="col-md-4 col-lg-3 col-form-label">Nivel de ingles LIC</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="obs_proyecto_lic" type="text" class="form-control" id="obs_proyecto_lic"
-                    value={{OBS_PROYECTO_LIC}} disabled />
-                </div>
-              </div>
-
-
-
-              <div class="text-center">
-                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
-              </div>
-            </form><!-- End Change Password Form -->
-
-          </div>
-
-          <div class="tab-pane fade pt-3" id="datos_seguro">
-            <!-- Change Password Form -->
-            <form action="/perfil/update-seguro" method="post">
-
-              <h5 class="card-title">Datos seguro médico</h5>
-
-              <div class="row mb-3">
-                <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
-                <div class="col-md-8 col-lg-9">
-                  <select class="form-select" id="tiposeguro" name="TIPO_SEG_MED" disabled />
-                  <option selected disabled value="{{TIPO_SEG_MED}}">{{TIPO_SEG_MED}}</option>
-                  <option value="imss_utp">IMSS-UTP</option>
-                  <option value="imms_fam">IMSS Familiar</option>
-                  <option value="isstey">ISSTEY</option>
-                  <option value="bienestar">Bienestar</option>
-                  <option value="particular">Particular</option>
-                  <option value="otro">Otro</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="nss" type="text" class="form-control" id="nss" value={{NUM_IMSS}} disabled />
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número Verificador</label>
-                <div class="col-md-8 col-lg-9">
-                  <input name="nss_verif" type="text" class="form-control" id="nss" value={{NUM_IMSS_VERIFICADOR}}
-                    disabled />
-                </div>
-              </div>
-
-              <div class="text-center">
-                <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
-              </div>
-            </form><!-- End Change Password Form -->
-
-          </div>
-          <div class="text-center pt-3">
-            <button class="btn btn-outline-primary" type="button" id="btn-habilitar">Habilitar edición</button>
-          </div>
-        </div><!-- End Bordered Tabs -->
+        </form><!-- End Change Password Form -->
 
       </div>
-    </div>
+
+      <div class="tab-pane fade pt-3" id="autorizada">
+        <!-- Change Password Form -->
+        <form method="post" action="/perfil/update-per-contac">
+
+          <h5 class="card-title">Persona autorizada para recibir información personal y/o académica</h5>
+
+          <div class="row mb-3">
+            <label for="nombre_autirizada" class="col-md-4 col-lg-3 col-form-label">Nombre completo</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="perContacto" type="text" class="form-control" id="domicilio" maxlength="25"
+                value="{{CONTACTO}}" disabled />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="parentesco" class="col-md-4 col-lg-3 col-form-label">Parentesco</label>
+            <div class="col-md-8 col-lg-9">
+              <select class="form-select" id="parentesco" name="PARENTESCO_CONTACTO" disabled />
+              <option selected value="{{PARENTESCO_CONTACTO}}" disabled>{{PARENTESCO_CONTACTO}}</option>
+              <option value="PADRE">Padre</option>
+              <option value="MADRE">Madre</option>
+              <option value="HERMANO(A)">Hermano(a)</option>
+              <option value="ABUELO(A)">Abuelo(a)</option>
+              <option value="CONYUGUE">Cónyugue</option>
+              <option value="PARIENTE">Pariente</option>
+              <option value="AMIGO(A)">Amigo(a)</option>
+              <option value="OTRO(A)">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="Phoneautorizada" class="col-md-4 col-lg-3 col-form-label">Teléfono persona
+              autorizada</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="telContacto" type="text" class="form-control" id="Phoneautorizada" value={{TEL_CONTACTO}}
+                disabled />
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+          </div>
+        </form><!-- End Change Password Form -->
+
+      </div>
+
+      <div class="tab-pane fade pt-3" id="datos_beca">
+        <!-- Change Password Form -->
+
+        <form method="post" action="/perfil/update-beca">
+          <h5 class="card-title">Beca bachillerato</h5>
+
+
+          <div class="row mb-3">
+            <label for="instbecabach" class="col-md-4 col-lg-3 col-form-label">Institución beca bach.</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="instbecabach" type="text" class="form-control" id="instbecabach" value={{NIVELCOMPLETO}}
+                disabled />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="becabach" class="col-md-4 col-lg-3 col-form-label">Nombre beca bach.</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="becabach" type="text" class="form-control" id="becabach" value={{CARRERACOMPLETO}}
+                disabled />
+            </div>
+          </div>
+
+          <h5 class="card-title">Beca UTP</h5>
+
+
+          <div class="row mb-3">
+            <label for="instbeca" class="col-md-4 col-lg-3 col-form-label">Institución de la beca</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="becainst" type="text" class="form-control" id="becainst" value={{HIJOS6A12}} disabled />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Nombre de la Beca</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="becanombre" type="text" class="form-control" id="becanombre" value={{BECA}} disabled />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="becaestatus" class="col-md-4 col-lg-3 col-form-label">Estatus de la beca</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="becaestatus" type="text" class="form-control" id="becaestatus" value={{HIJOS13A18}}
+                disabled />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="becafolio" class="col-md-4 col-lg-3 col-form-label">Folio de la beca</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="becafolio" type="text" class="form-control" id="becafolio" value={{HIJOSMAYORES}} disabled />
+            </div>
+          </div>
+
+
+
+          <div class="text-center">
+            <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+          </div>
+        </form><!-- End Change Password Form -->
+
+      </div>
+
+
+      <div class="tab-pane fade pt-3" id="datos_nivel">
+        <form method="post" action="/ingles/update-nivel" class="p-4 shadow-sm rounded bg-white">
+          <h5 class="card-title text-primary fw-bold mb-3">NIVEL DE INGLES</h5>
+
+          <div class="mb-3 row align-items-center">
+            <label class="col-lg-3 col-md-4 fw-semibold">NIVEL DE INGLES TSU:</label>
+            <div class="col-lg-9 col-md-8">
+              <p class="form-control-plaintext text-secondary">{{PROYECTO_OBS}}</p>
+            </div>
+          </div>
+
+          <div class="mb-3 row align-items-center">
+            <label class="col-lg-3 col-md-4 fw-semibold">NIVEL DE INGLES LIC:</label>
+            <div class="col-lg-9 col-md-8">
+              <p class="form-control-plaintext text-secondary">{{OBS_PROYECTO_LIC}}</p>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+
+
+      <div class="tab-pane fade pt-3" id="datos_seguro">
+        <!-- Change Password Form -->
+        <form action="/perfil/update-seguro" method="post">
+
+          <h5 class="card-title">Datos seguro médico</h5>
+
+          <div class="row mb-3">
+            <label for="tiposeguro" class="col-md-4 col-lg-3 col-form-label">Tipo de seguro médico</label>
+            <div class="col-md-8 col-lg-9">
+              <select class="form-select" id="tiposeguro" name="TIPO_SEG_MED" disabled />
+              <option selected disabled value="{{TIPO_SEG_MED}}">{{TIPO_SEG_MED}}</option>
+              <option value="imss_utp">IMSS-UTP</option>
+              <option value="imms_fam">IMSS Familiar</option>
+              <option value="isstey">ISSTEY</option>
+              <option value="bienestar">Bienestar</option>
+              <option value="particular">Particular</option>
+              <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número de seguro social</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="nss" type="text" class="form-control" id="nss" value={{NUM_IMSS}} disabled />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="nss" class="col-md-4 col-lg-3 col-form-label">Número Verificador</label>
+            <div class="col-md-8 col-lg-9">
+              <input name="nss_verif" type="text" class="form-control" id="nss" value={{NUM_IMSS_VERIFICADOR}}
+                disabled />
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-outline-primary d-none" type="submit" name="guardarForm">Guardar</button>
+          </div>
+        </form><!-- End Change Password Form -->
+
+      </div>
+      <div class="text-center pt-3">
+        <button class="btn btn-outline-primary" type="button" id="btn-habilitar">Habilitar edición</button>
+      </div>
+    </div><!-- End Bordered Tabs -->
+
+  </div>
+  </div>
 
   </div>
   </div>

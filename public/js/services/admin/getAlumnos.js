@@ -54,7 +54,7 @@ const getAlumnos = async () => {
       content += `<td>${item.MATRICULA}</td>`;
       content += `<td>${status[item.STATUS] ?? ""}</td>`;
       content += `<td>${item.NIVEL}</td>`;
-      content += `<td>${item.ALUMNO_PASSWORD ?? ""}</td>`; // Password change
+      // content += `<td>${item.ALUMNO_PASSWORD ?? ""}</td>`; // Password change
 
 
       // TÍTULO LICENCIATURA

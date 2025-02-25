@@ -47,7 +47,6 @@ AlumnosController.showById = async (req = request, res = response) => {
     );
   });
 };
-
 AlumnosController.updateContact = async (req = request, res = response) => {
   const body = {
     domicilio: req.body.domicilio,
@@ -60,6 +59,27 @@ AlumnosController.updateContact = async (req = request, res = response) => {
     telefono: req.body.telefono,
     alumno_password: req.body.alumno_password,
     entre_calles: req.body.entre_calles,
+  };
+
+  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
+  res.redirect("/perfil");
+};
+
+
+AlumnosController.updateContactIngles = async (req = request, res = response) => {
+  const body = {
+    domicilio: req.body.domicilio,
+    celular: req.body.celular,
+    estado: req.body.estado,
+    ciudad: req.body.ciudad,
+    cp: req.body.cp,
+    email: req.body.email,
+    email_alterno: req.body.emailutp,
+    telefono: req.body.telefono,
+    alumno_password: req.body.alumno_password,
+    entre_calles: req.body.entre_calles,
+    proyecto_obs: req.body.proyecto_obs,
+    obs_proyecto_lic: req.body.obs_proyecto_lic,
   };
 
   await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
@@ -106,15 +126,7 @@ AlumnosController.updateBeca = async (req = request, res = response) => {
 
 
 
-AlumnosController.updateNivelingles = async (req = request, res = response) => {
-  const body = {
-    proyecto_obs: req.body.proyecto_obs,
-    obs_proyecto_lic: req.body.obs_proyecto_lic,
-  };
 
-  await Alumno.findByIdAndUpdate(req.session.IDAuth, body);
-  res.redirect("/perfil");
-};
 
 AlumnosController.getBoletas = async (req = request, res = response) => {
 

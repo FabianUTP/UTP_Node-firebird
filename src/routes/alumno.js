@@ -33,7 +33,7 @@ router.post("/passworddata/update-per-contac", AlumnosController.updatePerContac
 router.post("/passworddata/update-seguro", AlumnosController.updateSeguro);
 router.post("/passworddata/update-beca", AlumnosController.updateBeca);
 
-router.post("/ingles/update-nivel", AlumnosController.updateNivelingles)
+router.post("/ingles/update-nivel", AlumnosController.updateContactIngles)
 
 //Apartado de modulo Estadia
 router.get("/estadia", isAlumno, EstadiaController.showById);

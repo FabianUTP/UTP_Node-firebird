@@ -45,35 +45,60 @@
                     </div>
                   </div>
                 </div>
-                <input type="text" class="form-control" name="user" id="user" required maxlength="8" pattern="\d{1,8}"
-                  title="La matrícula debe ser un número de hasta 8 dígitos.">
+                <input type="text" class="form-control" name="user" id="user" required maxlength="8" pattern="\d{1,8}"  placeholder="Ingresar tu Matricula">
               </div>
             </div>
 
-            <div>
-              <label for="pass" class="form-label">CONTRASEÑA</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <div class="icon">
-                      <i class="bi bi-key"></i>
-                    </div>
-                  </div>
+            <div class="mb-4">
+              <label for="pass" class="form-label fs-5">CONTRASEÑA</label>
+              <div class="input-group">
+                <!-- Icono de la contraseña -->
+                <div class="input-group-text">
+                  <i class="bi bi-lock"></i>
                 </div>
-                <input type="password" class="form-control" name="password" id="pass">
+                <!-- Campo de contraseña -->
+                <input type="password" class="form-control" name="password" id="pass" required
+                  placeholder="Ingresa tu contraseña">
+                <!-- Botón para mostrar/ocultar la contraseña -->
+                <button type="button" class="btn btn-outline-secondary btn-sm p-0" id="toggle-password"
+                  style="width: 35px; height: 35px;">
+                  <i class="bi bi-eye-slash" id="password-icon" style="font-size: 18px;"></i>
+                </button>
               </div>
             </div>
 
-            <div id="error-message" class="text-danger" style="display: none;">
-              <p>Por favor, agregue su contraseña.</p>
+            <!-- Enlace para "Olvidaste tu contraseña" -->
+            <div class="text-end">
+              <a href="#" class="text-decoration-none fs-6 text-primary">¿Olvidaste tu contraseña?</a>
             </div>
 
-            <div class="pt-1">
-              <a href="#">Olvidaste tu contraseña?</a>
-            </div>
+            <script>
+              // Script para cambiar entre mostrar y ocultar la contraseña sin animación
+              const togglePasswordButton = document.getElementById('toggle-password');
+              const passwordInput = document.getElementById('pass');
+              const passwordIcon = document.getElementById('password-icon');
+
+              togglePasswordButton.addEventListener('click', () => {
+                // Cambiar el tipo de input de contraseña
+                const type = passwordInput.type === 'password' ? 'text' : 'password';
+                passwordInput.type = type;
+
+                // Cambiar el ícono sin animación
+                if (passwordInput.type === 'password') {
+                  passwordIcon.classList.remove('bi-eye');
+                  passwordIcon.classList.add('bi-eye-slash');
+                } else {
+                  passwordIcon.classList.remove('bi-eye-slash');
+                  passwordIcon.classList.add('bi-eye');
+                }
+              });
+            </script>
+
+
+
 
             <div class="pt-3 text-center">
-              <button type="submit" class="btn btn-outline-primary" id="btn" >Iniciar sesión</button>
+              <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
             </div>
 
           </form>
@@ -238,9 +263,6 @@
   </div>
 </div>
 
-<script>
-
-</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -279,7 +301,7 @@
   }
 
 
-    document.getElementById("btn").addEventListener("click", async () => {
+  document.getElementById("btn").addEventListener("click", async () => {
     const user = document.getElementById("user").value;
     const password = document.getElementById("pass").value;
 
@@ -297,6 +319,21 @@
     } else {
       alert(data.error); // Mostrar error si la autenticación falla
     }
+  });
+  // Obtener el botón y el campo de contraseña
+  const togglePasswordButton = document.getElementById('toggle-password');
+  const passwordInput = document.getElementById('pass');
+  const passwordIcon = document.getElementById('password-icon');
+
+  // Añadir el evento para cambiar el tipo de contraseña y el ícono
+  togglePasswordButton.addEventListener('click', () => {
+    // Alternar el tipo de input entre "password" y "text"
+    const type = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = type;
+
+    // Alternar el ícono entre "bi-eye-slash" (ocultar) y "bi-eye" (mostrar)
+    passwordIcon.classList.toggle('bi-eye');
+    passwordIcon.classList.toggle('bi-eye-slash');
   });
 
 </script>

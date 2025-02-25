@@ -1,0 +1,404 @@
+<section class="section">
+    <div class="mb-3">
+        {{>btnBack}}
+    </div>
+
+    <div class="row w-100">
+        <div class="col-lg-12">
+            <section class="card text-center w-100">
+                <div class="row p-3 w-100">
+                    <div class="col-6">
+                        <div class="pt-2">
+                            {{#if image}}
+                            <img src="{{image}}" alt="foto" class="img-fluid" width="150" id="imgCurrent">
+                            {{else}}
+                            <img src="/imgs/studentIcon.png" alt="foto" class="img-fluid">
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Fichas</h4>
+                                <div class="btn-group flex-wrap" role="group">
+                                    <a class="btn btn-outline-primary"
+                                        href="/alumnos/{{MATRICULA}}/doctos">Documentos</a>
+                                    <a class="btn btn-outline-primary" href="/alumnos/{{MATRICULA}}/boletas">Boletas</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 pt-4">
+                                <h4>Actualizar fotografía</h4>
+                                <form action="/alumnos/{{MATRICULA}}/updatePhoto" method="post"
+                                    enctype="multipart/form-data">
+                                    <div class="btn-group">
+                                        <input type="file" name="fotografia" class="form-control" accept="image/*"
+                                            id="imgInput" />
+                                        <button class="btn" type="submit">
+                                            <i class="bi bi-arrow-bar-up"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="col-xl-9">
+        <div class="card shadow-sm">
+            <div class="card-body pt-3">
+                <ul class="nav nav-pills mb-3 gap-2 d-flex flex-wrap" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+                            data-bs-target="#DatosIdentidad">Identidad</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+                            data-bs-target="#Domicilios">Domicilios</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+                            data-bs-target="#Escolaridad">Escolaridad</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+                            data-bs-target="#Estatus">Estatus</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+                            data-bs-target="#Notas">Notas</button>
+                    </li>
+                </ul>
+            </div>
+
+            <form action="/alumnos/{{MATRICULA}}/update" method="post">
+                <div class="tab-content pt-4">
+                    <!-- Identidad -->
+                    <div class="tab-pane fade show active profile-overview" id="DatosIdentidad">
+                        <h5 class="card-title mb-4">Datos de identidad</h5>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre"
+                                    value="{{NOMBRE}}" disabled>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="paterno" class="form-label">Primer Apellido</label>
+                                <input type="text" id="paterno" name="paterno" class="form-control"
+                                    placeholder="Paterno" value="{{PATERNO}}" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="materno" class="form-label">Segundo apellido</label>
+                                <input type="text" id="materno" name="materno" class="form-control"
+                                    placeholder="Segundo apellido" value="{{MATERNO}}" disabled>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="genero" class="form-label">Género</label>
+                                <select name="genero" id="genero" class="form-select" disabled>
+                                    <option value="{{GENERO}}" selected>{{GENERO}}</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
+                                <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
+                                <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control"
+                                    disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="estado_nacimiento" class="form-label">Estado de nacimiento</label>
+                                <select id="estado_nacimiento" class="form-select" name="estado_nacimiento" disabled>
+                                    <option selected>{{ESTADO_NACIMIENTO}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
+                                <select id="municipio-nacimiento" class="form-select" name="municipio_naci" disabled>
+                                    <option>{{LUGAR_NACIMIENTO}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputnacionalidad" class="form-label">Nacionalidad</label>
+                                <select id="inputState" class="form-select" disabled name="nacionalidad">
+                                    <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
+                                    <option>Mexicana</option>
+                                    <option>Extranjera</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="inputedocivil" class="form-label">Estado civil</label>
+                                <select id="inputState" class="form-select" disabled>
+                                    <option selected value="{{ESTADO_CIVIL}}" disabled>{{ESTADO_CIVIL}}</option>
+                                    <option value="S">Soltero</option>
+                                    <option value="C">Casado</option>
+                                </select>
+                            </div>
+                            <div class="col-md-7 pt-2">
+                                <label class="control-label" for="curp_">CURP</label>
+                                <input id="curp_" name="curp" class="form-control form-control-lg"
+                                    style="text-transform: uppercase;" maxlength="18" required type="text"
+                                    value="{{CLAVE_CIUDADANA}}" disabled>
+                                </input>
+                                <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
+                                    Consulta tu CURP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Domicilio -->
+                    <div class="tab-pane fade profile-overview" id="Domicilios">
+                        <h5 class="card-title mb-4">Domicilio</h5>
+                        <div class="row g-2">
+                            <div class="col-md-8">
+                                <label for="domicilio" class="form-label">Domicilio particular</label>
+                                <input type="text" id="domicilio" name="domicilio" class="form-control"
+                                    placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cruzamientos" class="form-label">Municipio</label>
+                                <input type="text" id="cruzamientos" name="cruzamientos" class="form-control"
+                                    placeholder="Cruzamientos" value="{{ENTRE_CALLES}}" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="estado" class="form-label">Estado</label>
+                                <select id="estado" name="estado" class="form-select" disabled>
+                                    <option value="{{ESTADO}}">{{ESTADO}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ciudad" class="form-label">Ciudad</label>
+                                <select id="ciudad" name="ciudad" class="form-select" disabled>
+                                    <option>{{CIUDAD}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="cp" class="form-label">Código postal</label>
+                                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P"
+                                    value="{{CP}}" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email_personal" class="form-label">Correo personal</label>
+                                <input type="text" id="email_personal" name="email_personal" class="form-control"
+                                    placeholder="nombre@servidor.com" value="{{EMAIL}}" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email_insti" class="form-label">Correo personal</label>
+                                <input type="text" id="email_insti" name="email_insti" class="form-control"
+                                    placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tel_cel" class="form-label">Teléfono celular</label>
+                                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10"
+                                    value="{{CELULAR}}" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
+                                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control"
+                                    value="{{TELEFONO}}" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Escolaridad -->
+                    <div class="tab-pane fade profile-overview" id="Escolaridad">
+                        <h5 class="card-title mb-4">Escolaridad</h5>
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <label for="inputcarrera" class="form-label">Carrera</label>
+                                <select id="inputcarrera" name="nivel" class="form-select" required disabled>
+                                    <option selected value="{{NIVEL}}">{{NIVEL}}</option>
+                                    <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
+                                    <option>TSU en Gastronomía</option>
+                                    <option>TSU en Procesos Alimentarios</option>
+                                    <option>TSU en Tecnologías de la Información Área Desarrollo de Software
+                                        Multiplataforma</option>
+                                    <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
+                                    <option>Ingeniería en Procesos Bioalimentarios</option>
+                                    <option>Ingeniería en Desarrollo y Gestión de Software</option>
+                                    <option>Licenciatura en Gestión de Negocios y Proyectos</option>
+                                    <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+                                    <option>Curso de Inglés Básico</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="inputcuatri" class="form-label">Cuatrimestre</label>
+                                <select id="inputcuatri" class="form-select" name="grado" required disabled>
+                                    <option selected value="{{GRADO}}">{{GRADO}}</option>
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="inputmatricula" class="form-label">MATRÍCULA</label>
+                                <input type="text" class="form-control" id="inputmatricula" maxlength="8"
+                                    placeholder="AAMMFFFF" required value="{{MATRICULA}}" name="matricula" disabled>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estatus -->
+                    <div class="tab-pane fade profile-overview" id="Estatus">
+                        <h5 class="card-title mb-4">Estatus</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="estatus_actual" class="form-label">Estatus actual</label>
+                                <input type="hidden" id="status" value="{{STATUS}}">
+                                <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
+                                    <option selected disabled>--seleccionar estatus--</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6"></div>
+
+                            <!-- Ingreso TSU -->
+                            <div class="row my-2 d-none" id="ingreso_tsu">
+                                <div class="col-6">
+                                    <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
+                                    <input type="date" class="form-control" id="fecha_registro_tsu"
+                                        name="fecha_registro_tsu">
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
+                                    <input type="date" class="form-control" id="fecha_itsu" name="fecha_itsu">
+                                </div>
+                            </div>
+
+                            <!-- Motivo de baja -->
+                            <div class="row my-2 d-none" id="motivo_baja">
+                                <div class="col-md-6">
+                                    <label for="inputmotivo" class="form-label">Motivo de la baja</label>
+                                    <select id="inputmotivo" class="form-select" disabled>
+                                        <option>REPROBACIÓN</option>
+                                        <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
+                                        <option>MOTIVOS PERSONALES</option>
+                                        <option>CAMBIO DE CARRERA</option>
+                                        <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
+                                        <option>DISTANCIA DE LA UT</option>
+                                        <option>PROBLEMAS ECONÓMICOS</option>
+                                        <option>PROBLEMAS DE TRABAJO</option>
+                                        <option>CAMBIO DE UT</option>
+                                        <option>DEFUNCIÓN</option>
+                                        <option>OTRAS CAUSAS</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="fechabaja" class="form-label">Fecha de Baja</label>
+                                    <input class="form-control" id="fecha_baja" type="date" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notas -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="card-title">Notas</h1>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="adicionales" class="form-label">Notas</label>
+                                    <input type="text" id="adicionales" name="adicionales" class="form-control"
+                                        placeholder="adicionales" value="{{ADICIONALES}}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar
+                            edición</button>
+                        <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{{!-- // Ajusta las fechas --}}
+<script>
+    const fech_nacimiento_ini = document.getElementById("fech_nacimiento_ini");
+    const fech_nacimiento = document.getElementById("fech_nacimiento");
+    fech_nacimiento.value = formatDate(fech_nacimiento_ini.value);
+</script>
+
+{{!-- // Hablita todos los input para editar --}}
+<script>
+    const btn_act = document.getElementById("btn_act");
+    const btn_update = document.getElementById("btn_update");
+
+    btn_act.addEventListener("click", () => {
+        btn_act.classList.add("d-none");
+        btn_update.classList.remove("d-none");
+
+        let inputs = document.getElementsByTagName("input");
+        let selects = document.getElementsByTagName("select");
+        let txtarea = document.getElementsByTagName("textarea");
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = false;
+        }
+
+        for (let i = 0; i < selects.length; i++) {
+            selects[i].disabled = false;
+        }
+
+        for (let i = 0; i < txtarea.length; i++) {
+            txtarea[i].disabled = false;
+        }
+
+        // Manda al principio de la pagina
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+    //Botones de oculta y mostrar 
+
+    // Función para ocultar o mostrar el contenido de las tarjetas
+    // Función para ocultar o mostrar el contenido de las tarjetas
+    function toggleCard(cardId, buttonId) {
+        const card = document.getElementById(cardId);
+        const toggleButton = document.getElementById(buttonId);
+
+        // Si la tarjeta está oculta, la mostramos y cambiamos el texto del botón
+        if (card.style.display === "none") {
+            card.style.display = "block";
+            toggleButton.textContent = "Ocultar " + cardId.replace('_', ' '); // Cambia el texto del botón
+        }
+        // Si la tarjeta está visible, la ocultamos y cambiamos el texto del botón
+        else {
+            card.style.display = "none";
+            toggleButton.textContent = "Mostrar " + cardId.replace('_', ' '); // Cambia el texto del botón
+        }
+    }
+
+
+
+
+</script>
+<script src="/js/helpers/filtraPorEstatus.js"></script>

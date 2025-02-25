@@ -14,13 +14,16 @@ AuthController.authAlumno = async (req = request, res = response) => {
   const { user, password } = req.body;
 
   try {
+    // Buscar al alumno por matrícula
     const alumno = await Alumno.findById(user);
 
+    // Si no se encuentra al alumno, redirigir con mensaje de error
     if (!alumno) {
       req.flash('msj_error', 'Alumno no encontrado');
       return res.redirect('/login');
     }
 
+    // Si el estado del alumno es "S" (suspendido), denegar el acceso
     if (alumno.STATUS.trim() === "S") {
       req.flash('msj_error', 'No pueden ingresar los aspirantes');
       return res.redirect('/login');
@@ -29,31 +32,35 @@ AuthController.authAlumno = async (req = request, res = response) => {
     console.log("MATRÍCULA:", alumno.MATRICULA);
     console.log("CONTRASEÑA EN BD:", alumno.ALUMNO_PASSWORD || "No registrada");
 
-    // Si no hay contraseña en la BD, dejarlo pasar solo con la matrícula
+    // Si no hay contraseña registrada, denegar el acceso y dar instrucciones
     if (!alumno.ALUMNO_PASSWORD || alumno.ALUMNO_PASSWORD.trim() === "") {
-      console.log("No se encontró contraseña, permitiendo acceso solo con matrícula.");
-    } else {
-      // Validar que la contraseña ingresada coincida con la de la BD
-      if (password !== alumno.ALUMNO_PASSWORD) {
-        req.flash('msj_error', 'Contraseña incorrecta');
-        return res.redirect('/login');
-      }
+      req.flash('msj_error', 'El alumno no tiene una contraseña registrada. Por favor, contacte con el administrador o registre su contraseña.');
+      return res.redirect('/login');
     }
 
-    // Iniciar sesión
+    // Validar que la contraseña ingresada coincida con la de la BD
+    if (password !== alumno.ALUMNO_PASSWORD) {
+      req.flash('msj_error', 'Contraseña incorrecta');
+      return res.redirect('/login');
+    }
+
+    // Iniciar sesión si la contraseña es válida
     req.session.isAuthenticated = true;
     req.session.isAlumno = true;
     req.session.IDAuth = alumno.MATRICULA;
     req.session.nameAuth = alumno.NOMBRE;
     req.session.lastNameAuth = `${alumno.PATERNO} ${alumno.MATERNO}`;
 
+    // Redirigir a la página principal después de un inicio de sesión exitoso
     return res.redirect('/');
+
   } catch (error) {
     console.error('Error en authAlumno:', error);
     req.flash('msj_error', 'Hubo un problema al procesar su solicitud');
     return res.redirect('/login');
   }
 };
+
 
 
 // Autenticación de aspirantes

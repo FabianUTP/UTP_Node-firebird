@@ -45,10 +45,10 @@
     </div>
   </div>
 
-  <div class="col-xl-9">
-    <div class="card shadow-sm">
+  <div class="col-xl-9 d-flex justify-content-center">
+    <div class="card shadow-sm" style="max-width: 800px;">
       <div class="card-body pt-3">
-        <ul class="nav nav-pills mb-3 gap-2 d-flex flex-wrap" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills mb-3 gap-2 d-flex flex-wrap justify-content-center" id="pills-tab" role="tablist">
           <li class="nav-item">
             <button class="nav-link active text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
               data-bs-target="#DatosIdentidad">Identidad</button>
@@ -65,245 +65,327 @@
             <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
               data-bs-target="#Estatus">Estatus</button>
           </li>
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#Escuela">Escuela</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#Estadisticos">Estadisticos</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#Titulacion_Tsu">Titulacion Tsu</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#Folios_Doctos_TSU">Doctos Tsu</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#Titulacion_Lic">Titulacion Lic</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
+              data-bs-target="#Folios_docs_lic">Doctos LIC</button>
+          </li>
         </ul>
-      </div>
 
 
-      <form action="/alumnos/{{MATRICULA}}/update" method="post">
-        <div class="tab-content pt-4">
-          <!-- Identidad -->
-          <div class="tab-pane fade show active profile-overview" id="DatosIdentidad">
-            <h5 class="card-title mb-4">Datos de identidad</h5>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre"
-                  value="{{NOMBRE}}" disabled>
-              </div>
-              <div class="col-md-12">
-                <label for="paterno" class="form-label">Primer Apellido</label>
-                <input type="text" id="paterno" name="paterno" class="form-control" placeholder="Paterno"
-                  value="{{PATERNO}}" disabled>
-              </div>
-              <div class="col-md-6">
-                <label for="materno" class="form-label">Segundo apellido</label>
-                <input type="text" id="materno" name="materno" class="form-control" placeholder="Segundo apellido"
-                  value="{{MATERNO}}" disabled>
-              </div>
-              <div class="col-md-6">
-                <label for="genero" class="form-label">Género</label>
-                <select name="genero" id="genero" class="form-select" disabled>
-                  <option value="{{GENERO}}" selected>{{GENERO}}</option>
-                  <option value="M">Masculino</option>
-                  <option value="F">Femenino</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="fech_nacimiento" class="form-label">Fecha nacimiento</label>
-                <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
-                <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control" disabled>
-              </div>
-              <div class="col-md-6">
-                <label for="estado_nacimiento" class="form-label">Estado de nacimiento</label>
-                <select id="estado_nacimiento" class="form-select" name="estado_nacimiento" disabled>
-                  <option selected>{{ESTADO_NACIMIENTO}}</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="municipio-nacimiento" class="form-label">Municipio de nacimiento</label>
-                <select id="municipio-nacimiento" class="form-select" name="municipio_naci" disabled>
-                  <option>{{LUGAR_NACIMIENTO}}</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="inputnacionalidad" class="form-label">Nacionalidad</label>
-                <select id="inputState" class="form-select" disabled name="nacionalidad">
-                  <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
-                  <option>Mexicana</option>
-                  <option>Extranjera</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="inputedocivil" class="form-label">Estado civil</label>
-                <select id="inputState" class="form-select" disabled>
-                  <option selected value="{{ESTADO_CIVIL}}" disabled>{{ESTADO_CIVIL}}</option>
-                  <option value="S">Soltero</option>
-                  <option value="C">Casado</option>
-                </select>
-              </div>
-              <div class="col-md-7 pt-2">
-                <label class="control-label" for="curp_">CURP</label>
-                <input id="curp_" name="curp" class="form-control form-control-lg" style="text-transform: uppercase;"
-                  maxlength="18" required type="text" value="{{CLAVE_CIUDADANA}}" disabled>
-                <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
-                  Consulta tu CURP
-                </a>
-              </div>
-            </div>
-          </div>
 
-          <!-- Domicilio -->
-          <div class="tab-pane fade profile-overview" id="Domicilios">
-            <h5 class="card-title mb-4">Domicilio</h5>
-            <div class="row g-2">
-              <div class="col-md-8">
-                <label for="domicilio" class="form-label">Domicilio particular</label>
-                <input type="text" id="domicilio" name="domicilio" class="form-control"
-                  placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
-              </div>
-              <div class="col-md-4">
-                <label for="cruzamientos" class="form-label">Municipio</label>
-                <input type="text" id="cruzamientos" name="cruzamientos" class="form-control" placeholder="Cruzamientos"
-                  value="{{ENTRE_CALLES}}" disabled>
-              </div>
-              <div class="col-md-4">
-                <label for="estado" class="form-label">Estado</label>
-                <select id="estado" name="estado" class="form-select" disabled>
-                  <option value="{{ESTADO}}">{{ESTADO}}</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label for="ciudad" class="form-label">Ciudad</label>
-                <select id="ciudad" name="ciudad" class="form-select" disabled>
-                  <option>{{CIUDAD}}</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label for="cp" class="form-label">Código postal</label>
-                <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}"
-                  disabled>
-              </div>
-              <div class="col-md-4">
-                <label for="email_personal" class="form-label">Correo personal</label>
-                <input type="text" id="email_personal" name="email_personal" class="form-control"
-                  placeholder="nombre@servidor.com" value="{{EMAIL}}" disabled>
-              </div>
-              <div class="col-md-4">
-                <label for="email_insti" class="form-label">Correo personal</label>
-                <input type="text" id="email_insti" name="email_insti" class="form-control"
-                  placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
-              </div>
-              <div class="col-md-6">
-                <label for="tel_cel" class="form-label">Teléfono celular</label>
-                <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10" value="{{CELULAR}}"
-                  disabled />
-              </div>
-              <div class="col-md-6">
-                <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
-                <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control" value="{{TELEFONO}}"
-                  disabled>
-              </div>
-            </div>
-          </div>
-
-          <!-- Escolaridad -->
-          <div class="tab-pane fade profile-overview" id="Escolaridad">
-            <h5 class="card-title mb-4">Escolaridad</h5>
-            <div class="row g-3">
-              <div class="col-md-8">
-                <label for="inputcarrera" class="form-label">Carrera</label>
-                <select id="inputcarrera" name="nivel" class="form-select" required disabled>
-                  <option selected value="{{NIVEL}}">{{NIVEL}}</option>
-                  <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
-                  <option>TSU en Gastronomía</option>
-                  <option>TSU en Procesos Alimentarios</option>
-                  <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
-                  <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
-                  <option>Ingeniería en Procesos Bioalimentarios</option>
-                  <option>Ingeniería en Desarrollo y Gestión de Software</option>
-                  <option>Licenciatura en Gestión de Negocios y Proyectos</option>
-                  <option>Licenciatura en Gestión y Desarrollo Turístico</option>
-                  <option>Curso de Inglés Básico</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label for="inputcuatri" class="form-label">Cuatrimestre</label>
-                <select id="inputcuatri" class="form-select" name="grado" required disabled>
-                  <option selected value="{{GRADO}}">{{GRADO}}</option>
-                  <option>0</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for="inputmatricula" class="form-label">MATRÍCULA</label>
-                <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
-                  required value="{{MATRICULA}}" name="matricula" disabled>
-                <div class="valid-feedback">
-                  Looks good!
+        <form action="/alumnos/{{MATRICULA}}/update" method="post">
+          <div class="tab-content pt-4">
+            <!-- Identidad -->
+            <div class="tab-pane fade show active profile-overview" id="DatosIdentidad">
+              <h5 class="card-title mb-4 text-center">Datos de identidad</h5> <!-- Título centrado -->
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+                <!-- Nombre -->
+                <div class="col-md-6 text-center">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" class="form-control text-center" placeholder="Nombre"
+                    value="{{NOMBRE}}" disabled>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- Estatus -->
-          <div class="tab-pane fade profile-overview" id="Estatus">
-            <h5 class="card-title mb-4">Estatus</h5>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label for="estatus_actual" class="form-label">Estatus actual</label>
-                <input type="hidden" id="status" value="{{STATUS}}">
-                <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
-                  <option selected disabled>--seleccionar estatus--</option>
-                </select>
-              </div>
-              <div class="col-md-6"></div>
-
-              <!-- Ingreso TSU -->
-              <div class="row my-2 d-none" id="ingreso_tsu">
-                <div class="col-6">
-                  <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
-                  <input type="date" class="form-control" id="fecha_registro_tsu" name="fecha_registro_tsu" disabled>
+                <!-- Apellidos -->
+                <div class="col-md-6 text-center">
+                  <label for="paterno" class="form-label">Primer Apellido</label>
+                  <input type="text" id="paterno" name="paterno" class="form-control text-center" placeholder="Paterno"
+                    value="{{PATERNO}}" disabled>
                 </div>
-                <div class="col-6">
-                  <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
-                  <input type="date" class="form-control" id="fecha_itsu" name="fecha_itsu" disabled>
+                <div class="col-md-6 text-center">
+                  <label for="materno" class="form-label">Segundo Apellido</label>
+                  <input type="text" id="materno" name="materno" class="form-control text-center"
+                    placeholder="Segundo Apellido" value="{{MATERNO}}" disabled>
                 </div>
-              </div>
 
-              <!-- Motivo de baja -->
-              <div class="row my-2 d-none" id="motivo_baja">
-                <div class="col-md-6">
-                  <label for="inputmotivo" class="form-label">Motivo de la baja</label>
-                  <select id="inputmotivo" class="form-select" disabled>
-                    <option>REPROBACIÓN</option>
-                    <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
-                    <option>MOTIVOS PERSONALES</option>
-                    <option>CAMBIO DE CARRERA</option>
-                    <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
-                    <option>DISTANCIA DE LA UT</option>
-                    <option>PROBLEMAS ECONÓMICOS</option>
-                    <option>PROBLEMAS DE TRABAJO</option>
-                    <option>CAMBIO DE UT</option>
-                    <option>DEFUNCIÓN</option>
-                    <option>OTRAS CAUSAS</option>
+                <!-- Género -->
+                <div class="col-md-6 text-center">
+                  <label for="genero" class="form-label">Género</label>
+                  <select name="genero" id="genero" class="form-select text-center" disabled>
+                    <option value="{{GENERO}}" selected>{{GENERO}}</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
                   </select>
                 </div>
-                <div class="col-6">
-                  <label for="fechabaja" class="form-label">Fecha de Baja</label>
-                  <input class="form-control" id="fecha_baja" type="date" disabled>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="col-md-6 text-center">
+                  <label for="fech_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                  <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
+                  <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control text-center"
+                    disabled>
+                </div>
+
+                <!-- Lugar de Nacimiento -->
+                <div class="col-md-6 text-center">
+                  <label for="estado_nacimiento" class="form-label">Estado de Nacimiento</label>
+                  <select id="estado_nacimiento" class="form-select text-center" name="estado_nacimiento" disabled>
+                    <option selected>{{ESTADO_NACIMIENTO}}</option>
+                  </select>
+                </div>
+                <div class="col-md-6 text-center">
+                  <label for="municipio-nacimiento" class="form-label">Municipio de Nacimiento</label>
+                  <select id="municipio-nacimiento" class="form-select text-center" name="municipio_naci" disabled>
+                    <option>{{LUGAR_NACIMIENTO}}</option>
+                  </select>
+                </div>
+
+                <!-- Nacionalidad y Estado Civil -->
+                <div class="col-md-6 text-center">
+                  <label for="inputnacionalidad" class="form-label">Nacionalidad</label>
+                  <select id="inputState" class="form-select text-center" disabled name="nacionalidad">
+                    <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
+                    <option>Mexicana</option>
+                    <option>Extranjera</option>
+                  </select>
+                </div>
+                <div class="col-md-6 text-center">
+                  <label for="inputedocivil" class="form-label">Estado Civil</label>
+                  <select id="inputState" class="form-select text-center" disabled>
+                    <option selected value="{{ESTADO_CIVIL}}" disabled>{{ESTADO_CIVIL}}</option>
+                    <option value="S">Soltero</option>
+                    <option value="C">Casado</option>
+                  </select>
+                </div>
+
+                <!-- CURP -->
+                <div class="col-md-12 text-center">
+                  <label class="control-label" for="curp_">CURP</label>
+                  <input id="curp_" name="curp" class="form-control form-control-lg text-center"
+                    style="text-transform: uppercase;" maxlength="18" required type="text" value="{{CLAVE_CIUDADANA}}"
+                    disabled>
+                  <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
+                    Consulta tu CURP
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="text-center">
-            <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
-            <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
+
+            <!-- Domicilio -->
+            <div class="tab-pane fade profile-overview" id="Domicilios">
+              <h5 class="card-title mb-4 text-center">Domicilio</h5> <!-- Título centrado -->
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+                <!-- Domicilio Particular -->
+                <div class="col-md-8 text-center">
+                  <label for="domicilio" class="form-label">Domicilio particular</label>
+                  <input type="text" id="domicilio" name="domicilio" class="form-control text-center"
+                    placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
+                </div>
+
+                <!-- Cruzamientos -->
+                <div class="col-md-4 text-center">
+                  <label for="cruzamientos" class="form-label">Cruzamientos</label>
+                  <input type="text" id="cruzamientos" name="cruzamientos" class="form-control text-center"
+                    placeholder="Cruzamientos" value="{{ENTRE_CALLES}}" disabled>
+                </div>
+
+                <!-- Estado -->
+                <div class="col-md-4 text-center">
+                  <label for="estado" class="form-label">Estado</label>
+                  <select id="estado" name="estado" class="form-select text-center" disabled>
+                    <option value="{{ESTADO}}">{{ESTADO}}</option>
+                  </select>
+                </div>
+
+                <!-- Ciudad -->
+                <div class="col-md-4 text-center">
+                  <label for="ciudad" class="form-label">Ciudad</label>
+                  <select id="ciudad" name="ciudad" class="form-select text-center" disabled>
+                    <option>{{CIUDAD}}</option>
+                  </select>
+                </div>
+
+                <!-- Código Postal -->
+                <div class="col-md-4 text-center">
+                  <label for="cp" class="form-label">Código postal</label>
+                  <input type="text" id="postal" name="postal" class="form-control text-center" placeholder="C.P"
+                    value="{{CP}}" disabled>
+                </div>
+
+                <!-- Correo Personal -->
+                <div class="col-md-6 text-center">
+                  <label for="email_personal" class="form-label">Correo personal</label>
+                  <input type="text" id="email_personal" name="email_personal" class="form-control text-center"
+                    placeholder="nombre@servidor.com" value="{{EMAIL}}" disabled>
+                </div>
+
+                <!-- Correo Institucional -->
+                <div class="col-md-6 text-center">
+                  <label for="email_insti" class="form-label">Correo institucional</label>
+                  <input type="text" id="email_insti" name="email_insti" class="form-control text-center"
+                    placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
+                </div>
+
+                <!-- Teléfono Celular -->
+                <div class="col-md-6 text-center">
+                  <label for="tel_cel" class="form-label">Teléfono celular</label>
+                  <input name="tel_cel" id="tel_cel" class="form-control text-center" type="tel" maxlength="10"
+                    value="{{CELULAR}}" disabled />
+                </div>
+
+                <!-- Teléfono Domicilio -->
+                <div class="col-md-6 text-center">
+                  <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
+                  <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control text-center"
+                    value="{{TELEFONO}}" disabled>
+                </div>
+              </div>
+            </div>
+            <!-- Escolaridad -->
+            <div class="tab-pane fade profile-overview" id="Escolaridad">
+              <h5 class="card-title mb-4 text-center">Escolaridad</h5> <!-- Título centrado -->
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+                <!-- Carrera -->
+                <div class="col-md-8 text-center">
+                  <label for="inputcarrera" class="form-label">Carrera</label>
+                  <select id="inputcarrera" name="nivel" class="form-select text-center" required disabled>
+                    <option selected value="{{NIVEL}}">{{NIVEL}}</option>
+                    <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
+                    <option>TSU en Gastronomía</option>
+                    <option>TSU en Procesos Alimentarios</option>
+                    <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
+                    <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
+                    <option>Ingeniería en Procesos Bioalimentarios</option>
+                    <option>Ingeniería en Desarrollo y Gestión de Software</option>
+                    <option>Licenciatura en Gestión de Negocios y Proyectos</option>
+                    <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+                    <option>Curso de Inglés Básico</option>
+                  </select>
+                </div>
+
+                <!-- Cuatrimestre -->
+                <div class="col-md-4 text-center">
+                  <label for="inputcuatri" class="form-label">Cuatrimestre</label>
+                  <select id="inputcuatri" class="form-select text-center" name="grado" required disabled>
+                    <option selected value="{{GRADO}}">{{GRADO}}</option>
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                  </select>
+                </div>
+
+                <!-- Inglés TSU -->
+                <div class="col-md-6 text-center">
+                  <label for="proyecto_obs" class="form-label">Inglés TSU</label>
+                  <input type="text" id="proyecto_obs" name="proyecto_obs" class="form-control text-center"
+                    placeholder="NIVEL DE INGLES TSU" value="{{PROYECTO_OBS}}" disabled>
+                </div>
+
+                <!-- Inglés Lic -->
+                <div class="col-md-6 text-center">
+                  <label for="obs_proyecto_lic" class="form-label">Inglés Lic</label>
+                  <input type="text" id="obs_proyecto_lic" name="obs_proyecto_lic" class="form-control text-center"
+                    placeholder="NIVEL DE INGLES LIC" value="{{OBS_PROYECTO_LIC}}" disabled>
+                </div>
+
+                <!-- Matrícula -->
+                <div class="col-md-6 text-center">
+                  <label for="inputmatricula" class="form-label">MATRÍCULA</label>
+                  <input type="text" class="form-control text-center" id="inputmatricula" maxlength="8"
+                    placeholder="AAMMFFFF" required value="{{MATRICULA}}" name="matricula" disabled>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+ 
+
+            <!-- Estatus -->
+            <div class="tab-pane fade profile-overview" id="Estatus">
+              <h5 class="card-title mb-4 text-center">Estatus</h5> <!-- Título centrado -->
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+                <!-- Estatus Actual -->
+                <div class="col-md-6 text-center">
+                  <label for="estatus_actual" class="form-label">Estatus actual</label>
+                  <input type="hidden" id="status" value="{{STATUS}}">
+                  <select id="estatus_actual" class="form-select text-center" onchange="changeStatus()" disabled>
+                    <option selected disabled>--seleccionar estatus--</option>
+                  </select>
+                </div>
+                <div class="col-md-6"></div>
+
+                <!-- Ingreso TSU -->
+                <div class="row my-2 d-none justify-content-center" id="ingreso_tsu"> <!-- Centrar fila -->
+                  <div class="col-6 text-center">
+                    <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
+                    <input type="date" class="form-control text-center" id="fecha_registro_tsu"
+                      name="fecha_registro_tsu" disabled>
+                  </div>
+                  <div class="col-6 text-center">
+                    <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
+                    <input type="date" class="form-control text-center" id="fecha_itsu" name="fecha_itsu" disabled>
+                  </div>
+                </div>
+
+                <!-- Motivo de baja -->
+                <div class="row my-2 d-none justify-content-center" id="motivo_baja"> <!-- Centrar fila -->
+                  <div class="col-md-6 text-center">
+                    <label for="inputmotivo" class="form-label">Motivo de la baja</label>
+                    <select id="inputmotivo" class="form-select text-center" disabled>
+                      <option>REPROBACIÓN</option>
+                      <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
+                      <option>MOTIVOS PERSONALES</option>
+                      <option>CAMBIO DE CARRERA</option>
+                      <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
+                      <option>DISTANCIA DE LA UT</option>
+                      <option>PROBLEMAS ECONÓMICOS</option>
+                      <option>PROBLEMAS DE TRABAJO</option>
+                      <option>CAMBIO DE UT</option>
+                      <option>DEFUNCIÓN</option>
+                      <option>OTRAS CAUSAS</option>
+                    </select>
+                  </div>
+                  <div class="col-6 text-center">
+                    <label for="fechabaja" class="form-label">Fecha de Baja</label>
+                    <input class="form-control text-center" id="fecha_baja" type="date" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botones separados más abajo -->
+            <div class="text-center mt-4"> <!-- Agregar margen superior -->
+              <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
+              <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
 </section>
 
 <script>
@@ -347,9 +429,17 @@
 
 
 <style>
-  /* Agregar desplazamiento horizontal si el contenido es demasiado ancho */
-  .nav-pills {
-    overflow-x: auto;
-    white-space: nowrap;
+  .nav-link {
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .card {
+    border-radius: 10px;
   }
 </style>

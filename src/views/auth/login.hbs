@@ -5,18 +5,33 @@
   style="padding-top: 0%; left: 0%; position: absolute;">
   <div class="card w-100" style="max-width: 850px;">
 
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
-          role="tab" aria-controls="nav-home" aria-selected="true">Alumno</button>
-        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
-          role="tab" aria-controls="nav-profile" aria-selected="false">Aspirante</button>
-        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button"
-          role="tab" aria-controls="nav-contact" aria-selected="false">Profesor</button>
-        <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button"
-          role="tab" aria-controls="nav-disabled" aria-selected="false">Admin</button>
+    <nav class="custom-tabs-container">
+      <div class="tabs-wrapper">
+        <div class="custom-tabs" id="nav-tab" role="tablist">
+          <button class="tab-item active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+            type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+            <i class="bi bi-mortarboard-fill"></i>
+            <span>Alumno</span>
+            <div class="tab-indicator"></div>
+          </button>
+
+          <button class="tab-item" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button"
+            role="tab" aria-controls="nav-contact" aria-selected="false">
+            <i class="bi bi-person-workspace"></i>
+            <span>Profesor</span>
+            <div class="tab-indicator"></div>
+          </button>
+
+          <button class="tab-item" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled"
+            type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">
+            <i class="bi bi-shield-lock"></i>
+            <span>Admin</span>
+            <div class="tab-indicator"></div>
+          </button>
+        </div>
       </div>
     </nav>
+
 
 
     <div class="tab-content" id="nav-tabContent">
@@ -29,14 +44,14 @@
       <div class="px-5">
         {{>msj_error}}
       </div>
-
+      {{!-- LOGIN ALUMNO --}}
       {{!-- Section Alumno --}}
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
         <div class="card-body px-5">
           <form id="form" action="/login/alumno" method="post" class="d-flex flex-column justify-content-center"
             onsubmit="return validateForm()">
             <div>
-              <label for="User" class="form-label">MATRICULA</label>
+              <label for="User" class="form-label fs-5">MATRICULA</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
@@ -45,7 +60,7 @@
                     </div>
                   </div>
                 </div>
-                <input type="text" class="form-control" name="user" id="user" required maxlength="8" pattern="\d{1,8}"  placeholder="Ingresar tu Matricula">
+                <input type="text" class="form-control" name="user" id="user" required maxlength="8" pattern="\d{1,8}">
               </div>
             </div>
 
@@ -57,8 +72,7 @@
                   <i class="bi bi-lock"></i>
                 </div>
                 <!-- Campo de contraseña -->
-                <input type="password" class="form-control" name="password" id="pass" required
-                  placeholder="Ingresa tu contraseña">
+                <input type="password" class="form-control" name="password" id="pass">
                 <!-- Botón para mostrar/ocultar la contraseña -->
                 <button type="button" class="btn btn-outline-secondary btn-sm p-0" id="toggle-password"
                   style="width: 35px; height: 35px;">
@@ -66,35 +80,6 @@
                 </button>
               </div>
             </div>
-
-            <!-- Enlace para "Olvidaste tu contraseña" -->
-            <div class="text-end">
-              <a href="#" class="text-decoration-none fs-6 text-primary">¿Olvidaste tu contraseña?</a>
-            </div>
-
-            <script>
-              // Script para cambiar entre mostrar y ocultar la contraseña sin animación
-              const togglePasswordButton = document.getElementById('toggle-password');
-              const passwordInput = document.getElementById('pass');
-              const passwordIcon = document.getElementById('password-icon');
-
-              togglePasswordButton.addEventListener('click', () => {
-                // Cambiar el tipo de input de contraseña
-                const type = passwordInput.type === 'password' ? 'text' : 'password';
-                passwordInput.type = type;
-
-                // Cambiar el ícono sin animación
-                if (passwordInput.type === 'password') {
-                  passwordIcon.classList.remove('bi-eye');
-                  passwordIcon.classList.add('bi-eye-slash');
-                } else {
-                  passwordIcon.classList.remove('bi-eye-slash');
-                  passwordIcon.classList.add('bi-eye');
-                }
-              });
-            </script>
-
-
 
 
             <div class="pt-3 text-center">
@@ -104,8 +89,7 @@
           </form>
         </div>
       </div>
-
-
+      {{!-- LOGIN ASPIRANTE --}}
 
       {{!-- Section Aspirante Login --}}
       <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
@@ -161,6 +145,7 @@
         </div>
       </div>
 
+      {{!-- LOGIN PROFESORES --}}
       {{!-- Section Profesor Login --}}
       <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
         <div class="card-body px-5">
@@ -168,7 +153,7 @@
           <form id="form" action="/login/profe" method="post" class="d-flex flex-column justify-content-center">
             <div>
 
-              <label for="CLAVEPROFESOR" class="form-label">FOLIO DE PROFESORES</label>
+              <label for="CLAVEPROFESOR" class="form-label fs-5">FOLIO DE PROFESORES</label>
 
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -183,26 +168,22 @@
               </div>
             </div>
 
-            <div>
-              <label for="pass" class="form-label">CONTRASEÑA</label>
-              <div class="input-group mb-2 ">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <div class="icon">
-                      <i class="bi bi-key"></i>
-                    </div>
-                  </div>
+            <div class="mb-4">
+              <label for="pass" class="form-label fs-5">CONTRASEÑA</label>
+              <div class="input-group">
+                <!-- Icono de la contraseña -->
+                <div class="input-group-text">
+                  <i class="bi bi-lock"></i>
                 </div>
+                <!-- Campo de contraseña -->
                 <input type="password" class="form-control" name="password" id="pass">
-
-
+                <!-- Botón para mostrar/ocultar la contraseña -->
+                <button type="button" class="btn btn-outline-secondary btn-sm p-0" id="toggle-password"
+                  style="width: 35px; height: 35px;">
+                  <i class="bi bi-eye-slash" id="password-icon" style="font-size: 18px;"></i>
+                </button>
               </div>
             </div>
-
-            <div class="pt-1">
-              <a href="#">Olvidaste tu contraseña?</a>
-            </div>
-
             <div class="pt-3 text-center">
               <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
             </div>
@@ -210,7 +191,7 @@
           </form>
         </div>
       </div>
-
+      {{!-- LOGIN aDMIN --}}
       {{!-- Section Admin Login --}}
       <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
         <div class="card-body px-5">
@@ -320,20 +301,178 @@
       alert(data.error); // Mostrar error si la autenticación falla
     }
   });
-  // Obtener el botón y el campo de contraseña
   const togglePasswordButton = document.getElementById('toggle-password');
   const passwordInput = document.getElementById('pass');
   const passwordIcon = document.getElementById('password-icon');
 
-  // Añadir el evento para cambiar el tipo de contraseña y el ícono
   togglePasswordButton.addEventListener('click', () => {
-    // Alternar el tipo de input entre "password" y "text"
+    // Cambiar el tipo de input de contraseña
     const type = passwordInput.type === 'password' ? 'text' : 'password';
     passwordInput.type = type;
 
-    // Alternar el ícono entre "bi-eye-slash" (ocultar) y "bi-eye" (mostrar)
-    passwordIcon.classList.toggle('bi-eye');
-    passwordIcon.classList.toggle('bi-eye-slash');
+    // Cambiar el ícono
+    if (passwordInput.type === 'password') {
+      passwordIcon.classList.remove('bi-eye');
+      passwordIcon.classList.add('bi-eye-slash');
+    } else {
+      passwordIcon.classList.remove('bi-eye-slash');
+      passwordIcon.classList.add('bi-eye');
+    }
   });
 
+  // Función de validación del formulario
+  function validateForm() {
+    const user = document.getElementById('user').value;
+    const pass = document.getElementById('pass').value;
+
+    if (!user || !pass) {
+      alert('Por favor, completa todos los campos');
+      return false;
+    }
+
+    if (!/^\d{1,8}$/.test(user)) {
+      alert('La matrícula debe contener solo números (máximo 8 dígitos)');
+      return false;
+    }
+
+    return true;
+  }
+
 </script>
+
+{{!-- Scrip del login Alumno --}}
+
+
+<style>
+  /* Estilos modernos para pestañas */
+  .custom-tabs-container {
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 10px 20px 0;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .tabs-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .custom-tabs {
+    display: flex;
+    gap: 8px;
+    position: relative;
+    border: none;
+  }
+
+  .tab-item {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #6c757d;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-bottom: none;
+    z-index: 1;
+  }
+
+  .tab-item:hover {
+    color: #495057;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .tab-item.active {
+    color: #212529;
+    background-color: #fff;
+    border-color: #dee2e6;
+    box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .tab-item i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .tab-item.active i {
+    transform: scale(1.2);
+  }
+
+  .tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #c1272d, #e74c3c);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: center;
+  }
+
+  .tab-item.active .tab-indicator {
+    transform: scaleX(1);
+  }
+
+  .tab-item:nth-child(2) .tab-indicator {
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+  }
+
+  .tab-item:nth-child(3) .tab-indicator {
+    background: linear-gradient(90deg, #2980b9, #3498db);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .custom-tabs {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .tab-item {
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid #dee2e6;
+    }
+
+    .custom-tabs-container {
+      padding: 10px;
+      border-radius: 10px;
+    }
+  }
+
+  /* Animación para las pestañas */
+  @keyframes tabAppear {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .tab-item {
+    animation: tabAppear 0.3s ease forwards;
+  }
+
+  .tab-item:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .tab-item:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+</style>

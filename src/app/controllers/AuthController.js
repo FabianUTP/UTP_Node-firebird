@@ -63,41 +63,6 @@ AuthController.authAlumno = async (req = request, res = response) => {
 
 
 
-// Autenticación de aspirantes
-// AuthController.authAspirante = async (req = request, res = response) => {
-//   const { user, password } = req.body;
-
-//   try {
-//     const aspirante = await Aspirante.findById(user);
-
-//     if (!aspirante) {
-//       req.flash('msj_error', 'Folio de aspirante no encontrado');
-//       console.log('Corrige el valor antes de enviarlo a la base de datos.');
-//       return res.redirect('/login');
-//     }
-
-//     if (aspirante.STATUS.trim() !== "S") {
-//       req.flash('msj_error', 'Ya no puede ingresar con el folio');
-//       console.log('Corrige el valor antes de enviarlo a la base de datos.');
-//       return res.redirect('/login');
-//     }
-
-//     req.session.isAuthenticated = true;
-//     req.session.isAspirante = true;
-//     req.session.IDAuth = aspirante.NUMEROALUMNO;
-//     req.session.nameAuth = aspirante.NOMBRE;
-//     req.session.lastNameAuth = aspirante.PATERNO;
-
-//     return res.redirect('/');
-//   } catch (error) {
-//     console.error('Error en authAspirante:', error);
-//     req.flash('msj_error', 'Hubo un problema al procesar su solicitud');
-//     return res.redirect('/login');
-//   }
-// };
-
-
-
 // Autenticacion de Aspirantes cambios para los ingresos de numeros...
 AuthController.authAspirante = async (req = request, res = response) => {
   const { user } = req.body;
@@ -161,29 +126,43 @@ AuthController.authAspirante = async (req = request, res = response) => {
 
 // Autenticación de profesores
 AuthController.authProfe = async (req = request, res = response) => {
-  const { user } = req.body;
+  const { user, password } = req.body;
 
   try {
-    if (!user) {
-      req.flash('msj_error', 'Debe proporcionar un usuario');
+    // Buscar al profesor por clave de profesor
+    const profesor = await ProfeAuth.findById(user);
+
+    // Si no se encuentra al profesor, redirigir con mensaje de error
+    if (!profesor) {
+      req.flash('msj_error', 'Profesor no encontrado');
       return res.redirect('/login');
     }
 
-    const profe = await ProfeAuth.findById(user);
-    //console.log('Resultado de la consulta:', profe);
+    console.log("FOLIO PROFESOR:", profesor.CLAVEPROFESOR);
+    console.log("CONTRASEÑA EN BD:", profesor.PASSWORD || "No registrada");
 
-    if (!profe) {
-      req.flash('msj_error', 'Correo o contraseña incorrectos');
+    // Si no hay contraseña registrada, denegar el acceso y dar instrucciones
+    if (!profesor.PASSWORD || profesor.PASSWORD.trim() === "") {
+      req.flash('msj_error', 'El profesor no tiene una contraseña registrada. Por favor, contacte con el administrador.');
       return res.redirect('/login');
     }
 
+    // Validar que la contraseña ingresada coincida con la de la BD
+    if (password !== profesor.PASSWORD) {
+      req.flash('msj_error', 'Contraseña incorrecta');
+      return res.redirect('/login');
+    }
+
+    // Iniciar sesión si la contraseña es válida
     req.session.isAuthenticated = true;
     req.session.isProfe = true;
-    req.session.IDAuth = profe.CLAVEPROFESOR;
-    req.session.nameAuth = profe.NOMBREPROFESOR;
-    req.session.lastNameAuth = "";
+    req.session.IDAuth = profesor.CLAVEPROFESOR;
+    req.session.nameAuth = profesor.NOMBREPROFESOR;
+    req.session.lastNameAuth = profesor.APELLIDOPROFESOR || ""; 
 
+    // Redirigir a la página principal después de un inicio de sesión exitoso
     return res.redirect('/');
+
   } catch (error) {
     console.error('Error en authProfe:', error);
     req.flash('msj_error', 'Hubo un problema al procesar su solicitud');

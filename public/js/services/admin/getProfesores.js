@@ -31,10 +31,10 @@ async function getProfesores(){
             Ver Más
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}">Ver Ficha</a></li>
-            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/asignacion">Asignación de Grupo</a></li>
-            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/Perfil">Perfil Académico</a></li>
-            <li><a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/profesores-list">Horario Contratado</a></li>
+            <li><a class="dropdown-item" href="/Maestro/${item.CLAVEPROFESOR}">Ver Ficha</a></li>
+            <li><a class="dropdown-item" href="/Maestro/${item.CLAVEPROFESOR}/asignacion">Asignación de Grupo</a></li>
+            <li><a class="dropdown-item" href="/Maestro/${item.CLAVEPROFESOR}/Perfil">Perfil Académico</a></li>
+            <li><a class="dropdown-item" href="/Maestro/${item.CLAVEPROFESOR}/profesores-list">Horario Contratado</a></li>
           </ul>
         </div>
       </td>`;

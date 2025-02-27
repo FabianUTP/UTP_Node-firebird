@@ -137,13 +137,11 @@
                     <!-- Apellidos -->
                     <div class="col-md-4">
                       <label for="paterno" class="form-label">Primer Apellido</label>
-                      <input type="text" id="paterno" name="paterno" class="form-control" value="{{PATERNO}}"
-                        disabled>
+                      <input type="text" id="paterno" name="paterno" class="form-control" value="{{PATERNO}}" disabled>
                     </div>
                     <div class="col-md-4">
                       <label for="materno" class="form-label">Segundo Apellido</label>
-                      <input type="text" id="materno" name="materno" class="form-control" value="{{MATERNO}}"
-                        disabled>
+                      <input type="text" id="materno" name="materno" class="form-control" value="{{MATERNO}}" disabled>
                     </div>
 
                     <!-- Fecha y Lugar de Nacimiento -->
@@ -239,8 +237,8 @@
                     </div>
                     <div class="col-md-4">
                       <label for="cp" class="form-label">Código postal</label>
-                      <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P"
-                        value="{{CP}}" disabled>
+                      <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P" value="{{CP}}"
+                        disabled>
                     </div>
 
                     <!-- Contacto -->
@@ -284,6 +282,13 @@
               <div class="tab-pane fade" id="Escolaridad">
                 <div class="card-body p-4">
                   <div class="row g-3">
+
+                    <!-- Matrícula -->
+                    <div class="col-md-6">
+                      <label for="inputmatricula" class="form-label">MATRÍCULA</label>
+                      <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
+                        required value="{{MATRICULA}}" name="matricula" disabled>
+                    </div>
                     <!-- Carrera y Cuatrimestre -->
                     <div class="col-md-8">
                       <label for="inputcarrera" class="form-label">Carrera</label>
@@ -333,12 +338,7 @@
                         placeholder="NIVEL DE INGLÉS LIC" value="{{OBS_PROYECTO_LIC}}" disabled>
                     </div>
 
-                    <!-- Matrícula -->
-                    <div class="col-md-6">
-                      <label for="inputmatricula" class="form-label">MATRÍCULA</label>
-                      <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
-                        required value="{{MATRICULA}}" name="matricula" disabled>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -397,7 +397,7 @@
               </div>
 
               <!-- Escuela, Estadísticos, Titulación_Tsu, Folios_Doctos_TSU, Titulacion_Lic, Folios_docs_lic tabs would go here with same structure -->
-              
+
             </div>
           </form>
         </div>

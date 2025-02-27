@@ -26,10 +26,6 @@ router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoView);
 router.get("/gruposCalifi", GruposCtr.showAnother);
 router.get("/gruposCalifi/:idGrupo", GruposCtr.showByIdAnother);
 
-
-
-
-
 // Rutas para los alumnos
 router.get("/alumnos", AlumnosAdminCtr.show);
 router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
@@ -113,18 +109,18 @@ router.get("/academico/planes/:idPlan/evaluacion", PlanesCtr.showEval)
 router.get("/academico/planes/:idPlan/evaluacion/:idEval", PlanesCtr.showPlanesEvalId)
 router.get("/academico/planes/:idPlan/evaluacion/crear", PlanesCtr.showCreatePlanesEval)
 
-router.get("/profesores", ProfeCtr.showList);
-router.get("/profesores/:id", ProfeCtr.showById);
+router.get("/Maestro", ProfeCtr.showList);
+router.get("/Maestro/:id", ProfeCtr.showById);
 
-router.get("/profesores/:id/asignacion", ProfeCtr.showAsig);
-router.get("/profesores/:id/perfil", ProfeCtr.showPerfil);
+router.get("/Maestro/:id/asignacion", ProfeCtr.showAsig);
+router.get("/Maestro/:id/perfil", ProfeCtr.showPerfil);
 
-router.get("/profesores/:id/ver_calif", ProfeCtr.showVerCalf);
-router.get("/profesores/:id/subir_calif", ProfeCtr.showSubirCalf);
+router.get("/Maestro/:id/ver_calif", ProfeCtr.showVerCalf);
+router.get("/Maestro/:id/subir_calif", ProfeCtr.showSubirCalf);
 
-router.post("/profesores/:id/update_otros_campos", ProfeCtr.update_otros_campos);
-router.post("/profesores/:id/update_ficha", ProfeCtr.update_ficha);
-router.post("/profesores/:id/update_personalizados", ProfeCtr.update_personalizados);
+router.post("/Maestro/:id/update_otros_campos", ProfeCtr.update_otros_campos);
+router.post("/Maestro/:id/update_ficha", ProfeCtr.update_ficha);
+router.post("/Maestro/:id/update_personalizados", ProfeCtr.update_personalizados);
 
 
 // Navbar ___> Titulacion  src\

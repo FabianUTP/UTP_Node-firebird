@@ -40,20 +40,9 @@ router.get("/profesores/:id/doctos", AlumnosAdminCtr.doctosprofesor);
 router.get("/profesores/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoprofesor);
 router.get("/profesores/:id/boletas", AlumnosAdminCtr.boletasprofesor);
 
-// // Rutas para los alumnos
-// router.get("/alumnos", AlumnosAdminCtr.show);
-// router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
-// router.get("/alumnos/:id", AlumnosAdminCtr.showById);
-// router.post("/alumnos/:id/update", AlumnosAdminCtr.update);
-// router.post("/alumnos/:id/updatePhoto", AlumnosAdminCtr.updatePhoto);
-// router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
-// router.get("/alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
-// router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
-
 // Rutas para el Show de profesores->
 router.get("/gruposprofe", GruposCtr.showProfesores);
 router.get("/gruposprofe/crear", GruposCtr.addViewProfesores);
-// route.post("/gruposprofe/info", GruposCtr.getProfesorInfo);
 router.get("/gruposprofe/:idGrupo", GruposCtr.showByIdProfesores);
 router.get("/gruposprofe/:idGrupo/editar", GruposCtr.editViewProfesores);
 router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoViewProfesores);

@@ -79,8 +79,11 @@
             {{#if isAlumno}}
               <span>Matrícula: {{ IDAuth }}</span>
             {{/if}}
+              {{#if isProfe}}
+              <span>FOLIO PROFESOR {{ IDAuth }}</span>
+            {{/if}}
             {{#if isAdmin}}
-              <span>{{ IDAuth }}</span>
+              {{!-- <span>CORREO ADMIN {{ IDAuth }}</span> --}}
             {{/if}}
           </li>
           <li>

@@ -1,0 +1,491 @@
+<section class="section container">
+  <!-- Back Button -->
+  <div class="mb-3">
+    {{>btnBack}}
+  </div>
+
+  <!-- Profile Header Section -->
+  <div class="row mb-4">
+    <div class="col-lg-12">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <div class="row align-items-center">
+            <!-- Student Photo -->
+            <div class="col-md-4 text-center mb-3 mb-md-0">
+              {{#if image}}
+              <img src="{{image}}" alt="Foto del estudiante" class="img-thumbnail rounded-circle" width="180"
+                id="imgCurrent">
+              {{else}}
+              <img src="/imgs/studentIcon.png" alt="Foto predeterminada" class="img-thumbnail rounded-circle"
+                width="180">
+              {{/if}}
+
+              <!-- Photo Upload Form -->
+              <form action="/alumnos/{{MATRICULA}}/updatePhoto" method="post" enctype="multipart/form-data"
+                class="mt-3">
+                <div class="input-group">
+                  <input type="file" name="fotografia" class="form-control form-control-sm" accept="image/*"
+                    id="imgInput" />
+                  <button class="btn btn-sm btn-primary" type="submit">
+                    <i class="bi bi-arrow-bar-up"></i> Subir
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Student Info and Quick Links -->
+            <div class="col-md-8">
+              <h3 class="mb-3">{{NOMBRE}} {{PATERNO}} {{MATERNO}}</h3>
+              <h5 class="text-secondary mb-3">{{NIVEL}} - {{GRADO}}° Cuatrimestre</h5>
+              <p class="mb-3"><strong>Matrícula:</strong> {{MATRICULA}}</p>
+
+              <h5 class="mt-4 mb-3">Accesos Rápidos</h5>
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-outline-primary" href="/profesores/{{MATRICULA}}/doctos">
+                  <i class="bi bi-file-earmark-text"></i> Documentos
+                </a>
+                <a class="btn btn-outline-primary" href="/profesores/{{MATRICULA}}/boletas">
+                  <i class="bi bi-file-earmark-bar-graph"></i> Boletas
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <!-- Navigation Tabs -->
+          <ul class="nav nav-pills mb-4 d-flex flex-wrap justify-content-center gap-2" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#DatosIdentidad">
+                <i class="bi bi-person"></i> Identidad
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#Domicilios">
+                <i class="bi bi-house"></i> Domicilios
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#Escolaridad">
+                <i class="bi bi-mortarboard"></i> Escolaridad
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab" data-bs-target="#Estatus">
+                <i class="bi bi-clipboard-check"></i> Estatus
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab" data-bs-target="#Escuela">
+                <i class="bi bi-building"></i> Escuela
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#Estadisticos">
+                <i class="bi bi-bar-chart"></i> Estadísticos
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#Titulacion_Tsu">
+                <i class="bi bi-award"></i> Titulación TSU
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#Folios_Doctos_TSU">
+                <i class="bi bi-file-earmark"></i> Doctos TSU
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#Titulacion_Lic">
+                <i class="bi bi-award"></i> Titulación Lic
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link text-uppercase fw-bold px-3 py-2" data-bs-toggle="tab"
+                data-bs-target="#Folios_docs_lic">
+                <i class="bi bi-file-earmark"></i> Doctos Lic
+              </button>
+            </li>
+          </ul>
+
+          <!-- Tab Content -->
+          <form action="/alumnos/{{MATRICULA}}/update" method="post">
+            <div class="tab-content pt-3">
+              <!-- Identidad Tab -->
+              <div class="tab-pane fade show active" id="DatosIdentidad">
+                <div class="card-body p-4">
+                  <div class="row g-3">
+                    <!-- Nombre -->
+                    <div class="col-md-4">
+                      <label for="nombre" class="form-label">Nombre</label>
+                      <input type="text" id="nombre" name="nombre" class="form-control" value="{{NOMBRE}}" disabled>
+                    </div>
+                    <!-- Apellidos -->
+                    <div class="col-md-4">
+                      <label for="paterno" class="form-label">Primer Apellido</label>
+                      <input type="text" id="paterno" name="paterno" class="form-control" value="{{PATERNO}}"
+                        disabled>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="materno" class="form-label">Segundo Apellido</label>
+                      <input type="text" id="materno" name="materno" class="form-control" value="{{MATERNO}}"
+                        disabled>
+                    </div>
+
+                    <!-- Fecha y Lugar de Nacimiento -->
+                    <div class="col-md-4">
+                      <label for="fech_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                      <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
+                      <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control" disabled>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="estado_nacimiento" class="form-label">Estado de Nacimiento</label>
+                      <select id="estado_nacimiento" class="form-select" name="estado_nacimiento" disabled>
+                        <option selected>{{ESTADO_NACIMIENTO}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="municipio-nacimiento" class="form-label">Municipio de Nacimiento</label>
+                      <select id="municipio-nacimiento" class="form-select" name="municipio_naci" disabled>
+                        <option>{{LUGAR_NACIMIENTO}}</option>
+                      </select>
+                    </div>
+
+                    <!-- Género, Nacionalidad, Estado Civil -->
+                    <div class="col-md-4">
+                      <label for="genero" class="form-label">Género</label>
+                      <select name="genero" id="genero" class="form-select" disabled>
+                        <option value="{{GENERO}}" selected>{{GENERO}}</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputnacionalidad" class="form-label">Nacionalidad</label>
+                      <select id="inputState" class="form-select" disabled name="nacionalidad">
+                        <option selected value="{{NACIONALIDAD}}">{{NACIONALIDAD}}</option>
+                        <option>Mexicana</option>
+                        <option>Extranjera</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputedocivil" class="form-label">Estado Civil</label>
+                      <select id="inputState" class="form-select" disabled>
+                        <option selected value="{{ESTADO_CIVIL}}">{{ESTADO_CIVIL}}</option>
+                        <option value="S">Soltero</option>
+                        <option value="C">Casado</option>
+                      </select>
+                    </div>
+
+                    <!-- CURP -->
+                    <div class="col-md-12">
+                      <label class="form-label" for="curp_">CURP</label>
+                      <div class="input-group">
+                        <input id="curp_" name="curp" class="form-control form-control-lg"
+                          style="text-transform: uppercase;" maxlength="18" required type="text"
+                          value="{{CLAVE_CIUDADANA}}" disabled>
+                        <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank"
+                          class="btn btn-outline-secondary">
+                          Consultar CURP <i class="bi bi-box-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Domicilios Tab -->
+              <div class="tab-pane fade" id="Domicilios">
+                <div class="card-body p-4">
+                  <div class="row g-3">
+                    <!-- Dirección -->
+                    <div class="col-md-8">
+                      <label for="domicilio" class="form-label">Domicilio particular</label>
+                      <input type="text" id="domicilio" name="domicilio" class="form-control"
+                        placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="cruzamientos" class="form-label">Cruzamientos</label>
+                      <input type="text" id="cruzamientos" name="cruzamientos" class="form-control"
+                        placeholder="Cruzamientos" value="{{ENTRE_CALLES}}" disabled>
+                    </div>
+
+                    <!-- Ubicación -->
+                    <div class="col-md-4">
+                      <label for="estado" class="form-label">Estado</label>
+                      <select id="estado" name="estado" class="form-select" disabled>
+                        <option value="{{ESTADO}}">{{ESTADO}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="ciudad" class="form-label">Ciudad</label>
+                      <select id="ciudad" name="ciudad" class="form-select" disabled>
+                        <option>{{CIUDAD}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="cp" class="form-label">Código postal</label>
+                      <input type="text" id="postal" name="postal" class="form-control" placeholder="C.P"
+                        value="{{CP}}" disabled>
+                    </div>
+
+                    <!-- Contacto -->
+                    <div class="col-md-6">
+                      <label for="email_personal" class="form-label">Correo personal</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" id="email_personal" name="email_personal" class="form-control"
+                          placeholder="nombre@servidor.com" value="{{EMAIL}}" disabled>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email_insti" class="form-label">Correo institucional</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-envelope-at"></i></span>
+                        <input type="email" id="email_insti" name="email_insti" class="form-control"
+                          placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="tel_cel" class="form-label">Teléfono celular</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                        <input name="tel_cel" id="tel_cel" class="form-control" type="tel" maxlength="10"
+                          value="{{CELULAR}}" disabled />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
+                      <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                        <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control"
+                          value="{{TELEFONO}}" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Escolaridad Tab -->
+              <div class="tab-pane fade" id="Escolaridad">
+                <div class="card-body p-4">
+                  <div class="row g-3">
+                    <!-- Carrera y Cuatrimestre -->
+                    <div class="col-md-8">
+                      <label for="inputcarrera" class="form-label">Carrera</label>
+                      <select id="inputcarrera" name="nivel" class="form-select" required disabled>
+                        <option selected value="{{NIVEL}}">{{NIVEL}}</option>
+                        <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
+                        <option>TSU en Gastronomía</option>
+                        <option>TSU en Procesos Alimentarios</option>
+                        <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma
+                        </option>
+                        <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
+                        <option>Ingeniería en Procesos Bioalimentarios</option>
+                        <option>Ingeniería en Desarrollo y Gestión de Software</option>
+                        <option>Licenciatura en Gestión de Negocios y Proyectos</option>
+                        <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+                        <option>Curso de Inglés Básico</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputcuatri" class="form-label">Cuatrimestre</label>
+                      <select id="inputcuatri" class="form-select" name="grado" required disabled>
+                        <option selected value="{{GRADO}}">{{GRADO}}</option>
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                      </select>
+                    </div>
+
+                    <!-- Información de Inglés -->
+                    <div class="col-md-6">
+                      <label for="proyecto_obs" class="form-label">Inglés TSU</label>
+                      <input type="text" id="proyecto_obs" name="proyecto_obs" class="form-control"
+                        placeholder="NIVEL DE INGLÉS TSU" value="{{PROYECTO_OBS}}" disabled>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="obs_proyecto_lic" class="form-label">Inglés Lic</label>
+                      <input type="text" id="obs_proyecto_lic" name="obs_proyecto_lic" class="form-control"
+                        placeholder="NIVEL DE INGLÉS LIC" value="{{OBS_PROYECTO_LIC}}" disabled>
+                    </div>
+
+                    <!-- Matrícula -->
+                    <div class="col-md-6">
+                      <label for="inputmatricula" class="form-label">MATRÍCULA</label>
+                      <input type="text" class="form-control" id="inputmatricula" maxlength="8" placeholder="AAMMFFFF"
+                        required value="{{MATRICULA}}" name="matricula" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Estatus Tab -->
+              <div class="tab-pane fade" id="Estatus">
+                <div class="card-body p-4">
+                  <div class="row g-3">
+                    <!-- Estatus Actual -->
+                    <div class="col-md-6">
+                      <label for="estatus_actual" class="form-label">Estatus actual</label>
+                      <input type="hidden" id="status" value="{{STATUS}}">
+                      <select id="estatus_actual" class="form-select" onchange="changeStatus()" disabled>
+                        <option selected disabled>--seleccionar estatus--</option>
+                      </select>
+                    </div>
+
+                    <!-- Ingreso TSU -->
+                    <div class="row my-2 d-none justify-content-center" id="ingreso_tsu"> <!-- Centrar fila -->
+                      <div class="col-6 text-center">
+                        <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
+                        <input type="date" class="form-control text-center" id="fecha_registro_tsu"
+                          name="fecha_registro_tsu" disabled>
+                      </div>
+                      <div class="col-6 text-center">
+                        <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
+                        <input type="date" class="form-control text-center" id="fecha_itsu" name="fecha_itsu" disabled>
+                      </div>
+                    </div>
+
+                    <!-- Motivo de baja -->
+                    <div class="row my-2 d-none justify-content-center" id="motivo_baja"> <!-- Centrar fila -->
+                      <div class="col-md-6 text-center">
+                        <label for="inputmotivo" class="form-label">Motivo de la baja</label>
+                        <select id="inputmotivo" class="form-select text-center" disabled>
+                          <option>REPROBACIÓN</option>
+                          <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
+                          <option>MOTIVOS PERSONALES</option>
+                          <option>CAMBIO DE CARRERA</option>
+                          <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
+                          <option>DISTANCIA DE LA UT</option>
+                          <option>PROBLEMAS ECONÓMICOS</option>
+                          <option>PROBLEMAS DE TRABAJO</option>
+                          <option>CAMBIO DE UT</option>
+                          <option>DEFUNCIÓN</option>
+                          <option>OTRAS CAUSAS</option>
+                        </select>
+                      </div>
+                      <div class="col-6 text-center">
+                        <label for="fechabaja" class="form-label">Fecha de Baja</label>
+                        <input class="form-control text-center" id="fecha_baja" type="date" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Escuela, Estadísticos, Titulación_Tsu, Folios_Doctos_TSU, Titulacion_Lic, Folios_docs_lic tabs would go here with same structure -->
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Format date function
+  function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  }
+
+  // Initialize date fields
+  document.addEventListener('DOMContentLoaded', function () {
+    const fech_nacimiento_ini = document.getElementById("fech_nacimiento_ini");
+    const fech_nacimiento = document.getElementById("fech_nacimiento");
+    if (fech_nacimiento_ini && fech_nacimiento) {
+      fech_nacimiento.value = formatDate(fech_nacimiento_ini.value);
+    }
+
+    // Edit button functionality
+    const btn_act = document.getElementById("btn_act");
+    const btn_update = document.getElementById("btn_update");
+
+    if (btn_act) {
+      btn_act.addEventListener("click", () => {
+        btn_act.classList.add("d-none");
+        btn_update.classList.remove("d-none");
+
+        let inputs = document.querySelectorAll("input, select, textarea");
+        inputs.forEach(input => input.disabled = false);
+
+        // Scroll to top
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
+
+  // Toggle visibility function
+  function toggleCard(cardId, buttonId) {
+    const card = document.getElementById(cardId);
+    const toggleButton = document.getElementById(buttonId);
+
+    if (card.style.display === "none") {
+      card.style.display = "block";
+      toggleButton.textContent = "Ocultar " + cardId.replace('_', ' ');
+    } else {
+      card.style.display = "none";
+      toggleButton.textContent = "Mostrar " + cardId.replace('_', ' ');
+    }
+  }
+
+  // Preview image before upload
+  const imgInput = document.getElementById('imgInput');
+  const imgCurrent = document.getElementById('imgCurrent');
+
+  if (imgInput && imgCurrent) {
+    imgInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imgCurrent.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+</script>
+<style>
+  .nav-link {
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .card {
+    border-radius: 10px;
+  }
+</style>

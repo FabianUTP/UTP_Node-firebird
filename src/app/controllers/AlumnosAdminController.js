@@ -723,6 +723,172 @@ AlumnosAdminCtr.boletasPassword = async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+/////////////////Formato Profesores/////////////////
+
+AlumnosAdminCtr.createViewprofesor = (req, res) => {
+  res.render("admin/alumnos/alumnos/Profesor_view/profesor-crear");
+};
+
+AlumnosAdminCtr.showprofesor = (req, res) => {
+  const { search } = req.query;
+  res.render("admin/alumnos/alumnos/Profesor_view/profesor-lista", { search });
+};
+
+
+AlumnosAdminCtr.showDoctoprofesor = async (req, res) => {
+  const { id, idDocto } = req.params;
+  const profesores = await Alumno.findById(id);
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select documento from doctos 
+        where clave = '${profesores.NUMEROALUMNO}' AND id_docto = '${idDocto}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let docto = row[0]?.DOCUMENTO;
+
+        if (docto) {
+          docto(function (err, _name, e) {
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+
+              res.contentType("application/pdf");
+              res.send(buffer);
+              db.detach();
+            });
+          });
+        } else {
+          // res.redirect(`/alumnos/${id}/doctos`);
+          res.send("No hay documento");
+        }
+      }
+    );
+  });
+};
+
+AlumnosAdminCtr.showByIdprofesor = async (req = request, res = response) => {
+  const profesores = await Alumno.findById(req.params.id);
+  let image = "data:image/jpeg;base64, ";
+
+  firebird.attach(options, function (err, db) {
+    if (err) throw err;
+
+    db.query(
+      `select fotografia from alumnos where matricula = '${profesores?.MATRICULA}'`,
+      (err, row) => {
+        if (err) throw err;
+
+        let foto = row[0]?.FOTOGRAFIA;
+        if (foto) {
+          foto(function (err, _name, e) {
+            if (err) throw err;
+
+            let chunks = [];
+            e.on("data", (chunk) => {
+              chunks.push(chunk);
+            });
+
+            e.on("end", () => {
+              let buffer = Buffer.concat(chunks);
+              image += buffer.toString("base64");
+
+              let newAlumno = {
+                ...profesores,
+                image,
+              };
+              res.render("admin/alumnos/alumnos/Profesor_view/profesor-id", newAlumno);
+
+              db.detach();
+            });
+          });
+        } else {
+          res.render("admin/alumnos/alumnos/Profesor_view/profesor-id", profesores);
+        }
+      }
+    );
+  });
+};
+
+AlumnosAdminCtr.updateprofesor = async (req = request, res = response) => {
+  const body = req.body;
+
+  const data = {
+    paterno: body?.paterno,
+    materno: body?.materno,
+    nombre: body?.nombre,
+    genero: body?.genero,
+    fecha_nacimiento: body?.fecha_nacimiento,
+    estado_nacimiento: body?.estado_nacimiento,
+    lugar_nacimiento: body?.municipio_naci,
+    nacionalidad: body?.nacionalidad,
+    clave_ciudadana: body?.curp,
+    domicilio: body?.domicilio,
+    entre_calles: body?.cruzamientos,
+    estado: body?.estado,
+    cp: body?.postal,
+    email: body?.email_personal,
+    email_alterno: body?.email_insti,
+    celular: body?.tel_cel,
+    telefono: body?.tel_domicilio,
+    nivel: body?.nivel,
+    grado: body?.grado,
+    matricula: body?.matricula,
+    observaciones: body?.nota,
+    proyecto_obs: body?.proyecto_obs,
+    obs_proyecto_lic: body?.obs_proyecto_lic,
+  };
+
+  await Alumno.findByIdAndUpdate(body?.matricula, data);
+
+  res.redirect(`/profesores/${body?.matricula}`);
+};
+
+AlumnosAdminCtr.updatePhotoprofesor = async (req = request, res = response) => {
+  let id = req.params.id;
+
+  if (req.files?.fotografia) {
+    await Alumno.findByIdAndUpdate(id, {
+      fotografia: req.files.fotografia.data,
+    });
+    res.redirect(`/profesores/${id}`);
+  } else {
+    res.redirect(`/profesores/${id}`);
+  }
+};
+
+AlumnosAdminCtr.doctosprofesor = async (req = request, res = response) => {
+  const profesores = await Alumno.findById(req.params.id);
+  res.render("alumno/documentos/doctos-screen", {
+    numeroalumno: profesores?.NUMEROALUMNO,
+    nombre: profesores?.NOMBRE,
+  });
+};
+
+AlumnosAdminCtr.boletasprofesor = async (req, res) => {
+  const profesores = await Alumno.findById(req.params.id);
+  res.render("alumno/boletas/boletas-screen", profesores);
+};
+
+
+
+
+
+
 module.exports = {
   AlumnosAdminCtr,
 };

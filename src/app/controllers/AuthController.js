@@ -156,7 +156,7 @@ AuthController.authProfe = async (req = request, res = response) => {
     // Iniciar sesión si la contraseña es válida
     req.session.isAuthenticated = true;
     req.session.isProfe = true;
-    req.session.IDAuth = profesor.CLAVEPROFESOR;
+    req.session.IDAuth = profesor.CLAVEPROFESOR;//Matricula del maestro 
     req.session.nameAuth = profesor.NOMBREPROFESOR;
     req.session.lastNameAuth = profesor.APELLIDOPROFESOR || ""; 
 

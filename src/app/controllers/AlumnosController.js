@@ -47,6 +47,7 @@ AlumnosController.showById = async (req = request, res = response) => {
     );
   });
 };
+
 AlumnosController.updateContact = async (req = request, res = response) => {
   const body = {
     domicilio: req.body.domicilio,
@@ -186,6 +187,10 @@ AlumnosController.showDocto = async (req, res) => {
 
 
 
+
+
+
+
 AlumnosController.showByIdpasswords = async (req = request, res = response) => {
   try {
     const passworddata = await Alumno.findById(req.session.IDAuth);
@@ -249,8 +254,6 @@ AlumnosController.showByIdpasswords = async (req = request, res = response) => {
     res.status(500).send("Hubo un error al cargar la información del alumno.");
   }
 };
-
-
 
 AlumnosController.updateContactpasswords = async (req = request, res = response) => {
   // Obtén solo el nuevo valor de la contraseña

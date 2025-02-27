@@ -13,6 +13,7 @@ const {
   ProfeCtr,
 
 } = require("../app/controllers");
+const { Route } = require("express");
 
 router.use(isAdmin);
 
@@ -24,6 +25,9 @@ router.get("/grupos/:idGrupo/editar", GruposCtr.editView);
 router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoView);
 router.get("/gruposCalifi", GruposCtr.showAnother);
 router.get("/gruposCalifi/:idGrupo", GruposCtr.showByIdAnother);
+
+
+
 
 
 // Rutas para los alumnos
@@ -86,6 +90,9 @@ router.get('/admin/calificacion', (req, res) => {
 
 router.get("/calificaciones", GruposCtr.show);
 router.get("/calificaciones/:idGrupo", CalifiCtr.showCalifi);
+
+
+router.get("/")
 
 router.get("/carreras", NivelesCtr.show);
 router.get("/carreras/crear", NivelesCtr.form);

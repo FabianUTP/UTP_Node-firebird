@@ -1,0 +1,102 @@
+<section class="section">
+  <div class="col-lg-12">
+
+    <div class="pb-3 d-flex justify-content-between">
+      {{>btnBack}}
+      {{!-- <div class="btn-group">
+        <a href="/grupos/{{codigo_grupo}}/editar" class="btn btn-outline-success">Editar grupo</a>
+        <a href="/grupos/{{codigo_grupo}}/agregar_alumno" class="btn btn-outline-success">Editar alumnos</a>
+      </div> --}}
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title text-center">
+          <h1>Grupo {{codigo_grupo}}</h1>
+        </div>
+
+        <div>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Detalles del grupo
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ul>
+                        <li><b>Codigo del grupo:</b> {{codigo_grupo}}</li>
+                        <li><b>Nivel:</b> {{grupo.NIVEL}}</li>
+                        <li><b>Grado:</b> {{grupo.GRADO}} </li>
+                        <li><b>Grupo:</b> {{grupo.GRUPO}} </li>
+                      </ul>
+                    </div>
+                    <div class="col-md-6">
+                      <ul>
+                        <li><b>Cupo maximo:</b> {{grupo.CUPO_MAXIMO}} </li>
+                        <li><b>Inscritos:</b> {{grupo.INSCRITOS}} </li>
+                        <li><b>Hombres:</b> <span id="num_hom"></span> </li>
+                        <li><b>Mujeres:</b> <span id="num_muj"></span> </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+
+      <div class="text-center" style="padding: 13px;">
+        <h1><i class="bi bi-people"></i><span>Alumnos</span></h1>
+      </div>
+
+      <div class="card-body">
+        <div class="container">
+
+          <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
+
+          <!-- Table with stripped rows -->
+          <div class="table-responsive">
+            <table align="center" class="table table-hover">
+              <thead class="table">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre completo</th>
+                  <th scope="col">Matricula</th>
+                  <th scope="col">Estatus</th>
+                  <th scope="col">Carrera</th>
+                </tr>
+              </thead>
+
+              <tbody id="table-container"></tbody>
+
+            </table>
+            <div class="text-center" id="loader">
+              <div class="spinner-border"></div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
+            <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
+          </div>
+          <!-- End Table with stripped rows -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script src="/js/services/admin/getprofesoresgrupo.js"></script>

@@ -43,7 +43,7 @@ const getAlumnos = async () => {
       countMuj++;
     }
     //Cambiar la redireccion..datos por uno de Alumnos_de passwor
-    content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
+    content += `<tr onclick="window.location.href='/profesores/${item.MATRICULA}'">`;
     content += `<td>${skip + i + 1}</td>`;  // Ajuste de la numeración aquí
     content += `<td>${item.PATERNO} ${item.MATERNO} ${item.NOMBRE}</td>`;
     content += `<td>${item.MATRICULA}</td>`;

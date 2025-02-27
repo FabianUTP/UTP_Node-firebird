@@ -1,0 +1,286 @@
+<section class="section">
+  <style>
+    .hidden {
+      display: none !important;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .card {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .card-title h1 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .group-code-and-professor {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .professor-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .professor-info img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .asignatura-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 600px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .asignatura-item {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #ddd;
+      transition: background-color 0.3s, font-weight 0.3s;
+    }
+
+    .asignatura-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .asignatura-item.selected {
+      background-color: #911820;
+      color: #ffffff;
+    }
+
+    .table-responsive {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center; /* Centra la tabla */
+      overflow-x: auto; /* Permite desplazamiento horizontal */
+    }
+
+    .table {
+      width: 80%; /* Reduce el tamaño de la tabla */
+      border-collapse: collapse;
+      table-layout: fixed; /* Evita que la tabla se estire */
+    }
+
+    .table th, .table td {
+      padding: 8px 10px; /* Reduce el padding en las celdas */
+      text-align: center; /* Centra el contenido de las celdas */
+      border: 1px solid #ddd; /* Bordes sutiles */
+      word-wrap: break-word;
+      min-width: 70px; /* Tamaño mínimo de las celdas */
+    }
+
+    .table th {
+      background-color: #911820;
+      color: white;
+      font-weight: bold; /* Hace el texto más fuerte */
+      font-size: 14px; /* Tamaño de fuente más pequeño */
+    }
+
+    .table tbody tr {
+      background-color: #ffffff;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f5f5f5; /* Color de fondo cuando el mouse pasa por encima */
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #f9f9f9; /* Fondo gris claro para filas pares */
+    }
+
+    .table tbody tr:nth-child(odd) {
+      background-color: #ffffff; /* Fondo blanco para filas impares */
+    }
+
+    .table td {
+      font-size: 12px; /* Tamaño de fuente para los datos más pequeño */
+    }
+
+    #loader {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #eval-select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #911820;
+      border-radius: 5px;
+      background-color: #fff;
+      appearance: none;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 0;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: #911820;
+      border-color: #911820;
+    }
+
+    .btn-primary:hover {
+      color: #fff;
+      background-color: #7c1517;
+      border-color: #911820;
+    }
+
+    .btn-custom-download {
+      background-color: #911820;
+      color: white;
+      border: none;
+      font-size: 16px;
+      padding: 12px 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom-download:hover {
+      background-color: #7c1517;
+    }
+
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .left-column {
+      float: left;
+      width: 26%;
+      margin-right: 20px;
+    }
+
+    #botonDescargarExcel {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    #botonDescargarExcel i {
+      margin-right: 8px;
+    }
+
+    .right-column {
+      float: right;
+      width: 72%;
+    }
+  </style>
+
+  <div class="col-lg-12">
+    <!-- Botón de regreso -->
+    <div class="pb-3 d-flex justify-content-between">
+      {{>btnBack}}
+    </div>
+
+    <!-- Botón para descargar Excel -->
+    <button onclick="descargarTablaExcel()" id="botonDescargarExcel" class="btn btn-custom-download">
+      <i class="bi bi-file-earmark-excel"></i> Descargar
+    </button>
+
+    <!-- Todo el contenido dentro de un solo card -->
+    <div class="card">
+      <div class="card-body">
+        <!-- Información del grupo y profesor -->
+        <div class="card-title">
+          <div class="group-code-and-professor">
+            <h1>Grupo {{codigo_grupo}}</h1>
+            <div class="professor-info">
+              <h1 id="claveProfesor"></h1>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selección de evaluación -->
+        <select id="eval-select">
+          <option value="">Seleccione una evaluación</option>
+        </select>
+
+        <!-- Lista de asignaturas -->
+        <div class="left-column">
+          <div class="card-body">
+            <h5>Asignaturas</h5>
+            <ul id="asignatura-list" class="asignatura-list"></ul>
+          </div>
+        </div>
+
+        <!-- Tabla de estudiantes y calificaciones en un card diferente y a la derecha -->
+        <div class="right-column">
+          <div class="card">
+            <div class="card-body">
+              <div class="container">
+                <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <button id="guardarCalifBtn" class="btn btn-primary">Guardar</button>
+                  <div>
+                    <input id="input" type="file" accept=".xlsx, .xls, .csv" class="form-control" />
+                    <small id="info_excel" class="text-muted"></small>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr style="background-color: #911820;">
+                        <th>#</th>
+                        <th>Nombre completo</th>
+                        <th>Matrícula</th>
+                        <th>Calificación</th>
+                        <th>Guardar calificaciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table-container"></tbody>
+                  </table>
+                  <div class="text-center" id="loader">
+                    <div class="spinner-border"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/services/admin/getGruposAlumnosCalifi.js"></script>
+<script src="/js/FileSaver.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="/js/services/profe/Exel_js/ExportaExelGrupoAdmin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

@@ -83,6 +83,7 @@
 
 
             <div class="pt-3 text-center">
+
               <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
             </div>
 
@@ -196,7 +197,7 @@
           <form id="form" action="/login/admin" method="post" class="d-flex flex-column justify-content-center">
             <div>
 
-              <label for="matricula"class="form-label fs-5">USUARIOS</label>
+              <label for="matricula" class="form-label fs-5">USUARIOS</label>
 
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -231,7 +232,8 @@
             </div>
 
             <div class="pt-3 text-center">
-              <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
+              <body data-claveprofesor="<%= req.session.IDAuth %>">
+                <button type="submit" class="btn btn-outline-primary" id="btn">Iniciar sesión</button>
             </div>
 
           </form>

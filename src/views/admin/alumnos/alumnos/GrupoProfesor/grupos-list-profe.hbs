@@ -1,0 +1,108 @@
+<section class="container">
+  <div class="mb-3">
+    {{>btnBack}}
+  </div>
+
+  <div id="container" class="row d-none">
+    <div class="col-lg-12">
+      <div class="card shadow-sm">
+        <div class="card-header text-center bg-white text-black">
+          <h1><i class="bi bi-people"></i> Grupos</h1>
+        </div>
+
+        <div class="card-body">
+          <div class="container">
+            <div class="d-flex justify-content-between mb-3">
+              <div class="input-group w-50">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                  </span>
+                </div>
+                <input type="text" id="buscar-profesor" placeholder="Buscar por profesor">
+
+              </div>
+
+
+              <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Ordenar
+                </button>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-item">
+                    <input class="form-check-input" type="radio" id="orderApe" name="orderBy" checked
+                      onchange="handleOrder('codigo_carrera')">
+                    <label class="form-check-label" for="orderApe">
+                      Código carrera
+                    </label>
+                  </li>
+                  <li class="dropdown-item">
+                    <input class="form-check-input" type="radio" id="orderName" name="orderBy"
+                      onchange="handleOrder('codigo_grupo')">
+                    <label class="form-check-label" for="orderName">
+                      Código grupo
+                    </label>
+                  </li>
+                  <li class="dropdown-item">
+                    <input class="form-check-input" type="radio" id="orderMatri" name="orderBy"
+                      onchange="handleOrder('grupo')">
+                    <label class="form-check-label" for="orderMatri">
+                      Grupo
+                    </label>
+                  </li>
+                  <li class="border-top"></li>
+                  <li class="dropdown-item">
+                    <input class="form-check-input" type="radio" id="orderDesc" name="sort" checked
+                      onchange="handleSort('asc')">
+                    <label class="form-check-label" for="orderDesc">
+                      Ascendente
+                    </label>
+                  </li>
+                  <li class="dropdown-item">
+                    <input class="form-check-input" type="radio" id="orderAsc" name="sort"
+                      onchange="handleSort('desc')">
+                    <label class="form-check-label" for="orderAsc">
+                      Descendente
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+            <!-- Table with stripped rows -->
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Código carrera</th>
+                    <th scope="col">Código grupo</th>
+                    <th scope="col">Cuatri</th>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Inscritos</th>
+                    <th scope="col">Tutor</th>
+                  </tr>
+                </thead>
+                <tbody id="table-container"></tbody>
+              </table>
+              <div class="d-flex justify-content-center pb-2">
+                <div class="spinner-border" role="status" id="load" style="display: none;"></div>
+              </div>
+            </div>
+
+            <div class="text-center mt-3">
+              <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
+              <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="preloader"></div>
+</section>
+
+<script src="/js/services/admin/GetGrupos_profesor.js"></script>

@@ -140,58 +140,71 @@ router.get("/gruposCalifi", async (req, res) => {
     sort = "asc",
     grupo = "",
     grado = 0,
+    IDAuth, // Recibe el ID del profesor autenticado
   } = req.query;
-  //    "grupos.codigo_grupo as codigo_grupo,grupos.grado, grupos.inicial as inicial,grupos.final as final,grupos.periodo as periodo,grupos.id_escuela as id_escuela,CASE WHEN grupos.grado + 1 >= 5 THEN grupos.grado ELSE grupos.grado + 1  END  as siguiente_grupo , grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera ";
 
-  // Consulta SQL paar mostrar los grupos
-  let query = `SELECT FIRST(${limit}) SKIP(${skip}) `;
-  query +=
-    "grupos.codigo_grupo as codigo_grupo,grupos.grado, grupos.inicial,grupos.final,grupos.periodo as periodo,grupos.id_escuela as id_escuela, grupos.grupo as grupo, grupos.cupo_maximo, grupos.inscritos, profesores.nombreprofesor as claveprofesor_titular, cfgniveles.nivel as codigo_carrera ";
-  query += "FROM grupos ";
-  query +=
-    "LEFT JOIN profesores ON grupos.claveprofesor_titular = profesores.claveprofesor ";
-  query += "JOIN cfgniveles ON grupos.nivel = cfgniveles.nivel ";
+  let query = `SELECT FIRST(${limit}) SKIP(${skip}) 
+    grupos.codigo_grupo AS codigo_grupo,
+    grupos.grado,
+    grupos.inicial,
+    grupos.final,
+    grupos.periodo AS periodo,
+    grupos.id_escuela AS id_escuela,
+    grupos.grupo AS grupo,
+    grupos.cupo_maximo,
+    grupos.inscritos,
+    profesores.nombreprofesor AS CLAVEPROFESOR_TITULAR,
+    cfgniveles.nivel AS codigo_carrera 
+    FROM grupos 
+    LEFT JOIN profesores ON grupos.CLAVEPROFESOR_TITULAR = profesores.claveprofesor 
+    JOIN cfgniveles ON grupos.nivel = cfgniveles.nivel`;
 
-  // Si hay palabras a bsucar, lo agrega en la consulta
+  // Agregar condiciones WHERE dinámicas
+  let conditions = [];
+
   if (search.length > 0) {
-    query += `WHERE (grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%') `;
+    conditions.push(`grupos.codigo_grupo LIKE '%${search.toLocaleUpperCase()}%'`);
   }
   if (grupo.length > 0) {
-    query += `AND (grupos.nivel LIKE '%${grupo.toLocaleUpperCase()}%') `;
+    conditions.push(`grupos.nivel LIKE '%${grupo.toLocaleUpperCase()}%'`);
   }
   if (grado > 0) {
     let grado_alumno = parseFloat(grado) + 1;
-    query += `AND grupos.grado <= '${grado_alumno}' AND grupos.grado >= '${grado}'`;
+    conditions.push(`grupos.grado <= '${grado_alumno}' AND grupos.grado >= '${grado}'`);
   }
-  // Si hay periodo seleccionado a mostrar lo agrega en la query
+  if (IDAuth) {
+    conditions.push(`grupos.claveprofesor_titular = '${IDAuth}'`); // 🔹 Filtrar por el profesor autenticado
+  }
+
   if (req.session.periodoSelected) {
     let periodo = await Ciclos.findById(req.session.periodoSelected);
-    // Valida si ya tiene la consulta WHERE
-    query += query.includes("WHERE") ? "AND" : "WHERE";
-    // si lo tiene agrega un AND,  si no, agrega el WHERE
-    query += ` grupos.inicial = ${periodo?.INICIAL} `;
-    query += `AND grupos.final = ${periodo?.FINAL} `;
-    query += `AND grupos.periodo = ${periodo?.PERIODO} `;
+    conditions.push(`grupos.inicial = ${periodo?.INICIAL}`);
+    conditions.push(`grupos.final = ${periodo?.FINAL}`);
+    conditions.push(`grupos.periodo = ${periodo?.PERIODO}`);
   }
 
+  if (conditions.length > 0) {
+    query += " WHERE " + conditions.join(" AND ");
+  }
 
-  // Codigo para ordenar si existe
-  query += `ORDER BY ${orderBy} ${sort}`;
+  query += ` ORDER BY ${orderBy} ${sort}`;
 
-  const grupos = await Grupos.createQuery({ querySql: query });
+  console.log("Consulta generada:", query); // Verifica la consulta generada en la terminal
 
-  res.json({
-    querys: {
-      limit,
-      skip,
-      search,
-      orderBy,
-      sort
-    },
-    periodoSelected: req.session.periodoSelected,
-    grupos,
-  });
+  try {
+    const grupos = await Grupos.createQuery({ querySql: query });
+
+    res.json({
+      querys: { limit, skip, search, orderBy, sort, IDAuth },
+      periodoSelected: req.session.periodoSelected,
+      grupos,
+    });
+  } catch (error) {
+    console.error("Error al obtener grupos:", error);
+    res.status(500).json({ error: "Error al obtener los grupos" });
+  }
 });
+
 
 router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   const { limit = 10, skip = 0 } = req.query;

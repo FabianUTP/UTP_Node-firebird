@@ -27,14 +27,14 @@ router.get("/gruposCalifi", GruposCtr.showAnother);
 router.get("/gruposCalifi/:idGrupo", GruposCtr.showByIdAnother);
 
 // Rutas para los alumnos
-router.get("/alumnos", AlumnosAdminCtr.show);
-router.get("/alumnos/nuevo", AlumnosAdminCtr.createView);
-router.get("/alumnos/:id", AlumnosAdminCtr.showById);
-router.post("/alumnos/:id/update", AlumnosAdminCtr.update);
-router.post("/alumnos/:id/updatePhoto", AlumnosAdminCtr.updatePhoto);
-router.get("/alumnos/:id/doctos", AlumnosAdminCtr.doctos);
-router.get("/alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
-router.get("/alumnos/:id/boletas", AlumnosAdminCtr.boletas);
+router.get("/Alumnos", AlumnosAdminCtr.show);
+router.get("/Alumnos/nuevo", AlumnosAdminCtr.createView);
+router.get("/Alumnos/:id", AlumnosAdminCtr.showById);
+router.post("/Alumnos/:id/update", AlumnosAdminCtr.update);
+router.post("/Alumnos/:id/updatePhoto", AlumnosAdminCtr.updatePhoto);
+router.get("/Alumnos/:id/doctos", AlumnosAdminCtr.doctos);
+router.get("/Alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
+router.get("/Alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
 //datos para los AlumnosTitulos
 router.get("/titulaciones", AlumnosAdminCtr.showTitul);

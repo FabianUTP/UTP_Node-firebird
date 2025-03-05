@@ -40,12 +40,12 @@ async function getProfesoresAsig() {
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <li>
-          <a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/ver_calif?${query}">
+          <a class="dropdown-item" href="/Maestro/${item.CLAVEPROFESOR}/ver_calif?${query}">
             Ver calificaciones
           </a>
         </li>
         <li>
-          <a class="dropdown-item" href="/profesores/${item.CLAVEPROFESOR}/subir_calif?${query}">
+          <a class="dropdown-item" href="/Maestro/${item.CLAVEPROFESOR}/subir_calif?${query}">
             Subir Calificaciones
           </a>
         </li>

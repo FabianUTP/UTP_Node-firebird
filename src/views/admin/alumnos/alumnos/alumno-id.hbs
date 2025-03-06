@@ -67,7 +67,7 @@
           </li>
           <li class="nav-item">
             <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Escuela">Bachillerato</button>
+              data-bs-target="#BACHILLERATO">BACHILLERATO</button>
           </li>
           <li class="nav-item">
             <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
@@ -324,7 +324,6 @@
 
 
 
-
             <!-- Estatus -->
             <div class="tab-pane fade profile-overview" id="Estatus">
               <h5 class="card-title mb-4 text-center">Estatus</h5> <!-- Título centrado -->
@@ -378,619 +377,500 @@
               </div>
             </div>
 
+            {{!--FORMATO DE ESTATUS BACHILLERATO --}}
+            <div class="tab-pane fade profile-overview p-3" id="BACHILLERATO">
+              <div class="row g-3">
+                <!-- Escuela de Procedencia -->
+                <div class="col-md-12">
+                  <label for="ESCUELA_PROCEDENCIA" class="form-label fw-bold">ESCUELA DE PROCEDENCIA</label>
+                  <input type="text" id="ESCUELA_PROCEDENCIA" name="ESCUELA_PROCEDENCIA"
+                    class="form-control form-control-lg text-center" placeholder="Calle, número y colonia"
+                    value="{{ESCUELA_PROCEDENCIA}}" disabled>
+                </div>
+
+                <!-- Cruzamientos -->
+                <div class="col-md-12">
+                  <label for="ESCOLARIDAD" class="form-label fw-bold">ESCOLARIDAD</label>
+                  <input type="text" id="ESCOLARIDAD" name="ESCOLARIDAD"
+                    class="form-control form-control-lg text-center" placeholder="Escolaridad" value="{{ESCOLARIDAD}}"
+                    disabled>
+                </div>
+              </div>
+            </div>
 
 
-            {{!-- Estadisticos --}}
-            <div class="tab-pane fade" id="Estadisticos">
-              <div class="card-body p-1">
-                <div class="row g-1">
-                  <div class="col-md-2">
-                    <label for="BECA" class="form-label">BECA</label>
-                    <select id="BECA" class="form-select text-center" disabled>
-                      <option>-- SIN DATO --</option>
-                      <option>PRONABES</option>
-                      <option>BÉCALOS</option>
-                      <option>BECA ECONÓMICA</option>
-                      <option>OTRA</option>
-                      <option>NINGUNA</option>
-                    </select>
+
+
+            {{!-- ESTADISTICOS fORMATO TABLA --}}
+            <div class="tab-pane fade profile-overview" id="Estadisticos">
+              <div class="container mt-3">
+                <!-- Primera fila - Beca, Peso, Talla -->
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label for="BECA" class="form-label fw-bold">Beca</label>
+                    <input type="text" id="BECA" name="BECA" class="form-control text-center" value="{{BECA}}" disabled>
                   </div>
                   <div class="col-md-4">
-                    <label for="peso_kg" class="form-label">PESO DEL ALUMNO</label>
-                    <input type="text" id="peso_kg" name="peso_kg" class="form-control" placeholder="peso_kg"
-                      value="{{PESO_KG}}" disabled>
+                    <label for="PESO_KG" class="form-label fw-bold">Peso (Kg)</label>
+                    <input type="text" id="PESO_KG" name="PESO_KG" class="form-control text-center" value="{{PESO_KG}}"
+                      disabled>
                   </div>
                   <div class="col-md-4">
-                    <label for="talla" class="form-label">TALLA DEL ALUMNO</label>
-                    <select id="talla" name="talla" class="form-select" disabled>
+                    <label for="talla" class="form-label fw-bold">TALLA</label>
+                    <select id="talla" class="form-select text-center" name="talla" required disabled>
                       <option>{{TALLA}}</option>
+                      <option>XS</option>
+                      <option>S</option>
+                      <option>M</option>
+                      <option>G</option>
+                      <option>XG</option>
+                      <option>--</option>
                     </select>
                   </div>
+                </div>
+
+                <!-- Segunda fila - Contacto, Parentesco -->
+                <div class="row g-3 mt-2">
                   <div class="col-md-6">
-                    <label for="contacto" class="form-label">Contacto</label>
-                    <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                      <input name="contacto" id="contacto" class="form-control" type="tel" maxlength="10"
-                        value="{{CONTACTO}}" disabled />
-                    </div>
+                    <label for="contacto" class="form-label fw-bold">CONTACTO</label>
+                    <input type="text" id="contacto" name="contacto" class="form-control text-center"
+                      value="{{CONTACTO}}" disabled>
                   </div>
-                  <div class="col-md-4">
-                    <label for="PARENTESCO_CONTACTO" class="form-label">Parentesco del Contacto</label>
-                    <select id="PARENTESCO_CONTACTO" name="PARENTESCO_CONTACTO" class="form-select" disabled>
+                  <div class="col-md-6">
+                    <label for="PARENTESCO_CONTACTO" class="form-label fw-bold">PARENTESCO DEL CONTACTO</label>
+                    <select id="PARENTESCO_CONTACTO" class="form-select text-center" name="PARENTESCO_CONTACTO" required
+                      disabled>
                       <option>{{PARENTESCO_CONTACTO}}</option>
+                      <option>PADRE</option>
+                      <option>MADRE</option>
+                      <option>HERMANO(A)</option>
+                      <option>ABUELO(A)</option>
+                      <option>PARIENTE</option>
+                      <option>AMIGO</option>
+                      <option>CÓNYUGE</option>
+                      <option>TUTOR (A)</option>
+                      <option>Sin dato</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="TEL_CONTACTO" class="form-label">Teléfono del Contacto</label>
-                    <select id="TEL_CONTACTO" name="TEL_CONTACTO" class="form-select" disabled>
-                      <option>{{TEL_CONTACTO}}</option>
-                    </select>
+                </div>
+
+                <!-- Tercera fila - Teléfono, Tipo seguro -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="tel_contacto" class="form-label fw-bold">TELEFONO DEL CONTACTO</label>
+                    <input type="text" id="tel_contacto" name="tel_contacto" class="form-control text-center"
+                      value="{{TEL_CONTACTO}}" disabled>
                   </div>
-                  <div class="col-md-4">
-                    <label for="TIPO_SEG_MED" class="form-label">Tipo de Seguro Médico</label>
-                    <select id="TIPO_SEG_MED" name="TIPO_SEG_MED" class="form-select" disabled>
+                  <div class="col-md-6">
+                    <label for="tipo_seg_med" class="form-label fw-bold">TIPO DE SEGURO MEDICO</label>
+                    <select id="tipo_seg_med" class="form-select text-center" name="tipo_seg_med" required disabled>
                       <option>{{TIPO_SEG_MED}}</option>
+                      <option>Sin Especificar</option>
+                      <option>IMSS-UTP</option>
+                      <option>IMSS-FAMILIAR</option>
+                      <option>IMSS-LABORAL</option>
+                      <option>IMSS-OPORTUNIDADES</option>
+                      <option>ISSTE</option>
+                      <option>PRIVADO</option>
+                      <option>NO TIENE</option>
+                      <option>SEGURO POPULAR</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="NUM_IMSS" class="form-label">Número IMSS</label>
-                    <select id="NUM_IMSS" name="NUM_IMSS" class="form-select" disabled>
-                      <option>{{NUM_IMSS}}</option>
+                </div>
+
+                <!-- Cuarta fila - Número seguro, Escolaridad padre -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="num_imss" class="form-label fw-bold">NUMERO DE SEGURO</label>
+                    <input type="text" id="num_imss" name="num_imss" class="form-control text-center"
+                      value="{{NUM_IMSS}}" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="escolaridadpadre" class="form-label fw-bold">ESCOLARIDAD PADRE</label>
+                    <select id="escolaridadpadre" class="form-select text-center" name="escolaridadpadre" required
+                      disabled>
+                      <option>{{ESCOLARIDADPADRE}}</option>
+                      <option>SIN DATO</option>
+                      <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
+                      <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA</option>
+                      <option>SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLET</option>
+                      <option>EDUC. TÉCNICA COMPLETA O NORMAL BÁSICA</option>
+                      <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
+                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INC</option>
+                      <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTORADO) COMPL</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="NUM_IMSS_VERIFICADOR" class="form-label">Número IMSS Verificador</label>
-                    <select id="NUM_IMSS_VERIFICADOR" name="NUM_IMSS_VERIFICADOR" class="form-select" disabled>
-                      <option>{{NUM_IMSS_VERIFICADOR}}</option>
+                </div>
+
+                <!-- Quinta fila - Verificador, Escolaridad madre -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="num_imss_verificador" class="form-label fw-bold">VERIFICADOR DEL SEGURO</label>
+                    <input type="text" id="num_imss_verificador" name="num_imss_verificador"
+                      class="form-control text-center" value="{{NUM_IMSS_VERIFICADOR}}" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="ESCOLARIDADMADRE" class="form-label fw-bold">ESCOLARIDAD DE LA MADRE</label>
+                    <select id="ESCOLARIDADMADRE" class="form-select text-center" name="ESCOLARIDADMADRE" required
+                      disabled>
+                      <option>{{ESCOLARIDADMADRE}}</option>
+                      <option>SIN DATO</option>
+                      <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMAR</option>
+                      <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLE</option>
+                      <option>SECUNDARIA O COMERCIAL TERMINADA / BACH.</option>
+                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP. / POS</option>
+                      <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR I</option>
+                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP./ POST</option>
+                      <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTOR</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="LENGUAINDIGENA" class="form-label">Lengua Indígena</label>
-                    <select id="LENGUAINDIGENA" name="LENGUAINDIGENA" class="form-select" disabled>
-                      <option>{{LENGUAINDIGENA}}</option>
+                </div>
+
+
+
+                <!-- Sexta fila - Lengua indígena, Actividad padre -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="lenguaindigena" class="form-label fw-bold">¿HABLA ALGUNA LENGUA INDIGENA?</label>
+                    <input type="text" id="lenguaindigena" name="lenguaindigena" class="form-control text-center"
+                      value="{{LENGUAINDIGENA}}" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="actividadpadre" class="form-label fw-bold">ACTIVIDAD DEL PADRE</label>
+                    <select id="actividadpadre" class="form-select text-center" name="actividadpadre" required disabled>
+                      <option>{{ACTIVIDADPADRE}}</option>
+                      <option>SIN DATO</option>
+                      <option>DESEMPLEADO</option>
+                      <option>JUBILADO O PENSIONADO</option>
+                      <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
+                      <option>ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO, ETC)</option>
+                      <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC</option>
+                      <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
+                      <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
+                      <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                      <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
+                      <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
+                      <option>EMPLEADO GOB. MUNICIPAL, ESTATAL O FEDERAL (INCLUYE MILITAR)</option>
+                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                      <option>EMPLEADO DE INST. GUBERNAMENT. DESCENTR. (IMSS, ISSSTE, ETC)</option>
+                      <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                      <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.)</option>
+                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                      <option>PROPIETARIO DE CASAS EN )RENTA</option>
+                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING. ETC.)</option>
+                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC.)</option>
+                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNICP. EST. O FED</option>
+                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                      <option>NINGUNA DE LAS ANTERIORES</option>
+                      <option>AMA DE CASA</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="DISCAPACIDAD" class="form-label">Discapacidad</label>
-                    <select id="DISCAPACIDAD" name="DISCAPACIDAD" class="form-select" disabled>
-                      <option>{{DISCAPACIDAD}}</option>
+                </div>
+
+                <!-- Séptima fila - Discapacidad, Actividad madre -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="discapacidad" class="form-label fw-bold">¿SUFRE ALGUNA DISCAPACIDAD?</label>
+                    <input type="text" id="discapacidad" name="discapacidad" class="form-control text-center"
+                      value="{{DISCAPACIDAD}}" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="actividadmadre" class="form-label fw-bold">ACTIVIDAD DE LA MADRE</label>
+                    <select id="actividadmadre" class="form-select text-center" name="actividadmadre" required disabled>
+                      <option>{{ACTIVIDADMADRE}}</option>
+                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                      <option>EMPLEADO DE INST.GUBERNAMENT.DESCENTR.(IMSS, ISSSTE, ETC)</option>
+                      <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                      <option>GANADERO Y /O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROP.)</option>
+                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                      <option>PROPIETARIO DE CASAS EN RENTA</option>
+                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICOING. ETC)</option>
+                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC)</option>
+                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN.MUNIC.EST.O FED.</option>
+                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                      <option>NINGUNA DE LAS ANTERIORES</option>
+                      <option>AMA DE CASA</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="ENFERMEDAD" class="form-label">Enfermedad</label>
-                    <select id="ENFERMEDAD" name="ENFERMEDAD" class="form-select" disabled>
-                      <option>{{ENFERMEDAD}}</option>
+                </div>
+
+                <!-- Octava fila - Enfermedad, Vehículo -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="enfermedad" class="form-label fw-bold">¿SUFRE ALGUNA ENFERMEDAD?</label>
+                    <input type="text" id="enfermedad" name="enfermedad" class="form-control text-center"
+                      value="{{ENFERNEDAD}}" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="automovilfamiliar" class="form-label fw-bold">¿Cuenta con vehículo?</label>
+                    <select id="automovilfamiliar" class="form-select text-center" name="automovilfamiliar" required
+                      disabled>
+                      <option>{{AUTOMOVILFAMILIAR}}</option>
+                      <option>SIN DATO</option>
+                      <option>SI</option>
+                      <option>NO</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="ALERGIAS" class="form-label">Alergias</label>
-                    <select id="ALERGIAS" name="ALERGIAS" class="form-select" disabled>
-                      <option>{{ALERGIAS}}</option>
+                </div>
+
+                <!-- Novena fila - Alergias, Computadora -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="alergias" class="form-label fw-bold">¿SUFRE ALGUNA ALERGIA?</label>
+                    <input type="text" id="alergias" name="alergias" class="form-control text-center"
+                      value="{{ALERGIAS}}" disabled>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="computadora" class="form-label fw-bold">¿Cuenta con computadora?</label>
+                    <select id="computadora" class="form-select text-center" name="computadora" required disabled>
+                      <option>{{COMPUTADORA}}</option>
+                      <option>SIN DATO</option>
+                      <option>SI</option>
+                      <option>NO</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="TRABAJAS" class="form-label">¿Trabajas?</label>
-                    <select id="TRABAJAS" name="TRABAJAS" class="form-select" disabled>
+                </div>
+
+                <!-- Décima fila - Nombre padre, Nombre madre -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="nombrepadre" class="form-label fw-bold">NOMBRE PADRE</label>
+                    <input type="text" id="nombrepadre" name="nombrepadre" class="form-control text-center"
+                      value="{{NOMBREPADRE}}" disabled>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="tamanocasa" class="form-label fw-bold">¿TAMAÑO DE LA CASA?</label>
+                    <select id="tamanocasa" class="form-select text-center" name="tamanocasa" required disabled>
+                      <option>{{TAMANOCASA}}</option>
+                      <option>SIN DATO</option>
+                      <option>MENOS DE 100 m2</option>
+                      <option>DE 101 A 200 m2</option>
+                      <option>DE 201 A 300 m2</option>
+                      <option>DE 301 A 500 m2</option>
+                      <option>MÁS DE 500 m2</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <label for="nombremadre" class="form-label fw-bold">NOMBRE MADRE</label>
+                    <input type="text" id="nombremadre" name="nombremadre" class="form-control text-center"
+                      value="{{NOMBREMADRE}}" disabled>
+                  </div>
+
+
+                  <div class="col-md-6">
+                    <label for="infresofamiliar" class="form-label fw-bold">¿CUÁNTO ES EL INGRESO FAMILIAR?</label>
+                    <select id="infresofamiliar" class="form-select text-center" name="infresofamiliar" required
+                      disabled>
+                      <option>{{INFRESOFAMILIAR}}</option>
+                      <option>SIN DATO</option>
+                      <option>MENOS DE $1,950</option>
+                      <option>ENTRE $1,951 Y $3,900</option>
+                      <option>ENTRE $3,901 Y $6,500</option>
+                      <option>ENTRE $6,501 Y $13,000</option>
+                      <option>ENTRE $13,001 Y $26,500</option>
+                      <option>ENTRE $26,501 Y $40,000</option>
+                      <option>ENTRE $40,001 Y $53,500</option>
+                      <option>ENTRE $53,501 Y $67,000</option>
+                      <option>ENTRE $67,001 Y $80,000</option>
+                      <option>MÁS DE $80,001</option>
+                    </select>
+                  </div>
+
+
+                  <div class="col-md-12 text-start">
+                    <label for="trabajas" class="form-label fw-bold">¿Trabajas?</label>
+                    <select id="trabajas" class="form-select text-center" name="trabajas" required disabled>
                       <option>{{TRABAJAS}}</option>
+                      <option>SIN DATO</option>
+                      <option>SI</option>
+                      <option>NO</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="ACTIVIDADTRABAJAS" class="form-label">Actividad Laboral</label>
-                    <select id="ACTIVIDADTRABAJAS" name="ACTIVIDADTRABAJAS" class="form-select" disabled>
+
+
+                  <div class="col-md-12">
+                    <label for="ACTIVIDADTRABAJAS" class="form-label fw-bold">¿que tipo de trabajo realizas?</label>
+                    <select id="ACTIVIDADTRABAJAS" class="form-select text-center" name="ACTIVIDADTRABAJAS" required
+                      disabled>
                       <option>{{ACTIVIDADTRABAJAS}}</option>
+                      <option>SIN DATO</option>
+                      <option>AMA DE CASA</option>
+                      <option>DESEMPLEADO</option>
+                      <option>JUBILADO O PENScFIONADO</option>
+                      <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
+                      <option>ARTESANO (PRODUCTO DE MADERA, BARRO, CUERO, YESO, ETC)</option>
+                      <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO ETC)</option>
+                      <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
+                      <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
+                      <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                      <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
+                      <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
+                      <option>EMPLEADO DE GOB. MUNIC.ESTATAL O FED, (INCLUYE MILITAR)</option>
+                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                      <option>EMPLEADO DE INST. GUBERNAMENT.DESCENTR.(IMSS. ISSSTE. ETC)</option>
+                      <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                      <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.)</option>
+                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                      <option>PROPIETARIO DE CASAS EN RENTA</option>
+                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING, ETC)</option>
+                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC).</option>
+                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNICP. EST. O FED</option>
+                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                      <option>NINGUNA DE LAS ANTERIORES</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="HORARIOTRABAJAS" class="form-label">Horario de Trabajo</label>
-                    <select id="HORARIOTRABAJAS" name="HORARIOTRABAJAS" class="form-select" disabled>
-                      <option>{{HORARIOTRABAJAS}}</option>
-                    </select>
+
+
+
+                  <div class="col-md-auto">
+
+                    <label for="personasdependeningreso" class="form-label fw-bold">¿CUANTAS PERSONAS DEPENDEN DEL
+                      INGRESO?</label>
+                    <input type="text" id="personasdependeningreso" name="personasdependeningreso"
+                      class="form-control text-center" value="{{PERSONASDEPENDENINGRESO}}" disabled>
+
                   </div>
-                  <div class="col-md-4">
-                    <label for="ESTADOCIVIL" class="form-label">Estado Civil</label>
-                    <select id="ESTADOCIVIL" name="ESTADOCIVIL" class="form-select" disabled>
-                      <option>{{ESTADOCIVIL}}</option>
-                    </select>
+
+
+
+                  <div class="col-md-auto">
+
+                    <label for="vivenencasa" class="form-label fw-bold">¿ CUANTAS PEROSNAS VIVEN EN CASA?</label>
+                    <input type="text" id="vivenencasa" name="vivenencasa" class="form-control text-center"
+                      value="{{VIVENENCASA}}" disabled>
+
                   </div>
-                  <div class="col-md-4">
-                    <label for="NOMBRECONYUGE" class="form-label">Nombre del Cónyuge</label>
-                    <select id="NOMBRECONYUGE" name="NOMBRECONYUGE" class="form-select" disabled>
-                      <option>{{NOMBRECONYUGE}}</option>
-                    </select>
+
+
+
+                  <div class="col-md-auto">
+
+                    <label for="hermanos" class="form-label fw-bold">¿CUANTOS HERMNOS?</label>
+                    <input type="text" id="hermanos" name="hermanos" class="form-control text-center"
+                      value="{{HERMANOS}}" disabled>
+
                   </div>
+
+
+
+                  <div class="col-md-auto">
+
+                    <label for="lugarnacimiento" class="form-label fw-bold">¿lUGAR DE NACIMIENTO?</label>
+                    <input type="text" id="lugarnacimiento" name="lugarnacimiento" class="form-control text-center"
+                      value="{{LUGARNACIMIENTO}}" disabled>
+
+                  </div>
+
+
+
+                  <div class="col-md-auto">
+                    <label for="hermanosestudian" class="form-label fw-bold">¿cuantos hermnos estudian ?</label>
+                    <input type="text" id="hermanosestudian" name="hermanosestudian" class="form-control text-center"
+                      value="{{HERMANOSESTUDIAN}}" disabled>
+                  </div>
+
+
+
+                  <div class="col-md-auto">
+                    <label for="horariotrabajo" class="form-label fw-bold">¿HORARIOS DE TRABAJO?</label>
+                    <input type="text" id="horariotrabajo" name="horariotrabajo" class="form-control text-center"
+                      value="{{HORARIOTRABAJO}}" disabled>
+                  </div>
+
+                  <div class="col-md-auto">
+                    <label for="estadocivil" class="form-label fw-bold">¿ESTADO CIVIL?</label>
+                    <input type="text" id="estadocivil" name="estadocivil" class="form-control text-center"
+                      value="{{ESTADOCIVIL}}" disabled>
+                  </div>
+
+
+
                   <div class="col-md-4">
-                    <label for="ESCOLARIDADCONYUGE" class="form-label">Escolaridad del Cónyuge</label>
-                    <select id="ESCOLARIDADCONYUGE" name="ESCOLARIDADCONYUGE" class="form-select" disabled>
+                    <label for="hijos0a5" class="form-label fw-bold">¿CUANTOS HIJOS?</label>
+                    <input type="text" id="hijos0a5" name="hijos0a5" class="form-control text-center"
+                      value="{{HIJOS0A5}}" disabled>
+                  </div>
+
+
+                  <div class="col-md-12">
+                    <label for="nombreconyuge" class="form-label fw-bold">NOMBRE CONYUGE</label>
+                    <input type="text" id="nombreconyuge" name="nombreconyuge" class="form-select text-center"
+                      value="{{NOMBRECONYUGE}}" disabled>
+                  </div>
+
+                  <div class="col-md-12">
+                    <label for="escolaridadconyuge" class="form-label fw-bold">ESCOLARIDAD CONYUGE</label>
+                    <select id="escolaridadconyuge" class="form-select text-center" name="escolaridadconyuge" required
+                      disabled>
                       <option>{{ESCOLARIDADCONYUGE}}</option>
+                      <option>SIN DATO</option>
+                      <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
+                      <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA</option>
+                      <option>SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLET</option>
+                      <option>EDUC. TÉCNICA COMPLETA O NORMAL BÁSICA</option>
+                      <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
+                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP./ POSTGRADO INC</option>
+                      <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTORADO) COMPL</option>
                     </select>
                   </div>
-                  <div class="col-md-4">
-                    <label for="HIJOS0A5" class="form-label">Hijos (0-5 años)</label>
-                    <select id="HIJOS0A5" name="HIJOS0A5" class="form-select" disabled>
-                      <option>{{HIJOS0A5}}</option>
+
+
+                  <div class="col-md-12">
+                    <label for="actividadconyuge" class="form-label fw-bold">ESCOLARIDAD CONYUGE</label>
+                    <select id="actividadconyuge" class="form-select text-center" name="actividadconyuge" required
+                      disabled>
+                      <option>{{ACTIVIDADCONYUGE}}</option>
+                      <option>SIN DATO</option>
+                      <option>AMA DE CASA</option>
+                      <option>DESEMPLEADO</option>
+                      <option>JUBILADO O PENSIONADO</option>
+                      <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
+                      <option>ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO ETC)</option>
+                      <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC).</option>
+                      <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLEMERO, ETC)</option>
+                      <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
+                      <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                      <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
+                      <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
+                      <option>EMPLEADO DE GOB. MUNICIPAL, ESTATAL O FED. (INCLUYE MILITAR)</option>
+                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                      <option>EMPLEADO DE INST. GUBERNAMENTAL. DECENTR. /IMSS,ISSTE,ETC)</option>
+                      <option>COMERCIANTE (PROPIETARIO DE ESTAB. COMERCIAL)</option>
+                      <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.</option>
+                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                      <option>PROPIETARIO DE CASAS EN RENTA</option>
+                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING., ETC)</option>
+                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC).</option>
+                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNIC.EST. O FED.</option>
+                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                      <option>NINGUNA DE LAS ANTERIORES</option>
                     </select>
                   </div>
                 </div>
-              </div>
-            </div>
-            {{!-- Titulacion_TSU --}}
-            <div class="tab-pane fade" id="Titulacion_Tsu">
-              <div class="card-body p-2">
-                <div class="row g-1">
-                  <div class="col-md-2">
-                    <label for="INICIO_EGRESO" class="form-label">INICIO_EGRESO</label>
-                    <input type="text" id="INICIO_EGRESO" name="INICIO_EGRESO" class="form-control"
-                      placeholder="INICIO_EGRESO" value="{{INICIO_EGRESO}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_TITULACION" class="form-label">FOLIO_TITULACION</label>
-                    <input type="text" id="FOLIO_TITULACION" name="FOLIO_TITULACION" class="form-control"
-                      placeholder="FOLIO_TITULACION" value="{{FOLIO_TITULACION}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FECHA_TRAMITE" class="form-label">FECHA_TRAMITE</label>
-                    <select id="FECHA_TRAMITE" name="FECHA_TRAMITE" class="form-select" disabled>
-                      <option>{{FECHA_TRAMITE}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="REV_DOC_TITULACION" class="form-label">REV_DOC_TITULACION</label>
-                    <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                      <input name="REV_DOC_TITULACION" id="REV_DOC_TITULACION" class="form-control" type="tel"
-                        maxlength="10" value="{{REV_DOC_TITULACION}}" disabled />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_AN" class="form-label">TITULACION_AN</label>
-                    <select id="TITULACION_AN" name="TITULACION_AN" class="form-select" disabled>
-                      <option>{{TITULACION_AN}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_CB" class="form-label">TITULACION_CB</label>
-                    <select id="TITULACION_CB" name="TITULACION_CB" class="form-select" disabled>
-                      <option>{{TITULACION_CB}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_NA" class="form-label">TITULACION_NA</label>
-                    <select id="TITULACION_NA" name="TITULACION_NA" class="form-select" disabled>
-                      <option>{{TITULACION_NA}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_CLE" class="form-label">TITULACION_CLE</label>
-                    <select id="TITULACION_CLE" name="TITULACION_CLE" class="form-select" disabled>
-                      <option>{{TITULACION_CLE}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_CAI" class="form-label">TITULACION_CAI</label>
-                    <select id="TITULACION_CAI" name="TITULACION_CAI" class="form-select" disabled>
-                      <option>{{TITULACION_CAI}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_CURP" class="form-label">TITULACION_CURP</label>
-                    <select id="TITULACION_CURP" name="TITULACION_CURP" class="form-select" disabled>
-                      <option>{{TITULACION_CURP}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_FOTOS" class="form-label">TITULACION_FOTOS</label>
-                    <select id="TITULACION_FOTOS" name="TITULACION_FOTOS" class="form-select" disabled>
-                      <option>{{TITULACION_FOTOS}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_PAGO" class="form-label">TITULACION_PAGO</label>
-                    <select id="TITULACION_PAGO" name="TITULACION_PAGO" class="form-select" disabled>
-                      <option>{{TITULACION_PAGO}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TITULACION_FOLIOPAGO" class="form-label">TITULACION_FOLIOPAGO</label>
-                    <select id="TITULACION_FOLIOPAGO" name="TITULACION_FOLIOPAGO" class="form-select" disabled>
-                      <option>{{TITULACION_FOLIOPAGO}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="EMPRESA" class="form-label">EMPRESA</label>
-                    <select id="EMPRESA" name="EMPRESA" class="form-select" disabled>
-                      <option>{{EMPRESA}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="EMPRESA_NR" class="form-label">EMPRESA_NR</label>
-                    <select id="EMPRESA_NR" name="EMPRESA_NR" class="form-select" disabled>
-                      <option>{{EMPRESA_NR}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="ASESOR_EMPRESARIAL" class="form-label">ASESOR_EMPRESARIAL</label>
-                    <select id="ASESOR_EMPRESARIAL" name="ASESOR_EMPRESARIAL" class="form-select" disabled>
-                      <option>{{ASESOR_EMPRESARIAL}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="ASESOR_EMPRESARIAL_INT" class="form-label">ASESOR_EMPRESARIAL_INT</label>
-                    <select id="ASESOR_EMPRESARIAL_INT" name="ASESOR_EMPRESARIAL_INT" class="form-select" disabled>
-                      <option>{{ASESOR_EMPRESARIAL_INT}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="ESTADIA_INICIO" class="form-label">ESTADIA_INICIO</label>
-                    <select id="ESTADIA_INICIO" name="ESTADIA_INICIO" class="form-select" disabled>
-                      <option>{{ESTADIA_INICIO}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="ESTADIA_TERMINO" class="form-label">ESTADIA_TERMINO</label>
-                    <select id="ESTADIA_TERMINO" name="ESTADIA_TERMINO" class="form-select" disabled>
-                      <option>{{ESTADIA_TERMINO}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="CARTA_LIBERACION_EMISION" class="form-label">CARTA_LIBERACION_EMISION</label>
-                    <select id="CARTA_LIBERACION_EMISION" name="CARTA_LIBERACION_EMISION" class="form-select" disabled>
-                      <option>{{CARTA_LIBERACION_EMISION}}</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {{!-- Titulacion_LIC --}}
-            <div class="tab-pane fade" id="Titulacion_Lic">
-              <div class="card-body p-4">
-                <div class="row g-3">
-                  <!-- Información de fechas y trámites principales -->
-                  <div class="col-md-8">
-                    <label for="FECHA_TRAMITE_LIC" class="form-label">FECHA_TRAMITE_LIC</label>
-                    <input type="text" id="FECHA_TRAMITE_LIC" name="FECHA_TRAMITE_LIC" class="form-control"
-                      placeholder="FECHA_TRAMITE_LIC" value="{{FECHA_TRAMITE_LIC}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="TIC_LIC_AN" class="form-label">TIC_LIC_AN</label>
-                    <input type="text" id="TIC_LIC_AN" name="TIC_LIC_AN" class="form-control" placeholder="TIC_LIC_AN"
-                      value="{{TIC_LIC_AN}}" disabled>
-                  </div>
-
-                  <!-- Selects de documentación básica -->
-                  <div class="col-md-4">
-                    <label for="TIC_LIC_CB" class="form-label">TIC_LIC_CB</label>
-                    <select id="TIC_LIC_CB" name="TIC_LIC_CB" class="form-select" disabled>
-                      <option>{{TIC_LIC_CB}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBERACION_LIC" class="form-label">LIBERACION_LIC</label>
-                    <select id="LIBERACION_LIC" name="LIBERACION_LIC" class="form-select" disabled>
-                      <option>{{LIBERACION_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="AUTORIZACION_IMP_LIC" class="form-label">AUTORIZACION_IMP_LIC</label>
-                    <select id="AUTORIZACION_IMP_LIC" name="AUTORIZACION_IMP_LIC" class="form-select" disabled>
-                      <option>{{AUTORIZACION_IMP_LIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Documentación personal -->
-                  <div class="col-md-6">
-                    <label for="NO_ADEUDO_LIC" class="form-label">NO_ADEUDO_LIC</label>
-                    <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                      <input name="NO_ADEUDO_LIC" id="NO_ADEUDO_LIC" class="form-control" type="tel" maxlength="10"
-                        value="{{NO_ADEUDO_LIC}}" disabled />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="CURP_LIC" class="form-label">TITULACION_NA</label>
-                    <select id="CURP_LIC" name="CURP_LIC" class="form-select" disabled>
-                      <option>{{CURP_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOTOGRAFIAS_LIC" class="form-label">FOTOGRAFIAS_LIC</label>
-                    <select id="FOTOGRAFIAS_LIC" name="FOTOGRAFIAS_LIC" class="form-select" disabled>
-                      <option>{{FOTOGRAFIAS_LIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Pagos y folios -->
-                  <div class="col-md-4">
-                    <label for="PAGO_TITULACION_LIC" class="form-label">PAGO_TITULACION_LIC</label>
-                    <select id="PAGO_TITULACION_LIC" name="PAGO_TITULACION_LIC" class="form-select" disabled>
-                      <option>{{PAGO_TITULACION_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_PAGO_TIT_LIC" class="form-label">FOLIO_PAGO_TIT_LIC</label>
-                    <select id="FOLIO_PAGO_TIT_LIC" name="FOLIO_PAGO_TIT_LIC" class="form-select" disabled>
-                      <option>{{FOLIO_PAGO_TIT_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_TITULACION_LIC" class="form-label">FOLIO_TITULACION_LIC</label>
-                    <select id="FOLIO_TITULACION_LIC" name="FOLIO_TITULACION_LIC" class="form-select" disabled>
-                      <option>{{FOLIO_TITULACION_LIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Información de TSU -->
-                  <div class="col-md-4">
-                    <label for="CEDULA_TSU" class="form-label">CEDULA_TSU</label>
-                    <select id="CEDULA_TSU" name="CEDULA_TSU" class="form-select" disabled>
-                      <option>{{CEDULA_TSU}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="NUM_CEDULA_TSU" class="form-label">NUM_CEDULA_TSU</label>
-                    <select id="NUM_CEDULA_TSU" name="NUM_CEDULA_TSU" class="form-select" disabled>
-                      <option>{{NUM_CEDULA_TSU}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Información de estadía -->
-                  <div class="col-md-4">
-                    <label for="EMPRESA_ESTADIA_LIC" class="form-label">EMPRESA_ESTADIA_LIC</label>
-                    <select id="EMPRESA_ESTADIA_LIC" name="EMPRESA_ESTADIA_LIC" class="form-select" disabled>
-                      <option>{{EMPRESA_ESTADIA_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="ASESOR_EMPRESARIAL_LIC" class="form-label">ASESOR_EMPRESARIAL_LIC</label>
-                    <select id="ASESOR_EMPRESARIAL_LIC" name="ASESOR_EMPRESARIAL_LIC" class="form-select" disabled>
-                      <option>{{ASESOR_EMPRESARIAL_LIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Fechas de estadía -->
-                  <div class="col-md-4">
-                    <label for="FECHA_INICIO_EST_LIC" class="form-label">FECHA_INICIO_EST_LIC</label>
-                    <select id="FECHA_INICIO_EST_LIC" name="FECHA_INICIO_EST_LIC" class="form-select" disabled>
-                      <option>{{FECHA_INICIO_EST_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FECHA_FIN_EST_LIC" class="form-label">FECHA_FIN_EST_LIC</label>
-                    <select id="FECHA_FIN_EST_LIC" name="FECHA_FIN_EST_LIC" class="form-select" disabled>
-                      <option>{{FECHA_FIN_EST_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FECHA_LIBERACION_EST_LIC" class="form-label">FECHA_LIBERACION_EST_LIC</label>
-                    <select id="FECHA_LIBERACION_EST_LIC" name="FECHA_LIBERACION_EST_LIC" class="form-select" disabled>
-                      <option>{{FECHA_LIBERACION_EST_LIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Fechas de finalización y autorización -->
-                  <div class="col-md-4">
-                    <label for="FECHA_AUTORIZACION_LIC" class="form-label">FECHA_AUTORIZACION_LIC</label>
-                    <select id="FECHA_AUTORIZACION_LIC" name="FECHA_AUTORIZACION_LIC" class="form-select" disabled>
-                      <option>{{FECHA_AUTORIZACION_LIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FIN_TRAMITE_LIC" class="form-label">FIN_TRAMITE_LIC</label>
-                    <select id="FIN_TRAMITE_LIC" name="FIN_TRAMITE_LIC" class="form-select" disabled>
-                      <option>{{FIN_TRAMITE_LIC}}</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {{!-- FOLIOS_DOCTOS_TSU--}}
-            <div class="tab-pane fade" id="Folios_Doctos_TSU">
-              <div class="card-body p-4">
-                <div class="row g-3">
-                  <!-- Certificado Licenciatura (CERLIC) -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3">Certificado Licenciatura</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_CERLIC" class="form-label">FOLIO_CERLIC</label>
-                    <input type="text" id="FOLIO_CERLIC" name="FOLIO_CERLIC" class="form-control"
-                      placeholder="FOLIO_CERLIC" value="{{FOLIO_CERLIC}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_CERLIC" class="form-label">LIBRO_CERLIC</label>
-                    <input type="text" id="LIBRO_CERLIC" name="LIBRO_CERLIC" class="form-control"
-                      placeholder="LIBRO_CERLIC" value="{{LIBRO_CERLIC}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_CERLIC" class="form-label">FOJA_CERLIC</label>
-                    <select id="FOJA_CERLIC" name="FOJA_CERLIC" class="form-select" disabled>
-                      <option>{{FOJA_CERLIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Acta de Examen Licenciatura (AEXLIC) -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3 mt-3">Acta de Examen Licenciatura</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_AEXLIC" class="form-label">FOLIO_AEXLIC</label>
-                    <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                      <input name="FOLIO_AEXLIC" id="FOLIO_AEXLIC" class="form-control" type="tel" maxlength="10"
-                        value="{{FOLIO_AEXLIC}}" disabled />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_AEXLIC" class="form-label">LIBRO_AEXLIC</label>
-                    <select id="LIBRO_AEXLIC" name="LIBRO_AEXLIC" class="form-select" disabled>
-                      <option>{{LIBRO_AEXLIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_AEXLIC" class="form-label">FOJA_AEXLIC</label>
-                    <select id="FOJA_AEXLIC" name="FOJA_AEXLIC" class="form-select" disabled>
-                      <option>{{FOJA_AEXLIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Carta de Servicio Social Licenciatura (CSSLIC) -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3 mt-3">Carta de Servicio Social Licenciatura</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_CSSLIC" class="form-label">FOLIO_CSSLIC</label>
-                    <select id="FOLIO_CSSLIC" name="FOLIO_CSSLIC" class="form-select" disabled>
-                      <option>{{FOLIO_CSSLIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_CSSLIC" class="form-label">LIBRO_CSSLIC</label>
-                    <select id="LIBRO_CSSLIC" name="LIBRO_CSSLIC" class="form-select" disabled>
-                      <option>{{LIBRO_CSSLIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_CSSLIC" class="form-label">FOJA_CSSLIC</label>
-                    <select id="FOJA_CSSLIC" name="FOJA_CSSLIC" class="form-select" disabled>
-                      <option>{{FOJA_CSSLIC}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Título Licenciatura (TITLIC) -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3 mt-3">Título Licenciatura</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_TITLIC" class="form-label">FOLIO_TITLIC</label>
-                    <select id="FOLIO_TITLIC" name="FOLIO_TITLIC" class="form-select" disabled>
-                      <option>{{FOLIO_TITLIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_TITLIC" class="form-label">LIBRO_TITLIC</label>
-                    <select id="LIBRO_TITLIC" name="LIBRO_TITLIC" class="form-select" disabled>
-                      <option>{{LIBRO_TITLIC}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_TITLIC" class="form-label">FOJA_TITLIC</label>
-                    <select id="FOJA_TITLIC" name="FOJA_TITLIC" class="form-select" disabled>
-                      <option>{{FOJA_TITLIC}}</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {{!-- FOLIOS_DOCTOS_LIC--}}
-            <div class="tab-pane fade" id="Folios_docs_lic">
-              <div class="card-body p-4">
-                <div class="row g-3">
-                  <!-- Certificado TSU -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3">Certificado TSU</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_CERTIFICADO_TSU" class="form-label">FOLIO_CERTIFICADO_TSU</label>
-                    <input type="text" id="FOLIO_CERTIFICADO_TSU" name="FOLIO_CERTIFICADO_TSU" class="form-control"
-                      placeholder="FOLIO_CERTIFICADO_TSU" value="{{FOLIO_CERTIFICADO_TSU}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_CERTIFICADO_TSU" class="form-label">LIBRO_CERTIFICADO_TSU</label>
-                    <input type="text" id="LIBRO_CERTIFICADO_TSU" name="LIBRO_CERTIFICADO_TSU" class="form-control"
-                      placeholder="LIBRO_CERTIFICADO_TSU" value="{{LIBRO_CERTIFICADO_TSU}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_CERTIFICADO_TSU" class="form-label">FOJA_CERTIFICADO_TSU</label>
-                    <select id="FOJA_CERTIFICADO_TSU" name="FOJA_CERTIFICADO_TSU" class="form-select" disabled>
-                      <option>{{FOJA_CERTIFICADO_TSU}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Título TSU -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3 mt-3">Título TSU</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_TITULO_TSU" class="form-label">FOLIO_TITULO_TSU</label>
-                    <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                      <input name="FOLIO_TITULO_TSU" id="FOLIO_TITULO_TSU" class="form-control" type="tel"
-                        maxlength="10" value="{{FOLIO_TITULO_TSU}}" disabled />
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_TITULO_TSU" class="form-label">LIBRO_TITULO_TSU</label>
-                    <select id="LIBRO_TITULO_TSU" name="LIBRO_TITULO_TSU" class="form-select" disabled>
-                      <option>{{LIBRO_TITULO_TSU}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_TITULO_TSU" class="form-label">FOJA_TITULO_TSU</label>
-                    <select id="FOJA_TITULO_TSU" name="FOJA_TITULO_TSU" class="form-select" disabled>
-                      <option>{{FOJA_TITULO_TSU}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Carta de Servicio Social (CSS) -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3 mt-3">Carta de Servicio Social</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_CSS" class="form-label">FOLIO_CSS</label>
-                    <select id="FOLIO_CSS" name="FOLIO_CSS" class="form-select" disabled>
-                      <option>{{FOLIO_CSS}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_CSS" class="form-label">LIBRO_CSS</label>
-                    <select id="LIBRO_CSS" name="LIBRO_CSS" class="form-select" disabled>
-                      <option>{{LIBRO_CSS}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_CSS" class="form-label">FOJA_CSS</label>
-                    <select id="FOJA_CSS" name="FOJA_CSS" class="form-select" disabled>
-                      <option>{{FOJA_CSS}}</option>
-                    </select>
-                  </div>
-
-                  <!-- Carta de Exención (CEX) -->
-                  <div class="col-md-12">
-                    <h5 class="mb-3 mt-3">Carta de Exención</h5>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOLIO_CEX" class="form-label">FOLIO_CEX</label>
-                    <select id="FOLIO_CEX" name="FOLIO_CEX" class="form-select" disabled>
-                      <option>{{FOLIO_CEX}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="LIBRO_CEX" class="form-label">LIBRO_CEX</label>
-                    <select id="LIBRO_CEX" name="LIBRO_CEX" class="form-select" disabled>
-                      <option>{{LIBRO_CEX}}</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="FOJA_CEX" class="form-label">FOJA_CEX</label>
-                    <select id="FOJA_CEX" name="FOJA_CEX" class="form-select" disabled>
-                      <option>{{FOJA_CEX}}</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
 
 
 
 
-            <!-- Botones separados más abajo -->
-            <div class="text-center mt-4"> <!-- Agregar margen superior -->
-              <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
-              <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
-            </div>
-          </div>
+
+
+
         </form>
       </div>
     </div>
+    <div class="text-center mt-4"> <!-- Agregar margen superior -->
+      <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
+      <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
+    </div>
+  </div>
+  </div>
 </section>
 
 <script>

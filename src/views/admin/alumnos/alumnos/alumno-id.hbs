@@ -502,16 +502,16 @@
                   </div>
                 </div>
 
-                <!-- Quinta fila - Verificador, Escolaridad madre -->
+
                 <div class="row g-3 mt-2">
                   <div class="col-md-6">
                     <label for="num_imss_verificador" class="form-label fw-bold">VERIFICADOR DEL SEGURO</label>
                     <input type="text" id="num_imss_verificador" name="num_imss_verificador"
                       class="form-control text-center" value="{{NUM_IMSS_VERIFICADOR}}" disabled>
                   </div>
-                  <div class="col-md-6">
-                    <label for="ESCOLARIDADMADRE" class="form-label fw-bold">ESCOLARIDAD DE LA MADRE</label>
-                    <select id="ESCOLARIDADMADRE" class="form-select text-center" name="ESCOLARIDADMADRE" required
+                  <div class="col-md-5">
+                    <label for="escolaridadmadre" class="form-label fw-bold">ESCOLARIDAD MADRE</label>
+                    <select id="escolaridadmadre" class="form-select text-center" name="escolaridadmadre" required
                       disabled>
                       <option>{{ESCOLARIDADMADRE}}</option>
                       <option>SIN DATO</option>
@@ -525,6 +525,8 @@
                     </select>
                   </div>
                 </div>
+
+
 
 
 
@@ -599,8 +601,8 @@
                 <!-- Octava fila - Enfermedad, Vehículo -->
                 <div class="row g-3 mt-2">
                   <div class="col-md-6">
-                    <label for="enfermedad" class="form-label fw-bold">¿SUFRE ALGUNA ENFERMEDAD?</label>
-                    <input type="text" id="enfermedad" name="enfermedad" class="form-control text-center"
+                    <label for="ENFERNEDAD" class="form-label fw-bold">¿SUFRE ALGUNA ENFERMEDAD?</label>
+                    <input type="text" id="ENFERNEDAD" name="ENFERNEDAD" class="form-control text-center"
                       value="{{ENFERNEDAD}}" disabled>
                   </div>
                   <div class="col-md-6">
@@ -694,10 +696,13 @@
                   </div>
 
 
+
+
                   <div class="col-md-12">
-                    <label for="ACTIVIDADTRABAJAS" class="form-label fw-bold">¿que tipo de trabajo realizas?</label>
+                    <label for="ACTIVIDADTRABAJAS" class="form-label fw-bold">ATIVIDAD TRABAJAS </label>
                     <select id="ACTIVIDADTRABAJAS" class="form-select text-center" name="ACTIVIDADTRABAJAS" required
                       disabled>
+                      <option>{{ACTIVIDADTRABAJAS}}</option>
                       <option>{{ACTIVIDADTRABAJAS}}</option>
                       <option>SIN DATO</option>
                       <option>AMA DE CASA</option>
@@ -726,8 +731,6 @@
                       <option>NINGUNA DE LAS ANTERIORES</option>
                     </select>
                   </div>
-
-
 
                   <div class="col-md-auto">
 

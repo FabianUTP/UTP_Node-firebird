@@ -168,13 +168,37 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
     actividadconyuge: body?.escolaridadconyuge,
     hijos0a5: body?.hijos0a5,
 
-    //hORARIO BACHILLERATO--->
-    
+    //BACHILLERATO--->
+
     ESCUELA_PROCEDENCIA: body?.ESCUELA_PROCEDENCIA,
-    ESCOLARIDAD: body?.ESCOLARIDAD,
+    ESTADO_ESCOLARIDAD: body?.ESTADO_ESCOLARIDAD,
+
+    //LICENCIATURA
+    INICIO_BACH: body?.INICIO_BACH,
+    FIN_BACH: body?.FIN_BACH,
 
 
-    
+    //TSU Titulacion
+
+    inicio_egreso: body?.inicio_egreso,
+    folio_titulacion: body?.folio_titulacion,
+    fecha_tramite: body?.fecha_tramite,
+    titulacion_an: body?.titulacion_an,
+    titulacion_cb: body?.titulacion_cb,
+    titulacion_na: body?.titulacion_na,
+    titulacion_cle: body?.titulacion_cle,
+    titulacion_cai: body?.titulacion_cai,
+    titulacion_curp: body?.titulacion_curp,
+    titulacion_fotos: body?.titulacion_fotos,
+    titulacion_pago: body?.titulacion_pago,
+    titulacion_foliopago: body?.titulacion_foliopago,
+    empresa: body?.empresa,
+    empresa_nr: body?.empresa_nr,
+    asesor_empresarial: body?.asesor_empresarial,
+    asesor_empresarial_int: body?.asesor_empresarial_int,
+    estadia_inicio: body?.estadia_inicio,
+    estadia_termino: body?.estadia_termino,
+    carta_liberacion_emision: body?.carta_liberacion_emision,
 
 
   };

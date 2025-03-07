@@ -294,6 +294,19 @@
                   </select>
                 </div>
 
+                <div class="col-md-6 text-center">
+                  <label for="INICIO_BACH" class="form-label">Inicio Licenciatura</label>
+                  <input type="text" id="INICIO_BACH" name="INICIO_BACH" class="form-control text-center" placeholder=""
+                    value="{{INICIO_BACH}}" disabled>
+                </div>
+
+
+                <div class="col-md-6 text-center">
+                  <label for="FIN_BACH" class="form-label">Final Licenciatura</label>
+                  <input type="text" id="FIN_BACH" name="FIN_BACH" class="form-control text-center" placeholder=""
+                    value="{{FIN_BACH}}" disabled>
+                </div>
+
                 <!-- Inglés TSU -->
                 <div class="col-md-6 text-center">
                   <label for="proyecto_obs" class="form-label">Inglés TSU</label>
@@ -322,7 +335,146 @@
 
 
 
+            <div class="tab-pane fade profile-overview" id="Titulacion_Tsu">
+              <div class="container mt-3">
+                <!-- Primera fila - Beca, Peso, Talla -->
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label for="inicio_egreso" class="form-label fw-bold">INICIO ENGRESADO</label>
+                    <input type="text" id="inicio_egreso" name="inicio_egreso" class="form-control text-center"
+                      value="{{INICIO_EGRESO}}" disabled>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="folio_titulacion" class="form-label fw-bold">FOLIO TITULACION TSU</label>
+                    <input type="text" id="folio_titulacion" name="folio_titulacion" class="form-control text-center"
+                      value="{{FOLIO_TITULACION}}" disabled>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="fecha_tramite" class="form-label fw-bold">FECHA DE TRAMITE TSU</label>
+                    <input type="text" id="fecha_tramite" name="fecha_tramite" class="form-control text-center"
+                      value="{{FECHA_TRAMITE}}" disabled>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="titulacion_an" class="form-label fw-bold">TITULACION AN</label>
+                    <select id="titulacion_an" class="form-select text-center" name="titulacion_an" required disabled>
+                      <option selected>{{TITULACION_AN}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
 
+                  <div class="col-md-4">
+                    <label for="titulacion_cb" class="form-label fw-bold">TITULACION CB</label>
+                    <select id="titulacion_cb" class="form-select text-center" name="titulacion_cb" required disabled>
+                      <option selected>{{TITULACION_CB}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="titulacion_na_1" class="form-label fw-bold">TITULACION NA</label>
+                    <select id="titulacion_na_1" class="form-select text-center" name="titulacion_na" required disabled>
+                      <option selected>{{TITULACION_NA}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="titulacion_cle" class="form-label fw-bold">TITULACION CLE</label>
+                    <select id="titulacion_cle" class="form-select text-center" name="titulacion_cle" required disabled>
+                      <option selected>{{TITULACION_CLE}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="titulacion_cai" class="form-label fw-bold">TITULACION CAI</label>
+                    <select id="titulacion_cai" class="form-select text-center" name="titulacion_cai" required disabled>
+                      <option selected>{{TITULACION_CAI}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="titulacion_curp" class="form-label fw-bold">TITULACION CURP</label>
+                    <select id="titulacion_curp" class="form-select text-center" name="titulacion_curp" required
+                      disabled>
+                      <option selected>{{TITULACION_CURP}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="titulacion_fotos" class="form-label fw-bold">TITULACION FOTOS</label>
+                    <select id="titulacion_fotos" class="form-select text-center" name="titulacion_fotos" required
+                      disabled>
+                      <option selected>{{TITULACION_FOTOS}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="titulacion_pago" class="form-label fw-bold">TITULACION PAGO</label>
+                    <select id="titulacion_pago" class="form-select text-center" name="titulacion_pago" required
+                      disabled>
+                      <option selected>{{TITULACION_PAGO}}</option>
+                      <option value="SI">SI</option>
+                      <option value="NO">NO</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="titulacion_foliopago" class="form-label fw-bold">TITULACION FOLIO PAGO TSU</label>
+                    <input type="text" id="titulacion_foliopago" name="titulacion_foliopago"
+                      class="form-control text-center" value="{{TITULACION_FOLIOPAGO}}" disabled>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="empresa_nr" class="form-label fw-bold">EMPRESA TITULACION TSU</label>
+                    <input type="text" id="empresa_nr" name="empresa_nr" class="form-control text-center"
+                      value="{{EMPRESA_NR}}" disabled>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="asesor_empresarial" class="form-label fw-bold">ASESOR TITULACION TSU</label>
+                    <input type="text" id="asesor_empresarial" name="asesor_empresarial"
+                      class="form-control text-center" value="{{ASESOR_EMPRESARIAL}}" disabled>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="asesor_empresarial_int" class="form-label fw-bold">ASESOR TITULACION INT</label>
+                    <input type="text" id="asesor_empresarial_int" name="asesor_empresarial_int"
+                      class="form-control text-center" value="{{ASESOR_EMPRESARIAL_INT}}" disabled>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="estadia_inicio" class="form-label fw-bold">INICIO ESTADIA EN:</label>
+                    <input type="text" id="estadia_inicio" name="estadia_inicio" class="form-control text-center"
+                      value="{{ESTADIA_INICIO}}" disabled>
+                  </div>
+          
+
+                  <div class="col-md-4">
+                    <label for="estadia_termino" class="form-label fw-bold">TERMINO ESTADIA EN:</label>
+                    <input type="text" id="estadia_termino" name="estadia_termino" class="form-control text-center"
+                      value="{{ESTADIA_TERMINO}}">
+                  </div>
+
+
+                  <div class="col-md-4">
+                    <label for="carta_liberacion_emision" class="form-label fw-bold">CARTA LIBERACION</label>
+                    <input type="text" id="carta_liberacion_emision" name="carta_liberacion_emision"
+                      class="form-control text-center" value="{{CARTA_LIBERACION_EMISION}}" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!-- Estatus -->
             <div class="tab-pane fade profile-overview" id="Estatus">
@@ -390,10 +542,10 @@
 
                 <!-- Cruzamientos -->
                 <div class="col-md-12">
-                  <label for="ESCOLARIDAD" class="form-label fw-bold">ESCOLARIDAD</label>
-                  <input type="text" id="ESCOLARIDAD" name="ESCOLARIDAD"
-                    class="form-control form-control-lg text-center" placeholder="Escolaridad" value="{{ESCOLARIDAD}}"
-                    disabled>
+                  <label for="ESTADO_ESCOLARIDAD" class="form-label fw-bold">ESTADO ESCOLARIDAD</label>
+                  <input type="text" id="ESTADO_ESCOLARIDAD" name="ESTADO_ESCOLARIDAD"
+                    class="form-control form-control-lg text-center" placeholder="ESTADO_ESCOLARIDAD"
+                    value="{{ESTADO_ESCOLARIDAD}}" disabled>
                 </div>
               </div>
             </div>
@@ -857,9 +1009,9 @@
                       <option>NINGUNA DE LAS ANTERIORES</option>
                     </select>
                   </div>
+
+
                 </div>
-
-
 
 
 
@@ -875,6 +1027,13 @@
   </div>
   </div>
 </section>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+
 
 <script>
   // Ajusta las fechas

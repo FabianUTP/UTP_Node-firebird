@@ -201,6 +201,64 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
     carta_liberacion_emision: body?.carta_liberacion_emision,
 
 
+    //Folios LIC
+    folio_cerlic: body?.folio_cerlic,
+    libro_cerlic: body?.libro_cerlic,
+    foja_cerlic: body?.foja_cerlic,
+
+    folio_aexlic: body?.folio_aexlic,
+    libro_aexlic: body?.libro_aexlic,
+    foja_aexlic: body?.foja_aexlic,
+
+    folio_csslic: body?.folio_csslic,
+    libro_csslic: body?.libro_csslic,
+    foja_csslic: body?.foja_csslic,
+
+    folio_titlic: body?.folio_titlic,
+    libro_titlic: body?.libro_titlic,
+    foja_titlic: body?.foja_titlic,
+
+    //Folios TSU
+    folio_certificado_tsu: body?.folio_certificado_tsu,
+    libro_certificado_tsu: body?.libro_certificado_tsu,
+    fojas_certificado_tsu: body?.fojas_certificado_tsu,
+
+    folio_titulo_tsu: body?.folio_titulo_tsu,
+    libro_titulo_tsu: body?.libro_titulo_tsu,
+    fojas_titulo_tsu: body?.fojas_titulo_tsu,
+
+    folio_css: body?.folio_css,
+    libro_css: body?.libro_css,
+    fojas_css: body?.fojas_css,
+
+    folio_cex: body?.folio_cex,
+    libro_cex: body?.libro_cex,
+    fojas_cex: body?.fojas_cex,
+
+    // FORMATO DE TITULACION LIC 
+    fecha_tramite_lic: body?.fecha_tramite_lic,
+    tit_lic_an: body?.tit_lic_an,
+    tit_lic_cb: body?.tic_lic_cb,
+    no_adeudo_lic: body?.no_adeudo_lic,
+    liberacion_lic: body?.liberacion_lic,
+    autorizacion_imp_lic: body?.autorizacion_imp_lic,
+    curp_lic: body?.curp_lic,
+    fotografias_lic: body?.fotografias_lic,
+    pago_titulacion_lic: body?.pago_titulacion_lic,
+    FOLIO_PAGO_TIT_LIC: body?.FOLIO_PAGO_TIT_LIC,
+    cedula_tsu: body?.cedula_tsu,
+    num_cedula_tsu: body?.num_cedula_tsu,
+    EMPRESA_ESTADIA_LIC: body?.EMPRESA_ESTADIA_LIC,
+    asesor_empresarial_lic: body?.asesor_empresarial_lic,
+    fecha_inicio_est_lic: body?.fecha_inicio_est_lic,
+    FECHA_FIN_EST_LIC: body?.FECHA_FIN_EST_LIC,
+    fecha_liberacion_est_lic: body?.fecha_liberacion_est_lic,
+    fecha_autorizacion_lic: body?.fecha_autorizacion_lic,
+    asesor_acad_lic: body?.asesor_acad_lic,
+    fin_tramite_lic: body?.fin_tramite_lic,
+    folio_titulacion_lic: body?.folio_titulacion_lic,
+
+
   };
 
   await Alumno.findByIdAndUpdate(body?.matricula, data);
@@ -1001,25 +1059,26 @@ AlumnosAdminCtr.updateprofesor = async (req = request, res = response) => {
     //Titulacion LIC
     fecha_tramite_lic: body?.fecha_tramite_lic,
     tic_lic_an: body?.tic_lic_an,
-    tit_lic_cb: body?.tic_lic_cb,
+    TIT_LIC_CB: body?.TIT_LIC_CB,
     no_adeudo_lic: body?.no_adeudo_lic,
     liberacion_lic: body?.liberacion_lic,
     autorizacion_imp_lic: body?.autorizacion_imp_lic,
     curp_lic: body?.curp_lic,
-    fotografias_lic: body?.fotografias_lic,
+    FOTOGRAFIAS_LIC: body?.FOTOGRAFIAS_LIC,
     pago_titulacion_lic: body?.pago_titulacion_lic,
-    folio_pago_tit_lic: body?.folio_pago_tit_lic,
+    FOLIO_PAGO_TIT_LIC: body?.FOLIO_PAGO_TIT_LIC,
     cedula_tsu: body?.cedula_tsu,
     num_cedula_tsu: body?.num_cedula_tsu,
     empresa_estadia_lic: body?.empresa_estadia_lic,
     asesor_empresarial_lic: body?.asesor_empresarial_lic,
-    fecha_inicio_est_lic: body?.fecha_inicio_est_lic,
-    fecha_final_est_lic: body?.fecha_final_est_lic,
-    fecha_liberacion_est_lic: body?.fecha_liberacion_est_lic,
-    fecha_autorizacion_lic: body?.fecha_autorizacion_lic,
-    asesor_acad_lic: body?.asesor_acad_lic,
-    fin_tramite_lic: body?.fin_tramite_lic,
-    folio_titulacion_lic: body?.folio_titulacion_lic,
+    
+    FECHA_INICIO_EST_LIC: body?.FECHA_INICIO_EST_LIC,
+    FECHA_FIN_EST_LIC: body?.FECHA_FIN_EST_LIC,
+    FECHA_LIBERACION_EST_LIC: body?.FECHA_LIBERACION_EST_LIC,
+    FECHA_AUTORIZACION_LIC: body?.FECHA_AUTORIZACION_LIC,
+    ASESOR_ACAD_LIC: body?.ASESOR_ACAD_LIC,
+    FIN_TRAMITE_LIC: body?.FIN_TRAMITE_LIC,
+    FOLIO_TITULACION_LIC: body?.FOLIO_TITULACION_LIC,
 
 
     //Folios LIC

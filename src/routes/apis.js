@@ -27,7 +27,6 @@ const {
 } = require("../app/models");
 const Firebird = require("../app/models/Firebird");
 const GrupoAlumnos = require("../app/models/GrupoAlumno");
-console.log("GrupoAlumnos", GrupoAlumnos);
 
 router.get("/grupos", async (req, res) => {
   const {
@@ -189,7 +188,6 @@ router.get("/gruposCalifi", async (req, res) => {
 
   query += ` ORDER BY ${orderBy} ${sort}`;
 
-  console.log("Consulta generada:", query); // Verifica la consulta generada en la terminal
 
   try {
     const grupos = await Grupos.createQuery({ querySql: query });
@@ -298,7 +296,7 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   sql += `AND final = '${final}' `;
   sql += `AND periodo = '${periodo}'`;
 
-  
+
   try {
     await AlumnosGrupos.createQuery({ querySql: sql });
 
@@ -409,15 +407,7 @@ router.get("/alumnos", async (req, res) => {
     }
   }
 
-  // Imprimir la consulta en la consola para depuración
-  console.log("Consulta generada:", {
-    limit,
-    skip,
-    search,
-    searchQuery,
-    orderBy,
-    sort
-  });
+
 
   const alumnos = await Alumno.all({
     limit,
@@ -469,7 +459,7 @@ router.get("/carreras", async (req, res) => {
 router.get("/doctos/", async (req, res) => {
   const { grado, numalumno } = req.query;
 
-  if(!grado || !numalumno) {
+  if (!grado || !numalumno) {
     return res.json({
       error: 'Se necesita el grado a buscar y el numero del alumno'
     });
@@ -494,7 +484,7 @@ router.get("/doctos/", async (req, res) => {
 router.get("/calificaciones/asignaturas", async (req, res) => {
   const { idPlan = "", idAsig = "", idEval = "", idGrupo = "" } = req.query;
 
-  if(!idGrupo || !idPlan || !idAsig || !idEval) {
+  if (!idGrupo || !idPlan || !idAsig || !idEval) {
     return res.json({
       error: "El id del grupo, plan, evaluacion y asignatura son necesarios",
       querys: {
@@ -518,7 +508,7 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
       final: [grupo.FINAL],
       // periodo: [grupo.PERIODO],
     }, { limit: 35 });
-    
+
     res.json({
       querys: {
         idPlan,
@@ -569,7 +559,7 @@ router.get("/calificaciones", async (req, res) => {
     console.log("Query Parameters Received:", req.query);
 
     // Consulta SQL optimizada para asignatura, grupo y alumnos
-   let sql = `
+    let sql = `
   SELECT 
     alumnos.matricula,
     alumnos.numeroalumno,
@@ -599,22 +589,22 @@ router.get("/calificaciones", async (req, res) => {
   ORDER BY alumnos.paterno;
 `;
 
-let data = await Grupos.createQuery({
-  querySql: sql,
-  data: [
-    idPlan,
-    claveAsig,
-    idEtapa,
-    idEval,
-    inicial,
-    final,
-    periodo,
-    grupo,
-    inicial,
-    final,
-    periodo,
-  ],
-});
+    let data = await Grupos.createQuery({
+      querySql: sql,
+      data: [
+        idPlan,
+        claveAsig,
+        idEtapa,
+        idEval,
+        inicial,
+        final,
+        periodo,
+        grupo,
+        inicial,
+        final,
+        periodo,
+      ],
+    });
 
 
     // Filtrar datos para asegurar que las calificaciones no sean "0" o valores nulos

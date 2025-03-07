@@ -79,11 +79,11 @@
           </li>
           <li class="nav-item">
             <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Folios_Doctos_TSU">Doctos Tsu</button>
+              data-bs-target="#Titulacion_Lic">Titulacion Lic</button>
           </li>
           <li class="nav-item">
             <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Titulacion_Lic">Titulacion Lic</button>
+              data-bs-target="#Folios_Doctos_TSU">Doctos Tsu</button>
           </li>
           <li class="nav-item">
             <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
@@ -97,7 +97,6 @@
           <div class="tab-content pt-4">
             <!-- Identidad -->
             <div class="tab-pane fade show active profile-overview" id="DatosIdentidad">
-              <h5 class="card-title mb-4 text-center">Datos de identidad</h5> <!-- Título centrado -->
               <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
                 <!-- Nombre -->
                 <div class="col-md-6 text-center">
@@ -184,7 +183,6 @@
 
             <!-- Domicilio -->
             <div class="tab-pane fade profile-overview" id="Domicilios">
-              <h5 class="card-title mb-4 text-center">Domicilio</h5> <!-- Título centrado -->
               <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
                 <!-- Domicilio Particular -->
                 <div class="col-md-8 text-center">
@@ -252,9 +250,290 @@
                 </div>
               </div>
             </div>
+
+            {{!-- TITULACION LIC --}}
+            <div class="tab-pane fade profile-overview" id="Titulacion_Lic">
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+
+                <div class="col-md-4 ">
+                  <label for="fecha_tramite_lic" class="form-label fw-bold">FECHA TRAMITE LIC </label>
+                  <input type="text" id="fecha_tramite_lic" name="fecha_tramite_lic" class="form-control text-center"
+                    value="{{FECHA_TRAMITE_LIC}}" disabled>
+                </div>
+                <div class="col-md-4">
+                  <label for="tit_lic_an" class="form-label fw-bold">TITULACION LIC AN</label>
+                  <select id="tit_lic_an" class="form-select text-center" name="tit_lic_an" required disabled>
+                    <option selected>{{TIT_LIC_AN}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="TIT_LIC_CB" class="form-label fw-bold">TITULACION LIC CB</label>
+                  <select id="TIT_LIC_CB" class="form-select text-center" name="TIT_LIC_CB" required disabled>
+                    <option selected>{{TIT_LIC_CB}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="no_adeudo_lic" class="form-label fw-bold">NO ADEUDO LIC</label>
+                  <select id="no_adeudo_lic" class="form-select text-center" name="no_adeudo_lic" required disabled>
+                    <option selected>{{NO_ADEUDO_LIC}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="liberacion_lic" class="form-label fw-bold">LIBERACION</label>
+                  <select id="liberacion_lic" class="form-select text-center" name="liberacion_lic" required disabled>
+                    <option selected>{{LIBERACION_LIC}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="autorizacion_imp_lic" class="form-label fw-bold">AUTORIZACION IMP LIC </label>
+                  <select id="autorizacion_imp_lic" class="form-select text-center" name="autorizacion_imp_lic" required
+                    disabled>
+                    <option selected>{{AUTORIZACION_IMP_LIC}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="curp_lic" class="form-label fw-bold">CURP LIC </label>
+                  <select id="curp_lic" class="form-select text-center" name="curp_lic" required disabled>
+                    <option selected>{{CURP_LIC}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="FOTOGRAFIAS_LIC" class="form-label fw-bold">FOTOGRAFIA LIC </label>
+                  <select id="FOTOGRAFIAS_LIC" class="form-select text-center" name="FOTOGRAFIAS_LIC" required disabled>
+                    <option selected>{{FOTOGRAFIAS_LIC}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="pago_titulacion_lic" class="form-label fw-bold">PAGO TITULACION LIC </label>
+                  <select id="pago_titulacion_lic" class="form-select text-center" name="pago_titulacion_lic" required
+                    disabled>
+                    <option selected>{{PAGO_TITULACION_LIC}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="FOLIO_PAGO_TIT_LIC" class="form-label fw-bold">FOLIO PAGO TITULACION LIC </label>
+                  <input type="text" id="FOLIO_PAGO_TIT_LIC" name="FOLIO_PAGO_TIT_LIC" class="form-control text-center"
+                    value="{{FOLIO_PAGO_TIT_LIC}}" disabled>
+                </div>
+                <div class="col-md-4">
+                  <label for="cedula_tsu" class="form-label fw-bold">CEDULA TSU </label>
+                  <select id="cedula_tsu" class="form-select text-center" name="cedula_tsu" required disabled>
+                    <option selected>{{CEDULA_TSU}}</option>
+                    <option value="SI">SI</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="num_cedula_tsu" class="form-label fw-bold">NUM CEDULA TSU </label>
+                  <input type="text" id="num_cedula_tsu" name="num_cedula_tsu" class="form-control text-center"
+                    value="{{NUM_CEDULA_TSU}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="EMPRESA_ESTADIA_LIC" class="form-label fw-bold">EMPRESA DE ESTADIA LIC</label>
+                  <input type="text" id="EMPRESA_ESTADIA_LIC" name="EMPRESA_ESTADIA_LIC"
+                    class="form-control text-center" value="{{EMPRESA_ESTADIA_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="asesor_empresarial_lic" class="form-label fw-bold">ASESOR EMPRESARIAL</label>
+                  <input type="text" id="asesor_empresarial_lic" name="asesor_empresarial_lic"
+                    class="form-control text-center" value="{{ASESOR_EMPRESARIAL_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="FECHA_INICIO_EST_LIC" class="form-label fw-bold">FECHA EN QUE INICIO:</label>
+                  <input type="text" id="FECHA_INICIO_EST_LIC" name="FECHA_INICIO_EST_LIC"
+                    class="form-control text-center" value="{{FECHA_INICIO_EST_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="FECHA_FIN_EST_LIC" class="form-label fw-bold">FECHA EN QUE FINAL:</label>
+                  <input type="text" id="FECHA_FIN_EST_LIC" name="FECHA_FIN_EST_LIC" class="form-control text-center"
+                    value="{{FECHA_FIN_EST_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="FECHA_LIBERACION_EST_LIC" class="form-label fw-bold">FECHA LIBERACION:</label>
+                  <input type="text" id="FECHA_LIBERACION_EST_LIC" name="FECHA_LIBERACION_EST_LIC"
+                    class="form-control text-center" value="{{FECHA_LIBERACION_EST_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="FECHA_AUTORIZACION_LIC" class="form-label fw-bold">FECHA AUTORIZACION :</label>
+                  <input type="text" id="FECHA_AUTORIZACION_LIC" name="FECHA_AUTORIZACION_LIC"
+                    class="form-control text-center" value="{{FECHA_AUTORIZACION_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="ASESOR_ACAD_LIC" class="form-label fw-bold">ASESOR ACADEMICO LIC :</label>
+                  <input type="text" id="ASESOR_ACAD_LIC" name="ASESOR_ACAD_LIC" class="form-control text-center"
+                    value="{{ASESOR_ACAD_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="FIN_TRAMITE_LIC" class="form-label fw-bold">FIN DEL TRAMITE LIC:</label>
+                  <input type="text" id="FIN_TRAMITE_LIC" name="FIN_TRAMITE_LIC" class="form-control text-center"
+                    value="{{FIN_TRAMITE_LIC}}" disabled>
+                </div>
+                <div class="col-md-4 ">
+                  <label for="FOLIO_TITULACION_LIC" class="form-label fw-bold">FOLIO TITULACION LIC:</label>
+                  <input type="text" id="FOLIO_TITULACION_LIC" name="FOLIO_TITULACION_LIC" class="form-control text-center"
+                    value="{{FOLIO_TITULACION_LIC}}" disabled>
+                </div>
+              </div>
+            </div>
+
+            <!-- LIC DOCTOS-->
+            <div class="tab-pane fade profile-overview" id="Folios_docs_lic">
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+
+                <div class="col-md-4 text-center">
+                  <label for="folio_cerlic" class="form-label">FOLIO CERLIC</label>
+                  <input type="text" id="folio_cerlic" name="folio_cerlic" class="form-control text-center"
+                    value="{{FOLIO_CERLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_cerlic" class="form-label">LIBRO CERLIC </label>
+                  <input type="text" id="libro_cerlic" name="libro_cerlic" class="form-control text-center"
+                    value="{{LIBRO_CERLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="foja_cerlic" class="form-label">FOJA CERLIC </label>
+                  <input type="text" id="foja_cerlic" name="foja_cerlic" class="form-control text-center"
+                    value="{{FOJA_CERLIC}}" disabled>
+                </div>
+
+                <div class="col-md-4 text-center">
+                  <label for="folio_aexlic" class="form-label">FOLIO AEXLIC </label>
+                  <input type="text" id="folio_aexlic" name="folio_aexlic" class="form-control text-center"
+                    value="{{FOLIO_AEXLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_aexlic" class="form-label">LIBRO AEXLIC </label>
+                  <input type="text" id="libro_aexlic" name="libro_aexlic" class="form-control text-center"
+                    value="{{LIBRO_AEXLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="foja_aexlic" class="form-label">FOJA AEXLIC </label>
+                  <input type="text" id="foja_aexlic" name="foja_aexlic" class="form-control text-center"
+                    value="{{FOJA_AEXLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="folio_csslic" class="form-label">FOLIO CSSLIC </label>
+                  <input type="text" id="folio_csslic" name="folio_csslic" class="form-control text-center"
+                    value="{{FOLIO_CSSLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_csslic" class="form-label">LIBRO CSSLIC </label>
+                  <input type="text" id="libro_csslic" name="libro_csslic" class="form-control text-center"
+                    value="{{LIBRO_CSSLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="foja_csslic" class="form-label">FOJA CSSLIC </label>
+                  <input type="text" id="foja_csslic" name="foja_csslic" class="form-control text-center"
+                    value="{{FOJA_CSSLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="folio_titlic" class="form-label">FOLIO TITLIC </label>
+                  <input type="text" id="folio_titlic" name="folio_titlic" class="form-control text-center"
+                    value="{{FOLIO_TITLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_titlic" class="form-label">LIBRO TITLIC</label>
+                  <input type="text" id="libro_titlic" name="libro_titlic" class="form-control text-center"
+                    value="{{LIBRO_TITLIC}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="foja_titlic" class="form-label">FOJA TITLIC </label>
+                  <input type="text" id="foja_titlic" name="foja_titlic" class="form-control text-center"
+                    value="{{FOJA_TITLIC}}" disabled>
+                </div>
+              </div>
+            </div>
+
+            <!-- TSU -->
+            <div class="tab-pane fade profile-overview" id="Folios_Doctos_TSU">
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+
+                <div class="col-md-4 text-center">
+                  <label for="folio_certificado_tsu" class="form-label">FOLIO CERTITIFICADO TSU</label>
+                  <input type="text" id="folio_certificado_tsu" name="folio_certificado_tsu"
+                    class="form-control text-center" value="{{FOLIO_CERTIFICADO_TSU}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_certificado_tsu" class="form-label">LIBRO CERTIFICADO TSU </label>
+                  <input type="text" id="libro_certificado_tsu" name="libro_certificado_tsu"
+                    class="form-control text-center" value="{{LIBRO_CERTIFICADO_TSU}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="fojas_certificado_tsu" class="form-label">FOJA CERTIFICADO TSU </label>
+                  <input type="text" id="fojas_certificado_tsu" name="fojas_certificado_tsu"
+                    class="form-control text-center" value="{{FOJAS_CERTIFICADO_TSU}}" disabled>
+                </div>
+                {{!-- --}}
+                <div class="col-md-4 text-center">
+                  <label for="folio_titulo_tsu" class="form-label">FOLIO TITULO TSU </label>
+                  <input type="text" id="folio_titulo_tsu" name="folio_titulo_tsu" class="form-control text-center"
+                    value="{{FOLIO_TITULO_TSU}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_titulo_tsu" class="form-label">LIBRO TITULO TSU </label>
+                  <input type="text" id="libro_titulo_tsu" name="libro_titulo_tsu" class="form-control text-center"
+                    value="{{LIBRO_TITULO_TSU}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="fojas_titulo_tsu" class="form-label">FOJA TITULO TSU </label>
+                  <input type="text" id="fojas_titulo_tsu" name="fojas_titulo_tsu" class="form-control text-center"
+                    value="{{FOJAS_TITULO_TSU}}" disabled>
+                </div>
+                {{!-- --}}
+                <div class="col-md-4 text-center">
+                  <label for="folio_css" class="form-label">FOLIO CSS </label>
+                  <input type="text" id="folio_css" name="folio_css" class="form-control text-center"
+                    value="{{FOLIO_CSS}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_css" class="form-label">LIBRO CSS</label>
+                  <input type="text" id="libro_css" name="libro_css" class="form-control text-center"
+                    value="{{LIBRO_CSS}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="fojas_css" class="form-label">FOJA CSS</label>
+                  <input type="text" id="fojas_css" name="fojas_css" class="form-control text-center"
+                    value="{{FOJAS_CSS}}" disabled>
+                </div>
+                {{!-- --}}
+                <div class="col-md-4 text-center">
+                  <label for="folio_cex" class="form-label">FOLIO TITLIC </label>
+                  <input type="text" id="folio_cex" name="folio_cex" class="form-control text-center"
+                    value="{{FOLIO_CEX}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="libro_cex" class="form-label">LIBRO TITLIC</label>
+                  <input type="text" id="libro_cex" name="libro_cex" class="form-control text-center"
+                    value="{{LIBRO_CEX}}" disabled>
+                </div>
+                <div class="col-md-4 text-center">
+                  <label for="fojas_cex" class="form-label">FOJA TITLIC </label>
+                  <input type="text" id="fojas_cex" name="fojas_cex" class="form-control text-center"
+                    value="{{FOJAS_CEX}}" disabled>
+                </div>
+              </div>
+            </div>
+
+
             <!-- Escolaridad -->
             <div class="tab-pane fade profile-overview" id="Escolaridad">
-              <h5 class="card-title mb-4 text-center">Escolaridad</h5> <!-- Título centrado -->
               <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
                 <!-- Carrera -->
                 <div class="col-md-8 text-center">
@@ -458,12 +737,12 @@
                     <input type="text" id="estadia_inicio" name="estadia_inicio" class="form-control text-center"
                       value="{{ESTADIA_INICIO}}" disabled>
                   </div>
-          
+
 
                   <div class="col-md-4">
                     <label for="estadia_termino" class="form-label fw-bold">TERMINO ESTADIA EN:</label>
                     <input type="text" id="estadia_termino" name="estadia_termino" class="form-control text-center"
-                      value="{{ESTADIA_TERMINO}}">
+                      value="{{ESTADIA_TERMINO}}" disabled>
                   </div>
 
 
@@ -478,33 +757,32 @@
 
             <!-- Estatus -->
             <div class="tab-pane fade profile-overview" id="Estatus">
-              <h5 class="card-title mb-4 text-center">Estatus</h5> <!-- Título centrado -->
               <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
                 <!-- Estatus Actual -->
-                <div class="col-md-6 text-center">
+                <div class="col-md-12 text-center">
                   <label for="estatus_actual" class="form-label">Estatus actual</label>
                   <input type="hidden" id="status" value="{{STATUS}}">
                   <select id="estatus_actual" class="form-select text-center" onchange="changeStatus()" disabled>
                     <option selected disabled>--seleccionar estatus--</option>
                   </select>
                 </div>
-                <div class="col-md-6"></div>
+
 
                 <!-- Ingreso TSU -->
                 <div class="row my-2 d-none justify-content-center" id="ingreso_tsu"> <!-- Centrar fila -->
-                  <div class="col-6 text-center">
+                  <div class="col-12 text-center">
                     <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
                     <input type="date" class="form-control text-center" id="fecha_registro_tsu"
                       name="fecha_registro_tsu" disabled>
                   </div>
-                  <div class="col-6 text-center">
+                  <div class="col-12 text-center">
                     <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
                     <input type="date" class="form-control text-center" id="fecha_itsu" name="fecha_itsu" disabled>
                   </div>
                 </div>
 
                 <!-- Motivo de baja -->
-                <div class="row my-2 d-none justify-content-center" id="motivo_baja"> <!-- Centrar fila -->
+                <div class="row my-12 d-none justify-content-center" id="motivo_baja"> <!-- Centrar fila -->
                   <div class="col-md-6 text-center">
                     <label for="inputmotivo" class="form-label">Motivo de la baja</label>
                     <select id="inputmotivo" class="form-select text-center" disabled>
@@ -521,7 +799,7 @@
                       <option>OTRAS CAUSAS</option>
                     </select>
                   </div>
-                  <div class="col-6 text-center">
+                  <div class="col-12 text-center">
                     <label for="fechabaja" class="form-label">Fecha de Baja</label>
                     <input class="form-control text-center" id="fecha_baja" type="date" disabled>
                   </div>

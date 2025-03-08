@@ -1071,7 +1071,7 @@ AlumnosAdminCtr.updateprofesor = async (req = request, res = response) => {
     num_cedula_tsu: body?.num_cedula_tsu,
     empresa_estadia_lic: body?.empresa_estadia_lic,
     asesor_empresarial_lic: body?.asesor_empresarial_lic,
-    
+
     FECHA_INICIO_EST_LIC: body?.FECHA_INICIO_EST_LIC,
     FECHA_FIN_EST_LIC: body?.FECHA_FIN_EST_LIC,
     FECHA_LIBERACION_EST_LIC: body?.FECHA_LIBERACION_EST_LIC,
@@ -1117,6 +1117,8 @@ AlumnosAdminCtr.updateprofesor = async (req = request, res = response) => {
     libro_cex: body?.libro_cex,
     fojas_cex: body?.fojas_cex,
 
+    ESTATUS_DOCTOS_TSU: body?.ESTATUS_DOCTOS_TSU,
+    ESTATUS_DOCTOS_TSU_FECHA: body?.ESTATUS_DOCTOS_TSU_FECHA,
   };
 
   await Alumno.findByIdAndUpdate(body?.matricula, data);

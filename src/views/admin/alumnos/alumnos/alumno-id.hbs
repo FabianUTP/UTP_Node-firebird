@@ -387,8 +387,8 @@
                 </div>
                 <div class="col-md-4 ">
                   <label for="FOLIO_TITULACION_LIC" class="form-label fw-bold">FOLIO TITULACION LIC:</label>
-                  <input type="text" id="FOLIO_TITULACION_LIC" name="FOLIO_TITULACION_LIC" class="form-control text-center"
-                    value="{{FOLIO_TITULACION_LIC}}" disabled>
+                  <input type="text" id="FOLIO_TITULACION_LIC" name="FOLIO_TITULACION_LIC"
+                    class="form-control text-center" value="{{FOLIO_TITULACION_LIC}}" disabled>
                 </div>
               </div>
             </div>
@@ -463,8 +463,31 @@
 
             <!-- TSU -->
             <div class="tab-pane fade profile-overview" id="Folios_Doctos_TSU">
+              <hr>
+              <h5 class="fw-bold text-primary">Estatus de Documentos</h5>
+              <div class="d-flex justify-content-center mt-3">
+                <div class="col-md-10">
+                  <label for="ESTATUS_DOCTOS_TSU" class="form-label fw-bold">Estatus de Documentos</label>
+                  <select id="ESTATUS_DOCTOS_TSU" class="form-select text-center border-primary"
+                    name="ESTATUS_DOCTOS_TSU" required disabled>
+                    <option selected>{{ESTATUS_DOCTOS_TSU}}</option>
+                    <option value="EN EMISIÓN">EN EMISIÓN</option>
+                    <option value="ENTREGADOS">ENTREGADOS</option>
+                    <option value="LISTOS PARA ENTREGA">LISTOS PARA ENTREGA</option>
+                    <option value="SIN INICIAR">SIN INICIAR</option>
+                  </select>
+                </div>
+                <dir>
+              </div>
               <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-
+                <div class="col-md-4 text-center">
+                  <label for="ESTATUS_DOCTOS_TSU_FECHA" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
+                  <input type="text" id="ESTATUS_DOCTOS_TSU_FECHA" name="ESTATUS_DOCTOS_TSU_FECHA"
+                    class="form-control text-center" value="{{ESTATUS_DOCTOS_TSU_FECHA}}" disabled>
+                </div>
+              </div>
+              <hr>
+              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
                 <div class="col-md-4 text-center">
                   <label for="folio_certificado_tsu" class="form-label">FOLIO CERTITIFICADO TSU</label>
                   <input type="text" id="folio_certificado_tsu" name="folio_certificado_tsu"
@@ -1287,14 +1310,7 @@
                       <option>NINGUNA DE LAS ANTERIORES</option>
                     </select>
                   </div>
-
-
                 </div>
-
-
-
-
-
         </form>
       </div>
     </div>

@@ -327,19 +327,13 @@ router.get("/cuatris-navbar", async (req, res) => {
     });
   }
 
-  // Filtrar los ciclos para omitir el periodo 0
-  const ciclosFiltrados = ciclos.filter(ciclo => ciclo.PERIODO !== 0);
-
   // Obtener el periodo seleccionado en la sesión
   let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
-  if (periodoSelected && periodoSelected.PERIODO === 0) {
-    periodoSelected = null; // Si el periodo seleccionado es 0, lo omitimos
-  }
 
-  // Enviar los ciclos filtrados y el periodo seleccionado en la respuesta
+  // Enviar todos los ciclos (incluyendo PERIODO === 0) y el periodo seleccionado en la respuesta
   res.json({
     periodoSelected: periodoSelected?.DESCRIPCION,
-    ciclos: ciclosFiltrados,
+    ciclos: ciclos, // Incluye todos los ciclos, sin filtrar
     noCiclos: false, // Indicador de que hay ciclos disponibles
   });
 });

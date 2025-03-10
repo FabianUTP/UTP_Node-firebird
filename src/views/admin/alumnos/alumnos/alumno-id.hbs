@@ -637,7 +637,61 @@
 
         <!-- LIC DOCTOS-->
         <div class="tab-pane fade profile-overview" id="Folios_docs_lic">
+
+          {{!-- licenciatura --}}
           <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+            <div class="col-md-4 text-center">
+              <label for="NIVELCOMPLETO" class="form-label fw-bold">Estatus de Documentos</label>
+              <select id="NIVELCOMPLETO" class="form-select text-center border-primary" name="NIVELCOMPLETO"
+                disabled>
+                <option selected>{{NIVELCOMPLETO}}</option>
+                <option value="EN EMISIÓN">EN EMISIÓN</option>
+                <option value="ENTREGADOS">ENTREGADOS</option>
+                <option value="LISTOS PARA ENTREGA">LISTOS PARA ENTREGA</option>
+                <option value="SIN INICIAR">SIN INICIAR</option>
+              </select>
+            </div>
+
+
+            <div class="row g-3 justify-content-center">
+              <!-- Centrar los campos -->
+              <div class="col-md-4 text-center">
+                <label for="CARRERACOMPLETO" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
+                <input type="text" id="CARRERACOMPLETO" name="CARRERACOMPLETO" class="form-control text-center"
+                  value="{{CARRERACOMPLETO}}" disabled>
+              </div>
+            </div>
+            <hr>
+            <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+              <!-- Aquí van otros campos si los necesitas -->
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+            <script>
+              // Configuración de Flatpickr
+              flatpickr("#CARRERACOMPLETO", {
+                dateFormat: "d M Y", // Formato de fecha: día, mes (abreviado), año
+                locale: "en", // Idioma (en este caso, inglés)
+                defaultDate: new Date(),  // Fecha por defecto (la fecha actual)
+                onChange: function (selectedDates, dateStr, instance) {
+                  // Establece el valor de la fecha en el campo deshabilitado
+                  document.getElementById('CARRERACOMPLETO').value = dateStr;
+                },
+                // Hace que el calendario no permita escribir manualmente en el campo
+                allowInput: false
+              });
+
+              // Si tienes una fecha guardada en el backend (por ejemplo, {{CARRERACOMPLETO}})
+              // puedes asegurarte de que se muestre correctamente cuando se cargue la página.
+              document.addEventListener('DOMContentLoaded', function () {
+                const fechaGuardada = "{{CARRERACOMPLETO}}"; // Aquí pondrías la fecha guardada desde el backend
+                if (fechaGuardada) {
+                  document.getElementById('CARRERACOMPLETO').value = fechaGuardada;
+                }
+              });
+            </script>
 
 
             <div class="col-md-4 text-center">
@@ -707,28 +761,59 @@
         <!-- TSU -->
         <div class="tab-pane fade profile-overview" id="Folios_Doctos_TSU">
           <hr>
-          <h5 class="fw-bold text-primary">Estatus de Documentos</h5>
-          <div class="d-flex justify-content-center mt-3">
-            <div class="col-md-10">
+          <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+            <div class="col-md-4 text-center">
               <label for="ESTATUS_DOCTOS_TSU" class="form-label fw-bold">Estatus de Documentos</label>
               <select id="ESTATUS_DOCTOS_TSU" class="form-select text-center border-primary" name="ESTATUS_DOCTOS_TSU"
                 disabled>
                 <option selected>{{ESTATUS_DOCTOS_TSU}}</option>
-                <option value="EN EMISIÓN">EN EMISIÓN</option>
-                <option value="ENTREGADOS">ENTREGADOS</option>
-                <option value="LISTOS PARA ENTREGA">LISTOS PARA ENTREGA</option>
-                <option value="SIN INICIAR">SIN INICIAR</option>
+                <option>EN EMISIÓN</option>
+                <option>ENTREGADOS</option>
+                <option>LISTOS PARA ENTREGA</option>
+                <option>SIN INICIAR</option>
               </select>
             </div>
             <dir>
           </div>
-          <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+
+          {{!-- licenciatura --}}
+          <div class="row g-3 justify-content-center">
+            <!-- Centrar los campos -->
             <div class="col-md-4 text-center">
-              <label for="CARRERACOMPLETO" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
-              <input type="text" id="CARRERACOMPLETO" name="CARRERACOMPLETO"
-                class="form-control text-center" value="{{CARRERACOMPLETO}}" disabled>
+              <label for="ESTATUS_DOCTOS_TSU_FECHA" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
+              <input type="text" id="ESTATUS_DOCTOS_TSU_FECHA" name="ESTATUS_DOCTOS_TSU_FECHA"
+                value="{{ESTATUS_DOCTOS_TSU_FECHA}}" class="form-control text-center" disabled>
             </div>
           </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+          <script>
+            // Configuración de Flatpickr
+            flatpickr("#ESTATUS_DOCTOS_TSU_FECHA", {
+              dateFormat: "d M Y", // Formato de fecha: día, mes (abreviado), año
+              locale: "en", // Idioma (en este caso, inglés)
+              defaultDate: new Date(),  // Fecha por defecto (la fecha actual)
+              onChange: function (selectedDates, dateStr, instance) {
+                // Guardar la fecha seleccionada en el campo con el formato "día mes año"
+                document.getElementById('ESTATUS_DOCTOS_TSU_FECHA').value = dateStr;
+              }
+            });
+
+            // Si tienes una fecha guardada en el backend (por ejemplo, {{ESTATUS_DOCTOS_TSU_FECHA}})
+            // puedes asegurarte de que se muestre correctamente cuando se cargue la página.
+            document.addEventListener('DOMContentLoaded', function () {
+              const fechaGuardada = "{{ESTATUS_DOCTOS_TSU_FECHA}}"; // Aquí pondrías la fecha guardada desde el backend
+              if (fechaGuardada) {
+                document.getElementById('ESTATUS_DOCTOS_TSU_FECHA').value = fechaGuardada;
+              }
+            });
+          </script>
+
+
+
+
           <hr>
           <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
             <div class="col-md-4 text-center">
@@ -1236,22 +1321,4 @@
         toggleButton.textContent = "Mostrar " + cardId.replace('_', ' ');
       }
     }
-  </script>
-
-
-  {{!-- Script del formto de fechas --}}
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const fechaInput = document.getElementById("CARRERACOMPLETO");
-
-      if (fechaInput && fechaInput.value) {
-        const fecha = new Date(fechaInput.value);
-        const dia = fecha.getDate().toString().padStart(2, "0");
-        const mes = (fecha.getMonth() + 1).toString().padStart(2, "0"); // Los meses van de 0 a 11
-        const anio = fecha.getFullYear();
-
-        fechaInput.value = `${dia}/${mes}/${anio}`;
-      }
-    });
   </script>

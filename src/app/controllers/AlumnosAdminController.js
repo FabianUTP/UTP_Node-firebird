@@ -258,6 +258,9 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
     fin_tramite_lic: body?.fin_tramite_lic,
     folio_titulacion_lic: body?.folio_titulacion_lic,
 
+    // Estatus de datos--->:%
+    ESTATUS_DOCTOS_TSU: body?.ESTATUS_DOCTOS_TSU,
+
 
   };
 
@@ -1116,9 +1119,6 @@ AlumnosAdminCtr.updateprofesor = async (req = request, res = response) => {
     folio_cex: body?.folio_cex,
     libro_cex: body?.libro_cex,
     fojas_cex: body?.fojas_cex,
-
-    ESTATUS_DOCTOS_TSU: body?.ESTATUS_DOCTOS_TSU,
-    ESTATUS_DOCTOS_TSU_FECHA: body?.ESTATUS_DOCTOS_TSU_FECHA,
   };
 
   await Alumno.findByIdAndUpdate(body?.matricula, data);

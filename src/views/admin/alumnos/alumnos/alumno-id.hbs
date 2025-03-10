@@ -17,6 +17,9 @@
             </div>
           </div>
 
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
           <div class="col-6">
             <div class="row">
               <div class="col-md-12">
@@ -45,1342 +48,1241 @@
     </div>
   </div>
 
-  <div class="col-xl-9 d-flex justify-content-center">
-    <div class="card shadow-sm" style="max-width: 800px;">
-      <div class="card-body pt-3">
-        <ul class="nav nav-pills mb-3 gap-2 d-flex flex-wrap justify-content-center" id="pills-tab" role="tablist">
-          <li class="nav-item">
-            <button class="nav-link active text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#DatosIdentidad">Identidad</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Domicilios">Domicilios</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Escolaridad">Escolaridad</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Estatus">Estatus</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#BACHILLERATO">BACHILLERATO</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Estadisticos">Estadisticos</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Titulacion_Tsu">Titulacion Tsu</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Titulacion_Lic">Titulacion Lic</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Folios_Doctos_TSU">Doctos Tsu</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link text-uppercase fw-bold border px-3 py-2" data-bs-toggle="tab"
-              data-bs-target="#Folios_docs_lic">Doctos LIC</button>
-          </li>
-        </ul>
+  <!-- Navigation Tabs -->
+  <div class="nav-container">
+    <ul class="nav nav-pills d-flex flex-wrap justify-content-center gap-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button active" data-bs-toggle="tab" data-bs-target="#DatosIdentidad">
+          <i class="fas fa-id-card"></i> Identidad
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Domicilios">
+          <i class="fas fa-home"></i> Domicilios
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Escolaridad">
+          <i class="fas fa-book"></i> Escolaridad
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Estatus">
+          <i class="fas fa-info-circle"></i> Estatus
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#BACHILLERATO">
+          <i class="fas fa-school"></i> Bachillerato
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Estadisticos">
+          <i class="fas fa-chart-bar"></i> Estadísticos
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Titulacion_Tsu">
+          <i class="fas fa-graduation-cap"></i> Titulación TSU
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Titulacion_Lic">
+          <i class="fas fa-user-tie"></i> Titulación Lic
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Folios_Doctos_TSU">
+          <i class="fas fa-file-alt"></i> Documentos TSU
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link custom-tab-button" data-bs-toggle="tab" data-bs-target="#Folios_docs_lic">
+          <i class="fas fa-file-signature"></i> Documentos LIC
+        </button>
+      </li>
+    </ul>
 
+    {{!-- DATOS IDENTIDAD DEL USUARIO --}}
+    <form action="/alumnos/{{MATRICULA}}/update" method="post">
+      <div class="tab-content pt-4">
+        <!-- Identidad -->
+        <div class="tab-pane fade show active profile-overview" id="DatosIdentidad">
+          <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+            <!-- Nombre -->
+            <div class="col-md-6 text-center">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" id="nombre" name="nombre" class="form-control text-center" placeholder="Nombre"
+                value="{{NOMBRE}}" disabled>
+            </div>
+            <!-- Apellidos -->
+            <div class="col-md-6 text-center">
+              <label for="paterno" class="form-label">Primer Apellido</label>
+              <input type="text" id="paterno" name="paterno" class="form-control text-center" placeholder="Paterno"
+                value="{{PATERNO}}" disabled>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="materno" class="form-label">Segundo Apellido</label>
+              <input type="text" id="materno" name="materno" class="form-control text-center"
+                placeholder="Segundo Apellido" value="{{MATERNO}}" disabled>
+            </div>
+            <!-- Género -->
+            <div class="col-md-6 text-center">
+              <label for="genero" class="form-label">Género</label>
+              <select name="genero" id="genero" class="form-select text-center" disabled>
+                <option value="{{GENERO}}" selected>{{GENERO}}</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+              </select>
+            </div>
+            <!-- Fecha de Nacimiento -->
+            <div class="col-md-6 text-center">
+              <label for="fech_nacimiento" class="form-label">Fecha de Nacimiento</label>
+              <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
+              <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control text-center" disabled>
+            </div>
+            <!-- Lugar de Nacimiento -->
+            <div class="col-md-6 text-center">
+              <label for="estado_nacimiento" class="form-label">Estado de Nacimiento</label>
+              <select id="estado_nacimiento" class="form-select text-center" name="estado_nacimiento" disabled>
+                <option selected>{{ESTADO_NACIMIENTO}}</option>
+              </select>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="municipio-nacimiento" class="form-label">Municipio de Nacimiento</label>
+              <select id="municipio-nacimiento" class="form-select text-center" name="municipio_naci" disabled>
+                <option>{{LUGAR_NACIMIENTO}}</option>
+              </select>
+            </div>
+            <!-- Nacionalidad y Estado Civil -->
+            <div class="col-md-6 text-center">
+              <label for="inputnacionalidad" class="form-label">Nacionalidad</label>
+              <select id="inputState" class="form-select text-center" disabled name="nacionalidad">
+                <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
+                <option>Mexicana</option>
+                <option>Extranjera</option>
+              </select>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="inputedocivil" class="form-label">Estado Civil</label>
+              <select id="inputState" class="form-select text-center" disabled>
+                <option selected value="{{ESTADO_CIVIL}}" disabled>{{ESTADO_CIVIL}}</option>
+                <option value="S">Soltero</option>
+                <option value="C">Casado</option>
+              </select>
+            </div>
+            <!-- CURP -->
+            <div class="col-md-12 text-center">
+              <label class="control-label" for="curp_">CURP</label>
+              <input id="curp_" name="curp" class="form-control form-control-lg text-center"
+                style="text-transform: uppercase;" maxlength="18" type="text" value="{{CLAVE_CIUDADANA}}" disabled>
+              <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
+                Consulta tu CURP
+              </a>
+            </div>
+          </div>
+        </div>
 
+        <div class="tab-pane fade profile-overview" id="Domicilios">
+          <div class="row g-3 justify-content-center">
+            <div class="col-md-8 text-center">
+              <label for="domicilio" class="form-label">Domicilio particular</label>
+              <input type="text" id="domicilio" name="domicilio" class="form-control text-center"
+                placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="cruzamientos" class="form-label">Cruzamientos</label>
+              <input type="text" id="cruzamientos" name="cruzamientos" class="form-control text-center"
+                placeholder="Cruzamientos" value="{{ENTRE_CALLES}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="estado" class="form-label">Estado</label>
+              <select id="estado" name="estado" class="form-select text-center" disabled>
+                <option value="{{ESTADO}}">{{ESTADO}}</option>
+              </select>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="ciudad" class="form-label">Ciudad</label>
+              <select id="ciudad" name="ciudad" class="form-select text-center" disabled>
+                <option>{{CIUDAD}}</option>
+              </select>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="cp" class="form-label">Código postal</label>
+              <input type="text" id="postal" name="postal" class="form-control text-center" placeholder="C.P"
+                value="{{CP}}" disabled>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="email_personal" class="form-label">Correo personal</label>
+              <input type="text" id="email_personal" name="email_personal" class="form-control text-center"
+                placeholder="nombre@servidor.com" value="{{EMAIL}}" disabled>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="email_insti" class="form-label">Correo institucional</label>
+              <input type="text" id="email_insti" name="email_insti" class="form-control text-center"
+                placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="tel_cel" class="form-label">Teléfono celular</label>
+              <input name="tel_cel" id="tel_cel" class="form-control text-center" type="tel" maxlength="10"
+                value="{{CELULAR}}" disabled />
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
+              <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control text-center"
+                value="{{TELEFONO}}" disabled>
+            </div>
+          </div>
+        </div>
 
-        <form action="/alumnos/{{MATRICULA}}/update" method="post">
-          <div class="tab-content pt-4">
-            <!-- Identidad -->
-            <div class="tab-pane fade show active profile-overview" id="DatosIdentidad">
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-                <!-- Nombre -->
-                <div class="col-md-6 text-center">
-                  <label for="nombre" class="form-label">Nombre</label>
-                  <input type="text" id="nombre" name="nombre" class="form-control text-center" placeholder="Nombre"
-                    value="{{NOMBRE}}" disabled>
-                </div>
+        <!-- Escolaridad DEL USUARIO-->
+        <div class="tab-pane fade profile-overview" id="Escolaridad">
+          <div class="row g-3 justify-content-center">
+            <div class="col-md-8 text-center">
+              <label for="inputcarrera" class="form-label">Carrera</label>
+              <select id="inputcarrera" name="nivel" class="form-select text-center" disabled>
+                <option selected value="{{NIVEL}}">{{NIVEL}}</option>
+                <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
+                <option>TSU en Gastronomía</option>
+                <option>TSU en Procesos Alimentarios</option>
+                <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
+                <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
+                <option>Ingeniería en Procesos Bioalimentarios</option>
+                <option>Ingeniería en Desarrollo y Gestión de Software</option>
+                <option>Licenciatura en Gestión de Negocios y Proyectos</option>
+                <option>Licenciatura en Gestión y Desarrollo Turístico</option>
+                <option>Curso de Inglés Básico</option>
+              </select>
+            </div>
+            <!-- Cuatrimestre -->
+            <div class="col-md-4 text-center">
+              <label for="inputcuatri" class="form-label">Cuatrimestre</label>
+              <select id="inputcuatri" class="form-select text-center" name="grado" disabled>
+                <option selected value="{{GRADO}}">{{GRADO}}</option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+              </select>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="INICIO_BACH" class="form-label">Inicio Licenciatura</label>
+              <input type="text" id="INICIO_BACH" name="INICIO_BACH" class="form-control text-center" placeholder=""
+                value="{{INICIO_BACH}}" disabled>
+            </div>
+            <div class="col-md-6 text-center">
+              <label for="FIN_BACH" class="form-label">Final Licenciatura</label>
+              <input type="text" id="FIN_BACH" name="FIN_BACH" class="form-control text-center" placeholder=""
+                value="{{FIN_BACH}}" disabled>
+            </div>
+            <!-- Inglés TSU -->
+            <div class="col-md-6 text-center">
+              <label for="proyecto_obs" class="form-label">Inglés TSU</label>
+              <input type="text" id="proyecto_obs" name="proyecto_obs" class="form-control text-center"
+                placeholder="NIVEL DE INGLES TSU" value="{{PROYECTO_OBS}}" disabled>
+            </div>
+            <!-- Inglés Lic -->
+            <div class="col-md-6 text-center">
+              <label for="obs_proyecto_lic" class="form-label">Inglés Lic</label>
+              <input type="text" id="obs_proyecto_lic" name="obs_proyecto_lic" class="form-control text-center"
+                placeholder="NIVEL DE INGLES LIC" value="{{OBS_PROYECTO_LIC}}" disabled>
+            </div>
+            <!-- Matrícula -->
+            <div class="col-md-6 text-center">
+              <label for="inputmatricula" class="form-label">MATRÍCULA</label>
+              <input type="text" class="form-control text-center" id="inputmatricula" maxlength="8"
+                placeholder="AAMMFFFF" value="{{MATRICULA}}" name="matricula" disabled>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <!-- Apellidos -->
-                <div class="col-md-6 text-center">
-                  <label for="paterno" class="form-label">Primer Apellido</label>
-                  <input type="text" id="paterno" name="paterno" class="form-control text-center" placeholder="Paterno"
-                    value="{{PATERNO}}" disabled>
-                </div>
-                <div class="col-md-6 text-center">
-                  <label for="materno" class="form-label">Segundo Apellido</label>
-                  <input type="text" id="materno" name="materno" class="form-control text-center"
-                    placeholder="Segundo Apellido" value="{{MATERNO}}" disabled>
-                </div>
+        {{!-- TITULACION TSU --}}
+        <div class="tab-pane fade profile-overview" id="Titulacion_Tsu">
+          <div class="container mt-3">
+            <!-- Primera fila - Beca, Peso, Talla -->
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="inicio_egreso" class="form-label fw-bold">INICIO ENGRESADO</label>
+                <input type="text" id="inicio_egreso" name="inicio_egreso" class="form-control text-center"
+                  value="{{INICIO_EGRESO}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="folio_titulacion" class="form-label fw-bold">FOLIO TITULACION TSU</label>
+                <input type="text" id="folio_titulacion" name="folio_titulacion" class="form-control text-center"
+                  value="{{FOLIO_TITULACION}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="fecha_tramite" class="form-label fw-bold">FECHA DE TRAMITE TSU</label>
+                <input type="text" id="fecha_tramite" name="fecha_tramite" class="form-control text-center"
+                  value="{{FECHA_TRAMITE}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_an" class="form-label fw-bold">TITULACION AN</label>
+                <select id="titulacion_an" class="form-select text-center" name="titulacion_an" disabled>
+                  <option selected>{{TITULACION_AN}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_cb" class="form-label fw-bold">TITULACION CB</label>
+                <select id="titulacion_cb" class="form-select text-center" name="titulacion_cb" disabled>
+                  <option selected>{{TITULACION_CB}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_na_1" class="form-label fw-bold">TITULACION NA</label>
+                <select id="titulacion_na_1" class="form-select text-center" name="titulacion_na" disabled>
+                  <option selected>{{TITULACION_NA}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_cle" class="form-label fw-bold">TITULACION CLE</label>
+                <select id="titulacion_cle" class="form-select text-center" name="titulacion_cle" disabled>
+                  <option selected>{{TITULACION_CLE}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_cai" class="form-label fw-bold">TITULACION CAI</label>
+                <select id="titulacion_cai" class="form-select text-center" name="titulacion_cai" disabled>
+                  <option selected>{{TITULACION_CAI}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_curp" class="form-label fw-bold">TITULACION CURP</label>
+                <select id="titulacion_curp" class="form-select text-center" name="titulacion_curp" disabled>
+                  <option selected>{{TITULACION_CURP}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_fotos" class="form-label fw-bold">TITULACION FOTOS</label>
+                <select id="titulacion_fotos" class="form-select text-center" name="titulacion_fotos" disabled>
+                  <option selected>{{TITULACION_FOTOS}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_pago" class="form-label fw-bold">TITULACION PAGO</label>
+                <select id="titulacion_pago" class="form-select text-center" name="titulacion_pago" disabled>
+                  <option selected>{{TITULACION_PAGO}}</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="titulacion_foliopago" class="form-label fw-bold">TITULACION FOLIO PAGO TSU</label>
+                <input type="text" id="titulacion_foliopago" name="titulacion_foliopago"
+                  class="form-control text-center" value="{{TITULACION_FOLIOPAGO}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="empresa_nr" class="form-label fw-bold">EMPRESA TITULACION TSU</label>
+                <input type="text" id="empresa_nr" name="empresa_nr" class="form-control text-center"
+                  value="{{EMPRESA_NR}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="asesor_empresarial" class="form-label fw-bold">ASESOR TITULACION TSU</label>
+                <input type="text" id="asesor_empresarial" name="asesor_empresarial" class="form-control text-center"
+                  value="{{ASESOR_EMPRESARIAL}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="asesor_empresarial_int" class="form-label fw-bold">ASESOR TITULACION INT</label>
+                <input type="text" id="asesor_empresarial_int" name="asesor_empresarial_int"
+                  class="form-control text-center" value="{{ASESOR_EMPRESARIAL_INT}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="estadia_inicio" class="form-label fw-bold">INICIO ESTADIA EN:</label>
+                <input type="text" id="estadia_inicio" name="estadia_inicio" class="form-control text-center"
+                  value="{{ESTADIA_INICIO}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="estadia_termino" class="form-label fw-bold">TERMINO ESTADIA EN:</label>
+                <input type="text" id="estadia_termino" name="estadia_termino" class="form-control text-center"
+                  value="{{ESTADIA_TERMINO}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="carta_liberacion_emision" class="form-label fw-bold">CARTA LIBERACION</label>
+                <input type="text" id="carta_liberacion_emision" name="carta_liberacion_emision"
+                  class="form-control text-center" value="{{CARTA_LIBERACION_EMISION}}" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                <!-- Género -->
-                <div class="col-md-6 text-center">
-                  <label for="genero" class="form-label">Género</label>
-                  <select name="genero" id="genero" class="form-select text-center" disabled>
-                    <option value="{{GENERO}}" selected>{{GENERO}}</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Femenino</option>
-                  </select>
-                </div>
+        <!-- Estatus -->
+        <div class="tab-pane fade profile-overview" id="Estatus">
+          <div class="row g-3 justify-content-center">
+            <div class="col-md-12 text-center">
+              <label for="estatus_actual" class="form-label">Estatus actual</label>
+              <input type="hidden" id="status" value="{{STATUS}}">
+              <select id="estatus_actual" class="form-select text-center" onchange="changeStatus()" disabled>
+                <option selected disabled>--seleccionar estatus--</option>
+              </select>
+            </div>
 
-                <!-- Fecha de Nacimiento -->
-                <div class="col-md-6 text-center">
-                  <label for="fech_nacimiento" class="form-label">Fecha de Nacimiento</label>
-                  <input type="hidden" id="fech_nacimiento_ini" value="{{FECHA_NACIMIENTO}}">
-                  <input type="date" id="fech_nacimiento" name="fecha_nacimiento" class="form-control text-center"
-                    disabled>
-                </div>
-
-                <!-- Lugar de Nacimiento -->
-                <div class="col-md-6 text-center">
-                  <label for="estado_nacimiento" class="form-label">Estado de Nacimiento</label>
-                  <select id="estado_nacimiento" class="form-select text-center" name="estado_nacimiento" disabled>
-                    <option selected>{{ESTADO_NACIMIENTO}}</option>
-                  </select>
-                </div>
-                <div class="col-md-6 text-center">
-                  <label for="municipio-nacimiento" class="form-label">Municipio de Nacimiento</label>
-                  <select id="municipio-nacimiento" class="form-select text-center" name="municipio_naci" disabled>
-                    <option>{{LUGAR_NACIMIENTO}}</option>
-                  </select>
-                </div>
-
-                <!-- Nacionalidad y Estado Civil -->
-                <div class="col-md-6 text-center">
-                  <label for="inputnacionalidad" class="form-label">Nacionalidad</label>
-                  <select id="inputState" class="form-select text-center" disabled name="nacionalidad">
-                    <option selected value="{{NACIONALIDAD}}" disabled>{{NACIONALIDAD}}</option>
-                    <option>Mexicana</option>
-                    <option>Extranjera</option>
-                  </select>
-                </div>
-                <div class="col-md-6 text-center">
-                  <label for="inputedocivil" class="form-label">Estado Civil</label>
-                  <select id="inputState" class="form-select text-center" disabled>
-                    <option selected value="{{ESTADO_CIVIL}}" disabled>{{ESTADO_CIVIL}}</option>
-                    <option value="S">Soltero</option>
-                    <option value="C">Casado</option>
-                  </select>
-                </div>
-
-                <!-- CURP -->
-                <div class="col-md-12 text-center">
-                  <label class="control-label" for="curp_">CURP</label>
-                  <input id="curp_" name="curp" class="form-control form-control-lg text-center"
-                    style="text-transform: uppercase;" maxlength="18" required type="text" value="{{CLAVE_CIUDADANA}}"
-                    disabled>
-                  <a href="https://consultas.curp.gob.mx/CurpSP/gobmx/inicio.jsp" target="_blank">
-                    Consulta tu CURP
-                  </a>
-                </div>
+            <div class="row my-2 d-none justify-content-center" id="ingreso_tsu">
+              <div class="col-12 text-center">
+                <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
+                <input type="date" class="form-control text-center" id="fecha_registro_tsu" name="fecha_registro_tsu"
+                  disabled>
+              </div>
+              <div class="col-12 text-center">
+                <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
+                <input type="date" class="form-control text-center" id="fecha_itsu" name="fecha_itsu" disabled>
               </div>
             </div>
 
+            <div class="row my-12 d-none justify-content-center" id="motivo_baja">
+              <div class="col-md-6 text-center">
+                <label for="inputmotivo" class="form-label">Motivo de la baja</label>
+                <select id="inputmotivo" class="form-select text-center" disabled>
+                  <option>REPROBACIÓN</option>
+                  <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
+                  <option>MOTIVOS PERSONALES</option>
+                  <option>CAMBIO DE CARRERA</option>
+                  <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
+                  <option>DISTANCIA DE LA UT</option>
+                  <option>PROBLEMAS ECONÓMICOS</option>
+                  <option>PROBLEMAS DE TRABAJO</option>
+                  <option>CAMBIO DE UT</option>
+                  <option>DEFUNCIÓN</option>
+                  <option>OTRAS CAUSAS</option>
+                </select>
+              </div>
+              <div class="col-12 text-center">
+                <label for="fechabaja" class="form-label">Fecha de Baja</label>
+                <input class="form-control text-center" id="fecha_baja" type="date" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade profile-overview p-3" id="BACHILLERATO">
+          <div class="row g-3">
+            <div class="col-md-12">
+              <label for="ESCUELA_PROCEDENCIA" class="form-label fw-bold">ESCUELA DE PROCEDENCIA</label>
+              <input type="text" id="ESCUELA_PROCEDENCIA" name="ESCUELA_PROCEDENCIA"
+                class="form-control form-control-lg text-center" placeholder="Calle, número y colonia"
+                value="{{ESCUELA_PROCEDENCIA}}" disabled>
+            </div>
+            <div class="col-md-12">
+              <label for="ESTADO_ESCOLARIDAD" class="form-label fw-bold">ESTADO ESCOLARIDAD</label>
+              <input type="text" id="ESTADO_ESCOLARIDAD" name="ESTADO_ESCOLARIDAD"
+                class="form-control form-control-lg text-center" placeholder="ESTADO_ESCOLARIDAD"
+                value="{{ESTADO_ESCOLARIDAD}}" disabled>
+            </div>
+          </div>
+        </div>
 
-            <!-- Domicilio -->
-            <div class="tab-pane fade profile-overview" id="Domicilios">
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-                <!-- Domicilio Particular -->
-                <div class="col-md-8 text-center">
-                  <label for="domicilio" class="form-label">Domicilio particular</label>
-                  <input type="text" id="domicilio" name="domicilio" class="form-control text-center"
-                    placeholder="Calle, número y colonia" value="{{DOMICILIO}}" disabled>
-                </div>
 
-                <!-- Cruzamientos -->
-                <div class="col-md-4 text-center">
-                  <label for="cruzamientos" class="form-label">Cruzamientos</label>
-                  <input type="text" id="cruzamientos" name="cruzamientos" class="form-control text-center"
-                    placeholder="Cruzamientos" value="{{ENTRE_CALLES}}" disabled>
-                </div>
+        {{!-- TITULACION LIC --}}
+        <div class="tab-pane fade profile-overview" id="Titulacion_Lic">
+          <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
 
-                <!-- Estado -->
-                <div class="col-md-4 text-center">
-                  <label for="estado" class="form-label">Estado</label>
-                  <select id="estado" name="estado" class="form-select text-center" disabled>
-                    <option value="{{ESTADO}}">{{ESTADO}}</option>
-                  </select>
-                </div>
+            <div class="col-md-4 ">
+              <label for="fecha_tramite_lic" class="form-label fw-bold">FECHA TRAMITE LIC </label>
+              <input type="text" id="fecha_tramite_lic" name="fecha_tramite_lic" class="form-control text-center"
+                value="{{FECHA_TRAMITE_LIC}}" disabled>
+            </div>
+            <div class="col-md-4">
+              <label for="tit_lic_an" class="form-label fw-bold">TITULACION LIC AN</label>
+              <select id="tit_lic_an" class="form-select text-center" name="tit_lic_an" disabled>
+                <option selected>{{TIT_LIC_AN}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="tit_lic_cb" class="form-label fw-bold">TITULACION LIC CB</label>
+              <select id="tit_lic_cb" class="form-select text-center" name="tit_lic_cb" disabled>
+                <option selected>{{TIT_LIC_CB}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
 
-                <!-- Ciudad -->
-                <div class="col-md-4 text-center">
-                  <label for="ciudad" class="form-label">Ciudad</label>
-                  <select id="ciudad" name="ciudad" class="form-select text-center" disabled>
-                    <option>{{CIUDAD}}</option>
-                  </select>
-                </div>
+            <div class="col-md-4">
+              <label for="no_adeudo_lic" class="form-label fw-bold">NO ADEUDO LIC</label>
+              <select id="no_adeudo_lic" class="form-select text-center" name="no_adeudo_lic" disabled>
+                <option selected>{{NO_ADEUDO_LIC}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="liberacion_lic" class="form-label fw-bold">LIBERACION</label>
+              <select id="liberacion_lic" class="form-select text-center" name="liberacion_lic" disabled>
+                <option selected>{{LIBERACION_LIC}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="autorizacion_imp_lic" class="form-label fw-bold">AUTORIZACION IMP LIC </label>
+              <select id="autorizacion_imp_lic" class="form-select text-center" name="autorizacion_imp_lic" disabled>
+                <option selected>{{AUTORIZACION_IMP_LIC}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="curp_lic" class="form-label fw-bold">CURP LIC </label>
+              <select id="curp_lic" class="form-select text-center" name="curp_lic" disabled>
+                <option selected>{{CURP_LIC}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="fotografias_lic" class="form-label fw-bold">FOTOGRAFIA LIC </label>
+              <select id="fotografias_lic" class="form-select text-center" name="fotografias_lic" disabled>
+                <option selected>{{FOTOGRAFIAS_LIC}}</option>
+                <option value="NO">NO</option>
+                <option value="SI">SI</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="pago_titulacion_lic" class="form-label fw-bold">PAGO TITULACION LIC </label>
+              <select id="pago_titulacion_lic" class="form-select text-center" name="pago_titulacion_lic" disabled>
+                <option selected>{{PAGO_TITULACION_LIC}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+            <div class="col-md-4 ">
+              <label for="folio_pago_tit_lic" class="form-label fw-bold">FOLIO PAGO TITULACION LIC </label>
+              <input type="text" id="folio_pago_tit_lic" name="folio_pago_tit_lic" class="form-control text-center"
+                value="{{FOLIO_PAGO_TIT_LIC}}" disabled>
+            </div>
+            <div class="col-md-4">
+              <label for="cedula_tsu" class="form-label fw-bold">CEDULA TSU </label>
+              <select id="cedula_tsu" class="form-select text-center" name="cedula_tsu" disabled>
+                <option selected>{{CEDULA_TSU}}</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+              </select>
+            </div>
+            <div class="col-md-4 ">
+              <label for="num_cedula_tsu" class="form-label fw-bold">NUM CEDULA TSU </label>
+              <input type="text" id="num_cedula_tsu" name="num_cedula_tsu" class="form-control text-center"
+                value="{{NUM_CEDULA_TSU}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="empresa_estadia_lic" class="form-label fw-bold">EMPRESA DE ESTADIA LIC</label>
+              <input type="text" id="empresa_estadia_lic" name="empresa_estadia_lic" class="form-control text-center"
+                value="{{EMPRESA_ESTADIA_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="asesor_empresarial_lic" class="form-label fw-bold">ASESOR EMPRESARIAL</label>
+              <input type="text" id="asesor_empresarial_lic" name="asesor_empresarial_lic"
+                class="form-control text-center" value="{{ASESOR_EMPRESARIAL_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="fecha_inicio_est_lic" class="form-label fw-bold">FECHA EN QUE INICIO:</label>
+              <input type="text" id="fecha_inicio_est_lic" name="fecha_inicio_est_lic" class="form-control text-center"
+                value="{{FECHA_INICIO_EST_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="fecha_fin_est_lic" class="form-label fw-bold">FECHA EN QUE FINAL:</label>
+              <input type="text" id="fecha_fin_est_lic" name="fecha_fin_est_lic" class="form-control text-center"
+                value="{{FECHA_FIN_EST_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="fecha_liberacion_est_lic" class="form-label fw-bold">FECHA LIBERACION:</label>
+              <input type="text" id="fecha_liberacion_est_lic" name="fecha_liberacion_est_lic"
+                class="form-control text-center" value="{{FECHA_LIBERACION_EST_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="fecha_autorizacion_lic" class="form-label fw-bold">FECHA AUTORIZACION :</label>
+              <input type="text" id="fecha_autorizacion_lic" name="fecha_autorizacion_lic"
+                class="form-control text-center" value="{{FECHA_AUTORIZACION_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="asesor_acad_lic" class="form-label fw-bold">ASESOR ACADEMICO LIC :</label>
+              <input type="text" id="asesor_acad_lic" name="asesor_acad_lic" class="form-control text-center"
+                value="{{ASESOR_ACAD_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="fin_tramite_lic" class="form-label fw-bold">FIN DEL TRAMITE LIC:</label>
+              <input type="text" id="fin_tramite_lic" name="fin_tramite_lic" class="form-control text-center"
+                value="{{FIN_TRAMITE_LIC}}" disabled>
+            </div>
+            <div class="col-md-4 ">
+              <label for="folio_titulacion_lic" class="form-label fw-bold">FOLIO TITULACION LIC:</label>
+              <input type="text" id="folio_titulacion_lic" name="folio_titulacion_lic" class="form-control text-center"
+                value="{{FOLIO_TITULACION_LIC}}" disabled>
+            </div>
+          </div>
+        </div>
 
-                <!-- Código Postal -->
-                <div class="col-md-4 text-center">
-                  <label for="cp" class="form-label">Código postal</label>
-                  <input type="text" id="postal" name="postal" class="form-control text-center" placeholder="C.P"
-                    value="{{CP}}" disabled>
-                </div>
+        <!-- LIC DOCTOS-->
+        <div class="tab-pane fade profile-overview" id="Folios_docs_lic">
+          <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
 
-                <!-- Correo Personal -->
-                <div class="col-md-6 text-center">
-                  <label for="email_personal" class="form-label">Correo personal</label>
-                  <input type="text" id="email_personal" name="email_personal" class="form-control text-center"
-                    placeholder="nombre@servidor.com" value="{{EMAIL}}" disabled>
-                </div>
 
-                <!-- Correo Institucional -->
-                <div class="col-md-6 text-center">
-                  <label for="email_insti" class="form-label">Correo institucional</label>
-                  <input type="text" id="email_insti" name="email_insti" class="form-control text-center"
-                    placeholder="nombre@utponiente.edu.mx" value="{{EMAIL_ALTERNO}}" disabled>
-                </div>
+            <div class="col-md-4 text-center">
+              <label for="folio_titlic" class="form-label">FOLIO TITLIC </label>
+              <input type="text" id="folio_titlic" name="folio_titlic" class="form-control text-center"
+                value="{{FOLIO_TITLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_titlic" class="form-label">LIBRO TITLIC</label>
+              <input type="text" id="libro_titlic" name="libro_titlic" class="form-control text-center"
+                value="{{LIBRO_TITLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="foja_titlic" class="form-label">FOJA TITLIC </label>
+              <input type="text" id="foja_titlic" name="foja_titlic" class="form-control text-center"
+                value="{{FOJA_TITLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="folio_cerlic" class="form-label">FOLIO CERLIC</label>
+              <input type="text" id="folio_cerlic" name="folio_cerlic" class="form-control text-center"
+                value="{{FOLIO_CERLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_cerlic" class="form-label">LIBRO CERLIC </label>
+              <input type="text" id="libro_cerlic" name="libro_cerlic" class="form-control text-center"
+                value="{{LIBRO_CERLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="foja_cerlic" class="form-label">FOJA CERLIC </label>
+              <input type="text" id="foja_cerlic" name="foja_cerlic" class="form-control text-center"
+                value="{{FOJA_CERLIC}}" disabled>
+            </div>
 
-                <!-- Teléfono Celular -->
-                <div class="col-md-6 text-center">
-                  <label for="tel_cel" class="form-label">Teléfono celular</label>
-                  <input name="tel_cel" id="tel_cel" class="form-control text-center" type="tel" maxlength="10"
-                    value="{{CELULAR}}" disabled />
-                </div>
+            <div class="col-md-4 text-center">
+              <label for="folio_aexlic" class="form-label">FOLIO AEXLIC </label>
+              <input type="text" id="folio_aexlic" name="folio_aexlic" class="form-control text-center"
+                value="{{FOLIO_AEXLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_aexlic" class="form-label">LIBRO AEXLIC </label>
+              <input type="text" id="libro_aexlic" name="libro_aexlic" class="form-control text-center"
+                value="{{LIBRO_AEXLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="foja_aexlic" class="form-label">FOJA AEXLIC </label>
+              <input type="text" id="foja_aexlic" name="foja_aexlic" class="form-control text-center"
+                value="{{FOJA_AEXLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="folio_csslic" class="form-label">FOLIO CSSLIC </label>
+              <input type="text" id="folio_csslic" name="folio_csslic" class="form-control text-center"
+                value="{{FOLIO_CSSLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_csslic" class="form-label">LIBRO CSSLIC </label>
+              <input type="text" id="libro_csslic" name="libro_csslic" class="form-control text-center"
+                value="{{LIBRO_CSSLIC}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="foja_csslic" class="form-label">FOJA CSSLIC </label>
+              <input type="text" id="foja_csslic" name="foja_csslic" class="form-control text-center"
+                value="{{FOJA_CSSLIC}}" disabled>
+            </div>
+          </div>
+        </div>
 
-                <!-- Teléfono Domicilio -->
-                <div class="col-md-6 text-center">
-                  <label for="tel_domicilio" class="form-label">Teléfono domicilio</label>
-                  <input type="tel" id="tel_domicilio" name="tel_domicilio" class="form-control text-center"
-                    value="{{TELEFONO}}" disabled>
-                </div>
+        <!-- TSU -->
+        <div class="tab-pane fade profile-overview" id="Folios_Doctos_TSU">
+          <hr>
+          <h5 class="fw-bold text-primary">Estatus de Documentos</h5>
+          <div class="d-flex justify-content-center mt-3">
+            <div class="col-md-10">
+              <label for="ESTATUS_DOCTOS_TSU" class="form-label fw-bold">Estatus de Documentos</label>
+              <select id="ESTATUS_DOCTOS_TSU" class="form-select text-center border-primary" name="ESTATUS_DOCTOS_TSU"
+                disabled>
+                <option selected>{{ESTATUS_DOCTOS_TSU}}</option>
+                <option value="EN EMISIÓN">EN EMISIÓN</option>
+                <option value="ENTREGADOS">ENTREGADOS</option>
+                <option value="LISTOS PARA ENTREGA">LISTOS PARA ENTREGA</option>
+                <option value="SIN INICIAR">SIN INICIAR</option>
+              </select>
+            </div>
+            <dir>
+          </div>
+          <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+            <div class="col-md-4 text-center">
+              <label for="ESTATUS_DOCTOS_TSU_FECHA" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
+              <input type="text" id="ESTATUS_DOCTOS_TSU_FECHA" name="ESTATUS_DOCTOS_TSU_FECHA"
+                class="form-control text-center" value="{{ESTATUS_DOCTOS_TSU_FECHA}}" disabled>
+            </div>
+          </div>
+          <hr>
+
+
+          <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
+            <div class="col-md-4 text-center">
+              <label for="folio_certificado_tsu" class="form-label">FOLIO CERTITIFICADO TSU</label>
+              <input type="text" id="folio_certificado_tsu" name="folio_certificado_tsu"
+                class="form-control text-center" value="{{FOLIO_CERTIFICADO_TSU}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_certificado_tsu" class="form-label">LIBRO CERTIFICADO TSU </label>
+              <input type="text" id="libro_certificado_tsu" name="libro_certificado_tsu"
+                class="form-control text-center" value="{{LIBRO_CERTIFICADO_TSU}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="fojas_certificado_tsu" class="form-label">FOJA CERTIFICADO TSU </label>
+              <input type="text" id="fojas_certificado_tsu" name="fojas_certificado_tsu"
+                class="form-control text-center" value="{{FOJAS_CERTIFICADO_TSU}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="folio_titulo_tsu" class="form-label">FOLIO TITULO TSU </label>
+              <input type="text" id="folio_titulo_tsu" name="folio_titulo_tsu" class="form-control text-center"
+                value="{{FOLIO_TITULO_TSU}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_titulo_tsu" class="form-label">LIBRO TITULO TSU </label>
+              <input type="text" id="libro_titulo_tsu" name="libro_titulo_tsu" class="form-control text-center"
+                value="{{LIBRO_TITULO_TSU}}" disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="fojas_titulo_tsu" class="form-label">FOJA TITULO TSU </label>
+              <input type="text" id="fojas_titulo_tsu" name="fojas_titulo_tsu" class="form-control text-center"
+                value="{{FOJAS_TITULO_TSU}}" disabled>
+            </div>
+
+            <div class="col-md-4 text-center">
+              <label for="folio_css" class="form-label">FOLIO CSS TSU</label>
+              <input type="text" id="folio_css" name="folio_css" class="form-control text-center" value="{{FOLIO_CSS}}"
+                disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_css" class="form-label">LIBRO CSS TSU</label>
+              <input type="text" id="libro_css" name="libro_css" class="form-control text-center" value="{{LIBRO_CSS}}"
+                disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="fojas_css" class="form-label">FOJA CSS TSU</label>
+              <input type="text" id="fojas_css" name="fojas_css" class="form-control text-center" value="{{FOJAS_CSS}}"
+                disabled>
+            </div>
+            {{!-- --}}
+            <div class="col-md-4 text-center">
+              <label for="folio_cex" class="form-label">FOLIO CEX TSU</label>
+              <input type="text" id="folio_cex" name="folio_cex" class="form-control text-center" value="{{FOLIO_CEX}}"
+                disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="libro_cex" class="form-label">LIBRO CEX TSU</label>
+              <input type="text" id="libro_cex" name="libro_cex" class="form-control text-center" value="{{LIBRO_CEX}}"
+                disabled>
+            </div>
+            <div class="col-md-4 text-center">
+              <label for="fojas_cex" class="form-label">FOJA CEX TSU </label>
+              <input type="text" id="fojas_cex" name="fojas_cex" class="form-control text-center" value="{{FOJAS_CEX}}"
+                disabled>
+            </div>
+          </div>
+        </div>
+
+
+        {{!-- ESTADISTICOS fORMATO TABLA --}}
+        <div class="tab-pane fade profile-overview" id="Estadisticos">
+          <div class="container mt-3">
+            <!-- Primera fila - Beca, Peso, Talla -->
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="BECA" class="form-label fw-bold">Beca</label>
+                <input type="text" id="BECA" name="BECA" class="form-control text-center" value="{{BECA}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="PESO_KG" class="form-label fw-bold">Peso (Kg)</label>
+                <input type="text" id="PESO_KG" name="PESO_KG" class="form-control text-center" value="{{PESO_KG}}"
+                  disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="talla" class="form-label fw-bold">TALLA</label>
+                <select id="talla" class="form-select text-center" name="talla" disabled>
+                  <option>{{TALLA}}</option>
+                  <option>XS</option>
+                  <option>S</option>
+                  <option>M</option>
+                  <option>G</option>
+                  <option>XG</option>
+                  <option>--</option>
+                </select>
+              </div>
+            </div>
+            <!-- Segunda fila - Contacto, Parentesco -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="contacto" class="form-label fw-bold">CONTACTO</label>
+                <input type="text" id="contacto" name="contacto" class="form-control text-center" value="{{CONTACTO}}"
+                  disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="PARENTESCO_CONTACTO" class="form-label fw-bold">PARENTESCO DEL CONTACTO</label>
+                <select id="PARENTESCO_CONTACTO" class="form-select text-center" name="PARENTESCO_CONTACTO" disabled>
+                  <option>{{PARENTESCO_CONTACTO}}</option>
+                  <option>PADRE</option>
+                  <option>MADRE</option>
+                  <option>HERMANO(A)</option>
+                  <option>ABUELO(A)</option>
+                  <option>PARIENTE</option>
+                  <option>AMIGO</option>
+                  <option>CÓNYUGE</option>
+                  <option>TUTOR (A)</option>
+                  <option>Sin dato</option>
+                </select>
               </div>
             </div>
 
-            {{!-- TITULACION LIC --}}
-            <div class="tab-pane fade profile-overview" id="Titulacion_Lic">
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-
-                <div class="col-md-4 ">
-                  <label for="fecha_tramite_lic" class="form-label fw-bold">FECHA TRAMITE LIC </label>
-                  <input type="text" id="fecha_tramite_lic" name="fecha_tramite_lic" class="form-control text-center"
-                    value="{{FECHA_TRAMITE_LIC}}" disabled>
-                </div>
-                <div class="col-md-4">
-                  <label for="tit_lic_an" class="form-label fw-bold">TITULACION LIC AN</label>
-                  <select id="tit_lic_an" class="form-select text-center" name="tit_lic_an" required disabled>
-                    <option selected>{{TIT_LIC_AN}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="TIT_LIC_CB" class="form-label fw-bold">TITULACION LIC CB</label>
-                  <select id="TIT_LIC_CB" class="form-select text-center" name="TIT_LIC_CB" required disabled>
-                    <option selected>{{TIT_LIC_CB}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-
-                <div class="col-md-4">
-                  <label for="no_adeudo_lic" class="form-label fw-bold">NO ADEUDO LIC</label>
-                  <select id="no_adeudo_lic" class="form-select text-center" name="no_adeudo_lic" required disabled>
-                    <option selected>{{NO_ADEUDO_LIC}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="liberacion_lic" class="form-label fw-bold">LIBERACION</label>
-                  <select id="liberacion_lic" class="form-select text-center" name="liberacion_lic" required disabled>
-                    <option selected>{{LIBERACION_LIC}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="autorizacion_imp_lic" class="form-label fw-bold">AUTORIZACION IMP LIC </label>
-                  <select id="autorizacion_imp_lic" class="form-select text-center" name="autorizacion_imp_lic" required
-                    disabled>
-                    <option selected>{{AUTORIZACION_IMP_LIC}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="curp_lic" class="form-label fw-bold">CURP LIC </label>
-                  <select id="curp_lic" class="form-select text-center" name="curp_lic" required disabled>
-                    <option selected>{{CURP_LIC}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="FOTOGRAFIAS_LIC" class="form-label fw-bold">FOTOGRAFIA LIC </label>
-                  <select id="FOTOGRAFIAS_LIC" class="form-select text-center" name="FOTOGRAFIAS_LIC" required disabled>
-                    <option selected>{{FOTOGRAFIAS_LIC}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="pago_titulacion_lic" class="form-label fw-bold">PAGO TITULACION LIC </label>
-                  <select id="pago_titulacion_lic" class="form-select text-center" name="pago_titulacion_lic" required
-                    disabled>
-                    <option selected>{{PAGO_TITULACION_LIC}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="FOLIO_PAGO_TIT_LIC" class="form-label fw-bold">FOLIO PAGO TITULACION LIC </label>
-                  <input type="text" id="FOLIO_PAGO_TIT_LIC" name="FOLIO_PAGO_TIT_LIC" class="form-control text-center"
-                    value="{{FOLIO_PAGO_TIT_LIC}}" disabled>
-                </div>
-                <div class="col-md-4">
-                  <label for="cedula_tsu" class="form-label fw-bold">CEDULA TSU </label>
-                  <select id="cedula_tsu" class="form-select text-center" name="cedula_tsu" required disabled>
-                    <option selected>{{CEDULA_TSU}}</option>
-                    <option value="SI">SI</option>
-                    <option value="NO">NO</option>
-                  </select>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="num_cedula_tsu" class="form-label fw-bold">NUM CEDULA TSU </label>
-                  <input type="text" id="num_cedula_tsu" name="num_cedula_tsu" class="form-control text-center"
-                    value="{{NUM_CEDULA_TSU}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="EMPRESA_ESTADIA_LIC" class="form-label fw-bold">EMPRESA DE ESTADIA LIC</label>
-                  <input type="text" id="EMPRESA_ESTADIA_LIC" name="EMPRESA_ESTADIA_LIC"
-                    class="form-control text-center" value="{{EMPRESA_ESTADIA_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="asesor_empresarial_lic" class="form-label fw-bold">ASESOR EMPRESARIAL</label>
-                  <input type="text" id="asesor_empresarial_lic" name="asesor_empresarial_lic"
-                    class="form-control text-center" value="{{ASESOR_EMPRESARIAL_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="FECHA_INICIO_EST_LIC" class="form-label fw-bold">FECHA EN QUE INICIO:</label>
-                  <input type="text" id="FECHA_INICIO_EST_LIC" name="FECHA_INICIO_EST_LIC"
-                    class="form-control text-center" value="{{FECHA_INICIO_EST_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="FECHA_FIN_EST_LIC" class="form-label fw-bold">FECHA EN QUE FINAL:</label>
-                  <input type="text" id="FECHA_FIN_EST_LIC" name="FECHA_FIN_EST_LIC" class="form-control text-center"
-                    value="{{FECHA_FIN_EST_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="FECHA_LIBERACION_EST_LIC" class="form-label fw-bold">FECHA LIBERACION:</label>
-                  <input type="text" id="FECHA_LIBERACION_EST_LIC" name="FECHA_LIBERACION_EST_LIC"
-                    class="form-control text-center" value="{{FECHA_LIBERACION_EST_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="FECHA_AUTORIZACION_LIC" class="form-label fw-bold">FECHA AUTORIZACION :</label>
-                  <input type="text" id="FECHA_AUTORIZACION_LIC" name="FECHA_AUTORIZACION_LIC"
-                    class="form-control text-center" value="{{FECHA_AUTORIZACION_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="ASESOR_ACAD_LIC" class="form-label fw-bold">ASESOR ACADEMICO LIC :</label>
-                  <input type="text" id="ASESOR_ACAD_LIC" name="ASESOR_ACAD_LIC" class="form-control text-center"
-                    value="{{ASESOR_ACAD_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="FIN_TRAMITE_LIC" class="form-label fw-bold">FIN DEL TRAMITE LIC:</label>
-                  <input type="text" id="FIN_TRAMITE_LIC" name="FIN_TRAMITE_LIC" class="form-control text-center"
-                    value="{{FIN_TRAMITE_LIC}}" disabled>
-                </div>
-                <div class="col-md-4 ">
-                  <label for="FOLIO_TITULACION_LIC" class="form-label fw-bold">FOLIO TITULACION LIC:</label>
-                  <input type="text" id="FOLIO_TITULACION_LIC" name="FOLIO_TITULACION_LIC"
-                    class="form-control text-center" value="{{FOLIO_TITULACION_LIC}}" disabled>
-                </div>
+            <!-- Tercera fila - Teléfono, Tipo seguro -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="tel_contacto" class="form-label fw-bold">TELEFONO DEL CONTACTO</label>
+                <input type="text" id="tel_contacto" name="tel_contacto" class="form-control text-center"
+                  value="{{TEL_CONTACTO}}" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="tipo_seg_med" class="form-label fw-bold">TIPO DE SEGURO MEDICO</label>
+                <select id="tipo_seg_med" class="form-select text-center" name="tipo_seg_med" disabled>
+                  <option>{{TIPO_SEG_MED}}</option>
+                  <option>Sin Especificar</option>
+                  <option>IMSS-UTP</option>
+                  <option>IMSS-FAMILIAR</option>
+                  <option>IMSS-LABORAL</option>
+                  <option>IMSS-OPORTUNIDADES</option>
+                  <option>ISSTE</option>
+                  <option>PRIVADO</option>
+                  <option>NO TIENE</option>
+                  <option>SEGURO POPULAR</option>
+                </select>
               </div>
             </div>
-
-            <!-- LIC DOCTOS-->
-            <div class="tab-pane fade profile-overview" id="Folios_docs_lic">
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-
-                <div class="col-md-4 text-center">
-                  <label for="folio_cerlic" class="form-label">FOLIO CERLIC</label>
-                  <input type="text" id="folio_cerlic" name="folio_cerlic" class="form-control text-center"
-                    value="{{FOLIO_CERLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_cerlic" class="form-label">LIBRO CERLIC </label>
-                  <input type="text" id="libro_cerlic" name="libro_cerlic" class="form-control text-center"
-                    value="{{LIBRO_CERLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="foja_cerlic" class="form-label">FOJA CERLIC </label>
-                  <input type="text" id="foja_cerlic" name="foja_cerlic" class="form-control text-center"
-                    value="{{FOJA_CERLIC}}" disabled>
-                </div>
-
-                <div class="col-md-4 text-center">
-                  <label for="folio_aexlic" class="form-label">FOLIO AEXLIC </label>
-                  <input type="text" id="folio_aexlic" name="folio_aexlic" class="form-control text-center"
-                    value="{{FOLIO_AEXLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_aexlic" class="form-label">LIBRO AEXLIC </label>
-                  <input type="text" id="libro_aexlic" name="libro_aexlic" class="form-control text-center"
-                    value="{{LIBRO_AEXLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="foja_aexlic" class="form-label">FOJA AEXLIC </label>
-                  <input type="text" id="foja_aexlic" name="foja_aexlic" class="form-control text-center"
-                    value="{{FOJA_AEXLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="folio_csslic" class="form-label">FOLIO CSSLIC </label>
-                  <input type="text" id="folio_csslic" name="folio_csslic" class="form-control text-center"
-                    value="{{FOLIO_CSSLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_csslic" class="form-label">LIBRO CSSLIC </label>
-                  <input type="text" id="libro_csslic" name="libro_csslic" class="form-control text-center"
-                    value="{{LIBRO_CSSLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="foja_csslic" class="form-label">FOJA CSSLIC </label>
-                  <input type="text" id="foja_csslic" name="foja_csslic" class="form-control text-center"
-                    value="{{FOJA_CSSLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="folio_titlic" class="form-label">FOLIO TITLIC </label>
-                  <input type="text" id="folio_titlic" name="folio_titlic" class="form-control text-center"
-                    value="{{FOLIO_TITLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_titlic" class="form-label">LIBRO TITLIC</label>
-                  <input type="text" id="libro_titlic" name="libro_titlic" class="form-control text-center"
-                    value="{{LIBRO_TITLIC}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="foja_titlic" class="form-label">FOJA TITLIC </label>
-                  <input type="text" id="foja_titlic" name="foja_titlic" class="form-control text-center"
-                    value="{{FOJA_TITLIC}}" disabled>
-                </div>
+            <!-- Cuarta fila - Número seguro, Escolaridad padre -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="num_imss" class="form-label fw-bold">NUMERO DE SEGURO</label>
+                <input type="text" id="num_imss" name="num_imss" class="form-control text-center" value="{{NUM_IMSS}}"
+                  disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="escolaridadpadre" class="form-label fw-bold">ESCOLARIDAD PADRE</label>
+                <select id="escolaridadpadre" class="form-select text-center" name="escolaridadpadre" disabled>
+                  <option>{{ESCOLARIDADPADRE}}</option>
+                  <option>SIN DATO</option>
+                  <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
+                  <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA</option>
+                  <option>SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLET</option>
+                  <option>EDUC. TÉCNICA COMPLETA O NORMAL BÁSICA</option>
+                  <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
+                  <option>EDUC. SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INC</option>
+                  <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTORADO) COMPL</option>
+                </select>
               </div>
             </div>
-
-            <!-- TSU -->
-            <div class="tab-pane fade profile-overview" id="Folios_Doctos_TSU">
-              <hr>
-              <h5 class="fw-bold text-primary">Estatus de Documentos</h5>
-              <div class="d-flex justify-content-center mt-3">
-                <div class="col-md-10">
-                  <label for="ESTATUS_DOCTOS_TSU" class="form-label fw-bold">Estatus de Documentos</label>
-                  <select id="ESTATUS_DOCTOS_TSU" class="form-select text-center border-primary"
-                    name="ESTATUS_DOCTOS_TSU" required disabled>
-                    <option selected>{{ESTATUS_DOCTOS_TSU}}</option>
-                    <option value="EN EMISIÓN">EN EMISIÓN</option>
-                    <option value="ENTREGADOS">ENTREGADOS</option>
-                    <option value="LISTOS PARA ENTREGA">LISTOS PARA ENTREGA</option>
-                    <option value="SIN INICIAR">SIN INICIAR</option>
-                  </select>
-                </div>
-                <dir>
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="num_imss_verificador" class="form-label fw-bold">VERIFICADOR DEL SEGURO</label>
+                <input type="text" id="num_imss_verificador" name="num_imss_verificador"
+                  class="form-control text-center" value="{{NUM_IMSS_VERIFICADOR}}" disabled>
               </div>
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-                <div class="col-md-4 text-center">
-                  <label for="ESTATUS_DOCTOS_TSU_FECHA" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
-                  <input type="text" id="ESTATUS_DOCTOS_TSU_FECHA" name="ESTATUS_DOCTOS_TSU_FECHA"
-                    class="form-control text-center" value="{{ESTATUS_DOCTOS_TSU_FECHA}}" disabled>
-                </div>
-              </div>
-              <hr>
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-                <div class="col-md-4 text-center">
-                  <label for="folio_certificado_tsu" class="form-label">FOLIO CERTITIFICADO TSU</label>
-                  <input type="text" id="folio_certificado_tsu" name="folio_certificado_tsu"
-                    class="form-control text-center" value="{{FOLIO_CERTIFICADO_TSU}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_certificado_tsu" class="form-label">LIBRO CERTIFICADO TSU </label>
-                  <input type="text" id="libro_certificado_tsu" name="libro_certificado_tsu"
-                    class="form-control text-center" value="{{LIBRO_CERTIFICADO_TSU}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="fojas_certificado_tsu" class="form-label">FOJA CERTIFICADO TSU </label>
-                  <input type="text" id="fojas_certificado_tsu" name="fojas_certificado_tsu"
-                    class="form-control text-center" value="{{FOJAS_CERTIFICADO_TSU}}" disabled>
-                </div>
-                {{!-- --}}
-                <div class="col-md-4 text-center">
-                  <label for="folio_titulo_tsu" class="form-label">FOLIO TITULO TSU </label>
-                  <input type="text" id="folio_titulo_tsu" name="folio_titulo_tsu" class="form-control text-center"
-                    value="{{FOLIO_TITULO_TSU}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_titulo_tsu" class="form-label">LIBRO TITULO TSU </label>
-                  <input type="text" id="libro_titulo_tsu" name="libro_titulo_tsu" class="form-control text-center"
-                    value="{{LIBRO_TITULO_TSU}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="fojas_titulo_tsu" class="form-label">FOJA TITULO TSU </label>
-                  <input type="text" id="fojas_titulo_tsu" name="fojas_titulo_tsu" class="form-control text-center"
-                    value="{{FOJAS_TITULO_TSU}}" disabled>
-                </div>
-                {{!-- --}}
-                <div class="col-md-4 text-center">
-                  <label for="folio_css" class="form-label">FOLIO CSS </label>
-                  <input type="text" id="folio_css" name="folio_css" class="form-control text-center"
-                    value="{{FOLIO_CSS}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_css" class="form-label">LIBRO CSS</label>
-                  <input type="text" id="libro_css" name="libro_css" class="form-control text-center"
-                    value="{{LIBRO_CSS}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="fojas_css" class="form-label">FOJA CSS</label>
-                  <input type="text" id="fojas_css" name="fojas_css" class="form-control text-center"
-                    value="{{FOJAS_CSS}}" disabled>
-                </div>
-                {{!-- --}}
-                <div class="col-md-4 text-center">
-                  <label for="folio_cex" class="form-label">FOLIO TITLIC </label>
-                  <input type="text" id="folio_cex" name="folio_cex" class="form-control text-center"
-                    value="{{FOLIO_CEX}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="libro_cex" class="form-label">LIBRO TITLIC</label>
-                  <input type="text" id="libro_cex" name="libro_cex" class="form-control text-center"
-                    value="{{LIBRO_CEX}}" disabled>
-                </div>
-                <div class="col-md-4 text-center">
-                  <label for="fojas_cex" class="form-label">FOJA TITLIC </label>
-                  <input type="text" id="fojas_cex" name="fojas_cex" class="form-control text-center"
-                    value="{{FOJAS_CEX}}" disabled>
-                </div>
+              <div class="col-md-5">
+                <label for="escolaridadmadre" class="form-label fw-bold">ESCOLARIDAD MADRE</label>
+                <select id="escolaridadmadre" class="form-select text-center" name="escolaridadmadre" disabled>
+                  <option>{{ESCOLARIDADMADRE}}</option>
+                  <option>SIN DATO</option>
+                  <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMAR</option>
+                  <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLE</option>
+                  <option>SECUNDARIA O COMERCIAL TERMINADA / BACH.</option>
+                  <option>EDUC. SUPERIOR O NORMAL SUP. COMP. / POS</option>
+                  <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR I</option>
+                  <option>EDUC. SUPERIOR O NORMAL SUP. COMP./ POST</option>
+                  <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTOR</option>
+                </select>
               </div>
             </div>
-
-
-            <!-- Escolaridad -->
-            <div class="tab-pane fade profile-overview" id="Escolaridad">
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-                <!-- Carrera -->
-                <div class="col-md-8 text-center">
-                  <label for="inputcarrera" class="form-label">Carrera</label>
-                  <select id="inputcarrera" name="nivel" class="form-select text-center" required disabled>
-                    <option selected value="{{NIVEL}}">{{NIVEL}}</option>
-                    <option>TSU en Administración Área Formulación y Evaluación de Proyectos</option>
-                    <option>TSU en Gastronomía</option>
-                    <option>TSU en Procesos Alimentarios</option>
-                    <option>TSU en Tecnologías de la Información Área Desarrollo de Software Multiplataforma</option>
-                    <option>TSU en Turismo Área Desarrollo de Productos Alternativos</option>
-                    <option>Ingeniería en Procesos Bioalimentarios</option>
-                    <option>Ingeniería en Desarrollo y Gestión de Software</option>
-                    <option>Licenciatura en Gestión de Negocios y Proyectos</option>
-                    <option>Licenciatura en Gestión y Desarrollo Turístico</option>
-                    <option>Curso de Inglés Básico</option>
-                  </select>
-                </div>
-
-                <!-- Cuatrimestre -->
-                <div class="col-md-4 text-center">
-                  <label for="inputcuatri" class="form-label">Cuatrimestre</label>
-                  <select id="inputcuatri" class="form-select text-center" name="grado" required disabled>
-                    <option selected value="{{GRADO}}">{{GRADO}}</option>
-                    <option>0</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                  </select>
-                </div>
-
-                <div class="col-md-6 text-center">
-                  <label for="INICIO_BACH" class="form-label">Inicio Licenciatura</label>
-                  <input type="text" id="INICIO_BACH" name="INICIO_BACH" class="form-control text-center" placeholder=""
-                    value="{{INICIO_BACH}}" disabled>
-                </div>
-
-
-                <div class="col-md-6 text-center">
-                  <label for="FIN_BACH" class="form-label">Final Licenciatura</label>
-                  <input type="text" id="FIN_BACH" name="FIN_BACH" class="form-control text-center" placeholder=""
-                    value="{{FIN_BACH}}" disabled>
-                </div>
-
-                <!-- Inglés TSU -->
-                <div class="col-md-6 text-center">
-                  <label for="proyecto_obs" class="form-label">Inglés TSU</label>
-                  <input type="text" id="proyecto_obs" name="proyecto_obs" class="form-control text-center"
-                    placeholder="NIVEL DE INGLES TSU" value="{{PROYECTO_OBS}}" disabled>
-                </div>
-
-                <!-- Inglés Lic -->
-                <div class="col-md-6 text-center">
-                  <label for="obs_proyecto_lic" class="form-label">Inglés Lic</label>
-                  <input type="text" id="obs_proyecto_lic" name="obs_proyecto_lic" class="form-control text-center"
-                    placeholder="NIVEL DE INGLES LIC" value="{{OBS_PROYECTO_LIC}}" disabled>
-                </div>
-
-                <!-- Matrícula -->
-                <div class="col-md-6 text-center">
-                  <label for="inputmatricula" class="form-label">MATRÍCULA</label>
-                  <input type="text" class="form-control text-center" id="inputmatricula" maxlength="8"
-                    placeholder="AAMMFFFF" required value="{{MATRICULA}}" name="matricula" disabled>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
+            <!-- Sexta fila - Lengua indígena, Actividad padre -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="lenguaindigena" class="form-label fw-bold">¿HABLA ALGUNA LENGUA INDIGENA?</label>
+                <input type="text" id="lenguaindigena" name="lenguaindigena" class="form-control text-center"
+                  value="{{LENGUAINDIGENA}}" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="actividadpadre" class="form-label fw-bold">ACTIVIDAD DEL PADRE</label>
+                <select id="actividadpadre" class="form-select text-center" name="actividadpadre" disabled>
+                  <option>{{ACTIVIDADPADRE}}</option>
+                  <option>SIN DATO</option>
+                  <option>DESEMPLEADO</option>
+                  <option>JUBILADO O PENSIONADO</option>
+                  <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
+                  <option>ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO, ETC)</option>
+                  <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC</option>
+                  <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
+                  <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
+                  <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                  <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
+                  <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
+                  <option>EMPLEADO GOB. MUNICIPAL, ESTATAL O FEDERAL (INCLUYE MILITAR)</option>
+                  <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                  <option>EMPLEADO DE INST. GUBERNAMENT. DESCENTR. (IMSS, ISSSTE, ETC)</option>
+                  <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                  <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.)</option>
+                  <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                  <option>PROPIETARIO DE CASAS EN )RENTA</option>
+                  <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING. ETC.)</option>
+                  <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC.)</option>
+                  <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNICP. EST. O FED</option>
+                  <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                  <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                  <option>NINGUNA DE LAS ANTERIORES</option>
+                  <option>AMA DE CASA</option>
+                </select>
               </div>
             </div>
-
-
-
-            <div class="tab-pane fade profile-overview" id="Titulacion_Tsu">
-              <div class="container mt-3">
-                <!-- Primera fila - Beca, Peso, Talla -->
-                <div class="row g-3">
-                  <div class="col-md-4">
-                    <label for="inicio_egreso" class="form-label fw-bold">INICIO ENGRESADO</label>
-                    <input type="text" id="inicio_egreso" name="inicio_egreso" class="form-control text-center"
-                      value="{{INICIO_EGRESO}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="folio_titulacion" class="form-label fw-bold">FOLIO TITULACION TSU</label>
-                    <input type="text" id="folio_titulacion" name="folio_titulacion" class="form-control text-center"
-                      value="{{FOLIO_TITULACION}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="fecha_tramite" class="form-label fw-bold">FECHA DE TRAMITE TSU</label>
-                    <input type="text" id="fecha_tramite" name="fecha_tramite" class="form-control text-center"
-                      value="{{FECHA_TRAMITE}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="titulacion_an" class="form-label fw-bold">TITULACION AN</label>
-                    <select id="titulacion_an" class="form-select text-center" name="titulacion_an" required disabled>
-                      <option selected>{{TITULACION_AN}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_cb" class="form-label fw-bold">TITULACION CB</label>
-                    <select id="titulacion_cb" class="form-select text-center" name="titulacion_cb" required disabled>
-                      <option selected>{{TITULACION_CB}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_na_1" class="form-label fw-bold">TITULACION NA</label>
-                    <select id="titulacion_na_1" class="form-select text-center" name="titulacion_na" required disabled>
-                      <option selected>{{TITULACION_NA}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_cle" class="form-label fw-bold">TITULACION CLE</label>
-                    <select id="titulacion_cle" class="form-select text-center" name="titulacion_cle" required disabled>
-                      <option selected>{{TITULACION_CLE}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_cai" class="form-label fw-bold">TITULACION CAI</label>
-                    <select id="titulacion_cai" class="form-select text-center" name="titulacion_cai" required disabled>
-                      <option selected>{{TITULACION_CAI}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_curp" class="form-label fw-bold">TITULACION CURP</label>
-                    <select id="titulacion_curp" class="form-select text-center" name="titulacion_curp" required
-                      disabled>
-                      <option selected>{{TITULACION_CURP}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_fotos" class="form-label fw-bold">TITULACION FOTOS</label>
-                    <select id="titulacion_fotos" class="form-select text-center" name="titulacion_fotos" required
-                      disabled>
-                      <option selected>{{TITULACION_FOTOS}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_pago" class="form-label fw-bold">TITULACION PAGO</label>
-                    <select id="titulacion_pago" class="form-select text-center" name="titulacion_pago" required
-                      disabled>
-                      <option selected>{{TITULACION_PAGO}}</option>
-                      <option value="SI">SI</option>
-                      <option value="NO">NO</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="titulacion_foliopago" class="form-label fw-bold">TITULACION FOLIO PAGO TSU</label>
-                    <input type="text" id="titulacion_foliopago" name="titulacion_foliopago"
-                      class="form-control text-center" value="{{TITULACION_FOLIOPAGO}}" disabled>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="empresa_nr" class="form-label fw-bold">EMPRESA TITULACION TSU</label>
-                    <input type="text" id="empresa_nr" name="empresa_nr" class="form-control text-center"
-                      value="{{EMPRESA_NR}}" disabled>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="asesor_empresarial" class="form-label fw-bold">ASESOR TITULACION TSU</label>
-                    <input type="text" id="asesor_empresarial" name="asesor_empresarial"
-                      class="form-control text-center" value="{{ASESOR_EMPRESARIAL}}" disabled>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="asesor_empresarial_int" class="form-label fw-bold">ASESOR TITULACION INT</label>
-                    <input type="text" id="asesor_empresarial_int" name="asesor_empresarial_int"
-                      class="form-control text-center" value="{{ASESOR_EMPRESARIAL_INT}}" disabled>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label for="estadia_inicio" class="form-label fw-bold">INICIO ESTADIA EN:</label>
-                    <input type="text" id="estadia_inicio" name="estadia_inicio" class="form-control text-center"
-                      value="{{ESTADIA_INICIO}}" disabled>
-                  </div>
-
-
-                  <div class="col-md-4">
-                    <label for="estadia_termino" class="form-label fw-bold">TERMINO ESTADIA EN:</label>
-                    <input type="text" id="estadia_termino" name="estadia_termino" class="form-control text-center"
-                      value="{{ESTADIA_TERMINO}}" disabled>
-                  </div>
-
-
-                  <div class="col-md-4">
-                    <label for="carta_liberacion_emision" class="form-label fw-bold">CARTA LIBERACION</label>
-                    <input type="text" id="carta_liberacion_emision" name="carta_liberacion_emision"
-                      class="form-control text-center" value="{{CARTA_LIBERACION_EMISION}}" disabled>
-                  </div>
-                </div>
+            <!-- Séptima fila - Discapacidad, Actividad madre -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="discapacidad" class="form-label fw-bold">¿SUFRE ALGUNA DISCAPACIDAD?</label>
+                <input type="text" id="discapacidad" name="discapacidad" class="form-control text-center"
+                  value="{{DISCAPACIDAD}}" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="actividadmadre" class="form-label fw-bold">ACTIVIDAD DE LA MADRE</label>
+                <select id="actividadmadre" class="form-select text-center" name="actividadmadre" disabled>
+                  <option>{{ACTIVIDADMADRE}}</option>
+                  <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                  <option>EMPLEADO DE INST.GUBERNAMENT.DESCENTR.(IMSS, ISSSTE, ETC)</option>
+                  <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                  <option>GANADERO Y /O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROP.)</option>
+                  <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                  <option>PROPIETARIO DE CASAS EN RENTA</option>
+                  <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICOING. ETC)</option>
+                  <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC)</option>
+                  <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN.MUNIC.EST.O FED.</option>
+                  <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                  <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                  <option>NINGUNA DE LAS ANTERIORES</option>
+                  <option>AMA DE CASA</option>
+                </select>
               </div>
             </div>
-
-            <!-- Estatus -->
-            <div class="tab-pane fade profile-overview" id="Estatus">
-              <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
-                <!-- Estatus Actual -->
-                <div class="col-md-12 text-center">
-                  <label for="estatus_actual" class="form-label">Estatus actual</label>
-                  <input type="hidden" id="status" value="{{STATUS}}">
-                  <select id="estatus_actual" class="form-select text-center" onchange="changeStatus()" disabled>
-                    <option selected disabled>--seleccionar estatus--</option>
-                  </select>
-                </div>
-
-
-                <!-- Ingreso TSU -->
-                <div class="row my-2 d-none justify-content-center" id="ingreso_tsu"> <!-- Centrar fila -->
-                  <div class="col-12 text-center">
-                    <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
-                    <input type="date" class="form-control text-center" id="fecha_registro_tsu"
-                      name="fecha_registro_tsu" disabled>
-                  </div>
-                  <div class="col-12 text-center">
-                    <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
-                    <input type="date" class="form-control text-center" id="fecha_itsu" name="fecha_itsu" disabled>
-                  </div>
-                </div>
-
-                <!-- Motivo de baja -->
-                <div class="row my-12 d-none justify-content-center" id="motivo_baja"> <!-- Centrar fila -->
-                  <div class="col-md-6 text-center">
-                    <label for="inputmotivo" class="form-label">Motivo de la baja</label>
-                    <select id="inputmotivo" class="form-select text-center" disabled>
-                      <option>REPROBACIÓN</option>
-                      <option>DESERCIÓN SIN CAUSA CONOCIDA</option>
-                      <option>MOTIVOS PERSONALES</option>
-                      <option>CAMBIO DE CARRERA</option>
-                      <option>INCUMPLIMIENTO DE EXPECTATIVAS</option>
-                      <option>DISTANCIA DE LA UT</option>
-                      <option>PROBLEMAS ECONÓMICOS</option>
-                      <option>PROBLEMAS DE TRABAJO</option>
-                      <option>CAMBIO DE UT</option>
-                      <option>DEFUNCIÓN</option>
-                      <option>OTRAS CAUSAS</option>
-                    </select>
-                  </div>
-                  <div class="col-12 text-center">
-                    <label for="fechabaja" class="form-label">Fecha de Baja</label>
-                    <input class="form-control text-center" id="fecha_baja" type="date" disabled>
-                  </div>
-                </div>
+            <!-- Octava fila - Enfermedad, Vehículo -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="ENFERNEDAD" class="form-label fw-bold">¿SUFRE ALGUNA ENFERMEDAD?</label>
+                <input type="text" id="ENFERNEDAD" name="ENFERNEDAD" class="form-control text-center"
+                  value="{{ENFERNEDAD}}" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="automovilfamiliar" class="form-label fw-bold">¿Cuenta con vehículo?</label>
+                <select id="automovilfamiliar" class="form-select text-center" name="automovilfamiliar" disabled>
+                  <option>{{AUTOMOVILFAMILIAR}}</option>
+                  <option>SIN DATO</option>
+                  <option>SI</option>
+                  <option>NO</option>
+                </select>
               </div>
             </div>
-
-            {{!--FORMATO DE ESTATUS BACHILLERATO --}}
-            <div class="tab-pane fade profile-overview p-3" id="BACHILLERATO">
-              <div class="row g-3">
-                <!-- Escuela de Procedencia -->
-                <div class="col-md-12">
-                  <label for="ESCUELA_PROCEDENCIA" class="form-label fw-bold">ESCUELA DE PROCEDENCIA</label>
-                  <input type="text" id="ESCUELA_PROCEDENCIA" name="ESCUELA_PROCEDENCIA"
-                    class="form-control form-control-lg text-center" placeholder="Calle, número y colonia"
-                    value="{{ESCUELA_PROCEDENCIA}}" disabled>
-                </div>
-
-                <!-- Cruzamientos -->
-                <div class="col-md-12">
-                  <label for="ESTADO_ESCOLARIDAD" class="form-label fw-bold">ESTADO ESCOLARIDAD</label>
-                  <input type="text" id="ESTADO_ESCOLARIDAD" name="ESTADO_ESCOLARIDAD"
-                    class="form-control form-control-lg text-center" placeholder="ESTADO_ESCOLARIDAD"
-                    value="{{ESTADO_ESCOLARIDAD}}" disabled>
-                </div>
+            <!-- Novena fila - Alergias, Computadora -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="alergias" class="form-label fw-bold">¿SUFRE ALGUNA ALERGIA?</label>
+                <input type="text" id="alergias" name="alergias" class="form-control text-center" value="{{ALERGIAS}}"
+                  disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="computadora" class="form-label fw-bold">¿Cuenta con computadora?</label>
+                <select id="computadora" class="form-select text-center" name="computadora" disabled>
+                  <option>{{COMPUTADORA}}</option>
+                  <option>SIN DATO</option>
+                  <option>SI</option>
+                  <option>NO</option>
+                </select>
               </div>
             </div>
-
-
-
-
-            {{!-- ESTADISTICOS fORMATO TABLA --}}
-            <div class="tab-pane fade profile-overview" id="Estadisticos">
-              <div class="container mt-3">
-                <!-- Primera fila - Beca, Peso, Talla -->
-                <div class="row g-3">
-                  <div class="col-md-4">
-                    <label for="BECA" class="form-label fw-bold">Beca</label>
-                    <input type="text" id="BECA" name="BECA" class="form-control text-center" value="{{BECA}}" disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="PESO_KG" class="form-label fw-bold">Peso (Kg)</label>
-                    <input type="text" id="PESO_KG" name="PESO_KG" class="form-control text-center" value="{{PESO_KG}}"
-                      disabled>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="talla" class="form-label fw-bold">TALLA</label>
-                    <select id="talla" class="form-select text-center" name="talla" required disabled>
-                      <option>{{TALLA}}</option>
-                      <option>XS</option>
-                      <option>S</option>
-                      <option>M</option>
-                      <option>G</option>
-                      <option>XG</option>
-                      <option>--</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Segunda fila - Contacto, Parentesco -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="contacto" class="form-label fw-bold">CONTACTO</label>
-                    <input type="text" id="contacto" name="contacto" class="form-control text-center"
-                      value="{{CONTACTO}}" disabled>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="PARENTESCO_CONTACTO" class="form-label fw-bold">PARENTESCO DEL CONTACTO</label>
-                    <select id="PARENTESCO_CONTACTO" class="form-select text-center" name="PARENTESCO_CONTACTO" required
-                      disabled>
-                      <option>{{PARENTESCO_CONTACTO}}</option>
-                      <option>PADRE</option>
-                      <option>MADRE</option>
-                      <option>HERMANO(A)</option>
-                      <option>ABUELO(A)</option>
-                      <option>PARIENTE</option>
-                      <option>AMIGO</option>
-                      <option>CÓNYUGE</option>
-                      <option>TUTOR (A)</option>
-                      <option>Sin dato</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Tercera fila - Teléfono, Tipo seguro -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="tel_contacto" class="form-label fw-bold">TELEFONO DEL CONTACTO</label>
-                    <input type="text" id="tel_contacto" name="tel_contacto" class="form-control text-center"
-                      value="{{TEL_CONTACTO}}" disabled>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="tipo_seg_med" class="form-label fw-bold">TIPO DE SEGURO MEDICO</label>
-                    <select id="tipo_seg_med" class="form-select text-center" name="tipo_seg_med" required disabled>
-                      <option>{{TIPO_SEG_MED}}</option>
-                      <option>Sin Especificar</option>
-                      <option>IMSS-UTP</option>
-                      <option>IMSS-FAMILIAR</option>
-                      <option>IMSS-LABORAL</option>
-                      <option>IMSS-OPORTUNIDADES</option>
-                      <option>ISSTE</option>
-                      <option>PRIVADO</option>
-                      <option>NO TIENE</option>
-                      <option>SEGURO POPULAR</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Cuarta fila - Número seguro, Escolaridad padre -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="num_imss" class="form-label fw-bold">NUMERO DE SEGURO</label>
-                    <input type="text" id="num_imss" name="num_imss" class="form-control text-center"
-                      value="{{NUM_IMSS}}" disabled>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="escolaridadpadre" class="form-label fw-bold">ESCOLARIDAD PADRE</label>
-                    <select id="escolaridadpadre" class="form-select text-center" name="escolaridadpadre" required
-                      disabled>
-                      <option>{{ESCOLARIDADPADRE}}</option>
-                      <option>SIN DATO</option>
-                      <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
-                      <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA</option>
-                      <option>SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLET</option>
-                      <option>EDUC. TÉCNICA COMPLETA O NORMAL BÁSICA</option>
-                      <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
-                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP. / POSTGRADO INC</option>
-                      <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTORADO) COMPL</option>
-                    </select>
-                  </div>
-                </div>
-
-
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="num_imss_verificador" class="form-label fw-bold">VERIFICADOR DEL SEGURO</label>
-                    <input type="text" id="num_imss_verificador" name="num_imss_verificador"
-                      class="form-control text-center" value="{{NUM_IMSS_VERIFICADOR}}" disabled>
-                  </div>
-                  <div class="col-md-5">
-                    <label for="escolaridadmadre" class="form-label fw-bold">ESCOLARIDAD MADRE</label>
-                    <select id="escolaridadmadre" class="form-select text-center" name="escolaridadmadre" required
-                      disabled>
-                      <option>{{ESCOLARIDADMADRE}}</option>
-                      <option>SIN DATO</option>
-                      <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMAR</option>
-                      <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLE</option>
-                      <option>SECUNDARIA O COMERCIAL TERMINADA / BACH.</option>
-                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP. / POS</option>
-                      <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR I</option>
-                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP./ POST</option>
-                      <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTOR</option>
-                    </select>
-                  </div>
-                </div>
-
-
-
-
-
-                <!-- Sexta fila - Lengua indígena, Actividad padre -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="lenguaindigena" class="form-label fw-bold">¿HABLA ALGUNA LENGUA INDIGENA?</label>
-                    <input type="text" id="lenguaindigena" name="lenguaindigena" class="form-control text-center"
-                      value="{{LENGUAINDIGENA}}" disabled>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="actividadpadre" class="form-label fw-bold">ACTIVIDAD DEL PADRE</label>
-                    <select id="actividadpadre" class="form-select text-center" name="actividadpadre" required disabled>
-                      <option>{{ACTIVIDADPADRE}}</option>
-                      <option>SIN DATO</option>
-                      <option>DESEMPLEADO</option>
-                      <option>JUBILADO O PENSIONADO</option>
-                      <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
-                      <option>ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO, ETC)</option>
-                      <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC</option>
-                      <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
-                      <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
-                      <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
-                      <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
-                      <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
-                      <option>EMPLEADO GOB. MUNICIPAL, ESTATAL O FEDERAL (INCLUYE MILITAR)</option>
-                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
-                      <option>EMPLEADO DE INST. GUBERNAMENT. DESCENTR. (IMSS, ISSSTE, ETC)</option>
-                      <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
-                      <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.)</option>
-                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
-                      <option>PROPIETARIO DE CASAS EN )RENTA</option>
-                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING. ETC.)</option>
-                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC.)</option>
-                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNICP. EST. O FED</option>
-                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
-                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
-                      <option>NINGUNA DE LAS ANTERIORES</option>
-                      <option>AMA DE CASA</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Séptima fila - Discapacidad, Actividad madre -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="discapacidad" class="form-label fw-bold">¿SUFRE ALGUNA DISCAPACIDAD?</label>
-                    <input type="text" id="discapacidad" name="discapacidad" class="form-control text-center"
-                      value="{{DISCAPACIDAD}}" disabled>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="actividadmadre" class="form-label fw-bold">ACTIVIDAD DE LA MADRE</label>
-                    <select id="actividadmadre" class="form-select text-center" name="actividadmadre" required disabled>
-                      <option>{{ACTIVIDADMADRE}}</option>
-                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
-                      <option>EMPLEADO DE INST.GUBERNAMENT.DESCENTR.(IMSS, ISSSTE, ETC)</option>
-                      <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
-                      <option>GANADERO Y /O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROP.)</option>
-                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
-                      <option>PROPIETARIO DE CASAS EN RENTA</option>
-                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICOING. ETC)</option>
-                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC)</option>
-                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN.MUNIC.EST.O FED.</option>
-                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
-                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
-                      <option>NINGUNA DE LAS ANTERIORES</option>
-                      <option>AMA DE CASA</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Octava fila - Enfermedad, Vehículo -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="ENFERNEDAD" class="form-label fw-bold">¿SUFRE ALGUNA ENFERMEDAD?</label>
-                    <input type="text" id="ENFERNEDAD" name="ENFERNEDAD" class="form-control text-center"
-                      value="{{ENFERNEDAD}}" disabled>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="automovilfamiliar" class="form-label fw-bold">¿Cuenta con vehículo?</label>
-                    <select id="automovilfamiliar" class="form-select text-center" name="automovilfamiliar" required
-                      disabled>
-                      <option>{{AUTOMOVILFAMILIAR}}</option>
-                      <option>SIN DATO</option>
-                      <option>SI</option>
-                      <option>NO</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Novena fila - Alergias, Computadora -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="alergias" class="form-label fw-bold">¿SUFRE ALGUNA ALERGIA?</label>
-                    <input type="text" id="alergias" name="alergias" class="form-control text-center"
-                      value="{{ALERGIAS}}" disabled>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="computadora" class="form-label fw-bold">¿Cuenta con computadora?</label>
-                    <select id="computadora" class="form-select text-center" name="computadora" required disabled>
-                      <option>{{COMPUTADORA}}</option>
-                      <option>SIN DATO</option>
-                      <option>SI</option>
-                      <option>NO</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- Décima fila - Nombre padre, Nombre madre -->
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="nombrepadre" class="form-label fw-bold">NOMBRE PADRE</label>
-                    <input type="text" id="nombrepadre" name="nombrepadre" class="form-control text-center"
-                      value="{{NOMBREPADRE}}" disabled>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="tamanocasa" class="form-label fw-bold">¿TAMAÑO DE LA CASA?</label>
-                    <select id="tamanocasa" class="form-select text-center" name="tamanocasa" required disabled>
-                      <option>{{TAMANOCASA}}</option>
-                      <option>SIN DATO</option>
-                      <option>MENOS DE 100 m2</option>
-                      <option>DE 101 A 200 m2</option>
-                      <option>DE 201 A 300 m2</option>
-                      <option>DE 301 A 500 m2</option>
-                      <option>MÁS DE 500 m2</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="row g-3 mt-2">
-                  <div class="col-md-6">
-                    <label for="nombremadre" class="form-label fw-bold">NOMBRE MADRE</label>
-                    <input type="text" id="nombremadre" name="nombremadre" class="form-control text-center"
-                      value="{{NOMBREMADRE}}" disabled>
-                  </div>
-
-
-                  <div class="col-md-6">
-                    <label for="infresofamiliar" class="form-label fw-bold">¿CUÁNTO ES EL INGRESO FAMILIAR?</label>
-                    <select id="infresofamiliar" class="form-select text-center" name="infresofamiliar" required
-                      disabled>
-                      <option>{{INFRESOFAMILIAR}}</option>
-                      <option>SIN DATO</option>
-                      <option>MENOS DE $1,950</option>
-                      <option>ENTRE $1,951 Y $3,900</option>
-                      <option>ENTRE $3,901 Y $6,500</option>
-                      <option>ENTRE $6,501 Y $13,000</option>
-                      <option>ENTRE $13,001 Y $26,500</option>
-                      <option>ENTRE $26,501 Y $40,000</option>
-                      <option>ENTRE $40,001 Y $53,500</option>
-                      <option>ENTRE $53,501 Y $67,000</option>
-                      <option>ENTRE $67,001 Y $80,000</option>
-                      <option>MÁS DE $80,001</option>
-                    </select>
-                  </div>
-
-
-                  <div class="col-md-12 text-start">
-                    <label for="trabajas" class="form-label fw-bold">¿Trabajas?</label>
-                    <select id="trabajas" class="form-select text-center" name="trabajas" required disabled>
-                      <option>{{TRABAJAS}}</option>
-                      <option>SIN DATO</option>
-                      <option>SI</option>
-                      <option>NO</option>
-                    </select>
-                  </div>
-
-
-
-
-                  <div class="col-md-12">
-                    <label for="ACTIVIDADTRABAJAS" class="form-label fw-bold">ATIVIDAD TRABAJAS </label>
-                    <select id="ACTIVIDADTRABAJAS" class="form-select text-center" name="ACTIVIDADTRABAJAS" required
-                      disabled>
-                      <option>{{ACTIVIDADTRABAJAS}}</option>
-                      <option>{{ACTIVIDADTRABAJAS}}</option>
-                      <option>SIN DATO</option>
-                      <option>AMA DE CASA</option>
-                      <option>DESEMPLEADO</option>
-                      <option>JUBILADO O PENScFIONADO</option>
-                      <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
-                      <option>ARTESANO (PRODUCTO DE MADERA, BARRO, CUERO, YESO, ETC)</option>
-                      <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO ETC)</option>
-                      <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
-                      <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
-                      <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
-                      <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
-                      <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
-                      <option>EMPLEADO DE GOB. MUNIC.ESTATAL O FED, (INCLUYE MILITAR)</option>
-                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
-                      <option>EMPLEADO DE INST. GUBERNAMENT.DESCENTR.(IMSS. ISSSTE. ETC)</option>
-                      <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
-                      <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.)</option>
-                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
-                      <option>PROPIETARIO DE CASAS EN RENTA</option>
-                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING, ETC)</option>
-                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC).</option>
-                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNICP. EST. O FED</option>
-                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
-                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
-                      <option>NINGUNA DE LAS ANTERIORES</option>
-                    </select>
-                  </div>
-
-                  <div class="col-md-auto">
-
-                    <label for="personasdependeningreso" class="form-label fw-bold">¿CUANTAS PERSONAS DEPENDEN DEL
-                      INGRESO?</label>
-                    <input type="text" id="personasdependeningreso" name="personasdependeningreso"
-                      class="form-control text-center" value="{{PERSONASDEPENDENINGRESO}}" disabled>
-
-                  </div>
-
-
-
-                  <div class="col-md-auto">
-
-                    <label for="vivenencasa" class="form-label fw-bold">¿ CUANTAS PEROSNAS VIVEN EN CASA?</label>
-                    <input type="text" id="vivenencasa" name="vivenencasa" class="form-control text-center"
-                      value="{{VIVENENCASA}}" disabled>
-
-                  </div>
-
-
-
-                  <div class="col-md-auto">
-
-                    <label for="hermanos" class="form-label fw-bold">¿CUANTOS HERMNOS?</label>
-                    <input type="text" id="hermanos" name="hermanos" class="form-control text-center"
-                      value="{{HERMANOS}}" disabled>
-
-                  </div>
-
-
-
-                  <div class="col-md-auto">
-
-                    <label for="lugarnacimiento" class="form-label fw-bold">¿lUGAR DE NACIMIENTO?</label>
-                    <input type="text" id="lugarnacimiento" name="lugarnacimiento" class="form-control text-center"
-                      value="{{LUGARNACIMIENTO}}" disabled>
-
-                  </div>
-
-
-
-                  <div class="col-md-auto">
-                    <label for="hermanosestudian" class="form-label fw-bold">¿cuantos hermnos estudian ?</label>
-                    <input type="text" id="hermanosestudian" name="hermanosestudian" class="form-control text-center"
-                      value="{{HERMANOSESTUDIAN}}" disabled>
-                  </div>
-
-
-
-                  <div class="col-md-auto">
-                    <label for="horariotrabajo" class="form-label fw-bold">¿HORARIOS DE TRABAJO?</label>
-                    <input type="text" id="horariotrabajo" name="horariotrabajo" class="form-control text-center"
-                      value="{{HORARIOTRABAJO}}" disabled>
-                  </div>
-
-                  <div class="col-md-auto">
-                    <label for="estadocivil" class="form-label fw-bold">¿ESTADO CIVIL?</label>
-                    <input type="text" id="estadocivil" name="estadocivil" class="form-control text-center"
-                      value="{{ESTADOCIVIL}}" disabled>
-                  </div>
-
-
-
-                  <div class="col-md-4">
-                    <label for="hijos0a5" class="form-label fw-bold">¿CUANTOS HIJOS?</label>
-                    <input type="text" id="hijos0a5" name="hijos0a5" class="form-control text-center"
-                      value="{{HIJOS0A5}}" disabled>
-                  </div>
-
-
-                  <div class="col-md-12">
-                    <label for="nombreconyuge" class="form-label fw-bold">NOMBRE CONYUGE</label>
-                    <input type="text" id="nombreconyuge" name="nombreconyuge" class="form-select text-center"
-                      value="{{NOMBRECONYUGE}}" disabled>
-                  </div>
-
-                  <div class="col-md-12">
-                    <label for="escolaridadconyuge" class="form-label fw-bold">ESCOLARIDAD CONYUGE</label>
-                    <select id="escolaridadconyuge" class="form-select text-center" name="escolaridadconyuge" required
-                      disabled>
-                      <option>{{ESCOLARIDADCONYUGE}}</option>
-                      <option>SIN DATO</option>
-                      <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
-                      <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA</option>
-                      <option>SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLET</option>
-                      <option>EDUC. TÉCNICA COMPLETA O NORMAL BÁSICA</option>
-                      <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
-                      <option>EDUC. SUPERIOR O NORMAL SUP. COMP./ POSTGRADO INC</option>
-                      <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTORADO) COMPL</option>
-                    </select>
-                  </div>
-
-
-                  <div class="col-md-12">
-                    <label for="actividadconyuge" class="form-label fw-bold">ESCOLARIDAD CONYUGE</label>
-                    <select id="actividadconyuge" class="form-select text-center" name="actividadconyuge" required
-                      disabled>
-                      <option>{{ACTIVIDADCONYUGE}}</option>
-                      <option>SIN DATO</option>
-                      <option>AMA DE CASA</option>
-                      <option>DESEMPLEADO</option>
-                      <option>JUBILADO O PENSIONADO</option>
-                      <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
-                      <option>ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO ETC)</option>
-                      <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC).</option>
-                      <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLEMERO, ETC)</option>
-                      <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
-                      <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
-                      <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
-                      <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
-                      <option>EMPLEADO DE GOB. MUNICIPAL, ESTATAL O FED. (INCLUYE MILITAR)</option>
-                      <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
-                      <option>EMPLEADO DE INST. GUBERNAMENTAL. DECENTR. /IMSS,ISSTE,ETC)</option>
-                      <option>COMERCIANTE (PROPIETARIO DE ESTAB. COMERCIAL)</option>
-                      <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.</option>
-                      <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
-                      <option>PROPIETARIO DE CASAS EN RENTA</option>
-                      <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING., ETC)</option>
-                      <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC).</option>
-                      <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNIC.EST. O FED.</option>
-                      <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
-                      <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
-                      <option>NINGUNA DE LAS ANTERIORES</option>
-                    </select>
-                  </div>
-                </div>
-        </form>
-      </div>
-    </div>
-    <div class="text-center mt-4"> <!-- Agregar margen superior -->
-      <button class="btn btn-outline-primary" type="button" id="btn_act">Habilitar edición</button>
-      <button class="btn btn-outline-primary d-none" type="submit" id="btn_update">Actualizar</button>
-    </div>
-  </div>
-  </div>
+            <!-- Décima fila - Nombre padre, Nombre madre -->
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="nombrepadre" class="form-label fw-bold">NOMBRE PADRE</label>
+                <input type="text" id="nombrepadre" name="nombrepadre" class="form-control text-center"
+                  value="{{NOMBREPADRE}}" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="tamanocasa" class="form-label fw-bold">¿TAMAÑO DE LA CASA?</label>
+                <select id="tamanocasa" class="form-select text-center" name="tamanocasa" disabled>
+                  <option>{{TAMANOCASA}}</option>
+                  <option>SIN DATO</option>
+                  <option>MENOS DE 100 m2</option>
+                  <option>DE 101 A 200 m2</option>
+                  <option>DE 201 A 300 m2</option>
+                  <option>DE 301 A 500 m2</option>
+                  <option>MÁS DE 500 m2</option>
+                </select>
+              </div>
+            </div>
+            <div class="row g-3 mt-2">
+              <div class="col-md-6">
+                <label for="nombremadre" class="form-label fw-bold">NOMBRE MADRE</label>
+                <input type="text" id="nombremadre" name="nombremadre" class="form-control text-center"
+                  value="{{NOMBREMADRE}}" disabled>
+              </div>
+              <div class="col-md-6">
+                <label for="infresofamiliar" class="form-label fw-bold">¿CUÁNTO ES EL INGRESO FAMILIAR?</label>
+                <select id="infresofamiliar" class="form-select text-center" name="infresofamiliar" disabled>
+                  <option>{{INFRESOFAMILIAR}}</option>
+                  <option>SIN DATO</option>
+                  <option>MENOS DE $1,950</option>
+                  <option>ENTRE $1,951 Y $3,900</option>
+                  <option>ENTRE $3,901 Y $6,500</option>
+                  <option>ENTRE $6,501 Y $13,000</option>
+                  <option>ENTRE $13,001 Y $26,500</option>
+                  <option>ENTRE $26,501 Y $40,000</option>
+                  <option>ENTRE $40,001 Y $53,500</option>
+                  <option>ENTRE $53,501 Y $67,000</option>
+                  <option>ENTRE $67,001 Y $80,000</option>
+                  <option>MÁS DE $80,001</option>
+                </select>
+              </div>
+              <div class="col-md-12 text-start">
+                <label for="trabajas" class="form-label fw-bold">¿Trabajas?</label>
+                <select id="trabajas" class="form-select text-center" name="trabajas" disabled>
+                  <option>{{TRABAJAS}}</option>
+                  <option>SIN DATO</option>
+                  <option>SI</option>
+                  <option>NO</option>
+                </select>
+              </div>
+              <div class="col-md-12">
+                <label for="ACTIVIDADTRABAJAS" class="form-label fw-bold">ATIVIDAD TRABAJAS </label>
+                <select id="ACTIVIDADTRABAJAS" class="form-select text-center" name="ACTIVIDADTRABAJAS" disabled>
+                  <option>{{ACTIVIDADTRABAJAS}}</option>
+                  <option>{{ACTIVIDADTRABAJAS}}</option>
+                  <option>SIN DATO</option>
+                  <option>AMA DE CASA</option>
+                  <option>DESEMPLEADO</option>
+                  <option>JUBILADO O PENScFIONADO</option>
+                  <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
+                  <option>ARTESANO (PRODUCTO DE MADERA, BARRO, CUERO, YESO, ETC)</option>
+                  <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO ETC)</option>
+                  <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLOMERO, ETC)</option>
+                  <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
+                  <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                  <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
+                  <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
+                  <option>EMPLEADO DE GOB. MUNIC.ESTATAL O FED, (INCLUYE MILITAR)</option>
+                  <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                  <option>EMPLEADO DE INST. GUBERNAMENT.DESCENTR.(IMSS. ISSSTE. ETC)</option>
+                  <option>COMERCIANTE (PROPIETARIO DE ESTABLECIMIENTO COMERCIAL)</option>
+                  <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.)</option>
+                  <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                  <option>PROPIETARIO DE CASAS EN RENTA</option>
+                  <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING, ETC)</option>
+                  <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC).</option>
+                  <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNICP. EST. O FED</option>
+                  <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                  <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                  <option>NINGUNA DE LAS ANTERIORES</option>
+                </select>
+              </div>
+              <div class="col-md-auto">
+                <label for="personasdependeningreso" class="form-label fw-bold">¿CUANTAS PERSONAS DEPENDEN DEL
+                  INGRESO?</label>
+                <input type="text" id="personasdependeningreso" name="personasdependeningreso"
+                  class="form-control text-center" value="{{PERSONASDEPENDENINGRESO}}" disabled>
+              </div>
+              <div class="col-md-auto">
+                <label for="vivenencasa" class="form-label fw-bold">¿ CUANTAS PEROSNAS VIVEN EN CASA?</label>
+                <input type="text" id="vivenencasa" name="vivenencasa" class="form-control text-center"
+                  value="{{VIVENENCASA}}" disabled>
+              </div>
+              <div class="col-md-auto">
+                <label for="hermanos" class="form-label fw-bold">¿CUANTOS HERMNOS?</label>
+                <input type="text" id="hermanos" name="hermanos" class="form-control text-center" value="{{HERMANOS}}"
+                  disabled>
+              </div>
+              <div class="col-md-auto">
+                <label for="lugarnacimiento" class="form-label fw-bold">¿lUGAR DE NACIMIENTO?</label>
+                <input type="text" id="lugarnacimiento" name="lugarnacimiento" class="form-control text-center"
+                  value="{{LUGARNACIMIENTO}}" disabled>
+              </div>
+              <div class="col-md-auto">
+                <label for="hermanosestudian" class="form-label fw-bold">¿cuantos hermnos estudian ?</label>
+                <input type="text" id="hermanosestudian" name="hermanosestudian" class="form-control text-center"
+                  value="{{HERMANOSESTUDIAN}}" disabled>
+              </div>
+              <div class="col-md-auto">
+                <label for="horariotrabajo" class="form-label fw-bold">¿HORARIOS DE TRABAJO?</label>
+                <input type="text" id="horariotrabajo" name="horariotrabajo" class="form-control text-center"
+                  value="{{HORARIOTRABAJO}}" disabled>
+              </div>
+              <div class="col-md-auto">
+                <label for="estadocivil" class="form-label fw-bold">¿ESTADO CIVIL?</label>
+                <input type="text" id="estadocivil" name="estadocivil" class="form-control text-center"
+                  value="{{ESTADOCIVIL}}" disabled>
+              </div>
+              <div class="col-md-4">
+                <label for="hijos0a5" class="form-label fw-bold">¿CUANTOS HIJOS?</label>
+                <input type="text" id="hijos0a5" name="hijos0a5" class="form-control text-center" value="{{HIJOS0A5}}"
+                  disabled>
+              </div>
+              <div class="col-md-12">
+                <label for="nombreconyuge" class="form-label fw-bold">NOMBRE CONYUGE</label>
+                <input type="text" id="nombreconyuge" name="nombreconyuge" class="form-select text-center"
+                  value="{{NOMBRECONYUGE}}" disabled>
+              </div>
+              <div class="col-md-12">
+                <label for="escolaridadconyuge" class="form-label fw-bold">ESCOLARIDAD CONYUGE</label>
+                <select id="escolaridadconyuge" class="form-select text-center" name="escolaridadconyuge" disabled>
+                  <option>{{ESCOLARIDADCONYUGE}}</option>
+                  <option>SIN DATO</option>
+                  <option>SIN ESCOLARIDAD / ALGUNOS AÑOS DE PRIMARIA</option>
+                  <option>PRIMARIA TERMINADA / SECUNDARIA INCOMPLETA</option>
+                  <option>SECUNDARIA O COMERCIAL TERMINADA / BACH. INCOMPLET</option>
+                  <option>EDUC. TÉCNICA COMPLETA O NORMAL BÁSICA</option>
+                  <option>BACHILLERATO COMPLETO / EDUC. SUPERIOR INCOMPLETA</option>
+                  <option>EDUC. SUPERIOR O NORMAL SUP. COMP./ POSTGRADO INC</option>
+                  <option>ESTUDIOS DE POSTGRADO (MAESTRÍA O DOCTORADO) COMPL</option>
+                </select>
+              </div>
+              <div class="col-md-12">
+                <label for="actividadconyuge" class="form-label fw-bold">ESCOLARIDAD CONYUGE</label>
+                <select id="actividadconyuge" class="form-select text-center" name="actividadconyuge" disabled>
+                  <option>{{ACTIVIDADCONYUGE}}</option>
+                  <option>SIN DATO</option>
+                  <option>AMA DE CASA</option>
+                  <option>DESEMPLEADO</option>
+                  <option>JUBILADO O PENSIONADO</option>
+                  <option>PEQUEÑO COMERCIANTE (INSTALADO O AMBULANTE)</option>
+                  <option>ARTESANO (PRODUCTOS DE MADERA, BARRO, CUERO, YESO ETC)</option>
+                  <option>PEQUEÑO AGRICULTOR, GANADERO O PESCADOR, CAMPESINO, ETC).</option>
+                  <option>PRESTADOR DE SERVICIOS PERSONALES (JARDINERO, PLEMERO, ETC)</option>
+                  <option>OBRERO DE LA INDUSTRIA O MAQUILADORA</option>
+                  <option>OPERADOR DE TRANSPORTE (CHOFER, TAXISTA, FLETERO)</option>
+                  <option>MAESTRO DE PREESCOLAR, PRIMARIA O SECUNDARIA</option>
+                  <option>EMPLEADO DE ESTABLECIMIENTOS COMERCIALES O DE SERVICIOS</option>
+                  <option>EMPLEADO DE GOB. MUNICIPAL, ESTATAL O FED. (INCLUYE MILITAR)</option>
+                  <option>EMPLEADO DE LA INDUSTRIA O DE LA BANCA</option>
+                  <option>EMPLEADO DE INST. GUBERNAMENTAL. DECENTR. /IMSS,ISSTE,ETC)</option>
+                  <option>COMERCIANTE (PROPIETARIO DE ESTAB. COMERCIAL)</option>
+                  <option>GANADERO Y/O PRODUCTOR AGRÍCOLA (PROPIETARIO O COPROPIET.</option>
+                  <option>PROFESOR DE BACHILLER O UNIVERSIDAD (INCLUYE FUNCIONARIOS)</option>
+                  <option>PROPIETARIO DE CASAS EN RENTA</option>
+                  <option>PROFESIONISTA QUE TRABAJA POR SU CUENTA (MÉDICO, ING., ETC)</option>
+                  <option>DIRECTIVO DE EMPRESA (SUBGERENTE, GERENTE, DIRECTOR, ETC).</option>
+                  <option>FUNCIONARIO (MEDIO ALTO) DE INST. GUBERN. MUNIC.EST. O FED.</option>
+                  <option>EMPRESARIO, ACCIONISTA DE EMPRESAS</option>
+                  <option>POLÍTICO (PUESTO DE ELECCIÓN POPULAR)</option>
+                  <option>NINGUNA DE LAS ANTERIORES</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+          <div class="btn-group" role="group" aria-label="Botones de edición">
+            <button class="btn btn-outline-primary btn-lg px-4 py-2 shadow-sm hover-shadow" type="button" id="btn_act">
+              Habilitar edición
+            </button>
+            <button class="btn btn-primary btn-lg px-4 py-2 shadow-sm hover-shadow d-none" type="submit"
+              id="btn_update">
+              Actualizar
+            </button>
+          </div>
+        </div>
 </section>
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-
-
-
-<script>
-  // Ajusta las fechas
-  const fech_nacimiento_ini = document.getElementById("fech_nacimiento_ini");
-  const fech_nacimiento = document.getElementById("fech_nacimiento");
-  fech_nacimiento.value = formatDate(fech_nacimiento_ini.value);
-
-  // Hablita todos los input para editar
-  const btn_act = document.getElementById("btn_act");
-  const btn_update = document.getElementById("btn_update");
-
-  btn_act.addEventListener("click", () => {
-    btn_act.classList.add("d-none");
-    btn_update.classList.remove("d-none");
-
-    let inputs = document.querySelectorAll("input, select, textarea");
-    inputs.forEach(input => input.disabled = false);
-
-    // Manda al principio de la pagina
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  });
-
-  // Botones de oculta y mostrar 
-  function toggleCard(cardId, buttonId) {
-    const card = document.getElementById(cardId);
-    const toggleButton = document.getElementById(buttonId);
-
-    if (card.style.display === "none") {
-      card.style.display = "block";
-      toggleButton.textContent = "Ocultar " + cardId.replace('_', ' ');
-    } else {
-      card.style.display = "none";
-      toggleButton.textContent = "Mostrar " + cardId.replace('_', ' ');
-    }
-  }
-</script>
 <script src="/js/helpers/filtraPorEstatus.js"></script>
 
 
+{{!-- SCRIPT DE FECHAS Y INPUTS DE HABILITAR BOTONES Y DESABILITAR BOTON-<-2-> --}}
+  <script>
+    const fech_nacimiento_ini = document.getElementById("fech_nacimiento_ini");
+    const fech_nacimiento = document.getElementById("fech_nacimiento");
+    fech_nacimiento.value = formatDate(fech_nacimiento_ini.value);
+    const btn_act = document.getElementById("btn_act");
+    const btn_update = document.getElementById("btn_update");
 
-<style>
-  .nav-link {
-    margin: 5px;
-    transition: all 0.3s ease;
-  }
+    btn_act.addEventListener("click", () => {
+      btn_act.classList.add("d-none");
+      btn_update.classList.remove("d-none");
+      let inputs = document.querySelectorAll("input, select, textarea");
+      inputs.forEach(input => input.disabled = false);
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+    function toggleCard(cardId, buttonId) {
+      const card = document.getElementById(cardId);
+      const toggleButton = document.getElementById(buttonId);
+      if (card.style.display === "none") {
+        card.style.display = "block";
+        toggleButton.textContent = "Ocultar " + cardId.replace('_', ' ');
+      } else {
+        card.style.display = "none";
+        toggleButton.textContent = "Mostrar " + cardId.replace('_', ' ');
+      }
+    }
+  </script>
 
-  .nav-link:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+  {{!-- SCRIPT DEL LOS FORMATOS AUTORELLENABLES DE LOS FORMATO DE TITULACION--}}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function copiarValor(origenId, destinoIds) {
+        const origen = document.getElementById(origenId);
+        if (origen) {
+          origen.addEventListener("input", function () {
+            destinoIds.forEach(destinoId => {
+              const destino = document.getElementById(destinoId);
+              if (destino) {
+                destino.removeAttribute("disabled");
+                destino.value = this.value;
+              }
+            });
+          });
+        }
+      }
+      copiarValor("folio_cerlic", ["folio_aexlic", "folio_csslic"]);
+      copiarValor("libro_cerlic", ["libro_aexlic", "libro_csslic"]);
+      copiarValor("foja_cerlic", ["foja_aexlic", "foja_csslic"]);
+    });
 
-  .card {
-    border-radius: 10px;
-  }
-</style>
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function copiarValor(origenId, destinoIds) {
+        const origen = document.getElementById(origenId);
+        if (origen) {
+          origen.addEventListener("input", function () {
+            destinoIds.forEach(destinoId => {
+              const destino = document.getElementById(destinoId);
+              if (destino) {
+                destino.removeAttribute("disabled");
+                destino.value = this.value;
+              }
+            });
+          });
+        }
+      }
+      copiarValor("folio_certificado_tsu", ["folio_css", "folio_cex"]);
+      copiarValor("libro_certificado_tsu", ["libro_css", "libro_cex"]);
+      copiarValor("fojas_certificado_tsu", ["fojas_css", "fojas_cex"]);
+    });
+  </script>

@@ -724,14 +724,12 @@
           </div>
           <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
             <div class="col-md-4 text-center">
-              <label for="ESTATUS_DOCTOS_TSU_FECHA" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
-              <input type="text" id="ESTATUS_DOCTOS_TSU_FECHA" name="ESTATUS_DOCTOS_TSU_FECHA"
-                class="form-control text-center" value="{{ESTATUS_DOCTOS_TSU_FECHA}}" disabled>
+              <label for="CARRERACOMPLETO" class="form-label">FECHA DOCUMENTOS DOCTOS</label>
+              <input type="text" id="CARRERACOMPLETO" name="CARRERACOMPLETO"
+                class="form-control text-center" value="{{CARRERACOMPLETO}}" disabled>
             </div>
           </div>
           <hr>
-
-
           <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
             <div class="col-md-4 text-center">
               <label for="folio_certificado_tsu" class="form-label">FOLIO CERTITIFICADO TSU</label>
@@ -749,21 +747,20 @@
                 class="form-control text-center" value="{{FOJAS_CERTIFICADO_TSU}}" disabled>
             </div>
             <div class="col-md-4 text-center">
-              <label for="folio_titulo_tsu" class="form-label">FOLIO TITULO TSU </label>
-              <input type="text" id="folio_titulo_tsu" name="folio_titulo_tsu" class="form-control text-center"
-                value="{{FOLIO_TITULO_TSU}}" disabled>
+              <label for="folio_cex" class="form-label">FOLIO CEX TSU</label>
+              <input type="text" id="folio_cex" name="folio_cex" class="form-control text-center" value="{{FOLIO_CEX}}"
+                disabled>
             </div>
             <div class="col-md-4 text-center">
-              <label for="libro_titulo_tsu" class="form-label">LIBRO TITULO TSU </label>
-              <input type="text" id="libro_titulo_tsu" name="libro_titulo_tsu" class="form-control text-center"
-                value="{{LIBRO_TITULO_TSU}}" disabled>
+              <label for="libro_cex" class="form-label">LIBRO CEX TSU</label>
+              <input type="text" id="libro_cex" name="libro_cex" class="form-control text-center" value="{{LIBRO_CEX}}"
+                disabled>
             </div>
             <div class="col-md-4 text-center">
-              <label for="fojas_titulo_tsu" class="form-label">FOJA TITULO TSU </label>
-              <input type="text" id="fojas_titulo_tsu" name="fojas_titulo_tsu" class="form-control text-center"
-                value="{{FOJAS_TITULO_TSU}}" disabled>
+              <label for="fojas_cex" class="form-label">FOJA CEX TSU </label>
+              <input type="text" id="fojas_cex" name="fojas_cex" class="form-control text-center" value="{{FOJAS_CEX}}"
+                disabled>
             </div>
-
             <div class="col-md-4 text-center">
               <label for="folio_css" class="form-label">FOLIO CSS TSU</label>
               <input type="text" id="folio_css" name="folio_css" class="form-control text-center" value="{{FOLIO_CSS}}"
@@ -779,21 +776,20 @@
               <input type="text" id="fojas_css" name="fojas_css" class="form-control text-center" value="{{FOJAS_CSS}}"
                 disabled>
             </div>
-            {{!-- --}}
             <div class="col-md-4 text-center">
-              <label for="folio_cex" class="form-label">FOLIO CEX TSU</label>
-              <input type="text" id="folio_cex" name="folio_cex" class="form-control text-center" value="{{FOLIO_CEX}}"
-                disabled>
+              <label for="libro_titulo_tsu" class="form-label">FOLIO TITULO TSU </label>
+              <input type="text" id="libro_titulo_tsu" name="libro_titulo_tsu" class="form-control text-center"
+                value="{{LIBRO_TITULO_TSU}}" disabled>
             </div>
             <div class="col-md-4 text-center">
-              <label for="libro_cex" class="form-label">LIBRO CEX TSU</label>
-              <input type="text" id="libro_cex" name="libro_cex" class="form-control text-center" value="{{LIBRO_CEX}}"
-                disabled>
+              <label for="folio_titulo_tsu" class="form-label">LIBRO TITULO TSU </label>
+              <input type="text" id="folio_titulo_tsu" name="folio_titulo_tsu" class="form-control text-center"
+                value="{{FOLIO_TITULO_TSU}}" disabled>
             </div>
             <div class="col-md-4 text-center">
-              <label for="fojas_cex" class="form-label">FOJA CEX TSU </label>
-              <input type="text" id="fojas_cex" name="fojas_cex" class="form-control text-center" value="{{FOJAS_CEX}}"
-                disabled>
+              <label for="fojas_titulo_tsu" class="form-label">FOJA TITULO TSU </label>
+              <input type="text" id="fojas_titulo_tsu" name="fojas_titulo_tsu" class="form-control text-center"
+                value="{{FOJAS_TITULO_TSU}}" disabled>
             </div>
           </div>
         </div>
@@ -1242,4 +1238,20 @@
     }
   </script>
 
-  
+
+  {{!-- Script del formto de fechas --}}
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const fechaInput = document.getElementById("CARRERACOMPLETO");
+
+      if (fechaInput && fechaInput.value) {
+        const fecha = new Date(fechaInput.value);
+        const dia = fecha.getDate().toString().padStart(2, "0");
+        const mes = (fecha.getMonth() + 1).toString().padStart(2, "0"); // Los meses van de 0 a 11
+        const anio = fecha.getFullYear();
+
+        fechaInput.value = `${dia}/${mes}/${anio}`;
+      }
+    });
+  </script>

@@ -263,6 +263,9 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
     CARRERACOMPLETO: body?.CARRERACOMPLETO,
     ESTATUS_DOCTOS_TSU_FECHA: body?.ESTATUS_DOCTOS_TSU_FECHA,
     NIVELCOMPLETO: body?.NIVELCOMPLETO,
+    NUM_CEDULA_TSU: body?.NUM_CEDULA_TSU,
+    NUM_CEDULA_LIC: body?.NUM_CEDULA_LIC,
+
   };
 
   await Alumno.findByIdAndUpdate(body?.matricula, data);

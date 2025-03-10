@@ -1035,37 +1035,6 @@
     }
   });
 
-  // Toggle visibility function
-  function toggleCard(cardId, buttonId) {
-    const card = document.getElementById(cardId);
-    const toggleButton = document.getElementById(buttonId);
-
-    if (card.style.display === "none") {
-      card.style.display = "block";
-      toggleButton.textContent = "Ocultar " + cardId.replace('_', ' ');
-    } else {
-      card.style.display = "none";
-      toggleButton.textContent = "Mostrar " + cardId.replace('_', ' ');
-    }
-  }
-
-  // Preview image before upload
-  const imgInput = document.getElementById('imgInput');
-  const imgCurrent = document.getElementById('imgCurrent');
-
-  if (imgInput && imgCurrent) {
-    imgInput.addEventListener('change', function () {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          imgCurrent.src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-</script>
 <style>
   .nav-link {
     margin: 5px;

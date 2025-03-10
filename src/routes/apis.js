@@ -636,7 +636,6 @@ router.get("/calificaciones", async (req, res) => {
       data, // Responder con los datos filtrados
     });
 
-    console.log("Datos recibidos de la API:", data);
   } catch (error) {
     console.error(error);
     res.json({

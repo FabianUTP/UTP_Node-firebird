@@ -1242,47 +1242,4 @@
     }
   </script>
 
-  {{!-- SCRIPT DEL LOS FORMATOS AUTORELLENABLES DE LOS FORMATO DE TITULACION--}}
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      function copiarValor(origenId, destinoIds) {
-        const origen = document.getElementById(origenId);
-        if (origen) {
-          origen.addEventListener("input", function () {
-            destinoIds.forEach(destinoId => {
-              const destino = document.getElementById(destinoId);
-              if (destino) {
-                destino.removeAttribute("disabled");
-                destino.value = this.value;
-              }
-            });
-          });
-        }
-      }
-      copiarValor("folio_cerlic", ["folio_aexlic", "folio_csslic"]);
-      copiarValor("libro_cerlic", ["libro_aexlic", "libro_csslic"]);
-      copiarValor("foja_cerlic", ["foja_aexlic", "foja_csslic"]);
-    });
-
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      function copiarValor(origenId, destinoIds) {
-        const origen = document.getElementById(origenId);
-        if (origen) {
-          origen.addEventListener("input", function () {
-            destinoIds.forEach(destinoId => {
-              const destino = document.getElementById(destinoId);
-              if (destino) {
-                destino.removeAttribute("disabled");
-                destino.value = this.value;
-              }
-            });
-          });
-        }
-      }
-      copiarValor("folio_certificado_tsu", ["folio_css", "folio_cex"]);
-      copiarValor("libro_certificado_tsu", ["libro_css", "libro_cex"]);
-      copiarValor("fojas_certificado_tsu", ["fojas_css", "fojas_cex"]);
-    });
-  </script>
+  

@@ -642,13 +642,13 @@
           <div class="row g-3 justify-content-center"> <!-- Centrar los campos -->
             <div class="col-md-4 text-center">
               <label for="NIVELCOMPLETO" class="form-label fw-bold">Estatus de Documentos</label>
-              <select id="NIVELCOMPLETO" class="form-select text-center border-primary" name="NIVELCOMPLETO"
-                disabled>
+              <select id="NIVELCOMPLETO" class="form-select text-center border-primary" name="NIVELCOMPLETO" disabled>
                 <option selected>{{NIVELCOMPLETO}}</option>
+                <option value="SIN INICIAR">SIN INICIAR</option>
                 <option value="EN EMISIÓN">EN EMISIÓN</option>
                 <option value="ENTREGADOS">ENTREGADOS</option>
                 <option value="LISTOS PARA ENTREGA">LISTOS PARA ENTREGA</option>
-                <option value="SIN INICIAR">SIN INICIAR</option>
+
               </select>
             </div>
 
@@ -767,10 +767,10 @@
               <select id="ESTATUS_DOCTOS_TSU" class="form-select text-center border-primary" name="ESTATUS_DOCTOS_TSU"
                 disabled>
                 <option selected>{{ESTATUS_DOCTOS_TSU}}</option>
+                <option>SIN INICIAR</option>
                 <option>EN EMISIÓN</option>
                 <option>ENTREGADOS</option>
                 <option>LISTOS PARA ENTREGA</option>
-                <option>SIN INICIAR</option>
               </select>
             </div>
             <dir>

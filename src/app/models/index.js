@@ -5,6 +5,7 @@ const Ciclos = require("./Ciclos");
 const Niveles = require("./Niveles");
 const AlumnosGrupos = require("./GrupoAlumno");
 const AlumnosNiveles = require("./AlumnoNivel");
+
 const {
   Planes_Mst,
   Planes_Det,
@@ -24,7 +25,6 @@ module.exports = {
   Aspirante,
   Doctos,
   Grupos,
-  //Grup,
   Pagosalum,
   Ciclos,
   CiclosAdmins,
@@ -42,3 +42,5 @@ module.exports = {
   ...profes,
   ...villas,
 };
+
+

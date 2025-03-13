@@ -116,7 +116,7 @@ const mostrarAlumnos = () => {
   table.innerHTML = content;
 };
 
-// Función para guardar la calificación de un alumno
+
 const guardarCalificacion = async (numeroalumno) => {
   const row = document.querySelector(`tr[data-numeroalumno="${numeroalumno}"]`);
   if (!row) return;
@@ -211,7 +211,7 @@ const procesarExcel = (excelData) => {
   });
 };
 
-// Guardar las calificaciones modificadas
+
 // Guardar las calificaciones modificadas
 document.getElementById("guardarCalifBtn").addEventListener("click", async () => {
   const guardarBtn = document.getElementById("guardarCalifBtn");

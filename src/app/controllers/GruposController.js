@@ -86,6 +86,29 @@ GruposCtr.addAlumnoViewProfesores = (req, res) => {
   res.render(profesorespath + "/grupo-edit-alumno-profe")
 }
 
+
+
+
+//Generar alumnos por formato--> para subir arcivos
+
+const adminpath = "admin/alumnos/alumnos/Alumnos_Archivos";
+
+
+
+
+GruposCtr.showAnotheradmin = (req, res) => {
+  res.render(adminpath + '/grupos-list-califi-admin');
+};
+GruposCtr.showByIdAnotheradmin = async (req, res) => {
+  const grupo = await Grupos.findById(req.params.idGrupo);
+  res.render(adminpath + '/grupo-detail-califi-admin', {
+    codigo_grupo: req.params.idGrupo,
+    grupo
+  })
+};
+
+
+
 module.exports = {
   GruposCtr
 };

@@ -303,16 +303,11 @@ AlumnosAdminCtr.boletas = async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
+// Función unificada para mostrar y actualizar alumnos
+AlumnosAdminCtr.showAdmin = (req, res) => {
+  const { search } = req.query;
+  res.render("admin/alumnos/alumnos/Alumnos_Archivos/Alumnos-lista", { search });
+};
 
 
 

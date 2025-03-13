@@ -1,0 +1,102 @@
+
+.excel-header {
+    background-color: #217346;
+    /* Color verde de Excel */
+}
+
+.excel-toolbar {
+    background-color: #f0f0f0;
+}
+
+.excel-button {
+    background-color: #f0f0f0;
+    border: 1px solid #a6a6a6;
+    border-radius: 2px;
+}
+
+.excel-button:hover {
+    background-color: #e3e3e3;
+}
+
+.excel-search-input {
+    border: 1px solid #a6a6a6;
+    border-radius: 2px;
+}
+
+/* Estilos para las celdas */
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #d0d0d0 !important;
+}
+
+/* Efecto hover en filas estilo Excel */
+.table-bordered tbody tr:hover {
+    background-color: #fffde7 !important;
+}
+
+/* Para los estados */
+.estado-activo {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.estado-inactivo {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+/* Números de fila al estilo Excel */
+tbody tr td:first-child {
+    background-color: #e6e6e6;
+    text-align: center;
+    width: 40px;
+}
+
+/* Botón de descarga */
+.btn-custom-download {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #1b5e20;
+    color: white;
+    border: none;
+    z-index: 10;
+}
+
+.btn-custom-download:hover {
+    background-color: #2e7d32;
+    color: white;
+}
+
+/* Divisiones exactas como en la imagen */
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 33%;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    width: 33%;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+    width: 33%;
+}
+
+/* Área no editable y área editable como en la imagen */
+.no-editable {
+    background-color: #f0f0f0;
+}
+
+.editable {
+    background-color: #ffffff;
+}

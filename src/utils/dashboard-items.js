@@ -13,12 +13,17 @@ const admin_items = [
     content: "Ver los grupos existentes y a sus alumnos.",
     link: "/Grupos",
   },
-
   {
     path_img: "./imgs/satisfaccion.png",
     title: "Calificaciones",
     content: "Ver y Subir Calificaciones",
     link: "admin/calificacion",
+  },
+  {
+    path_img: "./imgs/Subirdocumentos.png",
+    title: "Alumnos documentacion",
+    content: "Subir Documentos Alumnos.",
+    link: "/ListaAlumnos",
   },
 ];
 

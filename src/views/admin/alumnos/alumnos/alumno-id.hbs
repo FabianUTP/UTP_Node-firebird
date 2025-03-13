@@ -236,7 +236,7 @@
         <!-- Escolaridad DEL USUARIO-->
         <div class="tab-pane fade profile-overview" id="Escolaridad">
           <div class="row g-3 justify-content-center">
-            <div class="col-md-6 text-center">
+               <div class="col-md-6 text-center">
               <label for="inputcarrera" class="form-label">Carrera</label>
               <select id="inputcarrera" name="nivel" class="form-select text-center" disabled>
                 <option selected value="{{NIVEL}}">{{NIVEL}}</option>
@@ -278,7 +278,15 @@
                 <option selected disabled>--seleccionar estatus--</option>
               </select>
             </div>
- 
+            <div class="col-6 text-center">
+              <label for="inputAddress2" class="form-label">Fecha de registro TSU</label>
+              <input type="date" class="form-control text-center" id="fecha_registro_tsu" name="fecha_registro_tsu"
+                disabled>
+            </div>
+            <div class="col-6 text-center">
+              <label for="inputdate" class="form-label">Ciclo de ingreso TSU</label>
+              <input type="date" class="form-control text-center" id="fecha_itsu" name="fecha_itsu" disabled>
+            </div>
 
             <div class="col-md-6 text-center">
               <label for="INICIO_BACH" class="form-label">Inicio Licenciatura</label>

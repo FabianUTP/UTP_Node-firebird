@@ -36,6 +36,11 @@ router.get("/Alumnos/:id/doctos", AlumnosAdminCtr.doctos);
 router.get("/Alumnos/:id/doctos/:idDocto", AlumnosAdminCtr.showDocto);
 router.get("/Alumnos/:id/boletas", AlumnosAdminCtr.boletas);
 
+
+
+router.get("/ListaAlumnos", AlumnosAdminCtr.showAdmin);
+
+
 //datos para los AlumnosTitulos
 router.get("/titulaciones", AlumnosAdminCtr.showTitul);
 router.get("/titulaciones/nuevo", AlumnosAdminCtr.createViewTitul);
@@ -68,11 +73,11 @@ router.get("/tsu/:id/doctos/:idDocto", AlumnosAdminCtr.showDoctoTSU);
 
 // Rutas para los cuatrimestres
 router.get("/cuatrimestres", CuatrisCtr.index);
-router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Calificacion/Calificaciones.hbs")})
-router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Edicion_ciclos/Edicion_Ciclos.hbs")})
-router.get("/Cuatri-Reins", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Reinscripcion/Reinscripciones.hbs")})
-router.get("/Cuatri-Estadia", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Estadias/Estadias.hbs")})
-router.get("/Cuatri-NIngreso", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Nuevo Ingreso/Nuevo_Ingreso.hbs")})
+router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Calificacion/Calificaciones.hbs") })
+router.get("/Cuatri-Calific", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Edicion_ciclos/Edicion_Ciclos.hbs") })
+router.get("/Cuatri-Reins", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Reinscripcion/Reinscripciones.hbs") })
+router.get("/Cuatri-Estadia", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Estadias/Estadias.hbs") })
+router.get("/Cuatri-NIngreso", (_req, res) => { res.render("../views/admin/config_general/cuatrimestres/Nuevo Ingreso/Nuevo_Ingreso.hbs") })
 router.get("/cuatrimestres/nuevo", CuatrisCtr.showCreate);
 router.post("/cuatrimestres/nuevo", CuatrisCtr.create);
 router.get("/cuatrimestres/:id", CuatrisCtr.showById);
@@ -124,7 +129,7 @@ router.post("/Maestro/:id/update_personalizados", ProfeCtr.update_personalizados
 
 
 // Navbar ___> Titulacion  src\
-router.get("/TitulacionNav", (_req, res) => { res.render("../views/admin/alumnos/alumnos/Titulacion/titulacion-lista.hbs")})
+router.get("/TitulacionNav", (_req, res) => { res.render("../views/admin/alumnos/alumnos/Titulacion/titulacion-lista.hbs") })
 
 
 module.exports = router;

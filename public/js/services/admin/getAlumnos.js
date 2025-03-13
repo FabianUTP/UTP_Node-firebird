@@ -4,7 +4,7 @@ const table = document.getElementById("table-container");
 const inputSearch = document.getElementById("buscar");
 const load = document.getElementById("load");
 
-let limit = 20;
+let limit = 40;
 let skip = 0;
 let search = "";
 let orderBy = "numeroalumno";
@@ -26,7 +26,9 @@ const getAlumnos = async () => {
   // Convertir el valor de búsqueda a mayúsculas
   const upperCaseSearch = search.toUpperCase();
 
+  // Filtrar por nombre y apellido únicamente
   const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${upperCaseSearch}&orderBy=${orderBy}&sort=${sort}`;
+  
   try {
     const res = await fetch(url);
     const { alumnos } = await res.json();
@@ -46,26 +48,29 @@ const getAlumnos = async () => {
       S: "Aspirantes"
     };
 
-    alumnos.forEach((item, i) => {
-      content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
-      content += `<td>${item.NUMEROALUMNO}</td>`;
-      content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
-      content += `<td>${item.NOMBRE}</td>`;
-      content += `<td>${item.MATRICULA}</td>`;
-      content += `<td>${status[item.STATUS] ?? ""}</td>`;
-      content += `<td>${item.NIVEL}</td>`;
-      // content += `<td>${item.ALUMNO_PASSWORD ?? ""}</td>`; // Password change
+    alumnos.forEach((item) => {
+      // Filtrar solo los alumnos que contengan el término de búsqueda en su nombre o apellido
+      if (
+        item.PATERNO.toUpperCase().includes(upperCaseSearch) || 
+        item.MATERNO.toUpperCase().includes(upperCaseSearch) ||
+        item.NOMBRE.toUpperCase().includes(upperCaseSearch)
+      ) {
+        content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
+        content += `<td>${item.NUMEROALUMNO}</td>`;
+        content += `<td>${item.PATERNO} ${item.MATERNO}</td>`;
+        content += `<td>${item.NOMBRE}</td>`;
+        content += `<td>${item.MATRICULA}</td>`;
+        content += `<td>${status[item.STATUS] ?? ""}</td>`;
+        content += `<td>${item.NIVEL}</td>`;
 
+        // TÍTULO LICENCIATURA
+        const proyectoObs = (item.PROYECTO_OBS && item.PROYECTO_OBS !== 0) ? item.PROYECTO_OBS : "";
+        const obsProyectoLic = (item.OBS_PROYECTO_LIC && item.OBS_PROYECTO_LIC !== 0) ? item.OBS_PROYECTO_LIC : "";
 
-      // TÍTULO LICENCIATURA
-
-      // Revisa si las fechas son null o 0, en caso contrario las muestra
-      const proyectoObs = (item.PROYECTO_OBS && item.PROYECTO_OBS !== 0) ? item.PROYECTO_OBS : "";
-      const obsProyectoLic = (item.OBS_PROYECTO_LIC && item.OBS_PROYECTO_LIC !== 0) ? item.OBS_PROYECTO_LIC : "";
-
-      content += `<td>${proyectoObs}</td>`;
-      content += `<td>${obsProyectoLic}</td>`;
-      content += "</tr>";
+        content += `<td>${proyectoObs}</td>`;
+        content += `<td>${obsProyectoLic}</td>`;
+        content += "</tr>";
+      }
     });
 
     table.innerHTML = content;
@@ -76,6 +81,7 @@ const getAlumnos = async () => {
   }
 };
 
+// Funciones para manejar orden y paginación
 const handleOrder = (by) => {
   orderBy = by;
   getAlumnos();
@@ -102,3 +108,12 @@ const next = () => {
 
 // Inicializa la carga de alumnos
 getAlumnos();
+
+// Función de debouncing para optimizar la búsqueda
+function debounce(func, wait = 500) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}

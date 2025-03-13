@@ -17,14 +17,6 @@
   </div>
 
   <script src="/js/services/admin/getCuatrimestresNavbar.js" async></script>
-
-  <div class="search-bar">
-    <form class="search-form d-flex align-items-center" action="/alumnos" method="get">
-      <input type="text" name="search" placeholder="Buscar alumno" title="Enter search keyword" autocomplete="off">
-      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-    </form>
-  </div><!-- End Search Bar -->
-
   {{/if}}
 
     {{!-- Si es alumno, muestra la seleccion del periodo --}}
@@ -80,7 +72,6 @@
               <span>Matrícula: {{ IDAuth }}</span>
             {{/if}}
               {{#if isProfe}}
-              <span>FOLIO PROFESOR {{ IDAuth }}</span>
             {{/if}}
           </li>
           <li>

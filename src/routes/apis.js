@@ -128,6 +128,11 @@ router.get("/grupos_alumnos/:idGrupo", async (req, res) => {
   }
 });
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 //////////////////////////Filtro para calificacion por alumno/////////////////////////////////////////////////////////////////
 
 router.get("/gruposCalifi", async (req, res) => {
@@ -204,8 +209,9 @@ router.get("/gruposCalifi", async (req, res) => {
 });
 
 
+
 router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
-  const { limit = 10, skip = 0 } = req.query;
+  const { limit = 40, skip = 0 } = req.query;
   const idGrupo = req.params.idGrupo;
 
   let sql = `SELECT FIRST ${limit} SKIP ${skip} `;
@@ -311,7 +317,7 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
 
 ////NAVBAR CUATRIMESTRES
 router.get("/cuatris-navbar", async (req, res) => {
-  const { limit = 100 } = req.query;
+  const { limit = 200 } = req.query;
 
   // Obtener los ciclos (limitados por parámetro 'limit')
   const ciclos = await Ciclos.all({
@@ -383,9 +389,9 @@ router.get("/cuatrimestres", async (req, res) => {
 });
 
 
-
+//formato de alumnos
 router.get("/alumnos", async (req, res) => {
-  const { limit = 15, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
+  const { limit = 4500, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
 
   let searchQuery = null;
 

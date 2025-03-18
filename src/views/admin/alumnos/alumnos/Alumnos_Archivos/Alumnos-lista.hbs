@@ -1,277 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla con Columnas Ocultables</title>
+    <title>Documentos Masivos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .checkbox-column {
-            width: 40px;
-            text-align: center;
-        }
-        .hidden-column {
-            display: none;
-        }
-        .column-toggle {
-            cursor: pointer;
-        }
-        .column-toggle:hover {
-            background-color: #e0e0e0;
-        }
 
-        /* Enhanced Administrative UI Theme */
-:root {
-    --admin-primary: #0056b3;
-    --admin-secondary: #343a40;
-    --admin-accent: #007bff;
-    --admin-light: #f8f9fa;
-    --admin-border: #dee2e6;
-    --admin-success: #28a745;
-    --admin-danger: #dc3545;
-    --admin-warning: #ffc107;
-    --admin-text: #212529;
-    --admin-text-light: #6c757d;
-    --admin-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-}
-
-body {
-    background-color: #f2f5f8;
-    color: var(--admin-text);
-    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-/* Main container styling */
-.container {
-    background-color: #ffffff;
-    border-radius: 0.25rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Page title */
-h2 {
-    color: var(--admin-secondary);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--admin-border);
-}
-
-/* Card for column toggles with scrolling */
-.column-toggles-card {
-    background-color: #ffffff;
-    border: 1px solid var(--admin-border);
-    border-radius: 0.25rem;
-    box-shadow: var(--admin-box-shadow);
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-}
-
-.column-toggles-scroll {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
-    scrollbar-width: thin; /* For Firefox */
-}
-
-.column-toggles-scroll::-webkit-scrollbar {
-    height: 6px;
-}
-
-.column-toggles-scroll::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
-}
-
-.column-toggles-scroll::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 3px;
-}
-
-.column-toggles-scroll::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-}
-
-/* Column toggle styling */
-.form-check-inline {
-    flex: 0 0 auto;
-    margin-right: 1rem;
-    margin-bottom: 0.5rem;
-    background-color: #f8f9fa;
-    border: 1px solid var(--admin-border);
-    border-radius: 0.25rem;
-    padding: 0.375rem 0.75rem;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-.form-check-inline:hover {
-    background-color: #e9ecef;
-    border-color: #ced4da;
-}
-
-.form-check-input {
-    margin-top: 0.2rem;
-    margin-right: 0.375rem;
-}
-
-.form-check-label {
-    color: var(--admin-text);
-    font-size: 0.875rem;
-}
-
-/* Button styling - more square and spaced */
-.btn {
-    font-weight: 500;
-    border-radius: 0.25rem;
-    padding: 0.5rem 1rem;
-    margin-right: 0.75rem;
-    margin-bottom: 0.5rem;
-    transition: all 0.2s ease;
-    text-transform: none;
-    letter-spacing: normal;
-    box-shadow: var(--admin-box-shadow);
-}
-
-.btn:last-child {
-    margin-right: 0;
-}
-
-.btn-primary {
-    background-color: var(--admin-primary);
-    border-color: var(--admin-primary);
-    color: white;
-}
-
-.btn-primary:hover, .btn-primary:focus {
-    background-color: #004494;
-    border-color: #004494;
-}
-
-.btn-secondary {
-    background-color: #ffffff;
-    border-color: var(--admin-border);
-    color: var(--admin-text);
-}
-
-.btn-secondary:hover {
-    background-color: #f1f3f5;
-    border-color: #ced4da;
-}
-
-.btn-success {
-    background-color: var(--admin-success);
-    border-color: var(--admin-success);
-}
-
-.btn-danger {
-    background-color: var(--admin-danger);
-    border-color: var(--admin-danger);
-}
-
-/* Action button container */
-.action-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border: 1px solid var(--admin-border);
-    border-radius: 0.25rem;
-    margin-top: 1.5rem;
-    box-shadow: var(--admin-box-shadow);
-}
-
-/* Table styling */
-.table-card {
-    border: 1px solid var(--admin-border);
-    border-radius: 0.25rem;
-    box-shadow: var(--admin-box-shadow);
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-}
-
-.table {
-    margin-bottom: 0;
-}
-
-.table thead th {
-    background-color: #f1f3f5;
-    color: var(--admin-secondary);
-    font-weight: 600;
-    font-size: 0.85rem;
-    padding: 0.75rem;
-    vertical-align: middle;
-    border-bottom: 2px solid var(--admin-border);
-    border-top: none;
-}
-
-.table tbody td {
-    padding: 0.75rem;
-    vertical-align: middle;
-    border-color: var(--admin-border);
-}
-
-.table tbody tr:hover {
-    background-color: rgba(0, 123, 255, 0.05);
-}
-
-/* Form controls */
-.form-control, .form-control-sm {
-    border: 1px solid var(--admin-border);
-    border-radius: 0.25rem;
-    color: var(--admin-text);
-    padding: 0.375rem 0.75rem;
-    font-size: 0.875rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.form-control:focus, .form-control-sm:focus {
-    border-color: var(--admin-accent);
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-/* Loading indicator */
-.spinner-border {
-    color: var(--admin-accent);
-}
-
-/* Action bar */
-.mt-3 {
-    padding-top: 1rem;
-    margin-top: 1.5rem !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-    
-    .btn {
-        margin-bottom: 0.5rem;
-    }
-}
-    </style>
 </head>
+
 <body>
     <div class="container mt-4">
-        <h2>Tabla con Columnas Ocultables</h2>
-        
+        <h2>Documentos Masivos</h2>
         <div class="mb-3">
             <div class="form-check form-check-inline" id="column-toggles">
                 <!-- Los checkboxes de columnas se generarán dinámicamente -->
             </div>
         </div>
-        
-        <div class="table-responsive">
-            <table class="table table-bordered align-middle m-0">
-                <thead style="background-color: #e6e6e6;" id="table-header">
+        <div id="scroll-container" class="table-responsive">
+            <table class="table table-bordered align-middle m-0" id="table-container">
+                <thead id="table-header">
                     <!-- El encabezado se generará dinámicamente -->
                 </thead>
                 <tbody id="table-container">
@@ -279,338 +27,796 @@ h2 {
                 </tbody>
             </table>
         </div>
-        
-        <div id="load" class="text-center mt-3" style="display: none;">
+        <div id="load" class="text-center mt-3">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Cargando...</span>
             </div>
         </div>
-        
         <div class="mt-3">
-            <button id="save-all-btn" class="btn btn-primary">Guardar Todos los Cambios</button>
+            <button id="save-all-btn" type="button" class="btn btn-primary">Guardar Cambios</button>
         </div>
     </div>
-
-    <script>
-        const table = document.getElementById("table-container");
-        const tableHeader = document.getElementById("table-header");
-        const columnToggles = document.getElementById("column-toggles");
-        const load = document.getElementById("load");
-        const saveAllBtn = document.getElementById("save-all-btn");
-
-        let skip = 0;
-        let orderBy = "numeroalumno";
-        let sort = "asc";
-        let cambios = {}; // Objeto para almacenar los cambios
-        let columnasVisibles = {}; // Objeto para almacenar la visibilidad de las columnas
-
-        // Definir columnas
-        const columnas = [
-            { id: "numeroalumno", nombre: "Número", visible: true },
-            { id: "nombre", nombre: "Nombre", visible: true },
-            { id: "matricula", nombre: "Matrícula", visible: true },
-            { id: "estadocivil", nombre: "Estado Civil", visible: true },
-            { id: "email", nombre: "EMAIL", visible: true },
-            { id: "email_alterno", nombre: "EMAIL ALTER", visible: true },
-            { id: "imss", nombre: "IMSS", visible: true },
-            { id: "estatus_doctos", nombre: "ESTATUS TSU", visible: true },
-            { id: "fecha_doctos", nombre: "FECHA TSU", visible: true }
-            
-        ];
-
-        // Inicializar el estado de visibilidad de columnas
-        columnas.forEach(columna => {
-            columnasVisibles[columna.id] = columna.visible;
-        });
-
-        // Formatear fecha para el input (MM/DD/YYYY)
-        const formatDateToInput = (dateStr) => {
-            if (!dateStr) return "";
-            const [year, month, day] = dateStr.split("-");
-            return `${month}/${day}/${year}`;
-        };
-
-        // Formatear fecha para la API (YYYY-MM-DD)
-        const formatDateToDB = (dateStr) => {
-            if (!dateStr) return "";
-            const [month, day, year] = dateStr.split("/");
-            return `${year}-${month}-${day}`;
-        };
-
-        // Generar checkboxes para controlar la visibilidad de las columnas
-        const generarColumnToggles = () => {
-            columnToggles.innerHTML = "";
-            
-            columnas.forEach(columna => {
-                const checkboxContainer = document.createElement("div");
-                checkboxContainer.className = "form-check form-check-inline";
-                
-                const checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.className = "form-check-input";
-                checkbox.id = `toggle-${columna.id}`;
-                checkbox.checked = columnasVisibles[columna.id];
-                checkbox.addEventListener("change", () => {
-                    toggleColumnaVisibilidad(columna.id);
-                });
-                
-                const label = document.createElement("label");
-                label.className = "form-check-label";
-                label.htmlFor = `toggle-${columna.id}`;
-                label.textContent = columna.nombre;
-                
-                checkboxContainer.appendChild(checkbox);
-                checkboxContainer.appendChild(label);
-                columnToggles.appendChild(checkboxContainer);
-            });
-        };
-
-        // Generar encabezado de la tabla
-        const generarEncabezado = () => {
-            const tr = document.createElement("tr");
-            
-            columnas.forEach(columna => {
-                const th = document.createElement("th");
-                th.scope = "col";
-                th.textContent = columna.nombre;
-                th.className = columnasVisibles[columna.id] ? "" : "hidden-column";
-                th.dataset.columna = columna.id;
-                tr.appendChild(th);
-            });
-            
-            tableHeader.innerHTML = "";
-            tableHeader.appendChild(tr);
-        };
-
-        // Cambiar visibilidad de una columna
-        const toggleColumnaVisibilidad = (columnaId) => {
-            const checkbox = document.getElementById(`toggle-${columnaId}`);
-            columnasVisibles[columnaId] = checkbox.checked;
-            
-            // Actualizar visibilidad en el encabezado
-            const th = document.querySelector(`th[data-columna="${columnaId}"]`);
-            if (th) {
-                if (checkbox.checked) {
-                    th.classList.remove("hidden-column");
-                } else {
-                    th.classList.add("hidden-column");
-                }
-            }
-            
-            // Actualizar visibilidad en las celdas
-            const celdas = document.querySelectorAll(`td[data-columna="${columnaId}"]`);
-            celdas.forEach(celda => {
-                if (checkbox.checked) {
-                    celda.classList.remove("hidden-column");
-                } else {
-                    celda.classList.add("hidden-column");
-                }
-            });
-        };
-
-        // Obtener alumnos desde la API
-        const getAlumnos = async () => {
-            table.innerHTML = "";
-            load.style.display = "block";
-
-            const url = `api/alumnos?skip=${skip}&orderBy=${orderBy}&sort=${sort}`;
-
-            try {
-                const res = await fetch(url);
-                const { alumnos } = await res.json();
-
-                load.style.display = "none";
-
-                if (!alumnos || alumnos.length === 0) {
-                    table.innerHTML = `<tr><td colspan="${columnas.length}" style="text-align: center;">No se encontraron resultados</td></tr>`;
-                    return;
-                }
-
-                // Generar filas de la tabla
-                alumnos.forEach(item => {
-                    const tr = document.createElement("tr");
-                    
-                    // Columna: Número de alumno
-                    let td = document.createElement("td");
-                    td.textContent = item.NUMEROALUMNO;
-                    td.dataset.columna = "numeroalumno";
-                    if (!columnasVisibles["numeroalumno"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: Nombre
-                    td = document.createElement("td");
-                    td.textContent = item.NOMBRE;
-                    td.dataset.columna = "nombre";
-                    if (!columnasVisibles["nombre"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: Matrícula
-                    td = document.createElement("td");
-                    td.textContent = item.MATRICULA;
-                    td.dataset.columna = "matricula";
-                    if (!columnasVisibles["matricula"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: Estado Civil
-                    td = document.createElement("td");
-                    const inputEstadoCivil = document.createElement("input");
-                    inputEstadoCivil.type = "text";
-                    inputEstadoCivil.className = "form-control form-control-sm";
-                    inputEstadoCivil.value = item.ESTADOCIVIL || "";
-                    inputEstadoCivil.onchange = function() {
-                        guardarCambio(item.NUMEROALUMNO, 'ESTADOCIVIL', this.value);
-                    };
-                    td.appendChild(inputEstadoCivil);
-                    td.dataset.columna = "estadocivil";
-                    if (!columnasVisibles["estadocivil"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: Email
-                    td = document.createElement("td");
-                    const inputEmail = document.createElement("input");
-                    inputEmail.type = "email";
-                    inputEmail.className = "form-control form-control-sm";
-                    inputEmail.value = item.EMAIL || "";
-                    inputEmail.onchange = function() {
-                        guardarCambio(item.NUMEROALUMNO, 'EMAIL', this.value);
-                    };
-                    td.appendChild(inputEmail);
-                    td.dataset.columna = "email";
-                    if (!columnasVisibles["email"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: Email Alterno
-                    td = document.createElement("td");
-                    const inputEmailAlt = document.createElement("input");
-                    inputEmailAlt.type = "email";
-                    inputEmailAlt.className = "form-control form-control-sm";
-                    inputEmailAlt.value = item.EMAIL_ALTERNO || "";
-                    inputEmailAlt.onchange = function() {
-                        guardarCambio(item.NUMEROALUMNO, 'EMAIL_ALTERNO', this.value);
-                    };
-                    td.appendChild(inputEmailAlt);
-                    td.dataset.columna = "email_alterno";
-                    if (!columnasVisibles["email_alterno"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: IMSS
-                    td = document.createElement("td");
-                    const inputImss = document.createElement("input");
-                    inputImss.type = "text";
-                    inputImss.className = "form-control form-control-sm";
-                    inputImss.value = item.NUM_IMSS || "";
-                    inputImss.onchange = function() {
-                        guardarCambio(item.NUMEROALUMNO, 'NUM_IMSS', this.value);
-                    };
-                    td.appendChild(inputImss);
-                    td.dataset.columna = "imss";
-                    if (!columnasVisibles["imss"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: Estatus Doctos TSU
-                    td = document.createElement("td");
-                    const inputEstatus = document.createElement("input");
-                    inputEstatus.type = "text";
-                    inputEstatus.className = "form-control form-control-sm";
-                    inputEstatus.value = item.ESTATUS_DOCTOS_TSU || "";
-                    inputEstatus.onchange = function() {
-                        guardarCambio(item.NUMEROALUMNO, 'ESTATUS_DOCTOS_TSU', this.value);
-                    };
-                    td.appendChild(inputEstatus);
-                    td.dataset.columna = "estatus_doctos";
-                    if (!columnasVisibles["estatus_doctos"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    // Columna: Fecha Doctos TSU
-                    td = document.createElement("td");
-                    const inputFecha = document.createElement("input");
-                    inputFecha.type = "text";
-                    inputFecha.className = "form-control form-control-sm";
-                    inputFecha.value = formatDateToInput(item.ESTATUS_DOCTOS_TSU_FECHA);
-                    inputFecha.placeholder = "MM/DD/YYYY";
-                    inputFecha.onblur = function() {
-                        guardarCambio(item.NUMEROALUMNO, 'ESTATUS_DOCTOS_TSU_FECHA', formatDateToDB(this.value));
-                    };
-                    td.appendChild(inputFecha);
-                    td.dataset.columna = "fecha_doctos";
-                    if (!columnasVisibles["fecha_doctos"]) td.classList.add("hidden-column");
-                    tr.appendChild(td);
-                    
-                    table.appendChild(tr);
-                });
-
-            } catch (error) {
-                console.error("Error al obtener los datos:", error);
-                load.style.display = "none";
-                table.innerHTML = `<tr><td colspan="${columnas.length}" style="text-align: center;">Error al cargar los datos</td></tr>`;
-            }
-        };
-
-        // Guardar cambios en memoria
-        const guardarCambio = (numeroAlumno, campo, valor) => {
-            if (!cambios[numeroAlumno]) {
-                cambios[numeroAlumno] = {};
-            }
-            cambios[numeroAlumno][campo] = valor;
-        };
-
-        // Guardar cambios en la API
-        const guardarCambios = async (numeroAlumno) => {
-            if (!cambios[numeroAlumno] || Object.keys(cambios[numeroAlumno]).length === 0) {
-                alert("No hay cambios para guardar.");
-                return;
-            }
-
-            try {
-                const url = `/api/alumnos/${numeroAlumno}/update`;
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(cambios[numeroAlumno]),
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert("Cambios guardados correctamente.");
-                    delete cambios[numeroAlumno]; // Limpiar cambios
-                    getAlumnos(); // Recargar la tabla
-                } else {
-                    alert("Error al guardar los cambios: " + data.message);
-                }
-            } catch (error) {
-                console.error("Error al guardar los cambios:", error);
-                alert("Error al guardar los cambios. Inténtalo de nuevo.");
-            }
-        };
-
-        // Guardar todos los cambios
-        saveAllBtn.addEventListener('click', async () => {
-            const numAlumnos = Object.keys(cambios);
-            
-            if (numAlumnos.length === 0) {
-                alert("No hay cambios para guardar.");
-                return;
-            }
-            
-            if (confirm(`¿Deseas guardar los cambios de ${numAlumnos.length} alumno(s)?`)) {
-                for (const numeroAlumno of numAlumnos) {
-                    await guardarCambios(numeroAlumno);
-                }
-            }
-        });
-
-        // Inicializar componentes
-        const inicializar = () => {
-            generarColumnToggles();
-            generarEncabezado();
-            getAlumnos();
-        };
-
-        // Iniciar la aplicación
-        inicializar();
-    </script>
 </body>
+
 </html>
+
+
+
+
+<script>
+    const table = document.getElementById("table-container");
+    const tableHeader = document.getElementById("table-header");
+    const columnToggles = document.getElementById("column-toggles");
+    const load = document.getElementById("load");
+    const saveAllBtn = document.getElementById("save-all-btn");
+
+    let skip = 0;
+    let orderBy = "numeroalumno";
+    let sort = "asc";
+    let cambios = {}; // Objeto para almacenar los cambios
+    let columnasVisibles = {}; // Objeto para almacenar la visibilidad de las columnas
+
+    // Definir columnas
+    const columnas = [
+        { id: "numeroalumno", nombre: "Número", visible: false },
+        { id: "nombre", nombre: "Nombre", visible: false },
+        { id: "matricula", nombre: "Matrícula", visible: false },
+        { id: "estadocivil", nombre: "Estado Civil", visible: false },
+        { id: "email", nombre: "EMAIL", visible: false },
+        { id: "email_alterno", nombre: "EMAIL ALTER", visible: false },
+        { id: "imss", nombre: "IMSS", visible: false },
+        { id: "estatus_doctos", nombre: "ESTATUS TSU", visible: false },
+        { id: "fecha_doctos", nombre: "FECHA TSU", visible: false },
+        { id: "celular", nombre: "CELULAR", visible: false },
+        { id: "telefono", nombre: "TELEFONO", visible: false },
+        { id: "proyecto_obs", nombre: "PROYECTO OBS", visible: false },
+        { id: "obs_proyecto_lic", nombre: "LIC PROYECTO OBS ", visible: false },
+        { id: "tel_contacto", nombre: "TELEFONO CONTACTO", visible: false },
+        { id: "tipo_seg_med", nombre: "TIPO DE SEG MEDICO", visible: false },
+        { id: "num_imss", nombre: "NUMERO DE IMSS", visible: false },
+        { id: "num_imss_verificador", nombre: "NUMERO VERIFICADOR IMSS", visible: false },
+        { id: "lenguaindigena", nombre: "lENGUA INDIGENA", visible: false },
+        { id: "discapacidad", nombre: "DISPACIDADES", visible: false },
+        { id: "ENFERNEDAD", nombre: "ENFERNEDAD", visible: false },
+        { id: "alergias", nombre: "ALERGIAS", visible: false },
+        {id: "escolaridadpadre", nombre: "ESCOLARIDAD PADRE", visible: false}
+        {id: "escolaridadpadre", nombre: "ESCOLARIDAD PADRE", visible: false}
+
+    ];
+
+
+
+    // Función para alternar la visibilidad de las columnas
+    const toggleColumnVisibility = (columnId) => {
+        columnas.forEach(col => {
+            if (col.id === columnId) {
+                col.visible = !col.visible;
+            }
+        });
+        renderTable();
+    };
+
+    // Función para generar la tabla con base en la visibilidad de las columnas
+    const renderTable = () => {
+        let headerRow = "<tr>";
+        columnas.forEach(col => {
+            if (col.visible) {
+                headerRow += `<th>${col.nombre}</th>`;
+            }
+        });
+        headerRow += "</tr>";
+
+        document.getElementById("table-header").innerHTML = headerRow;
+    };
+
+    // Llamar la función para renderizar inicialmente la tabla
+    renderTable();
+
+
+    // Inicializar el estado de visibilidad de columnas
+    columnas.forEach(columna => {
+        columnasVisibles[columna.id] = columna.visible;
+    });
+
+    // Formatear fecha para el input (MM/DD/YYYY)
+    const formatDateToInput = (dateStr) => {
+        if (!dateStr) return "";
+        const [year, month, day] = dateStr.split("-");
+        return `${month}/${day}/${year}`;
+    };
+
+    // Formatear fecha para la API (YYYY-MM-DD)
+    const formatDateToDB = (dateStr) => {
+        if (!dateStr) return "";
+        const [month, day, year] = dateStr.split("/");
+        return `${year}-${month}-${day}`;
+    };
+
+    // Generar checkboxes para controlar la visibilidad de las columnas
+    const generarColumnToggles = () => {
+        columnToggles.innerHTML = "";
+
+        columnas.forEach(columna => {
+            const checkboxContainer = document.createElement("div");
+            checkboxContainer.className = "form-check form-check-inline";
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "form-check-input";
+            checkbox.id = `toggle-${columna.id}`;
+            checkbox.checked = columnasVisibles[columna.id];
+            checkbox.addEventListener("change", () => {
+                toggleColumnaVisibilidad(columna.id);
+            });
+
+            const label = document.createElement("label");
+            label.className = "form-check-label";
+            label.htmlFor = `toggle-${columna.id}`;
+            label.textContent = columna.nombre;
+
+            checkboxContainer.appendChild(checkbox);
+            checkboxContainer.appendChild(label);
+            columnToggles.appendChild(checkboxContainer);
+        });
+    };
+
+    // Generar encabezado de la tabla
+    const generarEncabezado = () => {
+        const tr = document.createElement("tr");
+
+        columnas.forEach(columna => {
+            const th = document.createElement("th");
+            th.scope = "col";
+            th.textContent = columna.nombre;
+            th.className = columnasVisibles[columna.id] ? "" : "hidden-column";
+            th.dataset.columna = columna.id;
+            tr.appendChild(th);
+        });
+
+        tableHeader.innerHTML = "";
+        tableHeader.appendChild(tr);
+    };
+
+    // Cambiar visibilidad de una columna
+    const toggleColumnaVisibilidad = (columnaId) => {
+        const checkbox = document.getElementById(`toggle-${columnaId}`);
+        columnasVisibles[columnaId] = checkbox.checked;
+
+        // Actualizar visibilidad en el encabezado
+        const th = document.querySelector(`th[data-columna="${columnaId}"]`);
+        if (th) {
+            if (checkbox.checked) {
+                th.classList.remove("hidden-column");
+            } else {
+                th.classList.add("hidden-column");
+            }
+        }
+
+        // Actualizar visibilidad en las celdas
+        const celdas = document.querySelectorAll(`td[data-columna="${columnaId}"]`);
+        celdas.forEach(celda => {
+            if (checkbox.checked) {
+                celda.classList.remove("hidden-column");
+            } else {
+                celda.classList.add("hidden-column");
+            }
+        });
+    };
+
+    // Obtener alumnos desde la API
+    const getAlumnos = async () => {
+        table.innerHTML = "";
+        load.style.display = "block";
+
+        const url = `api/alumnos`;
+
+        try {
+            const res = await fetch(url);
+            const { alumnos } = await res.json();
+
+            load.style.display = "none";
+
+            if (!alumnos || alumnos.length === 0) {
+                table.innerHTML = `<tr><td colspan="${columnas.length}" style="text-align: center;">No se encontraron resultados</td></tr>`;
+                return;
+            }
+
+            // Generar filas de la tabla
+            alumnos.forEach(item => {
+                const tr = document.createElement("tr");
+
+                // Columna: Número de alumno
+                let td = document.createElement("td");
+                td.textContent = item.NUMEROALUMNO;
+                td.dataset.columna = "numeroalumno";
+                if (!columnasVisibles["numeroalumno"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                // Columna: Nombre
+                td = document.createElement("td");
+                td.textContent = item.NOMBRE;
+                td.dataset.columna = "nombre";
+                if (!columnasVisibles["nombre"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                // Columna: Matrícula
+                td = document.createElement("td");
+                td.textContent = item.MATRICULA;
+                td.dataset.columna = "matricula";
+                if (!columnasVisibles["matricula"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                // Columna: Estado Civil
+                td = document.createElement("td");
+                const inputEstadoCivil = document.createElement("input");
+                inputEstadoCivil.type = "text";
+                inputEstadoCivil.className = "form-control form-control-sm";
+                inputEstadoCivil.value = item.ESTADOCIVIL || "";
+                inputEstadoCivil.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ESTADOCIVIL', this.value);
+                };
+                td.appendChild(inputEstadoCivil);
+                td.dataset.columna = "estadocivil";
+                if (!columnasVisibles["estadocivil"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+                td = document.createElement("td");
+                const inputEmail = document.createElement("input");
+                inputEmail.type = "email";
+                inputEmail.className = "form-control form-control-sm";
+                inputEmail.value = item.EMAIL || "";
+                inputEmail.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'EMAIL', this.value);
+                };
+                td.appendChild(inputEmail);
+                td.dataset.columna = "email";
+                if (!columnasVisibles["email"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputEmailAlt = document.createElement("input");
+                inputEmailAlt.type = "email";
+                inputEmailAlt.className = "form-control form-control-sm";
+                inputEmailAlt.value = item.EMAIL_ALTERNO || "";
+                inputEmailAlt.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'EMAIL_ALTERNO', this.value);
+                };
+                td.appendChild(inputEmailAlt);
+                td.dataset.columna = "email_alterno";
+                if (!columnasVisibles["email_alterno"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                // Columna: IMSS
+                td = document.createElement("td");
+                const inputImss = document.createElement("input");
+                inputImss.type = "text";
+                inputImss.className = "form-control form-control-sm";
+                inputImss.value = item.NUM_IMSS || "";
+                inputImss.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'NUM_IMSS', this.value);
+                };
+                td.appendChild(inputImss);
+                td.dataset.columna = "imss";
+                if (!columnasVisibles["imss"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                // Columna: Estatus Doctos TSU
+                td = document.createElement("td");
+                const inputEstatus = document.createElement("input");
+                inputEstatus.type = "text";
+                inputEstatus.className = "form-control form-control-sm";
+                inputEstatus.value = item.ESTATUS_DOCTOS_TSU || "";
+                inputEstatus.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ESTATUS_DOCTOS_TSU', this.value);
+                };
+                td.appendChild(inputEstatus);
+                td.dataset.columna = "estatus_doctos";
+                if (!columnasVisibles["estatus_doctos"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                // Columna: Fecha Doctos TSU
+                td = document.createElement("td");
+                const inputFecha = document.createElement("input");
+                inputFecha.type = "text";
+                inputFecha.className = "form-control form-control-sm";
+                inputFecha.value = formatDateToInput(item.ESTATUS_DOCTOS_TSU_FECHA);
+                inputFecha.placeholder = "MM/DD/YYYY";
+                inputFecha.onblur = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ESTATUS_DOCTOS_TSU_FECHA', formatDateToDB(this.value));
+                };
+                td.appendChild(inputFecha);
+                td.dataset.columna = "fecha_doctos";
+                if (!columnasVisibles["fecha_doctos"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                // Columna: 
+                td = document.createElement("td");
+                const inputCelular = document.createElement("input");
+                inputCelular.type = "text";
+                inputCelular.className = "form-control form-control-sm";
+                inputCelular.value = item.CELULAR || "";
+                inputCelular.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'CELULAR', this.value);
+                };
+                td.appendChild(inputCelular);
+                td.dataset.columna = "celular";
+                if (!columnasVisibles["celular"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputDocumentosobs = document.createElement("input");
+                inputDocumentosobs.type = "text";
+                inputDocumentosobs.className = "form-control form-control-sm";
+                inputDocumentosobs.value = item.PROYECTO_OBS || "";
+                inputDocumentosobs.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'PROYECTO_OBS', this.value);
+                };
+                td.appendChild(inputDocumentosobs);
+                td.dataset.columna = "proyecto_obs"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["proyecto_obs"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputobsdocumentos = document.createElement("input");
+                inputobsdocumentos.type = "text";
+                inputobsdocumentos.className = "form-control form-control-sm";
+                inputobsdocumentos.value = item.OBS_PROYECTO_LIC || "";
+                inputobsdocumentos.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'OBS_PROYECTO_LIC', this.value);
+                };
+                td.appendChild(inputobsdocumentos);
+                td.dataset.columna = "obs_proyecto_lic"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["obs_proyecto_lic"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                const inputTelefono = document.createElement("input");
+                inputTelefono.type = "text";
+                inputTelefono.className = "form-control form-control-sm";
+                inputTelefono.value = item.TELEFONO || "";
+                inputTelefono.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'TELEFONO', this.value);
+                };
+                td.appendChild(inputTelefono);
+                td.dataset.columna = "telefono"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["telefono"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputTelefoncontacto = document.createElement("input");
+                inputTelefoncontacto.type = "text";
+                inputTelefoncontacto.className = "form-control form-control-sm";
+                inputTelefoncontacto.value = item.TEL_CONTACTO || "";
+                inputTelefoncontacto.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'TEL_CONTACTO', this.value);
+                };
+                td.appendChild(inputTelefoncontacto);
+                td.dataset.columna = "tel_contacto"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["tel_contacto"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputSeguro = document.createElement("input");
+                inputSeguro.type = "text";
+                inputSeguro.className = "form-control form-control-sm";
+                inputSeguro.value = item.TIPO_SEG_MED || "";
+                inputSeguro.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'TIPO_SEG_MED', this.value);
+                };
+                td.appendChild(inputSeguro);
+                td.dataset.columna = "tipo_seg_med"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["tipo_seg_med"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                const inputnumimss = document.createElement("input");
+                inputnumimss.type = "text";
+                inputnumimss.className = "form-control form-control-sm";
+                inputnumimss.value = item.NUM_IMSS || "";
+                inputnumimss.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'NUM_IMSS', this.value);
+                };
+                td.appendChild(inputnumimss);
+                td.dataset.columna = "num_imss"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["num_imss"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputVerificador = document.createElement("input");
+                inputVerificador.type = "text";
+                inputVerificador.className = "form-control form-control-sm";
+                inputVerificador.value = item.NUM_IMSS_VERFICADOR || "";
+                inputVerificador.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'NUM_IMSS_VERIFICADOR', this.value);
+                };
+                td.appendChild(inputVerificador);
+                td.dataset.columna = "num_imss_verificador"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["num_imss_verificador"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                const inputLengua = document.createElement("input");
+                inputLengua.type = "text";
+                inputLengua.className = "form-control form-control-sm";
+                inputLengua.value = item.LENGUAINDIGENA || "";
+                inputLengua.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'LENGUAINDIGENA', this.value);
+                };
+                td.appendChild(inputLengua);
+                td.dataset.columna = "lenguaindigena"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["lenguaindigena"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                const inputDispacidad = document.createElement("input");
+                inputDispacidad.type = "text";
+                inputDispacidad.className = "form-control form-control-sm";
+                inputDispacidad.value = item.DISCAPACIDAD || "";
+                inputDispacidad.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'DISCAPACIDAD', this.value);
+                };
+                td.appendChild(inputDispacidad);
+                td.dataset.columna = "discapacidad"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["discapacidad"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputEnfermedad = document.createElement("input");
+                inputEnfermedad.type = "text";
+                inputEnfermedad.className = "form-control form-control-sm";
+                inputEnfermedad.value = item.ENFERNEDAD || "";
+                inputEnfermedad.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ENFERNEDAD', this.value);
+                };
+                td.appendChild(inputDispacidad);
+                td.dataset.columna = "ENFERNEDAD"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["ENFERNEDAD"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputAlergia = document.createElement("input");
+                inputAlergia.type = "text";
+                inputAlergia.className = "form-control form-control-sm";
+                inputAlergia.value = item.ALERGIAS || "";
+                inputAlergia.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ALERGIAS', this.value);
+                };
+                td.appendChild(inputAlergia);
+                td.dataset.columna = "alergias"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["alergias"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputEscolaridadPAPA = document.createElement("input");
+                inputEscolaridadPAPA.type = "text";
+                inputEscolaridadPAPA.className = "form-control form-control-sm";
+                inputEscolaridadPAPA.value = item.ESCOLARIDADPADRE || "";
+                inputEscolaridadPAPA.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ESCOLARIDADPADRE', this.value);
+                };
+                td.appendChild(inputEscolaridadPAPA);
+                td.dataset.columna = "escolaridadpadre"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["escolaridadpadre"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                table.appendChild(tr);
+            });
+
+        } catch (error) {
+            console.error("Error al obtener los datos:", error);
+            load.style.display = "none";
+            table.innerHTML = `<tr><td colspan="${columnas.length}" style="text-align: center;">Error al cargar los datos</td></tr>`;
+        }
+    };
+
+
+    // Inicializar componentes
+    const inicializar = () => {
+        generarColumnToggles();
+        generarEncabezado();
+        getAlumnos();
+    };
+
+    // Iniciar la aplicación
+    inicializar();
+</script>
+
+
+
+<style>
+    /* Activar scroll horizontal para los checkboxes */
+    #column-toggles {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        max-width: 100%;
+        padding-bottom: 5px;
+    }
+
+    .checkbox-column {
+        width: 40px;
+        text-align: center;
+    }
+
+    .hidden-column {
+        display: none;
+    }
+
+    .column-toggle {
+        cursor: pointer;
+    }
+
+    .column-toggle:hover {
+        background-color: #e0e0e0;
+    }
+
+    :root {
+        --admin-primary: #0056b3;
+        --admin-secondary: #343a40;
+        --admin-accent: #007bff;
+        --admin-light: #f8f9fa;
+        --admin-border: #dee2e6;
+        --admin-success: #28a745;
+        --admin-danger: #dc3545;
+        --admin-warning: #ffc107;
+        --admin-text: #212529;
+        --admin-text-light: #6c757d;
+        --admin-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        --admin-background: #f2f5f8;
+    }
+
+    body {
+        background-color: var(--admin-background);
+        color: var(--admin-text);
+        font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    /* Main container styling */
+    .container {
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.12);
+        padding: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Page title */
+    h2 {
+        color: var(--admin-secondary);
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--admin-accent);
+        position: relative;
+    }
+
+    h2:after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 80px;
+        height: 2px;
+        background-color: var(--admin-primary);
+    }
+
+    /* ===== IMPROVED COLUMN TOGGLES WITH ENHANCED SCROLLING ===== */
+    #column-toggles {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        box-shadow: var(--admin-box-shadow);
+        border: 1px solid var(--admin-border);
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Custom scrollbar styling for modern browsers */
+    #column-toggles::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    #column-toggles::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    #column-toggles::-webkit-scrollbar-thumb {
+        background: var(--admin-accent);
+        border-radius: 10px;
+    }
+
+    #column-toggles::-webkit-scrollbar-thumb:hover {
+        background: var(--admin-primary);
+    }
+
+    .form-check-inline {
+        flex: 0 0 auto;
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+        background-color: #f8f9fa;
+        border: 1px solid var(--admin-border);
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    }
+
+    .form-check-inline:hover {
+        background-color: #e9ecef;
+        border-color: var(--admin-accent);
+        transform: translateY(-2px);
+    }
+
+    .form-check-input {
+        margin-top: 0.2rem;
+        margin-right: 0.5rem;
+    }
+
+    .form-check-input:checked {
+        background-color: var(--admin-accent);
+        border-color: var(--admin-accent);
+    }
+
+    .form-check-label {
+        color: var(--admin-text);
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    /* ===== TABLE STYLING ===== */
+    .table-responsive {
+        border-radius: 0.5rem;
+        box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--admin-border);
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table thead th {
+        background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        color: var(--admin-secondary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 1rem 0.75rem;
+        vertical-align: middle;
+        border-bottom: 2px solid var(--admin-border);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .table tbody td {
+        padding: 0.85rem 0.75rem;
+        vertical-align: middle;
+        border-color: var(--admin-border);
+        font-size: 0.9rem;
+    }
+
+    .table tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .table tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.05);
+    }
+
+    /* Zebra striping for better readability */
+    .table tbody tr:nth-child(even) {
+        background-color: #fcfcfc;
+    }
+
+    /* Cell actions styling */
+    .cell-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    /* Button styling */
+    .btn {
+        font-weight: 500;
+        border-radius: 0.375rem;
+        padding: 0.625rem 1.25rem;
+        transition: all 0.2s ease;
+        text-transform: none;
+        letter-spacing: normal;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        background: linear-gradient(to bottom, var(--admin-accent), var(--admin-primary));
+        border-color: var(--admin-primary);
+        color: white;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        background: linear-gradient(to bottom, #0062cc, #0056b3);
+        border-color: #004494;
+    }
+
+    .btn-secondary {
+        background-color: #ffffff;
+        border-color: var(--admin-border);
+        color: var(--admin-text);
+    }
+
+    .btn-secondary:hover {
+        background-color: #f1f3f5;
+        border-color: #ced4da;
+    }
+
+    .btn-success {
+        background: linear-gradient(to bottom, #34c759, var(--admin-success));
+        border-color: var(--admin-success);
+    }
+
+    .btn-danger {
+        background: linear-gradient(to bottom, #ff3b30, var(--admin-danger));
+        border-color: var(--admin-danger);
+    }
+
+    /* Loading indicator */
+    #load {
+        padding: 2rem 0;
+    }
+
+    .spinner-border {
+        color: var(--admin-accent);
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    /* Action bar */
+    .mt-3 {
+        padding-top: 1rem;
+        margin-top: 1.5rem !important;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .container {
+            padding: 1.25rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        #column-toggles {
+            padding: 0.75rem;
+        }
+
+        .btn {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+</style>

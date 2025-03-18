@@ -1,102 +1,252 @@
 
-.excel-header {
-    background-color: #217346;
-    /* Color verde de Excel */
-}
-
-.excel-toolbar {
-    background-color: #f0f0f0;
-}
-
-.excel-button {
-    background-color: #f0f0f0;
-    border: 1px solid #a6a6a6;
-    border-radius: 2px;
-}
-
-.excel-button:hover {
-    background-color: #e3e3e3;
-}
-
-.excel-search-input {
-    border: 1px solid #a6a6a6;
-    border-radius: 2px;
-}
-
-/* Estilos para las celdas */
-.table-bordered th,
-.table-bordered td {
-    border: 1px solid #d0d0d0 !important;
-}
-
-/* Efecto hover en filas estilo Excel */
-.table-bordered tbody tr:hover {
-    background-color: #fffde7 !important;
-}
-
-/* Para los estados */
-.estado-activo {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 13px;
-    display: inline-block;
-}
-
-.estado-inactivo {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 13px;
-    display: inline-block;
-}
-
-/* Números de fila al estilo Excel */
-tbody tr td:first-child {
-    background-color: #e6e6e6;
-    text-align: center;
+.checkbox-column {
     width: 40px;
+    text-align: center;
+}
+.hidden-column {
+    display: none;
+}
+.column-toggle {
+    cursor: pointer;
+}
+.column-toggle:hover {
+    background-color: #e0e0e0;
 }
 
-/* Botón de descarga */
-.btn-custom-download {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #1b5e20;
-    color: white;
-    border: none;
-    z-index: 10;
+/* Enhanced Administrative UI Theme */
+:root {
+--admin-primary: #0056b3;
+--admin-secondary: #343a40;
+--admin-accent: #007bff;
+--admin-light: #f8f9fa;
+--admin-border: #dee2e6;
+--admin-success: #28a745;
+--admin-danger: #dc3545;
+--admin-warning: #ffc107;
+--admin-text: #212529;
+--admin-text-light: #6c757d;
+--admin-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
-.btn-custom-download:hover {
-    background-color: #2e7d32;
-    color: white;
+body {
+background-color: #f2f5f8;
+color: var(--admin-text);
+font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Divisiones exactas como en la imagen */
-.table th:nth-child(2),
-.table td:nth-child(2) {
-    width: 33%;
+/* Main container styling */
+.container {
+background-color: #ffffff;
+border-radius: 0.25rem;
+box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+padding: 1.5rem;
+margin-top: 2rem;
+margin-bottom: 2rem;
 }
 
-.table th:nth-child(3),
-.table td:nth-child(3) {
-    width: 33%;
+/* Page title */
+h2 {
+color: var(--admin-secondary);
+font-size: 1.5rem;
+font-weight: 600;
+margin-bottom: 1.5rem;
+padding-bottom: 0.75rem;
+border-bottom: 1px solid var(--admin-border);
 }
 
-.table th:nth-child(4),
-.table td:nth-child(4) {
-    width: 33%;
+/* Card for column toggles with scrolling */
+.column-toggles-card {
+background-color: #ffffff;
+border: 1px solid var(--admin-border);
+border-radius: 0.25rem;
+box-shadow: var(--admin-box-shadow);
+margin-bottom: 1.5rem;
+padding: 1rem;
 }
 
-/* Área no editable y área editable como en la imagen */
-.no-editable {
-    background-color: #f0f0f0;
+.column-toggles-scroll {
+display: flex;
+flex-wrap: nowrap;
+overflow-x: auto;
+padding-bottom: 0.5rem;
+-webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+scrollbar-width: thin; /* For Firefox */
 }
 
-.editable {
-    background-color: #ffffff;
+.column-toggles-scroll::-webkit-scrollbar {
+height: 6px;
+}
+
+.column-toggles-scroll::-webkit-scrollbar-track {
+background: #f1f1f1;
+border-radius: 3px;
+}
+
+.column-toggles-scroll::-webkit-scrollbar-thumb {
+background: #c1c1c1;
+border-radius: 3px;
+}
+
+.column-toggles-scroll::-webkit-scrollbar-thumb:hover {
+background: #a8a8a8;
+}
+
+/* Column toggle styling */
+.form-check-inline {
+flex: 0 0 auto;
+margin-right: 1rem;
+margin-bottom: 0.5rem;
+background-color: #f8f9fa;
+border: 1px solid var(--admin-border);
+border-radius: 0.25rem;
+padding: 0.375rem 0.75rem;
+transition: all 0.2s ease;
+white-space: nowrap;
+}
+
+.form-check-inline:hover {
+background-color: #e9ecef;
+border-color: #ced4da;
+}
+
+.form-check-input {
+margin-top: 0.2rem;
+margin-right: 0.375rem;
+}
+
+.form-check-label {
+color: var(--admin-text);
+font-size: 0.875rem;
+}
+
+/* Button styling - more square and spaced */
+.btn {
+font-weight: 500;
+border-radius: 0.25rem;
+padding: 0.5rem 1rem;
+margin-right: 0.75rem;
+margin-bottom: 0.5rem;
+transition: all 0.2s ease;
+text-transform: none;
+letter-spacing: normal;
+box-shadow: var(--admin-box-shadow);
+}
+
+.btn:last-child {
+margin-right: 0;
+}
+
+.btn-primary {
+background-color: var(--admin-primary);
+border-color: var(--admin-primary);
+color: white;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+background-color: #004494;
+border-color: #004494;
+}
+
+.btn-secondary {
+background-color: #ffffff;
+border-color: var(--admin-border);
+color: var(--admin-text);
+}
+
+.btn-secondary:hover {
+background-color: #f1f3f5;
+border-color: #ced4da;
+}
+
+.btn-success {
+background-color: var(--admin-success);
+border-color: var(--admin-success);
+}
+
+.btn-danger {
+background-color: var(--admin-danger);
+border-color: var(--admin-danger);
+}
+
+/* Action button container */
+.action-buttons {
+display: flex;
+flex-wrap: wrap;
+padding: 1rem;
+background-color: #f8f9fa;
+border: 1px solid var(--admin-border);
+border-radius: 0.25rem;
+margin-top: 1.5rem;
+box-shadow: var(--admin-box-shadow);
+}
+
+/* Table styling */
+.table-card {
+border: 1px solid var(--admin-border);
+border-radius: 0.25rem;
+box-shadow: var(--admin-box-shadow);
+overflow: hidden;
+margin-bottom: 1.5rem;
+}
+
+.table {
+margin-bottom: 0;
+}
+
+.table thead th {
+background-color: #f1f3f5;
+color: var(--admin-secondary);
+font-weight: 600;
+font-size: 0.85rem;
+padding: 0.75rem;
+vertical-align: middle;
+border-bottom: 2px solid var(--admin-border);
+border-top: none;
+}
+
+.table tbody td {
+padding: 0.75rem;
+vertical-align: middle;
+border-color: var(--admin-border);
+}
+
+.table tbody tr:hover {
+background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* Form controls */
+.form-control, .form-control-sm {
+border: 1px solid var(--admin-border);
+border-radius: 0.25rem;
+color: var(--admin-text);
+padding: 0.375rem 0.75rem;
+font-size: 0.875rem;
+transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus, .form-control-sm:focus {
+border-color: var(--admin-accent);
+box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Loading indicator */
+.spinner-border {
+color: var(--admin-accent);
+}
+
+/* Action bar */
+.mt-3 {
+padding-top: 1rem;
+margin-top: 1.5rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+.container {
+padding: 1rem;
+}
+
+.btn {
+margin-bottom: 0.5rem;
+}
 }

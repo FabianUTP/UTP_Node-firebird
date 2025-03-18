@@ -247,7 +247,6 @@ AlumnosAdminCtr.update = async (req = request, res = response) => {
     pago_titulacion_lic: body?.pago_titulacion_lic,
     FOLIO_PAGO_TIT_LIC: body?.FOLIO_PAGO_TIT_LIC,
     cedula_tsu: body?.cedula_tsu,
-    num_cedula_tsu: body?.num_cedula_tsu,
     EMPRESA_ESTADIA_LIC: body?.EMPRESA_ESTADIA_LIC,
     asesor_empresarial_lic: body?.asesor_empresarial_lic,
     fecha_inicio_est_lic: body?.fecha_inicio_est_lic,

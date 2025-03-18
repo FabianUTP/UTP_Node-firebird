@@ -391,7 +391,7 @@ router.get("/cuatrimestres", async (req, res) => {
 
 //formato de alumnos
 router.get("/alumnos", async (req, res) => {
-  const { limit = 4500, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
+  const { limit = 6000, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
 
   let searchQuery = null;
 
@@ -428,6 +428,46 @@ router.get("/alumnos", async (req, res) => {
     alumnos,
   });
 });
+
+router.post("/alumnos", async (req, res) => {
+  const { limit = 3, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
+
+  let searchQuery = null;
+
+  // Si hay palabras a buscar, lo agrega en la consulta
+  if (search) {
+    searchQuery = `(matricula LIKE '%${search}%') `;
+    searchQuery += `OR (nombre LIKE '%${search}%') `;
+    searchQuery += `OR (paterno LIKE '%${search}%') `;
+
+    let searchLastName = search.split(" ");
+    if (searchLastName.length > 1) {
+      searchQuery += `OR (paterno LIKE '%${searchLastName[0]}%' AND materno LIKE '%${searchLastName[1]}%') `;
+    }
+  }
+  const alumnos = await Alumno.all({
+    limit,
+    skip,
+    searchQuery,
+    orderBy,
+    sort,
+  });
+
+  res.json({
+    querys: {
+      limit,
+      skip,
+      search,
+      orderBy,
+      sort
+    },
+    alumnos,
+  });
+});
+
+
+
+
 
 
 router.get("/carreras", async (req, res) => {

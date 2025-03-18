@@ -28,7 +28,7 @@ const getAlumnos = async () => {
 
   // Filtrar por nombre y apellido únicamente
   const url = `api/alumnos?limit=${limit}&skip=${skip}&search=${upperCaseSearch}&orderBy=${orderBy}&sort=${sort}`;
-  
+
   try {
     const res = await fetch(url);
     const { alumnos } = await res.json();
@@ -51,9 +51,10 @@ const getAlumnos = async () => {
     alumnos.forEach((item) => {
       // Filtrar solo los alumnos que contengan el término de búsqueda en su nombre o apellido
       if (
-        item.PATERNO.toUpperCase().includes(upperCaseSearch) || 
+        item.PATERNO.toUpperCase().includes(upperCaseSearch) ||
         item.MATERNO.toUpperCase().includes(upperCaseSearch) ||
-        item.NOMBRE.toUpperCase().includes(upperCaseSearch)
+        item.NOMBRE.toUpperCase().includes(upperCaseSearch) ||
+        item.MATRICULA.toUpperCase().includes(upperCaseSearch) // Se añade el filtro por matrícula
       ) {
         content += `<tr onclick="window.location.href='/alumnos/${item.MATRICULA}'">`;
         content += `<td>${item.NUMEROALUMNO}</td>`;

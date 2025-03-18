@@ -76,11 +76,33 @@
         { id: "num_imss", nombre: "NUMERO DE IMSS", visible: false },
         { id: "num_imss_verificador", nombre: "NUMERO VERIFICADOR IMSS", visible: false },
         { id: "lenguaindigena", nombre: "lENGUA INDIGENA", visible: false },
-        { id: "discapacidad", nombre: "DISPACIDADES", visible: false },
+        { id: "DISCAPACIDAD", nombre: "DISPACIDADES", visible: false },
         { id: "ENFERNEDAD", nombre: "ENFERNEDAD", visible: false },
         { id: "alergias", nombre: "ALERGIAS", visible: false },
-        {id: "escolaridadpadre", nombre: "ESCOLARIDAD PADRE", visible: false}
-        {id: "escolaridadpadre", nombre: "ESCOLARIDAD PADRE", visible: false}
+        { id: "escolaridadpadre", nombre: "ESCOLARIDAD PADRE", visible: false },
+        { id: "actividadpadre", nombre: "ACTIVIDAD PADRE", visible: false },
+        { id: "actividadmadre", nombre: "ACTIVIDAD MADRE", visible: false },
+        { id: "AUTOMOVILFAMILIAR", nombre: "AUTOMOVIL FAMILIAR", visible: false },
+        { id: "COMPUTADORA", nombre: "COMPUTADORA", visible: false },
+        { id: "tamanocasa", nombre: "TAMAÑO CASA", visible: false },
+        { id: "INFRESOFAMILIAR", nombre: "INFRESO FAMILIAR", visible: false },
+        { id: "personasdependeningreso", nombre: "PERSONASDEPENDENINGRESO", visible: false },
+        { id: "VIVENENCASA", nombre: "VIVENENCASA", visible: false },
+        { id: "HERMANOS", nombre: "HERMANOS", visible: false },
+        { id: "LUGARNACIMIENTO", nombre: "LUGARNACIMIENTO", visible: false },
+        { id: "HERMANOSESTUDIAN", nombre: "HERMANOSESTUDIAN", visible: false },
+        { id: "TRABAJAS", nombre: "TRABAJAS", visible: false },
+        { id: "ACTIVIDADTRABAJAS", nombre: "ACTIVIDADTRABAJAS", visible: false },
+        { id: "NOMBRECONYUGE", nombre: "NOMBRECONYUGE", visible: false },
+        { id: "ESCOLARIDADCONYUGE", nombre: "ESCOLARIDADCONYUGE", visible: false },
+        { id: "ACTIVIDADCONYUGE", nombre: "ACTIVIDADCONYUGE", visible: false },
+        { id: "NIVELCOMPLETO", nombre: "NIVELCOMPLETO", visible: false },
+        { id: "HIJOS0A5", nombre: "HIJOS", visible: false },
+        { id: "INICIO_EGRESO", nombre: "INICIO_EGRESO", visible: false },
+        { id: "FOLIO_TITULACION", nombre: "FOLIO_TITULACION", visible: false },
+        { id: "FECHA_TRAMITE", nombre: "FECHA_TRAMITE", visible: false },
+        { id: "TITULACION_AN", nombre: "TITULACION AN", visible: false },
+        { id: "TITULACION_CB", nombre: "TITULACION CB", visible: false },
 
     ];
 
@@ -461,8 +483,8 @@
                     guardarCambio(item.NUMEROALUMNO, 'DISCAPACIDAD', this.value);
                 };
                 td.appendChild(inputDispacidad);
-                td.dataset.columna = "discapacidad"; // Cambio aquí para coincidir con el array de columnas
-                if (!columnasVisibles["discapacidad"]) td.classList.add("hidden-column");
+                td.dataset.columna = "DISCAPACIDAD"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["DISCAPACIDAD"]) td.classList.add("hidden-column");
                 tr.appendChild(td);
 
 
@@ -474,7 +496,7 @@
                 inputEnfermedad.onchange = function () {
                     guardarCambio(item.NUMEROALUMNO, 'ENFERNEDAD', this.value);
                 };
-                td.appendChild(inputDispacidad);
+                td.appendChild(inputEnfermedad);
                 td.dataset.columna = "ENFERNEDAD"; // Cambio aquí para coincidir con el array de columnas
                 if (!columnasVisibles["ENFERNEDAD"]) td.classList.add("hidden-column");
                 tr.appendChild(td);
@@ -508,9 +530,388 @@
                 tr.appendChild(td);
 
 
+                td = document.createElement("td");
+                const inputEscmadre = document.createElement("input");
+                inputEscmadre.type = "text";
+                inputEscmadre.className = "form-control form-control-sm";
+                inputEscmadre.value = item.ESCOLARIDADMADRE || "";
+                inputEscmadre.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ESCOLARIDADMADRE', this.value);
+                };
+                td.appendChild(inputEscmadre);
+                td.dataset.columna = "escolaridadmadre"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["escolaridadmadre"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputactividadpadre = document.createElement("input");
+                inputactividadpadre.type = "text";
+                inputactividadpadre.className = "form-control form-control-sm";
+                inputactividadpadre.value = item.ACTIVIDADPADRE || "";
+                inputactividadpadre.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ACTIVIDADPADRE', this.value);
+                };
+                td.appendChild(inputactividadpadre);
+                td.dataset.columna = "actividadpadre"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["actividadpadre"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputactividadmadre = document.createElement("input");
+                inputactividadmadre.type = "text";
+                inputactividadmadre.className = "form-control form-control-sm";
+                inputactividadmadre.value = item.ACTIVIDADMADRE || "";
+                inputactividadmadre.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ACTIVIDADMADRE', this.value);
+                };
+                td.appendChild(inputactividadmadre);
+                td.dataset.columna = "actividadmadre"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["actividadmadre"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                const inputautomovilfamiliar = document.createElement("input");
+                inputautomovilfamiliar.type = "text";
+                inputautomovilfamiliar.className = "form-control form-control-sm";
+                inputautomovilfamiliar.value = item.AUTOMOVILFAMILIAR || "";
+                inputautomovilfamiliar.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'AUTOMOVILFAMILIAR', this.value);
+                };
+                td.appendChild(inputautomovilfamiliar);
+                td.dataset.columna = "AUTOMOVILFAMILIAR"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["AUTOMOVILFAMILIAR"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                const inputcomputadora = document.createElement("input");
+                inputcomputadora.type = "text";
+                inputcomputadora.className = "form-control form-control-sm";
+                inputcomputadora.value = item.COMPUTADORA || "";
+                inputcomputadora.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'COMPUTADORA', this.value);
+                };
+                td.appendChild(inputcomputadora);
+                td.dataset.columna = "COMPUTADORA"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["COMPUTADORA"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputTAMANOCASA = document.createElement("input");
+                inputTAMANOCASA.type = "text";
+                inputTAMANOCASA.className = "form-control form-control-sm";
+                inputTAMANOCASA.value = item.TAMANOCASA || "";
+                inputTAMANOCASA.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'TAMANOCASA', this.value);
+                };
+                td.appendChild(inputTAMANOCASA);
+                td.dataset.columna = "tamanocasa"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["tamanocasa"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+                td = document.createElement("td");
+                const inputINFRESOFAMILIAR = document.createElement("input");
+                inputINFRESOFAMILIAR.type = "text";
+                inputINFRESOFAMILIAR.className = "form-control form-control-sm";
+                inputINFRESOFAMILIAR.value = item.INFRESOFAMILIAR || "";
+                inputINFRESOFAMILIAR.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'INFRESOFAMILIAR', this.value);
+                };
+                td.appendChild(inputINFRESOFAMILIAR);
+                td.dataset.columna = "INFRESOFAMILIAR"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["INFRESOFAMILIAR"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+                td = document.createElement("td");
+                const inputPERSONASDEPENDENINGRESO = document.createElement("input");
+                inputPERSONASDEPENDENINGRESO.type = "text";
+                inputPERSONASDEPENDENINGRESO.className = "form-control form-control-sm";
+                inputPERSONASDEPENDENINGRESO.value = item.PERSONASDEPENDENINGRESO || "";
+                inputPERSONASDEPENDENINGRESO.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'PERSONASDEPENDENINGRESO', this.value);
+                };
+                td.appendChild(inputPERSONASDEPENDENINGRESO);
+                td.dataset.columna = "personasdependeningreso"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["personasdependeningreso"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputVIVENENCASA = document.createElement("input");
+                inputVIVENENCASA.type = "text";
+                inputVIVENENCASA.className = "form-control form-control-sm";
+                inputVIVENENCASA.value = item.VIVENENCASA || "";
+                inputVIVENENCASA.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'VIVENENCASA', this.value);
+                };
+                td.appendChild(inputVIVENENCASA);
+                td.dataset.columna = "VIVENENCASA"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["VIVENENCASA"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+                td = document.createElement("td");
+                const inputhermanos = document.createElement("input");
+                inputhermanos.type = "text";
+                inputhermanos.className = "form-control form-control-sm";
+                inputhermanos.value = item.HERMANOS || "";
+                inputhermanos.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'HERMANOS', this.value);
+                };
+                td.appendChild(inputhermanos);
+                td.dataset.columna = "HERMANOS"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["HERMANOS"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+                td = document.createElement("td");
+                const inputLUGARNACIMIENTO = document.createElement("input");
+                inputLUGARNACIMIENTO.type = "text";
+                inputLUGARNACIMIENTO.className = "form-control form-control-sm";
+                inputLUGARNACIMIENTO.value = item.LUGARNACIMIENTO || "";
+                inputLUGARNACIMIENTO.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'LUGARNACIMIENTO', this.value);
+                };
+                td.appendChild(inputLUGARNACIMIENTO);
+                td.dataset.columna = "LUGARNACIMIENTO"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["LUGARNACIMIENTO"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+
+                td = document.createElement("td");
+                const inputHERMANOSESTUDIAN = document.createElement("input");
+                inputHERMANOSESTUDIAN.type = "text";
+                inputHERMANOSESTUDIAN.className = "form-control form-control-sm";
+                inputHERMANOSESTUDIAN.value = item.HERMANOSESTUDIAN || "";
+                inputHERMANOSESTUDIAN.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'HERMANOSESTUDIAN', this.value);
+                };
+                td.appendChild(inputHERMANOSESTUDIAN);
+                td.dataset.columna = "HERMANOSESTUDIAN"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["HERMANOSESTUDIAN"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+                td = document.createElement("td");
+                const inputTRABAJAS = document.createElement("input");
+                inputTRABAJAS.type = "text";
+                inputTRABAJAS.className = "form-control form-control-sm";
+                inputTRABAJAS.value = item.TRABAJAS || "";
+                inputTRABAJAS.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'TRABAJAS', this.value);
+                };
+                td.appendChild(inputTRABAJAS);
+                td.dataset.columna = "TRABAJAS"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["TRABAJAS"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+                td = document.createElement("td");
+                const inputACTIVIDADTRABAJAS = document.createElement("input");
+                inputACTIVIDADTRABAJAS.type = "text";
+                inputACTIVIDADTRABAJAS.className = "form-control form-control-sm";
+                inputACTIVIDADTRABAJAS.value = item.ACTIVIDADTRABAJAS || "";
+                inputACTIVIDADTRABAJAS.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ACTIVIDADTRABAJAS', this.value);
+                };
+                td.appendChild(inputACTIVIDADTRABAJAS);
+                td.dataset.columna = "ACTIVIDADTRABAJAS"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["ACTIVIDADTRABAJAS"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+
+                td = document.createElement("td");
+                const inputHORARIOTRABAJO = document.createElement("input");
+                inputHORARIOTRABAJO.type = "text";
+                inputHORARIOTRABAJO.className = "form-control form-control-sm";
+                inputHORARIOTRABAJO.value = item.HORARIOTRABAJO || "";
+                inputHORARIOTRABAJO.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'HORARIOTRABAJO', this.value);
+                };
+                td.appendChild(inputHORARIOTRABAJO);
+                td.dataset.columna = "HORARIOTRABAJO"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["HORARIOTRABAJO"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+
+                td = document.createElement("td");
+                const inputNOMBRECONYUGE = document.createElement("input");
+                inputNOMBRECONYUGE.type = "text";
+                inputNOMBRECONYUGE.className = "form-control form-control-sm";
+                inputNOMBRECONYUGE.value = item.NOMBRECONYUGE || "";
+                inputNOMBRECONYUGE.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'NOMBRECONYUGE', this.value);
+                };
+                td.appendChild(inputNOMBRECONYUGE);
+                td.dataset.columna = "NOMBRECONYUGE"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["NOMBRECONYUGE"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+                td = document.createElement("td");
+                const inputescolaridadaconyuge = document.createElement("input");
+                inputescolaridadaconyuge.type = "text";
+                inputescolaridadaconyuge.className = "form-control form-control-sm";
+                inputescolaridadaconyuge.value = item.ESCOLARIDADCONYUGE || "";
+                inputescolaridadaconyuge.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ESCOLARIDADCONYUGE', this.value);
+                };
+                td.appendChild(inputescolaridadaconyuge);
+                td.dataset.columna = "ESCOLARIDADCONYUGE"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["ESCOLARIDADCONYUGE"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputACTIVIDADCONYUGE = document.createElement("input");
+                inputACTIVIDADCONYUGE.type = "text";
+                inputACTIVIDADCONYUGE.className = "form-control form-control-sm";
+                inputACTIVIDADCONYUGE.value = item.ACTIVIDADCONYUGE || "";
+                inputACTIVIDADCONYUGE.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'ACTIVIDADCONYUGE', this.value);
+                };
+                td.appendChild(inputACTIVIDADCONYUGE);
+                td.dataset.columna = "ACTIVIDADCONYUGE"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["ACTIVIDADCONYUGE"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+                td = document.createElement("td");
+                const inputNIVELCOMPLETO = document.createElement("input");
+                inputNIVELCOMPLETO.type = "text";
+                inputNIVELCOMPLETO.className = "form-control form-control-sm";
+                inputNIVELCOMPLETO.value = item.NIVELCOMPLETO || "";
+                inputNIVELCOMPLETO.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'NIVELCOMPLETO', this.value);
+                };
+                td.appendChild(inputNIVELCOMPLETO);
+                td.dataset.columna = "NIVELCOMPLETO"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["NIVELCOMPLETO"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+
+                td = document.createElement("td");
+                const inputhijos0a5 = document.createElement("input");
+                inputhijos0a5.type = "text";
+                inputhijos0a5.className = "form-control form-control-sm";
+                inputhijos0a5.value = item.HIJOS0A5 || "";
+                inputhijos0a5.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'HIJOS0A5', this.value);
+                };
+                td.appendChild(inputhijos0a5);
+                td.dataset.columna = "HIJOS0A5"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["HIJOS0A5"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputinicio_egreso = document.createElement("input");
+                inputinicio_egreso.type = "text";
+                inputinicio_egreso.className = "form-control form-control-sm";
+                inputinicio_egreso.value = item.INICIO_EGRESO || "";
+                inputinicio_egreso.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'INICIO_EGRESO', this.value);
+                };
+                td.appendChild(inputinicio_egreso);
+                td.dataset.columna = "INICIO_EGRESO"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["INICIO_EGRESO"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputfolio_titulacion = document.createElement("input");
+                inputfolio_titulacion.type = "text";
+                inputfolio_titulacion.className = "form-control form-control-sm";
+                inputfolio_titulacion.value = item.FOLIO_TITULACION || "";
+                inputfolio_titulacion.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'FOLIO_TITULACION', this.value);
+                };
+                td.appendChild(inputfolio_titulacion);
+                td.dataset.columna = "FOLIO_TITULACION"; // Cambio aquí para coincidir con el array de columnas
+                if (!columnasVisibles["FOLIO_TITULACION"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
+
+                td = document.createElement("td");
+                const inputfecha_tramite = document.createElement("input");
+                inputfecha_tramite.type = "text";
+                inputfecha_tramite.className = "form-control form-control-sm";
+                inputfecha_tramite.value = item.FECHA_TRAMITE || "";
+                inputfecha_tramite.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'FECHA_TRAMITE', this.value);
+                };
+                td.appendChild(inputfecha_tramite);
+                td.dataset.columna = "FECHA_TRAMITE";
+                if (!columnasVisibles["FECHA_TRAMITE"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+                td = document.createElement("td");
+                const inputTITULACION_AN = document.createElement("input");
+                inputTITULACION_AN.type = "text";
+                inputTITULACION_AN.className = "form-control form-control-sm";
+                inputTITULACION_AN.value = item.TITULACION_AN || "";
+                inputTITULACION_AN.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'TITULACION_AN', this.value);
+                };
+                td.appendChild(inputTITULACION_AN);
+                td.dataset.columna = "TITULACION_AN";
+                if (!columnasVisibles["TITULACION_AN"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+                td = document.createElement("td");
+                const inputTITULACION_CB = document.createElement("input");
+                inputTITULACION_CB.type = "text";
+                inputTITULACION_CB.className = "form-control form-control-sm";
+                inputTITULACION_CB.value = item.TITULACION_CB || "";
+                inputTITULACION_CB.onchange = function () {
+                    guardarCambio(item.NUMEROALUMNO, 'TITULACION_CB', this.value);
+                };
+                td.appendChild(inputTITULACION_CB);
+                td.dataset.columna = "TITULACION_CB";
+                if (!columnasVisibles["TITULACION_CB"]) td.classList.add("hidden-column");
+                tr.appendChild(td);
+
+
+
+
                 table.appendChild(tr);
             });
-
         } catch (error) {
             console.error("Error al obtener los datos:", error);
             load.style.display = "none";

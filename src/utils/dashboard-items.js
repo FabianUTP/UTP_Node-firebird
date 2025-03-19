@@ -21,7 +21,7 @@ const admin_items = [
   },
   {
     path_img: "./imgs/Subirdocumentos.png",
-    title: "Carga Masiva De Documentacion",
+    title: "Documenos Masivos",
     content: "Subir Documentos Alumnos.",
     link: "/ListaAlumnos",
   },

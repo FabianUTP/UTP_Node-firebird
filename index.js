@@ -3,57 +3,75 @@ const { engine } = require("express-handlebars");
 const session = require("express-session");
 const flash = require("connect-flash");
 const path = require("path");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
 require("dotenv").config();
 
 const app = express();
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
 
-// Definiendo la ruta para acceder en los archivos desde las etiquetas html
-app.use(express.static(path.join(__dirname, 'public')));
+// 🔥 Definir el modo de ejecución (local o server) desde los argumentos de la línea de comandos
+const MODE = process.argv[2] || process.env.MODE || "local";
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
-// Configuracion de plantillas Handlebars
-app.set("views", path.join(__dirname, "src", "views")); // Definiendo las rutas de las vistas
-app.engine(
-  ".hbs",
-  engine({
-    defaultLayout: "main",
-    layoutsDir: path.join(app.get("views"), "layouts"), // Definiendo la vista principal
-    partialsDir: [
-      path.join(app.get("views"), "layouts"),
-      path.join(app.get("views"), "alumno", "estadia", "partials") // Agrega esta línea para especificar la ubicación de los partials
-    ], // Definiendo las extenciones para la vista principal
-    extname: ".hbs", // Definiendo la extencion para las vistas
-  })
-);
+// 🔗 Configuración de la base de datos Firebird
+const FB_HOST = MODE === "server" ? process.env.FB_HOST_SERVER : process.env.FB_HOST_LOCAL;
+const FB_DATABASE = MODE === "server" ? process.env.FB_DATABASE_SERVER : process.env.FB_DATABASE_LOCAL;
+
+// 📂 Configuración de vistas
+app.set("views", path.join(__dirname, "src", "views"));
+app.engine(".hbs", engine({
+  defaultLayout: "main",
+  layoutsDir: path.join(app.get("views"), "layouts"),
+  partialsDir: [
+    path.join(app.get("views"), "layouts"),
+    path.join(app.get("views"), "alumno", "estadia", "partials"),
+  ],
+  extname: ".hbs",
+}));
 app.set("view engine", ".hbs");
 
-// Middlewares
-app.use(express.json()); // Admite en el request datos tipo json
-app.use(express.urlencoded({ extended: false })); // Lee los resultados de los formularios en el request
-app.use(fileUpload())
+// 🗂️ Archivos estáticos
+app.use(express.static(path.join(__dirname, "public")));
 
-// Configurando las sesiones
+// 🔧 Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// 📤 Configuración de subida de archivos
+app.use(fileUpload({
+  limits: { fileSize: 5 * 1024 * 1024 },
+  abortOnLimit: true,
+  responseOnLimit: "El archivo es demasiado grande",
+  useTempFiles: true,
+  tempFileDir: path.join(__dirname, "temp"),  // Guardar archivos temporalmente
+}));
+
+// 🔐 Configuración de sesión segura
 app.use(session({
-  secret: "keyboard cat",
-  resave: true,
+  secret: process.env.SESSION_SECRET || "fallbackSecret",
+  resave: false,
   saveUninitialized: true,
+  cookie: { secure: false },  // Cambia a `true` si usas HTTPS
 }));
 
 app.use(flash());
 
-// Variables Globales
-app.use(require('./globals'));
+// 🌍 Variables Globales
+app.use(require("./globals"));
 
-// Ruta de las apis
-app.use('/api', require('./src/routes/apis'));
-
-// Aqui se definen las rutas
+// 🚏 Rutas
+app.use("/api", require("./src/routes/apis"));
 app.use(require("./src/routes/routes"));
 
-// Aqui se levanta el servidor y se define el puerto
-let port = process.env.PORT || 8080;
-app.listen(port, () =>
-  console.log("Servidor corriendo en http://localhost:" + port)
-);
+// ⚠️ Manejo de errores global
+app.use((err, req, res, next) => {
+  console.error("❌ Error en el servidor:", err);
+  res.status(500).json({ error: "Ocurrió un error en el servidor" });
+});
+
+// 🚀 Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`🔄 Modo: ${MODE}`);
+  console.log(`📡 Conectando a Firebird en: ${FB_HOST}`);
+  console.log(`📂 Base de datos: ${FB_DATABASE}`);
+});

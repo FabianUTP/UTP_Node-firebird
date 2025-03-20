@@ -20,3 +20,5 @@ const globals = (req, res, next) => {
 };
 
 module.exports = globals;
+
+

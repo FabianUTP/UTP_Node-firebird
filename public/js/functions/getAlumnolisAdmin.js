@@ -14,8 +14,64 @@ let columnasVisibles = {}; // Objeto para almacenar la visibilidad de las column
 // Definir columnas
 const columnas = [
     { id: "NUMEROALUMNO", nombre: "NÚMERO", visible: false },
-    { id: "MATRICULA", nombre: "MATRÍCULA", visible: false },
     { id: "NOMBRE", nombre: "NOMBRE", visible: false },
+    { id: "PATERNO", nombre: "NOMBRE PATERNO", visible: false },
+    { id: "MATERNO", nombre: "NOMBRE MATERNO", visible: false },
+    { id: "TIPO_SEG_MED", nombre: "TIPO SEGURO", visible: false },
+    { id: "NUM_IMSS", nombre: "NUMERO IMSS", visible: false },
+    { id: "NUM_IMSS_VERIFICADOR", nombre: "NUMERO VERIFICACION", visible: false },
+    { id: "GENERO", nombre: "GENERO", visible: false },
+    { id: "NIVEL", nombre: "NIVEL", visible: false },
+    { id: "GRADO", nombre: "GRADO", visible: false },
+    { id: "SUBNIVEL", nombre: "SUBNIVEL", visible: false },
+    { id: "MATRICULA", nombre: "MATRÍCULA", visible: false },
+    { id: "MATRICULA_OFICIAL", nombre: "MATRICULA OFICIAL", visible: false },
+    { id: "STATUS", nombre: "STATUS", visible: false },
+    { id: "CLAVE_CIUDADANA", nombre: "CLAVE CIUDADANA", visible: false },
+    { id: "ESTADO_CIVIL", nombre: "ESTADO CIVIL", visible: false },
+    { id: "FECHA_NACIMIENTO", nombre: "FECHA DE NACIMIENTO", visible: false },
+    { id: "DOMICILIO", nombre: "DOMICILIO", visible: false },
+    { id: "ENTRE_CALLES", nombre: "ENTRE CALLES", visible: false },
+    { id: "CP", nombre: "CODIGO POSTAL", visible: false },
+    { id: "CIUDAD", nombre: "CIUDAD", visible: false },
+    { id: "ESTADO", nombre: "ESTADO", visible: false },
+    { id: "LATITUD", nombre: "LATITUD", visible: false },
+    { id: "LOGINTUD", nombre: "LOGINTUD", visible: false },
+    { id: "TELEFONO", nombre: "TELEFONO", visible: false },
+    { id: "CELULAR", nombre: "CELULAR", visible: false },
+    { id: "TELEFONOTRABAJO", nombre: "TELEFONOTRABAJO", visible: false },
+    { id: "NOMBRETUTOR", nombre: "NOMBRE DEL TUTOR", visible: false },
+    { id: "PARENTESCO", nombre: "PARENTESCO", visible: false },
+    { id: "OBSERVACIONES", nombre: "OBSERVACIONES", visible: false },
+    { id: "ADICIONALES", nombre: "ADICIONALES", visible: false },
+    { id: "EMAIL", nombre: "EMAIL PERSONAL", visible: false },
+    { id: "EMAIL_ALTERNO", nombre: "EMAIL ALTERNO", visible: false },
+    { id: "FECHA_BAJA", nombre: "FECHA DE BAJA", visible: false },
+    { id: "ANIOEGRESO", nombre: "AÑO ENGRESO", visible: false },
+    { id: "LUGAR_NACIMIENTO", nombre: "LUGAR NACIMIENTO", visible: false },
+    { id: "ESTADO_NACIMIENTO", nombre: "ESTADO NACIMIENTO", visible: false },
+    { id: "NACIONALIDAD", nombre: "NACIONALIDAD", visible: false },
+    { id: "ESCUELA_PROCEDENCIA", nombre: "ESCUELA DE PROCEDENCIA", visible: false },
+    { id: "ESCOLARIDAD", nombre: "ESCOLARIDAD", visible: false },
+    { id: "ESTADO_ESCOLARIDAD", nombre: "ESTADO ESCOLARIDAD", visible: false },
+    { id: "FECHA_EGRESO", nombre: "FECHA EGRESO", visible: false },
+    { id: "FECHA_INGRESO", nombre: "FECHA INGRESO", visible: false },
+    { id: "FECHA_CREACION", nombre: "FECHA CREACION", visible: false },
+    { id: "FECHA_ACTUALIZACION", nombre: "FECHA ACTUALIZACION", visible: false },
+    { id: "PROMEDIO_ESC_ANTERIOR", nombre: "PROMEDIO ANTERIOR", visible: false },
+    { id: "PROMEDIO_EX_ADMISION", nombre: "PROMEDIO ADMICION", visible: false },
+    { id: "CERTIFICADO", nombre: "CERTIFICADO", visible: false },
+    { id: "SITUACION_CERTIFICADO", nombre: "SITUACION_CERTIFICADO", visible: false },
+    { id: "ALUMNO_ALTAINICIAL", nombre: "ALTA ALUMNO", visible: false },
+    { id: "ALUMNO_ALTAFINAL", nombre: "ALTA FINAL", visible: false },
+    { id: "ALUMNO_ALTAPERIODO", nombre: "ALTA PERIODO", visible: false },
+    { id: "FECHA_PROSPECCION", nombre: "FECHA PROSPECCION", visible: false },
+    { id: "PROSPECCION_FINAL", nombre: "PROSPECCION FINAL", visible: false },
+    { id: "PROSPECCION_INICIAL", nombre: "PROSPECCION INICIAL", visible: false },
+    { id: "PROSPECCION_PERIODO", nombre: "PROSPECCION PERIODO", visible: false },
+    { id: "EGRESO_INICIAL", nombre: "ENGRESO INICIAL", visible: false },
+    { id: "EGRESO_FINAL", nombre: "ENGRESO FINAL", visible: false },
+    { id: "EGRESO_PERIODO", nombre: "ENGRESO PERIODO", visible: false },
     { id: "BECA", nombre: "BECA", visible: false },
     { id: "CUENTA_BECA", nombre: "CUENTA BECA", visible: false },
     { id: "TARJETA_BECA", nombre: "TARGETA BECA", visible: false },
@@ -24,8 +80,6 @@ const columnas = [
     { id: "PARENTESCO_CONTACTO", nombre: "PARENTESCO DEL CONTACTO", visible: false },
     { id: "TEL_CONTACTO", nombre: "TELEFONO DEL CONTACTO", visible: false },
     { id: "TIPO_SEG_MED", nombre: "TIPO SEGURO MEDICO", visible: false },
-    { id: "NUM_IMSS", nombre: "NUMERO IMSS", visible: false },
-    { id: "NUM_IMSS_VERIFICADOR", nombre: "NUMERO VERIFICACION", visible: false },
     { id: "LENGUAINDIGENA", nombre: "LENJUA INDIGENA", visible: false },
     { id: "DISCAPACIDAD", nombre: "DESCAPACIDAD", visible: false },
     { id: "ENFERNEDAD", nombre: "ENFERMEDAD", visible: false },
@@ -264,7 +318,30 @@ const getAlumnos = async () => {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingElement = document.getElementById('load');
+    loadingElement.classList.remove('d-none');
+    
+    // Si quieres que se oculte automáticamente después de cargar los datos
+    // asegúrate de que en tu función getAlumnos() se incluya:
+    // loadingElement.classList.add('d-none');
+});
 
+// Modificación a la función getAlumnos (asumiendo que está en algún archivo JS importado)
+const originalGetAlumnos = window.getAlumnos;
+if (typeof originalGetAlumnos === 'function') {
+    window.getAlumnos = async function() {
+        const loadingElement = document.getElementById('load');
+        loadingElement.classList.remove('d-none');
+        
+        try {
+            await originalGetAlumnos();
+        } finally {
+            // Ocultar el spinner cuando termine la carga (con éxito o error)
+            loadingElement.classList.add('d-none');
+        }
+    };
+}
 
 // Inicializar componentes
 const inicializar = () => {

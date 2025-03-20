@@ -391,7 +391,7 @@ router.get("/cuatrimestres", async (req, res) => {
 
 //formato de alumnos
 router.get("/alumnos", async (req, res) => {
-  const { limit = 20, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
+  const { limit = 6000, skip = 0, search, orderBy = "paterno", sort = "asc" } = req.query;
 
   let searchQuery = null;
 
@@ -436,7 +436,7 @@ router.post('/alumnos', [
   // Validate required fields
   body('ID_ESCUELA').notEmpty().withMessage('School ID is required'),
   body('NUMEROALUMNO').notEmpty().withMessage('Student number is required'),
-  
+
   // Optional fields validation
   body('PATERNO').optional(),
   body('MATERNO').optional(),
@@ -496,10 +496,10 @@ router.post('/alumnos', [
     }
 
     const studentData = req.body;
-    
+
     // Generate hash similar to the trigger logic
     let clongText = trimValue(studentData.ID_ESCUELA) + trimValue(studentData.NUMEROALUMNO);
-    
+
     // Add fields to hash if they exist
     const fieldsToInclude = [
       'PATERNO', 'MATERNO', 'NOMBRE', 'GENERO', 'NIVEL', 'GRADO', 'SUBNIVEL',
@@ -513,13 +513,13 @@ router.post('/alumnos', [
       'ID_PROMOTOR', 'ID_GRUPOETNICO', 'FECHA_PROSPECCION', 'PROSPECCION_INICIAL',
       'PROSPECCION_FINAL', 'PROSPECCION_PERIODO', 'PROSPECCION_AULAESCOLAR'
     ];
-    
+
     fieldsToInclude.forEach(field => {
       if (studentData[field] !== undefined && studentData[field] !== null) {
-        if (['GRADO', 'FECHA_NACIMIENTO', 'LATITUD', 'LONGITUD', 'ID_FAMILIA', 
-             'FECHA_BAJA', 'ANIOEGRESO', 'ID_CAMPUS', 'ID_GRUPOETNICO',
-             'FECHA_PROSPECCION', 'PROSPECCION_INICIAL', 'PROSPECCION_FINAL',
-             'PROSPECCION_PERIODO', 'PROSPECCION_AULAESCOLAR'].includes(field)) {
+        if (['GRADO', 'FECHA_NACIMIENTO', 'LATITUD', 'LONGITUD', 'ID_FAMILIA',
+          'FECHA_BAJA', 'ANIOEGRESO', 'ID_CAMPUS', 'ID_GRUPOETNICO',
+          'FECHA_PROSPECCION', 'PROSPECCION_INICIAL', 'PROSPECCION_FINAL',
+          'PROSPECCION_PERIODO', 'PROSPECCION_AULAESCOLAR'].includes(field)) {
           clongText += trimValue(studentData[field]);
         } else {
           clongText += studentData[field];
@@ -530,7 +530,7 @@ router.post('/alumnos', [
     // Calculate hash - Using crypto module for hash generation
     const crypto = require('crypto');
     const newHash = crypto.createHash('md5').update(clongText).digest('hex');
-    
+
     // Store in database
     const result = await db.query(
       `INSERT INTO alumnos (

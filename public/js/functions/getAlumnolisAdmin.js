@@ -14,6 +14,8 @@ let columnasVisibles = {}; // Objeto para almacenar la visibilidad de las column
 // Definir columnas
 const columnas = [
     { id: "NUMEROALUMNO", nombre: "NÚMERO", visible: false },
+    { id: "MATRICULA", nombre: "MATRÍCULA", visible: false },
+    { id: "MATRICULA_OFICIAL", nombre: "MATRICULA OFICIAL", visible: false },
     { id: "NOMBRE", nombre: "NOMBRE", visible: false },
     { id: "PATERNO", nombre: "NOMBRE PATERNO", visible: false },
     { id: "MATERNO", nombre: "NOMBRE MATERNO", visible: false },
@@ -24,8 +26,6 @@ const columnas = [
     { id: "NIVEL", nombre: "NIVEL", visible: false },
     { id: "GRADO", nombre: "GRADO", visible: false },
     { id: "SUBNIVEL", nombre: "SUBNIVEL", visible: false },
-    { id: "MATRICULA", nombre: "MATRÍCULA", visible: false },
-    { id: "MATRICULA_OFICIAL", nombre: "MATRICULA OFICIAL", visible: false },
     { id: "STATUS", nombre: "STATUS", visible: false },
     { id: "CLAVE_CIUDADANA", nombre: "CLAVE CIUDADANA", visible: false },
     { id: "ESTADO_CIVIL", nombre: "ESTADO CIVIL", visible: false },
@@ -318,10 +318,10 @@ const getAlumnos = async () => {
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const loadingElement = document.getElementById('load');
     loadingElement.classList.remove('d-none');
-    
+
     // Si quieres que se oculte automáticamente después de cargar los datos
     // asegúrate de que en tu función getAlumnos() se incluya:
     // loadingElement.classList.add('d-none');
@@ -330,10 +330,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Modificación a la función getAlumnos (asumiendo que está en algún archivo JS importado)
 const originalGetAlumnos = window.getAlumnos;
 if (typeof originalGetAlumnos === 'function') {
-    window.getAlumnos = async function() {
+    window.getAlumnos = async function () {
         const loadingElement = document.getElementById('load');
         loadingElement.classList.remove('d-none');
-        
+
         try {
             await originalGetAlumnos();
         } finally {

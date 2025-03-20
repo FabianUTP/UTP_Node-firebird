@@ -13,48 +13,97 @@ let columnasVisibles = {}; // Objeto para almacenar la visibilidad de las column
 
 // Definir columnas
 const columnas = [
-    { id: "numeroalumno", nombre: "Número", visible: false },
-    { id: "nombre", nombre: "Nombre", visible: false },
-    { id: "matricula", nombre: "Matrícula", visible: false },
-    { id: "estadocivil", nombre: "Estado Civil", visible: false },
-    { id: "email", nombre: "EMAIL", visible: false },
-    { id: "email_alterno", nombre: "EMAIL ALTER", visible: false },
-    { id: "num_imss", nombre: "NUMERO DE IMSS", visible: false },
-    { id: "num_imss_verificador", nombre: "NUMERO VERIFICADOR IMSS", visible: false },
-    { id: "celular", nombre: "CELULAR", visible: false },
-    { id: "telefono", nombre: "TELEFONO", visible: false },
-    { id: "proyecto_obs", nombre: "PROYECTO OBS", visible: false },
-    { id: "obs_proyecto_lic", nombre: "LIC PROYECTO OBS ", visible: false },
-    { id: "tel_contacto", nombre: "TELEFONO CONTACTO", visible: false },
-    { id: "tipo_seg_med", nombre: "TIPO DE SEG MEDICO", visible: false },
-    { id: "lenguaindigena", nombre: "LENGUA INDIGENA", visible: false },
-    { id: "DISCAPACIDAD", nombre: "DISCAPACIDADES", visible: false },
-    { id: "ENFERNEDAD", nombre: "ENFERNEDAD", visible: false },
-    { id: "alergias", nombre: "ALERGIAS", visible: false },
-    { id: "escolaridadpadre", nombre: "ESCOLARIDAD PADRE", visible: false },
-    { id: "actividadpadre", nombre: "ACTIVIDAD PADRE", visible: false },
-    { id: "actividadmadre", nombre: "ACTIVIDAD MADRE", visible: false },
-    { id: "AUTOMOVILFAMILIAR", nombre: "AUTOMOVIL FAMILIAR", visible: false },
-    { id: "COMPUTADORA", nombre: "COMPUTADORA", visible: false },
-    { id: "tamanocasa", nombre: "TAMAÑO CASA", visible: false },
-    { id: "INFRESOFAMILIAR", nombre: "INFRESO FAMILIAR", visible: false },
-    { id: "personasdependeningreso", nombre: "PERSONASDEPENDENINGRESO", visible: false },
-    { id: "VIVENENCASA", nombre: "VIVENENCASA", visible: false },
+    { id: "NUMEROALUMNO", nombre: "NÚMERO", visible: false },
+    { id: "MATRICULA", nombre: "MATRÍCULA", visible: false },
+    { id: "NOMBRE", nombre: "NOMBRE", visible: false },
+    { id: "BECA", nombre: "BECA", visible: false },
+    { id: "CUENTA_BECA", nombre: "CUENTA BECA", visible: false },
+    { id: "TARJETA_BECA", nombre: "TARGETA BECA", visible: false },
+    { id: "PESO_KG", nombre: "PESO", visible: false },
+    { id: "CONTACTO", nombre: "CONTACTO", visible: false },
+    { id: "PARENTESCO_CONTACTO", nombre: "PARENTESCO DEL CONTACTO", visible: false },
+    { id: "TEL_CONTACTO", nombre: "TELEFONO DEL CONTACTO", visible: false },
+    { id: "TIPO_SEG_MED", nombre: "TIPO SEGURO MEDICO", visible: false },
+    { id: "NUM_IMSS", nombre: "NUMERO IMSS", visible: false },
+    { id: "NUM_IMSS_VERIFICADOR", nombre: "NUMERO VERIFICACION", visible: false },
+    { id: "LENGUAINDIGENA", nombre: "LENJUA INDIGENA", visible: false },
+    { id: "DISCAPACIDAD", nombre: "DESCAPACIDAD", visible: false },
+    { id: "ENFERNEDAD", nombre: "ENFERMEDAD", visible: false },
+    { id: "ALERGIAS", nombre: "ALERGIA", visible: false },
+    { id: "NOMBREPADRE", nombre: "NOMBRE DEL PADRE", visible: false },
+    { id: "NOMBREMADRE", nombre: "NOMBRE DE LA MADRE", visible: false },
+    { id: "PERSONASDEPENDENINGRESO", nombre: "CUANTAS PERSONAS", visible: false },
+    { id: "VIVENCASA", nombre: "VIVI EN CASA", visible: false },
     { id: "HERMANOS", nombre: "HERMANOS", visible: false },
-    { id: "LUGARNACIMIENTO", nombre: "LUGARNACIMIENTO", visible: false },
-    { id: "HERMANOSESTUDIAN", nombre: "HERMANOSESTUDIAN", visible: false },
-    { id: "TRABAJAS", nombre: "TRABAJAS", visible: false },
-    { id: "ACTIVIDADTRABAJAS", nombre: "ACTIVIDADTRABAJAS", visible: false },
-    { id: "NOMBRECONYUGE", nombre: "NOMBRECONYUGE", visible: false },
-    { id: "ESCOLARIDADCONYUGE", nombre: "ESCOLARIDADCONYUGE", visible: false },
-    { id: "ACTIVIDADCONYUGE", nombre: "ACTIVIDADCONYUGE", visible: false },
-    { id: "NIVELCOMPLETO", nombre: "NIVELCOMPLETO", visible: false },
-    { id: "HIJOS0A5", nombre: "HIJOS", visible: false },
-    { id: "INICIO_EGRESO", nombre: "INICIO_EGRESO", visible: false },
-    { id: "FOLIO_TITULACION", nombre: "FOLIO_TITULACION", visible: false },
-    { id: "FECHA_TRAMITE", nombre: "FECHA_TRAMITE", visible: false },
-    { id: "TITULACION_AN", nombre: "TITULACION AN", visible: false },
-    { id: "TITULACION_CB", nombre: "TITULACION CB", visible: false },
+    { id: "LUGARNACIMIENTO", nombre: "LUGAR DE NACIMIENTO", visible: false },
+    { id: "HERMANOSESTUDIAN", nombre: "HERMANOS ESTUDIAN", visible: false },
+    { id: "HORARIOTRABAJAS", nombre: "HORARIOS TRABAJAS", visible: false },
+    { id: "ESCOLARIDADCONYUGE", nombre: "ESCOLARIDAD CONYUGE", visible: false },
+    { id: "HIJOS0A5", nombre: "HIJOS DE 5", visible: false },
+    { id: "HIJOS6A12", nombre: "HIJOS DE 6 A 12", visible: false },
+    { id: "HIJOS13A18", nombre: "HIJOS 13 A 18", visible: false },
+    { id: "HIJOSMAYORES", nombre: "HIJOS MAYORES", visible: false },
+    { id: "CARRERA_ORIGEN_MOV_ACAD", nombre: "CARRERA ORIGEN", visible: false },
+    { id: "FOLIO_CENEVAL", nombre: "FOLIO CENEVAL", visible: false },
+    { id: "FOLIO_ACTA_EXEN_TSU", nombre: "FOLIO EXEN TSU", visible: false },
+    { id: "LIBRO_ACTA_EXEN_TSU", nombre: "LIBRO EXEN TSU", visible: false },
+    { id: "FOJAS_ACTA_EXEN_TSU", nombre: "FOJAS EXEN TSU", visible: false },
+    { id: "FOLIO_CERTIFICADO_TSU", nombre: "FOLIO CETIFICADO TSU", visible: false },
+    { id: "LIBRO_CERTIFICADO_TSU", nombre: "LIBRO CERTIFICADO TSU", visible: false },
+    { id: "FOJAS_CERTIFICADO_TSU", nombre: "FOJAS CERTIFICADO TSU", visible: false },
+    { id: "FOLIO_TITULACION_TSU", nombre: "FOLIO TITULACION TSU", visible: false },
+    { id: "LIBRO_TITULACION_TSU", nombre: "FOLIO TITULACION TSU", visible: false },
+    { id: "FOJA_TITULACION_TSU", nombre: "FOLIO TITULACION TSU ", visible: false },
+    { id: "FOLIO_TITULACION", nombre: "FOLIO TITULACION TRAMITE", visible: false },
+    { id: "FECHA_TRAMITE", nombre: "FECHA DE TRAMITE", visible: false },
+    { id: "TITULACION_FOLIOPAGO", nombre: "FOLIO DE PAGO ", visible: false },
+    { id: "EMPRESA_NR", nombre: "EMPRESA NR", visible: false },
+    { id: "ASESOR_EMPRESARIAL", nombre: "ASESOR EMPRESARIAL", visible: false },
+    { id: "ASESOR_EMPRESARIAL_INT", nombre: "ASESOR INT", visible: false },
+    { id: "ESTADIA_INICIO", nombre: "ESTADIA INICIO", visible: false },
+    { id: "ESTADIA_TERMINO", nombre: "ESTADIA TERMINO", visible: false },
+    { id: "FOLIO_CSS", nombre: "FOLIO CSS", visible: false },
+    { id: "LIBRO_CSS", nombre: "LIBRO CSS", visible: false },
+    { id: "FOJAS_CSS", nombre: "FOJA CSS", visible: false },
+    { id: "PROYECTO_NOMBRE", nombre: "NOMBRE DEL PROYECTO", visible: false },
+    { id: "CAI_FECHA", nombre: "FECHA CAI", visible: false },
+    { id: "ASESOR_ACADEMICO", nombre: "ASESOR ACADEMICO", visible: false },
+    { id: "ASESOR_ACAD_EXT", nombre: "ASESOR ACADEMICO EXT", visible: false },
+    { id: "PROYECTO_OBS", nombre: "INGLES TSU", visible: false },
+    { id: "TRAMITE_COMPLETO", nombre: "TRAMITE COMPLETO", visible: false },
+    { id: "FOLIO_CEX", nombre: "FOLIO EXENCION", visible: false },
+    { id: "LIBRO_CEX", nombre: "LIBRO EXENCION", visible: false },
+    { id: "FOJAS_CEX", nombre: "FOJA EXENCION", visible: false },
+    { id: "SOLICITUD_TITULACION_LIC", nombre: "SOLICITUD TRAMITE LIC", visible: false },
+    { id: "FOLIO_TITULACION_LIC", nombre: "FOLIO TRAMITE LIC", visible: false },
+    { id: "FECHA_TRAMITE_LIC", nombre: "FECHA TRAMITE LIC", visible: false },
+    { id: "FOLIO_PAGO_TIT_LIC", nombre: "FOLIO PAGO TIT LIC", visible: false },
+    { id: "NUM_CEDULA_TSU", nombre: "NUMERO TSU", visible: false },
+    { id: "EMPRESA_ESTADIA_LIC", nombre: "EMPRESA DE ESTADIA", visible: false },
+    { id: "ASESOR_EMPRESARIAL_LIC", nombre: "ASESOR EMP LIC", visible: false },
+    { id: "FECHA_INICIO_EST_LIC", nombre: "FECHA INICIO EST LIC", visible: false },
+    { id: "FECHA_FIN_EST_LIC", nombre: "FECHA TERMINO EST LIC", visible: false },
+    { id: "FECHA_LIBERACION_EST_LIC", nombre: "FECHA LIB EST LIC ", visible: false },
+    { id: "PROYECTO_EST_LIC", nombre: "PROYECTO EST LIC", visible: false },
+    { id: "FECHA_AUTORIZACION_LIC", nombre: "FECHA AUTORIZ", visible: false },
+    { id: "ASESOR_ACAD_LIC", nombre: "ASESOR ACAD LIC", visible: false },
+    { id: "OBS_PROYECTO_LIC", nombre: "NIVEL INGLES LIC", visible: false },
+    { id: "FECHA_INGRESO_LIC", nombre: "FECHA INGRESO LIC", visible: false },
+    { id: "FECHA_EGRESO_LIC", nombre: "FECHA ENGRESO LIC", visible: false },
+    { id: "INICIO_BACH", nombre: "INICIO BACHILLERATO", visible: false },
+    { id: "FIN_BACH", nombre: "FIN BACHILLERATO", visible: false },
+    { id: "FOLIO_CERLIC", nombre: "FOLIO CERLIC", visible: false },
+    { id: "LIBRO_CERLIC", nombre: "LIBRO CERLIC", visible: false },
+    { id: "FOJA_CERLIC", nombre: "FOJA CERLIC", visible: false },
+    { id: "FOLIO_CSSLIC", nombre: "FOLIO CSSLIC", visible: false },
+    { id: "LIBRO_CSSLIC", nombre: "LIBRO CSSLIC", visible: false },
+    { id: "FOJA_CSSLIC", nombre: "FOJA CSSLIC", visible: false },
+    { id: "FOLIO_TITLIC", nombre: "FOLIO TITLIC", visible: false },
+    { id: "LIBRO_TITLIC", nombre: "LIBRO TITLIC", visible: false },
+    { id: "FOJA_TITLIC", nombre: "FOJA TICLIC", visible: false },
+    { id: "ALUMNO_PASSWORD", nombre: "ALUMNO_PASSWORD", visible: false },
+    { id: "NUM_CEDULA_LIC", nombre: "NUMERO CEDULA LIC", visible: false },
+    { id: "ESTADOCIVIL", nombre: "PRUEBA", visible: false },
 ];
 
 // Función para alternar la visibilidad de las columnas
@@ -151,7 +200,7 @@ const getAlumnos = async () => {
     try {
         const res = await fetch(url);
         const data = await res.json();
-        const alumnos = data.alumnos || [];
+        let alumnos = data.alumnos || [];
 
         load.style.display = "none";
 
@@ -165,6 +214,15 @@ const getAlumnos = async () => {
             table.appendChild(tr);
             return;
         }
+
+        // Ordenar alumnos: primero por nombre (A-Z), luego por matrícula (0-9000), y finalmente por número (0-9000)
+        alumnos.sort((a, b) => {
+            let cmp = a.NOMBRE.localeCompare(b.NOMBRE, "es", { sensitivity: "base" });
+            if (cmp !== 0) return cmp;
+            cmp = Number(a.MATRICULA) - Number(b.MATRICULA);
+            if (cmp !== 0) return cmp;
+            return Number(a.NUMEROALUMNO) - Number(b.NUMEROALUMNO);
+        });
 
         // Generar filas de la tabla
         alumnos.forEach(item => {
@@ -203,6 +261,10 @@ const getAlumnos = async () => {
         table.appendChild(tr);
     }
 };
+
+
+
+
 
 // Inicializar componentes
 const inicializar = () => {

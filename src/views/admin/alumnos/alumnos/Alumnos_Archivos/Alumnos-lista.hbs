@@ -11,34 +11,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="/css/Alumnolist.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .btn-floating {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-    </style>
 </head>
 
 <body>
     <div class="container mt-4">
         <h2 class="text-center text-primary">Documentos Masivos</h2>
+
+        <!-- Nuevo contenedor para selector y botón -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <button class="btn btn-success" onclick="guardarDocumentosSeleccionados()">Guardar</button>
+            <input type="file" class="form-control w-auto" id="fileInput">
+        </div>
+
         <div class="mb-3 d-flex justify-content-center">
             <div class="form-check form-check-inline" id="column-toggles">
                 <!-- Checkboxes de columnas dinámicos -->
@@ -70,7 +54,102 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="/js/functions/getAlumnolisAdmin.js"></script>
+    <script src="https://unpkg.com/read-excel-file@5.3.4/bundle/read-excel-file.min.js"></script>
     <script src="/js/services/profe/Exel_js/Exporta_admin.js"></script>
 </body>
 
 </html>
+
+<script>
+    const columnasSeleccionadas = columnas.filter(col => columnasVisibles[col.id]);
+
+    function guardarDocumentosSeleccionados() {
+        const fileInput = document.getElementById("fileInput");
+        if (!fileInput.files || fileInput.files.length === 0) {
+            alert("Por favor seleccione un archivo Excel antes de guardar.");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const allowedExtensions = ["xlsx", "xls"];
+        const fileExtension = file.name.split(".").pop().toLowerCase();
+        if (!allowedExtensions.includes(fileExtension)) {
+            alert("Formato de archivo no válido. Seleccione un archivo Excel (.xlsx, .xls)");
+            return;
+        }
+
+        const columnasRequeridas = ["NUMEROALUMNO", "MATRICULA", "NOMBRE"];
+        const columnasSeleccionadas = columnas.filter(col => columnasRequeridas.includes(col.id) || columnasVisibles[col.id]);
+        const saveButton = document.querySelector("button.btn-success");
+        const originalText = saveButton.textContent;
+        saveButton.textContent = "Procesando...";
+        saveButton.disabled = true;
+
+        readXlsxFile(file).then((data) => {
+            try {
+                if (!data || data.length < 2) {
+                    throw new Error("El archivo Excel no contiene datos suficientes.");
+                }
+
+                const headers = data[0].map(header => header.trim().toUpperCase());
+                const missingColumns = requiredColumns.filter(col => !headers.includes(col));
+
+                if (missingColumns.length > 0) {
+                    throw new Error(`El archivo no contiene las columnas requeridas: ${missingColumns.join(", ")}`);
+                }
+
+                const processedData = [];
+                const errors = [];
+
+                for (let i = 1; i < data.length; i++) {
+                    const row = data[i];
+                    const rowData = {};
+
+                    for (let j = 0; j < headers.length; j++) {
+                        rowData[headers[j]] = row[j] || "";
+                    }
+
+                    if (!rowData["MATRICULA"]) {
+                        errors.push(`Fila ${i + 1}: MATRÍCULA es un campo requerido y está vacío.`);
+                    }
+
+                    processedData.push(rowData);
+                }
+
+                if (errors.length > 0) {
+                    throw new Error(`Errores encontrados:\n${errors.slice(0, 10).join("\n")}${errors.length > 10 ? `\n...y ${errors.length - 10} más.` : ""}`);
+                }
+
+                enviarDatos(processedData);
+            } catch (error) {
+                alert(error.message);
+                console.error("Error de validación:", error);
+                saveButton.textContent = originalText;
+                saveButton.disabled = false;
+            }
+        }).catch(error => {
+            alert("Error al leer el archivo Excel: " + error.message);
+            console.error("Error de lectura:", error);
+            saveButton.textContent = originalText;
+            saveButton.disabled = false;
+        });
+    }
+
+    function enviarDatos(data) {
+        fetch("/api/alumnos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ alumnos: data })
+        })
+            .then(response => response.json())
+            .then(result => {
+                alert(`Datos importados exitosamente.\n\nRegistros procesados: ${result.total}`);
+            })
+            .catch(error => {
+                alert("Error al subir los datos: " + error.message);
+                console.error("Error en la subida:", error);
+            });
+    }
+
+
+</script>

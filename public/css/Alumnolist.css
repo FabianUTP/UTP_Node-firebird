@@ -1,23 +1,17 @@
 /* Variables de colores */
 :root {
-    --admin-primary: #a4273d;
-    /* Rojo vibrante */
+    --admin-primary: #a4273d; /* Rojo vibrante */
     --admin-secondary: #343a40;
-    --admin-accent: #007bff;
-    /* Azul brillante */
-    --admin-light: #f8f9fa;
-    /* Fondo claro */
-    --admin-border: #d1d1d1;
-    /* Bordes suaves */
+    --admin-accent: #007bff; /* Azul brillante */
+    --admin-light: #f8f9fa; /* Fondo claro */
+    --admin-border: #d1d1d1; /* Bordes suaves */
     --admin-success: #28a745;
     --admin-danger: #dc3545;
     --admin-warning: #ffc107;
-    --admin-text: #333333;
-    /* Texto oscuro */
+    --admin-text: #333333; /* Texto oscuro */
     --admin-text-light: #6c757d;
     --admin-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --admin-background: #ffffff;
-    /* Fondo blanco */
+    --admin-background: #ffffff; /* Fondo blanco */
 }
 
 /* Diseño general */
@@ -33,11 +27,10 @@ body {
     border-radius: 12px;
     box-shadow: var(--admin-box-shadow);
     padding: 2.5rem;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+    margin: 2.5rem 0;
 }
 
-/* Título */
+/* Títulos */
 h2 {
     color: var(--admin-secondary);
     font-size: 2.1rem;
@@ -60,7 +53,7 @@ h2:after {
     border-radius: 2px;
 }
 
-/* Tabla */
+/* Tablas */
 .table-responsive {
     border-radius: 12px;
     box-shadow: var(--admin-box-shadow);
@@ -79,17 +72,15 @@ h2:after {
     font-weight: 700;
     font-size: 1.1rem;
     padding: 1rem 1.5rem;
-    vertical-align: middle;
+    text-align: center;
     border-bottom: 3px solid var(--admin-border);
     position: sticky;
     top: 0;
     z-index: 1;
-    text-align: center;
 }
 
 .table tbody td {
     padding: 1rem 1.25rem;
-    vertical-align: middle;
     border-color: var(--admin-border);
     font-size: 1rem;
 }
@@ -103,18 +94,12 @@ h2:after {
     cursor: pointer;
 }
 
-.table tbody tr:nth-child(even) {
-    background-color: #fcfcfc;
-}
-
 /* Botones */
 .btn {
     font-weight: 500;
     border-radius: 0.5rem;
     padding: 0.75rem 1.5rem;
     transition: all 0.3s ease;
-    text-transform: none;
-    letter-spacing: normal;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
@@ -123,7 +108,6 @@ h2:after {
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
 }
 
-/* Botón Primario */
 .btn-primary {
     background: linear-gradient(to bottom, var(--admin-primary), #d72a47);
     border-color: #d72a47;
@@ -136,7 +120,7 @@ h2:after {
     border-color: #9e1932;
 }
 
-/* Estilo del botón flotante con ícono */
+/* Botón flotante */
 .btn-floating {
     position: fixed;
     bottom: 30px;
@@ -148,7 +132,6 @@ h2:after {
     color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     font-weight: 600;
-    text-transform: uppercase;
     transition: all 0.3s ease-in-out;
     display: flex;
     justify-content: center;
@@ -160,15 +143,7 @@ h2:after {
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
 }
 
-.btn-floating:focus {
-    outline: none;
-}
-
-.btn-floating i {
-    font-size: 1.5rem;
-}
-
-/* Para dispositivos móviles */
+/* Diseño responsive */
 @media (max-width: 768px) {
     .btn-floating {
         right: 15px;
@@ -194,25 +169,19 @@ h2:after {
     color: var(--admin-primary);
 }
 
-/* Estilo de columnas ocultas */
+/* Columnas ocultas */
 .hidden-column {
     display: none;
 }
 
-/* Contenedor de columnas */
+/* Estilos para checkboxes de columnas */
 #column-toggles {
     display: flex;
-    justify-content: flex-start;
     gap: 12px;
     overflow-x: auto;
     white-space: nowrap;
     max-width: 100%;
     padding-bottom: 10px;
-}
-
-.checkbox-column {
-    width: 50px;
-    text-align: center;
 }
 
 .column-toggle {
@@ -229,8 +198,7 @@ h2:after {
     transform: scale(1.05);
 }
 
-
-/* Diseño de checkbox con flecha hacia abajo */
+/* Checkbox con flecha */
 .checkbox-container {
     position: relative;
     display: inline-block;
@@ -240,7 +208,6 @@ h2:after {
     display: none;
 }
 
-/* Diseño personalizado para el checkbox */
 .checkbox-container label {
     position: relative;
     padding-left: 30px;
@@ -250,7 +217,6 @@ h2:after {
     font-weight: 500;
 }
 
-/* Flecha hacia abajo */
 .checkbox-container label:before {
     content: '';
     position: absolute;
@@ -264,151 +230,6 @@ h2:after {
     transition: transform 0.3s ease;
 }
 
-/* Efecto cuando el checkbox está marcado */
 .checkbox-container input[type="checkbox"]:checked+label:before {
     transform: translateY(-50%) rotate(225deg);
-    /* Flecha apuntando hacia arriba */
 }
-
-.checkbox-container input[type="checkbox"]:checked+label {
-    color: var(--admin-accent);
-}
-
-/* Estilos para la apariencia del checkbox */
-.checkbox-container input[type="checkbox"]:checked+label {
-    font-weight: 600;
-}
-
-.checkbox-container input[type="checkbox"]:not(:checked)+label {
-    color: var(--admin-text-light);
-}/* Estilos generales */
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
-}
-
-.container {
-    max-width: 1200px;
-    padding: 15px;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-
-h2 {
-    color: #007bff;
-    font-weight: 600;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #e9ecef;
-}
-
-/* Estilos para la tabla tipo Excel */
-#scroll-container {
-    max-height: 70vh;
-    overflow-y: auto;
-    border: 1px solid #dee2e6;
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    font-size: 14px;
-}
-
-.table thead th {
-    position: sticky;
-    top: 0;
-    background-color: #f0f0f0;
-    border: 1px solid #dee2e6;
-    color: #495057;
-    font-weight: 600;
-    text-align: center;
-    padding: 10px;
-    z-index: 10;
-    white-space: nowrap;
-}
-
-.table tbody td {
-    border: 1px solid #dee2e6;
-    padding: 8px;
-    vertical-align: middle;
-}
-
-.table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-.table tbody tr:hover {
-    background-color: #e9f0ff;
-}
-
-/* Estilos para los checkboxes de columnas */
-#column-toggles {
-    background-color: #f8f9fa;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #dee2e6;
-    margin-bottom: 15px;
-}
-
-.form-check-inline {
-    margin-right: 15px;
-}
-
-/* Estilos para el botón flotante */
-.btn-floating {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    padding: 10px 15px;
-    border-radius: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s;
-}
-
-.btn-floating:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-}
-
-.btn-floating i {
-    margin-right: 5px;
-}
-
-/* Estilos para el spinner de carga */
-#load {
-    padding: 20px;
-}
-
-.spinner-border {
-    color: #007bff;
-    width: 2rem;
-    height: 2rem;
-}
-
-/* Estilos responsive para pantallas pequeñas */
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-    
-    .table {
-        font-size: 12px;
-    }
-    
-    .table thead th,
-    .table tbody td {
-        padding: 6px 4px;
-    }
-    
-    .btn-floating {
-        bottom: 15px;
-        right: 15px;
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-}
-

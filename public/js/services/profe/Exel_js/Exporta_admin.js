@@ -1,58 +1,75 @@
 function descargarTablaExcel() {
     try {
+        // Verificar si la librería XLSX está disponible
+        if (typeof XLSX === 'undefined') {
+            throw new Error("La librería XLSX no está cargada correctamente");
+        }
+
         // Obtener las columnas visibles
         const columnasSeleccionadas = columnas.filter(col => columnasVisibles[col.id]);
 
-        // Si no hay columnas visibles seleccionadas, mostramos una alerta
         if (columnasSeleccionadas.length === 0) {
             alert("Debe seleccionar al menos una columna para exportar.");
             return;
         }
 
-        // Obtener los datos de la tabla
+        // Obtener datos de la tabla
         const rows = Array.from(document.querySelectorAll("#table-container tr"));
+        if (rows.length === 0) {
+            throw new Error("No se encontraron datos para exportar");
+        }
+
         const data = rows.map((row) => {
             const cells = Array.from(row.querySelectorAll("td"));
-            
-            // Filtrar solo las celdas correspondientes a las columnas visibles
-            const rowData = columnasSeleccionadas.map((col) => {
-                const cell = cells.find((cell, index) => index === columnas.findIndex(column => column.id === col.id));
-                if (cell) {
-                    const input = cell.querySelector("input");
-                    return input ? input.value.trim() : cell.textContent.trim();
-                }
-                return "";  // En caso de que la celda esté vacía
+            return columnasSeleccionadas.map((col) => {
+                const colIndex = columnas.findIndex(c => c.id === col.id);
+                if (colIndex === -1 || colIndex >= cells.length) return "";
+                
+                const cell = cells[colIndex];
+                const input = cell.querySelector("input");
+                return input ? input.value.trim() : cell.textContent.trim();
             });
-
-            return rowData;
         });
 
-        // Crear un nuevo libro de Excel
+        // Crear libro Excel
         const wb = XLSX.utils.book_new();
-
-        // Generar las cabeceras solo con las columnas seleccionadas
-        const wsData = data.length > 0
-            ? [
-                columnasSeleccionadas.map(col => col.nombre),  // Usamos los nombres de las columnas visibles seleccionadas
-                ...data
-            ]
-            : [columnasSeleccionadas.map(col => col.nombre)];  // Solo cabecera si no hay datos
+        const wsData = [
+            columnasSeleccionadas.map(col => col.nombre),
+            ...data
+        ];
 
         const ws = XLSX.utils.aoa_to_sheet(wsData);
-        ws["!cols"] = columnasSeleccionadas.map(() => ({ wch: 20 })); // Ajuste de ancho de columnas
-
+        
+        // Ajustar anchos de columna
+        ws['!cols'] = columnasSeleccionadas.map(() => ({ wch: 20 }));
+        
         XLSX.utils.book_append_sheet(wb, ws, "Datos");
 
-        const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+        // Generar archivo
+        const wbout = XLSX.write(wb, { 
+            bookType: "xlsx", 
+            type: "array",
+            cellStyles: true 
+        });
 
-        // Limpiar caracteres especiales del nombre del archivo
-        const nombreArchivo = `Datos_${new Date().toISOString().slice(0, 10)}.xlsx`;
-
-        saveAs(new Blob([wbout], { type: "application/octet-stream" }), nombreArchivo);
-
-        alert(`Archivo Excel generado correctamente: ${nombreArchivo}`);
+        // Descargar archivo
+        const blob = new Blob([wbout], { type: "application/octet-stream" });
+        const fileName = `Datos_${new Date().toISOString().slice(0, 10)}.xlsx`;
+        
+        // Usar FileSaver.js para la descarga
+        if (typeof saveAs !== 'undefined') {
+            saveAs(blob, fileName);
+            alert(`Archivo ${fileName} generado correctamente`);
+        } else {
+            // Alternativa si FileSaver no está disponible
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(link.href), 100);
+        }
     } catch (error) {
-        console.error("Error al generar el archivo Excel:", error);
-        alert(`Error: ${error.message}`);
+        console.error("Error en descargarTablaExcel:", error);
+        alert(`Error al generar el Excel: ${error.message}`);
     }
 }

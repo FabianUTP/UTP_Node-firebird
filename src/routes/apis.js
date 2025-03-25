@@ -316,76 +316,106 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
 
 
 ////NAVBAR CUATRIMESTRES
+// Ruta para obtener los ciclos con un límite opcional
 router.get("/cuatris-navbar", async (req, res) => {
   const { limit = 200 } = req.query;
 
-  // Obtener los ciclos (limitados por parámetro 'limit')
-  const ciclos = await Ciclos.all({
-    limit,
-  });
-
-  // Si no hay ciclos disponibles, enviamos una respuesta vacía o un indicador
-  if (!ciclos || ciclos.length === 0) {
-    return res.json({
-      periodoSelected: null,
-      ciclos: [],
-      noCiclos: true, // Indicador de que no hay ciclos disponibles
+  // Asegurarse de que el parámetro 'limit' sea un número válido
+  const limitInt = parseInt(limit, 10);
+  if (isNaN(limitInt) || limitInt <= 0) {
+    return res.status(400).json({
+      error: "El parámetro 'limit' debe ser un número válido y mayor a cero.",
     });
   }
 
-  // Obtener el periodo seleccionado en la sesión
-  let periodoSelected = await Ciclos.findById(req.session.periodoSelected);
+  try {
+    // Obtener los ciclos (limitados por el parámetro 'limit')
+    const ciclos = await Ciclos.all({ limit: limitInt });
 
-  // Enviar todos los ciclos (incluyendo PERIODO === 0) y el periodo seleccionado en la respuesta
-  res.json({
-    periodoSelected: periodoSelected?.DESCRIPCION,
-    ciclos: ciclos, // Incluye todos los ciclos, sin filtrar
-    noCiclos: false, // Indicador de que hay ciclos disponibles
-  });
+    if (!ciclos || ciclos.length === 0) {
+      return res.json({
+        periodoSelected: null,
+        ciclos: [],
+        noCiclos: true, // Indicador de que no hay ciclos disponibles
+      });
+    }
+
+    // Obtener el periodo seleccionado en la sesión
+    const periodoSelected = await Ciclos.findById(req.session.periodoSelected);
+
+    // Respuesta con los ciclos y el periodo seleccionado
+    res.json({
+      periodoSelected: periodoSelected?.DESCRIPCION || null,
+      ciclos,
+      noCiclos: false,
+    });
+  } catch (error) {
+    console.error("Error al obtener los ciclos:", error);
+    res.status(500).json({ error: "Hubo un problema al obtener los ciclos." });
+  }
 });
 
+// Ruta para actualizar el periodo seleccionado
 router.put("/update/CuatriXGrupos", async (req, res) => {
   const { periodo } = req.body;
 
-  // Actualiza el periodo a mostrar en la API de grupos
-  if (periodo === "none") {
-    req.session.periodoSelected = null;
-  } else {
-    req.session.periodoSelected = periodo;
+  if (!periodo) {
+    return res.status(400).json({
+      error: "El campo 'periodo' es obligatorio.",
+    });
   }
 
+  // Actualiza el periodo en la sesión
+  req.session.periodoSelected = periodo === "none" ? null : periodo;
+
   res.json({
-    res: "Periodo actualizado",
+    message: "Periodo actualizado",
   });
 });
 
-// Cuatrimestres / Ciclos
+// Ruta para obtener cuatrimestres/ciclos con filtros opcionales
 router.get("/cuatrimestres", async (req, res) => {
-  const { limit, skip, search } = req.query;
+  const { limit = 10, skip = 0, search = "" } = req.query;
 
-  let searchQuery = "";
+  // Validación de los parámetros 'limit' y 'skip'
+  const limitInt = parseInt(limit, 10);
+  const skipInt = parseInt(skip, 10);
 
-  if (search) {
-    searchQuery = `(codigo_corto LIKE '%${search.toUpperCase()}%') `;
-    searchQuery += `OR (descripcion LIKE '%${search}%')`;
+  if (isNaN(limitInt) || limitInt <= 0) {
+    return res.status(400).json({
+      error: "El parámetro 'limit' debe ser un número válido y mayor a cero.",
+    });
   }
 
-  const ciclos = await Ciclos.all({
-    limit,
-    skip,
-    searchQuery,
-    orderBy: 'inicial',
-    sort: 'desc'
-  });
+  if (isNaN(skipInt) || skipInt < 0) {
+    return res.status(400).json({
+      error: "El parámetro 'skip' debe ser un número entero válido y no negativo.",
+    });
+  }
 
-  res.json({
-    querys: {
-      limit,
-      skip,
-      search
-    },
-    ciclos,
-  });
+  let searchQuery = "";
+  if (search) {
+    searchQuery = `(codigo_corto LIKE '%${search.toUpperCase()}%' OR descripcion LIKE '%${search}%')`;
+  }
+
+  try {
+    // Obtener los ciclos con búsqueda, paginación y orden
+    const ciclos = await Ciclos.all({
+      limit: limitInt,
+      skip: skipInt,
+      searchQuery,
+      orderBy: 'inicial',
+      sort: 'desc',
+    });
+
+    res.json({
+      querys: { limit, skip, search },
+      ciclos,
+    });
+  } catch (error) {
+    console.error("Error al obtener los cuatrimestres/ciclos:", error);
+    res.status(500).json({ error: "Hubo un problema al obtener los cuatrimestres." });
+  }
 });
 
 
@@ -395,7 +425,6 @@ router.get("/alumnos", async (req, res) => {
 
   let searchQuery = null;
 
-  // Si hay palabras a buscar, lo agrega en la consulta
   if (search) {
     searchQuery = `(matricula LIKE '%${search}%') `;
     searchQuery += `OR (nombre LIKE '%${search}%') `;
@@ -406,9 +435,6 @@ router.get("/alumnos", async (req, res) => {
       searchQuery += `OR (paterno LIKE '%${searchLastName[0]}%' AND materno LIKE '%${searchLastName[1]}%') `;
     }
   }
-
-
-
   const alumnos = await Alumno.all({
     limit,
     skip,
@@ -429,176 +455,87 @@ router.get("/alumnos", async (req, res) => {
   });
 });
 
-
-const { body, validationResult } = require('express-validator');
-
-router.post('/alumnos', [
-  // Validate required fields
-  body('ID_ESCUELA').notEmpty().withMessage('School ID is required'),
-  body('NUMEROALUMNO').notEmpty().withMessage('Student number is required'),
-
-  // Optional fields validation
-  body('PATERNO').optional(),
-  body('MATERNO').optional(),
-  body('NOMBRE').optional(),
-  body('GENERO').optional(),
-  body('NIVEL').optional(),
-  body('GRADO').optional(),
-  body('SUBNIVEL').optional(),
-  body('MATRICULA').optional(),
-  body('MATRICULA_OFICIAL').optional(),
-  body('STATUS').optional(),
-  body('CLAVE_CIUDADANA').optional(),
-  body('ESTADO_CIVIL').optional(),
-  body('FECHA_NACIMIENTO').optional().isDate().withMessage('Birth date must be a valid date'),
-  body('DOMICILIO').optional(),
-  body('ENTRE_CALLES').optional(),
-  body('CP').optional(),
-  body('CIUDAD').optional(),
-  body('ESTADO').optional(),
-  body('LATITUD').optional().isNumeric().withMessage('Latitude must be a number'),
-  body('LONGITUD').optional().isNumeric().withMessage('Longitude must be a number'),
-  body('TELEFONO').optional(),
-  body('CELULAR').optional(),
-  body('TELEFONOTRABAJO').optional(),
-  body('NOMBRETUTOR').optional(),
-  body('PARENTESCO').optional(),
-  body('ID_FAMILIA').optional(),
-  body('PUESTO_EMPRESA').optional(),
-  body('EMAIL').optional().isEmail().withMessage('Must be a valid email'),
-  body('FECHA_BAJA').optional(),
-  body('MOTIVO_BAJA').optional(),
-  body('ANIOEGRESO').optional(),
-  body('LUGAR_NACIMIENTO').optional(),
-  body('ESTADO_NACIMIENTO').optional(),
-  body('NACIONALIDAD').optional(),
-  body('ESCUELA_PROCEDENCIA').optional(),
-  body('ESCOLARIDAD').optional(),
-  body('ESTADO_ESCOLARIDAD').optional(),
-  body('USERNAME').optional(),
-  body('USERNAME_ACTUALIZA').optional(),
-  body('CERTIFICADO').optional(),
-  body('SITUACION_CERTIFICADO').optional(),
-  body('ID_CAMPUS').optional(),
-  body('ID_PROMOTOR').optional(),
-  body('ID_GRUPOETNICO').optional(),
-  body('FECHA_PROSPECCION').optional(),
-  body('PROSPECCION_INICIAL').optional(),
-  body('PROSPECCION_FINAL').optional(),
-  body('PROSPECCION_PERIODO').optional(),
-  body('PROSPECCION_AULAESCOLAR').optional()
-], async (req, res) => {
+// Ruta para actualizar alumnos (POST o PUT)
+router.post("/alumnos/actualizar", async (req, res) => {
   try {
-    // Check for validation errors
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    const { cambios, soloSeleccion } = req.body;
+
+    if (!cambios || typeof cambios !== 'object') {
+      return res.status(400).json({ 
+        success: false,
+        message: "Datos de actualización inválidos" 
+      });
     }
 
-    const studentData = req.body;
+    // Verificar que al menos hay un cambio para procesar
+    if (Object.keys(cambios).length === 0) {
+      return res.status(400).json({ 
+        success: false,
+        message: "No se recibieron cambios para procesar" 
+      });
+    }
 
-    // Generate hash similar to the trigger logic
-    let clongText = trimValue(studentData.ID_ESCUELA) + trimValue(studentData.NUMEROALUMNO);
+    const resultados = {};
+    let actualizacionesExitosas = 0;
+    let errores = 0;
 
-    // Add fields to hash if they exist
-    const fieldsToInclude = [
-      'PATERNO', 'MATERNO', 'NOMBRE', 'GENERO', 'NIVEL', 'GRADO', 'SUBNIVEL',
-      'MATRICULA', 'MATRICULA_OFICIAL', 'STATUS', 'CLAVE_CIUDADANA', 'ESTADO_CIVIL',
-      'FECHA_NACIMIENTO', 'DOMICILIO', 'ENTRE_CALLES', 'CP', 'CIUDAD', 'ESTADO',
-      'LATITUD', 'LONGITUD', 'TELEFONO', 'CELULAR', 'TELEFONOTRABAJO', 'NOMBRETUTOR',
-      'PARENTESCO', 'ID_FAMILIA', 'PUESTO_EMPRESA', 'EMAIL', 'FECHA_BAJA', 'MOTIVO_BAJA',
-      'ANIOEGRESO', 'LUGAR_NACIMIENTO', 'ESTADO_NACIMIENTO', 'NACIONALIDAD',
-      'ESCUELA_PROCEDENCIA', 'ESCOLARIDAD', 'ESTADO_ESCOLARIDAD', 'USERNAME',
-      'USERNAME_ACTUALIZA', 'CERTIFICADO', 'SITUACION_CERTIFICADO', 'ID_CAMPUS',
-      'ID_PROMOTOR', 'ID_GRUPOETNICO', 'FECHA_PROSPECCION', 'PROSPECCION_INICIAL',
-      'PROSPECCION_FINAL', 'PROSPECCION_PERIODO', 'PROSPECCION_AULAESCOLAR'
-    ];
+    // Procesar cada alumno que necesita actualización
+    for (const [numeroAlumno, campos] of Object.entries(cambios)) {
+      try {
+        // Buscar al alumno por su número (usando tu modelo Alumno)
+        const alumno = await Alumno.findOne({ where: { numeroalumno: numeroAlumno } });
 
-    fieldsToInclude.forEach(field => {
-      if (studentData[field] !== undefined && studentData[field] !== null) {
-        if (['GRADO', 'FECHA_NACIMIENTO', 'LATITUD', 'LONGITUD', 'ID_FAMILIA',
-          'FECHA_BAJA', 'ANIOEGRESO', 'ID_CAMPUS', 'ID_GRUPOETNICO',
-          'FECHA_PROSPECCION', 'PROSPECCION_INICIAL', 'PROSPECCION_FINAL',
-          'PROSPECCION_PERIODO', 'PROSPECCION_AULAESCOLAR'].includes(field)) {
-          clongText += trimValue(studentData[field]);
-        } else {
-          clongText += studentData[field];
+        if (!alumno) {
+          resultados[numeroAlumno] = { success: false, message: "Alumno no encontrado" };
+          errores++;
+          continue;
         }
+
+        // Preparar los campos a actualizar
+        const updates = {};
+        for (const [campo, valor] of Object.entries(campos)) {
+          // Validar que el campo exista en el modelo (opcional pero recomendado)
+          if (campo in alumno.dataValues) {
+            updates[campo.toLowerCase()] = valor; // Asegurar lowercase para coincidir con DB
+          }
+        }
+
+        // Si hay campos válidos para actualizar
+        if (Object.keys(updates).length > 0) {
+          await alumno.update(updates);
+          resultados[numeroAlumno] = { success: true, camposActualizados: Object.keys(updates) };
+          actualizacionesExitosas++;
+        } else {
+          resultados[numeroAlumno] = { success: false, message: "No hay campos válidos para actualizar" };
+          errores++;
+        }
+      } catch (error) {
+        console.error(`Error al actualizar alumno ${numeroAlumno}:`, error);
+        resultados[numeroAlumno] = { success: false, message: error.message };
+        errores++;
+      }
+    }
+
+    res.json({
+      success: true,
+      message: `Proceso completado. Actualizados: ${actualizacionesExitosas}, Errores: ${errores}`,
+      resultados,
+      resumen: {
+        total: Object.keys(cambios).length,
+        actualizados: actualizacionesExitosas,
+        errores
       }
     });
 
-    // Calculate hash - Using crypto module for hash generation
-    const crypto = require('crypto');
-    const newHash = crypto.createHash('md5').update(clongText).digest('hex');
-
-    // Store in database
-    const result = await db.query(
-      `INSERT INTO alumnos (
-        ID_ESCUELA, NUMEROALUMNO, PATERNO, MATERNO, NOMBRE, GENERO, NIVEL, GRADO, SUBNIVEL,
-        MATRICULA, MATRICULA_OFICIAL, STATUS, CLAVE_CIUDADANA, ESTADO_CIVIL, FECHA_NACIMIENTO,
-        DOMICILIO, ENTRE_CALLES, CP, CIUDAD, ESTADO, LATITUD, LONGITUD, TELEFONO, CELULAR,
-        TELEFONOTRABAJO, NOMBRETUTOR, PARENTESCO, ID_FAMILIA, PUESTO_EMPRESA, EMAIL, FECHA_BAJA,
-        MOTIVO_BAJA, ANIOEGRESO, LUGAR_NACIMIENTO, ESTADO_NACIMIENTO, NACIONALIDAD,
-        ESCUELA_PROCEDENCIA, ESCOLARIDAD, ESTADO_ESCOLARIDAD, USERNAME, USERNAME_ACTUALIZA,
-        CERTIFICADO, SITUACION_CERTIFICADO, ID_CAMPUS, ID_PROMOTOR, ID_GRUPOETNICO,
-        FECHA_PROSPECCION, PROSPECCION_INICIAL, PROSPECCION_FINAL, PROSPECCION_PERIODO,
-        PROSPECCION_AULAESCOLAR
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20,
-        $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40,
-        $41, $42, $43, $44, $45, $46, $47, $48, $49, $50, $51) 
-      ON CONFLICT (ID_ESCUELA, NUMEROALUMNO) 
-      DO UPDATE SET
-        PATERNO = $3, MATERNO = $4, NOMBRE = $5, GENERO = $6, NIVEL = $7, GRADO = $8, SUBNIVEL = $9,
-        MATRICULA = $10, MATRICULA_OFICIAL = $11, STATUS = $12, CLAVE_CIUDADANA = $13, ESTADO_CIVIL = $14, 
-        FECHA_NACIMIENTO = $15, DOMICILIO = $16, ENTRE_CALLES = $17, CP = $18, CIUDAD = $19, ESTADO = $20, 
-        LATITUD = $21, LONGITUD = $22, TELEFONO = $23, CELULAR = $24, TELEFONOTRABAJO = $25, 
-        NOMBRETUTOR = $26, PARENTESCO = $27, ID_FAMILIA = $28, PUESTO_EMPRESA = $29, EMAIL = $30, 
-        FECHA_BAJA = $31, MOTIVO_BAJA = $32, ANIOEGRESO = $33, LUGAR_NACIMIENTO = $34, 
-        ESTADO_NACIMIENTO = $35, NACIONALIDAD = $36, ESCUELA_PROCEDENCIA = $37, ESCOLARIDAD = $38, 
-        ESTADO_ESCOLARIDAD = $39, USERNAME = $40, USERNAME_ACTUALIZA = $41, CERTIFICADO = $42, 
-        SITUACION_CERTIFICADO = $43, ID_CAMPUS = $44, ID_PROMOTOR = $45, ID_GRUPOETNICO = $46,
-        FECHA_PROSPECCION = $47, PROSPECCION_INICIAL = $48, PROSPECCION_FINAL = $49, 
-        PROSPECCION_PERIODO = $50, PROSPECCION_AULAESCOLAR = $51
-      RETURNING *`,
-      Object.values(studentData)
-    );
-
-    // Update or insert hash for synchronization
-    await db.query(
-      `INSERT INTO sincronizacion_hash (ID_ESCUELA, NOMBRE_TABLA, PK_TABLA, HASH_LOCAL, HASH_SINCRONIZACION, STATUS, TEXTO_LARGO)
-       VALUES ($1, 'alumnos', $2, $3, '', '1', $4)
-       ON CONFLICT (ID_ESCUELA, NOMBRE_TABLA, PK_TABLA)
-       DO UPDATE SET HASH_LOCAL = $3, TEXTO_LARGO = $4, STATUS = '1'`,
-      [studentData.ID_ESCUELA, studentData.NUMEROALUMNO, newHash, clongText]
-    );
-
-    // Trigger event handling could be implemented here
-    // In the original trigger, there was a POST_EVENT 'ALUMNOS_UPDATE'
-    // You might want to implement a message queue or event emitter here
-
-    return res.status(201).json({
-      success: true,
-      data: result.rows[0],
-      message: 'Student data processed successfully',
-      hash: newHash
-    });
-
   } catch (error) {
-    console.error('Error processing student data:', error);
-    return res.status(500).json({
+    console.error("Error en el endpoint de actualización:", error);
+    res.status(500).json({ 
       success: false,
-      message: 'Server error while processing student data',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      message: "Error interno del servidor",
+      error: error.message 
     });
   }
 });
-
-// Helper function similar to F_LRTRIM in the original code
-function trimValue(value) {
-  if (value === null || value === undefined) return '';
-  return String(value).trim();
-}
-
 
 
 
@@ -1399,8 +1336,6 @@ router.post('/GrupAlumnos', async (req, res) => {
   }
 });
 
-// ///Api prueba del Kardex_alumno
-// Endpoint: Consultar datos filtrados por periodos
 router.get("/kardex/periodo", async (req, res) => {
   try {
     const { inicio, final } = req.query;

@@ -8,7 +8,8 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Subir más los elementos */
+  justify-content: flex-start;
+  /* Subir más los elementos */
   align-items: center;
   overflow-x: hidden;
 }
@@ -18,7 +19,8 @@ body {
   width: 90%;
   max-width: 1200px;
   margin: auto;
-  padding-top: 40px; /* Subir más los elementos */
+  padding-top: 40px;
+  /* Subir más los elementos */
 }
 
 /* Tarjetas (Cards) */
@@ -32,8 +34,9 @@ body {
   text-align: center;
   border-left: 6px solid #911820;
   transition: all 0.3s ease-in-out;
-  margin-top: -20px; /* Subir más */
-  
+  margin-top: -20px;
+  /* Subir más */
+
   /* Animación de entrada */
   opacity: 0;
   transform: translateY(30px);
@@ -54,7 +57,8 @@ body {
 
 .card-body {
   padding: 10px 0;
-  color: #333; /* Texto oscuro para contraste */
+  color: #333;
+  /* Texto oscuro para contraste */
 }
 
 /* Botones */
@@ -84,6 +88,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -95,10 +100,144 @@ body {
   .card {
     width: 100%;
     padding: 20px;
-    margin-top: 10px; /* Subir más en móviles */
+    margin-top: 10px;
+    /* Subir más en móviles */
   }
 
   .btn {
     font-size: 0.9em;
   }
+}
+
+
+/* Estilos modernos para pestañas */
+.custom-tabs-container {
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px 20px 0;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tabs-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.custom-tabs {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  border: none;
+}
+
+.tab-item {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 10px 10px 0 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #6c757d;
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom: none;
+  z-index: 1;
+}
+
+.tab-item:hover {
+  color: #495057;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.tab-item.active {
+  color: #212529;
+  background-color: #fff;
+  border-color: #dee2e6;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tab-item i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.tab-item.active i {
+  transform: scale(1.2);
+}
+
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, #c1272d, #e74c3c);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.tab-item.active .tab-indicator {
+  transform: scaleX(1);
+}
+
+.tab-item:nth-child(2) .tab-indicator {
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+
+.tab-item:nth-child(3) .tab-indicator {
+  background: linear-gradient(90deg, #2980b9, #3498db);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .custom-tabs {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .tab-item {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+  }
+
+  .custom-tabs-container {
+    padding: 10px;
+    border-radius: 10px;
+  }
+}
+
+/* Animación para las pestañas */
+@keyframes tabAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-item {
+  animation: tabAppear 0.3s ease forwards;
+}
+
+.tab-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.tab-item:nth-child(3) {
+  animation-delay: 0.2s;
 }

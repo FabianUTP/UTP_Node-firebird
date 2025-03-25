@@ -4,155 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentos Masivos</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Iconos de FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- CSS personalizado -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/Alumnolist.css">
 </head>
 
 <body>
-    <div class="container mt-4">
-        <h2 class="text-center text-primary">Documentos Masivos</h2>
+    <div class="admin-wrapper">
+        <main class="admin-content container">
+            <div class="content-card">
 
-        <!-- Nuevo contenedor para selector y botón -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <button class="btn btn-success" onclick="guardarDocumentosSeleccionados()">Guardar</button>
-            <input type="file" class="form-control w-auto" id="fileInput">
-        </div>
+                <div class="column-toggles-container">
+                    <div class="toggle-header d-flex align-items-center">
+                        <i class="fas fa-columns me-2"></i>
+                        <h3>Gestionar Columnas</h3>
+                    </div>
+                    <div id="column-toggles" class="column-toggles"></div>
+                </div>
 
-        <div class="mb-3 d-flex justify-content-center">
-            <div class="form-check form-check-inline" id="column-toggles">
-                <!-- Checkboxes de columnas dinámicos -->
+                <div class="action-toolbar d-flex justify-content-between mt-3">
+                    <button class="btn btn-admin" id="save-selected-btn">
+                        <i class="fas fa-save"></i> Guardar Selección
+                    </button>
+                    <div class="custom-file-input">
+                        <input type="file" id="fileInput" class="file-input" accept=".xlsx, .xls">
+                        <label for="fileInput" class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Seleccionar archivo</span>
+                        </label>
+                        <span class="file-name">Ningún archivo seleccionado</span>
+                    </div>
+                </div>
+
+                <div class="table-container" id="scroll-container">
+                    <table class="admin-table" id="table-container">
+                        <thead id="table-header"></thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
+
+                <div id="load" class="loading-indicator text-center">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    <p>Cargando documentos, por favor espere...</p>
+                </div>
             </div>
-        </div>
-        <div id="scroll-container" class="table-responsive">
-            <table class="table table-striped table-bordered align-middle m-0" id="table-container">
-                <thead id="table-header" class="table-dark text-center">
-                    <!-- Encabezado dinámico -->
-                </thead>
-                <tbody id="table-body">
-                    <!-- Filas dinámicas -->
-                </tbody>
-            </table>
-        </div>
-        <!-- Reemplaza la sección del div "load" con esto -->
-        <div id="load" class="text-center mt-3">
-            <div class="spinner-border text-primary mb-2" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
-            <p class="text-primary fw-bold">Espere mientras carga la información...</p>
-        </div>
-    </div>
-    </div>
+        </main>
 
-    <!-- Botón flotante de descarga -->
-    <button onclick="descargarTablaExcel()" class="btn btn-primary btn-floating shadow">
+    <button onclick="descargarTablaExcel()" class="btn-floating">
         <i class="fas fa-download"></i>
+        <span class="tooltip">Descargar Excel</span>
     </button>
 
-    <!-- Librerías JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="/js/functions/getAlumnolisAdmin.js"></script>
     <script src="https://unpkg.com/read-excel-file@5.3.4/bundle/read-excel-file.min.js"></script>
     <script src="/js/services/profe/Exel_js/Exporta_admin.js"></script>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function (e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'Ningún archivo seleccionado';
+            document.querySelector('.file-name').textContent = fileName;
+        });
+    </script>
 </body>
 
 </html>
-
-<script>
-    const columnasSeleccionadas = columnas.filter(col => columnasVisibles[col.id]);
-
-    function guardarDocumentosSeleccionados() {
-        const fileInput = document.getElementById("fileInput");
-        if (!fileInput.files || fileInput.files.length === 0) {
-            alert("Por favor seleccione un archivo Excel antes de guardar.");
-            return;
-        }
-
-        const file = fileInput.files[0];
-        const allowedExtensions = ["xlsx", "xls"];
-        const fileExtension = file.name.split(".").pop().toLowerCase();
-        if (!allowedExtensions.includes(fileExtension)) {
-            alert("Formato de archivo no válido. Seleccione un archivo Excel (.xlsx, .xls)");
-            return;
-        }
-
-        const columnasRequeridas = ["NUMEROALUMNO", "MATRICULA", "NOMBRE"];
-        const columnasSeleccionadas = columnas.filter(col => columnasRequeridas.includes(col.id) || columnasVisibles[col.id]);
-        const saveButton = document.querySelector("button.btn-success");
-        const originalText = saveButton.textContent;
-        saveButton.textContent = "Procesando...";
-        saveButton.disabled = true;
-
-        readXlsxFile(file).then((data) => {
-            try {
-                if (!data || data.length < 2) {
-                    throw new Error("El archivo Excel no contiene datos suficientes.");
-                }
-
-                const headers = data[0].map(header => header.trim().toUpperCase());
-                const missingColumns = requiredColumns.filter(col => !headers.includes(col));
-
-                if (missingColumns.length > 0) {
-                    throw new Error(`El archivo no contiene las columnas requeridas: ${missingColumns.join(", ")}`);
-                }
-
-                const processedData = [];
-                const errors = [];
-
-                for (let i = 1; i < data.length; i++) {
-                    const row = data[i];
-                    const rowData = {};
-
-                    for (let j = 0; j < headers.length; j++) {
-                        rowData[headers[j]] = row[j] || "";
-                    }
-
-                    if (!rowData["MATRICULA"]) {
-                        errors.push(`Fila ${i + 1}: MATRÍCULA es un campo requerido y está vacío.`);
-                    }
-
-                    processedData.push(rowData);
-                }
-
-                if (errors.length > 0) {
-                    throw new Error(`Errores encontrados:\n${errors.slice(0, 10).join("\n")}${errors.length > 10 ? `\n...y ${errors.length - 10} más.` : ""}`);
-                }
-
-                enviarDatos(processedData);
-            } catch (error) {
-                alert(error.message);
-                console.error("Error de validación:", error);
-                saveButton.textContent = originalText;
-                saveButton.disabled = false;
-            }
-        }).catch(error => {
-            alert("Error al leer el archivo Excel: " + error.message);
-            console.error("Error de lectura:", error);
-            saveButton.textContent = originalText;
-            saveButton.disabled = false;
-        });
-    }
-
-    function enviarDatos(data) {
-        fetch("/api/alumnos", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ alumnos: data })
-        })
-            .then(response => response.json())
-            .then(result => {
-                alert(`Datos importados exitosamente.\n\nRegistros procesados: ${result.total}`);
-            })
-            .catch(error => {
-                alert("Error al subir los datos: " + error.message);
-                console.error("Error en la subida:", error);
-            });
-    }
-
-
-</script>

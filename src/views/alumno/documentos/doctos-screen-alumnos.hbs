@@ -38,7 +38,21 @@
             </div>
           </div>
 
-    
+          <!-- Subir documentos (visible solo para admins) -->
+          {{#if isAdmin}}
+          <div class="col">
+            <div class="mb-4">
+              <label class="form-label fs-5"><b>Subir documento</b> <small>(cuatrimestre seleccionado)</small></label>
+              <div class="d-flex align-items-center">
+                <input type="file" class="form-control" id="input" accept="application/pdf">
+                <button class="btn btn-outline-light ms-3" title="Subir">
+                  <i class="bi bi-upload"></i> Subir
+                </button>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+
         </div>
 
         <!-- Contenido de los documentos -->
@@ -51,5 +65,61 @@
   </div>
 </section>
 
-<script src="/js/services/alumno/getDoctosadmin.js"></script>
+<script src="/js/services/alumno/getDoctos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 
+<!-- Estilos adicionales -->
+<style>
+  .card {
+    border-radius: 1rem;
+  }
+
+  .card-header {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+
+  .form-select,
+  .form-control {
+    font-size: 1rem;
+  }
+
+  .btn-outline-light {
+    font-weight: 500;
+    border-color: #911820;
+    color: #911820;
+  }
+
+  .btn-outline-light:hover {
+    background-color: #911820;
+    color: white;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .ms-3 {
+    margin-left: 1rem;
+  }
+
+
+  /* Hacer el modal de pantalla completa */
+  .modal-fullscreen {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Asegurar que el iframe ocupe toda la pantalla */
+  .modal-body iframe {
+    width: 100%;
+    height: 100vh;
+    /* Altura completa de la pantalla */
+    border: none;
+    object-fit: contain;
+    /* Asegura que el contenido del PDF se ajuste bien */
+  }
+</style>

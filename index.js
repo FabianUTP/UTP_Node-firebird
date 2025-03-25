@@ -8,8 +8,8 @@ require("dotenv").config();
 
 const app = express();
 
-// 🔥 Definir el modo de ejecución (local o server) desde los argumentos de la línea de comandos
-const MODE = process.argv[2] || process.env.MODE || "local";
+// 🔥 Definir el modo de ejecución (local o server)
+const MODE = process.env.MODE || "local";
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
 // 🔗 Configuración de la base de datos Firebird
@@ -70,8 +70,7 @@ app.use((err, req, res, next) => {
 
 // 🚀 Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
   console.log(`🔄 Modo: ${MODE}`);
-  console.log(`📡 Conectando a Firebird en: ${FB_HOST}`);
   console.log(`📂 Base de datos: ${FB_DATABASE}`);
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });

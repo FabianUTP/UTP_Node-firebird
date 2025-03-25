@@ -250,61 +250,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Mostrar y ocultar contraseña
-  document.querySelectorAll('.btn-show').forEach(button => {
-    button.addEventListener('click', () => {
-      const input = button.previousElementSibling;
-      input.type === 'password' ? input.type = 'text' : input.type = 'password';
-    });
-  });
-
-  // Añadir validación del formulario
-  const forms = document.querySelectorAll('.needs-validation');
-  forms.forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    });
-  });
-
-
-  function validateForm() {
-    const password = document.getElementById('pass').value;
-    const errorMessage = document.getElementById('error-message');
-
-    if (!password) {
-      errorMessage.style.display = 'block';
-      return false; // Evita que el formulario se envíe
-    }
-
-    errorMessage.style.display = 'none';
-    return true; // Permite el envío del formulario
-  }
-
-
-  document.getElementById("btn").addEventListener("click", async () => {
-    const user = document.getElementById("user").value;
-    const password = document.getElementById("pass").value;
-
-    const response = await fetch("/login/alumno", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user, password })
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      sessionStorage.setItem("matriculaAuth", data.matricula); // Guardar la matrícula
-      window.location.href = "/"; // Redirigir al inicio
-    } else {
-      alert(data.error); // Mostrar error si la autenticación falla
-    }
-  });
-
   // Fix for password visibility toggle across all tabs
   document.addEventListener('DOMContentLoaded', function () {
     // Get all toggle password buttons
@@ -339,143 +284,34 @@
     });
   });
 
+  document.addEventListener("DOMContentLoaded", function () {
+    const tabButtons = document.querySelectorAll(".tab-item"); // Botones de pestañas
+    const tabContents = document.querySelectorAll(".tab-pane"); // Contenido de pestañas
+    const activeTab = localStorage.getItem("activeTab") || "nav-home"; // ID de la pestaña guardada o por defecto
+
+    // Desactivar todas las pestañas y activar la guardada
+    tabButtons.forEach(tab => tab.classList.remove("active"));
+    tabContents.forEach(content => content.classList.remove("show", "active"));
+
+    // Activar la pestaña guardada
+    const activeTabButton = document.querySelector(`[data-bs-target="#${activeTab}"]`);
+    const activeTabContent = document.getElementById(activeTab);
+
+    if (activeTabButton && activeTabContent) {
+      activeTabButton.classList.add("active");
+      activeTabButton.setAttribute("aria-selected", "true");
+      activeTabContent.classList.add("show", "active");
+    }
+
+    // Evento para guardar la pestaña seleccionada
+    tabButtons.forEach(tab => {
+      tab.addEventListener("click", function () {
+        const targetId = this.getAttribute("data-bs-target").replace("#", "");
+        localStorage.setItem("activeTab", targetId); // Guardar el ID de la pestaña en localStorage
+      });
+    });
+  });
+
 
 
 </script>
-
-{{!-- Scrip del login Alumno --}}
-
-
-<style>
-  /* Estilos modernos para pestañas */
-  .custom-tabs-container {
-    width: 100%;
-    background-color: #f8f9fa;
-    padding: 10px 20px 0;
-    border-radius: 12px 12px 0 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-  }
-
-  .tabs-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .custom-tabs {
-    display: flex;
-    gap: 8px;
-    position: relative;
-    border: none;
-  }
-
-  .tab-item {
-    flex: 1;
-    background: transparent;
-    border: none;
-    padding: 15px 20px;
-    border-radius: 10px 10px 0 0;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #6c757d;
-    position: relative;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-bottom: none;
-    z-index: 1;
-  }
-
-  .tab-item:hover {
-    color: #495057;
-    background-color: rgba(255, 255, 255, 0.6);
-  }
-
-  .tab-item.active {
-    color: #212529;
-    background-color: #fff;
-    border-color: #dee2e6;
-    box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.05);
-  }
-
-  .tab-item i {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-  }
-
-  .tab-item.active i {
-    transform: scale(1.2);
-  }
-
-  .tab-indicator {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 100%;
-    background: linear-gradient(90deg, #c1272d, #e74c3c);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-    transform-origin: center;
-  }
-
-  .tab-item.active .tab-indicator {
-    transform: scaleX(1);
-  }
-
-  .tab-item:nth-child(2) .tab-indicator {
-    background: linear-gradient(90deg, #27ae60, #2ecc71);
-  }
-
-  .tab-item:nth-child(3) .tab-indicator {
-    background: linear-gradient(90deg, #2980b9, #3498db);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .custom-tabs {
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .tab-item {
-      border-radius: 8px;
-      padding: 12px;
-      border: 1px solid #dee2e6;
-    }
-
-    .custom-tabs-container {
-      padding: 10px;
-      border-radius: 10px;
-    }
-  }
-
-  /* Animación para las pestañas */
-  @keyframes tabAppear {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .tab-item {
-    animation: tabAppear 0.3s ease forwards;
-  }
-
-  .tab-item:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-
-  .tab-item:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-</style>

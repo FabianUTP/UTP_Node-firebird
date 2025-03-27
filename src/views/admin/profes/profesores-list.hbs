@@ -1,40 +1,211 @@
 <section class="p-3">
+  <style>
+    :root {
+      --primary-color: #911820;
+      --primary-hover: #7a1416;
+      --secondary-color: #f8f9fa;
+      --text-dark: #212529;
+      --text-light: #6c757d;
+      --border-color: #dee2e6;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --transition: all 0.25s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: var(--secondary-color);
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-body {
+      padding: 2rem;
+    }
+
+    .card-title {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .input-group-text {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+    }
+
+    .form-control {
+      border-left: none;
+      padding: 0.75rem 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 0 0.25rem rgba(145, 24, 32, 0.25);
+      border-color: var(--border-color);
+    }
+
+    .table-responsive {
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+
+    .table {
+      margin-bottom: 0;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .table thead th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+      padding: 1rem;
+      border: none;
+      vertical-align: middle;
+    }
+
+    .table tbody tr {
+      transition: var(--transition);
+    }
+
+    .table tbody tr:hover {
+      background-color: rgba(145, 24, 32, 0.05);
+    }
+
+    .table td {
+      padding: 1rem;
+      vertical-align: middle;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-dark);
+    }
+
+    .btn-pagination {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-pagination:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-pagination:disabled {
+      background-color: #adb5bd;
+      cursor: not-allowed;
+    }
+
+    .btn-view {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      padding: 0.375rem 0.75rem;
+      border-radius: 6px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-view:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .pagination-info {
+      display: inline-flex;
+      align-items: center;
+      margin: 0 1rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .card-body {
+        padding: 1.5rem;
+      }
+      
+      .table td, .table th {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+
   <div class="mb-3">
     {{>btnBack}}
   </div>
 
   <div class="card">
     <div class="card-body">
-      <header class="text-center mb-4">
-        <h1>Lista de Profesores</h1>
-      </header>
+      <h1 class="card-title">
+        <i class="bi bi-people-fill"></i>
+        Lista de Profesores
+      </h1>
 
-      <div class="mb-3">
-        <div class="input-group">
+      <div class="mb-4">
+        <div class="input-group" style="max-width: 500px; margin: 0 auto;">
           <span class="input-group-text">
             <i class="bi bi-search"></i>
           </span>
-          <input type="search" class="form-control" placeholder="Buscar" id="buscar" />
+          <input 
+            type="search" 
+            class="form-control" 
+            placeholder="Buscar por nombre o clave..." 
+            id="buscar"
+            aria-label="Buscar profesores"
+          />
         </div>
       </div>
 
       <div class="table-responsive">
-        <table class="table" style="background-color: white; color: black;">
-          <thead style="background-color: #911820; color: white;">
+        <table class="table table-hover">
+          <thead>
             <tr>
-              <th>#</th>
-              <th>Clave del Profesor</th>
-              <th>Nombre del Profesor</th>
-              <th>Ver Mas</th>
+              <th style="width: 5%">#</th>
+              <th style="width: 25%">Clave</th>
+              <th style="width: 55%">Nombre</th>
+              <th style="width: 15%">Acciones</th>
             </tr>
           </thead>
-          <tbody id="table-content"></tbody>
+          <tbody id="table-content">
+            <!-- Los datos se cargarán aquí dinámicamente -->
+          </tbody>
         </table>
       </div>
 
-      <div class="d-flex justify-content-center mt-3">
-        <button class="btn btn-primary mx-2" onclick="onPrev()">&lt;</button>
-        <button class="btn btn-primary mx-2" onclick="onNext()">&gt;</button>
+      <div class="d-flex justify-content-center align-items-center mt-4">
+        <button class="btn-pagination" onclick="onPrev()" id="prev-btn" disabled>
+          &lt;
+        </button>
+        <span class="pagination-info" id="page-info">
+          Página 1 de 1
+        </span>
+        <button class="btn-pagination" onclick="onNext()" id="next-btn" disabled>
+          &gt;
+        </button>
       </div>
     </div>
   </div>

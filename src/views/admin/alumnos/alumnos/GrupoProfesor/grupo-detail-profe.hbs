@@ -1,14 +1,50 @@
 <section class="section">
-  <div class="col-lg-12">
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --primary-hover: #1d4ed8;
+      --secondary-color: #f8f9fa;
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --border-color: #e2e8f0;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --transition: all 0.2s ease;
+    }
 
-    <div class="pb-3 d-flex justify-content-between">
+    .btn-calificaciones {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-calificaciones:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-calificaciones i {
+      font-size: 1rem;
+    }
+  </style>
+
+  <div class="col-lg-12">
+    <div class="pb-3 d-flex justify-content-between align-items-center">
       {{>btnBack}}
-      {{!-- <div class="btn-group">
-        <a href="/grupos/{{codigo_grupo}}/editar" class="btn btn-outline-success">Editar grupo</a>
-        <a href="/grupos/{{codigo_grupo}}/agregar_alumno" class="btn btn-outline-success">Editar alumnos</a>
-      </div> --}}
+      <a href="/profesorview" class="btn-calificaciones">
+        <i class="bi bi-journal-check"></i> Calificaciones
+      </a>
     </div>
 
+    <!-- Resto del código permanece igual -->
     <div class="card">
       <div class="card-body">
         <div class="card-title text-center">
@@ -50,22 +86,18 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
     <div class="card">
-
       <div class="text-center" style="padding: 13px;">
         <h1><i class="bi bi-people"></i><span>Alumnos</span></h1>
       </div>
 
       <div class="card-body">
         <div class="container">
-
           <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
 
-          <!-- Table with stripped rows -->
           <div class="table-responsive">
             <table align="center" class="table table-hover">
               <thead class="table">
@@ -77,9 +109,7 @@
                   <th scope="col">Carrera</th>
                 </tr>
               </thead>
-
               <tbody id="table-container"></tbody>
-
             </table>
             <div class="text-center" id="loader">
               <div class="spinner-border"></div>
@@ -90,13 +120,10 @@
             <button onclick="prev()" class="btn btn-outline-warning"><i class="bi bi-arrow-left"></i></button>
             <button onclick="next()" class="btn btn-outline-warning"><i class="bi bi-arrow-right"></i></button>
           </div>
-          <!-- End Table with stripped rows -->
         </div>
-
       </div>
     </div>
   </div>
-
 </section>
 
 <script src="/js/services/admin/getprofesoresgrupo.js"></script>

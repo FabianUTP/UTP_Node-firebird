@@ -1,61 +1,20 @@
-/**
- * =============================================
- * SISTEMA DE GESTIÓN DE ALUMNOS - DOCUMENTACIÓN
- * =============================================
- * 
- * Este módulo gestiona la visualización y edición de datos de alumnos
- * mediante una interfaz tabular con capacidad para:
- * - Mostrar/ocultar columnas
- * - Editar campos permitidos
- * - Guardar cambios en el servidor
- * - Ordenar datos
- */
+const table = document.getElementById("table-container");
+const tableHeader = document.getElementById("table-header");
+const columnToggles = document.getElementById("column-toggles");
+const load = document.getElementById("load");
+const saveAllBtn = document.getElementById("save-all-btn");
 
-// --------------------------------------------------
-// CONFIGURACIÓN INICIAL
-// --------------------------------------------------
+let skip = 0;
+let orderBy = "numeroalumno";
+let sort = "asc";
+let cambios = {};
+let columnasVisibles = {};
 
-/**
- * Elementos del DOM utilizados en la aplicación
- * @type {Object}
- * @property {HTMLElement} table - Contenedor principal de la tabla
- * @property {HTMLElement} tableHeader - Sección de encabezados de la tabla
- * @property {HTMLElement} columnToggles - Contenedor de controles para mostrar/ocultar columnas
- * @property {HTMLElement} load - Elemento visual de carga
- * @property {HTMLElement} saveAllBtn - Botón para guardar todos los cambios
- */
-const elements = {
-    table: document.getElementById("table-container"),
-    tableHeader: document.getElementById("table-header"),
-    columnToggles: document.getElementById("column-toggles"),
-    load: document.getElementById("load"),
-    saveAllBtn: document.getElementById("save-all-btn")
-};
-
-/**
- * Estado global de la aplicación
- * @type {Object}
- * @property {number} skip - Registros a omitir (para paginación)
- * @property {string} orderBy - Campo actual para ordenación
- * @property {string} sort - Dirección de ordenación ('asc' o 'desc')
- * @property {Object} cambios - Cambios pendientes de guardar {alumnoId: {campo: valor}}
- * @property {Object} columnasVisibles - Columnas visibles {colId: boolean}
- */
-const state = {
-    skip: 0,
-    orderBy: "matricula",
-    sort: "asc",
-    cambios: {},
-    columnasVisibles: {}
-};
-// --------------------------------------------------
-// COLUMNAS DE DATOS -->TABLA
-// --------------------------------------------------
 const columnas = [
-    { id: "NUMEROALUMNO", nombre: "NUMEROALUMNO", visible: false, editable: false },
-    { id: "MATRICULA", nombre: "MATRICULA", visible: false, editable: false },
-    { id: "MATRICULA_OFICIAL", nombre: "MATRICULA_OFICIAL", visible: false, editable: false },
-    { id: "NOMBRE", nombre: "NOMBRE", visible: false, editable: false },
+    { id: "NUMEROALUMNO", nombre: "NUMEROALUMNO", visible: false },
+    { id: "MATRICULA", nombre: "MATRICULA", visible: false },
+    { id: "MATRICULA_OFICIAL", nombre: "MATRICULA_OFICIAL", visible: false },
+    { id: "NOMBRE", nombre: "NOMBRE", visible: false },
     { id: "PATERNO", nombre: "PATERNO", visible: false },
     { id: "MATERNO", nombre: "MATERNO", visible: false },
     { id: "TIPO_SEG_MED", nombre: "TIPO_SEG_MED", visible: false },
@@ -192,235 +151,181 @@ const columnas = [
     { id: "LIBRO_CSSLIC", nombre: "LIBRO_CSSLIC", visible: false },
     { id: "FOJA_CSSLIC", nombre: "FOJA_CSSLIC", visible: false },
     { id: "FOLIO_TITLIC", nombre: "FOLIO_TITLIC", visible: false },
-    { id: "LIBRO_TITLIC", nombre: "LIBRO_TITLIC", visible: false },
+    { id: "LIBRO_TITLIC", nombre: "LIBRO TITLIC", visible: false },
     { id: "FOJA_TITLIC", nombre: "FOJA_TITLIC", visible: false },
     { id: "ALUMNO_PASSWORD", nombre: "ALUMNO_PASSWORD", visible: false },
     { id: "NUM_CEDULA_LIC", nombre: "NUM_CEDULA_LIC", visible: false },
     { id: "ESTADOCIVIL", nombre: "ESTADOCIVIL", visible: false },
 ];
 
-// --------------------------------------------------
-// UTILIDADES
-// --------------------------------------------------
-
-/**
- * Funciones de utilidad general
- * @type {Object}
- */
-const utils = {
-    /**
-     * Formatea fecha de YYYY-MM-DD a DD/MM/YYYY para mostrar en inputs
-     * @param {string} dateStr 
-     * @returns {string} 
-     */
-    formatDateToInput: (dateStr) => dateStr ? dateStr.split("-").reverse().join("/") : "",
-
-    /**
-     * Formatea fecha de DD/MM/YYYY a YYYY-MM-DD para enviar a la base de datos
-     * @param {string} dateStr
-     * @returns {string} 
-     */
-    formatDateToDB: (dateStr) => dateStr ? dateStr.split("/").reverse().join("-") : ""
+const toggleColumnaVisibilidad = (columnId) => {
+    columnasVisibles[columnId] = !columnasVisibles[columnId];
+    renderTable();
 };
 
-// --------------------------------------------------
-// GESTIÓN DE TABLA
-// --------------------------------------------------
+const renderTable = () => {
+    let headerRow = "<tr>";
+    columnas.forEach(col => {
+        if (columnasVisibles[col.id]) {
+            headerRow += `<th>${col.nombre}</th>`;
+        }
+    });
+    headerRow += "</tr>";
 
-/**
- * Controlador principal para la gestión de la tabla
- * @type {Object}
- */
-const tableManager = {
-    /**
-     * Alterna la visibilidad de una columna
-     * @param {string} columnId 
-     */
-    toggleColumnVisibility: (columnId) => {
-        state.columnasVisibles[columnId] = !state.columnasVisibles[columnId];
-        tableManager.renderTable();
-    },
+    tableHeader.innerHTML = headerRow;
 
-    /**
-     * Renderiza la tabla actualizando las columnas visibles
-     */
-    renderTable: () => {
-
-        const visibleColumns = columnas.filter(col => state.columnasVisibles[col.id]);
-        elements.tableHeader.innerHTML = `<tr>${visibleColumns.map(col => `<th>${col.nombre}</th>`).join("")}</tr>`;
-        Array.from(elements.table.querySelectorAll("tr")).forEach(row => {
-            Array.from(row.querySelectorAll("td")).forEach(cell => {
-                const colId = cell.dataset.columna;
-                cell.classList.toggle("hidden-column", !state.columnasVisibles[colId]);
-            });
-        });
-    },
-
-    /**
-     * Genera los controles para mostrar/ocultar columnas
-     */
-    generateColumnToggles: () => {
-        elements.columnToggles.innerHTML = columnas.map(col => `
-            <div class="form-check form-check-inline">
-                <input type="checkbox" 
-                       class="form-check-input" 
-                       id="toggle-${col.id}"
-                       ${state.columnasVisibles[col.id] ? "checked" : ""}
-                       onchange="tableManager.toggleColumnVisibility('${col.id}')">
-                <label class="form-check-label" for="toggle-${col.id}">
-                    ${col.nombre}
-                </label>
-            </div>
-        `).join("");
-    },
-
-    /**
-     * Registra un cambio en los datos para posterior guardado
-     * @param {string} alumnoId
-     * @param {string} campo
-     * @param {string} valor
-     */
-    saveChange: (alumnoId, campo, valor) => {
-        state.cambios[alumnoId] = state.cambios[alumnoId] || {};
-        state.cambios[alumnoId][campo] = valor;
-    }
-};
-
-// --------------------------------------------------
-// SERVICIO API
-// --------------------------------------------------
-
-/**
- * Módulo para comunicación con el backend
- * @type {Object}
- */
-const apiService = {
-    /**
-     * Obtiene los datos de alumnos desde el servidor
-     * @async
-     * @returns {Promise<void>}
-     */
-    getAlumnos: async () => {
-        elements.table.innerHTML = "";
-        elements.load.style.display = "block";
-
-        try {
-            const res = await fetch("api/alumnos");
-            const { alumnos = [] } = await res.json();
-
-            if (alumnos.length === 0) {
-                return elements.table.innerHTML = `
-                    <tr>
-                        <td colspan="${columnas.length}" style="text-align: center">
-                            No se encontraron resultados
-                        </td>
-                    </tr>
-                `;
+    const rows = table.querySelectorAll("tr");
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        cells.forEach(cell => {
+            const columnaId = cell.dataset.columna;
+            if (columnasVisibles[columnaId]) {
+                cell.classList.remove("hidden-column");
+            } else {
+                cell.classList.add("hidden-column");
             }
+        });
+    });
+};
 
-            alumnos
-                .sort((a, b) => a.NOMBRE.localeCompare(b.NOMBRE) ||
-                    a.MATRICULA - b.MATRICULA ||
-                    a.NUMEROALUMNO - b.NUMEROALUMNO)
-                .forEach(alumno => {
-                    const row = document.createElement("tr");
+const formatDateToInput = (dateStr) => {
+    if (!dateStr) return "";
+    const [year, month, day] = dateStr.split("-");
+    return `${month}/${day}/${year}`;
+};
 
-                    columnas.forEach(col => {
-                        const cell = document.createElement("td");
-                        const input = document.createElement("input");
+const formatDateToDB = (dateStr) => {
+    if (!dateStr) return "";
+    const [month, day, year] = dateStr.split("/");
+    return `${year}-${month}-${day}`;
+};
 
-                        input.type = "text";
-                        input.className = `form-control form-control-sm ${col.editable ? "" : "no-editable"}`;
-                        input.value = alumno[col.id] || "";
-                        input.readOnly = !col.editable;
-                        input.onchange = () => tableManager.saveChange(alumno.NUMEROALUMNO, col.id, input.value);
+const generarColumnToggles = () => {
+    columnToggles.innerHTML = "";
 
-                        cell.appendChild(input);
-                        cell.dataset.columna = col.id;
-                        cell.classList.toggle("hidden-column", !state.columnasVisibles[col.id]);
+    columnas.forEach(columna => {
+        const checkboxContainer = document.createElement("div");
+        checkboxContainer.className = "form-check form-check-inline";
 
-                        row.appendChild(cell);
-                    });
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "form-check-input";
+        checkbox.id = `toggle-${columna.id}`;
+        checkbox.checked = columnasVisibles[columna.id];
+        checkbox.addEventListener("change", () => {
+            toggleColumnaVisibilidad(columna.id);
+        });
 
-                    elements.table.appendChild(row);
-                });
-        } catch (error) {
-            console.error("Error al cargar alumnos:", error);
-            elements.table.innerHTML = `
-                <tr>
-                    <td colspan="${columnas.length}" style="text-align: center">
-                        Error al cargar los datos
-                    </td>
-                </tr>
-            `;
-        } finally {
-            elements.load.style.display = "none";
-        }
-    },
+        const label = document.createElement("label");
+        label.className = "form-check-label";
+        label.htmlFor = `toggle-${columna.id}`;
+        label.textContent = columna.nombre;
 
-    /**
-     * Envía los cambios al servidor
-     * @async
-     * @returns {Promise<void>}
-     */
-    saveChanges: async () => {
-        if (Object.keys(state.cambios).length === 0) {
-            return alert("No hay cambios para guardar");
-        }
+        checkboxContainer.appendChild(checkbox);
+        checkboxContainer.appendChild(label);
+        columnToggles.appendChild(checkboxContainer);
+    });
+};
 
-        if (!confirm("¿Está seguro de guardar los cambios?")) {
+
+
+const getAlumnos = async () => {
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+    load.style.display = "block";
+
+    const url = `api/alumnos`;
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        let alumnos = data.alumnos || [];
+
+        load.style.display = "none";
+
+        if (alumnos.length === 0) {
+            const tr = document.createElement("tr");
+            const td = document.createElement("td");
+            td.colSpan = columnas.length;
+            td.style.textAlign = "center";
+            td.textContent = "No se encontraron resultados";
+            tr.appendChild(td);
+            table.appendChild(tr);
             return;
         }
 
-        elements.load.style.display = "block";
+        alumnos.sort((a, b) => {
+            let cmp = a.NOMBRE.localeCompare(b.NOMBRE, "es", { sensitivity: "base" });
+            if (cmp !== 0) return cmp;
+            cmp = Number(a.MATRICULA) - Number(b.MATRICULA);
+            if (cmp !== 0) return cmp;
+            return Number(a.NUMEROALUMNO) - Number(b.NUMEROALUMNO);
+        });
 
-        try {
-            const res = await fetch("api/alumnos/actualizar", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cambios: state.cambios })
+        alumnos.forEach(item => {
+            const tr = document.createElement("tr");
+
+            columnas.forEach(columna => {
+                const td = document.createElement("td");
+                const input = document.createElement("input");
+                input.type = "text";
+                input.className = "form-control form-control-sm";
+                input.value = item[columna.id.toUpperCase()] || "";
+                input.onchange = () => {
+                    guardarCambio(item.NUMEROALUMNO, columna.id.toUpperCase(), input.value);
+                };
+                td.appendChild(input);
+                td.dataset.columna = columna.id;
+
+                if (!columnasVisibles[columna.id]) {
+                    td.classList.add("hidden-column");
+                }
+
+                tr.appendChild(td);
             });
 
-            const data = await res.json();
-
-            if (data.success) {
-                alert("Cambios guardados exitosamente");
-                state.cambios = {};
-            } else {
-                alert(`Error: ${data.message || "Error desconocido"}`);
-            }
-        } catch (error) {
-            console.error("Error al guardar cambios:", error);
-            alert("Error de conexión con el servidor");
-        } finally {
-            elements.load.style.display = "none";
-        }
+            table.appendChild(tr);
+        });
+    } catch (error) {
+        console.error("Error al obtener los datos:", error);
+        load.style.display = "none";
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = columnas.length;
+        td.style.textAlign = "center";
+        td.textContent = "Error al cargar los datos";
+        tr.appendChild(td);
+        table.appendChild(tr);
     }
 };
 
-// --------------------------------------------------
-// INICIALIZACIÓN
-// --------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+    const loadingElement = document.getElementById('load');
+    loadingElement.classList.remove('d-none');
+});
 
-/**
- * Inicializa la aplicación configurando:
- * - Visibilidad de columnas
- * - Propiedad editable de columnas
- * - Event listeners
- */
-const init = () => {
-    columnas.forEach(col => {
-        state.columnasVisibles[col.id] = col.visible;
-        col.editable = !["NUMEROALUMNO", "MATRICULA", "MATRICULA_OFICIAL", "NOMBRE"].includes(col.id);
+const originalGetAlumnos = window.getAlumnos;
+if (typeof originalGetAlumnos === 'function') {
+    window.getAlumnos = async function () {
+        const loadingElement = document.getElementById('load');
+        loadingElement.classList.remove('d-none');
+
+        try {
+            await originalGetAlumnos();
+        } finally {
+            loadingElement.classList.add('d-none');
+        }
+    };
+}
+
+const inicializar = () => {
+    columnas.forEach(columna => {
+        columnasVisibles[columna.id] = columna.visible;
     });
 
-    tableManager.generateColumnToggles();
-
-    apiService.getAlumnos();
-
-    if (elements.saveAllBtn) {
-        elements.saveAllBtn.addEventListener("click", apiService.saveChanges);
-    }
+    generarColumnToggles();
+    getAlumnos();
 };
 
-document.addEventListener("DOMContentLoaded", init);
+inicializar();

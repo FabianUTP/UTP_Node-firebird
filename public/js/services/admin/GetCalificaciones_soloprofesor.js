@@ -11,18 +11,22 @@ let orderBy = "inicial";
 let sort = "desc";
 let gruposLength = 0;
 
+// Obtener IDAuth del objeto window (ajustalo según la forma en que manejas el IDAuth)
+const IDAuth = window.IDAuth || ""; // Si el IDAuth no está en el window, asigna un valor por defecto
+
 inputSearch.addEventListener("input", debounce(() => {
   search = inputSearch.value;
   skip = 0; // Reinicia la paginación
-  getGrupos();
+  getGrupos(IDAuth);  // Pasar IDAuth a la función
 }));
 
 // 📌 Llamada a la API
-const getGrupos = async () => {
+const getGrupos = async (IDAuth) => {
   table.innerHTML = ""; // Vacía la tabla en caso de que ya tenga datos
   load.style.display = "block";
 
-  const url = `/api/gruposCalifi?limit=${limit}&skip=${skip}&orderBy=${orderBy}&sort=${sort}`;
+  // Incluye el IDAuth en la URL
+  const url = `/api/gruposCalifi?limit=${limit}&skip=${skip}&orderBy=${orderBy}&sort=${sort}&IDAuth=${IDAuth}`;
   const res = await fetch(url);
   const { grupos } = await res.json();
 
@@ -51,26 +55,26 @@ const getGrupos = async () => {
 
 const handleOrder = (by) => {
   orderBy = by;
-  getGrupos();
+  getGrupos(IDAuth);  // Pasar IDAuth a la función
 };
 
 const handleSort = (by) => {
   sort = by;
-  getGrupos();
+  getGrupos(IDAuth);  // Pasar IDAuth a la función
 };
 
 const prev = () => {
   if (skip >= limit) {
     skip -= limit;
-    getGrupos();
+    getGrupos(IDAuth);  // Pasar IDAuth a la función
   }
 };
 
 const next = () => {
   if (!(gruposLength < limit)) {
     skip += limit;
-    getGrupos();
+    getGrupos(IDAuth);  // Pasar IDAuth a la función
   }
 };
 
-getGrupos();
+getGrupos(IDAuth);  // Llamada inicial con el IDAuth

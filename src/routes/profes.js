@@ -48,6 +48,7 @@ router.get("/gruposprofe/:idGrupo/editar", GruposCtr.editViewProfesores);
 router.get("/grupos/:idGrupo/agregar_alumno", GruposCtr.addAlumnoViewProfesores);
 router.get("/gruposprofeCalifi", GruposCtr.showAnotherProfesores);
 router.get("/gruposprofeCalifi/:idGrupo", GruposCtr.showByIdAnotherProfesores);
+router.get("/profesorview",GruposCtr.showByIdProfesoresviews)
 
 // Importar middlewares y controladores
 const { isProfesor } = require("../app/middlewares/session");

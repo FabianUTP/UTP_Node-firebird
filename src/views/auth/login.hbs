@@ -45,7 +45,6 @@
         {{>msj_error}}
       </div>
       {{!-- LOGIN ALUMNO --}}
-      {{!-- Section Alumno --}}
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
         <div class="card-body px-5">
           <form id="form" action="/login/alumno" method="post" class="d-flex flex-column justify-content-center"
@@ -91,8 +90,6 @@
         </div>
       </div>
       {{!-- LOGIN ASPIRANTE --}}
-
-      {{!-- Section Aspirante Login --}}
       <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
         <div class="card-body px-5">
 
@@ -142,9 +139,7 @@
           </form>
         </div>
       </div>
-
       {{!-- LOGIN PROFESORES --}}
-      {{!-- Section Profesor Login --}}
       <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
         <div class="card-body px-5">
 
@@ -190,7 +185,6 @@
         </div>
       </div>
       {{!-- LOGIN aDMIN --}}
-      {{!-- Section Admin Login --}}
       <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
         <div class="card-body px-5">
 
@@ -249,69 +243,57 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Fix for password visibility toggle across all tabs
-  document.addEventListener('DOMContentLoaded', function () {
-    // Get all toggle password buttons
-    const toggleButtons = document.querySelectorAll('button[id^="toggle-password"], button.btn-outline-secondary');
 
-    // Add event listener to each toggle button
-    toggleButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        // Find the closest form to this button
-        const form = this.closest('form');
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    
+    // Manejo de visibilidad de contraseñas
+    document.querySelectorAll('button[id^="toggle-password"], button.btn-outline-secondary').forEach(button => {
+      button.addEventListener("click", function () {
+        const form = this.closest("form");
         if (!form) return;
 
-        // Find the password field in this form
         const passwordField = form.querySelector('input[name="password"]');
-        if (!passwordField) return;
+        const icon = this.querySelector("i");
 
-        // Find the icon in this button
-        const icon = this.querySelector('i');
-        if (!icon) return;
-
-        // Toggle password visibility
-        if (passwordField.type === 'password') {
-          passwordField.type = 'text';
-          icon.classList.remove('bi-eye-slash');
-          icon.classList.add('bi-eye');
-        } else {
-          passwordField.type = 'password';
-          icon.classList.remove('bi-eye');
-          icon.classList.add('bi-eye-slash');
+        if (passwordField && icon) {
+          const isPassword = passwordField.type === "password";
+          passwordField.type = isPassword ? "text" : "password";
+          icon.classList.toggle("bi-eye", isPassword);
+          icon.classList.toggle("bi-eye-slash", !isPassword);
         }
       });
     });
-  });
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const tabButtons = document.querySelectorAll(".tab-item"); // Botones de pestañas
-    const tabContents = document.querySelectorAll(".tab-pane"); // Contenido de pestañas
-    const activeTab = localStorage.getItem("activeTab") || "nav-home"; // ID de la pestaña guardada o por defecto
-
-    // Desactivar todas las pestañas y activar la guardada
-    tabButtons.forEach(tab => tab.classList.remove("active"));
-    tabContents.forEach(content => content.classList.remove("show", "active"));
-
-    // Activar la pestaña guardada
+    // Manejo de pestañas y almacenamiento en localStorage
+    const tabButtons = document.querySelectorAll(".tab-item");
+    const activeTab = localStorage.getItem("activeTab") || "nav-home";
     const activeTabButton = document.querySelector(`[data-bs-target="#${activeTab}"]`);
     const activeTabContent = document.getElementById(activeTab);
 
     if (activeTabButton && activeTabContent) {
+      tabButtons.forEach(tab => tab.classList.remove("active"));
+      document.querySelectorAll(".tab-pane").forEach(content => content.classList.remove("show", "active"));
+
       activeTabButton.classList.add("active");
       activeTabButton.setAttribute("aria-selected", "true");
       activeTabContent.classList.add("show", "active");
     }
 
-    // Evento para guardar la pestaña seleccionada
     tabButtons.forEach(tab => {
       tab.addEventListener("click", function () {
-        const targetId = this.getAttribute("data-bs-target").replace("#", "");
-        localStorage.setItem("activeTab", targetId); // Guardar el ID de la pestaña en localStorage
+        localStorage.setItem("activeTab", this.getAttribute("data-bs-target").replace("#", ""));
       });
     });
+
+    // Aquí puedes agregar la lógica para bloquear vistas para alumnos y profesores
+    // Bloqueo de vistas según el rol (Ejemplo)
+    const userRole = localStorage.getItem("userRole"); // Suponiendo que el rol está en localStorage
+
+    if (userRole === "alumno") {
+      document.getElementById("nav-disabled-tab").style.display = "none"; // Ocultar pestaña Admin
+    } else if (userRole === "profesor") {
+      document.getElementById("nav-disabled-tab").style.display = "none"; // Ocultar pestaña Admin
+    }
   });
-
-
-
 </script>

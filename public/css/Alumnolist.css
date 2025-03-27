@@ -283,19 +283,19 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-  }
-  
-  .btn-admin:hover {
+}
+
+.btn-admin:hover {
     background-color: #45a049;
-  }
-  
-  /* Estilos para la carga de archivos */
-  .custom-file-input {
+}
+
+/* Estilos para la carga de archivos */
+.custom-file-input {
     position: relative;
     display: inline-block;
-  }
-  
-  .file-input {
+}
+
+.file-input {
     position: absolute;
     left: 0;
     top: 0;
@@ -303,48 +303,327 @@ body {
     width: 100%;
     height: 100%;
     cursor: pointer;
-  }
-  
-  .file-label {
+}
+
+.file-label {
     display: inline-block;
     padding: 10px 20px;
     background-color: #2196F3;
     color: white;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  .file-name {
+}
+
+.file-name {
     margin-left: 10px;
     font-style: italic;
-  }
-  
-  /* Estilos para campos editables/no editables */
-  .campo-no-editable {
+}
+
+/* Estilos para campos editables/no editables */
+.campo-no-editable {
     background-color: #ffdddd;
     color: #cc0000;
     border: 1px solid #ff9999;
     cursor: not-allowed;
-  }
-  
-  .campo-editable {
+}
+
+.campo-editable {
     background-color: #ddffdd;
     color: #006600;
     border: 1px solid #99cc99;
-  }
-  
-  .campo-editable:focus {
+}
+
+.campo-editable:focus {
     background-color: #eeffee;
     border-color: #66aa66;
     outline: none;
-  }
-  
-  /* Estilo para el spinner de carga */
-  #load {
+}
+
+/* Estilo para el spinner de carga */
+/* Loading overlay styles */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
     display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
-  }
+    border-radius: 8px;
+}
+
+.loading-content {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Asegurar que la tabla tenga altura mínima */
+.table-container {
+    min-height: 300px;
+    position: relative;
+}
+
+
+:root {
+    /* Paleta de colores */
+    --primary-color: #4361ee;
+    --primary-dark: #3a56d4;
+    --primary-light: #eef2ff;
+    --secondary-color: #f72585;
+    --accent-color: #4cc9f0;
+    --success-color: #4ade80;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --dark-color: #1e293b;
+    --medium-color: #64748b;
+    --light-color: #f8fafc;
+    --border-color: #e2e8f0;
+
+    /* Sombras */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* Bordes */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Transiciones */
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Estructura base */
+body {
+    font-family: 'Rubik', sans-serif;
+    background: var(--light-color);
+    color: var(--dark-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Loading overlay - Versión mejorada */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(3px);
+}
+
+.loading-content {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-width: 400px;
+    width: 90%;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Spinner moderno */
+.spinner-advanced {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+}
+
+.spinner-advanced .circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.spinner-advanced .circle:nth-child(2) {
+    border: 4px solid transparent;
+    border-bottom-color: var(--accent-color);
+    animation: spin 1.2s linear infinite reverse;
+}
+
+/* Efecto skeleton loading para la tabla */
+.skeleton-row {
+    display: flex;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.skeleton-cell {
+    flex: 1;
+    height: 20px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 2000px 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: var(--radius-sm);
+    margin: 0 0.5rem;
+}
+
+.skeleton-cell.short {
+    flex: 0.5;
+}
+
+.skeleton-cell.long {
+    flex: 2;
+}
+
+/* Tabla con efecto de carga mejorado */
+.table-container.loading {
+    position: relative;
+}
+
+.table-container.loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(2px);
+    z-index: 10;
+    border-radius: var(--radius-md);
+}
+
+/* Botones con efecto de carga */
+.btn-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 1.5s infinite;
+}
+
+/* Animación para los toggles de columnas */
+.column-toggle {
+    transition: var(--transition), transform 0.2s ease;
+}
+
+.column-toggle:hover {
+    transform: translateY(-2px) scale(1.05);
+}
+
+.column-toggle.active {
+    animation: pulse 1.5s infinite;
+}
+
+/* Efecto de carga para el input de archivo */
+.file-input-loading .file-label {
+    position: relative;
+    overflow: hidden;
+}
+
+.file-input-loading .file-label::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 1.5s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .loading-content {
+        padding: 1.5rem;
+    }
+
+    .spinner-advanced {
+        width: 50px;
+        height: 50px;
+    }
+
+    .skeleton-cell {
+        height: 16px;
+    }
+}
+
+/* Clases utilitarias para animaciones */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}

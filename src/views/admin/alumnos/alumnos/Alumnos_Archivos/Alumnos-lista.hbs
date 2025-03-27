@@ -14,7 +14,6 @@
     <div class="admin-wrapper">
         <main class="admin-content container">
             <div class="content-card">
-
                 <div class="column-toggles-container">
                     <div class="toggle-header d-flex align-items-center">
                         <i class="fas fa-columns me-2"></i>
@@ -51,23 +50,77 @@
             </div>
         </main>
 
-    <button onclick="descargarTablaExcel()" class="btn-floating">
-        <i class="fas fa-download"></i>
-        <span class="tooltip">Descargar Excel</span>
-    </button>
+        <button onclick="descargarTablaExcel()" class="btn-floating">
+            <i class="fas fa-download"></i>
+            <span class="tooltip">Descargar Excel</span>
+        </button>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="/js/functions/getAlumnolisAdmin.js"></script>
-    <script src="https://unpkg.com/read-excel-file@5.3.4/bundle/read-excel-file.min.js"></script>
-    <script src="/js/services/profe/Exel_js/Exporta_admin.js"></script>
+        <!-- Librerías necesarias -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+        <script src="https://unpkg.com/read-excel-file@5.3.4/bundle/read-excel-file.min.js"></script>
 
-    <script>
-        document.getElementById('fileInput').addEventListener('change', function (e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'Ningún archivo seleccionado';
-            document.querySelector('.file-name').textContent = fileName;
-        });
-    </script>
+        <!-- Scripts personalizados -->
+        <script src="/js/functions/getAlumnolisAdmin.js"></script>
+        <script src="/js/services/profe/Exel_js/Exporta_admin.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const fileInput = document.getElementById('fileInput');
+                const fileNameSpan = document.querySelector('.file-name');
+                const saveButton = document.getElementById('save-selected-btn');
+
+                fileInput.addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    fileNameSpan.textContent = file.name;
+
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        try {
+                            const workbook = XLSX.read(event.target.result, { type: 'binary' });
+                            const sheetNames = workbook.SheetNames;
+                            console.log("📌 Hojas en el archivo:", sheetNames);
+
+                            // Mostrar la primera hoja como ejemplo
+                            const sheet = workbook.Sheets[sheetNames[0]];
+                            const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+                            console.log("📊 Datos de la primera hoja:", data.slice(0, 5)); // Muestra las primeras 5 filas
+                        } catch (error) {
+                            console.error("❌ Error al leer el archivo Excel:", error);
+                            alert("Error al procesar el archivo Excel.");
+                        }
+                    };
+                    reader.readAsBinaryString(file);
+                });
+
+                saveButton.addEventListener('click', function () {
+                    const file = fileInput.files[0];
+                    if (!file) {
+                        alert("Por favor, selecciona un archivo primero.");
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append("excelFile", file);
+
+                    fetch("/api/alumnos", { // 🔧 Corrección en la URL
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message || "Archivo guardado correctamente.");
+                    })
+                    .catch(error => {
+                        console.error("❌ Error al guardar el archivo:", error);
+                        alert("Hubo un problema al enviar el archivo.");
+                    });
+                });
+            });
+        </script>
+    </div>
 </body>
 
 </html>

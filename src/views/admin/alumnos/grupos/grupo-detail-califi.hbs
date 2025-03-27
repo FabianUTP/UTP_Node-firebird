@@ -1,48 +1,105 @@
 <section class="section">
   <style>
+    :root {
+      --primary-color: #911820;
+      --primary-hover: #7c1517;
+      --secondary-color: #f8f9fa;
+      --border-color: #e0e0e0;
+      --text-color: #333;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
     .hidden {
       display: none !important;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
+    /* Card Styles */
+    .card {
+      margin-bottom: 24px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      background-color: var(--white);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .card {
-      margin-bottom: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
 
     .card-title h1 {
       font-size: 1.5rem;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      color: var(--primary-color);
+      font-weight: 600;
     }
 
     .card-body {
-      padding: 20px;
+      padding: 24px;
     }
 
+    /* Header Section */
     .group-code-and-professor {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .professor-info {
       display: flex;
       align-items: center;
+      background-color: var(--light-gray);
+      padding: 8px 16px;
+      border-radius: 50px;
     }
 
-    .professor-info img {
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
+    .professor-info h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--text-color);
+    }
+
+    /* Evaluation Select */
+    #eval-select {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      border: 2px solid var(--primary-color);
+      border-radius: 8px;
+      background-color: var(--white);
+      font-size: 14px;
+      color: var(--text-color);
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    #eval-select:focus {
+      outline: none;
+      border-color: var(--primary-hover);
+      box-shadow: 0 0 0 3px rgba(145, 24, 32, 0.2);
+    }
+
+    /* Subject List */
+    .left-column {
+      float: left;
+      width: 28%;
+      margin-right: 24px;
     }
 
     .asignatura-list {
@@ -51,152 +108,235 @@
       margin: 0;
       max-height: 600px;
       overflow-y: auto;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-color) var(--light-gray);
+    }
+
+    .asignatura-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .asignatura-list::-webkit-scrollbar-track {
+      background: var(--light-gray);
+    }
+
+    .asignatura-list::-webkit-scrollbar-thumb {
+      background-color: var(--primary-color);
+      border-radius: 6px;
     }
 
     .asignatura-item {
-      padding: 10px;
+      padding: 12px 16px;
       cursor: pointer;
-      border-bottom: 1px solid #ddd;
-      transition: background-color 0.3s, font-weight 0.3s;
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      font-size: 14px;
     }
 
     .asignatura-item:hover {
-      background-color: #f0f0f0;
+      background-color: var(--light-gray);
+      transform: translateX(4px);
     }
 
     .asignatura-item.selected {
-      background-color: #911820;
-      color: #ffffff;
+      background-color: var(--primary-color);
+      color: var(--white);
+      font-weight: 500;
     }
 
+    /* Main Content Area */
+    .right-column {
+      float: right;
+      width: 68%;
+    }
+
+    /* Table Styles */
     .table-responsive {
       margin-top: 20px;
-      display: flex;
-      justify-content: center; /* Centra la tabla */
-      overflow-x: auto; /* Permite desplazamiento horizontal */
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .table {
-      width: 80%; /* Reduce el tamaño de la tabla */
-      border-collapse: collapse;
-      table-layout: fixed; /* Evita que la tabla se estire */
-    }
-
-    .table th, .table td {
-      padding: 8px 10px; /* Reduce el padding en las celdas */
-      text-align: center; /* Centra el contenido de las celdas */
-      border: 1px solid #ddd; /* Bordes sutiles */
-      word-wrap: break-word;
-      min-width: 70px; /* Tamaño mínimo de las celdas */
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
     }
 
     .table th {
-      background-color: #911820;
-      color: white;
-      font-weight: bold; /* Hace el texto más fuerte */
-      font-size: 14px; /* Tamaño de fuente más pequeño */
-    }
-
-    .table tbody tr {
-      background-color: #ffffff;
-    }
-
-    .table tbody tr:hover {
-      background-color: #f5f5f5; /* Color de fondo cuando el mouse pasa por encima */
-    }
-
-    .table tbody tr:nth-child(even) {
-      background-color: #f9f9f9; /* Fondo gris claro para filas pares */
-    }
-
-    .table tbody tr:nth-child(odd) {
-      background-color: #ffffff; /* Fondo blanco para filas impares */
+      background-color: var(--primary-color);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 12px 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
     }
 
     .table td {
-      font-size: 12px; /* Tamaño de fuente para los datos más pequeño */
+      padding: 10px 12px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      font-size: 13px;
+      word-wrap: break-word;
     }
 
-    #loader {
-      display: none;
-      margin-top: 20px;
+    .table tbody tr {
+      background-color: var(--white);
+      transition: background-color 0.2s ease;
     }
 
-    #eval-select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 2px solid #911820;
-      border-radius: 5px;
-      background-color: #fff;
-      appearance: none;
+    .table tbody tr:hover {
+      background-color: var(--light-gray);
     }
 
+    .table tbody tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    /* Button Styles */
     .btn {
-      padding: 12px 20px;
-      border-radius: 0;
+      padding: 10px 20px;
+      border-radius: 6px;
       font-size: 14px;
-      transition: background-color 0.3s ease;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn i {
+      margin-right: 8px;
     }
 
     .btn-primary {
-      color: #fff;
-      background-color: #911820;
-      border-color: #911820;
+      background-color: var(--primary-color);
+      color: var(--white);
     }
 
     .btn-primary:hover {
-      color: #fff;
-      background-color: #7c1517;
-      border-color: #911820;
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .btn-custom-download {
-      background-color: #911820;
-      color: white;
-      border: none;
-      font-size: 16px;
-      padding: 12px 30px;
-      transition: background-color 0.3s ease;
+    .btn-primary:active {
+      transform: translateY(0);
     }
 
-    .btn-custom-download:hover {
-      background-color: #7c1517;
+    #botonDescargarExcel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
+    /* File Input */
+    .file-input-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .file-input-container input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .file-input-label {
+      display: inline-block;
+      padding: 10px 16px;
+      background-color: var(--light-gray);
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px dashed var(--border-color);
+    }
+
+    .file-input-label:hover {
+      background-color: #e9e9e9;
+    }
+
+    .file-input-label i {
+      margin-right: 8px;
+      color: var(--primary-color);
+    }
+
+    /* Loader */
+    #loader {
+      display: none;
+      margin: 24px 0;
+    }
+
+    .spinner-border {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-width: 0.25em;
+      color: var(--primary-color);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .left-column, .right-column {
+        float: none;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 24px;
+      }
+    }
+
+    /* Clearfix */
     .clearfix::after {
       content: "";
       display: table;
       clear: both;
     }
 
-    .left-column {
-      float: left;
-      width: 26%;
-      margin-right: 20px;
+    /* Back button */
+    .btn-back {
+      color: var(--primary-color);
+      background-color: transparent;
+      border: 1px solid var(--primary-color);
+      transition: all 0.3s ease;
     }
 
-    #botonDescargarExcel {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      padding: 12px 20px;
-      border-radius: 5px;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
+    .btn-back:hover {
+      background-color: var(--primary-color);
+      color: var(--white);
     }
 
-    #botonDescargarExcel i {
-      margin-right: 8px;
+    /* Input styles */
+    input[type="number"] {
+      width: 70px;
+      padding: 6px 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      text-align: center;
+      transition: border-color 0.3s ease;
     }
 
-    .right-column {
-      float: right;
-      width: 72%;
+    input[type="number"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(145, 24, 32, 0.2);
     }
   </style>
 
@@ -207,8 +347,8 @@
     </div>
 
     <!-- Botón para descargar Excel -->
-    <button onclick="descargarTablaExcel()" id="botonDescargarExcel" class="btn btn-custom-download">
-      <i class="bi bi-file-earmark-excel"></i> Descargar
+    <button onclick="descargarTablaExcel()" id="botonDescargarExcel" class="btn btn-primary">
+      <i class="bi bi-file-earmark-excel"></i> Descargar Excel
     </button>
 
     <!-- Todo el contenido dentro de un solo card -->
@@ -217,23 +357,26 @@
         <!-- Información del grupo y profesor -->
         <div class="card-title">
           <div class="group-code-and-professor">
-            <h1>Grupo {{codigo_grupo}}</h1>
+            <h1><i class="bi bi-people-fill me-2"></i>Grupo {{codigo_grupo}}</h1>
             <div class="professor-info">
+              <i class="bi bi-person-circle me-2"></i>
               <h1 id="claveProfesor"></h1>
             </div>
           </div>
         </div>
 
         <!-- Selección de evaluación -->
-        <select id="eval-select">
+        <select id="eval-select" class="form-select">
           <option value="">Seleccione una evaluación</option>
         </select>
 
         <!-- Lista de asignaturas -->
         <div class="left-column">
-          <div class="card-body">
-            <h5>Asignaturas</h5>
-            <ul id="asignatura-list" class="asignatura-list"></ul>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><i class="bi bi-book me-2"></i>Asignaturas</h5>
+              <ul id="asignatura-list" class="asignatura-list"></ul>
+            </div>
           </div>
         </div>
 
@@ -244,36 +387,42 @@
               <div class="container">
                 <input type="hidden" id="idGrupo" value="{{codigo_grupo}}">
 
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <button id="guardarCalifBtn" class="btn btn-primary">Guardar</button>
-                  <div>
-                    <input id="input" type="file" accept=".xlsx, .xls, .csv" class="form-control" />
-                    <small id="info_excel" class="text-muted"></small>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <button id="guardarCalifBtn" class="btn btn-primary">
+                    <i class="bi bi-save me-2"></i>Guardar Calificaciones
+                  </button>
+                  
+                  <div class="file-input-container">
+                    <label for="input" class="file-input-label">
+                      <i class="bi bi-upload"></i>
+                      Importar desde Excel
+                    </label>
+                    <input id="input" type="file" accept=".xlsx, .xls, .csv" />
+                    <small id="info_excel" class="text-muted d-block mt-1"></small>
                   </div>
                 </div>
 
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <thead>
-                      <tr style="background-color: #911820;">
-                        <th>#</th>
-                        <th>Nombre completo</th>
-                        <th>Matrícula</th>
-                        <th>Calificación</th>
-                        <th>Guardar calificaciones</th>
+                      <tr>
+                        <th style="width: 5%">#</th>
+                        <th style="width: 45%">Nombre completo</th>
+                        <th style="width: 20%">Matrícula</th>
+                        <th style="width: 15%">Calificación</th>
                       </tr>
                     </thead>
                     <tbody id="table-container"></tbody>
                   </table>
                   <div class="text-center" id="loader">
                     <div class="spinner-border"></div>
+                    <p class="mt-2">Cargando datos...</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

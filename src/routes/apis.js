@@ -209,7 +209,7 @@ router.get("/gruposCalifi", async (req, res) => {
 });
 
 
-
+//GRUPO POR CALIFICACIONES -->
 router.get("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
   const { limit = 40, skip = 0 } = req.query;
   const idGrupo = req.params.idGrupo;
@@ -313,7 +313,6 @@ router.put("/gruposCalifi_alumnos/:idGrupo", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 ////NAVBAR CUATRIMESTRES
 // Ruta para obtener los ciclos con un límite opcional
@@ -454,90 +453,59 @@ router.get("/alumnos", async (req, res) => {
     alumnos,
   });
 });
+const crypto = require('crypto');
 
 // Ruta para actualizar alumnos (POST o PUT)
-router.post("/alumnos/actualizar", async (req, res) => {
+router.post('/alumnos', async (req, res) => {
   try {
-    const { cambios, soloSeleccion } = req.body;
-
-    if (!cambios || typeof cambios !== 'object') {
-      return res.status(400).json({ 
-        success: false,
-        message: "Datos de actualización inválidos" 
-      });
+    const data = req.body;
+    if (!data.NUMEROALUMNO) {
+      return res.status(400).json({ error: 'El campo NUMEROALUMNO es obligatorio' });
     }
 
-    // Verificar que al menos hay un cambio para procesar
-    if (Object.keys(cambios).length === 0) {
-      return res.status(400).json({ 
-        success: false,
-        message: "No se recibieron cambios para procesar" 
-      });
-    }
+    let clongText = `${data.MATRICULA || ''}${data.NUMEROALUMNO || ''}`;
+    const fields = [
+      'PATERNO', 'MATERNO', 'NOMBRE', 'GENERO', 'NIVEL', 'GRADO', 'SUBNIVEL',
+      'MATRICULA', 'MATRICULA_OFICIAL', 'STATUS', 'CLAVE_CIUDADANA', 'ESTADO_CIVIL',
+      'FECHA_NACIMIENTO', 'DOMICILIO', 'ENTRE_CALLES', 'CP', 'CIUDAD', 'ESTADO',
+      'LATITUD', 'LONGITUD', 'TELEFONO', 'CELULAR', 'TELEFONOTRABAJO', 'NOMBRETUTOR',
+      'PARENTESCO', 'ID_FAMILIA', 'PUESTO_EMPRESA', 'EMAIL', 'FECHA_BAJA', 'MOTIVO_BAJA',
+      'ANIOEGRESO', 'LUGAR_NACIMIENTO', 'ESTADO_NACIMIENTO', 'NACIONALIDAD',
+      'ESCUELA_PROCEDENCIA', 'ESCOLARIDAD', 'ESTADO_ESCOLARIDAD', 'USERNAME',
+      'USERNAME_ACTUALIZA', 'CERTIFICADO', 'SITUACION_CERTIFICADO', 'ID_CAMPUS',
+      'ID_PROMOTOR', 'ID_GRUPOETNICO', 'FECHA_PROSPECCION', 'PROSPECCION_INICIAL',
+      'PROSPECCION_FINAL', 'PROSPECCION_PERIODO', 'PROSPECCION_AULAESCOLAR'
+    ];
 
-    const resultados = {};
-    let actualizacionesExitosas = 0;
-    let errores = 0;
-
-    // Procesar cada alumno que necesita actualización
-    for (const [numeroAlumno, campos] of Object.entries(cambios)) {
-      try {
-        // Buscar al alumno por su número (usando tu modelo Alumno)
-        const alumno = await Alumno.findOne({ where: { numeroalumno: numeroAlumno } });
-
-        if (!alumno) {
-          resultados[numeroAlumno] = { success: false, message: "Alumno no encontrado" };
-          errores++;
-          continue;
-        }
-
-        // Preparar los campos a actualizar
-        const updates = {};
-        for (const [campo, valor] of Object.entries(campos)) {
-          // Validar que el campo exista en el modelo (opcional pero recomendado)
-          if (campo in alumno.dataValues) {
-            updates[campo.toLowerCase()] = valor; // Asegurar lowercase para coincidir con DB
-          }
-        }
-
-        // Si hay campos válidos para actualizar
-        if (Object.keys(updates).length > 0) {
-          await alumno.update(updates);
-          resultados[numeroAlumno] = { success: true, camposActualizados: Object.keys(updates) };
-          actualizacionesExitosas++;
-        } else {
-          resultados[numeroAlumno] = { success: false, message: "No hay campos válidos para actualizar" };
-          errores++;
-        }
-      } catch (error) {
-        console.error(`Error al actualizar alumno ${numeroAlumno}:`, error);
-        resultados[numeroAlumno] = { success: false, message: error.message };
-        errores++;
-      }
-    }
-
-    res.json({
-      success: true,
-      message: `Proceso completado. Actualizados: ${actualizacionesExitosas}, Errores: ${errores}`,
-      resultados,
-      resumen: {
-        total: Object.keys(cambios).length,
-        actualizados: actualizacionesExitosas,
-        errores
-      }
+    fields.forEach(field => {
+      if (data[field]) clongText += String(data[field]);
     });
 
+    const newHash = crypto.createHash('sha256').update(clongText).digest('hex');
+
+    Firebird.attach(dbOptions, (err, db) => {
+      if (err) {
+        return res.status(500).json({ error: 'Error de conexión con la base de datos', details: err });
+      }
+      
+      const query = `UPDATE OR INSERT INTO sincronizacion_hash 
+                        (ID_ESCUELA, NOMBRE_TABLA, PK_TABLA, HASH_LOCAL, HASH_SINCRONIZACION, STATUS, TEXTO_LARGO)
+                        VALUES (?, 'alumnos', ?, ?, '', '1', ?)`;
+
+      db.query(query, [1, data.NUMEROALUMNO, newHash, clongText], (err, result) => {
+        db.detach();
+        if (err) {
+          return res.status(500).json({ error: 'Error al insertar en la base de datos', details: err });
+        }
+        res.status(200).json({ message: 'Registro almacenado con éxito', hash: newHash });
+      });
+    });
   } catch (error) {
-    console.error("Error en el endpoint de actualización:", error);
-    res.status(500).json({ 
-      success: false,
-      message: "Error interno del servidor",
-      error: error.message 
-    });
+    res.status(500).json({ error: 'Error inesperado en el servidor', details: error.message });
   }
 });
 
-
+module.exports = router;
 
 router.get("/carreras", async (req, res) => {
   const { limit, skip, search } = req.query;
@@ -639,7 +607,6 @@ router.get("/calificaciones/asignaturas", async (req, res) => {
 router.get("/calificaciones", async (req, res) => {
   const {
     idPlan,
-    numeroalumno,
     grupo,
     claveAsig,
     idEtapa,
@@ -898,9 +865,6 @@ router.post("/grupos_add", async (req, res) => {
 
 
     // Ejecutar la consulta en la base de datos (asegúrate de tener configurada la conexión a la base de datos correctamente)
-    const alumnos = await AlumnosGrupos.createQuery({ querySql: query });
-    const alumnos_nivel = await AlumnosNiveles.createQuery({ querySql: queryNivel });
-    const alumno = await Alumno.findByIdAndUpdate(INFORMACIONALUMNO.MATRICULA, data);
 
 
     res.status(200)({ message: 'Registro realizado correctamente' });
@@ -1292,7 +1256,7 @@ router.get("/villas/:idVilla/cfg", async (req, res) => {
   res.json(cfgVilla);
 });
 
-router.get("/villas/:idVilla/cfg/:idCfg", async (req, res) => { });
+router.get("/villas/:idVilla/cfg/:idCfg", async () => { });
 
 router.post('/GrupAlumnos', async (req, res) => {
   try {
@@ -1305,8 +1269,6 @@ router.post('/GrupAlumnos', async (req, res) => {
       FINAL,
       PERIODO,
       NUMEROALUMNO,
-      NUM,
-      TIPO,
       CODIGO_GRUPO
     } = data;
     //se crea el query para grabar en alumnos_grupos
@@ -1395,11 +1357,7 @@ router.post('/AlumnosNivel', async (req, res) => {
       FINAL,
       PERIODO,
       NUMEROALUMNO,
-      NUM,
-      TIPO,
       NIVEL,
-      GRADO,
-      CODIGO_GRUPO,
       CUATRIMESTRE
     } = data;
     //se crea el query para grabar en alumnos_grupos
